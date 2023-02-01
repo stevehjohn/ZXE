@@ -7,6 +7,17 @@ public class Z80
 {
     private readonly byte[] _ram;
 
+    private short _pc;
+    private short _sp;
+
+    private short _ix;
+    private short _iy;
+
+    private byte _accumulator;
+    private byte _flags;
+
+    private byte[] _registers = new byte[16];
+
     public Z80(Model model, string path)
     {
         _ram = new byte[model == Model.Spectrum48K ? Constants.K64 : Constants.K128];
