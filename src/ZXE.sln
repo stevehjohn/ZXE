@@ -7,11 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		..\LICENSE = ..\LICENSE
 		..\README.md = ..\README.md
+		..\Documentation\Z80 User Manual.pdf = ..\Documentation\Z80 User Manual.pdf
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXE.Core", "ZXE.Core\ZXE.Core.csproj", "{463ECCDE-1A31-4812-BB07-C0945001694D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core", "ZXE.Core\ZXE.Core.csproj", "{463ECCDE-1A31-4812-BB07-C0945001694D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXE.Core.Tests", "ZXE.Core.Tests\ZXE.Core.Tests.csproj", "{6802C760-59D5-469E-B01F-8FA966669AC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core.Tests", "ZXE.Core.Tests\ZXE.Core.Tests.csproj", "{6802C760-59D5-469E-B01F-8FA966669AC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

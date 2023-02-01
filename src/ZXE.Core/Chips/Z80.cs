@@ -16,7 +16,7 @@ public class Z80
     private byte _accumulator;
     private byte _flags;
 
-    private byte[] _registers = new byte[16];
+    private readonly byte[] _registers = new byte[16];
 
     public Z80(Model model, string path)
     {
