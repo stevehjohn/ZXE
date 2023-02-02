@@ -1,29 +1,23 @@
 ﻿using System.Runtime.CompilerServices;
 using ZXE.Core.Exceptions;
 using ZXE.Core.Infrastructure;
+using ZXE.Core.System;
 
 namespace ZXE.Core.Chips;
 
 public class Z80
 {
-    private readonly byte[] _ram;
+    private readonly CpuState _cpuState;
 
-    private short _pc;
-    private short _sp;
-
-    private short _ix;
-    private short _iy;
-
-    private byte _accumulator;
-    private byte _flags;
-
-    private readonly byte[] _registers = new byte[16];
+    private Instruction[]? _instructions;
 
     public Z80(Model model, string path)
     {
-        _ram = new byte[model == Model.Spectrum48K ? Constants.K64 : Constants.K128];
+        _cpuState = new CpuState(model == Model.Spectrum48K ? Constants.K64 : Constants.K128);
 
         LoadRoms(model, path);
+
+        InitialiseInstructions();
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -54,6 +48,23 @@ public class Z80
     {
         var image = File.ReadAllBytes(path);
 
-        Array.Copy(image, 0, _ram, address, image.Length);
+        Array.Copy(image, 0, _cpuState.Ram, address, image.Length);
+    }
+
+    private void InitialiseInstructions()
+    {
+        // TODO: Probably going to need to add a cycle count.
+        var instructions = new Dictionary<int, Instruction>
+                           {
+                               { 0x0000, new Instruction("NOP", 1, (_, _) => Thread.Sleep(0)) },
+                               { 0x0001, new Instruction("LD BC, nn", 3, (i, s) => { s.SetRegister(Register.C, i[1]); s.SetRegister(Register.B, i[2]); }) }
+                           };
+
+        _instructions = new Instruction[instructions.Max(i => i.Key + 1)];
+
+        foreach (var instruction in instructions)
+        {
+            _instructions[instruction.Key] = instruction.Value;
+        }
     }
 }

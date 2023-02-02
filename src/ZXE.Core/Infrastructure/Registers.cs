@@ -1,6 +1,6 @@
 ﻿namespace ZXE.Core.Infrastructure;
 
-public enum Registers
+public enum Register
 {
     B,
     C,
