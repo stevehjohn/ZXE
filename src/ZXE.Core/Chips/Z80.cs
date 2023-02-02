@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Exceptions;
+﻿using System.Runtime.CompilerServices;
+using ZXE.Core.Exceptions;
 using ZXE.Core.Infrastructure;
 
 namespace ZXE.Core.Chips;
@@ -23,6 +24,11 @@ public class Z80
         _ram = new byte[model == Model.Spectrum48K ? Constants.K64 : Constants.K128];
 
         LoadRoms(model, path);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
+    public void Tick()
+    {
     }
 
     private void LoadRoms(Model model, string romPath)
