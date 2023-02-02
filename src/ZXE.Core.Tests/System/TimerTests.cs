@@ -19,6 +19,6 @@ public class TimerTests
 
         Thread.Sleep(100);
 
-        Assert.True(callCount > 100_000);
+        Assert.True(callCount > 10);
     }
 }

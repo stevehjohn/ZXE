@@ -6,8 +6,6 @@ public class Timer : ITimer
 {
     public required Action OnTick { get; init; }
 
-    private int _delayNanoseconds;
-
     private readonly CancellationTokenSource _cancellationTokenSource;
 
     private readonly CancellationToken _cancellationToken;
@@ -16,6 +14,8 @@ public class Timer : ITimer
 
     public Timer(double speedHz)
     {
+        // TODO: Gonna need to use speedHz to slow the timer down when in Release mode I think.
+
         _cancellationTokenSource = new CancellationTokenSource();
 
         _cancellationToken = _cancellationTokenSource.Token;
