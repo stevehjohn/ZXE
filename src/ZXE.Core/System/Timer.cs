@@ -6,6 +6,8 @@ public class Timer : ITimer
 {
     public required Action OnTick { get; init; }
 
+    private int _delayNanoseconds;
+
     private readonly CancellationTokenSource _cancellationTokenSource;
 
     private readonly CancellationToken _cancellationToken;

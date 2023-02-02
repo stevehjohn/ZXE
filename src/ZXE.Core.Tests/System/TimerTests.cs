@@ -6,7 +6,7 @@ namespace ZXE.Core.Tests.System;
 public class TimerTests
 {
     [Fact]
-    public void Timer_raises_repeated_events()
+    public void Timer_fires_rapidly()
     {
         var callCount = 0L;
 
@@ -19,6 +19,6 @@ public class TimerTests
 
         Thread.Sleep(100);
 
-        Assert.True(callCount > 2);
+        Assert.True(callCount > 100_000);
     }
 }
