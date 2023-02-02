@@ -25,17 +25,17 @@ public class Z80
         LoadRoms(model, path);
     }
 
-    private void LoadRoms(Model model, string path)
+    private void LoadRoms(Model model, string romPath)
     {
-        if (! Path.Exists(path))
+        if (! Path.Exists(romPath))
         {
-            throw new RomNotFoundException($"No ROMs found at {path}.");
+            throw new RomNotFoundException($"No ROMs found at {romPath}.");
         }
 
         switch (model)
         {
             case Model.Spectrum48K:
-                LoadRom($"{path}\\image-0.rom", 0);
+                LoadRom($"{romPath}\\image-0.rom", 0);
 
                 break;
 
