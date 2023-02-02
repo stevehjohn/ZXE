@@ -1,6 +1,7 @@
 ﻿using Xunit;
 using ZXE.Core.Chips;
 using ZXE.Core.Infrastructure;
+using ZXE.Core.System;
 
 namespace ZXE.Core.Tests.Chips;
 
@@ -11,6 +12,10 @@ public class Z80Tests
     [Fact]
     public void Loads_ROM_into_memory()
     {
-        var chip = new Z80(Model.Spectrum48K, $"{PathToRoms}\\ZX Spectrum 48K");
+        var ram = new Ram(Model.Spectrum48K);
+
+        var chip = new Z80(ram);
+
+        chip.LoadRoms(
     }
 }

@@ -9,19 +9,15 @@ public class Z80
 {
     private readonly Ram _ram;
 
-    private readonly CpuState _cpuState;
-
     private readonly InstructionProcessor _instructionProcessor;
 
-    public Z80(Model model, string path)
+    public Z80(Ram ram)
     {
-        _cpuState = new CpuState();
+        var cpuState = new CpuState();
 
-        _ram = new Ram(model);
+        _ram = ram;
 
-        LoadRoms(model, path);
-
-        _instructionProcessor = new InstructionProcessor(_cpuState);
+        _instructionProcessor = new InstructionProcessor(cpuState);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
@@ -30,7 +26,7 @@ public class Z80
         _instructionProcessor.ProcessInstruction();
     }
 
-    private void LoadRoms(Model model, string romPath)
+    public void LoadRoms(Model model, string romPath)
     {
         if (! Path.Exists(romPath))
         {
