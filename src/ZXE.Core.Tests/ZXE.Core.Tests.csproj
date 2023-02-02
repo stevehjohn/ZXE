@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Chips\" />
     <Folder Include="System\" />
   </ItemGroup>
 
