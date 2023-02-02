@@ -4,11 +4,10 @@ namespace ZXE.Core.System;
 
 public class CpuState
 {
-    public readonly byte[] Ram;
-
     public readonly byte[] Registers = new byte[16];
 
-    //private short _pc;
+    public short PC = 0;
+
     //private short _sp;
 
     //private short _ix;
@@ -17,12 +16,8 @@ public class CpuState
     //private byte _accumulator;
     //private byte _flags;
 
-    public CpuState(int ramSize)
-    {
-        Ram = new byte[ramSize];
-    }
-
     public void SetRegister(Register register, byte value)
     {
+        Registers[(int) register] = value;
     }
 }

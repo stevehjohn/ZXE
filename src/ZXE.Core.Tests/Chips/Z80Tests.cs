@@ -9,7 +9,7 @@ public class Z80Tests
     private const string PathToRoms = "..\\..\\..\\..\\..\\ROM Images";
 
     [Fact]
-    public void Blah()
+    public void Loads_ROM_into_memory()
     {
         var chip = new Z80(Model.Spectrum48K, $"{PathToRoms}\\ZX Spectrum 48K");
     }
