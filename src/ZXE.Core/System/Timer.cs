@@ -12,6 +12,7 @@ public class Timer : ITimer
 
     private Task? _timer;
 
+    // ReSharper disable once UnusedParameter.Local - Will be used eventually.
     public Timer(double speedHz)
     {
         // TODO: Gonna need to use speedHz to slow the timer down when in Release mode I think.
@@ -31,6 +32,8 @@ public class Timer : ITimer
         _cancellationTokenSource.Cancel();
 
         _cancellationTokenSource.Dispose();
+
+        _timer = null;
     }
 
     private void TimerWorker()
