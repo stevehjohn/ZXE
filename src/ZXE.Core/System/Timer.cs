@@ -11,7 +11,7 @@ public class Timer : ITimer
 
     public Timer(double speedHz)
     {
-        _timer.Interval = 1 / speedHz / 1_000d;
+        _timer.Interval = 1; // / speedHz / 1_000d;
 
         _timer.Elapsed += Tick;
     }

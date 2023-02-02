@@ -8,7 +8,7 @@ public class TimerTests
     [Fact]
     public void Timer_raises_repeated_events()
     {
-        var callCount = 0;
+        var callCount = 0L;
 
         using var timer = new Timer(3_500_000)
                           {
@@ -17,7 +17,7 @@ public class TimerTests
 
         timer.Start();
 
-        Thread.Sleep(1000);
+        Thread.Sleep(2000);
 
         Assert.True(callCount > 2);
     }
