@@ -8,9 +8,11 @@
 
   <ItemGroup>
     <Folder Include="Chips\" />
+    <Folder Include="System\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="xunit.assert" Version="2.4.2" />
     <PackageReference Include="xunit.core" Version="2.4.2" />
   </ItemGroup>
 
