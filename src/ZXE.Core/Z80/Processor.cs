@@ -1,4 +1,5 @@
 ﻿using ZXE.Core.Infrastructure;
+using ZXE.Core.System;
 
 namespace ZXE.Core.Z80;
 
@@ -20,7 +21,11 @@ public class Processor
         }
     }
 
-    private void InitialiseInstructions(Dictionary<int, Instruction> instructions)
+    public void ProcessInstruction(Ram ram, State state)
+    {
+    }
+
+    private static void InitialiseInstructions(Dictionary<int, Instruction> instructions)
     {
         instructions[0x000000] = new Instruction("NOP", 1, (_, _) => Thread.Sleep(0));
 
