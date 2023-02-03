@@ -2,14 +2,7 @@
   <Settings>
     <AutoEnable>True</AutoEnable>
     <CurrentEngineMode>Run impacted tests automatically, others manually [Global]</CurrentEngineMode>
-    <StatusIndicatorSplitterDistance>18.0180168151855%</StatusIndicatorSplitterDistance>
-    <TestsWindowMenuOptions>
-      <VerticalSplitMenuOption>false</VerticalSplitMenuOption>
-      <ShowPassingTestsMenuOption>true</ShowPassingTestsMenuOption>
-      <ShowFailingTestsMenuOption>true</ShowFailingTestsMenuOption>
-      <ShowUnexecutedTestsMenuOption>true</ShowUnexecutedTestsMenuOption>
-      <ShowIgnoredTestsMenuOption>false</ShowIgnoredTestsMenuOption>
-    </TestsWindowMenuOptions>
-    <TestsWindowSplitterDistance>49.8122673034668%</TestsWindowSplitterDistance>
+    <StatusIndicatorSplitterDistance>15%</StatusIndicatorSplitterDistance>
+    <TestsWindowSplitterDistance>50%</TestsWindowSplitterDistance>
   </Settings>
 </SolutionConfiguration>

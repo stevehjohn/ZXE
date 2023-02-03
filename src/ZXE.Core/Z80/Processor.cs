@@ -13,7 +13,7 @@ public class Processor
 
         InitialiseInstructions(instructions);
 
-        _instructions = new Instruction[instructions.Max(i => i.Key)];
+        _instructions = new Instruction[instructions.Max(i => i.Key) + 1];
 
         foreach (var instruction in instructions)
         {
