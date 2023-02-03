@@ -23,12 +23,17 @@ public class Processor
 
     public void ProcessInstruction(Ram ram, State state)
     {
+        var instruction = _instructions[ram[state.ProgramCounter]];
+
+        var operationData = ram[state.ProgramCounter..(state.ProgramCounter + instruction.Length)];
+
+        instruction.Action(operationData, state, ram);
     }
 
     private static void InitialiseInstructions(Dictionary<int, Instruction> instructions)
     {
-        instructions[0x000000] = new Instruction("NOP", 1, (_, _) => Thread.Sleep(0));
+        instructions[0x000000] = new Instruction("NOP", 1, (_, _, _) => Thread.Sleep(0));
 
-        instructions[0x000001] = new Instruction("LD BC, nn", 3, (i, s) => { });
+        instructions[0x000001] = new Instruction("LD BC, nn", 3, (i, s, r) => { });
     }
 }

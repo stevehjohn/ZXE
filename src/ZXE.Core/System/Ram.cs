@@ -16,6 +16,9 @@ public class Ram
         get => _ram[address];
         set => _ram[address] = value;
     }
+
+    public byte[] this[Range range] => _ram[range];
+
     public void Load(byte[] data, int destination)
     {
         Array.Copy(data, 0, _ram, destination, data.Length);

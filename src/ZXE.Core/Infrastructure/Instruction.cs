@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Z80;
+﻿using ZXE.Core.System;
+using ZXE.Core.Z80;
 
 namespace ZXE.Core.Infrastructure;
 
@@ -8,11 +9,13 @@ public class Instruction
 
     public byte Length { get; }
 
-    public Action<byte[], State> Action { get; }
+    public Action<byte[], State, Ram> Action { get; }
 
-    public Instruction(string mnemonic, byte length, Action<byte[], State> action)
+    public Instruction(string mnemonic, byte length, Action<byte[], State, Ram> action)
     {
         Mnemonic = mnemonic;
+
+        Length = length;
 
         Action = action;
     }

@@ -10,13 +10,13 @@ public class Cpu
 
     private readonly Processor _processor;
 
-    public Cpu(State state, Ram ram, Processor processor)
+    public Cpu(Ram ram)
     {
-        _state = state;
-
         _ram = ram;
 
-        _processor = processor;
+        _state = new State();
+
+        _processor = new Processor();
     }
 
     public void Tick()
