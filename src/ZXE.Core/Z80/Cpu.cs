@@ -10,8 +10,6 @@ public class Cpu
 
     private readonly Processor _processor;
 
-    private readonly Registers _registers;
-
     public Cpu(Ram ram)
     {
         _ram = ram;
@@ -19,8 +17,6 @@ public class Cpu
         _state = new State();
 
         _processor = new Processor();
-
-        _registers = new Registers();
     }
 
     public void Tick()
