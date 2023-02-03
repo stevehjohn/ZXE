@@ -2,22 +2,18 @@
 
 public enum Register
 {
+    A,
     B,
     C,
     D,
     E,
-    F,
     H,
     L,
-    W,
-    Z,
+    Aa,
     Ba,
     Ca,
     Da,
     Ea,
-    Fa,
     Ha,
-    La,
-    Wa,
-    Za
+    La
 }

@@ -34,6 +34,10 @@ public class Processor
     {
         instructions[0x000000] = new Instruction("NOP", 1, (_, _, _) => Thread.Sleep(0));
 
-        instructions[0x000001] = new Instruction("LD BC, nn", 3, (i, s, r) => { });
+        instructions[0x000001] = new Instruction("LD BC, nn", 3, (i, s, _) =>
+        {
+            s.Registers[Register.B] = i[2];
+            s.Registers[Register.C] = i[1];
+        });
     }
 }
