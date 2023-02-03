@@ -25,20 +25,20 @@ public class ProcessorTests
     [Fact]
     public void Passes_correct_number_of_bytes_to_instruction()
     {
-        _ram[65_533] = 0x01;
+        _ram[0xFFFD] = 0x01;
 
         var state = new State
                     {
-                        ProgramCounter = 65_533
+                        ProgramCounter = 0xFFFD
                     };
 
         _processor.ProcessInstruction(_ram, state);
 
-        _ram[65_534] = 0x01;
+        _ram[0xFFFE] = 0x01;
 
         state = new State
                     {
-                        ProgramCounter = 65_534
+                        ProgramCounter = 0xFFFE
                     };
 
         Assert.Throws<ArgumentOutOfRangeException>(() => _processor.ProcessInstruction(_ram, state));
@@ -55,5 +55,39 @@ public class ProcessorTests
 
         Assert.True(_state.Registers[Register.B] == 0x30);
         Assert.True(_state.Registers[Register.C] == 0x39);
+    }
+
+    [Fact]
+    public void LD_жBC_A()
+    {
+        _ram[0] = 0x02;
+
+        _state.Registers[Register.B] = 0x01;
+        _state.Registers[Register.C] = 0x02;
+
+        _state.Registers[Register.A] = 0xAB;
+
+        _processor.ProcessInstruction(_ram, _state);
+
+        Assert.True(_ram[0x0102] == 0xAB);
+    }
+
+    [Fact]
+    public void INC_BC()
+    {
+        _ram[0] = 0x03;
+
+        _state.Registers[Register.B] = 0x00;
+        _state.Registers[Register.C] = 0xFE;
+
+        _processor.ProcessInstruction(_ram, _state);
+
+        Assert.True(_state.Registers[Register.C] == 0xFF);
+        Assert.True(_state.Registers[Register.B] == 0x00);
+
+        _processor.ProcessInstruction(_ram, _state);
+
+        Assert.True(_state.Registers[Register.C] == 0x00);
+        Assert.True(_state.Registers[Register.B] == 0x01);
     }
 }
