@@ -8,7 +8,11 @@ public class State
 
     public Registers Registers;
 
-    public byte Flags => Registers[Register.F];
+    public byte Flags
+    {
+        get => Registers[Register.F];
+        set => Registers[Register.F] = value;
+    }
 
     public State()
     {

@@ -1,5 +1,9 @@
 ﻿using ZXE.Core.System;
 
+// ReSharper disable IdentifierTypo
+// ReSharper disable InconsistentNaming
+// ReSharper disable StringLiteralTypo
+
 namespace ZXE.Core.Z80;
 
 public class Processor
@@ -33,7 +37,6 @@ public class Processor
 
     private static void InitialiseInstructions(Dictionary<int, Instruction> instructions)
     {
-        // TODO: Account for cycles...
         instructions[0x00] = new Instruction("NOP", 1, _ => Thread.Sleep(0), 4);
 
         instructions[0x01] = new Instruction("LD BC, nn", 3, i => LD_rr_nn(i, Register.BC), 10);
@@ -47,6 +50,8 @@ public class Processor
         instructions[0x05] = new Instruction("DEC B", 1, i => DEC_r(i, Register.B), 4);
         
         instructions[0x06] = new Instruction("LD B, n", 2, i => LD_r_n(i, Register.B), 7);
+
+        instructions[0x07] = new Instruction("RLCA", 1, i => LD_r_n(i, Register.B), 7);
 
         //instructions[0x0000C0] = new Instruction("RET NZ", 1, (_, s, _) =>
         //{
@@ -71,15 +76,31 @@ public class Processor
     private static void INC_r(Input input, Register register)
     {
         input.State.Registers[register] = (byte) (input.State.Registers[register] + 1);
+
+        // FLAGS
     }
 
     private static void DEC_r(Input input, Register register)
     {
         input.State.Registers[register] = (byte) (input.State.Registers[register] - 1);
+
+        // FLAGS
     }
 
     private static void LD_r_n(Input input, Register register)
     {
         input.State.Registers[register] = input.Data[1];
+    }
+
+    private static void RLCA(Input input)
+    {
+        var topBit = (byte) ((input.State.Registers[Register.A] & 0x80) >> 7);
+
+        input.State.Registers[Register.A] = (byte) (((input.State.Registers[Register.A] << 1) & 0xFE) | topBit);
+
+        input.State.Flags = (byte) (input.State.Flags & (FlagMasks.Sign | FlagMasks.Zero | FlagMasks.ParityOverflow));
+        input.State.Flags |= topBit;
+
+        // FLAGS
     }
 }
