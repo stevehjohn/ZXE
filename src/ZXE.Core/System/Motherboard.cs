@@ -6,11 +6,11 @@ namespace ZXE.Core.System;
 
 public class Motherboard : IDisposable
 {
+    private readonly Processor _processor;
+
     private readonly Ram _ram;
 
     private readonly ITimer _timer;
-
-    private readonly Cpu _cpu;
 
     public Motherboard(Model model)
     {
@@ -21,7 +21,19 @@ public class Motherboard : IDisposable
                      OnTick = Tick
                  };
 
-        _cpu = new Cpu();
+        _processor = new Processor();
+    }
+
+    public void Load(byte[] data, int destination)
+    {
+        _ram.Load(data, destination);
+    }
+
+    public List<string> DumpAssembly(int startAddress, int length)
+    {
+        var assembly = new List<string>();
+
+        return assembly;
     }
 
     private void Tick()

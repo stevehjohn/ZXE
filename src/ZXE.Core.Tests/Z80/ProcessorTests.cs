@@ -53,8 +53,8 @@ public class ProcessorTests
 
         _processor.ProcessInstruction(_ram, _state);
 
-        Assert.True(_state.Registers[Register.B] == 0x30);
-        Assert.True(_state.Registers[Register.C] == 0x39);
+        Assert.Equal(0x30, _state.Registers[Register.B]);
+        Assert.Equal(0x39, _state.Registers[Register.C]);
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public class ProcessorTests
 
         _processor.ProcessInstruction(_ram, _state);
 
-        Assert.True(_ram[0x0102] == 0xAB);
+        Assert.Equal(0xAB, _ram[0x0102]);
     }
 
     [Fact]
@@ -82,12 +82,12 @@ public class ProcessorTests
 
         _processor.ProcessInstruction(_ram, _state);
 
-        Assert.True(_state.Registers[Register.C] == 0xFF);
-        Assert.True(_state.Registers[Register.B] == 0x00);
+        Assert.Equal(0xFF, _state.Registers[Register.C]);
+        Assert.Equal(0x00, _state.Registers[Register.B]);
 
         _processor.ProcessInstruction(_ram, _state);
 
-        Assert.True(_state.Registers[Register.C] == 0x00);
-        Assert.True(_state.Registers[Register.B] == 0x01);
+        Assert.Equal(0x00, _state.Registers[Register.C]);
+        Assert.Equal(0x01, _state.Registers[Register.B]);
     }
 }
