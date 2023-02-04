@@ -38,7 +38,7 @@ public class Processor
 
     private static void InitialiseInstructions(Dictionary<int, Instruction> instructions)
     {
-        instructions[0x00] = new Instruction("NOP", 1, _ => Thread.Sleep(0), 4);
+        instructions[0x00] = new Instruction("NOP", 1, _ => NOP(), 4);
 
         instructions[0x01] = new Instruction("LD BC, nn", 3, i => LD_rr_nn(i, Register.BC), 10);
 
@@ -54,9 +54,11 @@ public class Processor
 
         instructions[0x07] = new Instruction("RLCA", 1, RLCA, 4);
 
-        //instructions[0x0000C0] = new Instruction("RET NZ", 1, (_, s, _) =>
-        //{
-        //});
+        instructions[0x76] = new Instruction("HALT", 1, _ => HALT(), 4);
+    }
+
+    private static void NOP()
+    {
     }
 
     private static void LD_rr_nn(Input input, Register register)
@@ -134,5 +136,9 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+    }
+
+    private static void HALT()
+    {
     }
 }
