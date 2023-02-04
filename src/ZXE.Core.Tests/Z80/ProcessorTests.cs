@@ -150,13 +150,13 @@ public class ProcessorTests
         _processor.ProcessInstruction(_ram, _state);
 
         Assert.Equal(0b11010010, _state.Registers[Register.A]);
-        Assert.Equal(_state.Flags & Flags.Carry, 0);
+        Assert.False(_state.Flags.Carry);
 
         _state.ProgramCounter = 0;
 
         _processor.ProcessInstruction(_ram, _state);
 
         Assert.Equal(0b10100101, _state.Registers[Register.A]);
-        Assert.True((_state.Flags & Flags.Carry) > 0);
+        Assert.True(_state.Flags.Carry);
     }
 }

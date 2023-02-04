@@ -84,14 +84,6 @@ public class Processor
 
         input.State.Registers[register] = result;
 
-        input.State.SetFlag(Flags.Carry, input.State.Flags[Flags.Carry]);
-
-        input.State.Flags = (byte) (input.State.Flags & Flags.Carry);
-        input.State.Flags |= (sbyte) result < 0 ? Flags.Sign : (byte) 0;
-        input.State.Flags |= result == 0 ? Flags.Zero : (byte) 0;
-        input.State.Flags |= (result & 0x10) > 0 ? Flags.HalfCarry : (byte) 0;
-        input.State.Flags |= value == 0x7F ? Flags.ParityOverflow : (byte) 0;
-
         // FLAGS
     }
 
@@ -113,7 +105,8 @@ public class Processor
 
         input.State.Registers[Register.A] = (byte) (((input.State.Registers[Register.A] << 1) & 0xFE) | topBit);
 
-        input.State.Flags = (byte) (input.State.Flags & (Flags.Sign | Flags.Zero | Flags.ParityOverflow));
-        input.State.Flags |= topBit;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.Carry = topBit == 1;
     }
 }

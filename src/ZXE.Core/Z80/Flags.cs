@@ -2,21 +2,21 @@
 
 public class Flags
 {
-    public bool Carry { get; set; }
+    public bool Carry { get; set; }          // C
     
-    public bool AddSubtract { get; set; }
+    public bool AddSubtract { get; set; }    // N
 
-    public bool ParityOverflow { get; set; }
+    public bool ParityOverflow { get; set; } // P/V
     
-    public bool X1 { get; set; }
+    public bool X1 { get; set; }             // Supposedly unused
+     
+    public bool HalfCarry { get; set; }      // H
     
-    public bool HalfCarry { get; set; }
+    public bool X2 { get; set; }             // Supposedly unused
     
-    public bool X2 { get; set; }
+    public bool Zero { get; set; }           // Z
     
-    public bool Zero { get; set; }
-    
-    public bool Sign { get; set; }
+    public bool Sign { get; set; }           // S
 
     public byte ToByte()
     {

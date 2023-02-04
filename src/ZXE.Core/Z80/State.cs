@@ -13,5 +13,7 @@ public class State
     public State()
     {
         Registers = new Registers();
+
+        Flags = new Flags();
     }
 }
