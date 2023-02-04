@@ -23,11 +23,6 @@ public class Processor
 
     public void ProcessInstruction(Ram ram)
     {
-        if (_state.ProgramCounter >= ram.Size)
-        {
-            throw new RamAddressException("Program counter points outsize of memory.");
-        }
-
         var instruction = _instructions[ram[_state.ProgramCounter]];
 
         var data = ram[_state.ProgramCounter..(_state.ProgramCounter + instruction.Length)];
