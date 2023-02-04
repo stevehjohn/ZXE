@@ -1,6 +1,6 @@
 ﻿namespace ZXE.Core.Z80;
 
-public static class FlagMasks
+public static class Flags
 {
     public const byte Carry          = 0x01; // C
     public const byte AddSubtract    = 0x02; // N

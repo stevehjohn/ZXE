@@ -51,7 +51,7 @@ public class Processor
         
         instructions[0x06] = new Instruction("LD B, n", 2, i => LD_r_n(i, Register.B), 7);
 
-        instructions[0x07] = new Instruction("RLCA", 1, i => LD_r_n(i, Register.B), 7);
+        instructions[0x07] = new Instruction("RLCA", 1, RLCA, 4);
 
         //instructions[0x0000C0] = new Instruction("RET NZ", 1, (_, s, _) =>
         //{
@@ -98,7 +98,7 @@ public class Processor
 
         input.State.Registers[Register.A] = (byte) (((input.State.Registers[Register.A] << 1) & 0xFE) | topBit);
 
-        input.State.Flags = (byte) (input.State.Flags & (FlagMasks.Sign | FlagMasks.Zero | FlagMasks.ParityOverflow));
+        input.State.Flags = (byte) (input.State.Flags & (Flags.Sign | Flags.Zero | Flags.ParityOverflow));
         input.State.Flags |= topBit;
 
         // FLAGS

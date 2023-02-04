@@ -2,6 +2,9 @@
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Core.Z80;
+// ReSharper disable CommentTypo
+// ReSharper disable InconsistentNaming
+// ReSharper disable IdentifierTypo
 
 namespace ZXE.Core.Tests.Z80;
 
@@ -132,5 +135,26 @@ public class ProcessorTests
         _processor.ProcessInstruction(_ram, _state);
 
         Assert.Equal(0x23, _state.Registers[Register.B]);
+    }
+
+    [Fact]
+    public void RLCA()
+    {
+        // RLCA
+        _ram[0] = 0x07;
+
+        _state.Registers[Register.A] = 0b01101001;
+        
+        _processor.ProcessInstruction(_ram, _state);
+
+        Assert.Equal(0b11010010, _state.Registers[Register.A]);
+        Assert.Equal(_state.Flags & Flags.Carry, 0);
+
+        _state.ProgramCounter = 0;
+
+        _processor.ProcessInstruction(_ram, _state);
+
+        Assert.Equal(0b10100101, _state.Registers[Register.A]);
+        Assert.True((_state.Flags & Flags.Carry) > 0);
     }
 }
