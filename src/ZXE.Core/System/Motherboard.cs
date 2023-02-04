@@ -29,18 +29,6 @@ public class Motherboard : IDisposable
         _ram.Load(data, destination);
     }
 
-    public List<string> DumpAssembly(int address, int length)
-    {
-        var assembly = new List<string>();
-
-        while (length > 0)
-        {
-            _processor.Parse(_ram);
-        }
-
-        return assembly;
-    }
-
     private void Tick()
     {
     }

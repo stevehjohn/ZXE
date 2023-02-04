@@ -1,5 +1,4 @@
-﻿using ZXE.Core.Exceptions;
-using ZXE.Core.System;
+﻿using ZXE.Core.System;
 
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
@@ -30,17 +29,6 @@ public class Processor
         instruction.Action(new Input(data, _state, ram));
 
         _state.ProgramCounter += instruction.Length;
-    }
-
-    public string Parse(Ram ram)
-    {
-        var instruction = _instructions[ram[_state.ProgramCounter]];
-
-        _state.ProgramCounter += instruction.Length;
-
-        var assemblyLine = instruction.Mnemonic;
-
-        return assemblyLine;
     }
 
     internal void SetState(State state)
