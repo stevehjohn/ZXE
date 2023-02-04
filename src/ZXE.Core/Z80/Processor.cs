@@ -41,6 +41,8 @@ public class Processor
         instructions[0x02] = new Instruction("LD (BC), A", 3, i => LD_addr_rr_A(i, Register.BC), 7);
 
         instructions[0x03] = new Instruction("INC BC", 1, i => INC_rr(i, Register.BC), 6);
+        
+        instructions[0x04] = new Instruction("INC B", 1, i => INC_r(i, Register.B), 4);
 
         //instructions[0x000002] = new Instruction("LD (BC), A", 1, (_, s, r) =>
         //{
@@ -64,7 +66,6 @@ public class Processor
         //});
     }
 
-    // TODO: REALLY, REALLY, REALLY, verify the byte order of these instructions before continuing much further.
     private static void LD_rr_nn(Input input, Register register)
     {
         input.State.Registers.LoadFromRam(register, input.Data[1..3]);
@@ -78,5 +79,10 @@ public class Processor
     private static void INC_rr(Input input, Register register)
     {
         input.State.Registers.WritePair(register, (ushort) (input.State.Registers.ReadPair(register) + 1));
+    }
+
+    private static void INC_r(Input input, Register register)
+    {
+        input.State.Registers[register] = (byte) (input.State.Registers[register] + 1);
     }
 }

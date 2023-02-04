@@ -77,7 +77,7 @@ public class ProcessorTests
     [Fact]
     public void INC_rr()
     {
-        // INC_BC
+        // INC BC
         _ram[0] = 0x03;
 
         _state.Registers[Register.B] = 0x00;
@@ -94,5 +94,18 @@ public class ProcessorTests
 
         Assert.Equal(0x01, _state.Registers[Register.B]);
         Assert.Equal(0x00, _state.Registers[Register.C]);
+    }
+
+    [Fact]
+    public void INC_r()
+    {
+        // INC B
+        _ram[0] = 0x04;
+
+        _state.Registers[Register.B] = 0x12;
+
+        _processor.ProcessInstruction(_ram, _state);
+
+        Assert.Equal(0x13, _state.Registers[Register.B]);
     }
 }
