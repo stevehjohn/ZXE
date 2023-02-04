@@ -8,6 +8,8 @@ public class State
 
     public Registers Registers;
 
+    public byte Flags => Registers[Register.F];
+
     public State()
     {
         Registers = new Registers();

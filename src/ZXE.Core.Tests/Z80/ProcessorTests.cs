@@ -108,4 +108,29 @@ public class ProcessorTests
 
         Assert.Equal(0x13, _state.Registers[Register.B]);
     }
+
+    [Fact]
+    public void DEC_r()
+    {
+        // DEC B
+        _ram[0] = 0x05;
+
+        _state.Registers[Register.B] = 0x12;
+
+        _processor.ProcessInstruction(_ram, _state);
+
+        Assert.Equal(0x11, _state.Registers[Register.B]);
+    }
+
+    [Fact]
+    public void LD_R_n()
+    {
+        // LD B, 0x23
+        _ram[0] = 0x06;
+        _ram[1] = 0x23;
+
+        _processor.ProcessInstruction(_ram, _state);
+
+        Assert.Equal(0x23, _state.Registers[Register.B]);
+    }
 }
