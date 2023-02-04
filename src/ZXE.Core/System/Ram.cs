@@ -6,9 +6,15 @@ public class Ram
 {
     private readonly byte[] _ram;
 
+    public int Size { get; }
+
     public Ram(Model model)
     {
-        _ram = new byte[model == Model.Spectrum48K ? Constants.K64 : Constants.K128];
+        var size = model == Model.Spectrum48K ? Constants.K64 : Constants.K128;
+        
+        _ram = new byte[size];
+
+        Size = size;
     }
 
     public byte this[int address]

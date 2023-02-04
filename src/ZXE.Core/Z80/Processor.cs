@@ -1,4 +1,5 @@
-﻿using ZXE.Core.System;
+﻿using ZXE.Core.Exceptions;
+using ZXE.Core.System;
 
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
@@ -9,31 +10,63 @@ namespace ZXE.Core.Z80;
 
 public class Processor
 {
+    private State _state;
+
     private readonly Instruction[] _instructions;
 
     public Processor()
+    {
+        _state = new State();
+
+        _instructions = InitialiseInstructions();
+    }
+
+    public void ProcessInstruction(Ram ram)
+    {
+        if (_state.ProgramCounter >= ram.Size)
+        {
+            throw new RamAddressException("Program counter points outsize of memory.");
+        }
+
+        var instruction = _instructions[ram[_state.ProgramCounter]];
+
+        var data = ram[_state.ProgramCounter..(_state.ProgramCounter + instruction.Length)];
+
+        instruction.Action(new Input(data, _state, ram));
+
+        _state.ProgramCounter += instruction.Length;
+    }
+
+    public string Parse(Ram ram)
+    {
+        var instruction = _instructions[ram[_state.ProgramCounter]];
+
+        _state.ProgramCounter += instruction.Length;
+
+        var assemblyLine = instruction.Mnemonic;
+
+        return assemblyLine;
+    }
+
+    internal void SetState(State state)
+    {
+        _state = state;
+    }
+
+    private Instruction[] InitialiseInstructions()
     {
         var instructions = new Dictionary<int, Instruction>();
 
         InitialiseInstructions(instructions);
 
-        _instructions = new Instruction[instructions.Max(i => i.Key) + 1];
+        var instructionArray = new Instruction[instructions.Max(i => i.Key) + 1];
 
         foreach (var instruction in instructions)
         {
-            _instructions[instruction.Key] = instruction.Value;
+            instructionArray[instruction.Key] = instruction.Value;
         }
-    }
 
-    public void ProcessInstruction(Ram ram, State state)
-    {
-        var instruction = _instructions[ram[state.ProgramCounter]];
-
-        var data = ram[state.ProgramCounter..(state.ProgramCounter + instruction.Length)];
-
-        instruction.Action(new Input(data, state, ram));
-
-        state.ProgramCounter += instruction.Length;
+        return instructionArray;
     }
 
     private static void InitialiseInstructions(Dictionary<int, Instruction> instructions)
