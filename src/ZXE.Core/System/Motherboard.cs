@@ -16,7 +16,7 @@ public class Motherboard : IDisposable
     {
         _ram = new Ram(model);
 
-        _timer = new Timer(3_500_0100)
+        _timer = new Timer(3_500_000)
                  {
                      OnTick = Tick
                  };
