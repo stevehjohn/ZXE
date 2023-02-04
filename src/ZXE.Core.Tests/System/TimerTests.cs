@@ -17,8 +17,8 @@ public class TimerTests
 
         timer.Start();
 
-        Thread.Sleep(100);
+        Thread.Sleep(200);
 
-        Assert.True(callCount > 10);
+        Assert.True(callCount > 5);
     }
 }

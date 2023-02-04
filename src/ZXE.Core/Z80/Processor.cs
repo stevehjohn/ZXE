@@ -59,8 +59,6 @@ public class Processor
         //});
     }
 
-    // TODO: Deal with undocumented flags?
-
     private static void LD_rr_nn(Input input, Register register)
     {
         input.State.Registers.LoadFromRam(register, input.Data[1..3]);
@@ -85,13 +83,33 @@ public class Processor
         input.State.Registers[register] = result;
 
         // FLAGS
+        // Carry unaffected
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = value == 0x7F;
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0xF;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        input.State.Flags.Zero = (sbyte) result == 0;
+        input.State.Flags.Sign = (sbyte) result < 0;
     }
 
     private static void DEC_r(Input input, Register register)
     {
-        input.State.Registers[register] = (byte) (input.State.Registers[register] - 1);
+        var value = input.State.Registers[register];
+
+        var result = (byte) (value - 1);
+
+        input.State.Registers[register] = result;
 
         // FLAGS
+        // Carry unaffected
+        input.State.Flags.AddSubtract = true;
+        input.State.Flags.ParityOverflow = value == 0x80;
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = (value & 0x0F) < 1;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        input.State.Flags.Zero = (sbyte) result == 0;
+        input.State.Flags.Sign = (sbyte) result < 0;
     }
 
     private static void LD_r_n(Input input, Register register)
@@ -103,10 +121,18 @@ public class Processor
     {
         var topBit = (byte) ((input.State.Registers[Register.A] & 0x80) >> 7);
 
-        input.State.Registers[Register.A] = (byte) (((input.State.Registers[Register.A] << 1) & 0xFE) | topBit);
+        var result = (byte) (((input.State.Registers[Register.A] << 1) & 0xFE) | topBit);
 
-        input.State.Flags.HalfCarry = false;
-        input.State.Flags.AddSubtract = false;
+        input.State.Registers[Register.A] = result;
+
+        // FLAGS
         input.State.Flags.Carry = topBit == 1;
+        input.State.Flags.AddSubtract = false;
+        // ParityOverflow unaffected
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        // Zero unaffected
+        // Sign unaffected
     }
 }
