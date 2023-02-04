@@ -110,6 +110,8 @@ public class ProcessorTests
         _processor.ProcessInstruction(_ram, _state);
 
         Assert.Equal(0x13, _state.Registers[Register.B]);
+
+        // Check sign bit
     }
 
     [Fact]

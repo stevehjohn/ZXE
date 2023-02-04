@@ -2,6 +2,7 @@
 
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
+// ReSharper disable RedundantCast
 // ReSharper disable StringLiteralTypo
 
 namespace ZXE.Core.Z80;
@@ -58,6 +59,8 @@ public class Processor
         //});
     }
 
+    // TODO: Deal with undocumented flags?
+
     private static void LD_rr_nn(Input input, Register register)
     {
         input.State.Registers.LoadFromRam(register, input.Data[1..3]);
@@ -75,7 +78,19 @@ public class Processor
 
     private static void INC_r(Input input, Register register)
     {
-        input.State.Registers[register] = (byte) (input.State.Registers[register] + 1);
+        var value = input.State.Registers[register];
+
+        var result = (byte) (value + 1);
+
+        input.State.Registers[register] = result;
+
+        input.State.SetFlag(Flags.Carry, input.State.Flags[Flags.Carry]);
+
+        input.State.Flags = (byte) (input.State.Flags & Flags.Carry);
+        input.State.Flags |= (sbyte) result < 0 ? Flags.Sign : (byte) 0;
+        input.State.Flags |= result == 0 ? Flags.Zero : (byte) 0;
+        input.State.Flags |= (result & 0x10) > 0 ? Flags.HalfCarry : (byte) 0;
+        input.State.Flags |= value == 0x7F ? Flags.ParityOverflow : (byte) 0;
 
         // FLAGS
     }
@@ -100,7 +115,5 @@ public class Processor
 
         input.State.Flags = (byte) (input.State.Flags & (Flags.Sign | Flags.Zero | Flags.ParityOverflow));
         input.State.Flags |= topBit;
-
-        // FLAGS
     }
 }
