@@ -4,6 +4,8 @@ public class State
 {
     public int ProgramCounter = 0;
 
+    public int StackPointer = 0;
+
     public Registers Registers;
 
     public State()

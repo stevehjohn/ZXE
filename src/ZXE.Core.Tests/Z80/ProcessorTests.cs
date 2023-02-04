@@ -45,36 +45,39 @@ public class ProcessorTests
     }
 
     [Fact]
-    public void LD_BC_nn()
+    public void LD_rr_nn()
     {
+        // LD BC, 0x1234
         _ram[0] = 0x01;
-        _ram[1] = 0x39;
-        _ram[2] = 0x30;
+        _ram[1] = 0x34;
+        _ram[2] = 0x12;
 
         _processor.ProcessInstruction(_ram, _state);
 
-        Assert.Equal(0x30, _state.Registers[Register.B]);
-        Assert.Equal(0x39, _state.Registers[Register.C]);
+        Assert.Equal(0x12, _state.Registers[Register.B]);
+        Assert.Equal(0x34, _state.Registers[Register.C]);
     }
 
     [Fact]
-    public void LD_жBC_A()
+    public void LD_addr_rr_A()
     {
+        // LD (BC), A
         _ram[0] = 0x02;
 
-        _state.Registers[Register.B] = 0x01;
-        _state.Registers[Register.C] = 0x02;
+        _state.Registers[Register.B] = 0x12;
+        _state.Registers[Register.C] = 0x34;
 
-        _state.Registers[Register.A] = 0xAB;
+        _state.Registers[Register.A] = 0x56;
 
         _processor.ProcessInstruction(_ram, _state);
 
-        Assert.Equal(0xAB, _ram[0x0102]);
+        Assert.Equal(0x56, _ram[0x1234]);
     }
 
     [Fact]
-    public void INC_BC()
+    public void INC_rr()
     {
+        // INC_BC
         _ram[0] = 0x03;
 
         _state.Registers[Register.B] = 0x00;
@@ -82,12 +85,14 @@ public class ProcessorTests
 
         _processor.ProcessInstruction(_ram, _state);
 
-        Assert.Equal(0xFF, _state.Registers[Register.C]);
         Assert.Equal(0x00, _state.Registers[Register.B]);
+        Assert.Equal(0xFF, _state.Registers[Register.C]);
+
+        _state.ProgramCounter = 0;
 
         _processor.ProcessInstruction(_ram, _state);
 
-        Assert.Equal(0x00, _state.Registers[Register.C]);
         Assert.Equal(0x01, _state.Registers[Register.B]);
+        Assert.Equal(0x00, _state.Registers[Register.C]);
     }
 }

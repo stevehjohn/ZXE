@@ -2,6 +2,20 @@
 
 A ZX Spectrum emulator. Mostly about just seeing if I can.
 
+## Solution Structure
+
+### ZXE.Core
+
+This is the emulator. I have tried to keep all the Z80 specific code in the Z80 folder so it can be used in contexts other than a ZX Spectrum emulator.
+
+### ZXE.Core.Tests
+
+Unit tests for the above.
+
+### ZXE.Core.Tests.Console
+
+Run some select tests in the console so the developer has easy access to the test output.
+
 ## ROMS
 
 - https://github.com/archtaurus/RetroPieBIOS

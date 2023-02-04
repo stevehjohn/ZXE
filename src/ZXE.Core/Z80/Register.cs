@@ -1,5 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
-namespace ZXE.Core.Infrastructure;
+
+namespace ZXE.Core.Z80;
 
 public enum Register
 {
@@ -13,13 +14,15 @@ public enum Register
     L  = 0x0007,
     Aa = 0x0008,
     Fa = 0x0009,
-    Ba = 0x0010,
-    Ca = 0x0011,
-    Da = 0x0012,
-    Ea = 0x0013,
-    Ha = 0x0014,
-    La = 0x0015,
-    Ia = 0x0016,
-    Ra = 0x0017,
+    Ba = 0x000A,
+    Ca = 0x000B,
+    Da = 0x000C,
+    Ea = 0x000D,
+    Ha = 0x000E,
+    La = 0x000F,
+    I  = 0x0010,
+    R  = 0x0011,
+    IX = 0x1213,
+    IY = 0x1415,
     BC = 0x0203
 }

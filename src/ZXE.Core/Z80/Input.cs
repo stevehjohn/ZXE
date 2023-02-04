@@ -1,7 +1,6 @@
 ﻿using ZXE.Core.System;
-using ZXE.Core.Z80;
 
-namespace ZXE.Core.Infrastructure;
+namespace ZXE.Core.Z80;
 
 public class Input
 {

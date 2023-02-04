@@ -1,5 +1,4 @@
-﻿using ZXE.Core.Infrastructure;
-using ZXE.Core.System;
+﻿using ZXE.Core.System;
 
 namespace ZXE.Core.Z80;
 
@@ -28,14 +27,20 @@ public class Processor
         var data = ram[state.ProgramCounter..(state.ProgramCounter + instruction.Length)];
 
         instruction.Action(new Input(data, state, ram));
+
+        state.ProgramCounter += instruction.Length;
     }
 
     private static void InitialiseInstructions(Dictionary<int, Instruction> instructions)
     {
         // TODO: Account for cycles...
-        instructions[0x000000] = new Instruction("NOP", 1, _ => Thread.Sleep(0), 4);
+        instructions[0x00] = new Instruction("NOP", 1, _ => Thread.Sleep(0), 4);
 
-        instructions[0x000001] = new Instruction("LD BC, nn", 3, LD_rr_nn, 10);
+        instructions[0x01] = new Instruction("LD BC, nn", 3, i => LD_rr_nn(i, Register.BC), 10);
+
+        instructions[0x02] = new Instruction("LD (BC), A", 3, i => LD_addr_rr_A(i, Register.BC), 7);
+
+        instructions[0x03] = new Instruction("INC BC", 1, i => INC_rr(i, Register.BC), 6);
 
         //instructions[0x000002] = new Instruction("LD (BC), A", 1, (_, s, r) =>
         //{
@@ -60,7 +65,18 @@ public class Processor
     }
 
     // TODO: REALLY, REALLY, REALLY, verify the byte order of these instructions before continuing much further.
-    private static void LD_rr_nn(Input input)
+    private static void LD_rr_nn(Input input, Register register)
     {
+        input.State.Registers.LoadFromRam(register, input.Data[1..3]);
+    }
+
+    private static void LD_addr_rr_A(Input input, Register register)
+    {
+        input.Ram[input.State.Registers.ReadPair(register)] = input.State.Registers[Register.A];
+    }
+
+    private static void INC_rr(Input input, Register register)
+    {
+        input.State.Registers.WritePair(register, (ushort) (input.State.Registers.ReadPair(register) + 1));
     }
 }

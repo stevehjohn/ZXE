@@ -6,6 +6,7 @@ This document just contains notes for me to refer to during implementation.
 
 - The destination is always the first parameter. `LD BC, nn` puts `nn` into the `BC` register pair.
 
-## Notation in code
+## Coding Conventions
 
-- In unit test methods, I've used the Cyrillic character ж to denote dereferencing since it (kinda) looks like an asterisk but is allowed in method names.
+- In code the alternate registers are suffixed with `a`. E.g. `B'` is `Ba`, `C'` is `Ca` etc...
+- Dereferencing registers in method names are prefixed with `addr`. E.g. `LD (BC), nn` would be called `LD_addr_BC_nn` as a C# method.
