@@ -12,21 +12,20 @@ public class Motherboard : IDisposable
 
     private readonly Cpu _cpu;
 
-    public Motherboard(Model model, string romPath)
+    public Motherboard(Model model)
     {
         _ram = new Ram(model);
 
-        _timer = new Timer(3_500_000)
+        _timer = new Timer(3_500_0100)
                  {
                      OnTick = Tick
                  };
 
-        _cpu = new Cpu(_ram);
+        _cpu = new Cpu();
     }
 
     private void Tick()
     {
-        _cpu.Tick();
     }
 
     public void Dispose()
