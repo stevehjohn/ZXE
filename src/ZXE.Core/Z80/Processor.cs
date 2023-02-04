@@ -57,5 +57,9 @@ public class Processor
                 s.Registers[Register.B]++;
             }
         });
+
+        instructions[0x0000C0] = new Instruction("RET NZ", 1, (_, s, _) =>
+        {
+        });
     }
 }
