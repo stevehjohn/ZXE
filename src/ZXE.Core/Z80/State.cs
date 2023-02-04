@@ -4,8 +4,6 @@ public class State
 {
     public int ProgramCounter = 0;
 
-    public byte Flags = 0;
-
     public Registers Registers;
 
     public State()

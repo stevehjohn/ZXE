@@ -25,41 +25,42 @@ public class Processor
     {
         var instruction = _instructions[ram[state.ProgramCounter]];
 
-        var operationData = ram[state.ProgramCounter..(state.ProgramCounter + instruction.Length)];
+        var data = ram[state.ProgramCounter..(state.ProgramCounter + instruction.Length)];
 
-        instruction.Action(operationData, state, ram);
+        instruction.Action(new Input(data, state, ram));
     }
 
     private static void InitialiseInstructions(Dictionary<int, Instruction> instructions)
     {
-        instructions[0x000000] = new Instruction("NOP", 1, (_, _, _) => Thread.Sleep(0));
+        // TODO: Account for cycles...
+        instructions[0x000000] = new Instruction("NOP", 1, _ => Thread.Sleep(0), 4);
 
-        // TODO: REALLY, REALLY, REALLY, verify the byte order of these instructions before continuing much further.
-        instructions[0x000001] = new Instruction("LD BC, nn", 3, (i, s, _) =>
-        {
-            s.Registers[Register.B] = i[2];
-            s.Registers[Register.C] = i[1];
-        });
+        instructions[0x000001] = new Instruction("LD BC, nn", 3, LD_rr_nn, 10);
 
-        instructions[0x000002] = new Instruction("LD (BC), A", 1, (_, s, r) =>
-        {
-            var address = s.Registers[Register.B] << 8 | s.Registers[Register.C];
+        //instructions[0x000002] = new Instruction("LD (BC), A", 1, (_, s, r) =>
+        //{
+        //    var address = s.Registers[Register.B] << 8 | s.Registers[Register.C];
 
-            r[address] = s.Registers[Register.A];
-        });
+        //    r[address] = s.Registers[Register.A];
+        //});
 
-        instructions[0x000003] = new Instruction("INC BC", 1, (_, s, _) =>
-        {
-            s.Registers[Register.C]++;
+        //instructions[0x000003] = new Instruction("INC BC", 1, (_, s, _) =>
+        //{
+        //    s.Registers[Register.C]++;
 
-            if (s.Registers[Register.C] == 0)
-            {
-                s.Registers[Register.B]++;
-            }
-        });
+        //    if (s.Registers[Register.C] == 0)
+        //    {
+        //        s.Registers[Register.B]++;
+        //    }
+        //});
 
-        instructions[0x0000C0] = new Instruction("RET NZ", 1, (_, s, _) =>
-        {
-        });
+        //instructions[0x0000C0] = new Instruction("RET NZ", 1, (_, s, _) =>
+        //{
+        //});
+    }
+
+    // TODO: REALLY, REALLY, REALLY, verify the byte order of these instructions before continuing much further.
+    private static void LD_rr_nn(Input input)
+    {
     }
 }
