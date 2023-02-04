@@ -10,6 +10,8 @@ public class State
 
     public Flags Flags { get; set; }
 
+    public bool Halted { get; set; }
+
     public State()
     {
         Registers = new Registers();

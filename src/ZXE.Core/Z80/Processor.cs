@@ -54,7 +54,7 @@ public class Processor
 
         instructions[0x07] = new Instruction("RLCA", 1, RLCA, 4);
 
-        instructions[0x76] = new Instruction("HALT", 1, _ => HALT(), 4);
+        instructions[0x76] = new Instruction("HALT", 1, HALT, 4);
     }
 
     private static void NOP()
@@ -138,7 +138,8 @@ public class Processor
         // Sign unaffected
     }
 
-    private static void HALT()
+    private static void HALT(Input input)
     {
+        input.State.Halted = true;
     }
 }

@@ -157,4 +157,15 @@ public class ProcessorTests
         Assert.Equal(0b10100101, _state.Registers[Register.A]);
         Assert.True(_state.Flags.Carry);
     }
+
+    [Fact]
+    public void HALT()
+    {
+        // HALT
+        _ram[0] = 0x76;
+
+        _processor.ProcessInstruction(_ram, _state);
+
+        Assert.True(_state.Halted);
+    }
 }
