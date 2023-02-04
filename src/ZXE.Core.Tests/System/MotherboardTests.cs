@@ -33,10 +33,11 @@ public class MotherboardTests
         // TODO: Endienness confirmation
         motherboard.Load(new byte[] 
                          { 
-                             0x00,                   // NOP
-                             0x01, 0x03, 0xFF,       // LD BC, 0x03FF
-                             0x02,                   // LD (BC), A
-                             0x03                    // INC BC
+                             // Something like:
+                             // LD A, 0
+                             // INC A
+                             // JNE A, 5, -1
+                             // RET NZ
                          }, 0);
 
         var assembly = motherboard.DumpAssembly(0, 6);
