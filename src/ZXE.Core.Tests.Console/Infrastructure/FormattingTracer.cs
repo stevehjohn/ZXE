@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System.Text;
+﻿using System.Text;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 using ZXE.Core.Z80;
