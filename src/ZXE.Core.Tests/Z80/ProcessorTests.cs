@@ -293,6 +293,29 @@ public class ProcessorTests
     }
 
     [Fact]
+    public void DJNZ_e()
+    {
+        // DJNZ e
+        _ram[0] = 0x10;
+        _ram[1] = 0x20;
+
+        _state.Registers[Register.B] = 0x10;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x0F, _state.Registers[Register.B]);
+        Assert.Equal(0x22, _state.ProgramCounter);
+
+        _state.ProgramCounter = 0;
+        _state.Registers[Register.B] = 0x01;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x00, _state.Registers[Register.B]);
+        Assert.Equal(0x02, _state.ProgramCounter);
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT

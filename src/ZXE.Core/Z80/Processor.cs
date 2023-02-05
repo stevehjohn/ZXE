@@ -109,6 +109,8 @@ public class Processor
         instructions[0x0E] = new Instruction("LD C, n", 2, i => LD_R_n(i, Register.C), 7);
 
         instructions[0x0F] = new Instruction("RRCA", 2, RRCA, 4);
+        
+        instructions[0x10] = new Instruction("DJNZ e", 2, DJNZ_e, 8);
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
 
@@ -303,6 +305,19 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+    }
+
+    private static void DJNZ_e(Input input)
+    {
+        // If B != 0, 5 more cycles... how to do this?
+        DEC_R(input, Register.B);
+
+        if (input.State.Registers[Register.B] != 0)
+        {
+            input.State.ProgramCounter += (sbyte) input.Data[1];
+        }
+
+        // Flags unaffected
     }
 
     private static void HALT(Input input)
