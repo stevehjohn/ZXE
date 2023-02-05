@@ -94,7 +94,7 @@ public class Processor
 
         instructions[0x07] = new Instruction("RLCA", 1, RLCA, 4);
 
-        instructions[0x08] = new Instruction("EX AF, AF'", 1, RLCA, 4);
+        instructions[0x08] = new Instruction("EX AF, AF'", 1, i => EX_RR_RaRa(i, Register.A, Register.F), 4);
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
 
@@ -196,8 +196,15 @@ public class Processor
         input.State.Registers[register] = input.Ram[(input.Data[2] << 8) | input.Data[1]];
     }
 
-    private static void EX_RR_RaRa(Input input, Register register)
+    private static void EX_RR_RaRa(Input input, Register register1, Register register2)
     {
+        var alternate1 = Enum.Parse<Register>($"{register1}a");
+
+        var alternate2 = Enum.Parse<Register>($"{register2}a");
+
+        (input.State.Registers[register1], input.State.Registers[alternate1]) = (input.State.Registers[alternate1], input.State.Registers[register1]);
+
+        (input.State.Registers[register2], input.State.Registers[alternate2]) = (input.State.Registers[alternate2], input.State.Registers[register2]);
     }
 
     private static void HALT(Input input)

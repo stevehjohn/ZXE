@@ -45,6 +45,15 @@ public class ProcessorTests
     }
 
     [Fact]
+    public void NOP()
+    {
+        // NOP
+        _ram[0] = 0x00;
+
+        _processor.ProcessInstruction(_ram);
+    }
+
+    [Fact]
     public void LD_RR_nn()
     {
         // LD BC, 0x1234
@@ -153,6 +162,25 @@ public class ProcessorTests
 
         Assert.Equal(0b10100101, _state.Registers[Register.A]);
         Assert.True(_state.Flags.Carry);
+    }
+
+    [Fact]
+    public void EX_RR_RaRa()
+    {
+        // EX AF, AF'
+        _ram[0] = 0x08;
+
+        _state.Registers[Register.A] = 0x01;
+        _state.Registers[Register.F] = 0x02;
+        _state.Registers[Register.Aa] = 0x03;
+        _state.Registers[Register.Fa] = 0x04;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x03, _state.Registers[Register.A]);
+        Assert.Equal(0x04, _state.Registers[Register.F]);
+        Assert.Equal(0x01, _state.Registers[Register.Aa]);
+        Assert.Equal(0x02, _state.Registers[Register.Fa]);
     }
 
     [Fact]
