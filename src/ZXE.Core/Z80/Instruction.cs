@@ -20,15 +20,4 @@ public class Instruction
 
         ClockCycles = clockCycles;
     }
-
-    public string LogAction(State state)
-    {
-        // TODO: Replace variables in mnemonic with values from the CPU state
-        return Mnemonic;
-    }
-
-    public override string ToString()
-    {
-        return Mnemonic;
-    }
 }

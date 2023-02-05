@@ -98,6 +98,8 @@ public class Processor
 
         instructions[0x09] = new Instruction("ADD HL, BC'", 1, i => ADD_RR_RR(i, Register.HL, Register.BC), 11);
 
+        instructions[0x0A] = new Instruction("ADD A, (BC)'", 1, i => LD_R_addr_RR(i, Register.HL, Register.BC), 7);
+
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
 
         instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_R_addr_nn(i, Register.A), 13);
@@ -249,6 +251,13 @@ public class Processor
         // Sign unaffected
 
         input.State.Registers[Register.F] = input.State.Flags.ToByte();
+    }
+
+    public static void LD_R_addr_RR(Input input, Register target, Register source)
+    {
+        input.State.Registers[target] = input.Ram[input.State.Registers.ReadPair(source)];
+
+        // Flags unaffected
     }
 
     private static void HALT(Input input)
