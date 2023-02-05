@@ -33,7 +33,7 @@ public class ExecutesSimpleProgram : ITest
 
         while (! state.Halted)
         {
-            output.Add(processor.ProcessInstruction(ram));
+            output.Add(processor.ProcessInstruction(ram, true));
         }
 
         return output;

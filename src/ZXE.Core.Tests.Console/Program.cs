@@ -27,7 +27,7 @@ public class Program
 
             foreach (var line in output)
             {
-                FormattedConsole.WriteLine($"     {line}");
+                FormattedConsole.WriteLine($"     &White;{line}");
             }
         }
     }
