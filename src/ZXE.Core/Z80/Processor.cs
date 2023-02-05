@@ -92,7 +92,7 @@ public class Processor
         
         instructions[0x06] = new Instruction("LD B, n", 2, i => LD_R_n(i, Register.B), 7);
 
-        instructions[0x07] = new Instruction("RLCA", 1, RLCA, 4);
+        instructions[0x07] = new Instruction("RLCA", 1, RLCA, 4, "RLCA A");
 
         instructions[0x08] = new Instruction("EX AF, AF'", 1, i => EX_RR_RaRa(i, Register.A, Register.F), 4);
 
@@ -108,7 +108,7 @@ public class Processor
 
         instructions[0x0E] = new Instruction("LD C, n", 2, i => LD_R_n(i, Register.C), 7);
 
-        instructions[0x0F] = new Instruction("RRCA", 2, RRCA, 4);
+        instructions[0x0F] = new Instruction("RRCA", 2, RRCA, 4, "RRCA A");
         
         instructions[0x10] = new Instruction("DJNZ e", 2, DJNZ_e, 8, "DJNZ B, e");
 
@@ -124,7 +124,7 @@ public class Processor
 
         instructions[0x16] = new Instruction("LD D, n", 3, i => LD_R_n(i, Register.D), 7);
 
-        instructions[0x17] = new Instruction("RLA", 3, RLA, 4);
+        instructions[0x17] = new Instruction("RLA", 1, RLA, 4, "RLA A");
 
         instructions[0x18] = new Instruction("JR e", 2, JR_e, 12);
 
@@ -140,7 +140,7 @@ public class Processor
 
         instructions[0x1E] = new Instruction("LD E, n", 1, i => LD_R_n(i, Register.E), 7);
 
-        instructions[0x1F] = new Instruction("RRA", 1, RRA, 4);
+        instructions[0x1F] = new Instruction("RRA", 1, RRA, 4, "RRA A");
 
 
 

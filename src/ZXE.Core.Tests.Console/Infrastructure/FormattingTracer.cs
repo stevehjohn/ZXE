@@ -84,6 +84,8 @@ public class FormattingTracer : ITracer
 
         builder.Append($"    &Cyan;SP&White;: &Yellow;0x{state.StackPointer:X4}");
 
+        builder.Append($"    &Cyan;Flags&White;: {GetFlags(state.Flags)}");
+
         var parts = mnemonic.Split(' ', StringSplitOptions.TrimEntries).Select(p => p.Replace(",", string.Empty)).ToArray();
 
         if (parts.Length == 1)
@@ -157,6 +159,24 @@ public class FormattingTracer : ITracer
                 builder.Append($"&Green;({operand})&White;: &Yellow;0x{ram[(data[2] << 8) | data[1]]:X2}");
             }
         }
+
+        return builder.ToString();
+    }
+
+    private static string GetFlags(Flags flags)
+    {
+        var builder = new StringBuilder();
+
+        builder.Append("&Green;");
+
+        builder.Append(flags.Carry ? 'C' : ' ');
+        builder.Append(flags.AddSubtract ? 'N' : ' ');
+        builder.Append(flags.ParityOverflow ? 'P' : ' ');
+        builder.Append(flags.X1 ? 'X' : ' ');
+        builder.Append(flags.HalfCarry ? 'H' : ' ');
+        builder.Append(flags.X2 ? 'X' : ' ');
+        builder.Append(flags.Zero ? 'Z' : ' ');
+        builder.Append(flags.Sign ? 'S' : ' ');
 
         return builder.ToString();
     }
