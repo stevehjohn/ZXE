@@ -154,6 +154,12 @@ public class Processor
 
         instructions[0x25] = new Instruction("DEC H", 1, i => DEC_R(i, Register.H), 4);
 
+        instructions[0x26] = new Instruction("LD H, n", 2, i => LD_R_n(i, Register.H), 7);
+
+        instructions[0x27] = new Instruction("DAA", 1, DAA, 4);
+
+        instructions[0x28] = new Instruction("JR Z, e", 2, JR_Z_e, 7);
+
 
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
@@ -433,6 +439,23 @@ public class Processor
 
         input.Ram[address] = (byte) (data & 0x00FF);
         input.Ram[address + 1] = (byte) ((data & 0xFF00) >> 8);
+
+        // Flags unaffected
+    }
+
+    private static void DAA(Input i)
+    {
+        // TODO: Wooooah.
+    }
+    
+    private static void JR_Z_e(Input input)
+    {
+        if (input.State.Flags.Zero)
+        {
+            // TODO: If Z == true, 5 more cycles... how to do this?
+
+            input.State.ProgramCounter += (sbyte) input.Data[1];
+        }
 
         // Flags unaffected
     }
