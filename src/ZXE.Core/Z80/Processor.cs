@@ -458,6 +458,7 @@ public class Processor
     private static void DAA(Input i)
     {
         // TODO: Wooooah.
+        // TODO: DO!
     }
     
     private static void JR_Z_e(Input input)
