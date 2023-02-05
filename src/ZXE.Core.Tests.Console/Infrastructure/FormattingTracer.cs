@@ -112,17 +112,22 @@ public class FormattingTracer : ITracer
             isIndirect = true;
         }
 
+        Register? register = null;
+
         if (char.IsUpper(operand[0]))
         {
-            var register = Enum.Parse<Register>(operand);
+            register = Enum.Parse<Register>(operand);
+        }
 
+        if (register != null)
+        {
             if (operand.Length == 2)
             {
-                builder.Append($"&Magenta;{operand,-2}&White;: &Yellow;0x{state.Registers.ReadPair(register):X4}");
+                builder.Append($"&Magenta;{operand,-2}&White;: &Yellow;0x{state.Registers.ReadPair((Register) register):X4}");
             }
             else
             {
-                builder.Append($"&Magenta;{operand,-2}&White;: &Yellow;0x{state.Registers[register]:X2}  ");
+                builder.Append($"&Magenta;{operand,-2}&White;: &Yellow;0x{state.Registers[(Register) register]:X2}  ");
             }
         }
         else
@@ -139,6 +144,16 @@ public class FormattingTracer : ITracer
 
         if (isIndirect)
         {
+            builder.Append("    ");
+
+            if (register != null)
+            {
+                builder.Append($"&Magenta;({operand})&White;: &Yellow;0x{ram[state.Registers.ReadPair((Register) register)]:X2}");
+            }
+            else
+            {
+                builder.Append($"&Green;({operand})&White;: &Yellow;0x{ram[(data[2] << 8) | data[1]]:X2}");
+            }
         }
 
         return builder.ToString();

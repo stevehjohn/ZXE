@@ -94,6 +94,8 @@ public class Processor
 
         instructions[0x07] = new Instruction("RLCA", 1, RLCA, 4);
 
+        instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_r_addr_nn(i, Register.A), 13);
+
         instructions[0x76] = new Instruction("HALT", 1, HALT, 4);
     }
 
@@ -176,6 +178,10 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+    }
+
+    private static void LD_r_addr_nn(Input input, Register register)
+    {
     }
 
     private static void HALT(Input input)
