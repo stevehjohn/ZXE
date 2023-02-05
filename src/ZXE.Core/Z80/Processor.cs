@@ -94,6 +94,8 @@ public class Processor
 
         instructions[0x07] = new Instruction("RLCA", 1, RLCA, 4);
 
+        instructions[0x08] = new Instruction("EX AF, AF'", 1, RLCA, 4);
+
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_r(i, Register.A), 13);
 
         instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_r_addr_nn(i, Register.A), 13);
@@ -192,6 +194,10 @@ public class Processor
     private static void LD_r_addr_nn(Input input, Register register)
     {
         input.State.Registers[register] = input.Ram[(input.Data[2] << 8) | input.Data[1]];
+    }
+
+    private static void EX_rr_rara(Input input, Register register)
+    {
     }
 
     private static void HALT(Input input)
