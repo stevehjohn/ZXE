@@ -12,9 +12,9 @@ public class ExecutesSimpleProgram : ITest
 {
     public List<string> Execute()
     {
-        var output = new List<string>();
+        var tracer = new FormattingTracer();
 
-        var processor = new Processor();
+        var processor = new Processor(tracer);
 
         var ram = new Ram(Model.Spectrum48K);
 
@@ -33,9 +33,9 @@ public class ExecutesSimpleProgram : ITest
 
         while (! state.Halted)
         {
-            output.Add(processor.ProcessInstruction(ram, true));
+            processor.ProcessInstruction(ram, true);
         }
 
-        return output;
+        return tracer.GetTrace();
     }
 }

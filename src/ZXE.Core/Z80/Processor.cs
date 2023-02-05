@@ -1,4 +1,4 @@
-﻿using ZXE.Core.Infrastructure;
+﻿using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
 // ReSharper disable IdentifierTypo
@@ -14,11 +14,22 @@ public class Processor
 
     private readonly Instruction[] _instructions;
 
+    private readonly ITracer? _tracer;
+
     public Processor()
     {
         _state = new State();
 
         _instructions = InitialiseInstructions();
+    }
+
+    public Processor(ITracer tracer)
+    {
+        _state = new State();
+
+        _instructions = InitialiseInstructions();
+
+        _tracer = tracer;
     }
 
     public string ProcessInstruction(Ram ram, bool trace = false)
@@ -31,9 +42,9 @@ public class Processor
 
         _state.ProgramCounter += instruction.Length;
 
-        if (trace)
+        if (_tracer != null)
         {
-            return TraceFormatter.Format(instruction.Mnemonic);
+            _tracer.Trace(instruction.Mnemonic, _state, ram);
         }
 
         return string.Empty;
