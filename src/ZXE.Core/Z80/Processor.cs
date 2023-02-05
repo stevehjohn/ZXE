@@ -160,6 +160,8 @@ public class Processor
 
         instructions[0x28] = new Instruction("JR Z, e", 2, JR_Z_e, 7);
 
+        instructions[0x29] = new Instruction("ADD HL, HL", 2, i => ADD_RR_RR(i, Register.HL, Register.HL), 11);
+
 
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);

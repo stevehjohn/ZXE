@@ -423,7 +423,7 @@ public class ProcessorTests
     [Fact]
     public void JR_Z_e()
     {
-        // JR NZ, e
+        // JR Z, e
         _ram[0] = 0x28;
         _ram[1] = 0x10;
 
