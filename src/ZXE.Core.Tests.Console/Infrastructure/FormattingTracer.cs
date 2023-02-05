@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Microsoft.Win32;
+using System.Text;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 using ZXE.Core.Z80;
@@ -116,6 +117,13 @@ public class FormattingTracer : ITracer
             }
 
             return $"&Magenta;{operand,-2}&White;: &Yellow;0x{state.Registers[register]:X2}  ";
+        }
+
+        if (operand.Length == 2)
+        {
+            var value = (data[2] << 8) | data[1];
+
+            return $"&Green;{operand,-2}&White;: &Yellow;0x{value:X4}";
         }
 
         return string.Empty;
