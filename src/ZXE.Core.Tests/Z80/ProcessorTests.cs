@@ -1,5 +1,7 @@
-﻿using Xunit;
+﻿using Moq;
+using Xunit;
 using ZXE.Core.Infrastructure;
+using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 using ZXE.Core.Z80;
 
@@ -42,6 +44,21 @@ public class ProcessorTests
         _state.ProgramCounter = 0xFFFE;
 
         Assert.Throws<ArgumentOutOfRangeException>(() => _processor.ProcessInstruction(_ram));
+    }
+
+    [Fact]
+    public void Calls_tracer_if_present()
+    {
+        var tracer = new Mock<ITracer>();
+
+        var processor = new Processor(tracer.Object);
+
+        _ram[0] = 0x00;
+
+        processor.ProcessInstruction(_ram);
+
+        tracer.Verify(t => t.TraceBefore("NOP", new byte[] { 0x00 }, It.IsAny<State>(), It.IsAny<Ram>()));
+        tracer.Verify(t => t.TraceAfter("NOP", new byte[] { 0x00 }, It.IsAny<State>(), It.IsAny<Ram>()));
     }
 
     [Fact]
@@ -162,6 +179,36 @@ public class ProcessorTests
 
         Assert.Equal(0b10100101, _state.Registers[Register.A]);
         Assert.True(_state.Flags.Carry);
+    }
+
+    [Fact]
+    public void LD_addr_nn_R()
+    {
+        // LD (nn), A
+        _ram[0] = 0x32;
+        _ram[1] = 0x34;
+        _ram[2] = 0x12;
+
+        _state.Registers[Register.A] = 0x56;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x56, _ram[0x1234]);
+    }
+
+    [Fact]
+    public void LD_R_addr_nn()
+    {
+        // LD A, (nn)
+        _ram[0] = 0x3A;
+        _ram[1] = 0x34;
+        _ram[2] = 0x12;
+
+        _ram[0x1234] = 0x56;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x56, _state.Registers[Register.A]);
     }
 
     [Fact]
