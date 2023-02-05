@@ -114,7 +114,9 @@ public class Processor
 
         instructions[0x11] = new Instruction("LD DE, nn", 3, i => LD_RR_nn(i, Register.DE), 10);
 
-        instructions[0x12] = new Instruction("LD (DE), A", 3, i => LD_addr_RR_R(i, Register.DE, Register.A), 10);
+        instructions[0x12] = new Instruction("LD (DE), A", 3, i => LD_addr_RR_R(i, Register.DE, Register.A), 7);
+
+
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
 
@@ -237,9 +239,9 @@ public class Processor
 
     private static void EX_RR_RaRa(Input input, Register register1, Register register2)
     {
-        var alternate1 = Enum.Parse<Register>($"{register1}a");
+        var alternate1 = Enum.Parse<Register>($"{register1}1");
 
-        var alternate2 = Enum.Parse<Register>($"{register2}a");
+        var alternate2 = Enum.Parse<Register>($"{register2}1");
 
         (input.State.Registers[register1], input.State.Registers[alternate1]) = (input.State.Registers[alternate1], input.State.Registers[register1]);
 
