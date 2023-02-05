@@ -102,6 +102,14 @@ public class Processor
 
         instructions[0x0B] = new Instruction("DEC BC", 1, i => DEC_RR(i, Register.BC), 6);
 
+        instructions[0x0C] = new Instruction("INC C", 1, i => INC_R(i, Register.C), 4);
+        
+        instructions[0x0D] = new Instruction("DEC C", 1, i => DEC_R(i, Register.C), 4);
+
+        instructions[0x0E] = new Instruction("LD C, n", 2, i => LD_R_n(i, Register.C), 7);
+
+        instructions[0x0F] = new Instruction("RRCA", 2, RRCA, 4);
+
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
 
         instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_R_addr_nn(i, Register.A), 13);
@@ -145,7 +153,7 @@ public class Processor
 
         input.State.Registers[register] = result;
 
-        // FLAGS
+        // Flags
         // Carry unaffected
         input.State.Flags.AddSubtract = false;
         input.State.Flags.ParityOverflow = value == 0x7F;
@@ -166,7 +174,7 @@ public class Processor
 
         input.State.Registers[register] = result;
 
-        // FLAGS
+        // Flags
         // Carry unaffected
         input.State.Flags.AddSubtract = true;
         input.State.Flags.ParityOverflow = value == 0x80;
@@ -194,7 +202,7 @@ public class Processor
 
         input.State.Registers[Register.A] = result;
 
-        // FLAGS
+        // Flags
         input.State.Flags.Carry = topBit == 1;
         input.State.Flags.AddSubtract = false;
         // ParityOverflow unaffected
@@ -242,7 +250,7 @@ public class Processor
 
         input.State.Registers.WritePair(target, (ushort) result);
 
-        // FLAGS
+        // Flags
         input.State.Flags.Carry = result > 0xFFFF;
         input.State.Flags.AddSubtract = false;
         // ParityOverflow unaffected
@@ -271,6 +279,25 @@ public class Processor
         input.State.Registers.WritePair(register, result);
 
         // Flags unaffected
+    }
+
+    private static void RRCA(Input input)
+    {
+        var bottomBit = input.State.Registers[Register.A] & 0x01;
+
+        var result = (byte) (0x0F & (input.State.Registers[Register.A] >> 1));
+
+        input.State.Registers[Register.A] = result;
+
+        // FLAGS
+        input.State.Flags.Carry = bottomBit > 0;
+        input.State.Flags.AddSubtract = false;
+        // ParityOverflow unaffected
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        // Zero unaffected
+        // Sign unaffected
     }
 
     private static void HALT(Input input)
