@@ -442,6 +442,23 @@ public class ProcessorTests
     }
 
     [Fact]
+    public void LD_RR_addr_nn()
+    {
+        // LD HL, (0x1234)
+        _ram[0] = 0x2A;
+        _ram[1] = 0x34;
+        _ram[2] = 0x12;
+
+        _ram[0x1234] = 0x56;
+        _ram[0x1235] = 0x78;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x56, _state.Registers[Register.L]);
+        Assert.Equal(0x78, _state.Registers[Register.H]);
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT
