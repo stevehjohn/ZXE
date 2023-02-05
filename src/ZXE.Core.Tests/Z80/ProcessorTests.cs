@@ -45,7 +45,7 @@ public class ProcessorTests
     }
 
     [Fact]
-    public void LD_rr_nn()
+    public void LD_RR_nn()
     {
         // LD BC, 0x1234
         _ram[0] = 0x01;
@@ -59,7 +59,7 @@ public class ProcessorTests
     }
 
     [Fact]
-    public void LD_addr_rr_A()
+    public void LD_addr_RR_A()
     {
         // LD (BC), A
         _ram[0] = 0x02;
@@ -75,7 +75,7 @@ public class ProcessorTests
     }
 
     [Fact]
-    public void INC_rr()
+    public void INC_RR()
     {
         // INC BC
         _ram[0] = 0x03;
@@ -97,7 +97,7 @@ public class ProcessorTests
     }
 
     [Fact]
-    public void INC_r()
+    public void INC_R()
     {
         // INC B
         _ram[0] = 0x04;
@@ -110,7 +110,7 @@ public class ProcessorTests
     }
 
     [Fact]
-    public void DEC_r()
+    public void DEC_R()
     {
         // DEC B
         _ram[0] = 0x05;
