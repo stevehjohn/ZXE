@@ -6,7 +6,7 @@ A ZX Spectrum emulator. Mostly about just seeing if I can.
 
 ### ZXE.Core
 
-This is the emulator. I have tried to keep all the Z80 specific code in the Z80 folder so it can be used in contexts other than a ZX Spectrum emulator.
+This is the emulator. I have tried to keep all the Z80 specific code in the Z80 folder so it can be used in contexts other than only a ZX Spectrum emulator.
 
 ### ZXE.Core.Tests
 
@@ -29,3 +29,4 @@ Run some select tests in the console so the developer has easy access to the tes
 - http://www.z80.info/z80syntx.htm
 - http://www.breakintoprogram.co.uk/hardware/computers/zx-spectrum/memory-map
 - https://landley.net/history/mirror/cpm/z80.html
+- https://clrhome.org/table/

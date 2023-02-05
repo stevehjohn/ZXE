@@ -96,6 +96,8 @@ public class Processor
 
         instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_r_addr_nn(i, Register.A), 13);
 
+        instructions[0x3E] = new Instruction("LD A, n", 2, i => LD_r_n(i, Register.A), 7);
+
         instructions[0x76] = new Instruction("HALT", 1, HALT, 4);
     }
 
