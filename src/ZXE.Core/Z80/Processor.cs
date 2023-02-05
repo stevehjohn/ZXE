@@ -98,7 +98,7 @@ public class Processor
 
         instructions[0x09] = new Instruction("ADD HL, BC'", 1, i => ADD_RR_RR(i, Register.HL, Register.BC), 11);
 
-        instructions[0x0A] = new Instruction("ADD A, (BC)'", 1, i => LD_R_addr_RR(i, Register.HL, Register.BC), 7);
+        instructions[0x0A] = new Instruction("LD A, (BC)'", 1, i => LD_R_addr_RR(i, Register.A, Register.BC), 7);
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
 
