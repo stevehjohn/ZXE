@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Core.Tests.Console.Infrastructure;
@@ -6,6 +7,7 @@ using ZXE.Core.Z80;
 
 namespace ZXE.Core.Tests.Console.Tests;
 
+[UsedImplicitly]
 [ExcludeFromCodeCoverage]
 [Test(1, "Successfully executes a simple machine code program and outputs relevant trace information.")]
 public class ExecutesSimpleProgram : ITest
