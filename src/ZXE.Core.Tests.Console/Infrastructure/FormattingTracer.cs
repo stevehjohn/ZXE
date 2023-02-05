@@ -101,9 +101,15 @@ public class FormattingTracer : ITracer
 
     private static string FormatOperandData(string operand, byte[] data, State state, Ram ram)
     {
+        var builder = new StringBuilder();
+
+        var isIndirect = false;
+
         if (operand[0] == '(')
         {
             operand = operand[1..^1];
+
+            isIndirect = true;
         }
 
         if (char.IsUpper(operand[0]))
@@ -112,19 +118,29 @@ public class FormattingTracer : ITracer
 
             if (operand.Length == 2)
             {
-                return $"&Magenta;{operand,-2}&White;: &Yellow;0x{state.Registers.ReadPair(register):X4}";
+                builder.Append($"&Magenta;{operand,-2}&White;: &Yellow;0x{state.Registers.ReadPair(register):X4}");
             }
-
-            return $"&Magenta;{operand,-2}&White;: &Yellow;0x{state.Registers[register]:X2}  ";
+            else
+            {
+                builder.Append($"&Magenta;{operand,-2}&White;: &Yellow;0x{state.Registers[register]:X2}  ");
+            }
         }
-
-        if (operand.Length == 2)
+        else
         {
-            var value = (data[2] << 8) | data[1];
-
-            return $"&Green;{operand,-2}&White;: &Yellow;0x{value:X4}";
+            if (operand.Length == 2)
+            {
+                builder.Append($"&Green;{operand,-2}&White;: &Yellow;0x{(data[2] << 8) | data[1]:X4}");
+            }
+            else
+            {
+                builder.Append($"&Green;{operand,-2}&White;: &Yellow;0x{data[1]:X2}  ");
+            }
         }
 
-        return string.Empty;
+        if (isIndirect)
+        {
+        }
+
+        return builder.ToString();
     }
 }
