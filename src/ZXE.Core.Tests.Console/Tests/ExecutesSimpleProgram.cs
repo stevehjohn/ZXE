@@ -26,6 +26,7 @@ public class ExecutesSimpleProgram : ITest
                  {
                      0x00,             // NOP
                      0x01, 0x34, 0x12, // LD BC, 0x1234
+                     0x3A, 0x78, 0x56, // LD A, (0x5678)
                      0x02,             // LD (BC), A
                      0x03,             // INC BC
                      0x04,             // INC B

@@ -182,6 +182,7 @@ public class Processor
 
     private static void LD_r_addr_nn(Input input, Register register)
     {
+        input.State.Registers[register] = input.Ram[(input.Data[2] << 8) | input.Data[1]];
     }
 
     private static void HALT(Input input)
