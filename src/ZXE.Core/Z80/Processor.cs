@@ -144,6 +144,10 @@ public class Processor
 
         instructions[0x20] = new Instruction("JR NZ, e", 2, JR_NZ_e, 7);
 
+        instructions[0x21] = new Instruction("LD HL, nn", 3, i => LD_RR_nn(i, Register.HL), 10);
+
+        instructions[0x22] = new Instruction("LD (nn), HL", 3, i => LD_addr_nn_RR(i, Register.HL), 16);
+
 
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
@@ -411,6 +415,18 @@ public class Processor
 
             input.State.ProgramCounter += (sbyte) input.Data[1];
         }
+
+        // Flags unaffected
+    }
+
+    private static void LD_addr_nn_RR(Input input, Register register)
+    {
+        var address = input.Data[2] << 8 | input.Data[1];
+
+        var data = input.State.Registers.ReadPair(Register.HL);
+
+        input.Ram[address] = (byte) (data & 0x00FF);
+        input.Ram[address + 1] = (byte) ((data & 0xFF00) >> 8);
 
         // Flags unaffected
     }
