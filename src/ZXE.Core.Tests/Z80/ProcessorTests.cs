@@ -344,6 +344,17 @@ public class ProcessorTests
     }
 
     [Fact]
+    public void JR_e()
+    {
+        _ram[0] = 0x18;
+        _ram[1] = 0x20;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x23, _state.ProgramCounter);
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT

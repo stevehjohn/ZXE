@@ -127,6 +127,8 @@ public class Processor
 
         instructions[0x17] = new Instruction("RLA", 3, RLA, 4);
 
+        instructions[0x18] = new Instruction("JR e", 3, JR_e, 12);
+
 
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
@@ -329,6 +331,7 @@ public class Processor
         // TODO: If B != 0, 5 more cycles... how to do this?
         DEC_R(input, Register.B);
 
+        // TODO: Compensate for twice-incremented program counter?
         if (input.State.Registers[Register.B] != 0)
         {
             input.State.ProgramCounter += (sbyte) input.Data[1];
@@ -356,6 +359,12 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+    }
+
+    public static void JR_e(Input input)
+    {
+        // TODO: Compensate for twice-incremented program counter?
+        input.State.ProgramCounter += input.Data[1];
     }
 
     private static void HALT(Input input)
