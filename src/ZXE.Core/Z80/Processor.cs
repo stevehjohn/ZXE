@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Infrastructure.Interfaces;
+﻿using System.Reflection.Metadata;
+using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
 // ReSharper disable IdentifierTypo
@@ -115,6 +116,16 @@ public class Processor
         instructions[0x11] = new Instruction("LD DE, nn", 3, i => LD_RR_nn(i, Register.DE), 10);
 
         instructions[0x12] = new Instruction("LD (DE), A", 3, i => LD_addr_RR_R(i, Register.DE, Register.A), 7);
+
+        instructions[0x13] = new Instruction("INC DE", 3, i => INC_RR(i, Register.DE), 6);
+
+        instructions[0x14] = new Instruction("INC D", 3, i => INC_R(i, Register.D), 4);
+
+        instructions[0x15] = new Instruction("DEC D", 3, i => DEC_R(i, Register.D), 4);
+
+        instructions[0x16] = new Instruction("LD D, n", 3, i => LD_R_n(i, Register.D), 7);
+
+        instructions[0x17] = new Instruction("RLA", 3, RLA, 4);
 
 
 
@@ -302,7 +313,7 @@ public class Processor
 
         input.State.Registers[Register.A] = result;
 
-        // FLAGS
+        // Flags
         input.State.Flags.Carry = bottomBit == 1;
         input.State.Flags.AddSubtract = false;
         // ParityOverflow unaffected
@@ -324,6 +335,27 @@ public class Processor
         }
 
         // Flags unaffected
+    }
+
+    private static void RLA(Input input)
+    {
+        var topBit = (input.State.Registers[Register.A] & 0x80) >> 7;
+
+        var result = (byte) (input.State.Registers[Register.A] << 1);
+
+        result |= (byte) (input.State.Flags.Carry ? 1 : 0);
+
+        input.State.Registers[Register.A] = result;
+
+        // Flags
+        input.State.Flags.Carry = topBit == 1;
+        input.State.Flags.AddSubtract = false;
+        // ParityOverflow unaffected
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        // Zero unaffected
+        // Sign unaffected
     }
 
     private static void HALT(Input input)
