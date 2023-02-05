@@ -2,6 +2,14 @@
 
 A ZX Spectrum emulator. Mostly about just seeing if I can.
 
+## Features
+
+So far, apart from a WIP emulator, I have...
+
+### Colourised Tracing of Machine Code Execution
+
+![Console Tracing](Images/Tracing-1.png)
+
 ## Solution Structure
 
 ### ZXE.Core
