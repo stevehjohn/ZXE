@@ -57,8 +57,8 @@ public class ProcessorTests
 
         processor.ProcessInstruction(_ram);
 
-        tracer.Verify(t => t.TraceBefore("NOP", new byte[] { 0x00 }, It.IsAny<State>(), It.IsAny<Ram>()));
-        tracer.Verify(t => t.TraceAfter("NOP", new byte[] { 0x00 }, It.IsAny<State>(), It.IsAny<Ram>()));
+        tracer.Verify(t => t.TraceBefore(It.Is<Instruction>(i => i.Mnemonic == "NOP"), new byte[] { 0x00 }, It.IsAny<State>(), It.IsAny<Ram>()));
+        tracer.Verify(t => t.TraceAfter(It.Is<Instruction>(i => i.Mnemonic == "NOP"), new byte[] { 0x00 }, It.IsAny<State>(), It.IsAny<Ram>()));
     }
 
     [Fact]
@@ -351,7 +351,7 @@ public class ProcessorTests
 
         _processor.ProcessInstruction(_ram);
 
-        Assert.Equal(0x23, _state.ProgramCounter);
+        Assert.Equal(0x22, _state.ProgramCounter);
     }
 
     [Fact]

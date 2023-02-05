@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata;
-using ZXE.Core.Infrastructure.Interfaces;
+﻿using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
 // ReSharper disable IdentifierTypo
@@ -41,7 +40,7 @@ public class Processor
 
         if (_tracer != null)
         {
-            _tracer.TraceBefore(instruction.Mnemonic, data, _state, ram);
+            _tracer.TraceBefore(instruction, data, _state, ram);
         }
 
         instruction.Action(new Input(data, _state, ram));
@@ -50,7 +49,7 @@ public class Processor
 
         if (_tracer != null)
         {
-            _tracer.TraceAfter(instruction.Mnemonic, data, _state, ram);
+            _tracer.TraceAfter(instruction, data, _state, ram);
         }
 
         return string.Empty;
@@ -97,7 +96,7 @@ public class Processor
 
         instructions[0x08] = new Instruction("EX AF, AF'", 1, i => EX_RR_RaRa(i, Register.A, Register.F), 4);
 
-        instructions[0x09] = new Instruction("ADD HL, BC'", 1, i => ADD_RR_RR(i, Register.HL, Register.BC), 11);
+        instructions[0x09] = new Instruction("ADD HL, BC", 1, i => ADD_RR_RR(i, Register.HL, Register.BC), 11);
 
         instructions[0x0A] = new Instruction("LD A, (BC)'", 1, i => LD_R_addr_RR(i, Register.A, Register.BC), 7);
 
@@ -111,7 +110,7 @@ public class Processor
 
         instructions[0x0F] = new Instruction("RRCA", 2, RRCA, 4);
         
-        instructions[0x10] = new Instruction("DJNZ e", 2, DJNZ_e, 8);
+        instructions[0x10] = new Instruction("DJNZ e", 2, DJNZ_e, 8, "DJNZ B, e");
 
         instructions[0x11] = new Instruction("LD DE, nn", 3, i => LD_RR_nn(i, Register.DE), 10);
 
@@ -127,7 +126,11 @@ public class Processor
 
         instructions[0x17] = new Instruction("RLA", 3, RLA, 4);
 
-        instructions[0x18] = new Instruction("JR e", 3, JR_e, 12);
+        instructions[0x18] = new Instruction("JR e", 2, JR_e, 12);
+
+        instructions[0x19] = new Instruction("ADD HL, DE", 1, i => ADD_RR_RR(i, Register.HL, Register.DE), 11);
+
+        instructions[0x1A] = new Instruction("LD A, (DE)", 1, i => LD_R_addr_RR(i, Register.A, Register.DE), 7);
 
 
 
@@ -332,7 +335,7 @@ public class Processor
         DEC_R(input, Register.B);
 
         // TODO: Compensate for twice-incremented program counter?
-        if (input.State.Registers[Register.B] != 0)
+        if (! input.State.Flags.Zero)
         {
             input.State.ProgramCounter += (sbyte) input.Data[1];
         }
@@ -364,7 +367,7 @@ public class Processor
     public static void JR_e(Input input)
     {
         // TODO: Compensate for twice-incremented program counter?
-        input.State.ProgramCounter += input.Data[1];
+        input.State.ProgramCounter += (sbyte) input.Data[1];
     }
 
     private static void HALT(Input input)

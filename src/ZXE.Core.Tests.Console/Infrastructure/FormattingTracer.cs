@@ -13,14 +13,14 @@ public class FormattingTracer : ITracer
 
     // TODO: Always show PC and SP.
 
-    public void TraceBefore(string mnemonic, byte[] data, State state, Ram ram)
+    public void TraceBefore(Instruction instruction, byte[] data, State state, Ram ram)
     {
-        _trace.Add($"{FormatMnemonic(mnemonic)}{FormatState(mnemonic, data, state, ram)}");
+        _trace.Add($"{FormatMnemonic(instruction.Mnemonic)}{FormatState(instruction.HelperMnemonic ?? instruction.Mnemonic, data, state, ram)}");
     }
 
-    public void TraceAfter(string mnemonic, byte[] data, State state, Ram ram)
+    public void TraceAfter(Instruction instruction, byte[] data, State state, Ram ram)
     {
-        _trace.Add($"{new string(' ', 15)}{FormatState(mnemonic, data, state, ram)}");
+        _trace.Add($"{new string(' ', 15)}{FormatState(instruction.HelperMnemonic ?? instruction.Mnemonic, data, state, ram)}");
 
         _trace.Add(string.Empty);
     }
