@@ -123,22 +123,22 @@ public class FormattingTracer : ITracer
         {
             if (operand.Length == 2)
             {
-                builder.Append($"&Magenta;{operand,-2}&White;: &Yellow;0x{state.Registers.ReadPair((Register) register):X4}");
+                builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers.ReadPair((Register) register):X4}");
             }
             else
             {
-                builder.Append($"&Magenta;{operand,-2}&White;: &Yellow;0x{state.Registers[(Register) register]:X2}  ");
+                builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers[(Register) register]:X2}  ");
             }
         }
         else
         {
             if (operand.Length == 2)
             {
-                builder.Append($"&Green;{operand,-2}&White;: &Yellow;0x{(data[2] << 8) | data[1]:X4}");
+                builder.Append($"&Green;{operand,-4}&White;: &Yellow;0x{(data[2] << 8) | data[1]:X4}");
             }
             else
             {
-                builder.Append($"&Green;{operand,-2}&White;: &Yellow;0x{data[1]:X2}  ");
+                builder.Append($"&Green;{operand,-4}&White;: &Yellow;0x{data[1]:X2}  ");
             }
         }
 
