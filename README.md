@@ -27,6 +27,7 @@ Run some select tests in the console so the developer has easy access to the tes
 ## Miscellaneous References
 
 - http://www.z80.info/z80syntx.htm
+- http://www.z80.info/z80code.htm
 - http://www.breakintoprogram.co.uk/hardware/computers/zx-spectrum/memory-map
 - https://landley.net/history/mirror/cpm/z80.html
 - https://clrhome.org/table/

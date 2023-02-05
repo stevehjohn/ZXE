@@ -109,21 +109,28 @@ public class Processor
 
     private static void NOP()
     {
+        // Flags unaffected
     }
 
     private static void LD_RR_nn(Input input, Register register)
     {
         input.State.Registers.LoadFromRam(register, input.Data[1..3]);
+
+        // Flags unaffected
     }
 
     private static void LD_addr_RR_A(Input input, Register register)
     {
         input.Ram[input.State.Registers.ReadPair(register)] = input.State.Registers[Register.A];
+
+        // Flags unaffected
     }
 
     private static void INC_RR(Input input, Register register)
     {
         input.State.Registers.WritePair(register, (ushort) (input.State.Registers.ReadPair(register) + 1));
+
+        // Flags unaffected
     }
 
     private static void INC_R(Input input, Register register)
@@ -171,6 +178,8 @@ public class Processor
     private static void LD_R_n(Input input, Register register)
     {
         input.State.Registers[register] = input.Data[1];
+
+        // Flags unaffected
     }
 
     private static void RLCA(Input input)
@@ -197,11 +206,15 @@ public class Processor
     private static void LD_addr_nn_R(Input input, Register register)
     {
         input.Ram[(input.Data[2] << 8) | input.Data[1]] = input.State.Registers[register];
+
+        // Flags unaffected
     }
 
     private static void LD_R_addr_nn(Input input, Register register)
     {
         input.State.Registers[register] = input.Ram[(input.Data[2] << 8) | input.Data[1]];
+
+        // Flags unaffected
     }
 
     private static void EX_RR_RaRa(Input input, Register register1, Register register2)
@@ -213,22 +226,24 @@ public class Processor
         (input.State.Registers[register1], input.State.Registers[alternate1]) = (input.State.Registers[alternate1], input.State.Registers[register1]);
 
         (input.State.Registers[register2], input.State.Registers[alternate2]) = (input.State.Registers[alternate2], input.State.Registers[register2]);
+
+        // Flags unaffected
     }
 
     private static void ADD_RR_RR(Input input, Register target, Register operand)
     {
-        var result = input.State.Registers.ReadPair(target);
+        var source = (int) input.State.Registers.ReadPair(target);
 
-        result += input.State.Registers.ReadPair(operand);
+        var result = source + input.State.Registers.ReadPair(operand);
 
-        input.State.Registers.WritePair(target, result);
+        input.State.Registers.WritePair(target, (ushort) result);
 
         // FLAGS
-        // input.State.Flags.Carry
+        input.State.Flags.Carry = result > 0xFFFF;
         input.State.Flags.AddSubtract = false;
         // ParityOverflow unaffected
         input.State.Flags.X1 = (result & 0x08) > 0;
-        // input.State.Flags.HalfCarry
+        input.State.Flags.HalfCarry = (source & 0x0800) > 0 && (result & 0x1000) > 0;
         input.State.Flags.X2 = (result & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
@@ -239,5 +254,7 @@ public class Processor
     private static void HALT(Input input)
     {
         input.State.Halted = true;
+
+        // Flags unaffected
     }
 }
