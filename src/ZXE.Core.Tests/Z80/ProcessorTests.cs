@@ -407,6 +407,7 @@ public class ProcessorTests
     [Fact]
     public void LD_addr_nn_RR()
     {
+        // LD (0x1234), HL
         _ram[0] = 0x22;
         _ram[1] = 0x34;
         _ram[2] = 0x12;
