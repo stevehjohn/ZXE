@@ -148,6 +148,12 @@ public class Processor
 
         instructions[0x22] = new Instruction("LD (nn), HL", 3, i => LD_addr_nn_RR(i, Register.HL), 16);
 
+        instructions[0x23] = new Instruction("INC HL", 1, i => INC_RR(i, Register.HL), 6);
+
+        instructions[0x24] = new Instruction("INC H", 1, i => INC_R(i, Register.H), 4);
+
+        instructions[0x25] = new Instruction("DEC H", 1, i => DEC_R(i, Register.H), 4);
+
 
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
