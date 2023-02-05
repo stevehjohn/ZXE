@@ -231,6 +231,20 @@ public class ProcessorTests
     }
 
     [Fact]
+    public void ADD_RR_RR()
+    {
+        // ADD HL, BC
+        _ram[0] = 0x09;
+
+        _state.Registers.WritePair(Register.HL, 0x0034);
+        _state.Registers.WritePair(Register.BC, 0x1200);
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x1234, _state.Registers.ReadPair(Register.HL));
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT

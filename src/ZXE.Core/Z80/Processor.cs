@@ -96,7 +96,7 @@ public class Processor
 
         instructions[0x08] = new Instruction("EX AF, AF'", 1, i => EX_RR_RaRa(i, Register.A, Register.F), 4);
 
-        instructions[0x09] = new Instruction("ADD HL, BC'", 1, i => ADD_RR_RR(i, Register.A, Register.F), 11);
+        instructions[0x09] = new Instruction("ADD HL, BC'", 1, i => ADD_RR_RR(i, Register.HL, Register.BC), 11);
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
 
@@ -143,6 +143,8 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         input.State.Flags.Zero = (sbyte) result == 0;
         input.State.Flags.Sign = (sbyte) result < 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 
     private static void DEC_R(Input input, Register register)
@@ -162,6 +164,8 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         input.State.Flags.Zero = (sbyte) result == 0;
         input.State.Flags.Sign = (sbyte) result < 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 
     private static void LD_R_n(Input input, Register register)
@@ -186,6 +190,8 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 
     private static void LD_addr_nn_R(Input input, Register register)
@@ -211,9 +217,9 @@ public class Processor
 
     private static void ADD_RR_RR(Input input, Register target, Register operand)
     {
-        var result = input.State.Registers[target];
+        var result = input.State.Registers.ReadPair(target);
 
-        result += input.State.Registers[operand];
+        result += input.State.Registers.ReadPair(operand);
 
         input.State.Registers.WritePair(target, result);
 
@@ -226,6 +232,8 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 
     private static void HALT(Input input)
