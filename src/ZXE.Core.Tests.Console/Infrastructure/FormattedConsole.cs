@@ -18,7 +18,7 @@ public static class FormattedConsole
 
                 if (end > 0)
                 {
-                    System.Console.Write(builder);
+                    global::System.Console.Write(builder);
 
                     builder.Clear();
 
@@ -26,7 +26,7 @@ public static class FormattedConsole
 
                     var colourEnum = Enum.Parse<ConsoleColor>(colour);
 
-                    System.Console.ForegroundColor = colourEnum;
+                    global::System.Console.ForegroundColor = colourEnum;
 
                     i = end;
 
@@ -37,7 +37,7 @@ public static class FormattedConsole
             builder.Append(output[i]);
         }
 
-        System.Console.Write(builder);
+        global::System.Console.Write(builder);
     }
 
     public static void WriteLine(string output)

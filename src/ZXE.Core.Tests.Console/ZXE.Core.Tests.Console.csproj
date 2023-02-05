@@ -12,4 +12,8 @@
     <Folder Include="Tests\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ZXE.Core\ZXE.Core.csproj" />
+  </ItemGroup>
+
 </Project>

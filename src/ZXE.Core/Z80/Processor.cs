@@ -20,7 +20,7 @@ public class Processor
         _instructions = InitialiseInstructions();
     }
 
-    public void ProcessInstruction(Ram ram)
+    public string ProcessInstruction(Ram ram, bool trace = false)
     {
         var instruction = _instructions[ram[_state.ProgramCounter]];
 
@@ -29,6 +29,12 @@ public class Processor
         instruction.Action(new Input(data, _state, ram));
 
         _state.ProgramCounter += instruction.Length;
+
+        if (trace)
+        {
+        }
+
+        return string.Empty;
     }
 
     internal void SetState(State state)
