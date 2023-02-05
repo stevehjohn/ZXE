@@ -32,7 +32,7 @@ public class Processor
         _tracer = tracer;
     }
 
-    public string ProcessInstruction(Ram ram, bool trace = false)
+    public string ProcessInstruction(Ram ram)
     {
         var instruction = _instructions[ram[_state.ProgramCounter]];
 
@@ -80,27 +80,27 @@ public class Processor
     {
         instructions[0x00] = new Instruction("NOP", 1, _ => NOP(), 4);
 
-        instructions[0x01] = new Instruction("LD BC, nn", 3, i => LD_rr_nn(i, Register.BC), 10);
+        instructions[0x01] = new Instruction("LD BC, nn", 3, i => LD_RR_nn(i, Register.BC), 10);
 
-        instructions[0x02] = new Instruction("LD (BC), A", 1, i => LD_addr_rr_A(i, Register.BC), 7);
+        instructions[0x02] = new Instruction("LD (BC), A", 1, i => LD_addr_RR_A(i, Register.BC), 7);
 
-        instructions[0x03] = new Instruction("INC BC", 1, i => INC_rr(i, Register.BC), 6);
+        instructions[0x03] = new Instruction("INC BC", 1, i => INC_RR(i, Register.BC), 6);
         
-        instructions[0x04] = new Instruction("INC B", 1, i => INC_r(i, Register.B), 4);
+        instructions[0x04] = new Instruction("INC B", 1, i => INC_R(i, Register.B), 4);
         
-        instructions[0x05] = new Instruction("DEC B", 1, i => DEC_r(i, Register.B), 4);
+        instructions[0x05] = new Instruction("DEC B", 1, i => DEC_R(i, Register.B), 4);
         
-        instructions[0x06] = new Instruction("LD B, n", 2, i => LD_r_n(i, Register.B), 7);
+        instructions[0x06] = new Instruction("LD B, n", 2, i => LD_R_n(i, Register.B), 7);
 
         instructions[0x07] = new Instruction("RLCA", 1, RLCA, 4);
 
         instructions[0x08] = new Instruction("EX AF, AF'", 1, RLCA, 4);
 
-        instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_r(i, Register.A), 13);
+        instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
 
-        instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_r_addr_nn(i, Register.A), 13);
+        instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_R_addr_nn(i, Register.A), 13);
 
-        instructions[0x3E] = new Instruction("LD A, n", 2, i => LD_r_n(i, Register.A), 7);
+        instructions[0x3E] = new Instruction("LD A, n", 2, i => LD_R_n(i, Register.A), 7);
 
         instructions[0x76] = new Instruction("HALT", 1, HALT, 4);
     }
@@ -109,22 +109,22 @@ public class Processor
     {
     }
 
-    private static void LD_rr_nn(Input input, Register register)
+    private static void LD_RR_nn(Input input, Register register)
     {
         input.State.Registers.LoadFromRam(register, input.Data[1..3]);
     }
 
-    private static void LD_addr_rr_A(Input input, Register register)
+    private static void LD_addr_RR_A(Input input, Register register)
     {
         input.Ram[input.State.Registers.ReadPair(register)] = input.State.Registers[Register.A];
     }
 
-    private static void INC_rr(Input input, Register register)
+    private static void INC_RR(Input input, Register register)
     {
         input.State.Registers.WritePair(register, (ushort) (input.State.Registers.ReadPair(register) + 1));
     }
 
-    private static void INC_r(Input input, Register register)
+    private static void INC_R(Input input, Register register)
     {
         var value = input.State.Registers[register];
 
@@ -143,7 +143,7 @@ public class Processor
         input.State.Flags.Sign = (sbyte) result < 0;
     }
 
-    private static void DEC_r(Input input, Register register)
+    private static void DEC_R(Input input, Register register)
     {
         var value = input.State.Registers[register];
 
@@ -162,7 +162,7 @@ public class Processor
         input.State.Flags.Sign = (sbyte) result < 0;
     }
 
-    private static void LD_r_n(Input input, Register register)
+    private static void LD_R_n(Input input, Register register)
     {
         input.State.Registers[register] = input.Data[1];
     }
@@ -186,17 +186,17 @@ public class Processor
         // Sign unaffected
     }
 
-    private static void LD_addr_nn_r(Input input, Register register)
+    private static void LD_addr_nn_R(Input input, Register register)
     {
         input.Ram[(input.Data[2] << 8) | input.Data[1]] = input.State.Registers[register];
     }
 
-    private static void LD_r_addr_nn(Input input, Register register)
+    private static void LD_R_addr_nn(Input input, Register register)
     {
         input.State.Registers[register] = input.Ram[(input.Data[2] << 8) | input.Data[1]];
     }
 
-    private static void EX_rr_rara(Input input, Register register)
+    private static void EX_RR_RaRa(Input input, Register register)
     {
     }
 

@@ -38,7 +38,7 @@ public class ExecutesSimpleProgram : ITest
 
         while (! state.Halted)
         {
-            processor.ProcessInstruction(ram, true);
+            processor.ProcessInstruction(ram);
         }
 
         return tracer.GetTrace();
