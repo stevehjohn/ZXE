@@ -94,6 +94,8 @@ public class Processor
 
         instructions[0x07] = new Instruction("RLCA", 1, RLCA, 4);
 
+        instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_r(i, Register.A), 13);
+
         instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_r_addr_nn(i, Register.A), 13);
 
         instructions[0x3E] = new Instruction("LD A, n", 2, i => LD_r_n(i, Register.A), 7);
@@ -180,6 +182,11 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+    }
+
+    private static void LD_addr_nn_r(Input input, Register register)
+    {
+        input.Ram[(input.Data[2] << 8) | input.Data[1]] = input.State.Registers[register];
     }
 
     private static void LD_r_addr_nn(Input input, Register register)
