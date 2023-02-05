@@ -1,10 +1,12 @@
-﻿using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 using ZXE.Core.Z80;
 
 namespace ZXE.Core.Tests.Console.Infrastructure;
 
+[ExcludeFromCodeCoverage]
 public class FormattingTracer : ITracer
 {
     private readonly List<string> _trace = new();
