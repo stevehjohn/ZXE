@@ -63,21 +63,21 @@ public class Processor
     {
         instructions[0x00] = new Instruction("NOP", "NOP", 1, _ => NOP(), 4);
 
-        instructions[0x01] = new Instruction("LD BC, nn", "LD BC, nn", 3, i => LD_rr_nn(i, Register.BC), 10);
+        instructions[0x01] = new Instruction("LD BC, nn", "LD &Magenta;BC&White;, &DarkGreen;nn", 3, i => LD_rr_nn(i, Register.BC), 10);
 
-        instructions[0x02] = new Instruction("LD (BC), A", "", 1, i => LD_addr_rr_A(i, Register.BC), 7);
+        instructions[0x02] = new Instruction("LD (BC), A", "LD (BC), A", 1, i => LD_addr_rr_A(i, Register.BC), 7);
 
-        instructions[0x03] = new Instruction("INC BC", "", 1, i => INC_rr(i, Register.BC), 6);
+        instructions[0x03] = new Instruction("INC BC", "INC BC", 1, i => INC_rr(i, Register.BC), 6);
         
-        instructions[0x04] = new Instruction("INC B", "", 1, i => INC_r(i, Register.B), 4);
+        instructions[0x04] = new Instruction("INC B", "INC B", 1, i => INC_r(i, Register.B), 4);
         
-        instructions[0x05] = new Instruction("DEC B", "", 1, i => DEC_r(i, Register.B), 4);
+        instructions[0x05] = new Instruction("DEC B", "DEC B", 1, i => DEC_r(i, Register.B), 4);
         
-        instructions[0x06] = new Instruction("LD B, n", "", 2, i => LD_r_n(i, Register.B), 7);
+        instructions[0x06] = new Instruction("LD B, n", "LD B, n", 2, i => LD_r_n(i, Register.B), 7);
 
-        instructions[0x07] = new Instruction("RLCA", "", 1, RLCA, 4);
+        instructions[0x07] = new Instruction("RLCA", "RLCA", 1, RLCA, 4);
 
-        instructions[0x76] = new Instruction("HALT", "", 1, HALT, 4);
+        instructions[0x76] = new Instruction("HALT", "HALT", 1, HALT, 4);
     }
 
     private static void NOP()
