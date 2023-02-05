@@ -82,7 +82,7 @@ public class Processor
 
         instructions[0x01] = new Instruction("LD BC, nn", 3, i => LD_RR_nn(i, Register.BC), 10);
 
-        instructions[0x02] = new Instruction("LD (BC), A", 1, i => LD_addr_RR_A(i, Register.BC), 7);
+        instructions[0x02] = new Instruction("LD (BC), A", 1, i => LD_addr_RR_R(i, Register.BC, Register.A), 7);
 
         instructions[0x03] = new Instruction("INC BC", 1, i => INC_RR(i, Register.BC), 6);
         
@@ -112,6 +112,10 @@ public class Processor
         
         instructions[0x10] = new Instruction("DJNZ e", 2, DJNZ_e, 8);
 
+        instructions[0x11] = new Instruction("LD DE, nn", 3, i => LD_RR_nn(i, Register.DE), 10);
+
+        instructions[0x12] = new Instruction("LD (DE), A", 3, i => LD_addr_RR_R(i, Register.DE, Register.A), 10);
+
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
 
         instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_R_addr_nn(i, Register.A), 13);
@@ -133,9 +137,9 @@ public class Processor
         // Flags unaffected
     }
 
-    private static void LD_addr_RR_A(Input input, Register register)
+    private static void LD_addr_RR_R(Input input, Register target, Register source)
     {
-        input.Ram[input.State.Registers.ReadPair(register)] = input.State.Registers[Register.A];
+        input.Ram[input.State.Registers.ReadPair(target)] = input.State.Registers[source];
 
         // Flags unaffected
     }
@@ -309,7 +313,7 @@ public class Processor
 
     private static void DJNZ_e(Input input)
     {
-        // If B != 0, 5 more cycles... how to do this?
+        // TODO: If B != 0, 5 more cycles... how to do this?
         DEC_R(input, Register.B);
 
         if (input.State.Registers[Register.B] != 0)
