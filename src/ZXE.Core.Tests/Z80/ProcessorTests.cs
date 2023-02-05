@@ -272,6 +272,27 @@ public class ProcessorTests
     }
 
     [Fact]
+    public void RRCA()
+    {
+        // RRCA
+        _ram[0] = 0x0F;
+
+        _state.Registers[Register.A] = 0b11010010;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0b01101001, _state.Registers[Register.A]);
+        Assert.False(_state.Flags.Carry);
+
+        _state.ProgramCounter = 0;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0b10110100, _state.Registers[Register.A]);
+        Assert.True(_state.Flags.Carry);
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT

@@ -285,12 +285,17 @@ public class Processor
     {
         var bottomBit = input.State.Registers[Register.A] & 0x01;
 
-        var result = (byte) (0x0F & (input.State.Registers[Register.A] >> 1));
+        var result = (byte) (0xFF & (input.State.Registers[Register.A] >> 1));
+
+        if (bottomBit == 1)
+        {
+            result |= 0x80;
+        }
 
         input.State.Registers[Register.A] = result;
 
         // FLAGS
-        input.State.Flags.Carry = bottomBit > 0;
+        input.State.Flags.Carry = bottomBit == 1;
         input.State.Flags.AddSubtract = false;
         // ParityOverflow unaffected
         input.State.Flags.X1 = (result & 0x08) > 0;
