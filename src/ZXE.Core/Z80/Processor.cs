@@ -132,6 +132,16 @@ public class Processor
 
         instructions[0x1A] = new Instruction("LD A, (DE)", 1, i => LD_R_addr_RR(i, Register.A, Register.DE), 7);
 
+        instructions[0x1B] = new Instruction("DEC DE", 1, i => DEC_RR(i, Register.DE), 6);
+
+        instructions[0x1C] = new Instruction("INC E", 1, i => INC_R(i, Register.E), 4);
+
+        instructions[0x1D] = new Instruction("DEC E", 1, i => DEC_R(i, Register.E), 4);
+
+        instructions[0x1E] = new Instruction("LD E, n", 1, i => LD_R_n(i, Register.E), 7);
+
+        instructions[0x1F] = new Instruction("RRA", 1, RRA, 4);
+
 
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
@@ -368,6 +378,27 @@ public class Processor
     {
         // TODO: Compensate for twice-incremented program counter?
         input.State.ProgramCounter += (sbyte) input.Data[1];
+    }
+
+    private static void RRA(Input input)
+    {
+        var bottomBit = input.State.Registers[Register.A] & 0x01;
+
+        var result = (byte) (input.State.Registers[Register.A] >> 1);
+
+        result |= (byte) (input.State.Flags.Carry ? 0x80 : 0);
+
+        input.State.Registers[Register.A] = result;
+
+        // Flags
+        input.State.Flags.Carry = bottomBit == 1;
+        input.State.Flags.AddSubtract = false;
+        // ParityOverflow unaffected
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        // Zero unaffected
+        // Sign unaffected
     }
 
     private static void HALT(Input input)

@@ -184,7 +184,7 @@ public class ProcessorTests
     [Fact]
     public void LD_addr_nn_R()
     {
-        // LD (nn), A
+        // LD (0x1234), A
         _ram[0] = 0x32;
         _ram[1] = 0x34;
         _ram[2] = 0x12;
@@ -199,7 +199,7 @@ public class ProcessorTests
     [Fact]
     public void LD_R_addr_nn()
     {
-        // LD A, (nn)
+        // LD A, (0x1234)
         _ram[0] = 0x3A;
         _ram[1] = 0x34;
         _ram[2] = 0x12;
@@ -295,7 +295,7 @@ public class ProcessorTests
     [Fact]
     public void DJNZ_e()
     {
-        // DJNZ e
+        // DJNZ 0x20
         _ram[0] = 0x10;
         _ram[1] = 0x20;
 
@@ -346,12 +346,41 @@ public class ProcessorTests
     [Fact]
     public void JR_e()
     {
+        // JR 0x20
         _ram[0] = 0x18;
         _ram[1] = 0x20;
 
         _processor.ProcessInstruction(_ram);
 
         Assert.Equal(0x22, _state.ProgramCounter);
+    }
+
+    [Fact]
+    public void RRA()
+    {
+        // RRA
+        _ram[0] = 0x1F;
+
+        _state.Registers[Register.A] = 0b10000010;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0b01000001, _state.Registers[Register.A]);
+        Assert.False(_state.Flags.Carry);
+
+        _state.ProgramCounter = 0;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0b00100000, _state.Registers[Register.A]);
+        Assert.True(_state.Flags.Carry);
+
+        _state.ProgramCounter = 0;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0b10010000, _state.Registers[Register.A]);
+        Assert.False(_state.Flags.Carry);
     }
 
     [Fact]
