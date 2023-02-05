@@ -259,6 +259,19 @@ public class ProcessorTests
     }
 
     [Fact]
+    public void DEC_RR()
+    {
+        // DEC BC
+        _ram[0] = 0x0B;
+
+        _state.Registers.WritePair(Register.BC, 0x1234);
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x1233, _state.Registers.ReadPair(Register.BC));
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT

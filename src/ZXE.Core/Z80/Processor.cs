@@ -100,6 +100,8 @@ public class Processor
 
         instructions[0x0A] = new Instruction("LD A, (BC)'", 1, i => LD_R_addr_RR(i, Register.A, Register.BC), 7);
 
+        instructions[0x0B] = new Instruction("DEC BC", 1, i => DEC_RR(i, Register.BC), 6);
+
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
 
         instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_R_addr_nn(i, Register.A), 13);
@@ -256,6 +258,17 @@ public class Processor
     public static void LD_R_addr_RR(Input input, Register target, Register source)
     {
         input.State.Registers[target] = input.Ram[input.State.Registers.ReadPair(source)];
+
+        // Flags unaffected
+    }
+
+    private static void DEC_RR(Input input, Register register)
+    {
+        var result = input.State.Registers.ReadPair(register);
+
+        result--;
+
+        input.State.Registers.WritePair(register, result);
 
         // Flags unaffected
     }
