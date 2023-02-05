@@ -9,9 +9,18 @@ public class FormattingTracer : ITracer
 {
     private readonly List<string> _trace = new();
 
-    public void Trace(string mnemonic, State state, Ram ram)
+    // TODO: Always show PC and SP.
+
+    public void TraceBefore(string mnemonic, byte[] data, State state, Ram ram)
     {
-        _trace.Add(FormatMnemonic(mnemonic));
+        _trace.Add($"{FormatMnemonic(mnemonic)}{FormatState(mnemonic, data, state, ram)}");
+    }
+
+    public void TraceAfter(string mnemonic, byte[] data, State state, Ram ram)
+    {
+        _trace.Add($"{new string(' ', 15)}{FormatState(mnemonic, data, state, ram)}");
+
+        _trace.Add(string.Empty);
     }
 
     public List<string> GetTrace()
@@ -19,7 +28,7 @@ public class FormattingTracer : ITracer
         return _trace;
     }
 
-    public static string FormatMnemonic(string mnemonic)
+    private static string FormatMnemonic(string mnemonic)
     {
         var parts = mnemonic.Split(' ', StringSplitOptions.TrimEntries).Select(p => p.Replace(",", string.Empty)).ToArray();
 
@@ -45,7 +54,7 @@ public class FormattingTracer : ITracer
             padding -= parts[2].Length + 2;
         }
 
-        return $"{builder}{new string(' ', padding)} X";
+        return $"{builder}{new string(' ', padding)}";
     }
 
     private static string ColourOperand(string operand)
@@ -63,5 +72,52 @@ public class FormattingTracer : ITracer
         }
 
         return $"&Green;{operand}";
+    }
+
+    private static string FormatState(string mnemonic, byte[] data, State state, Ram ram)
+    {
+        var builder = new StringBuilder();
+
+        builder.Append($"&Cyan;PC&White;: &Yellow;0x{state.ProgramCounter:X4}");
+
+        builder.Append($"    &Cyan;SP&White;: &Yellow;0x{state.StackPointer:X4}");
+
+        var parts = mnemonic.Split(' ', StringSplitOptions.TrimEntries).Select(p => p.Replace(",", string.Empty)).ToArray();
+
+        if (parts.Length == 1)
+        {
+            return builder.ToString();
+        }
+
+        builder.Append($"    {FormatOperandData(parts[1], data, state, ram)}");
+
+        if (parts.Length > 2)
+        {
+            builder.Append($"    {FormatOperandData(parts[2], data, state, ram)}");
+        }
+
+        return builder.ToString();
+    }
+
+    private static string FormatOperandData(string operand, byte[] data, State state, Ram ram)
+    {
+        if (operand[0] == '(')
+        {
+            operand = operand[1..^1];
+        }
+
+        if (char.IsUpper(operand[0]))
+        {
+            var register = Enum.Parse<Register>(operand);
+
+            if (operand.Length == 2)
+            {
+                return $"&Magenta;{operand,-2}&White;: &Yellow;0x{state.Registers.ReadPair(register):X4}";
+            }
+
+            return $"&Magenta;{operand,-2}&White;: &Yellow;0x{state.Registers[register]:X2}  ";
+        }
+
+        return string.Empty;
     }
 }

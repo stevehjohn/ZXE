@@ -5,5 +5,7 @@ namespace ZXE.Core.Infrastructure.Interfaces;
 
 public interface ITracer
 {
-    void Trace(string mnemonic, State state, Ram ram);
+    void TraceBefore(string mnemonic, byte[] data, State state, Ram ram);
+    
+    void TraceAfter(string mnemonic, byte[] data, State state, Ram ram);
 }

@@ -30,5 +30,7 @@ public class Program
                 FormattedConsole.WriteLine($"     {line}");
             }
         }
+
+        global::System.Console.ReadKey();
     }
 }

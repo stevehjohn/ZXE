@@ -28,6 +28,7 @@ public class ExecutesSimpleProgram : ITest
                      0x01, 0x34, 0x12, // LD BC, 0x1234
                      0x02,             // LD (BC), A
                      0x03,             // INC BC
+                     0x04,             // INC B
                      0x76              // HALT
                  }, 0);
 

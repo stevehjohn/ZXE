@@ -38,13 +38,18 @@ public class Processor
 
         var data = ram[_state.ProgramCounter..(_state.ProgramCounter + instruction.Length)];
 
+        if (_tracer != null)
+        {
+            _tracer.TraceBefore(instruction.Mnemonic, data, _state, ram);
+        }
+
         instruction.Action(new Input(data, _state, ram));
 
         _state.ProgramCounter += instruction.Length;
 
         if (_tracer != null)
         {
-            _tracer.Trace(instruction.Mnemonic, _state, ram);
+            _tracer.TraceAfter(instruction.Mnemonic, data, _state, ram);
         }
 
         return string.Empty;
