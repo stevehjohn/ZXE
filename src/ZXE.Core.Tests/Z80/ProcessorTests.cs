@@ -384,6 +384,27 @@ public class ProcessorTests
     }
 
     [Fact]
+    public void JR_NZ_e()
+    {
+        // JR NZ, e
+        _ram[0] = 0x20;
+        _ram[1] = 0x10;
+
+        _state.Flags.Zero = true;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x02, _state.ProgramCounter);
+
+        _state.Flags.Zero = false;
+        _state.ProgramCounter = 0;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x12, _state.ProgramCounter);
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT
