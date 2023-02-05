@@ -96,6 +96,8 @@ public class Processor
 
         instructions[0x08] = new Instruction("EX AF, AF'", 1, i => EX_RR_RaRa(i, Register.A, Register.F), 4);
 
+        instructions[0x09] = new Instruction("ADD HL, BC'", 1, i => ADD_RR_RR(i, Register.A, Register.F), 11);
+
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
 
         instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_R_addr_nn(i, Register.A), 13);
@@ -205,6 +207,25 @@ public class Processor
         (input.State.Registers[register1], input.State.Registers[alternate1]) = (input.State.Registers[alternate1], input.State.Registers[register1]);
 
         (input.State.Registers[register2], input.State.Registers[alternate2]) = (input.State.Registers[alternate2], input.State.Registers[register2]);
+    }
+
+    private static void ADD_RR_RR(Input input, Register target, Register operand)
+    {
+        var result = input.State.Registers[target];
+
+        result += input.State.Registers[operand];
+
+        input.State.Registers.WritePair(target, result);
+
+        // FLAGS
+        // input.State.Flags.Carry
+        input.State.Flags.AddSubtract = false;
+        // ParityOverflow unaffected
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        // input.State.Flags.HalfCarry
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        // Zero unaffected
+        // Sign unaffected
     }
 
     private static void HALT(Input input)
