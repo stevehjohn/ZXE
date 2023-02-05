@@ -27,9 +27,7 @@ public class BitManipulationExercises : ITest
         ram.Load(new byte[]
                  {
                      0x00,             // NOP
-                     0x3E, 0x01,       // LD A, 0x01
-                     0x17,             // RLA
-                     0x17,             // RLA
+                     0x3E, 0x04,       // LD A, 0x04
                      0x17,             // RLA
                      0x17,             // RLA
                      0x17,             // RLA
