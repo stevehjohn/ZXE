@@ -459,6 +459,19 @@ public class ProcessorTests
     }
 
     [Fact]
+    public void CPL()
+    {
+        // CPL
+        _ram[0] = 0x2F;
+
+        _state.Registers[Register.A] = 0b10100101;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0b01011010, _state.Registers[Register.A]);
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT
