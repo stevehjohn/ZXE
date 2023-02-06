@@ -176,6 +176,9 @@ public class Processor
 
         instructions[0x30] = new Instruction("JR NC, e", 2, JR_NC_e, 7);
 
+        instructions[0x31] = new Instruction("LD SP, nn", 3, LD_SP_nn, 10);
+
+
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
 
@@ -511,6 +514,13 @@ public class Processor
 
             input.State.ProgramCounter += (sbyte) input.Data[1];
         }
+
+        // Flags unaffected
+    }
+
+    private static void LD_SP_nn(Input input)
+    {
+        input.State.StackPointer = input.Data[2] << 8 | input.Data[1];
 
         // Flags unaffected
     }

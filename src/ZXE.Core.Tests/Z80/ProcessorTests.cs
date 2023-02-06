@@ -493,6 +493,19 @@ public class ProcessorTests
     }
 
     [Fact]
+    private void LD_SP_nn()
+    {
+        // LD SP, 0x1234
+        _ram[0] = 0x31;
+        _ram[1] = 0x34;
+        _ram[2] = 0x12;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x1234, _state.StackPointer);
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT
