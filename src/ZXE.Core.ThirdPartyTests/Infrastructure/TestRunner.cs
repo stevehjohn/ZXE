@@ -60,7 +60,9 @@ public class TestRunner
 
         FormattedConsole.WriteLine($"  &Cyan;Testing complete. Time elapsed&White;: &Yellow; {stopwatch.Elapsed.Minutes}:{stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}");
 
-        FormattedConsole.WriteLine($"\n  &Cyan;Tests Run&White;: &Yellow;{total}    &Cyan;Tests Passed&White;: &Green;{passed}    &Cyan;Tests Failed&White;: &Red;{total - passed}");
+        FormattedConsole.WriteLine($"\n  &Cyan;Tests Run&White;: &Yellow;{total:N0}    &Cyan;Tests Passed&White;: &Green;{passed:N0}    ");
+
+        FormattedConsole.WriteLine($"\n  &Cyan;Tests Failed&White;: &Red;{total - passed:N0}    &Cyan;Percent Failed&White;: &Yellow;{((float) total - passed) / total * 100:F2}%");
 
         FormattedConsole.WriteLine(string.Empty);
 
