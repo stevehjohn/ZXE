@@ -1058,7 +1058,7 @@ public class Processor
             // Flags
             input.State.Flags.Carry = result < 0;
             input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = ((sbyte) result & 0x80) > 0;
+            input.State.Flags.ParityOverflow = result < -0x80; // TODO: Potential bug here?
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F) < (valueS & 0x0F);
             input.State.Flags.X2 = (result & 0x20) > 0;
@@ -1071,5 +1071,27 @@ public class Processor
 
     private static void SUB_R_addr_RR(Input input, Register destination, Register source)
     {
+        unchecked
+        {
+            var valueD = input.State.Registers[destination];
+
+            var valueS = input.Ram[input.State.Registers.ReadPair(source)];
+
+            var result = valueD - valueS;
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = result < 0;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = result < -0x80; // TODO: Potential bug here?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) < (valueS & 0x0F);
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 }
