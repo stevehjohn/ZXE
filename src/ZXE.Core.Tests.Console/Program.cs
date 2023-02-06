@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using ZXE.Common.ConsoleHelpers;
 using ZXE.Core.Tests.Console.Infrastructure;
 
 namespace ZXE.Core.Tests.Console;
