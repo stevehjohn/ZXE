@@ -192,6 +192,8 @@ public class Processor
 
         instructions[0x38] = new Instruction("JR C, e", 2, JR_C_e, 7);
 
+        instructions[0x39] = new Instruction("ADD HL, SP", 1, i => ADD_RR_SP(i, Register.HL), 11);
+
 
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
@@ -387,6 +389,8 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 
     private static void DJNZ_e(Input input)
@@ -422,6 +426,8 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 
     public static void JR_e(Input input)
@@ -449,6 +455,8 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 
     private static void JR_NZ_e(Input input)
@@ -520,6 +528,8 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 
     private static void JR_NC_e(Input input)
@@ -565,6 +575,8 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = (sbyte) result < 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 
     private static void DEC_addr_RR(Input input, Register register)
@@ -584,6 +596,8 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = (sbyte) result < 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 
     private static void LD_addr_RR_n(Input input, Register register)
@@ -608,6 +622,27 @@ public class Processor
         }
 
         // Flags unaffected
+    }
+
+    private static void ADD_RR_SP(Input input, Register register)
+    {
+        var source = input.State.StackPointer;
+
+        var result = source + input.State.Registers.ReadPair(register);
+
+        input.State.Registers.WritePair(register, (ushort) result);
+
+        // Flags
+        input.State.Flags.Carry = result > 0xFFFF;
+        input.State.Flags.AddSubtract = false;
+        // ParityOverflow unaffected
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = (source & 0x0800) > 0 && (result & 0x1000) > 0;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        // Zero unaffected
+        // Sign unaffected
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 
     private static void HALT(Input input)

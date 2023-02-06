@@ -386,7 +386,7 @@ public class ProcessorTests
     [Fact]
     public void JR_NZ_e()
     {
-        // JR NZ, e
+        // JR NZ, 0x10
         _ram[0] = 0x20;
         _ram[1] = 0x10;
 
@@ -423,7 +423,7 @@ public class ProcessorTests
     [Fact]
     public void JR_Z_e()
     {
-        // JR Z, e
+        // JR Z, 0x10
         _ram[0] = 0x28;
         _ram[1] = 0x10;
 
@@ -474,7 +474,7 @@ public class ProcessorTests
     [Fact]
     public void JR_NC_e()
     {
-        // JR NC, e
+        // JR NC, 0x10
         _ram[0] = 0x30;
         _ram[1] = 0x10;
 
@@ -549,7 +549,7 @@ public class ProcessorTests
     [Fact]
     public void LD_addr_RR_n()
     {
-        // LD (HL), n
+        // LD (HL), 0xAB
         _ram[0] = 0x36;
         _ram[1] = 0xAB;
 
@@ -574,7 +574,7 @@ public class ProcessorTests
     [Fact]
     public void JR_C_e()
     {
-        // JR NC, e
+        // JR NC, 0x10
         _ram[0] = 0x38;
         _ram[1] = 0x10;
 
@@ -590,6 +590,20 @@ public class ProcessorTests
         _processor.ProcessInstruction(_ram);
 
         Assert.Equal(0x12, _state.ProgramCounter);
+    }
+
+    [Fact]
+    public void ADD_RR_SP()
+    {
+        // ADD HL, SP
+        _ram[0] = 0x39;
+
+        _state.Registers.WritePair(Register.HL, 0x0101);
+        _state.StackPointer = 0xA0A0;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0xA1A1, _state.Registers.ReadPair(Register.HL));
     }
 
     [Fact]
