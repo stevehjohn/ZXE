@@ -682,4 +682,54 @@ public class ProcessorTests
 
         Assert.Equal(0x1A, _state.Registers[Register.A]);
     }
+
+    [Fact]
+    public void ADC_R_R()
+    {
+        // ADC A, B
+        _ram[0] = 0x88;
+
+        _state.Registers[Register.A] = 0x10;
+        _state.Registers[Register.B] = 0x0A;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x1A, _state.Registers[Register.A]);
+
+        _state.ProgramCounter = 0;
+
+        _state.Registers[Register.A] = 0x10;
+        _state.Registers[Register.B] = 0x0A;
+
+        _state.Flags.Carry = true;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x1B, _state.Registers[Register.A]);
+    }
+
+    [Fact]
+    public void ADC_R_addr_RR()
+    {
+        // ADC A, (HL)
+        _ram[0] = 0x8E;
+        _ram[0x1234] = 0x0A;
+
+        _state.Registers[Register.A] = 0x10;
+        _state.Registers.WritePair(Register.HL, 0x1234);
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x1A, _state.Registers[Register.A]);
+
+        _state.ProgramCounter = 0;
+
+        _state.Registers[Register.A] = 0x10;
+
+        _state.Flags.Carry = true;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x1B, _state.Registers[Register.A]);
+    }
 }
