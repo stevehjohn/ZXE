@@ -1,10 +1,18 @@
-﻿namespace ZXE.Core.ThirdPartyTests
+﻿using System.Diagnostics.CodeAnalysis;
+using ZXE.Core.ThirdPartyTests.Infrastructure;
+
+namespace ZXE.Core.ThirdPartyTests
 {
+    [ExcludeFromCodeCoverage]
     public class Program
     {
         public static void Main()
         {
-            Console.WriteLine("Hello, World!");
+            var runner = new TestRunner();
+
+            runner.RunAllTests();
+
+            Console.ReadKey();
         }
     }
 }
