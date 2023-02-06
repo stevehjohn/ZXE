@@ -47,6 +47,11 @@ public class Processor
 
         _state.ProgramCounter += instruction.Length;
 
+        if (_state.ProgramCounter > 0xFFFF)
+        {
+            _state.ProgramCounter -= 0xFFFF;
+        }
+
         if (_tracer != null)
         {
             _tracer.TraceAfter(instruction, data, _state, ram);
