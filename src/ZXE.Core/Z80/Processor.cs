@@ -381,6 +381,8 @@ public class Processor
         instructions[0x96] = new Instruction("SUB A, (HL)", 1, i => SUB_R_addr_RR(i, Register.A, Register.HL), 7);
 
         instructions[0x97] = new Instruction("SUB A, A", 1, i => SUB_R_R(i, Register.A, Register.B), 4);
+
+        instructions[0x98] = new Instruction("SBC A, B", 1, i => SBC_R_R(i, Register.A, Register.B), 4);
     }
 
     private static void NOP()
@@ -1025,7 +1027,9 @@ public class Processor
 
             var valueS = input.Ram[input.State.Registers.ReadPair(source)];
 
-            var result = valueD + valueS + (input.State.Flags.Carry ? 0x01 : 0x00);
+            var carry = (byte) (input.State.Flags.Carry ? 0x01 : 0x00);
+
+            var result = valueD + valueS + carry;
 
             input.State.Registers[destination] = (byte) result;
 
@@ -1034,7 +1038,7 @@ public class Processor
             input.State.Flags.AddSubtract = false;
             input.State.Flags.ParityOverflow = result > 0x7F;
             input.State.Flags.X1 = (result & 0x08) > 0;
-            input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) > 0xF;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0xF;
             input.State.Flags.X2 = (result & 0x20) > 0;
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
@@ -1087,6 +1091,34 @@ public class Processor
             input.State.Flags.ParityOverflow = result < -0x80; // TODO: Potential bug here?
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F) < (valueS & 0x0F);
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+    }
+
+    private static void SBC_R_R(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var valueD = input.State.Registers[destination];
+
+            var valueS = input.State.Registers[source];
+            
+            var carry = (byte) (input.State.Flags.Carry ? 0x01 : 0x00);
+
+            var result = valueD - valueS - carry;
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = result < 0;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = result < -0x80; // TODO: Potential bug here?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) < ((valueS + carry) & 0x0F);
             input.State.Flags.X2 = (result & 0x20) > 0;
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
