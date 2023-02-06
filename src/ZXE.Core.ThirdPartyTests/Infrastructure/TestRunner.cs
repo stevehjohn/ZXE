@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using ZXE.Common.ConsoleHelpers;
 using ZXE.Core.Infrastructure;
+using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 using ZXE.Core.ThirdPartyTests.Models;
 using ZXE.Core.Z80;
@@ -12,7 +13,7 @@ namespace ZXE.Core.ThirdPartyTests.Infrastructure;
 [ExcludeFromCodeCoverage]
 public class TestRunner
 {
-    public void RunAllTests()
+    public void RunAllTests(bool dumpOnFail = false)
     {
         var files = Directory.EnumerateFiles("TestDefinitions", "*.json");
 
@@ -48,8 +49,9 @@ public class TestRunner
                 {
                     passed++;
                 }
-                else
+                else if (dumpOnFail)
                 {
+                    DumpTest(test);
                 }
             }
         }
@@ -98,11 +100,13 @@ public class TestRunner
         return result.Passed;
     }
 
-    private static (bool Passed, int Operations) ExecuteTest(TestDefinition test)
+    private static (bool Passed, int Operations, State State) ExecuteTest(TestDefinition test, ITracer? tracer = null)
     {
         var ram = new Ram(Model.Spectrum48K);
 
-        var processor = new Processor();
+        var processor = tracer != null
+                            ? new Processor(tracer)
+                            : new Processor();
 
         var state = new State();
 
@@ -141,7 +145,7 @@ public class TestRunner
         }
         catch
         {
-            return (false, operations);
+            return (false, operations, state);
         }
 
         var pass = state.ProgramCounter == test.Final.PC
@@ -159,6 +163,32 @@ public class TestRunner
             pass = pass && ram[pair[0]] == pair[1];
         }
 
-        return (pass, operations);
+        return (pass, operations, state);
+    }
+
+    private void DumpTest(TestDefinition test)
+    {
+        var tracer = new FormattingTracer();
+
+        var result = ExecuteTest(test, tracer);
+
+        FormattedConsole.WriteLine("\n&Cyan;        Expected    Actual");
+        FormattedConsole.WriteLine($"    &Cyan;PC&White;: &Green;{test.Final.PC:X4}         {(test.Final.PC == result.State.ProgramCounter ? "&Green;" : "&Red;")}{result.State.ProgramCounter:X4}");
+
+        var trace = tracer.GetTrace();
+
+        for (var i = 0; i < 60; i++)
+        {
+            if (i >= trace.Count)
+            {
+                break;
+            }
+
+            FormattedConsole.WriteLine($"    {trace[i]}");
+        }
+
+        FormattedConsole.WriteLine("\n    &Cyan;Press any key to continue...\n");
+
+        Console.ReadKey();
     }
 }

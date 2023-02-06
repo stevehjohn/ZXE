@@ -10,7 +10,7 @@ namespace ZXE.Core.ThirdPartyTests
         {
             var runner = new TestRunner();
 
-            runner.RunAllTests();
+            runner.RunAllTests(true);
 
             Console.ReadKey();
         }
