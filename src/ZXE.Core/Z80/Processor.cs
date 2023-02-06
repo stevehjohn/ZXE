@@ -113,7 +113,7 @@ public class Processor
 
         instructions[0x0E] = new Instruction("LD C, n", 2, i => LD_R_n(i, Register.C), 7);
 
-        instructions[0x0F] = new Instruction("RRCA", 2, RRCA, 4, "RRCA A");
+        instructions[0x0F] = new Instruction("RRCA", 1, RRCA, 4, "RRCA A");
 
         instructions[0x10] = new Instruction("DJNZ e", 2, DJNZ_e, 8, "DJNZ B, e");
 
@@ -619,7 +619,7 @@ public class Processor
         {
             var bottomBit = input.State.Registers[Register.A] & 0x01;
 
-            var result = (byte) (0xFF & (input.State.Registers[Register.A] >> 1));
+            var result = (byte) (input.State.Registers[Register.A] >> 1);
 
             if (bottomBit == 1)
             {
