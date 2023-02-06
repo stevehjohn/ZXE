@@ -119,15 +119,15 @@ public class Processor
 
         instructions[0x11] = new Instruction("LD DE, nn", 3, i => LD_RR_nn(i, Register.DE), 10);
 
-        instructions[0x12] = new Instruction("LD (DE), A", 3, i => LD_addr_RR_R(i, Register.DE, Register.A), 7);
+        instructions[0x12] = new Instruction("LD (DE), A", 1, i => LD_addr_RR_R(i, Register.DE, Register.A), 7);
 
-        instructions[0x13] = new Instruction("INC DE", 3, i => INC_RR(i, Register.DE), 6);
+        instructions[0x13] = new Instruction("INC DE", 1, i => INC_RR(i, Register.DE), 6);
 
-        instructions[0x14] = new Instruction("INC D", 3, i => INC_R(i, Register.D), 4);
+        instructions[0x14] = new Instruction("INC D", 1, i => INC_R(i, Register.D), 4);
 
-        instructions[0x15] = new Instruction("DEC D", 3, i => DEC_R(i, Register.D), 4);
+        instructions[0x15] = new Instruction("DEC D", 1, i => DEC_R(i, Register.D), 4);
 
-        instructions[0x16] = new Instruction("LD D, n", 3, i => LD_R_n(i, Register.D), 7);
+        instructions[0x16] = new Instruction("LD D, n", 2, i => LD_R_n(i, Register.D), 7);
 
         instructions[0x17] = new Instruction("RLA", 1, RLA, 4, "RLA A");
 

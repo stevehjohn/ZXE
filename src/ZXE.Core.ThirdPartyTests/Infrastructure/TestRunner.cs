@@ -145,7 +145,7 @@ public class TestRunner
 
         try
         {
-            while (state.ProgramCounter != test.Final.PC)
+            do
             {
                 operations++;
 
@@ -155,7 +155,8 @@ public class TestRunner
                 }
 
                 processor.ProcessInstruction(ram);
-            }
+
+            } while (state.ProgramCounter != test.Final.PC);
         }
         catch
         {
