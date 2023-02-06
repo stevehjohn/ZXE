@@ -206,9 +206,23 @@ public class Processor
 
         instructions[0x3F] = new Instruction("CCF", 1, CCF, 4);
 
+
+
         instructions[0x40] = new Instruction("LD B, B", 1, i => LD_R_R(i, Register.B, Register.B), 4);
 
         instructions[0x41] = new Instruction("LD B, C", 1, i => LD_R_R(i, Register.B, Register.C), 4);
+
+        instructions[0x42] = new Instruction("LD B, D", 1, i => LD_R_R(i, Register.B, Register.D), 4);
+        
+        instructions[0x43] = new Instruction("LD B, E", 1, i => LD_R_R(i, Register.B, Register.E), 4);
+
+        instructions[0x44] = new Instruction("LD B, H", 1, i => LD_R_R(i, Register.B, Register.H), 4);
+
+        instructions[0x45] = new Instruction("LD B, L", 1, i => LD_R_R(i, Register.B, Register.L), 4);
+        
+        instructions[0x46] = new Instruction("LD B, (HL)", 1, i => LD_R_addr_nn(i, Register.B), 7);
+
+        instructions[0x47] = new Instruction("LD B, A", 1, i => LD_R_R(i, Register.B, Register.A), 4);
 
 
 
