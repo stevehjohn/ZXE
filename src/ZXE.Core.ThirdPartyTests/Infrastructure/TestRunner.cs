@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using ZXE.Common.ConsoleHelpers;
 using ZXE.Core.Infrastructure;
@@ -150,7 +149,7 @@ public class TestRunner
 
         foreach (var cycle in cycles)
         {
-            var addressBus = (int) ((JsonElement) cycle[0]).ValueKind;
+            var addressBus = ((JsonElement) cycle[0]).GetInt32();
 
             if (addressBus == last)
             {

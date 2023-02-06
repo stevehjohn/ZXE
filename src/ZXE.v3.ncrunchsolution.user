@@ -3,7 +3,7 @@
     <AutoEnable>True</AutoEnable>
     <CurrentEngineMode>Run impacted tests automatically, others manually [Global]</CurrentEngineMode>
     <ProcessingQueueSplitterDistance>50%</ProcessingQueueSplitterDistance>
-    <StatusIndicatorSplitterDistance>14.0350875854492%</StatusIndicatorSplitterDistance>
+    <StatusIndicatorSplitterDistance>13.6842098236084%</StatusIndicatorSplitterDistance>
     <TestsWindowMenuOptions>
       <VerticalSplitMenuOption>false</VerticalSplitMenuOption>
       <ShowPassingTestsMenuOption>true</ShowPassingTestsMenuOption>
