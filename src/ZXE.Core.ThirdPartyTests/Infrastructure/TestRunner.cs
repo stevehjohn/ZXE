@@ -39,7 +39,7 @@ public class TestRunner
                     passed++;
                 }
 
-                Thread.Sleep(250);
+                //Thread.Sleep(250);
             }
         }
     }
@@ -104,15 +104,15 @@ public class TestRunner
             processor.ProcessInstruction(ram);
         }
 
-        var pass = state.ProgramCounter == test.Initial.PC
-                   && state.StackPointer == test.Initial.SP
-                   && state.Registers[Register.A] == test.Initial.A
-                   && state.Registers[Register.B] == test.Initial.B
-                   && state.Registers[Register.C] == test.Initial.C
-                   && state.Registers[Register.D] == test.Initial.D
-                   && state.Registers[Register.E] == test.Initial.E
-                   && state.Registers[Register.H] == test.Initial.H
-                   && state.Registers[Register.L] == test.Initial.L;
+        var pass = state.ProgramCounter == test.Final.PC
+                   && state.StackPointer == test.Final.SP
+                   && state.Registers[Register.A] == test.Final.A
+                   && state.Registers[Register.B] == test.Final.B
+                   && state.Registers[Register.C] == test.Final.C
+                   && state.Registers[Register.D] == test.Final.D
+                   && state.Registers[Register.E] == test.Final.E
+                   && state.Registers[Register.H] == test.Final.H
+                   && state.Registers[Register.L] == test.Final.L;
 
         foreach (var pair in test.Final.Ram)
         {
@@ -126,7 +126,7 @@ public class TestRunner
     {
         var last = int.MinValue;
 
-        var count = 1;
+        var count = 0;
 
         foreach (var cycle in cycles)
         {
