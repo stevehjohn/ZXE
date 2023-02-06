@@ -48,8 +48,9 @@ public class TestRunner
                 {
                     passed++;
                 }
-
-                //Thread.Sleep(250);
+                else
+                {
+                }
             }
         }
 
@@ -122,8 +123,6 @@ public class TestRunner
             ram[pair[0]] = (byte) pair[1];
         }
 
-        //var operations = CountOperations(test.Cycles);
-
         var operations = 0;
 
         try
@@ -162,27 +161,4 @@ public class TestRunner
 
         return (pass, operations);
     }
-
-    //private static int CountOperations(object[][] cycles)
-    //{
-    //    var last = int.MinValue;
-
-    //    var count = 0;
-
-    //    foreach (var cycle in cycles)
-    //    {
-    //        var addressBus = ((JsonElement) cycle[0]).GetInt32();
-
-    //        if (addressBus == last)
-    //        {
-    //            continue;
-    //        }
-
-    //        last = addressBus;
-
-    //        count++;
-    //    }
-
-    //    return count;
-    //}
 }
