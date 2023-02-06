@@ -24,6 +24,12 @@ Unit tests for the above.
 
 Run some select tests in the console so the developer has easy access to the test output.
 
+### ZXE.Core.ThirdPartyTests
+
+Runs tests against this awesome suite:
+
+- https://github.com/raddad772/jsmoo/tree/main/misc/tests/GeneratedTests/z80/v1
+
 ## ROMS
 
 - https://github.com/archtaurus/RetroPieBIOS

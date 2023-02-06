@@ -64,7 +64,7 @@ public class TestRunner
 
         var result = ExecuteTest(test);
 
-        FormattedConsole.Write($"  &Cyan;Operations&White;: &Magenta;{result.Operations, 3}  ");
+        FormattedConsole.Write($"  &Cyan;Operations&White;: &Magenta;{result.Operations, 6}  ");
 
         FormattedConsole.Write("  &Cyan;Result&White;: [ ");
 
@@ -118,6 +118,11 @@ public class TestRunner
             while (state.ProgramCounter != test.Final.PC)
             {
                 operations++;
+
+                if (operations > 99_999)
+                {
+                    break;
+                }
 
                 processor.ProcessInstruction(ram);
             }
