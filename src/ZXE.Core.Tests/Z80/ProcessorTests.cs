@@ -620,6 +620,30 @@ public class ProcessorTests
     }
 
     [Fact]
+    public void CCF()
+    {
+        // CCF
+        _ram[0] = 0x3F;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.True(_state.Flags.Carry);
+    }
+
+    [Fact]
+    public void LD_R_R()
+    {
+        // LD B, C
+        _ram[0] = 0x41;
+
+        _state.Registers[Register.C] = 0x12;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x12, _state.Registers[Register.B]);
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT

@@ -206,6 +206,10 @@ public class Processor
 
         instructions[0x3F] = new Instruction("CCF", 1, CCF, 4);
 
+        instructions[0x40] = new Instruction("LD B, B", 1, i => LD_R_R(i, Register.B, Register.B), 4);
+
+        instructions[0x41] = new Instruction("LD B, C", 1, i => LD_R_R(i, Register.B, Register.C), 4);
+
 
 
         instructions[0x76] = new Instruction("HALT", 1, HALT, 4);
@@ -689,6 +693,13 @@ public class Processor
         input.State.Flags.X2 = (xFlags & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+    }
+
+    private static void LD_R_R(Input input, Register destination, Register source)
+    {
+        input.State.Registers[destination] = input.State.Registers[source];
+
+        // Flags unaffected
     }
 
     private static void HALT(Input input)
