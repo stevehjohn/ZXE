@@ -470,6 +470,27 @@ public class ProcessorTests
 
         Assert.Equal(0b01011010, _state.Registers[Register.A]);
     }
+    
+    [Fact]
+    public void JR_NC_e()
+    {
+        // JR NC, e
+        _ram[0] = 0x30;
+        _ram[1] = 0x10;
+
+        _state.Flags.Carry = true;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x02, _state.ProgramCounter);
+
+        _state.Flags.Carry = false;
+        _state.ProgramCounter = 0;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x12, _state.ProgramCounter);
+    }
 
     [Fact]
     public void HALT()

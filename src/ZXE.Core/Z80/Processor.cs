@@ -174,6 +174,7 @@ public class Processor
 
         instructions[0x2F] = new Instruction("CPL", 1, CPL, 4);
 
+        instructions[0x30] = new Instruction("JR NC, e", 2, JR_NC_e, 7);
 
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
@@ -500,6 +501,18 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+    }
+    
+    private static void JR_NC_e(Input input)
+    {
+        if (! input.State.Flags.Carry)
+        {
+            // TODO: If Z == false, 5 more cycles... how to do this?
+
+            input.State.ProgramCounter += (sbyte) input.Data[1];
+        }
+
+        // Flags unaffected
     }
 
     private static void HALT(Input input)
