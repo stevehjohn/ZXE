@@ -570,6 +570,27 @@ public class ProcessorTests
 
         Assert.True(_state.Flags.Carry);
     }
+        
+    [Fact]
+    public void JR_C_e()
+    {
+        // JR NC, e
+        _ram[0] = 0x38;
+        _ram[1] = 0x10;
+
+        _state.Flags.Carry = false;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x02, _state.ProgramCounter);
+
+        _state.Flags.Carry = true;
+        _state.ProgramCounter = 0;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x12, _state.ProgramCounter);
+    }
 
     [Fact]
     public void HALT()

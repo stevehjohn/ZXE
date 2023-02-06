@@ -190,6 +190,8 @@ public class Processor
 
         instructions[0x37] = new Instruction("SCF", 1, SCF, 4);
 
+        instructions[0x38] = new Instruction("JR C, e", 2, JR_C_e, 7);
+
 
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
@@ -594,6 +596,18 @@ public class Processor
     private static void SCF(Input input)
     {
         input.State.Flags.Carry = true;
+    }
+
+    private static void JR_C_e(Input input)
+    {
+        if (input.State.Flags.Carry)
+        {
+            // TODO: If C == false, 5 more cycles... how to do this?
+
+            input.State.ProgramCounter += (sbyte) input.Data[1];
+        }
+
+        // Flags unaffected
     }
 
     private static void HALT(Input input)
