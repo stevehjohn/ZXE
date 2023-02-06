@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using ZXE.Common.ConsoleHelpers;
 using ZXE.Core.Infrastructure;
@@ -21,6 +22,8 @@ public class TestRunner
 
         var passed = 0;
 
+        Console.CursorVisible = false;
+
         foreach (var file in files)
         {
             var tests = JsonSerializer.Deserialize<TestDefinition[]>(File.ReadAllText(file), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
@@ -42,6 +45,16 @@ public class TestRunner
                 //Thread.Sleep(250);
             }
         }
+
+        FormattedConsole.WriteLine(string.Empty);
+
+        FormattedConsole.WriteLine("  &Cyan;Testing complete.");
+
+        FormattedConsole.WriteLine($"\n  &Cyan;Tests Run&White;: &Yellow;{total}    &Cyan;Tests Passed&White;: &Green;{passed}    &Cyan;Tests Failed&White: &Red;{total - passed}");
+
+        FormattedConsole.WriteLine(string.Empty);
+
+        Console.CursorVisible = true;
     }
 
     private static bool RunTest(TestDefinition test)
@@ -54,7 +67,7 @@ public class TestRunner
 
         FormattedConsole.Write($"  &Cyan;Operations&White;: &Magenta;{result.Operations, 3}  ");
 
-        FormattedConsole.Write("  &Cyan;Result&White; &White;[ ");
+        FormattedConsole.Write("  &Cyan;Result&White;: [ ");
 
         if (result.Passed)
         {
@@ -65,7 +78,7 @@ public class TestRunner
             FormattedConsole.Write("&Red;FAIL");
         }
 
-        FormattedConsole.WriteLine("&White; ]");
+        FormattedConsole.Write("&White; ]");
 
         FormattedConsole.WriteLine(string.Empty);
 
@@ -99,9 +112,16 @@ public class TestRunner
 
         var operations = CountOperations(test.Cycles);
 
-        for (var i = 0; i < operations; i++)
+        try
         {
-            processor.ProcessInstruction(ram);
+            for (var i = 0; i < operations; i++)
+            {
+                processor.ProcessInstruction(ram);
+            }
+        }
+        catch
+        {
+            return (false, operations);
         }
 
         var pass = state.ProgramCounter == test.Final.PC
@@ -116,7 +136,7 @@ public class TestRunner
 
         foreach (var pair in test.Final.Ram)
         {
-            pass = pass && ram[pair[0]] == ram[pair[1]];
+            pass = pass && ram[pair[0]] == pair[1];
         }
 
         return (pass, operations);
