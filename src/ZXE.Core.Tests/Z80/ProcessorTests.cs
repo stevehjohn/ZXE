@@ -493,7 +493,7 @@ public class ProcessorTests
     }
 
     [Fact]
-    private void LD_SP_nn()
+    public void LD_SP_nn()
     {
         // LD SP, 0x1234
         _ram[0] = 0x31;
@@ -506,7 +506,7 @@ public class ProcessorTests
     }
 
     [Fact]
-    private void INC_SP()
+    public void INC_SP()
     {
         // INC SP
         _ram[0] = 0x33;
@@ -519,7 +519,7 @@ public class ProcessorTests
     }
 
     [Fact]
-    private void INC_addr_RR()
+    public void INC_addr_RR()
     {
         // INC (HL)
         _ram[0] = 0x34;
@@ -533,7 +533,7 @@ public class ProcessorTests
     }
 
     [Fact]
-    private void DEC_addr_RR()
+    public void DEC_addr_RR()
     {
         // DEC (HL)
         _ram[0] = 0x35;
@@ -547,7 +547,7 @@ public class ProcessorTests
     }
 
     [Fact]
-    private void LD_addr_RR_n()
+    public void LD_addr_RR_n()
     {
         // LD (HL), n
         _ram[0] = 0x36;
@@ -558,6 +558,17 @@ public class ProcessorTests
         _processor.ProcessInstruction(_ram);
 
         Assert.Equal(0xAB, _ram[0x1234]);
+    }
+
+    [Fact]
+    public void SCF()
+    {
+        // SCF
+        _ram[0] = 0x37;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.True(_state.Flags.Carry);
     }
 
     [Fact]

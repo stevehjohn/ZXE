@@ -188,6 +188,8 @@ public class Processor
 
         instructions[0x36] = new Instruction("LD (HL), n", 2, i => LD_addr_RR_n(i, Register.HL), 10);
 
+        instructions[0x37] = new Instruction("SCF", 1, SCF, 4);
+
 
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
@@ -587,6 +589,11 @@ public class Processor
         input.Ram[input.State.Registers.ReadPair(register)] = input.Data[1];
 
         // Flags unaffected
+    }
+
+    private static void SCF(Input input)
+    {
+        input.State.Flags.Carry = true;
     }
 
     private static void HALT(Input input)
