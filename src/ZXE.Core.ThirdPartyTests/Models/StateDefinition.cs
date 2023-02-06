@@ -27,6 +27,8 @@ public class StateDefinition
 
     public byte L { get; set; }
 
+    public byte F { get; set; }
+
     public int[][] Ram { get; set; }
 }
 

@@ -29,4 +29,19 @@ public class Flags
                        | (Zero ? 0x40 : 0x00)
                        | (Sign ? 0x80 : 0x00));
     }
+
+    public static Flags FromByte(byte data)
+    {
+        return new Flags
+               {
+                   Carry = (data & 0x01) > 0,
+                   AddSubtract = (data & 0x02) > 0,
+                   ParityOverflow = (data & 0x04) > 0,
+                   X1 = (data & 0x08) > 0,
+                   HalfCarry = (data & 0x10) > 0,
+                   X2 = (data & 0x20) > 0,
+                   Zero = (data & 0x40) > 0,
+                   Sign = (data & 0x80) > 0
+               };
+    }
 }
