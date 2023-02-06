@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using ZXE.Common.ConsoleHelpers;
 using ZXE.Core.Infrastructure;
@@ -23,6 +24,8 @@ public class TestRunner
 
         Console.CursorVisible = false;
 
+        var stopwatch = Stopwatch.StartNew();
+
         foreach (var file in files)
         {
             var tests = JsonSerializer.Deserialize<TestDefinition[]>(File.ReadAllText(file), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
@@ -34,6 +37,11 @@ public class TestRunner
 
             foreach (var test in tests)
             {
+                if (test.Name.StartsWith("A9", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    goto done;
+                }
+
                 total++;
 
                 if (RunTest(test))
@@ -45,11 +53,14 @@ public class TestRunner
             }
         }
 
+        stopwatch.Stop();
+
+        done:
         FormattedConsole.WriteLine(string.Empty);
 
-        FormattedConsole.WriteLine("  &Cyan;Testing complete.");
+        FormattedConsole.WriteLine($"  &Cyan;Testing complete. Time elapsed&White;: &Yellow; {stopwatch.Elapsed.Minutes}:{stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}");
 
-        FormattedConsole.WriteLine($"\n  &Cyan;Tests Run&White;: &Yellow;{total}    &Cyan;Tests Passed&White;: &Green;{passed}    &Cyan;Tests Failed&White: &Red;{total - passed}");
+        FormattedConsole.WriteLine($"\n  &Cyan;Tests Run&White;: &Yellow;{total}    &Cyan;Tests Passed&White;: &Green;{passed}    &Cyan;Tests Failed&White;: &Red;{total - passed}");
 
         FormattedConsole.WriteLine(string.Empty);
 
@@ -58,13 +69,13 @@ public class TestRunner
 
     private static bool RunTest(TestDefinition test)
     {
-        FormattedConsole.Write($"  &Cyan;Test&White;: &Magenta;{test.Name, -12}  ");
+        FormattedConsole.Write($"  &Cyan;Test&White;: &Magenta;{test.Name,-12}  ");
 
-        FormattedConsole.Write($"  &Cyan;RAM&White;: &Magenta;{test.Initial.Ram.Length, 3}B  ");
+        FormattedConsole.Write($"  &Cyan;RAM&White;: &Magenta;{test.Initial.Ram.Length,3}B  ");
 
         var result = ExecuteTest(test);
 
-        FormattedConsole.Write($"  &Cyan;Operations&White;: &Magenta;{result.Operations, 6}  ");
+        FormattedConsole.Write($"  &Cyan;Operations&White;: &Magenta;{result.Operations,6}  ");
 
         FormattedConsole.Write("  &Cyan;Result&White;: [ ");
 

@@ -415,6 +415,20 @@ public class Processor
         instructions[0xA7] = new Instruction("AND A, A", 1, i => AND_R_R(i, Register.A, Register.A), 4);
 
         instructions[0xA8] = new Instruction("XOR A, B", 1, i => XOR_R_R(i, Register.A, Register.B), 4);
+
+        instructions[0xA9] = new Instruction("XOR A, C", 1, i => XOR_R_R(i, Register.A, Register.C), 4);
+
+        instructions[0xAA] = new Instruction("XOR A, D", 1, i => XOR_R_R(i, Register.A, Register.D), 4);
+
+        instructions[0xAB] = new Instruction("XOR A, E", 1, i => XOR_R_R(i, Register.A, Register.E), 4);
+
+        instructions[0xAC] = new Instruction("XOR A, H", 1, i => XOR_R_R(i, Register.A, Register.H), 4);
+
+        instructions[0xAD] = new Instruction("XOR A, L", 1, i => XOR_R_R(i, Register.A, Register.L), 4);
+
+        instructions[0xAE] = new Instruction("XOR A, (HL)", 1, i => XOR_R_addr_RR(i, Register.A, Register.HL), 7);
+
+        instructions[0xAF] = new Instruction("XOR A, A", 1, i => XOR_R_R(i, Register.A, Register.A), 4);
     }
 
     private static void NOP()
@@ -1236,6 +1250,28 @@ public class Processor
         unchecked
         {
             var result = input.State.Registers[destination] ^ input.State.Registers[source];
+
+            input.State.Registers[Register.A] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can XOR overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+    }
+
+    private static void XOR_R_addr_RR(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] ^ input.Ram[input.State.Registers.ReadPair(source)];
 
             input.State.Registers[Register.A] = (byte) result;
 
