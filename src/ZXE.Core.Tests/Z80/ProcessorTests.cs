@@ -800,4 +800,18 @@ public class ProcessorTests
 
         Assert.Equal(0x10, _state.Registers[Register.A]);
     }
+
+    [Fact]
+    public void AND_R_R()
+    {
+        // AND A, B
+        _ram[0] = 0xA0;
+        
+        _state.Registers[Register.A] = 0b00011000;
+        _state.Registers[Register.B] = 0b00111100;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0b00011000, _state.Registers[Register.A]);
+    }
 }
