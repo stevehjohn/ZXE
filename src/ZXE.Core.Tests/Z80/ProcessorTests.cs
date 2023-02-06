@@ -607,6 +607,19 @@ public class ProcessorTests
     }
 
     [Fact]
+    public void DEC_SP()
+    {
+        // DEC SP
+        _ram[0] = 0x3B;
+
+        _state.StackPointer = 0x1235;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x1234, _state.StackPointer);
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT

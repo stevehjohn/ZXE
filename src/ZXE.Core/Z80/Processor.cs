@@ -194,13 +194,19 @@ public class Processor
 
         instructions[0x39] = new Instruction("ADD HL, SP", 1, i => ADD_RR_SP(i, Register.HL), 11);
 
-
-
-        instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
-
         instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_R_addr_nn(i, Register.A), 13);
 
+        instructions[0x3B] = new Instruction("DEC SP", 1, DEC_SP, 6);
+
+        instructions[0x3C] = new Instruction("INC A", 1, i => INC_R(i, Register.A), 4);
+
+        instructions[0x3D] = new Instruction("DEC A", 1, i => DEC_R(i, Register.A), 4);
+
         instructions[0x3E] = new Instruction("LD A, n", 2, i => LD_R_n(i, Register.A), 7);
+
+        instructions[0x3F] = new Instruction("CCF", 1, CCF, 4);
+
+
 
         instructions[0x76] = new Instruction("HALT", 1, HALT, 4);
     }
@@ -475,7 +481,7 @@ public class Processor
     {
         var address = input.Data[2] << 8 | input.Data[1];
 
-        var data = input.State.Registers.ReadPair(Register.HL);
+        var data = input.State.Registers.ReadPair(register);
 
         input.Ram[address] = (byte) (data & 0x00FF);
         input.Ram[address + 1] = (byte) ((data & 0xFF00) >> 8);
@@ -610,6 +616,19 @@ public class Processor
     private static void SCF(Input input)
     {
         input.State.Flags.Carry = true;
+
+        // TODO: XOR with Q register?
+        var xFlags = input.State.Flags.ToByte() | input.State.Registers[Register.A];
+
+        // Flags
+        // Carry adjusted by operation
+        input.State.Flags.AddSubtract = false;
+        // ParityOverflow unaffected
+        input.State.Flags.X1 = (xFlags & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.X2 = (xFlags & 0x20) > 0;
+        // Zero unaffected
+        // Sign unaffected
     }
 
     private static void JR_C_e(Input input)
@@ -643,6 +662,33 @@ public class Processor
         // Sign unaffected
 
         input.State.Registers[Register.F] = input.State.Flags.ToByte();
+    }
+
+    private static void DEC_SP(Input input)
+    {
+        input.State.StackPointer--;
+
+        // Flags unaffected
+    }
+
+    private static void CCF(Input input)
+    {
+        var value = input.State.Flags.Carry;
+
+        input.State.Flags.Carry = ! input.State.Flags.Carry;
+        
+        // TODO: XOR with Q register?
+        var xFlags = input.State.Flags.ToByte() | input.State.Registers[Register.A];
+
+        // Flags
+        // Carry adjusted by operation
+        input.State.Flags.AddSubtract = false;
+        // ParityOverflow unaffected
+        input.State.Flags.X1 = (xFlags & 0x08) > 0;
+        input.State.Flags.HalfCarry = value;
+        input.State.Flags.X2 = (xFlags & 0x20) > 0;
+        // Zero unaffected
+        // Sign unaffected
     }
 
     private static void HALT(Input input)
