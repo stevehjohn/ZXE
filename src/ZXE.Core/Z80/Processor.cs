@@ -186,6 +186,8 @@ public class Processor
 
         instructions[0x35] = new Instruction("DEC (HL)", 1, i => DEC_addr_RR(i, Register.HL), 11);
 
+        instructions[0x36] = new Instruction("LD (HL), n", 2, i => LD_addr_RR_n(i, Register.HL), 10);
+
 
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
@@ -578,6 +580,13 @@ public class Processor
         input.State.Flags.X2 = (result & 0x20) > 0;
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = (sbyte) result < 0;
+    }
+
+    private static void LD_addr_RR_n(Input input, Register register)
+    {
+        input.Ram[input.State.Registers.ReadPair(register)] = input.Data[1];
+
+        // Flags unaffected
     }
 
     private static void HALT(Input input)
