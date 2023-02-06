@@ -121,8 +121,20 @@ public class TestRunner
         state.Registers[Register.C] = test.Initial.C;
         state.Registers[Register.D] = test.Initial.D;
         state.Registers[Register.E] = test.Initial.E;
+        state.Registers[Register.F] = test.Initial.F;
         state.Registers[Register.H] = test.Initial.H;
         state.Registers[Register.L] = test.Initial.L;
+
+        state.Flags = Flags.FromByte(test.Initial.F);
+
+        state.Registers[Register.A1] = (byte) ((test.Initial.AF_ & 0xFF00) >> 8);
+        state.Registers[Register.B1] = (byte) ((test.Initial.BC_ & 0xFF00) >> 8);
+        state.Registers[Register.C1] = (byte) (test.Initial.BC_ & 0x00FF);
+        state.Registers[Register.D1] = (byte) ((test.Initial.DE_ & 0xFF00) >> 8);
+        state.Registers[Register.E1] = (byte) (test.Initial.DE_ & 0x00FF);
+        state.Registers[Register.F1] = (byte) (test.Initial.AF_ & 0x00FF);
+        state.Registers[Register.H1] = (byte) ((test.Initial.HL_ & 0xFF00) >> 8);
+        state.Registers[Register.L1] = (byte) (test.Initial.HL_ & 0x00FF);
 
         foreach (var pair in test.Initial.Ram)
         {

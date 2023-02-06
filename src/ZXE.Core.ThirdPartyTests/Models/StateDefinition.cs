@@ -29,6 +29,14 @@ public class StateDefinition
 
     public byte F { get; set; }
 
+    public ushort AF_ { get; set; }
+
+    public ushort BC_ { get; set; }
+
+    public ushort DE_ { get; set; }
+
+    public ushort HL_ { get; set; }
+
     public int[][] Ram { get; set; }
 }
 
