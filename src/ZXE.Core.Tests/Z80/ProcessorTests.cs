@@ -732,4 +732,28 @@ public class ProcessorTests
 
         Assert.Equal(0x1B, _state.Registers[Register.A]);
     }
+
+    [Fact]
+    public void SUB_R_R()
+    {
+        // SUB A, B
+        _ram[0] = 0x90;
+
+        _state.Registers[Register.A] = 0x0A;
+        _state.Registers[Register.B] = 0x05;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x05, _state.Registers[Register.A]);
+
+        _state.ProgramCounter = 0;
+
+        _state.Registers[Register.A] = 0x80;
+        _state.Registers[Register.B] = 0x05;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.True(_state.Flags.ParityOverflow);
+        Assert.Equal(0x05, _state.Registers[Register.A]);
+    }
 }

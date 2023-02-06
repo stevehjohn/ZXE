@@ -365,6 +365,22 @@ public class Processor
         instructions[0x8E] = new Instruction("ADC A, (HL)", 1, i => ADC_R_addr_RR(i, Register.A, Register.HL), 7);
 
         instructions[0x8F] = new Instruction("ADC A, A", 1, i => ADC_R_R(i, Register.A, Register.A), 4);
+
+        instructions[0x90] = new Instruction("SUB A, B", 1, i => SUB_R_R(i, Register.A, Register.B), 4);
+
+        instructions[0x91] = new Instruction("SUB A, C", 1, i => SUB_R_R(i, Register.A, Register.C), 4);
+
+        instructions[0x92] = new Instruction("SUB A, D", 1, i => SUB_R_R(i, Register.A, Register.D), 4);
+
+        instructions[0x93] = new Instruction("SUB A, E", 1, i => SUB_R_R(i, Register.A, Register.E), 4);
+
+        instructions[0x94] = new Instruction("SUB A, H", 1, i => SUB_R_R(i, Register.A, Register.H), 4);
+
+        instructions[0x95] = new Instruction("SUB A, L", 1, i => SUB_R_R(i, Register.A, Register.L), 4);
+
+        instructions[0x96] = new Instruction("SUB A, (HL)", 1, i => SUB_R_addr_RR(i, Register.A, Register.HL), 7);
+
+        instructions[0x97] = new Instruction("SUB A, A", 1, i => SUB_R_R(i, Register.A, Register.B), 4);
     }
 
     private static void NOP()
@@ -388,51 +404,60 @@ public class Processor
 
     private static void INC_RR(Input input, Register register)
     {
-        input.State.Registers.WritePair(register, (ushort) (input.State.Registers.ReadPair(register) + 1));
+        unchecked
+        {
+            input.State.Registers.WritePair(register, (ushort) (input.State.Registers.ReadPair(register) + 1));
+        }
 
         // Flags unaffected
     }
 
     private static void INC_R(Input input, Register register)
     {
-        var value = input.State.Registers[register];
+        unchecked
+        {
+            var value = input.State.Registers[register];
 
-        var result = (byte) (value + 1);
+            var result = (byte) (value + 1);
 
-        input.State.Registers[register] = result;
+            input.State.Registers[register] = result;
 
-        // Flags
-        // Carry unaffected
-        input.State.Flags.AddSubtract = false;
-        input.State.Flags.ParityOverflow = value == 0x7F;
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0xF;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        input.State.Flags.Zero = (sbyte) result == 0;
-        input.State.Flags.Sign = (sbyte) result < 0;
+            // Flags
+            // Carry unaffected
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = value == 0x7F;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = (sbyte) result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 
     private static void DEC_R(Input input, Register register)
     {
-        var value = input.State.Registers[register];
+        unchecked
+        {
+            var value = input.State.Registers[register];
 
-        var result = (byte) (value - 1);
+            var result = (byte) (value - 1);
 
-        input.State.Registers[register] = result;
+            input.State.Registers[register] = result;
 
-        // Flags
-        // Carry unaffected
-        input.State.Flags.AddSubtract = true;
-        input.State.Flags.ParityOverflow = value == 0x80;
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = (value & 0x0F) < 1;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        input.State.Flags.Zero = (sbyte) result == 0;
-        input.State.Flags.Sign = (sbyte) result < 0;
+            // Flags
+            // Carry unaffected
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = value == 0x80;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (value & 0x0F) < 1;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = (sbyte) result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 
     private static void LD_R_n(Input input, Register register)
@@ -444,23 +469,26 @@ public class Processor
 
     private static void RLCA(Input input)
     {
-        var topBit = (byte) ((input.State.Registers[Register.A] & 0x80) >> 7);
+        unchecked
+        {
+            var topBit = (byte) ((input.State.Registers[Register.A] & 0x80) >> 7);
 
-        var result = (byte) (((input.State.Registers[Register.A] << 1) & 0xFE) | topBit);
+            var result = (byte) (((input.State.Registers[Register.A] << 1) & 0xFE) | topBit);
 
-        input.State.Registers[Register.A] = result;
+            input.State.Registers[Register.A] = result;
 
-        // Flags
-        input.State.Flags.Carry = topBit == 1;
-        input.State.Flags.AddSubtract = false;
-        // ParityOverflow unaffected
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = false;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        // Zero unaffected
-        // Sign unaffected
+            // Flags
+            input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.AddSubtract = false;
+            // ParityOverflow unaffected
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            // Zero unaffected
+            // Sign unaffected
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 
     private static void LD_addr_nn_R(Input input, Register register)
@@ -492,23 +520,26 @@ public class Processor
 
     private static void ADD_RR_RR(Input input, Register target, Register operand)
     {
-        var source = (int) input.State.Registers.ReadPair(target);
+        unchecked
+        {
+            var source = (int) input.State.Registers.ReadPair(target);
 
-        var result = source + input.State.Registers.ReadPair(operand);
+            var result = source + input.State.Registers.ReadPair(operand);
 
-        input.State.Registers.WritePair(target, (ushort) result);
+            input.State.Registers.WritePair(target, (ushort) result);
 
-        // Flags
-        input.State.Flags.Carry = result > 0xFFFF;
-        input.State.Flags.AddSubtract = false;
-        // ParityOverflow unaffected
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = (source & 0x0800) > 0 && (result & 0x1000) > 0;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        // Zero unaffected
-        // Sign unaffected
+            // Flags
+            input.State.Flags.Carry = result > 0xFFFF;
+            input.State.Flags.AddSubtract = false;
+            // ParityOverflow unaffected
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (source & 0x0800) > 0 && (result & 0x1000) > 0;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            // Zero unaffected
+            // Sign unaffected
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 
     public static void LD_R_addr_RR(Input input, Register target, Register source)
@@ -531,118 +562,139 @@ public class Processor
 
     private static void RRCA(Input input)
     {
-        var bottomBit = input.State.Registers[Register.A] & 0x01;
-
-        var result = (byte) (0xFF & (input.State.Registers[Register.A] >> 1));
-
-        if (bottomBit == 1)
+        unchecked
         {
-            result |= 0x80;
+            var bottomBit = input.State.Registers[Register.A] & 0x01;
+
+            var result = (byte) (0xFF & (input.State.Registers[Register.A] >> 1));
+
+            if (bottomBit == 1)
+            {
+                result |= 0x80;
+            }
+
+            input.State.Registers[Register.A] = result;
+
+            // Flags
+            input.State.Flags.Carry = bottomBit == 1;
+            input.State.Flags.AddSubtract = false;
+            // ParityOverflow unaffected
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            // Zero unaffected
+            // Sign unaffected
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
-
-        input.State.Registers[Register.A] = result;
-
-        // Flags
-        input.State.Flags.Carry = bottomBit == 1;
-        input.State.Flags.AddSubtract = false;
-        // ParityOverflow unaffected
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = false;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        // Zero unaffected
-        // Sign unaffected
-
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 
     private static void DJNZ_e(Input input)
     {
-        // TODO: If B != 0, 5 more cycles... how to do this?
-        DEC_R(input, Register.B);
-
-        // TODO: Compensate for twice-incremented program counter?
-        if (! input.State.Flags.Zero)
+        unchecked
         {
-            input.State.ProgramCounter += (sbyte) input.Data[1];
-        }
+            // TODO: If B != 0, 5 more cycles... how to do this?
+            DEC_R(input, Register.B);
 
-        // Flags unaffected
+            // TODO: Compensate for twice-incremented program counter?
+            if (! input.State.Flags.Zero)
+            {
+                input.State.ProgramCounter += (sbyte) input.Data[1];
+            }
+
+            // Flags unaffected
+        }
     }
 
     private static void RLA(Input input)
     {
-        var topBit = (input.State.Registers[Register.A] & 0x80) >> 7;
+        unchecked
+        {
+            var topBit = (input.State.Registers[Register.A] & 0x80) >> 7;
 
-        var result = (byte) (input.State.Registers[Register.A] << 1);
+            var result = (byte) (input.State.Registers[Register.A] << 1);
 
-        result |= (byte) (input.State.Flags.Carry ? 1 : 0);
+            result |= (byte) (input.State.Flags.Carry ? 1 : 0);
 
-        input.State.Registers[Register.A] = result;
+            input.State.Registers[Register.A] = result;
 
-        // Flags
-        input.State.Flags.Carry = topBit == 1;
-        input.State.Flags.AddSubtract = false;
-        // ParityOverflow unaffected
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = false;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        // Zero unaffected
-        // Sign unaffected
+            // Flags
+            input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.AddSubtract = false;
+            // ParityOverflow unaffected
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            // Zero unaffected
+            // Sign unaffected
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 
     public static void JR_e(Input input)
     {
-        // TODO: Compensate for twice-incremented program counter?
-        input.State.ProgramCounter += (sbyte) input.Data[1];
+        unchecked
+        {
+            // TODO: Compensate for twice-incremented program counter?
+            input.State.ProgramCounter += (sbyte) input.Data[1];
+        }
     }
 
     private static void RRA(Input input)
     {
-        var bottomBit = input.State.Registers[Register.A] & 0x01;
+        unchecked
+        {
+            var bottomBit = input.State.Registers[Register.A] & 0x01;
 
-        var result = (byte) (input.State.Registers[Register.A] >> 1);
+            var result = (byte) (input.State.Registers[Register.A] >> 1);
 
-        result |= (byte) (input.State.Flags.Carry ? 0x80 : 0);
+            result |= (byte) (input.State.Flags.Carry ? 0x80 : 0);
 
-        input.State.Registers[Register.A] = result;
+            input.State.Registers[Register.A] = result;
 
-        // Flags
-        input.State.Flags.Carry = bottomBit == 1;
-        input.State.Flags.AddSubtract = false;
-        // ParityOverflow unaffected
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = false;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        // Zero unaffected
-        // Sign unaffected
+            // Flags
+            input.State.Flags.Carry = bottomBit == 1;
+            input.State.Flags.AddSubtract = false;
+            // ParityOverflow unaffected
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            // Zero unaffected
+            // Sign unaffected
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 
     private static void JR_NZ_e(Input input)
     {
-        if (! input.State.Flags.Zero)
+        unchecked
         {
-            // TODO: If Z == false, 5 more cycles... how to do this?
+            if (! input.State.Flags.Zero)
+            {
+                // TODO: If Z == false, 5 more cycles... how to do this?
 
-            input.State.ProgramCounter += (sbyte) input.Data[1];
+                input.State.ProgramCounter += (sbyte) input.Data[1];
+            }
+
+            // Flags unaffected
         }
-
-        // Flags unaffected
     }
 
     private static void LD_addr_nn_RR(Input input, Register register)
     {
-        var address = input.Data[2] << 8 | input.Data[1];
+        unchecked
+        {
+            var address = input.Data[2] << 8 | input.Data[1];
 
-        var data = input.State.Registers.ReadPair(register);
+            var data = input.State.Registers.ReadPair(register);
 
-        input.Ram[address] = (byte) (data & 0x00FF);
-        input.Ram[address + 1] = (byte) ((data & 0xFF00) >> 8);
+            input.Ram[address] = (byte) (data & 0x00FF);
+            input.Ram[address + 1] = (byte) ((data & 0xFF00) >> 8);
 
-        // Flags unaffected
+            // Flags unaffected
+        }
     }
 
     private static void DAA(Input i)
@@ -653,54 +705,66 @@ public class Processor
 
     private static void JR_Z_e(Input input)
     {
-        if (input.State.Flags.Zero)
+        unchecked
         {
-            // TODO: If Z == true, 5 more cycles... how to do this?
+            if (input.State.Flags.Zero)
+            {
+                // TODO: If Z == true, 5 more cycles... how to do this?
 
-            input.State.ProgramCounter += (sbyte) input.Data[1];
+                input.State.ProgramCounter += (sbyte) input.Data[1];
+            }
+
+            // Flags unaffected
         }
-
-        // Flags unaffected
     }
 
     private static void LD_RR_addr_nn(Input input, Register register)
     {
-        var address = input.Data[2] << 8 | input.Data[1];
+        unchecked
+        {
+            var address = input.Data[2] << 8 | input.Data[1];
 
-        input.State.Registers.WritePair(register, (ushort) (input.Ram[address + 1] << 8 | input.Ram[address]));
+            input.State.Registers.WritePair(register, (ushort) (input.Ram[address + 1] << 8 | input.Ram[address]));
 
-        input.State.Registers[Register.L] = input.Ram[address];
-        input.State.Registers[Register.H] = input.Ram[address + 1];
+            input.State.Registers[Register.L] = input.Ram[address];
+            input.State.Registers[Register.H] = input.Ram[address + 1];
 
-        // Flags unaffected
+            // Flags unaffected
+        }
     }
 
     private static void CPL(Input input)
     {
-        var result = input.State.Registers[Register.A] ^ 0xFF;
+        unchecked
+        {
+            var result = input.State.Registers[Register.A] ^ 0xFF;
 
-        input.State.Registers[Register.A] = (byte) result;
+            input.State.Registers[Register.A] = (byte) result;
 
-        // Flags
-        // Carry unaffected
-        input.State.Flags.AddSubtract = true;
-        // ParityOverflow unaffected
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = true;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        // Zero unaffected
-        // Sign unaffected
+            // Flags
+            // Carry unaffected
+            input.State.Flags.AddSubtract = true;
+            // ParityOverflow unaffected
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = true;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            // Zero unaffected
+            // Sign unaffected
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 
     private static void JR_NC_e(Input input)
     {
-        if (! input.State.Flags.Carry)
+        unchecked
         {
-            // TODO: If C == false, 5 more cycles... how to do this?
+            if (! input.State.Flags.Carry)
+            {
+                // TODO: If C == false, 5 more cycles... how to do this?
 
-            input.State.ProgramCounter += (sbyte) input.Data[1];
+                input.State.ProgramCounter += (sbyte) input.Data[1];
+            }
         }
 
         // Flags unaffected
@@ -722,44 +786,50 @@ public class Processor
 
     private static void INC_addr_RR(Input input, Register register)
     {
-        var address = input.State.Registers.ReadPair(register);
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(register);
 
-        var value = input.Ram[address];
+            var value = input.Ram[address];
 
-        var result = ++input.Ram[address];
+            var result = ++input.Ram[address];
 
-        // Flags
-        // Carry unaffected
-        input.State.Flags.AddSubtract = false;
-        input.State.Flags.ParityOverflow = value == 0x7F;
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0x0F;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        input.State.Flags.Zero = result == 0;
-        input.State.Flags.Sign = (sbyte) result < 0;
+            // Flags
+            // Carry unaffected
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = value == 0x7F;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0x0F;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 
     private static void DEC_addr_RR(Input input, Register register)
     {
-        var address = input.State.Registers.ReadPair(register);
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(register);
 
-        var value = input.Ram[address];
+            var value = input.Ram[address];
 
-        var result = --input.Ram[address];
+            var result = --input.Ram[address];
 
-        // Flags
-        // Carry unaffected
-        input.State.Flags.AddSubtract = true;
-        input.State.Flags.ParityOverflow = value == 0x80;
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = (value & 0x0F) < 1;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        input.State.Flags.Zero = result == 0;
-        input.State.Flags.Sign = (sbyte) result < 0;
+            // Flags
+            // Carry unaffected
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = value == 0x80;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (value & 0x0F) < 1;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 
     private static void LD_addr_RR_n(Input input, Register register)
@@ -789,35 +859,41 @@ public class Processor
 
     private static void JR_C_e(Input input)
     {
-        if (input.State.Flags.Carry)
+        unchecked
         {
-            // TODO: If C == false, 5 more cycles... how to do this?
+            if (input.State.Flags.Carry)
+            {
+                // TODO: If C == false, 5 more cycles... how to do this?
 
-            input.State.ProgramCounter += (sbyte) input.Data[1];
+                input.State.ProgramCounter += (sbyte) input.Data[1];
+            }
+
+            // Flags unaffected
         }
-
-        // Flags unaffected
     }
 
     private static void ADD_RR_SP(Input input, Register register)
     {
-        var source = input.State.StackPointer;
+        unchecked
+        {
+            var source = input.State.StackPointer;
 
-        var result = source + input.State.Registers.ReadPair(register);
+            var result = source + input.State.Registers.ReadPair(register);
 
-        input.State.Registers.WritePair(register, (ushort) result);
+            input.State.Registers.WritePair(register, (ushort) result);
 
-        // Flags
-        input.State.Flags.Carry = result > 0xFFFF;
-        input.State.Flags.AddSubtract = false;
-        // ParityOverflow unaffected
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = (source & 0x0800) > 0 && (result & 0x1000) > 0;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        // Zero unaffected
-        // Sign unaffected
+            // Flags
+            input.State.Flags.Carry = result > 0xFFFF;
+            input.State.Flags.AddSubtract = false;
+            // ParityOverflow unaffected
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (source & 0x0800) > 0 && (result & 0x1000) > 0;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            // Zero unaffected
+            // Sign unaffected
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 
     private static void DEC_SP(Input input)
@@ -863,85 +939,137 @@ public class Processor
 
     public static void ADD_R_R(Input input, Register destination, Register source)
     {
-        var valueD = input.State.Registers[destination];
-        
-        var valueS = input.State.Registers[source];
+        unchecked
+        {
+            var valueD = input.State.Registers[destination];
 
-        var result = valueD + valueS;
+            var valueS = input.State.Registers[source];
 
-        input.State.Registers[destination] = (byte) result;
+            var result = valueD + valueS;
 
-        // Flags
-        input.State.Flags.Carry = result > 0xFF;
-        input.State.Flags.AddSubtract = false;
-        input.State.Flags.ParityOverflow = result > 0xFF;
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) > 0xF;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        input.State.Flags.Zero = result == 0;
-        input.State.Flags.Sign = (sbyte) result < 0;
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = result > 0xFF;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result > 0xFF;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 
     private static void ADD_R_addr_RR(Input input, Register destination, Register source)
     {
-        var valueD = input.State.Registers[destination];
+        unchecked
+        {
+            var valueD = input.State.Registers[destination];
 
-        var valueS = input.Ram[input.State.Registers.ReadPair(source)];
+            var valueS = input.Ram[input.State.Registers.ReadPair(source)];
 
-        var result = valueD + valueS;
+            var result = valueD + valueS;
 
-        input.State.Registers[destination] = (byte) result;
+            input.State.Registers[destination] = (byte) result;
 
-        // Flags
-        input.State.Flags.Carry = result > 0xFF;
-        input.State.Flags.AddSubtract = false;
-        input.State.Flags.ParityOverflow = result > 0xFF;
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) > 0xF;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        input.State.Flags.Zero = result == 0;
-        input.State.Flags.Sign = (sbyte) result < 0;
+            // Flags
+            input.State.Flags.Carry = result > 0xFF;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result > 0xFF;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 
     private static void ADC_R_R(Input input, Register destination, Register source)
     {
-        var valueD = input.State.Registers[destination];
-        
-        var valueS = input.State.Registers[source];
+        unchecked
+        {
+            var valueD = input.State.Registers[destination];
 
-        var result = valueD + valueS + (input.State.Flags.Carry ? 0x01 : 0x00);
+            var valueS = input.State.Registers[source];
 
-        input.State.Registers[destination] = (byte) result;
+            var carry = (byte) (input.State.Flags.Carry ? 0x01 : 0x00);
 
-        // Flags
-        input.State.Flags.Carry = result > 0xFF;
-        input.State.Flags.AddSubtract = false;
-        input.State.Flags.ParityOverflow = result > 0xFF;
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) > 0xF;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        input.State.Flags.Zero = result == 0;
-        input.State.Flags.Sign = (sbyte) result < 0;
+            var result = valueD + valueS + carry;
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = result > 0xFF;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result > 0x7F;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 
     private static void ADC_R_addr_RR(Input input, Register destination, Register source)
     {
-        var valueD = input.State.Registers[destination];
+        unchecked
+        {
+            var valueD = input.State.Registers[destination];
 
-        var valueS = input.Ram[input.State.Registers.ReadPair(source)];
+            var valueS = input.Ram[input.State.Registers.ReadPair(source)];
 
-        var result = valueD + valueS + (input.State.Flags.Carry ? 0x01 : 0x00);
+            var result = valueD + valueS + (input.State.Flags.Carry ? 0x01 : 0x00);
 
-        input.State.Registers[destination] = (byte) result;
+            input.State.Registers[destination] = (byte) result;
 
-        // Flags
-        input.State.Flags.Carry = result > 0xFF;
-        input.State.Flags.AddSubtract = false;
-        input.State.Flags.ParityOverflow = result > 0xFF;
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) > 0xF;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        input.State.Flags.Zero = result == 0;
-        input.State.Flags.Sign = (sbyte) result < 0;
+            // Flags
+            input.State.Flags.Carry = result > 0xFF;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result > 0x7F;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+    }
+
+    private static void SUB_R_R(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var valueD = input.State.Registers[destination];
+
+            var valueS = input.State.Registers[source];
+
+            var result = valueD - valueS;
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = result < 0;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = ((sbyte) result & 0x80) > 0;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) < (valueS & 0x0F);
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+    }
+
+    private static void SUB_R_addr_RR(Input input, Register destination, Register source)
+    {
     }
 }
