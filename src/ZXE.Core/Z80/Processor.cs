@@ -400,6 +400,20 @@ public class Processor
         instructions[0x9F] = new Instruction("SBC A, A", 1, i => SBC_R_R(i, Register.A, Register.A), 4);
 
         instructions[0xA0] = new Instruction("AND A, B", 1, i => AND_R_R(i, Register.A, Register.B), 4);
+
+        instructions[0xA1] = new Instruction("AND A, C", 1, i => AND_R_R(i, Register.A, Register.C), 4);
+
+        instructions[0xA2] = new Instruction("AND A, D", 1, i => AND_R_R(i, Register.A, Register.D), 4);
+
+        instructions[0xA3] = new Instruction("AND A, E", 1, i => AND_R_R(i, Register.A, Register.E), 4);
+
+        instructions[0xA4] = new Instruction("AND A, H", 1, i => AND_R_R(i, Register.A, Register.H), 4);
+
+        instructions[0xA5] = new Instruction("AND A, L", 1, i => AND_R_R(i, Register.A, Register.L), 4);
+
+        instructions[0xA6] = new Instruction("AND A, (HL)", 1, i => AND_R_addr_RR(i, Register.A, Register.HL), 7);
+
+        instructions[0xA7] = new Instruction("AND A, A", 1, i => AND_R_R(i, Register.A, Register.A), 4);
     }
 
     private static void NOP()
@@ -1174,18 +1188,41 @@ public class Processor
 
     private static void AND_R_R(Input input, Register destination, Register source)
     {
-        var result = input.State.Registers[destination] & input.State.Registers[source];
+        unchecked
+        {
+            var result = input.State.Registers[destination] & input.State.Registers[source];
 
-        // Flags
-        input.State.Flags.Carry = false;
-        input.State.Flags.AddSubtract = false;
-        input.State.Flags.ParityOverflow = false; // TODO: Can AND overflow?
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = true;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        input.State.Flags.Zero = result == 0;
-        input.State.Flags.Sign = (sbyte) result < 0;
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can AND overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = true;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+    }
+
+    private static void AND_R_addr_RR(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] & input.Ram[input.State.Registers.ReadPair(source)];
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can AND overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = true;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
     }
 }
