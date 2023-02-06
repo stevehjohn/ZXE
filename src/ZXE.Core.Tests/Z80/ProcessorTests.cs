@@ -807,8 +807,8 @@ public class ProcessorTests
         // AND A, B
         _ram[0] = 0xA0;
         
-        _state.Registers[Register.A] = 0b00011000;
-        _state.Registers[Register.B] = 0b00111100;
+        _state.Registers[Register.A] = 0b01111000;
+        _state.Registers[Register.B] = 0b00011110;
 
         _processor.ProcessInstruction(_ram);
 
@@ -820,13 +820,27 @@ public class ProcessorTests
     {
         // AND A, (HL)
         _ram[0] = 0xA6;
-        _ram[0x1234] = 0b00111100;
+        _ram[0x1234] = 0b00011110;
 
-        _state.Registers[Register.A] = 0b00011000;
+        _state.Registers[Register.A] = 0b01111000;
         _state.Registers.WritePair(Register.HL, 0x1234);
 
         _processor.ProcessInstruction(_ram);
 
         Assert.Equal(0b00011000, _state.Registers[Register.A]);
+    }
+
+    [Fact]
+    public void XOR_R_R()
+    {
+        // XOR A, B
+        _ram[0] = 0xA8;
+        
+        _state.Registers[Register.A] = 0b01011010;
+        _state.Registers[Register.B] = 0b11111111;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0b10100101, _state.Registers[Register.A]);
     }
 }

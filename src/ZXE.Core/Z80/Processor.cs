@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using ZXE.Core.Infrastructure.Interfaces;
+﻿using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
 // ReSharper disable IdentifierTypo
@@ -414,6 +413,8 @@ public class Processor
         instructions[0xA6] = new Instruction("AND A, (HL)", 1, i => AND_R_addr_RR(i, Register.A, Register.HL), 7);
 
         instructions[0xA7] = new Instruction("AND A, A", 1, i => AND_R_R(i, Register.A, Register.A), 4);
+
+        instructions[0xA8] = new Instruction("XOR A, B", 1, i => XOR_R_R(i, Register.A, Register.B), 4);
     }
 
     private static void NOP()
@@ -1192,6 +1193,8 @@ public class Processor
         {
             var result = input.State.Registers[destination] & input.State.Registers[source];
 
+            input.State.Registers[Register.A] = (byte) result;
+
             // Flags
             input.State.Flags.Carry = false;
             input.State.Flags.AddSubtract = false;
@@ -1211,6 +1214,8 @@ public class Processor
         unchecked
         {
             var result = input.State.Registers[destination] & input.Ram[input.State.Registers.ReadPair(source)];
+            
+            input.State.Registers[Register.A] = (byte) result;
 
             // Flags
             input.State.Flags.Carry = false;
@@ -1218,6 +1223,28 @@ public class Processor
             input.State.Flags.ParityOverflow = false; // TODO: Can AND overflow?
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = true;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+    }
+
+    private static void XOR_R_R(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] ^ input.State.Registers[source];
+
+            input.State.Registers[Register.A] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can XOR overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
