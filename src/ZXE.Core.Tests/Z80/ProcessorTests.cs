@@ -533,6 +533,20 @@ public class ProcessorTests
     }
 
     [Fact]
+    private void DEC_addr_RR()
+    {
+        // DEC (HL)
+        _ram[0] = 0x35;
+        _ram[0x1234] = 0x0A;
+
+        _state.Registers.WritePair(Register.HL, 0x1234);
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x09, _ram[0x1234]);
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT

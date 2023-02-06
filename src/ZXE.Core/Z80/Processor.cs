@@ -85,11 +85,11 @@ public class Processor
         instructions[0x02] = new Instruction("LD (BC), A", 1, i => LD_addr_RR_R(i, Register.BC, Register.A), 7);
 
         instructions[0x03] = new Instruction("INC BC", 1, i => INC_RR(i, Register.BC), 6);
-        
+
         instructions[0x04] = new Instruction("INC B", 1, i => INC_R(i, Register.B), 4);
-        
+
         instructions[0x05] = new Instruction("DEC B", 1, i => DEC_R(i, Register.B), 4);
-        
+
         instructions[0x06] = new Instruction("LD B, n", 2, i => LD_R_n(i, Register.B), 7);
 
         instructions[0x07] = new Instruction("RLCA", 1, RLCA, 4, "RLCA A");
@@ -103,13 +103,13 @@ public class Processor
         instructions[0x0B] = new Instruction("DEC BC", 1, i => DEC_RR(i, Register.BC), 6);
 
         instructions[0x0C] = new Instruction("INC C", 1, i => INC_R(i, Register.C), 4);
-        
+
         instructions[0x0D] = new Instruction("DEC C", 1, i => DEC_R(i, Register.C), 4);
 
         instructions[0x0E] = new Instruction("LD C, n", 2, i => LD_R_n(i, Register.C), 7);
 
         instructions[0x0F] = new Instruction("RRCA", 2, RRCA, 4, "RRCA A");
-        
+
         instructions[0x10] = new Instruction("DJNZ e", 2, DJNZ_e, 8, "DJNZ B, e");
 
         instructions[0x11] = new Instruction("LD DE, nn", 3, i => LD_RR_nn(i, Register.DE), 10);
@@ -183,6 +183,8 @@ public class Processor
         instructions[0x33] = new Instruction("INC SP", 1, INC_SP, 6);
 
         instructions[0x34] = new Instruction("INC (HL)", 1, i => INC_addr_RR(i, Register.HL), 11);
+
+        instructions[0x35] = new Instruction("DEC (HL)", 1, i => DEC_addr_RR(i, Register.HL), 11);
 
 
 
@@ -472,7 +474,7 @@ public class Processor
         // TODO: Wooooah.
         // TODO: DO!
     }
-    
+
     private static void JR_Z_e(Input input)
     {
         if (input.State.Flags.Zero)
@@ -513,7 +515,7 @@ public class Processor
         // Zero unaffected
         // Sign unaffected
     }
-    
+
     private static void JR_NC_e(Input input)
     {
         if (! input.State.Flags.Carry)
@@ -544,7 +546,38 @@ public class Processor
     {
         var address = input.State.Registers.ReadPair(register);
 
-        input.Ram[address]++;
+        var value = input.Ram[address];
+
+        var result = ++input.Ram[address];
+
+        // Flags
+        // Carry unaffected
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = value == 0x7F;
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0x0F;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        input.State.Flags.Zero = result == 0;
+        input.State.Flags.Sign = (sbyte) result < 0;
+    }
+
+    private static void DEC_addr_RR(Input input, Register register)
+    {
+        var address = input.State.Registers.ReadPair(register);
+
+        var value = input.Ram[address];
+
+        var result = --input.Ram[address];
+
+        // Flags
+        // Carry unaffected
+        input.State.Flags.AddSubtract = true;
+        input.State.Flags.ParityOverflow = value == 0x80;
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = (value & 0x0F) < 1;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        input.State.Flags.Zero = result == 0;
+        input.State.Flags.Sign = (sbyte) result < 0;
     }
 
     private static void HALT(Input input)
