@@ -29,25 +29,16 @@ public class ExecutesSimpleProgramWithLoop : ITest
         ram.Load(new byte[]
                  {
                      0x00,             // NOP
-                     0x06, 0x05,       // LD B, 5
-                     0x10, 0xFE,       // DJNZ -2
+                     0x3E, 0x01,       // LD A, 0x01
+                     0x06, 0x08,       // LD B, 8
+                     0x17,             // RLA
+                     0x10, 0xFD,       // DJNZ -3
                      0x76              // HALT
                  }, 0);
 
         while (! state.Halted)
         {
             processor.ProcessInstruction(ram);
-
-            //var trace = tracer.GetTrace();
-
-            //global::System.Console.Clear();
-
-            //foreach (var line in trace)
-            //{
-            //    FormattedConsole.WriteLine(line);
-
-            //    global::System.Console.ReadKey();
-            //}
         }
 
         return tracer.GetTrace();
