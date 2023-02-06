@@ -644,6 +644,20 @@ public class ProcessorTests
     }
 
     [Fact]
+    public void ADD_R_R()
+    {
+        // ADD A, B
+        _ram[0] = 0x80;
+
+        _state.Registers[Register.A] = 0x10;
+        _state.Registers[Register.B] = 0x0A;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x1A, _state.Registers[Register.A]);
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT
