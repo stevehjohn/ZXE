@@ -49,7 +49,7 @@ public class Processor
 
         if (_state.ProgramCounter > 0xFFFF)
         {
-            _state.ProgramCounter -= 0xFFFF;
+            _state.ProgramCounter -= 0x10000;
         }
 
         if (_tracer != null)
