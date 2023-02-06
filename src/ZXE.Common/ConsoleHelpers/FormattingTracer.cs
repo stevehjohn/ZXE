@@ -4,7 +4,7 @@ using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 using ZXE.Core.Z80;
 
-namespace ZXE.Core.Tests.Console.Infrastructure;
+namespace ZXE.Common.ConsoleHelpers;
 
 [ExcludeFromCodeCoverage]
 public class FormattingTracer : ITracer

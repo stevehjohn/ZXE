@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
+using ZXE.Common.ConsoleHelpers;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Core.Tests.Console.Infrastructure;

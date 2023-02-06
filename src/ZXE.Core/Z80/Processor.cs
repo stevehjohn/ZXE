@@ -60,7 +60,7 @@ public class Processor
         _state = state;
     }
 
-    private Instruction[] InitialiseInstructions()
+    private static Instruction[] InitialiseInstructions()
     {
         var instructions = new Dictionary<int, Instruction>();
 
