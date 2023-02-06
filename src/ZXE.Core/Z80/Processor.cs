@@ -510,7 +510,7 @@ public class Processor
     {
         if (! input.State.Flags.Carry)
         {
-            // TODO: If Z == false, 5 more cycles... how to do this?
+            // TODO: If C == false, 5 more cycles... how to do this?
 
             input.State.ProgramCounter += (sbyte) input.Data[1];
         }

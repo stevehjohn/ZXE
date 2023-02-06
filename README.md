@@ -32,6 +32,11 @@ Run some select tests in the console so the developer has easy access to the tes
 
 - https://sinclair.wiki.zxnet.co.uk/wiki/Main_Page
 
+## Useful Resources
+
+- https://github.com/raxoft/z80test
+- https://floooh.github.io/2021/12/17/cycle-stepped-z80.html#testing
+
 ## Miscellaneous References
 
 - http://www.z80.info/z80syntx.htm

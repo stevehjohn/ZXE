@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\Notes.md = ..\Notes.md
 		..\README.md = ..\README.md
 		..\Documentation\Z80 Family User Manual.pdf = ..\Documentation\Z80 Family User Manual.pdf
+		..\Documentation\Z80 Undocumented.pdf = ..\Documentation\Z80 Undocumented.pdf
 		..\Documentation\Z80 User Manual.pdf = ..\Documentation\Z80 User Manual.pdf
 	EndProjectSection
 EndProject
