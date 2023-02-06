@@ -506,6 +506,33 @@ public class ProcessorTests
     }
 
     [Fact]
+    private void INC_SP()
+    {
+        // INC SP
+        _ram[0] = 0x33;
+
+        _state.StackPointer = 0x1234;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x1235, _state.StackPointer);
+    }
+
+    [Fact]
+    private void INC_addr_RR()
+    {
+        // INC (HL)
+        _ram[0] = 0x34;
+        _ram[0x1234] = 0x09;
+
+        _state.Registers.WritePair(Register.HL, 0x1234);
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x0A, _ram[0x1234]);
+    }
+
+    [Fact]
     public void HALT()
     {
         // HALT

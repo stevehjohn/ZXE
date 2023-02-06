@@ -178,6 +178,12 @@ public class Processor
 
         instructions[0x31] = new Instruction("LD SP, nn", 3, LD_SP_nn, 10);
 
+        instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
+
+        instructions[0x33] = new Instruction("INC SP", 1, INC_SP, 6);
+
+        instructions[0x34] = new Instruction("INC (HL)", 1, i => INC_addr_RR(i, Register.HL), 11);
+
 
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
@@ -483,6 +489,8 @@ public class Processor
     {
         var address = input.Data[2] << 8 | input.Data[1];
 
+        input.State.Registers.WritePair(register, (ushort) (input.Ram[address + 1] << 8 | input.Ram[address]));
+
         input.State.Registers[Register.L] = input.Ram[address];
         input.State.Registers[Register.H] = input.Ram[address + 1];
 
@@ -523,6 +531,20 @@ public class Processor
         input.State.StackPointer = input.Data[2] << 8 | input.Data[1];
 
         // Flags unaffected
+    }
+
+    private static void INC_SP(Input input)
+    {
+        input.State.StackPointer++;
+
+        // Flags unaffected
+    }
+
+    private static void INC_addr_RR(Input input, Register register)
+    {
+        var address = input.State.Registers.ReadPair(register);
+
+        input.Ram[address]++;
     }
 
     private static void HALT(Input input)
