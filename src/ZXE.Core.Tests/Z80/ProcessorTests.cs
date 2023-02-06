@@ -644,6 +644,17 @@ public class ProcessorTests
     }
 
     [Fact]
+    public void HALT()
+    {
+        // HALT
+        _ram[0] = 0x76;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.True(_state.Halted);
+    }
+
+    [Fact]
     public void ADD_R_R()
     {
         // ADD A, B
@@ -658,13 +669,17 @@ public class ProcessorTests
     }
 
     [Fact]
-    public void HALT()
+    public void ADD_R_addr_RR()
     {
-        // HALT
-        _ram[0] = 0x76;
+        // ADD A, (HL)
+        _ram[0] = 0x86;
+        _ram[0x1234] = 0x0A;
+
+        _state.Registers[Register.A] = 0x10;
+        _state.Registers.WritePair(Register.HL, 0x1234);
 
         _processor.ProcessInstruction(_ram);
 
-        Assert.True(_state.Halted);
+        Assert.Equal(0x1A, _state.Registers[Register.A]);
     }
 }

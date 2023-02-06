@@ -335,6 +335,20 @@ public class Processor
         instructions[0x7F] = new Instruction("LD A, A", 1, i => LD_R_R(i, Register.A, Register.A), 4);
 
         instructions[0x80] = new Instruction("ADD A, B", 1, i => ADD_R_R(i, Register.A, Register.B), 4);
+
+        instructions[0x81] = new Instruction("ADD A, C", 1, i => ADD_R_R(i, Register.A, Register.C), 4);
+
+        instructions[0x82] = new Instruction("ADD A, D", 1, i => ADD_R_R(i, Register.A, Register.D), 4);
+
+        instructions[0x83] = new Instruction("ADD A, E", 1, i => ADD_R_R(i, Register.A, Register.E), 4);
+
+        instructions[0x84] = new Instruction("ADD A, H", 1, i => ADD_R_R(i, Register.A, Register.H), 4);
+
+        instructions[0x85] = new Instruction("ADD A, L", 1, i => ADD_R_R(i, Register.A, Register.L), 4);
+
+        instructions[0x86] = new Instruction("ADD A, (HL)", 1, i => ADD_R_addr_RR(i, Register.A, Register.HL), 7);
+
+        instructions[0x87] = new Instruction("ADD A, A", 1, i => ADD_R_R(i, Register.A, Register.A), 4);
     }
 
     private static void NOP()
@@ -824,6 +838,13 @@ public class Processor
         // Flags unaffected
     }
 
+    private static void HALT(Input input)
+    {
+        input.State.Halted = true;
+
+        // Flags unaffected
+    }
+
     public static void ADD_R_R(Input input, Register destination, Register source)
     {
         var valueD = input.State.Registers[destination];
@@ -845,10 +866,24 @@ public class Processor
         input.State.Flags.Sign = (sbyte) result < 0;
     }
 
-    private static void HALT(Input input)
+    private static void ADD_R_addr_RR(Input input, Register destination, Register source)
     {
-        input.State.Halted = true;
+        var valueD = input.State.Registers[destination];
 
-        // Flags unaffected
+        var valueS = input.Ram[input.State.Registers.ReadPair(source)];
+
+        var result = valueD + valueS;
+
+        input.State.Registers[destination] = (byte) result;
+
+        // Flags
+        input.State.Flags.Carry = result > 0xFF;
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = result > 0xFF;
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) > 0xF;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        input.State.Flags.Zero = result == 0;
+        input.State.Flags.Sign = (sbyte) result < 0;
     }
 }
