@@ -785,4 +785,19 @@ public class ProcessorTests
 
         Assert.Equal(0x0F, _state.Registers[Register.A]);
     }
+
+    [Fact]
+    public void SBC_R_addr_RR()
+    {
+        // SBC A, (HL)
+        _ram[0] = 0x9E;
+        _ram[0x1234] = 0x10;
+
+        _state.Registers[Register.A] = 0x20;
+        _state.Registers.WritePair(Register.HL, 0x1234);
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x10, _state.Registers[Register.A]);
+    }
 }
