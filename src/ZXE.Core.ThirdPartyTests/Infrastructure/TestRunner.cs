@@ -173,7 +173,7 @@ public class TestRunner
         var result = ExecuteTest(test, tracer);
 
         FormattedConsole.WriteLine("\n&Cyan;        Expected    Actual");
-        FormattedConsole.WriteLine($"    &Cyan;PC&White;: &Green;{test.Final.PC:X4}         {(test.Final.PC == result.State.ProgramCounter ? "&Green;" : "&Red;")}{result.State.ProgramCounter:X4}");
+        FormattedConsole.WriteLine($"    &Cyan;PC&White;: &Green;0x{test.Final.PC:X4}      {(test.Final.PC == result.State.ProgramCounter ? "&Green;" : "&Red;")}0x{result.State.ProgramCounter:X4}");
 
         var trace = tracer.GetTrace();
 
