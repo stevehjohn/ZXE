@@ -109,12 +109,16 @@ public class TestRunner
             ram[pair[0]] = (byte) pair[1];
         }
 
-        var operations = CountOperations(test.Cycles);
+        //var operations = CountOperations(test.Cycles);
+
+        var operations = 0;
 
         try
         {
-            for (var i = 0; i < operations; i++)
+            while (state.ProgramCounter != test.Final.PC)
             {
+                operations++;
+
                 processor.ProcessInstruction(ram);
             }
         }
@@ -141,26 +145,26 @@ public class TestRunner
         return (pass, operations);
     }
 
-    private static int CountOperations(object[][] cycles)
-    {
-        var last = int.MinValue;
+    //private static int CountOperations(object[][] cycles)
+    //{
+    //    var last = int.MinValue;
 
-        var count = 0;
+    //    var count = 0;
 
-        foreach (var cycle in cycles)
-        {
-            var addressBus = ((JsonElement) cycle[0]).GetInt32();
+    //    foreach (var cycle in cycles)
+    //    {
+    //        var addressBus = ((JsonElement) cycle[0]).GetInt32();
 
-            if (addressBus == last)
-            {
-                continue;
-            }
+    //        if (addressBus == last)
+    //        {
+    //            continue;
+    //        }
 
-            last = addressBus;
+    //        last = addressBus;
 
-            count++;
-        }
+    //        count++;
+    //    }
 
-        return count;
-    }
+    //    return count;
+    //}
 }
