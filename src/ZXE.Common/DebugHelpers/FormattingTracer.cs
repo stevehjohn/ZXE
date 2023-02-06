@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using ZXE.Common.Extensions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 using ZXE.Core.Z80;
 
-namespace ZXE.Common.ConsoleHelpers;
+namespace ZXE.Common.DebugHelpers;
 
 [ExcludeFromCodeCoverage]
 public class FormattingTracer : ITracer
@@ -84,7 +85,7 @@ public class FormattingTracer : ITracer
 
         builder.Append($"    &Cyan;SP&White;: &Yellow;0x{state.StackPointer:X4}");
 
-        builder.Append($"    &Cyan;Flags&White;: {GetFlags(state.Flags)}");
+        builder.Append($"    &Cyan;Flags&White;: &Green;{state.Flags.GetFlags()}");
 
         var parts = mnemonic.Split(' ', StringSplitOptions.TrimEntries).Select(p => p.Replace(",", string.Empty)).ToArray();
 
@@ -127,18 +128,18 @@ public class FormattingTracer : ITracer
         {
             if (operand.Length == 2)
             {
-                builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers.ReadPair((Register) register):X4}");
+                builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers.ReadPair((Register)register):X4}");
             }
             else
             {
-                builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers[(Register) register]:X2}  ");
+                builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers[(Register)register]:X2}  ");
             }
         }
         else
         {
             if (operand.Length == 2)
             {
-                builder.Append($"&Green;{operand,-4}&White;: &Yellow;0x{(data[2] << 8) | data[1]:X4}");
+                builder.Append($"&Green;{operand,-4}&White;: &Yellow;0x{data[2] << 8 | data[1]:X4}");
             }
             else
             {
@@ -152,31 +153,13 @@ public class FormattingTracer : ITracer
 
             if (register != null)
             {
-                builder.Append($"&Magenta;({operand})&White;: &Yellow;0x{ram[state.Registers.ReadPair((Register) register)]:X2}");
+                builder.Append($"&Magenta;({operand})&White;: &Yellow;0x{ram[state.Registers.ReadPair((Register)register)]:X2}");
             }
             else
             {
-                builder.Append($"&Green;({operand})&White;: &Yellow;0x{ram[(data[2] << 8) | data[1]]:X2}");
+                builder.Append($"&Green;({operand})&White;: &Yellow;0x{ram[data[2] << 8 | data[1]]:X2}");
             }
         }
-
-        return builder.ToString();
-    }
-
-    private static string GetFlags(Flags flags)
-    {
-        var builder = new StringBuilder();
-
-        builder.Append("&Green;");
-
-        builder.Append(flags.Carry ? 'C' : ' ');
-        builder.Append(flags.AddSubtract ? 'N' : ' ');
-        builder.Append(flags.ParityOverflow ? 'P' : ' ');
-        builder.Append(flags.X1 ? 'X' : ' ');
-        builder.Append(flags.HalfCarry ? 'H' : ' ');
-        builder.Append(flags.X2 ? 'X' : ' ');
-        builder.Append(flags.Zero ? 'Z' : ' ');
-        builder.Append(flags.Sign ? 'S' : ' ');
 
         return builder.ToString();
     }

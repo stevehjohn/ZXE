@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using ZXE.Common.ConsoleHelpers;
+using ZXE.Common.DebugHelpers;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
@@ -176,6 +177,8 @@ public class TestRunner
 
         FormattedConsole.WriteLine($"    &Cyan;PC&White;: &Green;0x{test.Final.PC:X4}      {(test.Final.PC == result.State.ProgramCounter ? "&Green;" : "&Red;")}0x{result.State.ProgramCounter:X4}");
         FormattedConsole.WriteLine($"    &Cyan;SP&White;: &Green;0x{test.Final.SP:X4}      {(test.Final.SP == result.State.StackPointer ? "&Green;" : "&Red;")}0x{result.State.StackPointer:X4}");
+
+        FormattedConsole.WriteLine($"    &Cyan;F &White;: &Green;0x{test.Final.A:X2}        {(test.Final.A == result.State.Registers[Register.A] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.A]:X2}");
 
         FormattedConsole.WriteLine($"    &Cyan;A &White;: &Green;0x{test.Final.A:X2}        {(test.Final.A == result.State.Registers[Register.A] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.A]:X2}");
         FormattedConsole.WriteLine($"    &Cyan;B &White;: &Green;0x{test.Final.B:X2}        {(test.Final.B == result.State.Registers[Register.B] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.B]:X2}");
