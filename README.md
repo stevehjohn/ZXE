@@ -2,6 +2,10 @@
 
 A ZX Spectrum emulator. Mostly about just seeing if I can.
 
+## Main TODOs
+
+- With some conditional opcodes (e.g. JP NZ, RET Z), more cycles are used if condition is met. Account for this in the timings.
+
 ## Features
 
 So far, apart from a WIP emulator, I have...

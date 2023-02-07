@@ -482,7 +482,11 @@ public class Processor
 
         instructions[0xC7] = new Instruction("RST 0x00", 1, RST, 11);
 
-        instructions[0xC8] = new Instruction("RET Z", 1, RET_Z, 11);
+        instructions[0xC8] = new Instruction("RET Z", 1, RET_Z, 5);
+
+        instructions[0xC9] = new Instruction("RET", 1, RET, 10);
+
+        instructions[0xCA] = new Instruction("JP Z, nn", 3, JP_Z_nn, 10);
     }
 
     private static bool NOP()
@@ -1730,6 +1734,8 @@ public class Processor
     {
         if (input.State.Flags.Zero)
         {
+            // TODO: Same old... more cycles if condition met.
+
             return RET(input);
         }
 
@@ -1751,6 +1757,18 @@ public class Processor
         input.State.StackPointer++;
 
         input.State.ProgramCounter--;
+
+        return true;
+    }
+
+    private static bool JP_Z_nn(Input input)
+    {
+        if (input.State.Flags.Zero)
+        {
+            JP_nn(input);
+        }
+
+        // Flags unaffected
 
         return true;
     }
