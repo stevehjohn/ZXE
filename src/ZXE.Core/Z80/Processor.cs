@@ -523,6 +523,10 @@ public class Processor
         instructions[0xDC] = new Instruction("CALL C, nn", 3, CALL_C_nn, 10);
 
         instructions[0xDE] = new Instruction("SBC A, n", 2, i => SBC_R_n(i, Register.A), 7);
+
+        instructions[0xDF] = new Instruction("RST 0x18", 1, i => RST(i, 0x18), 11);
+
+        instructions[0xE0] = new Instruction("RET PO", 1, RET_PO, 5);
     }
 
     private static bool NOP()
@@ -2027,6 +2031,15 @@ public class Processor
         }
 
         return true;
+    }
 
+    private static bool RET_PO(Input input)
+    {
+        if (! input.State.Flags.ParityOverflow)
+        {
+            RET(input);
+        }
+
+        return true;
     }
 }

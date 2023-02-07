@@ -36,7 +36,7 @@ public class TestRunner
                 continue;
             }
 
-            if (Path.GetFileName(file).StartsWith("e0"))
+            if (Path.GetFileName(file).StartsWith("e1"))
             {
                 break;
             }
