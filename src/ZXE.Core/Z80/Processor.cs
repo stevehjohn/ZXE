@@ -1493,6 +1493,8 @@ public class Processor
             input.State.ProgramCounter = (input.State.ProgramCounter & 0x00FF) | spContent << 8;
 
             input.State.StackPointer++;
+
+            input.State.ProgramCounter--;
         }
 
         // Flags unaffected
