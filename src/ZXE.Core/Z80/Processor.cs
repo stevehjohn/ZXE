@@ -43,9 +43,10 @@ public class Processor
             _tracer.TraceBefore(instruction, data, _state, ram);
         }
 
-        instruction.Action(new Input(data, _state, ram));
-
-        _state.ProgramCounter += instruction.Length;
+        if (instruction.Action(new Input(data, _state, ram)))
+        {
+            _state.ProgramCounter += instruction.Length;
+        }
 
         if (_state.ProgramCounter > 0xFFFF)
         {
@@ -1731,6 +1732,6 @@ public class Processor
 
         input.State.ProgramCounter = 0;
 
-        return true;
+        return false;
     }
 }
