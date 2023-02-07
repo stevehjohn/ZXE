@@ -813,13 +813,18 @@ public class Processor
 
     private static void JR_Z_e(Input input)
     {
+        if (input.State.ProgramCounter == 28)
+        {
+        }
+
         unchecked
         {
             if (input.State.Flags.Zero)
             {
                 // TODO: If Z == true, 5 more cycles... how to do this?
 
-                input.State.ProgramCounter += (sbyte) input.Data[1];
+                input.State.ProgramCounter = (ushort) (input.State.ProgramCounter + (sbyte) input.Data[1]);
+                //input.State.ProgramCounter += (sbyte) input.Data[1];
             }
 
             // Flags unaffected
