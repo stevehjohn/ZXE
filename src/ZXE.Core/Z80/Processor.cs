@@ -1285,7 +1285,7 @@ public class Processor
         {
             var result = input.State.Registers[destination] & input.State.Registers[source];
 
-            input.State.Registers[Register.A] = (byte) result;
+            input.State.Registers[destination] = (byte) result;
 
             // Flags
             input.State.Flags.Carry = false;
@@ -1307,7 +1307,7 @@ public class Processor
         {
             var result = input.State.Registers[destination] & input.Ram[input.State.Registers.ReadPair(source)];
 
-            input.State.Registers[Register.A] = (byte) result;
+            input.State.Registers[destination] = (byte) result;
 
             // Flags
             input.State.Flags.Carry = false;
@@ -1329,7 +1329,7 @@ public class Processor
         {
             var result = input.State.Registers[destination] ^ input.State.Registers[source];
 
-            input.State.Registers[Register.A] = (byte) result;
+            input.State.Registers[destination] = (byte) result;
 
             // Flags
             input.State.Flags.Carry = false;
@@ -1351,7 +1351,7 @@ public class Processor
         {
             var result = input.State.Registers[destination] ^ input.Ram[input.State.Registers.ReadPair(source)];
 
-            input.State.Registers[Register.A] = (byte) result;
+            input.State.Registers[destination] = (byte) result;
 
             // Flags
             input.State.Flags.Carry = false;
@@ -1373,7 +1373,7 @@ public class Processor
         {
             var result = input.State.Registers[destination] | input.State.Registers[source];
 
-            input.State.Registers[Register.A] = (byte) result;
+            input.State.Registers[destination] = (byte) result;
 
             // Flags
             input.State.Flags.Carry = false;
@@ -1393,7 +1393,9 @@ public class Processor
     {
         unchecked
         {
-            var result = input.State.Registers[destination] | input.State.Registers.ReadPair(source);
+            var result = input.State.Registers[destination] | input.Ram[input.State.Registers.ReadPair(source)];
+
+            input.State.Registers[destination] = (byte) result;
 
             // Flags
             input.State.Flags.Carry = false;

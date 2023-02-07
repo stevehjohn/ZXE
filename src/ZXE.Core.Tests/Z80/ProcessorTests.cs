@@ -866,4 +866,19 @@ public class ProcessorTests
 
         Assert.Equal(0b00111100, _state.Registers[Register.A]);
     }
+
+    [Fact]
+    public void OR_R_addr_RR()
+    {
+        // OR A, (HL)
+        _ram[0] = 0xB6;
+        _ram[0x1234] = 0b00001100;
+
+        _state.Registers[Register.A] = 0b00110000;
+        _state.Registers.WritePair(Register.HL, 0x1234);
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0b00111100, _state.Registers[Register.A]);
+    }
 }
