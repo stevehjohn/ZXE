@@ -472,6 +472,10 @@ public class Processor
         instructions[0xC1] = new Instruction("POP BC", 1, POP_RR, 10);
 
         instructions[0xC2] = new Instruction("JP NZ, nn", 3, JP_NZ_nn, 10);
+
+        instructions[0xC3] = new Instruction("JP nn", 3, JP_nn, 10);
+
+        instructions[0xC4] = new Instruction("CALL NZ, nn", 3, CALL_NZ_nn, 10);
     }
 
     private static void NOP()
@@ -760,17 +764,12 @@ public class Processor
 
     private static void JR_NZ_e(Input input)
     {
-        unchecked
+        if (! input.State.Flags.Zero)
         {
-            if (! input.State.Flags.Zero)
-            {
-                // TODO: If Z == false, 5 more cycles... how to do this?
-
-                input.State.ProgramCounter += (sbyte) input.Data[1];
-            }
-
-            // Flags unaffected
+            JR_e(input);
         }
+
+        // Flags unaffected
     }
 
     private static void LD_addr_nn_RR(Input input, Register register)
@@ -852,18 +851,12 @@ public class Processor
 
     private static void JR_Z_e(Input input)
     {
-        unchecked
+        if (input.State.Flags.Zero)
         {
-            if (input.State.Flags.Zero)
-            {
-                // TODO: If Z == true, 5 more cycles... how to do this?
-
-                input.State.ProgramCounter = (ushort) (input.State.ProgramCounter + (sbyte) input.Data[1]);
-                //input.State.ProgramCounter += (sbyte) input.Data[1];
-            }
-
-            // Flags unaffected
+            JR_e(input);
         }
+
+        // Flags unaffected
     }
 
     private static void LD_RR_addr_nn(Input input, Register register)
@@ -905,14 +898,9 @@ public class Processor
 
     private static void JR_NC_e(Input input)
     {
-        unchecked
+        if (! input.State.Flags.Carry)
         {
-            if (! input.State.Flags.Carry)
-            {
-                // TODO: If C == false, 5 more cycles... how to do this?
-
-                input.State.ProgramCounter += (sbyte) input.Data[1];
-            }
+            JR_e(input);
         }
 
         // Flags unaffected
@@ -1007,17 +995,12 @@ public class Processor
 
     private static void JR_C_e(Input input)
     {
-        unchecked
+        if (input.State.Flags.Carry)
         {
-            if (input.State.Flags.Carry)
-            {
-                // TODO: If C == false, 5 more cycles... how to do this?
-
-                input.State.ProgramCounter += (sbyte) input.Data[1];
-            }
-
-            // Flags unaffected
+            JR_e(input);
         }
+
+        // Flags unaffected
     }
 
     private static void ADD_RR_SP(Input input, Register register)
@@ -1521,10 +1504,39 @@ public class Processor
     {
         if (! input.State.Flags.Zero)
         {
-            // TODO: Don't like this - 3 thing... maybe return true/false to indicate whether PC should be adjusted by caller...
-            input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
+            JP_nn(input);
         }
 
         // Flags unaffected
+    }
+
+    private static void JP_nn(Input input)
+    {
+        // TODO: Don't like this - 3 thing... maybe return true/false to indicate whether PC should be adjusted by caller...
+        input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
+
+        // Flags unaffected
+    }
+
+    private static void CALL_NZ_nn(Input input)
+    {
+        // TODO: If condition true, 7 more cycles required.
+        if (! input.State.Flags.Zero)
+        {
+            CALL_nn(input);
+        }
+    }
+
+    private static void CALL_nn(Input input)
+    {
+        input.State.StackPointer--;
+
+        input.Ram[input.State.StackPointer] = (byte) ((input.State.ProgramCounter & 0xFF00) >> 8);
+
+        input.State.StackPointer--;
+
+        input.Ram[input.State.StackPointer] = (byte) (input.State.ProgramCounter & 0x00FF);
+
+        input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
     }
 }
