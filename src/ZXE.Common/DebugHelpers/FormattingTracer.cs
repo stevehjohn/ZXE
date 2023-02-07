@@ -94,7 +94,7 @@ public class FormattingTracer : ITracer
 
         var parts = mnemonic.Split(' ', StringSplitOptions.TrimEntries).Select(p => p.Replace(",", string.Empty)).ToArray();
 
-        if (parts.Length == 1)
+        if (parts.Length == 1 || parts[1][0] == '0')
         {
             return builder.ToString();
         }

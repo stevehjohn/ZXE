@@ -225,6 +225,8 @@ public class TestRunner
             if (result.Ram[entry[0]] != entry[1])
             {
                 ramDifference = true;
+
+                break;
             }
         }
 
