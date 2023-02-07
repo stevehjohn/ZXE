@@ -813,10 +813,6 @@ public class Processor
 
     private static void JR_Z_e(Input input)
     {
-        if (input.State.ProgramCounter == 28)
-        {
-        }
-
         unchecked
         {
             if (input.State.Flags.Zero)
