@@ -1479,5 +1479,22 @@ public class Processor
 
     private static void RET_NZ(Input input)
     {
+        // TODO: If condition true, 6 more cycles required.
+        if (! input.State.Flags.Zero)
+        {
+            var spContent = input.Ram[input.State.StackPointer];
+
+            input.State.ProgramCounter = (input.State.ProgramCounter & 0xFF00) | spContent;
+
+            input.State.StackPointer++;
+
+            spContent = input.Ram[input.State.StackPointer];
+
+            input.State.ProgramCounter = (input.State.ProgramCounter & 0x00FF) | spContent << 8;
+
+            input.State.StackPointer++;
+        }
+
+        // Flags unaffected
     }
 }
