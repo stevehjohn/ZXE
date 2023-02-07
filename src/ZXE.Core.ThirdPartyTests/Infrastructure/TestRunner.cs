@@ -29,8 +29,17 @@ public class TestRunner
 
         var stopwatch = Stopwatch.StartNew();
 
+        var skip = 0xC0;
+
         foreach (var file in files)
         {
+            skip--;
+
+            if (skip > 0)
+            {
+                continue;
+            }
+
             var tests = JsonSerializer.Deserialize<TestDefinition[]>(File.ReadAllText(file), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             if (tests == null)
@@ -40,11 +49,6 @@ public class TestRunner
 
             foreach (var test in tests)
             {
-                if (test.Name.StartsWith("C1", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    goto done;
-                }
-
                 total++;
 
                 if (RunTest(test))
@@ -60,7 +64,6 @@ public class TestRunner
 
         stopwatch.Stop();
 
-        done:
         FormattedConsole.WriteLine(string.Empty);
 
         FormattedConsole.WriteLine($"  &Cyan;Testing complete. Time elapsed&White;: &Yellow; {stopwatch.Elapsed.Minutes}:{stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}");

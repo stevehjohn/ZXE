@@ -468,6 +468,10 @@ public class Processor
         instructions[0xBF] = new Instruction("CP A, A", 1, i => CP_R_R(i, Register.A, Register.A), 4);
 
         instructions[0xC0] = new Instruction("RET NZ", 1, RET_NZ, 5);
+
+        instructions[0xC1] = new Instruction("POP BC", 1, POP_RR, 10);
+
+        instructions[0xC2] = new Instruction("JP NZ, nn", 3, JP_NZ_nn, 10);
     }
 
     private static void NOP()
@@ -1495,6 +1499,30 @@ public class Processor
             input.State.StackPointer++;
 
             input.State.ProgramCounter--;
+        }
+
+        // Flags unaffected
+    }
+
+    private static void POP_RR(Input input)
+    {
+        input.State.Registers[Register.C] = input.Ram[input.State.StackPointer];
+
+        input.State.StackPointer++;
+
+        input.State.Registers[Register.B] = input.Ram[input.State.StackPointer];
+
+        input.State.StackPointer++;
+
+        // Flags unaffected
+    }
+
+    private static void JP_NZ_nn(Input input)
+    {
+        if (! input.State.Flags.Zero)
+        {
+            // TODO: Don't like this - 3 thing... maybe return true/false to indicate whether PC should be adjusted by caller...
+            input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
         }
 
         // Flags unaffected
