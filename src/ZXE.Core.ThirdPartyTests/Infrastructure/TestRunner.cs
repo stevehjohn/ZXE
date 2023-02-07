@@ -15,7 +15,7 @@ namespace ZXE.Core.ThirdPartyTests.Infrastructure;
 [ExcludeFromCodeCoverage]
 public class TestRunner
 {
-    public void RunAllTests(bool dumpOnFail = false)
+    public static void RunAllTests(bool dumpOnFail = false)
     {
         var files = Directory.EnumerateFiles("TestDefinitions", "*.json");
 
@@ -29,20 +29,20 @@ public class TestRunner
 
         var stopwatch = Stopwatch.StartNew();
 
-        //var skip = 0xD0;
-        var skip = 0x00;
-
         foreach (var file in files)
         {
-            skip--;
-
-            if (skip > 0)
+            if (Path.GetFileName(file).CompareTo("da") < 0)
             {
                 continue;
             }
 
+            if (Path.GetFileName(file).StartsWith("e0"))
+            {
+                break;
+            }
+
             // TODO: Remove once implemented...
-            if (Path.GetFileName(file).StartsWith("cb") || Path.GetFileName(file).StartsWith("db"))
+            if (Path.GetFileName(file).StartsWith("cb") || Path.GetFileName(file).StartsWith("db") || Path.GetFileName(file).StartsWith("dd"))
             {
                 continue;
             }

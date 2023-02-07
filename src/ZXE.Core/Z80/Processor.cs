@@ -519,6 +519,10 @@ public class Processor
         instructions[0xDA] = new Instruction("JP C, nn", 3, JP_C_nn, 10);
 
         instructions[0xDB] = new Instruction("IN A, (n)", 2, IN_R_addr_N, 11);
+
+        instructions[0xDC] = new Instruction("CALL C, nn", 3, CALL_C_nn, 10);
+
+        instructions[0xDE] = new Instruction("SBC A, n", 2, i => SBC_R_n(i, Register.A), 7);
     }
 
     private static bool NOP()
@@ -1983,5 +1987,46 @@ public class Processor
         // Flags unaffected
 
         return true;
+    }
+
+    private static bool CALL_C_nn(Input input)
+    {
+        if (input.State.Flags.Carry)
+        {
+            return CALL_nn(input);
+        }
+
+        return true;
+    }
+
+    private static bool SBC_R_n(Input input, Register destination)
+    {
+        unchecked
+        {
+            var valueD = input.State.Registers[destination];
+
+            var valueS = input.Data[1];
+
+            var carry = (byte) (input.State.Flags.Carry ? 0x01 : 0x00);
+
+            var result = valueD - valueS - carry;
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = result < 0;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = result < -0x80; // TODO: Potential bug here?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) < ((valueS + carry) & 0x0F);
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+
     }
 }

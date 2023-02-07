@@ -8,9 +8,7 @@ namespace ZXE.Core.ThirdPartyTests
     {
         public static void Main()
         {
-            var runner = new TestRunner();
-
-            runner.RunAllTests(true);
+            TestRunner.RunAllTests(true);
 
             Console.ReadKey();
         }
