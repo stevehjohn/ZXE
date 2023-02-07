@@ -143,7 +143,7 @@ public class Processor
 
         instructions[0x1D] = new Instruction("DEC E", 1, i => DEC_R(i, Register.E), 4);
 
-        instructions[0x1E] = new Instruction("LD E, n", 1, i => LD_R_n(i, Register.E), 7);
+        instructions[0x1E] = new Instruction("LD E, n", 2, i => LD_R_n(i, Register.E), 7);
 
         instructions[0x1F] = new Instruction("RRA", 1, RRA, 4, "RRA A");
 
