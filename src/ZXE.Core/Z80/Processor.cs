@@ -752,8 +752,6 @@ public class Processor
 
     private static void DAA(Input input)
     {
-        // TODO: Wooooah.
-        // TODO: DO!
         var adjust = 0;
 
         if (input.State.Flags.HalfCarry || (input.State.Registers[Register.A] & 0x0F) > 0x09)
