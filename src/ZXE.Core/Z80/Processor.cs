@@ -750,10 +750,67 @@ public class Processor
         }
     }
 
-    private static void DAA(Input i)
+    private static void DAA(Input input)
     {
         // TODO: Wooooah.
         // TODO: DO!
+        var adjust = 0;
+
+        if (input.State.Flags.HalfCarry || (input.State.Registers[Register.A] & 0x0F) > 0x09)
+        {
+            adjust++;
+        }
+
+        if (input.State.Registers[Register.A] > 0x99)
+        {
+            adjust += 2;
+
+            input.State.Flags.Carry = true;
+        }
+
+        if (input.State.Flags.AddSubtract && ! input.State.Flags.HalfCarry)
+        {
+            input.State.Flags.HalfCarry = false;
+        }
+        else
+        {
+            if (input.State.Flags.AddSubtract && input.State.Flags.HalfCarry)
+            {
+                input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < 0x06;
+            }
+            else
+            {
+                input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) >= 0x0A;
+            }
+        }
+
+        switch (adjust)
+        {
+            case 1:
+                input.State.Registers[Register.A] += (byte) (input.State.Flags.AddSubtract ? 0xFA : 0x06);
+
+                break;
+            case 2:
+                input.State.Registers[Register.A] += (byte) (input.State.Flags.AddSubtract ? 0xA0 : 0x60);
+
+                break;
+            case 3:
+                input.State.Registers[Register.A] += (byte) (input.State.Flags.AddSubtract ? 0x9A : 0x66);
+
+                break;
+        }
+
+        // Flags
+        // Carry adjusted by operation
+        input.State.Flags.AddSubtract = true;
+        // TODO: ParityOverflow
+        input.State.Flags.X1 = (input.State.Registers[Register.A] & 0x08) > 0;
+        input.State.Flags.HalfCarry = true;
+        input.State.Flags.X2 = (input.State.Registers[Register.A] & 0x20) > 0;
+        input.State.Flags.Zero = input.State.Registers[Register.A] == 0;
+        input.State.Flags.Sign = (input.State.Registers[Register.A] & 0x80) > 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 
     private static void JR_Z_e(Input input)
