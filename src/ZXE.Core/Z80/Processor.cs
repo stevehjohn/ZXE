@@ -216,13 +216,13 @@ public class Processor
         instructions[0x41] = new Instruction("LD B, C", 1, i => LD_R_R(i, Register.B, Register.C), 4);
 
         instructions[0x42] = new Instruction("LD B, D", 1, i => LD_R_R(i, Register.B, Register.D), 4);
-        
+
         instructions[0x43] = new Instruction("LD B, E", 1, i => LD_R_R(i, Register.B, Register.E), 4);
 
         instructions[0x44] = new Instruction("LD B, H", 1, i => LD_R_R(i, Register.B, Register.H), 4);
 
         instructions[0x45] = new Instruction("LD B, L", 1, i => LD_R_R(i, Register.B, Register.L), 4);
-        
+
         instructions[0x46] = new Instruction("LD B, (HL)", 1, i => LD_R_addr_RR(i, Register.B, Register.HL), 7);
 
         instructions[0x47] = new Instruction("LD B, A", 1, i => LD_R_R(i, Register.B, Register.A), 4);
@@ -232,13 +232,13 @@ public class Processor
         instructions[0x49] = new Instruction("LD C, C", 1, i => LD_R_R(i, Register.C, Register.C), 4);
 
         instructions[0x4A] = new Instruction("LD C, D", 1, i => LD_R_R(i, Register.C, Register.D), 4);
-        
+
         instructions[0x4B] = new Instruction("LD C, E", 1, i => LD_R_R(i, Register.C, Register.E), 4);
 
         instructions[0x4C] = new Instruction("LD C, H", 1, i => LD_R_R(i, Register.C, Register.H), 4);
 
         instructions[0x4D] = new Instruction("LD C, L", 1, i => LD_R_R(i, Register.C, Register.L), 4);
-        
+
         instructions[0x4E] = new Instruction("LD C, (HL)", 1, i => LD_R_addr_RR(i, Register.C, Register.HL), 7);
 
         instructions[0x4F] = new Instruction("LD C, A", 1, i => LD_R_R(i, Register.C, Register.A), 4);
@@ -248,13 +248,13 @@ public class Processor
         instructions[0x51] = new Instruction("LD D, C", 1, i => LD_R_R(i, Register.D, Register.C), 4);
 
         instructions[0x52] = new Instruction("LD D, D", 1, i => LD_R_R(i, Register.D, Register.D), 4);
-        
+
         instructions[0x53] = new Instruction("LD D, E", 1, i => LD_R_R(i, Register.D, Register.E), 4);
 
         instructions[0x54] = new Instruction("LD D, H", 1, i => LD_R_R(i, Register.D, Register.H), 4);
 
         instructions[0x55] = new Instruction("LD D, L", 1, i => LD_R_R(i, Register.D, Register.L), 4);
-        
+
         instructions[0x56] = new Instruction("LD D, (HL)", 1, i => LD_R_addr_RR(i, Register.D, Register.HL), 7);
 
         instructions[0x57] = new Instruction("LD D, A", 1, i => LD_R_R(i, Register.D, Register.A), 4);
@@ -264,13 +264,13 @@ public class Processor
         instructions[0x59] = new Instruction("LD E, C", 1, i => LD_R_R(i, Register.E, Register.C), 4);
 
         instructions[0x5A] = new Instruction("LD E, D", 1, i => LD_R_R(i, Register.E, Register.D), 4);
-        
+
         instructions[0x5B] = new Instruction("LD E, E", 1, i => LD_R_R(i, Register.E, Register.E), 4);
 
         instructions[0x5C] = new Instruction("LD E, H", 1, i => LD_R_R(i, Register.E, Register.H), 4);
 
         instructions[0x5D] = new Instruction("LD E, L", 1, i => LD_R_R(i, Register.E, Register.L), 4);
-        
+
         instructions[0x5E] = new Instruction("LD E, (HL)", 1, i => LD_R_addr_RR(i, Register.E, Register.HL), 7);
 
         instructions[0x5F] = new Instruction("LD E, A", 1, i => LD_R_R(i, Register.E, Register.A), 4);
@@ -280,13 +280,13 @@ public class Processor
         instructions[0x61] = new Instruction("LD H, C", 1, i => LD_R_R(i, Register.H, Register.C), 4);
 
         instructions[0x62] = new Instruction("LD H, D", 1, i => LD_R_R(i, Register.H, Register.D), 4);
-        
+
         instructions[0x63] = new Instruction("LD H, E", 1, i => LD_R_R(i, Register.H, Register.E), 4);
 
         instructions[0x64] = new Instruction("LD H, H", 1, i => LD_R_R(i, Register.H, Register.H), 4);
 
         instructions[0x65] = new Instruction("LD H, L", 1, i => LD_R_R(i, Register.H, Register.L), 4);
-        
+
         instructions[0x66] = new Instruction("LD H, (HL)", 1, i => LD_R_addr_RR(i, Register.H, Register.HL), 7);
 
         instructions[0x67] = new Instruction("LD H, A", 1, i => LD_R_R(i, Register.H, Register.A), 4);
@@ -296,13 +296,13 @@ public class Processor
         instructions[0x69] = new Instruction("LD L, C", 1, i => LD_R_R(i, Register.L, Register.C), 4);
 
         instructions[0x6A] = new Instruction("LD L, D", 1, i => LD_R_R(i, Register.L, Register.D), 4);
-        
+
         instructions[0x6B] = new Instruction("LD L, E", 1, i => LD_R_R(i, Register.L, Register.E), 4);
 
         instructions[0x6C] = new Instruction("LD L, H", 1, i => LD_R_R(i, Register.L, Register.H), 4);
 
         instructions[0x6D] = new Instruction("LD L, L", 1, i => LD_R_R(i, Register.L, Register.L), 4);
-        
+
         instructions[0x6E] = new Instruction("LD L, (HL)", 1, i => LD_R_addr_RR(i, Register.L, Register.HL), 7);
 
         instructions[0x6F] = new Instruction("LD L, A", 1, i => LD_R_R(i, Register.L, Register.A), 4);
@@ -335,8 +335,8 @@ public class Processor
 
         instructions[0x7D] = new Instruction("LD A, L", 1, i => LD_R_R(i, Register.A, Register.L), 4);
 
-        instructions[0x77] = new Instruction("LD A, (HL)", 1, i => LD_R_addr_RR(i, Register.A, Register.HL), 7);
-        
+        instructions[0x7E] = new Instruction("LD A, (HL)", 1, i => LD_R_addr_RR(i, Register.A, Register.HL), 7);
+
         instructions[0x7F] = new Instruction("LD A, A", 1, i => LD_R_R(i, Register.A, Register.A), 4);
 
         instructions[0x80] = new Instruction("ADD A, B", 1, i => ADD_R_R(i, Register.A, Register.B), 4);
@@ -385,7 +385,7 @@ public class Processor
 
         instructions[0x96] = new Instruction("SUB A, (HL)", 1, i => SUB_R_addr_RR(i, Register.A, Register.HL), 7);
 
-        instructions[0x97] = new Instruction("SUB A, A", 1, i => SUB_R_R(i, Register.A, Register.B), 4);
+        instructions[0x97] = new Instruction("SUB A, A", 1, i => SUB_R_R(i, Register.A, Register.A), 4);
 
         instructions[0x98] = new Instruction("SBC A, B", 1, i => SBC_R_R(i, Register.A, Register.B), 4);
 
@@ -434,6 +434,22 @@ public class Processor
         instructions[0xAE] = new Instruction("XOR A, (HL)", 1, i => XOR_R_addr_RR(i, Register.A, Register.HL), 7);
 
         instructions[0xAF] = new Instruction("XOR A, A", 1, i => XOR_R_R(i, Register.A, Register.A), 4);
+
+        instructions[0xB0] = new Instruction("OR A, B", 1, i => OR_R_R(i, Register.A, Register.B), 4);
+
+        instructions[0xB1] = new Instruction("OR A, C", 1, i => OR_R_R(i, Register.A, Register.C), 4);
+
+        instructions[0xB2] = new Instruction("OR A, D", 1, i => OR_R_R(i, Register.A, Register.D), 4);
+
+        instructions[0xB3] = new Instruction("OR A, E", 1, i => OR_R_R(i, Register.A, Register.E), 4);
+
+        instructions[0xB4] = new Instruction("OR A, H", 1, i => OR_R_R(i, Register.A, Register.H), 4);
+
+        instructions[0xB5] = new Instruction("OR A, L", 1, i => OR_R_R(i, Register.A, Register.L), 4);
+
+        instructions[0xB6] = new Instruction("OR A, (HL)", 1, i => OR_R_addr_RR(i, Register.A, Register.HL), 7);
+
+        instructions[0xB7] = new Instruction("OR A, A", 1, i => OR_R_R(i, Register.A, Register.A), 4);
     }
 
     private static void NOP()
@@ -750,6 +766,7 @@ public class Processor
         }
     }
 
+    // TODO: Lol, good luck adding a unit test for this one!
     private static void DAA(Input input)
     {
         var adjust = 0;
@@ -1017,7 +1034,7 @@ public class Processor
         var value = input.State.Flags.Carry;
 
         input.State.Flags.Carry = ! input.State.Flags.Carry;
-        
+
         // TODO: XOR with Q register?
         var xFlags = input.State.Flags.ToByte() | input.State.Registers[Register.A];
 
@@ -1213,7 +1230,7 @@ public class Processor
             var valueD = input.State.Registers[destination];
 
             var valueS = input.State.Registers[source];
-            
+
             var carry = (byte) (input.State.Flags.Carry ? 0x01 : 0x00);
 
             var result = valueD - valueS - carry;
@@ -1241,7 +1258,7 @@ public class Processor
             var valueD = input.State.Registers[destination];
 
             var valueS = input.Ram[input.State.Registers.ReadPair(source)];
-            
+
             var carry = (byte) (input.State.Flags.Carry ? 0x01 : 0x00);
 
             var result = valueD - valueS - carry;
@@ -1289,7 +1306,7 @@ public class Processor
         unchecked
         {
             var result = input.State.Registers[destination] & input.Ram[input.State.Registers.ReadPair(source)];
-            
+
             input.State.Registers[Register.A] = (byte) result;
 
             // Flags
@@ -1340,6 +1357,46 @@ public class Processor
             input.State.Flags.Carry = false;
             input.State.Flags.AddSubtract = false;
             input.State.Flags.ParityOverflow = false; // TODO: Can XOR overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+    }
+
+    private static void OR_R_R(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] | input.State.Registers[source];
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can OR overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+    }
+
+    private static void OR_R_addr_RR(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] | input.State.Registers.ReadPair(source);
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can OR overflow?
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
