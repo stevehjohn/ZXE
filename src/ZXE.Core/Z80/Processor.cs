@@ -513,6 +513,8 @@ public class Processor
         instructions[0xD7] = new Instruction("RST 0x10", 1, i => RST(i, 0x10), 11);
         
         instructions[0xD8] = new Instruction("RET C", 1, RET_C, 5);
+
+        instructions[0xD9] = new Instruction("EXX", 1, EXX, 4);
     }
 
     private static bool NOP()
@@ -1930,6 +1932,31 @@ public class Processor
             return RET(input);
         }
 
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool EXX(Input input)
+    {
+        var bc = input.State.Registers.ReadPair(Register.BC);
+
+        var de = input.State.Registers.ReadPair(Register.DE);
+
+        var hl = input.State.Registers.ReadPair(Register.HL);
+
+        input.State.Registers.WritePair(Register.BC, input.State.Registers.ReadPair(Register.BC1));
+
+        input.State.Registers.WritePair(Register.DE, input.State.Registers.ReadPair(Register.DE1));
+
+        input.State.Registers.WritePair(Register.HL, input.State.Registers.ReadPair(Register.HL1));
+
+        input.State.Registers.WritePair(Register.BC1, bc);
+
+        input.State.Registers.WritePair(Register.DE1, de);
+
+        input.State.Registers.WritePair(Register.HL1, hl);
+        
         // Flags unaffected
 
         return true;
