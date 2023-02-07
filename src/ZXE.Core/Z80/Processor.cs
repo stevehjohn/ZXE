@@ -476,6 +476,8 @@ public class Processor
         instructions[0xC4] = new Instruction("CALL NZ, nn", 3, CALL_NZ_nn, 10);
 
         instructions[0xC5] = new Instruction("PUSH BC", 1, i => PUSH_RR(i, Register.BC), 11);
+
+        instructions[0xC6] = new Instruction("ADD A, n", 2, i => ADD_R_n(i, Register.A), 7);
     }
 
     private static void NOP()
@@ -1548,14 +1550,35 @@ public class Processor
     {
         input.State.StackPointer--;
 
-        var data = input.State.Registers.ReadPair(register) - 3;
+        var data = input.State.Registers.ReadPair(register);
 
-        input.Ram[input.State.StackPointer] = (byte) (data & 0xFF00 >> 8);
+        input.Ram[input.State.StackPointer] = (byte) ((data & 0xFF00) >> 8);
 
         input.State.StackPointer--;
 
         input.Ram[input.State.StackPointer] = (byte) (data & 0x00FF);
 
         // Flags unaffected
+    }
+
+    private static void ADD_R_n(Input input, Register register)
+    {
+        var original = input.State.Registers[register];
+
+        var result = input.State.Registers[register] + input.Data[1];
+
+        input.State.Registers[Register.A] = (byte) result;
+
+        // Flags
+        input.State.Flags.Carry = result > 0xFF;
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = false; // TODO
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = (original & 0x0F) < (result & 0x10);
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        input.State.Flags.Zero = result == 0;
+        input.State.Flags.Sign = (sbyte) result < 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
     }
 }
