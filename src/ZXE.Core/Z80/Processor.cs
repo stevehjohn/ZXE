@@ -1595,5 +1595,16 @@ public class Processor
 
     private static void RST(Input input)
     {
+        var pc = input.State.ProgramCounter;
+
+        input.State.StackPointer--;
+
+        input.Ram[input.State.StackPointer] = (byte) ((pc & 0xFF00) >> 8);
+
+        input.State.StackPointer--;
+
+        input.Ram[input.State.StackPointer] = (byte) (pc & 0x00FF);
+
+        input.State.ProgramCounter = 0;
     }
 }
