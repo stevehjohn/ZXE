@@ -468,7 +468,7 @@ public class Processor
 
         instructions[0xC0] = new Instruction("RET NZ", 1, RET_NZ, 5);
 
-        instructions[0xC1] = new Instruction("POP BC", 1, POP_RR, 10);
+        instructions[0xC1] = new Instruction("POP BC", 1, i => POP_RR(i, Register.BC), 10);
 
         instructions[0xC2] = new Instruction("JP NZ, nn", 3, JP_NZ_nn, 10);
 
@@ -480,7 +480,7 @@ public class Processor
 
         instructions[0xC6] = new Instruction("ADD A, n", 2, i => ADD_R_n(i, Register.A), 7);
 
-        instructions[0xC7] = new Instruction("RST 0x00", 1, RST, 11);
+        instructions[0xC7] = new Instruction("RST 0x00", 1, i => RST(i, 0x00), 11);
 
         instructions[0xC8] = new Instruction("RET Z", 1, RET_Z, 5);
 
@@ -491,6 +491,14 @@ public class Processor
         instructions[0xCC] = new Instruction("CALL Z, nn", 3, CALL_Z_nn, 10);
 
         instructions[0xCD] = new Instruction("CALL nn", 3, CALL_nn, 17);
+
+        instructions[0xCE] = new Instruction("ADC A, n", 2, i => ADC_R_n(i, Register.A), 7);
+
+        instructions[0xCF] = new Instruction("RST 0x08", 1, i => RST(i, 0x08), 11);
+
+        instructions[0xD0] = new Instruction("RET NC", 1, RET_NC, 5);
+
+        instructions[0xD1] = new Instruction("POP DE", 1, i => POP_RR(i, Register.DE), 10);
     }
 
     private static bool NOP()
@@ -1600,15 +1608,17 @@ public class Processor
         return true;
     }
 
-    private static bool POP_RR(Input input)
+    private static bool POP_RR(Input input, Register register)
     {
-        input.State.Registers[Register.C] = input.Ram[input.State.StackPointer];
+        var data = (ushort) input.Ram[input.State.StackPointer];
 
         input.State.StackPointer++;
 
-        input.State.Registers[Register.B] = input.Ram[input.State.StackPointer];
+        data |= (ushort) (input.Ram[input.State.StackPointer] << 8);
 
         input.State.StackPointer++;
+
+        input.State.Registers.WritePair(register, data);
 
         // Flags unaffected
 
@@ -1717,7 +1727,7 @@ public class Processor
         return true;
     }
 
-    private static bool RST(Input input)
+    private static bool RST(Input input, byte pageZeroAddress)
     {
         var pc = input.State.ProgramCounter + 1;
 
@@ -1729,7 +1739,7 @@ public class Processor
 
         input.Ram[input.State.StackPointer] = (byte) (pc & 0x00FF);
 
-        input.State.ProgramCounter = 0;
+        input.State.ProgramCounter = pageZeroAddress;
 
         return false;
     }
@@ -1786,6 +1796,46 @@ public class Processor
         }
 
         // Flags unaffected
+
+        return true;
+    }
+
+    public static bool ADC_R_n(Input input, Register destination)
+    {
+        unchecked
+        {
+            var valueD = input.State.Registers[destination];
+
+            var valueS = input.Data[1];
+
+            var carry = (byte) (input.State.Flags.Carry ? 0x01 : 0x00);
+
+            var result = valueD + valueS + carry;
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = result > 0xFF;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result > 0x7F;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool RET_NC(Input input)
+    {
+        if (! input.State.Flags.Carry)
+        {
+            RET(input);
+        }
 
         return true;
     }

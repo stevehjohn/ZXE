@@ -29,7 +29,7 @@ public class TestRunner
 
         var stopwatch = Stopwatch.StartNew();
 
-        var skip = 0xC7;
+        var skip = 0xC0;
 
         foreach (var file in files)
         {
