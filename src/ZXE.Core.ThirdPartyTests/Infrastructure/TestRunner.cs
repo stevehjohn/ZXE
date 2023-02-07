@@ -29,7 +29,7 @@ public class TestRunner
 
         var stopwatch = Stopwatch.StartNew();
 
-        var skip = 0xC0;
+        var skip = 0xC7;
 
         foreach (var file in files)
         {
@@ -57,7 +57,7 @@ public class TestRunner
                 }
                 else if (dumpOnFail)
                 {
-                    DumpTest(test);
+                    //DumpTest(test);
                 }
             }
         }
@@ -95,7 +95,14 @@ public class TestRunner
         }
         else
         {
-            FormattedConsole.Write("&Red;FAIL");
+            if (result.exception != null)
+            {
+                FormattedConsole.Write("&Red;EXCP");
+            }
+            else
+            {
+                FormattedConsole.Write("&Red;FAIL");
+            }
         }
 
         FormattedConsole.Write("&White; ]");
@@ -105,7 +112,7 @@ public class TestRunner
         return result.Passed;
     }
 
-    private static (bool Passed, int Operations, State State, Ram Ram) ExecuteTest(TestDefinition test, ITracer? tracer = null)
+    private static (bool Passed, int Operations, State State, Ram Ram, Exception? exception) ExecuteTest(TestDefinition test, ITracer? tracer = null)
     {
         var ram = new Ram(Model.Spectrum48K);
 
@@ -161,9 +168,9 @@ public class TestRunner
 
             } while (state.ProgramCounter != test.Final.PC);
         }
-        catch
+        catch (Exception exception)
         {
-            return (false, operations, state, ram);
+            return (false, operations, state, ram, exception);
         }
 
         var pass = state.ProgramCounter == test.Final.PC
@@ -181,10 +188,10 @@ public class TestRunner
             pass = pass && ram[pair[0]] == pair[1];
         }
 
-        return (pass, operations, state, ram);
+        return (pass, operations, state, ram, null);
     }
 
-    private void DumpTest(TestDefinition test)
+    private static void DumpTest(TestDefinition test)
     {
         var tracer = new FormattingTracer();
 

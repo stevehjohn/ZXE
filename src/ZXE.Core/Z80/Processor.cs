@@ -480,7 +480,7 @@ public class Processor
 
         instructions[0xC6] = new Instruction("ADD A, n", 2, i => ADD_R_n(i, Register.A), 7);
 
-        instructions[0xC7] = new Instruction("RST", 1, RST, 11);
+        instructions[0xC7] = new Instruction("RST 0x00", 1, RST, 11);
     }
 
     private static bool NOP()
@@ -1644,7 +1644,7 @@ public class Processor
         // TODO: If condition true, 7 more cycles required.
         if (! input.State.Flags.Zero)
         {
-            CALL_nn(input);
+            return CALL_nn(input);
         }
 
         // Flags unaffected
@@ -1664,6 +1664,7 @@ public class Processor
 
             input.Ram[input.State.StackPointer] = (byte) ((input.State.ProgramCounter + 3) & 0x00FF);
 
+            // TODO: Remove -3 and return false
             input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
 
             // Flags unaffected

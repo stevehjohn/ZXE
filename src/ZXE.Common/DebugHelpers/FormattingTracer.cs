@@ -64,6 +64,11 @@ public class FormattingTracer : ITracer
     {
         var character = operand[0];
 
+        if (character == '0')
+        {
+            return $"&Magenta;{operand}";
+        }
+
         if (character == '(')
         {
             character = operand[1];
