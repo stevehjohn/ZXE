@@ -1,4 +1,5 @@
 ﻿using ZXE.Core.Infrastructure;
+using ZXE.Core.Z80;
 
 namespace ZXE.Core.System;
 
@@ -28,5 +29,15 @@ public class Ram
     public void Load(byte[] data, int destination)
     {
         Array.Copy(data, 0, _ram, destination, data.Length);
+    }
+
+    public byte[] GetData(int start, int length)
+    {
+        if (start + length - 1 < Size)
+        {
+            return this[start..(start + length)];
+        }
+
+        return Array.Empty<byte>();
     }
 }

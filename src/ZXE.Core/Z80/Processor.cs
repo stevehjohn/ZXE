@@ -36,7 +36,7 @@ public class Processor
     {
         var instruction = _instructions[ram[_state.ProgramCounter]];
 
-        var data = ram[_state.ProgramCounter..(_state.ProgramCounter + instruction.Length)];
+        var data = ram.GetData(_state.ProgramCounter, instruction.Length);
 
         if (_tracer != null)
         {
