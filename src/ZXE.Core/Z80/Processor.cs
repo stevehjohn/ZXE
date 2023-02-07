@@ -761,7 +761,7 @@ public class Processor
             adjust++;
         }
 
-        if (input.State.Registers[Register.A] > 0x99)
+        if (input.State.Flags.Carry || input.State.Registers[Register.A] > 0x99)
         {
             adjust += 2;
 
