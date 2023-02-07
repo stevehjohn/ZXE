@@ -450,6 +450,24 @@ public class Processor
         instructions[0xB6] = new Instruction("OR A, (HL)", 1, i => OR_R_addr_RR(i, Register.A, Register.HL), 7);
 
         instructions[0xB7] = new Instruction("OR A, A", 1, i => OR_R_R(i, Register.A, Register.A), 4);
+
+        instructions[0xB8] = new Instruction("CP A, B", 1, i => CP_R_R(i, Register.A, Register.B), 4);
+
+        instructions[0xB9] = new Instruction("CP A, C", 1, i => CP_R_R(i, Register.A, Register.C), 4);
+
+        instructions[0xBA] = new Instruction("CP A, D", 1, i => CP_R_R(i, Register.A, Register.D), 4);
+
+        instructions[0xBB] = new Instruction("CP A, E", 1, i => CP_R_R(i, Register.A, Register.E), 4);
+
+        instructions[0xBC] = new Instruction("CP A, H", 1, i => CP_R_R(i, Register.A, Register.H), 4);
+
+        instructions[0xBD] = new Instruction("CP A, L", 1, i => CP_R_R(i, Register.A, Register.L), 4);
+
+        instructions[0xBE] = new Instruction("CP A, (HL)", 1, i => CP_R_addr_RR(i, Register.A, Register.HL), 7);
+
+        instructions[0xBF] = new Instruction("CP A, A", 1, i => CP_R_R(i, Register.A, Register.A), 4);
+
+        instructions[0xC0] = new Instruction("RET NZ", 1, RET_NZ, 5);
     }
 
     private static void NOP()
@@ -1409,5 +1427,57 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+    }
+
+    private static void CP_R_R(Input input, Register left, Register right)
+    {
+        unchecked
+        {
+            var leftValue = input.State.Registers[left];
+
+            var rightValue = input.State.Registers[right];
+
+            var difference = leftValue - rightValue;
+
+            // Flags
+            input.State.Flags.Carry = rightValue > leftValue;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = false; // TODO: Can CP overflow?
+            input.State.Flags.X1 = (rightValue & 0x08) > 0;
+            input.State.Flags.HalfCarry = (leftValue & 0x0F) < (rightValue & 0x0F);
+            input.State.Flags.X2 = (rightValue & 0x20) > 0;
+            input.State.Flags.Zero = difference == 0;
+            input.State.Flags.Sign = (byte) difference > 0x7F;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+    }
+
+    private static void CP_R_addr_RR(Input input, Register left, Register right)
+    {
+        unchecked
+        {
+            var leftValue = input.State.Registers[left];
+
+            var rightValue = input.Ram[input.State.Registers.ReadPair(right)];
+
+            var difference = leftValue - rightValue;
+
+            // Flags
+            input.State.Flags.Carry = rightValue > leftValue;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = false; // TODO: Can CP overflow?
+            input.State.Flags.X1 = (rightValue & 0x08) > 0;
+            input.State.Flags.HalfCarry = (leftValue & 0x0F) < (rightValue & 0x0F);
+            input.State.Flags.X2 = (rightValue & 0x20) > 0;
+            input.State.Flags.Zero = difference == 0;
+            input.State.Flags.Sign = (byte) difference > 0x7F;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+    }
+
+    private static void RET_NZ(Input input)
+    {
     }
 }

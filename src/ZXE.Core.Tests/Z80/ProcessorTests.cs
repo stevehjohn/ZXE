@@ -881,4 +881,47 @@ public class ProcessorTests
 
         Assert.Equal(0b00111100, _state.Registers[Register.A]);
     }
+
+    [Fact]
+    public void CP_R_R()
+    {
+        // CP A, B
+        _ram[0] = 0xB8;
+        
+        _state.Registers[Register.A] = 0b00110000;
+        _state.Registers[Register.B] = 0b00001100;
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.False(_state.Flags.Carry);
+        Assert.True(_state.Flags.AddSubtract);
+        Assert.False(_state.Flags.ParityOverflow);
+        Assert.True(_state.Flags.X1);
+        Assert.True(_state.Flags.HalfCarry);
+        Assert.False(_state.Flags.X2);
+        Assert.False(_state.Flags.Zero);
+        Assert.False(_state.Flags.Sign);
+    }
+
+    [Fact]
+    public void CP_R_addr_RR()
+    {
+        // CP A, (HL)
+        _ram[0] = 0xBE;
+        _ram[0x1234] = 0b00001100;
+
+        _state.Registers[Register.A] = 0b00110000;
+        _state.Registers.WritePair(Register.HL, 0x1234);
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.False(_state.Flags.Carry);
+        Assert.True(_state.Flags.AddSubtract);
+        Assert.False(_state.Flags.ParityOverflow);
+        Assert.True(_state.Flags.X1);
+        Assert.True(_state.Flags.HalfCarry);
+        Assert.False(_state.Flags.X2);
+        Assert.False(_state.Flags.Zero);
+        Assert.False(_state.Flags.Sign);
+    }
 }

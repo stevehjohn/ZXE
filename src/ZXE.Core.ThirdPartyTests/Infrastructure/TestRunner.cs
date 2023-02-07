@@ -40,7 +40,7 @@ public class TestRunner
 
             foreach (var test in tests)
             {
-                if (test.Name.StartsWith("B8", StringComparison.InvariantCultureIgnoreCase))
+                if (test.Name.StartsWith("C0", StringComparison.InvariantCultureIgnoreCase))
                 {
                     goto done;
                 }
