@@ -85,7 +85,7 @@ public class FormattingTracer : ITracer
 
         builder.Append($"    &Cyan;SP&White;: &Yellow;0x{state.StackPointer:X4}");
 
-        builder.Append($"    &Cyan;Flags&White;: &Green;{state.Flags.GetFlags()}");
+        builder.Append($"    &Cyan;Flags&White;: &Magenta;{state.Flags.GetFlags()}");
 
         var parts = mnemonic.Split(' ', StringSplitOptions.TrimEntries).Select(p => p.Replace(",", string.Empty)).ToArray();
 

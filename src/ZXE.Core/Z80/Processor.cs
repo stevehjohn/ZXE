@@ -649,7 +649,6 @@ public class Processor
             // TODO: If B != 0, 5 more cycles... how to do this?
             DEC_R(input, Register.B);
 
-            // TODO: Compensate for twice-incremented program counter?
             if (! input.State.Flags.Zero)
             {
                 input.State.ProgramCounter += (sbyte) input.Data[1];
@@ -689,8 +688,9 @@ public class Processor
     {
         unchecked
         {
-            // TODO: Compensate for twice-incremented program counter?
             input.State.ProgramCounter += (sbyte) input.Data[1];
+
+            input.State.ProgramCounter = (ushort) input.State.ProgramCounter;
         }
     }
 
