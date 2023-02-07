@@ -70,7 +70,7 @@ public class TestRunner
 
         FormattedConsole.WriteLine($"\n  &Cyan;Tests Run&White;: &Yellow;{total:N0}    &Cyan;Tests Passed&White;: &Green;{passed:N0}    ");
 
-        FormattedConsole.WriteLine($"\n  &Cyan;Tests Failed&White;: &Red;{total - passed:N0}    &Cyan;Percent Failed&White;: &Yellow;{((float) total - passed) / total * 100:F2}%");
+        FormattedConsole.WriteLine($"\n  &Cyan;Tests Failed&White;: {(total == passed ? "&Green;" : "&Red;")}{total - passed:N0}    &Cyan;Percent Failed&White;: &Yellow;{((float) total - passed) / total * 100:F2}%");
 
         FormattedConsole.WriteLine(string.Empty);
 
@@ -105,7 +105,7 @@ public class TestRunner
         return result.Passed;
     }
 
-    private static (bool Passed, int Operations, State State) ExecuteTest(TestDefinition test, ITracer? tracer = null)
+    private static (bool Passed, int Operations, State State, Ram Ram) ExecuteTest(TestDefinition test, ITracer? tracer = null)
     {
         var ram = new Ram(Model.Spectrum48K);
 
@@ -163,7 +163,7 @@ public class TestRunner
         }
         catch
         {
-            return (false, operations, state);
+            return (false, operations, state, ram);
         }
 
         var pass = state.ProgramCounter == test.Final.PC
@@ -181,7 +181,7 @@ public class TestRunner
             pass = pass && ram[pair[0]] == pair[1];
         }
 
-        return (pass, operations, state);
+        return (pass, operations, state, ram);
     }
 
     private void DumpTest(TestDefinition test)
@@ -208,6 +208,43 @@ public class TestRunner
         FormattedConsole.WriteLine($"\n    &Cyan;F &White;: &Green;{expectedFlags.GetFlags()}      {(test.Final.F == result.State.Registers[Register.F] ? "&Green;" : "&Red;")}{result.State.Flags.GetFlags()}");
 
         FormattedConsole.WriteLine(string.Empty);
+
+        FormattedConsole.Write("    &Cyan;RAM differences&White;: ");
+
+        var ramDifference = false;
+
+        foreach (var entry in test.Final.Ram)
+        {
+            if (result.Ram[entry[0]] != entry[1])
+            {
+                ramDifference = true;
+            }
+        }
+
+        if (! ramDifference)
+        {
+            FormattedConsole.WriteLine("&Green; NONE\n");
+        }
+        else
+        {
+            FormattedConsole.WriteLine("\n");
+            
+            FormattedConsole.WriteLine("&Cyan;              Expected    Actual");
+
+            foreach (var entry in test.Final.Ram)
+            {
+                if (result.Ram[entry[0]] != entry[1])
+                {
+                    FormattedConsole.Write($"      &Cyan;0x{entry[0]:X4}&White;:");
+
+                    FormattedConsole.Write($"     &Green;0x{entry[1]:X2}");
+
+                    FormattedConsole.WriteLine($"      &Red;0x{entry[1]:X2}");
+                }
+            }
+
+            FormattedConsole.WriteLine(string.Empty);
+        }
 
         var trace = tracer.GetTrace();
 

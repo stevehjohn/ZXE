@@ -32,7 +32,7 @@ public class Processor
         _tracer = tracer;
     }
 
-    public string ProcessInstruction(Ram ram)
+    public void ProcessInstruction(Ram ram)
     {
         var instruction = _instructions[ram[_state.ProgramCounter]];
 
@@ -56,8 +56,6 @@ public class Processor
         {
             _tracer.TraceAfter(instruction, data, _state, ram);
         }
-
-        return string.Empty;
     }
 
     internal void SetState(State state)
@@ -476,6 +474,8 @@ public class Processor
         instructions[0xC3] = new Instruction("JP nn", 3, JP_nn, 10);
 
         instructions[0xC4] = new Instruction("CALL NZ, nn", 3, CALL_NZ_nn, 10);
+
+        instructions[0xC5] = new Instruction("PUSH BC", 1, i => PUSH_RR(i, Register.BC), 11);
     }
 
     private static void NOP()
@@ -1525,18 +1525,37 @@ public class Processor
         {
             CALL_nn(input);
         }
+
+        // Flags unaffected
     }
 
     private static void CALL_nn(Input input)
     {
         input.State.StackPointer--;
 
-        input.Ram[input.State.StackPointer] = (byte) ((input.State.ProgramCounter & 0xFF00) >> 8);
+        input.Ram[input.State.StackPointer] = (byte) (((input.State.ProgramCounter + 3) & 0xFF00) >> 8);
 
         input.State.StackPointer--;
 
-        input.Ram[input.State.StackPointer] = (byte) (input.State.ProgramCounter & 0x00FF);
+        input.Ram[input.State.StackPointer] = (byte) ((input.State.ProgramCounter + 3) & 0x00FF);
 
         input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
+
+        // Flags unaffected
+    }
+
+    private static void PUSH_RR(Input input, Register register)
+    {
+        input.State.StackPointer--;
+
+        var data = input.State.Registers.ReadPair(register) - 3;
+
+        input.Ram[input.State.StackPointer] = (byte) (data & 0xFF00 >> 8);
+
+        input.State.StackPointer--;
+
+        input.Ram[input.State.StackPointer] = (byte) (data & 0x00FF);
+
+        // Flags unaffected
     }
 }
