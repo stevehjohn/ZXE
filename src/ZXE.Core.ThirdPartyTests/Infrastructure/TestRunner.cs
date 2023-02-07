@@ -239,7 +239,7 @@ public class TestRunner
 
                     FormattedConsole.Write($"     &Green;0x{entry[1]:X2}");
 
-                    FormattedConsole.WriteLine($"      &Red;0x{entry[1]:X2}");
+                    FormattedConsole.WriteLine($"      &Red;0x{result.Ram[entry[0]]:X2}");
                 }
             }
 
