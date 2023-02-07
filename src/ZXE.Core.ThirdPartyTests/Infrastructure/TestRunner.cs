@@ -57,7 +57,7 @@ public class TestRunner
                 }
                 else if (dumpOnFail)
                 {
-                    //DumpTest(test);
+                    DumpTest(test);
                 }
             }
         }
