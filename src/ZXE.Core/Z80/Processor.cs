@@ -1373,6 +1373,8 @@ public class Processor
         {
             var result = input.State.Registers[destination] | input.State.Registers[source];
 
+            input.State.Registers[Register.A] = (byte) result;
+
             // Flags
             input.State.Flags.Carry = false;
             input.State.Flags.AddSubtract = false;
