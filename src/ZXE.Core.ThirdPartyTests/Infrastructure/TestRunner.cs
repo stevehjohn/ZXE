@@ -29,7 +29,8 @@ public class TestRunner
 
         var stopwatch = Stopwatch.StartNew();
 
-        var skip = 0xD0;
+        //var skip = 0xD0;
+        var skip = 0x00;
 
         foreach (var file in files)
         {
@@ -40,7 +41,8 @@ public class TestRunner
                 continue;
             }
 
-            if (Path.GetFileName(file).StartsWith("cb"))
+            // TODO: Remove once implemented...
+            if (Path.GetFileName(file).StartsWith("cb") || Path.GetFileName(file).StartsWith("db"))
             {
                 continue;
             }

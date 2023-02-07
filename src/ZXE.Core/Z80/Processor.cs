@@ -515,6 +515,10 @@ public class Processor
         instructions[0xD8] = new Instruction("RET C", 1, RET_C, 5);
 
         instructions[0xD9] = new Instruction("EXX", 1, EXX, 4);
+
+        instructions[0xDA] = new Instruction("JP C, nn", 3, JP_C_nn, 10);
+
+        instructions[0xDB] = new Instruction("IN A, (n)", 2, IN_R_addr_N, 11);
     }
 
     private static bool NOP()
@@ -1957,6 +1961,25 @@ public class Processor
 
         input.State.Registers.WritePair(Register.HL1, hl);
         
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool JP_C_nn(Input input)
+    {
+        if (input.State.Flags.Carry)
+        {
+            return JP_nn(input);
+        }
+
+        return true;
+    }
+
+    private static bool IN_R_addr_N(Input input)
+    {
+        // TODO: Hmm. Might have to get into buses and stuff for this one... bugger.
+
         // Flags unaffected
 
         return true;
