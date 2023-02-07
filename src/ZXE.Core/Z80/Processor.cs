@@ -478,6 +478,8 @@ public class Processor
         instructions[0xC5] = new Instruction("PUSH BC", 1, i => PUSH_RR(i, Register.BC), 11);
 
         instructions[0xC6] = new Instruction("ADD A, n", 2, i => ADD_R_n(i, Register.A), 7);
+
+        instructions[0xC7] = new Instruction("RST", 1, RST, 11);
     }
 
     private static void NOP()
@@ -1533,52 +1535,65 @@ public class Processor
 
     private static void CALL_nn(Input input)
     {
-        input.State.StackPointer--;
+        unchecked
+        {
+            input.State.StackPointer--;
 
-        input.Ram[input.State.StackPointer] = (byte) (((input.State.ProgramCounter + 3) & 0xFF00) >> 8);
+            input.Ram[input.State.StackPointer] = (byte) (((input.State.ProgramCounter + 3) & 0xFF00) >> 8);
 
-        input.State.StackPointer--;
+            input.State.StackPointer--;
 
-        input.Ram[input.State.StackPointer] = (byte) ((input.State.ProgramCounter + 3) & 0x00FF);
+            input.Ram[input.State.StackPointer] = (byte) ((input.State.ProgramCounter + 3) & 0x00FF);
 
-        input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
+            input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
 
-        // Flags unaffected
+            // Flags unaffected
+        }
     }
 
     private static void PUSH_RR(Input input, Register register)
     {
-        input.State.StackPointer--;
+        unchecked
+        {
+            input.State.StackPointer--;
 
-        var data = input.State.Registers.ReadPair(register);
+            var data = input.State.Registers.ReadPair(register);
 
-        input.Ram[input.State.StackPointer] = (byte) ((data & 0xFF00) >> 8);
+            input.Ram[input.State.StackPointer] = (byte) ((data & 0xFF00) >> 8);
 
-        input.State.StackPointer--;
+            input.State.StackPointer--;
 
-        input.Ram[input.State.StackPointer] = (byte) (data & 0x00FF);
+            input.Ram[input.State.StackPointer] = (byte) (data & 0x00FF);
 
-        // Flags unaffected
+            // Flags unaffected
+        }
     }
 
     private static void ADD_R_n(Input input, Register register)
     {
-        var original = input.State.Registers[register];
+        unchecked
+        {
+            var original = input.State.Registers[register];
 
-        var result = input.State.Registers[register] + input.Data[1];
+            var result = input.State.Registers[register] + input.Data[1];
 
-        input.State.Registers[Register.A] = (byte) result;
+            input.State.Registers[Register.A] = (byte) result;
 
-        // Flags
-        input.State.Flags.Carry = result > 0xFF;
-        input.State.Flags.AddSubtract = false;
-        input.State.Flags.ParityOverflow = false; // TODO
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = (original & 0x0F) < (result & 0x10);
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        input.State.Flags.Zero = result == 0;
-        input.State.Flags.Sign = (sbyte) result < 0;
+            // Flags
+            input.State.Flags.Carry = result > 0xFF;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (original & 0x0F) < (result & 0x10);
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+    }
+
+    private static void RST(Input input)
+    {
     }
 }
