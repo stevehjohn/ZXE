@@ -38,6 +38,24 @@ public class Ram
             return this[start..(start + length)];
         }
 
-        return Array.Empty<byte>();
+        var bytes = new List<byte>();
+
+        var position = start;
+
+        while (length > 0)
+        {
+            bytes.Add(_ram[position]);
+
+            length--;
+
+            position++;
+
+            if (position >= Size)
+            {
+                position = 0;
+            }
+        }
+
+        return bytes.ToArray();
     }
 }

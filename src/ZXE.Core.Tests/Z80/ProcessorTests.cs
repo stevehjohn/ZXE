@@ -38,12 +38,6 @@ public class ProcessorTests
         _state.ProgramCounter = 0xFFFD;
 
         _processor.ProcessInstruction(_ram);
-
-        _ram[0xFFFE] = 0x01;
-
-        _state.ProgramCounter = 0xFFFE;
-
-        Assert.Throws<ArgumentOutOfRangeException>(() => _processor.ProcessInstruction(_ram));
     }
 
     [Fact]
