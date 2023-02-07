@@ -482,26 +482,32 @@ public class Processor
         instructions[0xC7] = new Instruction("RST", 1, RST, 11);
     }
 
-    private static void NOP()
+    private static bool NOP()
     {
         // Flags unaffected
+
+        return true;
     }
 
-    private static void LD_RR_nn(Input input, Register register)
+    private static bool LD_RR_nn(Input input, Register register)
     {
         input.State.Registers.LoadFromRam(register, input.Data[1..3]);
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void LD_addr_RR_R(Input input, Register target, Register source)
+    private static bool LD_addr_RR_R(Input input, Register target, Register source)
     {
         input.Ram[input.State.Registers.ReadPair(target)] = input.State.Registers[source];
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void INC_RR(Input input, Register register)
+    private static bool INC_RR(Input input, Register register)
     {
         unchecked
         {
@@ -509,9 +515,11 @@ public class Processor
         }
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void INC_R(Input input, Register register)
+    private static bool INC_R(Input input, Register register)
     {
         unchecked
         {
@@ -533,9 +541,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void DEC_R(Input input, Register register)
+    private static bool DEC_R(Input input, Register register)
     {
         unchecked
         {
@@ -557,16 +567,20 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void LD_R_n(Input input, Register register)
+    private static bool LD_R_n(Input input, Register register)
     {
         input.State.Registers[register] = input.Data[1];
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void RLCA(Input input)
+    private static bool RLCA(Input input)
     {
         unchecked
         {
@@ -588,23 +602,29 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void LD_addr_nn_R(Input input, Register register)
+    private static bool LD_addr_nn_R(Input input, Register register)
     {
         input.Ram[(input.Data[2] << 8) | input.Data[1]] = input.State.Registers[register];
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void LD_R_addr_nn(Input input, Register register)
+    private static bool LD_R_addr_nn(Input input, Register register)
     {
         input.State.Registers[register] = input.Ram[(input.Data[2] << 8) | input.Data[1]];
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void EX_RR_RaRa(Input input, Register register1, Register register2)
+    private static bool EX_RR_RaRa(Input input, Register register1, Register register2)
     {
         var alternate1 = Enum.Parse<Register>($"{register1}1");
 
@@ -615,9 +635,11 @@ public class Processor
         (input.State.Registers[register2], input.State.Registers[alternate2]) = (input.State.Registers[alternate2], input.State.Registers[register2]);
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void ADD_RR_RR(Input input, Register target, Register operand)
+    private static bool ADD_RR_RR(Input input, Register target, Register operand)
     {
         unchecked
         {
@@ -639,16 +661,20 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    public static void LD_R_addr_RR(Input input, Register target, Register source)
+    public static bool LD_R_addr_RR(Input input, Register target, Register source)
     {
         input.State.Registers[target] = input.Ram[input.State.Registers.ReadPair(source)];
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void DEC_RR(Input input, Register register)
+    private static bool DEC_RR(Input input, Register register)
     {
         var result = input.State.Registers.ReadPair(register);
 
@@ -657,9 +683,11 @@ public class Processor
         input.State.Registers.WritePair(register, result);
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void RRCA(Input input)
+    private static bool RRCA(Input input)
     {
         unchecked
         {
@@ -686,9 +714,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void DJNZ_e(Input input)
+    private static bool DJNZ_e(Input input)
     {
         unchecked
         {
@@ -702,9 +732,11 @@ public class Processor
 
             // Flags unaffected
         }
+
+        return true;
     }
 
-    private static void RLA(Input input)
+    private static bool RLA(Input input)
     {
         unchecked
         {
@@ -728,9 +760,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    public static void JR_e(Input input)
+    public static bool JR_e(Input input)
     {
         unchecked
         {
@@ -738,9 +772,11 @@ public class Processor
 
             input.State.ProgramCounter = (ushort) input.State.ProgramCounter;
         }
+
+        return true;
     }
 
-    private static void RRA(Input input)
+    private static bool RRA(Input input)
     {
         unchecked
         {
@@ -764,9 +800,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void JR_NZ_e(Input input)
+    private static bool JR_NZ_e(Input input)
     {
         if (! input.State.Flags.Zero)
         {
@@ -774,9 +812,11 @@ public class Processor
         }
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void LD_addr_nn_RR(Input input, Register register)
+    private static bool LD_addr_nn_RR(Input input, Register register)
     {
         unchecked
         {
@@ -789,10 +829,12 @@ public class Processor
 
             // Flags unaffected
         }
+
+        return true;
     }
 
     // TODO: Lol, good luck adding a unit test for this one!
-    private static void DAA(Input input)
+    private static bool DAA(Input input)
     {
         var adjust = 0;
 
@@ -851,9 +893,11 @@ public class Processor
         input.State.Flags.Sign = (input.State.Registers[Register.A] & 0x80) > 0;
 
         input.State.Registers[Register.F] = input.State.Flags.ToByte();
+
+        return true;
     }
 
-    private static void JR_Z_e(Input input)
+    private static bool JR_Z_e(Input input)
     {
         if (input.State.Flags.Zero)
         {
@@ -861,9 +905,11 @@ public class Processor
         }
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void LD_RR_addr_nn(Input input, Register register)
+    private static bool LD_RR_addr_nn(Input input, Register register)
     {
         unchecked
         {
@@ -876,9 +922,11 @@ public class Processor
 
             // Flags unaffected
         }
+
+        return true;
     }
 
-    private static void CPL(Input input)
+    private static bool CPL(Input input)
     {
         unchecked
         {
@@ -898,9 +946,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void JR_NC_e(Input input)
+    private static bool JR_NC_e(Input input)
     {
         if (! input.State.Flags.Carry)
         {
@@ -908,23 +958,29 @@ public class Processor
         }
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void LD_SP_nn(Input input)
+    private static bool LD_SP_nn(Input input)
     {
         input.State.StackPointer = input.Data[2] << 8 | input.Data[1];
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void INC_SP(Input input)
+    private static bool INC_SP(Input input)
     {
         input.State.StackPointer++;
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void INC_addr_RR(Input input, Register register)
+    private static bool INC_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -946,9 +1002,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void DEC_addr_RR(Input input, Register register)
+    private static bool DEC_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -970,16 +1028,20 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void LD_addr_RR_n(Input input, Register register)
+    private static bool LD_addr_RR_n(Input input, Register register)
     {
         input.Ram[input.State.Registers.ReadPair(register)] = input.Data[1];
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void SCF(Input input)
+    private static bool SCF(Input input)
     {
         input.State.Flags.Carry = true;
 
@@ -995,9 +1057,11 @@ public class Processor
         input.State.Flags.X2 = (xFlags & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+
+        return true;
     }
 
-    private static void JR_C_e(Input input)
+    private static bool JR_C_e(Input input)
     {
         if (input.State.Flags.Carry)
         {
@@ -1005,9 +1069,11 @@ public class Processor
         }
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void ADD_RR_SP(Input input, Register register)
+    private static bool ADD_RR_SP(Input input, Register register)
     {
         unchecked
         {
@@ -1029,16 +1095,20 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void DEC_SP(Input input)
+    private static bool DEC_SP(Input input)
     {
         input.State.StackPointer--;
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void CCF(Input input)
+    private static bool CCF(Input input)
     {
         var value = input.State.Flags.Carry;
 
@@ -1056,23 +1126,29 @@ public class Processor
         input.State.Flags.X2 = (xFlags & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+
+        return true;
     }
 
-    private static void LD_R_R(Input input, Register destination, Register source)
+    private static bool LD_R_R(Input input, Register destination, Register source)
     {
         input.State.Registers[destination] = input.State.Registers[source];
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void HALT(Input input)
+    private static bool HALT(Input input)
     {
         input.State.Halted = true;
 
         // Flags unaffected
+
+        return true;
     }
 
-    public static void ADD_R_R(Input input, Register destination, Register source)
+    public static bool ADD_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1096,9 +1172,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void ADD_R_addr_RR(Input input, Register destination, Register source)
+    private static bool ADD_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1122,9 +1200,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void ADC_R_R(Input input, Register destination, Register source)
+    private static bool ADC_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1150,9 +1230,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void ADC_R_addr_RR(Input input, Register destination, Register source)
+    private static bool ADC_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1178,9 +1260,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void SUB_R_R(Input input, Register destination, Register source)
+    private static bool SUB_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1204,9 +1288,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void SUB_R_addr_RR(Input input, Register destination, Register source)
+    private static bool SUB_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1230,9 +1316,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void SBC_R_R(Input input, Register destination, Register source)
+    private static bool SBC_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1258,9 +1346,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void SBC_R_addr_RR(Input input, Register destination, Register source)
+    private static bool SBC_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1286,9 +1376,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void AND_R_R(Input input, Register destination, Register source)
+    private static bool AND_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1308,9 +1400,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void AND_R_addr_RR(Input input, Register destination, Register source)
+    private static bool AND_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1330,9 +1424,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void XOR_R_R(Input input, Register destination, Register source)
+    private static bool XOR_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1352,9 +1448,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void XOR_R_addr_RR(Input input, Register destination, Register source)
+    private static bool XOR_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1374,9 +1472,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void OR_R_R(Input input, Register destination, Register source)
+    private static bool OR_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1396,9 +1496,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void OR_R_addr_RR(Input input, Register destination, Register source)
+    private static bool OR_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1418,9 +1520,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void CP_R_R(Input input, Register left, Register right)
+    private static bool CP_R_R(Input input, Register left, Register right)
     {
         unchecked
         {
@@ -1442,9 +1546,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void CP_R_addr_RR(Input input, Register left, Register right)
+    private static bool CP_R_addr_RR(Input input, Register left, Register right)
     {
         unchecked
         {
@@ -1466,9 +1572,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void RET_NZ(Input input)
+    private static bool RET_NZ(Input input)
     {
         // TODO: If condition true, 6 more cycles required.
         if (! input.State.Flags.Zero)
@@ -1489,9 +1597,11 @@ public class Processor
         }
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void POP_RR(Input input)
+    private static bool POP_RR(Input input)
     {
         input.State.Registers[Register.C] = input.Ram[input.State.StackPointer];
 
@@ -1502,9 +1612,11 @@ public class Processor
         input.State.StackPointer++;
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void JP_NZ_nn(Input input)
+    private static bool JP_NZ_nn(Input input)
     {
         if (! input.State.Flags.Zero)
         {
@@ -1512,17 +1624,21 @@ public class Processor
         }
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void JP_nn(Input input)
+    private static bool JP_nn(Input input)
     {
         // TODO: Don't like this - 3 thing... maybe return true/false to indicate whether PC should be adjusted by caller...
         input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void CALL_NZ_nn(Input input)
+    private static bool CALL_NZ_nn(Input input)
     {
         // TODO: If condition true, 7 more cycles required.
         if (! input.State.Flags.Zero)
@@ -1531,9 +1647,11 @@ public class Processor
         }
 
         // Flags unaffected
+
+        return true;
     }
 
-    private static void CALL_nn(Input input)
+    private static bool CALL_nn(Input input)
     {
         unchecked
         {
@@ -1549,9 +1667,11 @@ public class Processor
 
             // Flags unaffected
         }
+
+        return true;
     }
 
-    private static void PUSH_RR(Input input, Register register)
+    private static bool PUSH_RR(Input input, Register register)
     {
         unchecked
         {
@@ -1567,9 +1687,11 @@ public class Processor
 
             // Flags unaffected
         }
+
+        return true;
     }
 
-    private static void ADD_R_n(Input input, Register register)
+    private static bool ADD_R_n(Input input, Register register)
     {
         unchecked
         {
@@ -1591,9 +1713,11 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
     }
 
-    private static void RST(Input input)
+    private static bool RST(Input input)
     {
         var pc = input.State.ProgramCounter;
 
@@ -1606,5 +1730,7 @@ public class Processor
         input.Ram[input.State.StackPointer] = (byte) (pc & 0x00FF);
 
         input.State.ProgramCounter = 0;
+
+        return true;
     }
 }

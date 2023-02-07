@@ -8,11 +8,11 @@ public class Instruction
 
     public byte Length { get; }
 
-    public Action<Input> Action { get; }
+    public Func<Input, bool> Action { get; }
 
     public int ClockCycles { get; }
 
-    public Instruction(string mnemonic,  byte length, Action<Input> action, int clockCycles, string? helperMnemonic = null)
+    public Instruction(string mnemonic,  byte length, Func<Input, bool> action, int clockCycles, string? helperMnemonic = null)
     {
         Mnemonic = mnemonic;
 
