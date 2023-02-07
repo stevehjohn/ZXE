@@ -481,6 +481,8 @@ public class Processor
         instructions[0xC6] = new Instruction("ADD A, n", 2, i => ADD_R_n(i, Register.A), 7);
 
         instructions[0xC7] = new Instruction("RST 0x00", 1, RST, 11);
+
+        instructions[0xC8] = new Instruction("RET Z", 1, RET_Z, 11);
     }
 
     private static bool NOP()
@@ -1582,19 +1584,7 @@ public class Processor
         // TODO: If condition true, 6 more cycles required.
         if (! input.State.Flags.Zero)
         {
-            var spContent = input.Ram[input.State.StackPointer];
-
-            input.State.ProgramCounter = (input.State.ProgramCounter & 0xFF00) | spContent;
-
-            input.State.StackPointer++;
-
-            spContent = input.Ram[input.State.StackPointer];
-
-            input.State.ProgramCounter = (input.State.ProgramCounter & 0x00FF) | spContent << 8;
-
-            input.State.StackPointer++;
-
-            input.State.ProgramCounter--;
+            return RET(input);
         }
 
         // Flags unaffected
@@ -1734,5 +1724,34 @@ public class Processor
         input.State.ProgramCounter = 0;
 
         return false;
+    }
+
+    private static bool RET_Z(Input input)
+    {
+        if (input.State.Flags.Zero)
+        {
+            return RET(input);
+        }
+
+        return true;
+    }
+
+    private static bool RET(Input input)
+    {
+        var spContent = input.Ram[input.State.StackPointer];
+
+        input.State.ProgramCounter = (input.State.ProgramCounter & 0xFF00) | spContent;
+
+        input.State.StackPointer++;
+
+        spContent = input.Ram[input.State.StackPointer];
+
+        input.State.ProgramCounter = (input.State.ProgramCounter & 0x00FF) | spContent << 8;
+
+        input.State.StackPointer++;
+
+        input.State.ProgramCounter--;
+
+        return true;
     }
 }
