@@ -165,7 +165,7 @@ public class Processor
 
         instructions[0x28] = new Instruction("JR Z, e", 2, JR_Z_e, 7);
 
-        instructions[0x29] = new Instruction("ADD HL, HL", 2, i => ADD_RR_RR(i, Register.HL, Register.HL), 11);
+        instructions[0x29] = new Instruction("ADD HL, HL", 1, i => ADD_RR_RR(i, Register.HL, Register.HL), 11);
 
         instructions[0x2A] = new Instruction("LD HL, (nn)", 3, i => LD_RR_addr_nn(i, Register.HL), 16);
 
@@ -223,7 +223,7 @@ public class Processor
 
         instructions[0x45] = new Instruction("LD B, L", 1, i => LD_R_R(i, Register.B, Register.L), 4);
         
-        instructions[0x46] = new Instruction("LD B, (HL)", 1, i => LD_R_addr_nn(i, Register.B), 7);
+        instructions[0x46] = new Instruction("LD B, (HL)", 1, i => LD_R_addr_RR(i, Register.B, Register.HL), 7);
 
         instructions[0x47] = new Instruction("LD B, A", 1, i => LD_R_R(i, Register.B, Register.A), 4);
 
@@ -239,7 +239,7 @@ public class Processor
 
         instructions[0x4D] = new Instruction("LD C, L", 1, i => LD_R_R(i, Register.C, Register.L), 4);
         
-        instructions[0x4E] = new Instruction("LD C, (HL)", 1, i => LD_R_addr_nn(i, Register.C), 7);
+        instructions[0x4E] = new Instruction("LD C, (HL)", 1, i => LD_R_addr_RR(i, Register.C, Register.HL), 7);
 
         instructions[0x4F] = new Instruction("LD C, A", 1, i => LD_R_R(i, Register.C, Register.A), 4);
 
@@ -255,7 +255,7 @@ public class Processor
 
         instructions[0x55] = new Instruction("LD D, L", 1, i => LD_R_R(i, Register.D, Register.L), 4);
         
-        instructions[0x56] = new Instruction("LD D, (HL)", 1, i => LD_R_addr_nn(i, Register.D), 7);
+        instructions[0x56] = new Instruction("LD D, (HL)", 1, i => LD_R_addr_RR(i, Register.D, Register.HL), 7);
 
         instructions[0x57] = new Instruction("LD D, A", 1, i => LD_R_R(i, Register.D, Register.A), 4);
 
@@ -271,7 +271,7 @@ public class Processor
 
         instructions[0x5D] = new Instruction("LD E, L", 1, i => LD_R_R(i, Register.E, Register.L), 4);
         
-        instructions[0x5E] = new Instruction("LD E, (HL)", 1, i => LD_R_addr_nn(i, Register.E), 7);
+        instructions[0x5E] = new Instruction("LD E, (HL)", 1, i => LD_R_addr_RR(i, Register.E, Register.HL), 7);
 
         instructions[0x5F] = new Instruction("LD E, A", 1, i => LD_R_R(i, Register.E, Register.A), 4);
 
@@ -287,7 +287,7 @@ public class Processor
 
         instructions[0x65] = new Instruction("LD H, L", 1, i => LD_R_R(i, Register.H, Register.L), 4);
         
-        instructions[0x66] = new Instruction("LD H, (HL)", 1, i => LD_R_addr_nn(i, Register.H), 7);
+        instructions[0x66] = new Instruction("LD H, (HL)", 1, i => LD_R_addr_RR(i, Register.H, Register.HL), 7);
 
         instructions[0x67] = new Instruction("LD H, A", 1, i => LD_R_R(i, Register.H, Register.A), 4);
 
@@ -303,7 +303,7 @@ public class Processor
 
         instructions[0x6D] = new Instruction("LD L, L", 1, i => LD_R_R(i, Register.L, Register.L), 4);
         
-        instructions[0x6E] = new Instruction("LD L, (HL)", 1, i => LD_R_addr_nn(i, Register.L), 7);
+        instructions[0x6E] = new Instruction("LD L, (HL)", 1, i => LD_R_addr_RR(i, Register.L, Register.HL), 7);
 
         instructions[0x6F] = new Instruction("LD L, A", 1, i => LD_R_R(i, Register.L, Register.A), 4);
 
@@ -335,7 +335,7 @@ public class Processor
 
         instructions[0x7D] = new Instruction("LD A, L", 1, i => LD_R_R(i, Register.A, Register.L), 4);
 
-        instructions[0x77] = new Instruction("LD A, (HL)", 1, i => LD_addr_RR_R(i, Register.HL, Register.A), 7);
+        instructions[0x77] = new Instruction("LD A, (HL)", 1, i => LD_R_addr_RR(i, Register.A, Register.HL), 7);
         
         instructions[0x7F] = new Instruction("LD A, A", 1, i => LD_R_R(i, Register.A, Register.A), 4);
 
