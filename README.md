@@ -4,7 +4,7 @@ A ZX Spectrum emulator. Mostly about just seeing if I can.
 
 ## Main TODOs
 
-- With some conditional opcodes (e.g. JP NZ, RET Z), more cycles are used if condition is met. Account for this in the timings.
+- With some conditional opcodes (e.g. CALL cc, JP cc, JR cc, RET cc), more cycles are used if condition is met. Account for this in the timings. Actually, maybe this can be handled with the condition checking being a separate function...
 
 ## Features
 

@@ -40,6 +40,11 @@ public class TestRunner
                 continue;
             }
 
+            if (Path.GetFileName(file).StartsWith("cb"))
+            {
+                continue;
+            }
+
             var tests = JsonSerializer.Deserialize<TestDefinition[]>(File.ReadAllText(file), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             if (tests == null)

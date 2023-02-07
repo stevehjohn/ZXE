@@ -487,6 +487,10 @@ public class Processor
         instructions[0xC9] = new Instruction("RET", 1, RET, 10);
 
         instructions[0xCA] = new Instruction("JP Z, nn", 3, JP_Z_nn, 10);
+
+        instructions[0xCC] = new Instruction("CALL Z, nn", 3, CALL_Z_nn, 10);
+
+        instructions[0xCD] = new Instruction("CALL nn", 3, CALL_nn, 17);
     }
 
     private static bool NOP()
@@ -1766,6 +1770,19 @@ public class Processor
         if (input.State.Flags.Zero)
         {
             JP_nn(input);
+        }
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool CALL_Z_nn(Input input)
+    {
+        // TODO: If condition true, 7 more cycles required.
+        if (input.State.Flags.Zero)
+        {
+            return CALL_nn(input);
         }
 
         // Flags unaffected
