@@ -197,6 +197,11 @@ public class TestRunner
 
         var result = ExecuteTest(test, tracer);
 
+        if (result.exception != null)
+        {
+            FormattedConsole.WriteLine($"\n    &Cyan;Exception&White;: &Red;{result.exception.GetType().Name}");
+        }
+
         FormattedConsole.WriteLine("\n&Cyan;        Expected      Actual");
 
         FormattedConsole.WriteLine($"    &Cyan;PC&White;: &Green;0x{test.Final.PC:X4}        {(test.Final.PC == result.State.ProgramCounter ? "&Green;" : "&Red;")}0x{result.State.ProgramCounter:X4}");

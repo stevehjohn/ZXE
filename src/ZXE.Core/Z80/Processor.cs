@@ -1721,7 +1721,7 @@ public class Processor
 
     private static bool RST(Input input)
     {
-        var pc = input.State.ProgramCounter;
+        var pc = input.State.ProgramCounter + 1;
 
         input.State.StackPointer--;
 
