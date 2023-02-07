@@ -499,6 +499,20 @@ public class Processor
         instructions[0xD0] = new Instruction("RET NC", 1, RET_NC, 5);
 
         instructions[0xD1] = new Instruction("POP DE", 1, i => POP_RR(i, Register.DE), 10);
+
+        instructions[0xD2] = new Instruction("JP NC, nn", 3, JP_NC_nn, 10);
+
+        instructions[0xD3] = new Instruction("OUT (n), A", 2, i => OUT_addr_n_R(i, Register.A), 11);
+
+        instructions[0xD4] = new Instruction("CALL NC, nn", 3, CALL_NC_nn, 10);
+
+        instructions[0xD5] = new Instruction("PUSH DE", 1, i => PUSH_RR(i, Register.DE), 11);
+
+        instructions[0xD6] = new Instruction("SUB A, n", 2, i => SUB_R_n(i, Register.A), 7);
+
+        instructions[0xD7] = new Instruction("RST 0x10", 1, i => RST(i, 0x10), 11);
+        
+        instructions[0xD8] = new Instruction("RET C", 1, RET_C, 5);
     }
 
     private static bool NOP()
@@ -1741,6 +1755,8 @@ public class Processor
 
         input.State.ProgramCounter = pageZeroAddress;
 
+        // Flags unaffected
+
         return false;
     }
 
@@ -1752,6 +1768,8 @@ public class Processor
 
             return RET(input);
         }
+
+        // Flags unaffected
 
         return true;
     }
@@ -1771,6 +1789,8 @@ public class Processor
         input.State.StackPointer++;
 
         input.State.ProgramCounter--;
+        
+        // Flags unaffected
 
         return true;
     }
@@ -1836,6 +1856,81 @@ public class Processor
         {
             RET(input);
         }
+        
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool JP_NC_nn(Input input)
+    {
+        if (! input.State.Flags.Carry)
+        {
+            return JP_nn(input);
+        }
+        
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool OUT_addr_n_R(Input input, Register register)
+    {
+        // TODO: Hmm. Might have to get into buses and stuff for this one... bugger.
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool CALL_NC_nn(Input input)
+    {
+        if (! input.State.Flags.Carry)
+        {
+            return CALL_nn(input);
+        }
+
+        return true;
+    }
+
+    private static bool SUB_R_n(Input input, Register register)
+    {
+        unchecked
+        {
+            var valueD = input.State.Registers[register];
+
+            var valueS = input.Data[1];
+
+            var result = valueD - valueS;
+
+            input.State.Registers[register] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = result < 0;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = result < -0x80; // TODO: Potential bug here?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) < (valueS & 0x0F);
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool RET_C(Input input)
+    {
+        if (input.State.Flags.Carry)
+        {
+            // TODO: Same old... more cycles if condition met.
+
+            return RET(input);
+        }
+
+        // Flags unaffected
 
         return true;
     }
