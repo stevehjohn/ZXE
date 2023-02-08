@@ -583,6 +583,8 @@ public class Processor
         instructions[0xFC] = new Instruction("CALL S, nn", 3, CALL_S_nn, 10);
 
         instructions[0xFE] = new Instruction("CP A, n", 2, i => CP_R_n(i, Register.A), 7);
+
+        instructions[0xFF] = new Instruction("RST 0x38", 1, i => RST(i, 0x38), 11);
     }
 
     private static bool NOP()
