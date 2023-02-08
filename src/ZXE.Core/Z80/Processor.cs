@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Infrastructure.Interfaces;
+﻿using ZXE.Core.Exceptions;
+using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
 // ReSharper disable IdentifierTypo
@@ -12,7 +13,7 @@ public class Processor
 {
     private State _state;
 
-    private readonly Instruction[] _instructions;
+    private readonly Instruction?[] _instructions;
 
     private readonly ITracer? _tracer;
 
@@ -34,7 +35,21 @@ public class Processor
 
     public void ProcessInstruction(Ram ram)
     {
-        var instruction = _instructions[ram[_state.ProgramCounter]];
+        var opcode = (int) ram[_state.ProgramCounter];
+
+        if (_state.OpcodePrefix != 0)
+        {
+            opcode = _state.OpcodePrefix << 8 | opcode;
+
+            _state.OpcodePrefix = 0;
+        }
+
+        var instruction = _instructions[opcode];
+
+        if (instruction == null)
+        {
+            throw new OpcodeNotImplementedException($"Opcode not implemented: {opcode:X6}.");
+        }
 
         var data = ram.GetData(_state.ProgramCounter, instruction.Length);
 
@@ -63,12 +78,21 @@ public class Processor
     {
         _state = state;
     }
+    
+    private bool SetOpcodePrefix(int prefix)
+    {
+        _state.OpcodePrefix = prefix;
 
-    private static Instruction[] InitialiseInstructions()
+        return true;
+    }
+
+    private Instruction[] InitialiseInstructions()
     {
         var instructions = new Dictionary<int, Instruction>();
 
-        InitialiseInstructions(instructions);
+        InitialiseBaseInstructions(instructions);
+
+        InitialiseDDInstructions(instructions);
 
         var instructionArray = new Instruction[instructions.Max(i => i.Key) + 1];
 
@@ -80,7 +104,7 @@ public class Processor
         return instructionArray;
     }
 
-    private static void InitialiseInstructions(Dictionary<int, Instruction> instructions)
+    private void InitialiseBaseInstructions(Dictionary<int, Instruction> instructions)
     {
         instructions[0x00] = new Instruction("NOP", 1, _ => NOP(), 4);
 
@@ -522,6 +546,9 @@ public class Processor
 
         instructions[0xDC] = new Instruction("CALL C, nn", 3, CALL_C_nn, 10);
 
+        // Switch opcode set to DD
+        instructions[0xDD] = new Instruction("SOPSET DD", 1, _ => SetOpcodePrefix(0xDD), 4);
+
         instructions[0xDE] = new Instruction("SBC A, n", 2, i => SBC_R_n(i, Register.A), 7);
 
         instructions[0xDF] = new Instruction("RST 0x18", 1, i => RST(i, 0x18), 11);
@@ -585,6 +612,21 @@ public class Processor
         instructions[0xFE] = new Instruction("CP A, n", 2, i => CP_R_n(i, Register.A), 7);
 
         instructions[0xFF] = new Instruction("RST 0x38", 1, i => RST(i, 0x38), 11);
+    }
+
+    private static void InitialiseDDInstructions(Dictionary<int, Instruction> instructions)
+    {
+        // INFO: These are basically timing equivalent to base instructions with an extra 4 cycles at the start. These are added by the prefix itself, so ignore here.
+
+        instructions[0xDD09] = new Instruction("ADD IX, BC", 1, i => ADD_RR_RR(i, Register.IX, Register.BC), 11);
+
+        instructions[0xDD19] = new Instruction("ADD IX, DE", 1, i => ADD_RR_RR(i, Register.IX, Register.DE), 11);
+
+        instructions[0xDD21] = new Instruction("LD IX, nn", 3, i => LD_RR_nn(i, Register.IX), 10);
+
+        instructions[0xDD22] = new Instruction("LD IX, (nn)", 3, i => LD_RR_addr_nn(i, Register.IX), 16);
+
+        instructions[0xDD23] = new Instruction("INC IX", 3, i => INC_RR(i, Register.IX), 6);
     }
 
     private static bool NOP()

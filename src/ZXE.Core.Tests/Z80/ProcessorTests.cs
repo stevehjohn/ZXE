@@ -924,4 +924,20 @@ public class ProcessorTests
         Assert.False(_state.Flags.Zero);
         Assert.False(_state.Flags.Sign);
     }
+
+    [Fact]
+    public void Can_execute_DD_instruction()
+    {
+        // LD IX, nn
+        _ram[0] = 0xDD;
+        _ram[1] = 0x21;
+        _ram[2] = 0x34;
+        _ram[3] = 0x12;
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x1234, _state.Registers.ReadPair(Register.IX));
+    }
 }

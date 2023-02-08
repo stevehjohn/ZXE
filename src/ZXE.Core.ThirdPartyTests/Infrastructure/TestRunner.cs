@@ -4,6 +4,7 @@ using System.Text.Json;
 using ZXE.Common.ConsoleHelpers;
 using ZXE.Common.DebugHelpers;
 using ZXE.Common.Extensions;
+using ZXE.Core.Exceptions;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
@@ -25,6 +26,8 @@ public class TestRunner
 
         var passed = 0;
 
+        var notImplemented = 0;
+
         Console.CursorVisible = false;
 
         var stopwatch = Stopwatch.StartNew();
@@ -32,16 +35,16 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("f0") < 0)
-            //{
-            //    continue;
-            //}
+            if (Path.GetFileName(file).CompareTo("dd 0f") < 0)
+            {
+                continue;
+            }
 
             // Not implemented yet
             // TODO: Remove once implemented...
             if (Path.GetFileName(file).StartsWith("cb") 
                 || Path.GetFileName(file).StartsWith("db") 
-                || Path.GetFileName(file).StartsWith("dd") 
+                // || Path.GetFileName(file).StartsWith("dd") 
                 || Path.GetFileName(file).StartsWith("ed")
                 || Path.GetFileName(file).StartsWith("fd"))
             {
@@ -59,13 +62,25 @@ public class TestRunner
             {
                 total++;
 
-                if (RunTest(test))
+                switch (RunTest(test))
                 {
-                    passed++;
-                }
-                else if (dumpOnFail)
-                {
-                    DumpTest(test);
+                    case TestResult.Pass:
+                        passed++;
+
+                        break;
+
+                    case TestResult.Fail:
+                        if (dumpOnFail)
+                        {
+                            DumpTest(test);
+                        }
+
+                        break;
+
+                    case TestResult.NotImplemented:
+                        notImplemented++;
+
+                        break;
                 }
             }
         }
@@ -76,7 +91,7 @@ public class TestRunner
 
         FormattedConsole.WriteLine($"  &Cyan;Testing complete. Time elapsed&White;: &Yellow;{stopwatch.Elapsed.Minutes}:{stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}");
 
-        FormattedConsole.WriteLine($"\n  &Cyan;Tests Run&White;: &Yellow;{total:N0}    &Cyan;Tests Passed&White;: &Green;{passed:N0}    ");
+        FormattedConsole.WriteLine($"\n  &Cyan;Tests Run&White;: &Yellow;{total:N0}    &Cyan;Tests Passed&White;: &Green;{passed:N0}    &Cyan;Not Implemented&White;: &Yellow;{notImplemented}");
 
         FormattedConsole.WriteLine($"\n  &Cyan;Tests Failed&White;: {(total == passed ? "&Green;" : "&Red;")}{total - passed:N0}    &Cyan;Percent Failed&White;: &Yellow;{((float) total - passed) / total * 100:F2}%");
 
@@ -85,7 +100,7 @@ public class TestRunner
         Console.CursorVisible = true;
     }
 
-    private static bool RunTest(TestDefinition test)
+    private static TestResult RunTest(TestDefinition test)
     {
         FormattedConsole.Write($"  &Cyan;Test&White;: &Magenta;{test.Name,-12}  ");
 
@@ -97,15 +112,28 @@ public class TestRunner
 
         FormattedConsole.Write("  &Cyan;Result&White;: [ ");
 
+        var testResult = TestResult.Fail;
+
         if (result.Passed)
         {
             FormattedConsole.Write("&Green;PASS");
+
+            testResult = TestResult.Pass;
         }
         else
         {
             if (result.exception != null)
             {
-                FormattedConsole.Write("&Red;EXCP");
+                if (result.exception is OpcodeNotImplementedException)
+                {
+                    FormattedConsole.Write("&Yellow;NIMP");
+
+                    testResult = TestResult.NotImplemented;
+                }
+                else
+                {
+                    FormattedConsole.Write("&Red;EXCP");
+                }
             }
             else
             {
@@ -117,7 +145,7 @@ public class TestRunner
 
         FormattedConsole.WriteLine(string.Empty);
 
-        return result.Passed;
+        return testResult;
     }
 
     private static (bool Passed, int Operations, State State, Ram Ram, Exception? exception) ExecuteTest(TestDefinition test, ITracer? tracer = null)
@@ -179,6 +207,12 @@ public class TestRunner
         catch (Exception exception)
         {
             return (false, operations, state, ram, exception);
+        }
+
+        // INFO: Edge case, hopefully fixed if this gets an answer: https://github.com/raddad772/jsmoo/issues/23
+        if (state.OpcodePrefix > 0)
+        {
+            throw new OpcodeNotImplementedException("Not implemented");
         }
 
         var pass = state.ProgramCounter == test.Final.PC

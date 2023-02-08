@@ -14,6 +14,8 @@ public class State
 
     public InterruptMode InterruptMode { get; set; } = InterruptMode.Mode0;
 
+    public int OpcodePrefix { get; set; }
+
     public State()
     {
         Registers = new Registers();

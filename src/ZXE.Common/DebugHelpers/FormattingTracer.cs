@@ -84,6 +84,13 @@ public class FormattingTracer : ITracer
 
     private static string FormatState(string mnemonic, byte[] data, State state, Ram ram)
     {
+        var parts = mnemonic.Split(' ', StringSplitOptions.TrimEntries).Select(p => p.Replace(",", string.Empty)).ToArray();
+
+        if (parts[0] == "SOPSET")
+        {
+            return string.Empty;
+        }
+
         var builder = new StringBuilder();
 
         builder.Append($"&Cyan;PC&White;: &Yellow;0x{state.ProgramCounter:X4}");
@@ -91,8 +98,6 @@ public class FormattingTracer : ITracer
         builder.Append($"    &Cyan;SP&White;: &Yellow;0x{state.StackPointer:X4}");
 
         builder.Append($"    &Cyan;Flags&White;: &Magenta;{state.Flags.GetFlags()}");
-
-        var parts = mnemonic.Split(' ', StringSplitOptions.TrimEntries).Select(p => p.Replace(",", string.Empty)).ToArray();
 
         if (parts.Length == 1 || parts[1][0] == '0')
         {
