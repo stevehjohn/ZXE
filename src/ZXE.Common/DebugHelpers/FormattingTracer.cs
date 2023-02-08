@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using ZXE.Common.Extensions;
 using ZXE.Core.Infrastructure.Interfaces;
@@ -29,7 +28,7 @@ public class FormattingTracer : ITracer
             return;
         }
 
-        _trace.Add($"{new string(' ', 15)}{FormatState(instruction.HelperMnemonic ?? instruction.Mnemonic, data, state, ram)}");
+        _trace.Add($"{new string(' ', 20)}{FormatState(instruction.HelperMnemonic ?? instruction.Mnemonic, data, state, ram)}");
 
         _trace.Add(string.Empty);
     }
@@ -45,7 +44,7 @@ public class FormattingTracer : ITracer
 
         var builder = new StringBuilder();
 
-        var padding = 15;
+        var padding = 20;
 
         builder.Append($"&White;{parts[0]}");
 
@@ -118,11 +117,15 @@ public class FormattingTracer : ITracer
             }
             else if (char.IsPunctuation(c))
             {
-                builder.Append($"&White;{c}");
+                builder.Append($"&Magenta;{c}");
             }
             else if (char.IsSymbol(c))
             {
-                builder.Append($"&Magenta;{c}");
+                builder.Append($"&White;{c}");
+            }
+            else
+            {
+                builder.Append($"&Green;{c}");
             }
         }
 
