@@ -527,6 +527,14 @@ public class Processor
         instructions[0xDF] = new Instruction("RST 0x18", 1, i => RST(i, 0x18), 11);
 
         instructions[0xE0] = new Instruction("RET PO", 1, RET_PO, 5);
+
+        instructions[0xE1] = new Instruction("POP HL", 1, i => POP_RR(i, Register.HL), 10);
+
+        instructions[0xE2] = new Instruction("JP PO, nn", 3, JP_PO_nn, 10);
+
+        instructions[0xE3] = new Instruction("EX (SP), HL", 1, EX_addr_RR_RR, 19);
+
+        instructions[0xE4] = new Instruction("CALL PO, nn", 3, CALL_PO_nn, 10);
     }
 
     private static bool NOP()
@@ -1903,6 +1911,8 @@ public class Processor
         {
             return CALL_nn(input);
         }
+        
+        // Flags unaffected
 
         return true;
     }
@@ -1980,6 +1990,8 @@ public class Processor
         {
             return JP_nn(input);
         }
+        
+        // Flags unaffected
 
         return true;
     }
@@ -1999,6 +2011,8 @@ public class Processor
         {
             return CALL_nn(input);
         }
+        
+        // Flags unaffected
 
         return true;
     }
@@ -2038,6 +2052,41 @@ public class Processor
         if (! input.State.Flags.ParityOverflow)
         {
             RET(input);
+        }
+        
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool JP_PO_nn(Input input)
+    {
+        if (! input.State.Flags.ParityOverflow)
+        {
+            JP_nn(input);
+        }
+        
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool EX_addr_RR_RR(Input input)
+    {
+        (input.Ram[input.State.StackPointer], input.State.Registers[Register.L]) = (input.State.Registers[Register.L], input.Ram[input.State.StackPointer]);
+
+        (input.Ram[input.State.StackPointer + 1], input.State.Registers[Register.H]) = (input.State.Registers[Register.H], input.Ram[input.State.StackPointer + 1]);
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool CALL_PO_nn(Input input)
+    {
+        if (! input.State.Flags.ParityOverflow)
+        {
+            CALL_nn(input);
         }
 
         return true;

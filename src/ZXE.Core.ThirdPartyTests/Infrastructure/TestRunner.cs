@@ -31,16 +31,19 @@ public class TestRunner
 
         foreach (var file in files)
         {
-            if (Path.GetFileName(file).CompareTo("da") < 0)
+            // Skip a bunch of tests
+            if (Path.GetFileName(file).CompareTo("e0") < 0)
             {
                 continue;
             }
 
-            if (Path.GetFileName(file).StartsWith("e1"))
+            // Last test to run
+            if (Path.GetFileName(file).StartsWith("ea"))
             {
                 break;
             }
 
+            // Not implemented yet
             // TODO: Remove once implemented...
             if (Path.GetFileName(file).StartsWith("cb") || Path.GetFileName(file).StartsWith("db") || Path.GetFileName(file).StartsWith("dd"))
             {
