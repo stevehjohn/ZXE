@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using ZXE.Common.Extensions;
 using ZXE.Core.Infrastructure.Interfaces;
@@ -40,17 +41,7 @@ public class FormattingTracer : ITracer
 
     private static string FormatMnemonic(string mnemonic)
     {
-        if (mnemonic.Contains('+'))
-        {
-            return FormatDisplacementMnemonic(mnemonic);
-        }
-
-        return FormatNormalMnemonic(mnemonic);
-    }
-
-    private static string FormatNormalMnemonic(string mnemonic)
-    {
-        var parts = mnemonic.Split(' ', StringSplitOptions.TrimEntries).Select(p => p.Replace(",", string.Empty)).ToArray();
+        var parts = GetMnemonicParts(mnemonic);
 
         var builder = new StringBuilder();
 
@@ -77,24 +68,19 @@ public class FormattingTracer : ITracer
         return $"{builder}{new string(' ', padding)}";
     }
 
-    private static string FormatDisplacementMnemonic(string mnemonic)
+    private static string ColourOperand(string operand)
     {
-        var parts = mnemonic.Split(' ', StringSplitOptions.TrimEntries).Select(p => p.Replace(",", string.Empty)).ToArray();
+        var parts = operand.Split(' ');
 
-        var builder = new StringBuilder();
+        if (parts.Length == 1)
+        {
+            return ColourSimpleOperand(operand);
+        }
 
-        builder.Append($"&White;{parts[0]}");
-
-        builder.Append($" &Cyan;(&Magenta;{parts[1][1..]}");
-
-        builder.Append($" &White;{parts[2]}");
-
-        builder.Append($" &Green;{parts[3][..^1]}&Cyan;)");
-
-        return builder.ToString();
+        return ColourComplexOperand(operand);
     }
 
-    private static string ColourOperand(string operand)
+    private static string ColourSimpleOperand(string operand)
     {
         var character = operand[0];
 
@@ -114,6 +100,33 @@ public class FormattingTracer : ITracer
         }
 
         return $"&Green;{operand}";
+    }
+
+    private static string ColourComplexOperand(string operand)
+    {
+        var builder = new StringBuilder();
+
+        foreach (var c in operand)
+        {
+            if (char.IsUpper(c))
+            {
+                builder.Append($"&Magenta;{c}");
+            }
+            else if (char.IsWhiteSpace(c))
+            {
+                builder.Append(" ");
+            }
+            else if (char.IsPunctuation(c))
+            {
+                builder.Append($"&White;{c}");
+            }
+            else if (char.IsSymbol(c))
+            {
+                builder.Append($"&Magenta;{c}");
+            }
+        }
+
+        return builder.ToString();
     }
 
     private static string FormatState(string mnemonic, byte[] data, State state, Ram ram)
@@ -161,6 +174,8 @@ public class FormattingTracer : ITracer
             isIndirect = true;
         }
 
+        operand = operand.Replace('.', ' ');
+
         Register? register = null;
 
         if (char.IsUpper(operand[0]))
@@ -172,11 +187,11 @@ public class FormattingTracer : ITracer
         {
             if (operand.Length == 2)
             {
-                builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers.ReadPair((Register)register):X4}");
+                builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers.ReadPair((Register) register):X4}");
             }
             else
             {
-                builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers[(Register)register]:X2}  ");
+                builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers[(Register) register]:X2}  ");
             }
         }
         else
@@ -197,7 +212,7 @@ public class FormattingTracer : ITracer
 
             if (register != null)
             {
-                builder.Append($"&Magenta;({operand})&White;: &Yellow;0x{ram[state.Registers.ReadPair((Register)register)]:X2}");
+                builder.Append($"&Magenta;({operand})&White;: &Yellow;0x{ram[state.Registers.ReadPair((Register) register)]:X2}");
             }
             else
             {
@@ -206,5 +221,24 @@ public class FormattingTracer : ITracer
         }
 
         return builder.ToString();
+    }
+
+    private static string[] GetMnemonicParts(string mnemonic)
+    {
+        var parts = mnemonic.Split(' ', 2, StringSplitOptions.TrimEntries);
+
+        if (parts.Length == 1)
+        {
+            return new[] { parts[0] };
+        }
+
+        var operands = parts[1].Split(',', StringSplitOptions.TrimEntries);
+
+        if (operands.Length > 1)
+        {
+            return new[] { parts[0], operands[0], operands[1] };
+        }
+
+        return new[] { parts[0], operands[0] };
     }
 }
