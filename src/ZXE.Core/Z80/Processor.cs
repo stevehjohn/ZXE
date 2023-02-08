@@ -1,5 +1,4 @@
-﻿using System.Net;
-using ZXE.Core.Infrastructure.Interfaces;
+﻿using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
 // ReSharper disable IdentifierTypo
@@ -562,6 +561,10 @@ public class Processor
         instructions[0xF1] = new Instruction("POP AF", 1, i => POP_RR(i, Register.AF), 10);
 
         instructions[0xF2] = new Instruction("JP S, nn", 3, JP_S_nn, 10);
+
+        instructions[0xF3] = new Instruction("DI", 1, DI, 4);
+
+        instructions[0xF4] = new Instruction("CALL S, nn", 3, CALL_S_nn, 10);
     }
 
     private static bool NOP()
@@ -2244,6 +2247,24 @@ public class Processor
         if (! input.State.Flags.Sign)
         {
             JP_nn(input);
+        }
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool DI(Input input)
+    {
+        // TODO: Disable maskable interrupt.
+        return true;
+    }
+
+    private static bool CALL_S_nn(Input input)
+    {
+        if (! input.State.Flags.Sign)
+        {
+            CALL_nn(input);
         }
 
         // Flags unaffected
