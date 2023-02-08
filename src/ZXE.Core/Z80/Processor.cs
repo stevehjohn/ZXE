@@ -512,7 +512,7 @@ public class Processor
         instructions[0xD6] = new Instruction("SUB A, n", 2, i => SUB_R_n(i, Register.A), 7);
 
         instructions[0xD7] = new Instruction("RST 0x10", 1, i => RST(i, 0x10), 11);
-        
+
         instructions[0xD8] = new Instruction("RET C", 1, RET_C, 5);
 
         instructions[0xD9] = new Instruction("EXX", 1, EXX, 4);
@@ -546,6 +546,10 @@ public class Processor
         instructions[0xE8] = new Instruction("RET PE", 1, RET_PE, 5);
 
         instructions[0xE9] = new Instruction("JP (HL)", 1, i => JP_addr_RR(i, Register.HL), 4);
+
+        instructions[0xEA] = new Instruction("JP PE, nn", 3, JP_PE_nn, 10);
+
+        instructions[0xEB] = new Instruction("EX DE, HL", 1, i => EX_RR_RR(i, Register.DE, Register.HL), 4);
     }
 
     private static bool NOP()
@@ -1822,7 +1826,7 @@ public class Processor
         input.State.StackPointer++;
 
         input.State.ProgramCounter--;
-        
+
         // Flags unaffected
 
         return true;
@@ -1889,7 +1893,7 @@ public class Processor
         {
             RET(input);
         }
-        
+
         // Flags unaffected
 
         return true;
@@ -1901,7 +1905,7 @@ public class Processor
         {
             return JP_nn(input);
         }
-        
+
         // Flags unaffected
 
         return true;
@@ -1922,7 +1926,7 @@ public class Processor
         {
             return CALL_nn(input);
         }
-        
+
         // Flags unaffected
 
         return true;
@@ -1989,7 +1993,7 @@ public class Processor
         input.State.Registers.WritePair(Register.DE1, de);
 
         input.State.Registers.WritePair(Register.HL1, hl);
-        
+
         // Flags unaffected
 
         return true;
@@ -2001,7 +2005,7 @@ public class Processor
         {
             return JP_nn(input);
         }
-        
+
         // Flags unaffected
 
         return true;
@@ -2022,7 +2026,7 @@ public class Processor
         {
             return CALL_nn(input);
         }
-        
+
         // Flags unaffected
 
         return true;
@@ -2064,7 +2068,7 @@ public class Processor
         {
             RET(input);
         }
-        
+
         // Flags unaffected
 
         return true;
@@ -2076,7 +2080,7 @@ public class Processor
         {
             JP_nn(input);
         }
-        
+
         // Flags unaffected
 
         return true;
@@ -2142,5 +2146,26 @@ public class Processor
         input.State.ProgramCounter = input.State.Registers.ReadPair(register);
 
         return false;
+    }
+
+    private static bool JP_PE_nn(Input input)
+    {
+        if (input.State.Flags.ParityOverflow)
+        {
+            return JP_nn(input);
+        }
+
+        return true;
+    }
+
+    private static bool EX_RR_RR(Input input, Register left, Register right)
+    {
+        var swap = input.State.Registers.ReadPair(left);
+
+        input.State.Registers.WritePair(left, input.State.Registers.ReadPair(right));
+
+        input.State.Registers.WritePair(right, swap);
+
+        return true;
     }
 }

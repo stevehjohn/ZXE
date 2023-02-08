@@ -32,13 +32,13 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("e0") < 0)
+            if (Path.GetFileName(file).CompareTo("ea") < 0)
             {
                 continue;
             }
 
             // Last test to run
-            if (Path.GetFileName(file).StartsWith("ea"))
+            if (Path.GetFileName(file).StartsWith("ef"))
             {
                 break;
             }
