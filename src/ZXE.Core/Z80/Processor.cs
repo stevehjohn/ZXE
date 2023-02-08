@@ -577,6 +577,8 @@ public class Processor
         instructions[0xF9] = new Instruction("LD SP, HL", 1, LD_RR_RR, 6);
 
         instructions[0xFA] = new Instruction("JP S, nn", 3, JP_S_nn, 10);
+
+        instructions[0xFB] = new Instruction("EI", 1, EI, 4);
     }
 
     private static bool NOP()
@@ -2338,6 +2340,12 @@ public class Processor
 
         // Flags unaffected
 
+        return true;
+    }
+
+    private static bool EI(Input input)
+    {
+        // TODO: Enable maskable interrupt.
         return true;
     }
 }
