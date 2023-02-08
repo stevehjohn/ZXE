@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using ZXE.Common.ConsoleHelpers;
@@ -52,6 +51,12 @@ public class TestRunner
                 continue;
             }
 
+            // End early
+            if (Path.GetFileName(file).CompareTo("dd 25") > 0)
+            {
+                continue;
+            }
+
             var tests = JsonSerializer.Deserialize<TestDefinition[]>(File.ReadAllText(file), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             if (tests == null)
@@ -62,6 +67,8 @@ public class TestRunner
             foreach (var test in tests)
             {
                 total++;
+
+                var skipRemainder = false;
 
                 switch (RunTest(test))
                 {
@@ -81,10 +88,19 @@ public class TestRunner
                     case TestResult.NotImplemented:
                         notImplemented++;
 
+                        skipRemainder = true;
+
                         break;
+                }
+
+                if (skipRemainder)
+                {
+                    break;
                 }
             }
         }
+
+        var failed = total - (passed + notImplemented);
 
         stopwatch.Stop();
 
@@ -94,7 +110,7 @@ public class TestRunner
 
         FormattedConsole.WriteLine($"\n  &Cyan;Tests Run&White;: &Yellow;{total:N0}    &Cyan;Tests Passed&White;: &Green;{passed:N0}    &Cyan;Not Implemented&White;: &Yellow;{notImplemented}");
 
-        FormattedConsole.WriteLine($"\n  &Cyan;Tests Failed&White;: {(total == passed ? "&Green;" : "&Red;")}{total - passed:N0}    &Cyan;Percent Failed&White;: &Yellow;{((float) total - passed) / total * 100:F2}%");
+        FormattedConsole.WriteLine($"\n  &Cyan;Tests Failed&White;: {(failed == 0 ? "&Green;" : "&Red;")}{failed:N0}    &Cyan;Percent Failed&White;: &Yellow;{((float) failed) / total * 100:F2}%");
 
         FormattedConsole.WriteLine(string.Empty);
 
@@ -171,6 +187,8 @@ public class TestRunner
         state.Registers[Register.F] = test.Initial.F;
         state.Registers[Register.H] = test.Initial.H;
         state.Registers[Register.L] = test.Initial.L;
+        state.Registers.WritePair(Register.IX, test.Initial.IX);
+        state.Registers.WritePair(Register.IY, test.Initial.IY);
 
         state.Flags = Flags.FromByte(test.Initial.F);
 

@@ -624,9 +624,11 @@ public class Processor
 
         instructions[0xDD21] = new Instruction("LD IX, nn", 3, i => LD_RR_nn(i, Register.IX), 10);
 
-        instructions[0xDD22] = new Instruction("LD IX, (nn)", 3, i => LD_RR_addr_nn(i, Register.IX), 16);
+        instructions[0xDD22] = new Instruction("LD (nn), IX", 3, i => LD_addr_nn_RR(i, Register.IX), 16);
 
-        instructions[0xDD23] = new Instruction("INC IX", 3, i => INC_RR(i, Register.IX), 6);
+        instructions[0xDD23] = new Instruction("INC IX", 1, i => INC_RR(i, Register.IX), 6);
+
+        instructions[0xDD24] = new Instruction("INC IXh", 1, i => INC_RRh(i, Register.IX), 4);
     }
 
     private static bool NOP()
@@ -2426,6 +2428,30 @@ public class Processor
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool INC_RRh(Input input, Register register)
+    {
+        unchecked
+        {
+            var value = input.State.Registers.ReadPair(register);
+
+            var result = (ushort) ((value & 0xFF00) + 1);
+
+            result += (byte) (value & 0x00FF);
+            
+            // Flags
+            // Carry unaffected
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = value == 0x7F;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = (sbyte) result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
         }
 
         return true;

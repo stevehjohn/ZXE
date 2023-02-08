@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 		..\Documentation\Z80 Family User Manual.pdf = ..\Documentation\Z80 Family User Manual.pdf
 		..\Documentation\Z80 Undocumented.pdf = ..\Documentation\Z80 Undocumented.pdf
+		..\Documentation\Z80 User Manual 2.pdf = ..\Documentation\Z80 User Manual 2.pdf
 		..\Documentation\Z80 User Manual.pdf = ..\Documentation\Z80 User Manual.pdf
 	EndProjectSection
 EndProject
@@ -19,9 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core.Tests", "ZXE.Core.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core.Tests.Console", "ZXE.Core.Tests.Console\ZXE.Core.Tests.Console.csproj", "{E6C16151-095C-4BAA-8498-7B2A4CAF21A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXE.Core.ThirdPartyTests", "ZXE.Core.ThirdPartyTests\ZXE.Core.ThirdPartyTests.csproj", "{EC09A4A6-F367-4B08-B1C2-A67CCD2F9004}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core.ThirdPartyTests", "ZXE.Core.ThirdPartyTests\ZXE.Core.ThirdPartyTests.csproj", "{EC09A4A6-F367-4B08-B1C2-A67CCD2F9004}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXE.Common", "ZXE.Common\ZXE.Common.csproj", "{92EE2C72-0F6F-4E5B-A404-DBA5F5748120}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Common", "ZXE.Common\ZXE.Common.csproj", "{92EE2C72-0F6F-4E5B-A404-DBA5F5748120}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
