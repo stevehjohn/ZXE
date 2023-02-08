@@ -5,6 +5,7 @@ A ZX Spectrum emulator. Mostly about just seeing if I can.
 ## Main TODOs
 
 - With some conditional opcodes (e.g. CALL cc, JP cc, JR cc, RET cc), more cycles are used if condition is met. Account for this in the timings. Actually, maybe this can be handled with the condition checking being a separate function...
+- Check undocumented flag implementation against https://worldofspectrum.org/faq/reference/z80reference.htm
 
 ## Features
 
@@ -53,6 +54,7 @@ Runs tests against this awesome suite:
 - http://www.z80.info/z80syntx.htm
 - http://www.z80.info/z80code.htm
 - http://www.z80.info/z80oplist.txt
+- http://www.z80.info/decoding.htm
 - http://www.breakintoprogram.co.uk/hardware/computers/zx-spectrum/memory-map
 - https://landley.net/history/mirror/cpm/z80.html
 - https://worldofspectrum.org/faq/reference/z80reference.htm

@@ -12,6 +12,8 @@ public class State
 
     public bool Halted { get; set; }
 
+    public InterruptMode InterruptMode { get; set; } = InterruptMode.Mode0;
+
     public State()
     {
         Registers = new Registers();
