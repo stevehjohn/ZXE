@@ -556,11 +556,11 @@ public class Processor
 
         instructions[0xEF] = new Instruction("RST 0x28", 1, i => RST(i, 0x28), 11);
 
-        instructions[0xF0] = new Instruction("RET S", 1, RET_S, 5);
+        instructions[0xF0] = new Instruction("RET NS", 1, RET_NS, 5);
 
         instructions[0xF1] = new Instruction("POP AF", 1, i => POP_RR(i, Register.AF), 10);
 
-        instructions[0xF2] = new Instruction("JP S, nn", 3, JP_S_nn, 10);
+        instructions[0xF2] = new Instruction("JP NS, nn", 3, JP_NS_nn, 10);
 
         instructions[0xF3] = new Instruction("DI", 1, DI, 4);
 
@@ -569,6 +569,14 @@ public class Processor
         instructions[0xF5] = new Instruction("PUSH AF", 1, i => PUSH_RR(i, Register.AF), 11);
 
         instructions[0xF6] = new Instruction("OR A, n", 2, i => OR_R_n(i, Register.A), 7);
+
+        instructions[0xF7] = new Instruction("RST 0x30", 1, i => RST(i, 0x30), 11);
+
+        instructions[0xF8] = new Instruction("RET S", 1, RET_S, 5);
+
+        instructions[0xF9] = new Instruction("LD SP, HL", 1, LD_RR_RR, 6);
+
+        instructions[0xFA] = new Instruction("JP S, nn", 3, JP_S_nn, 10);
     }
 
     private static bool NOP()
@@ -2234,7 +2242,7 @@ public class Processor
         return true;
     }
 
-    private static bool RET_S(Input input)
+    private static bool RET_NS(Input input)
     {
         if (! input.State.Flags.Sign)
         {
@@ -2246,7 +2254,7 @@ public class Processor
         return true;
     }
 
-    private static bool JP_S_nn(Input input)
+    private static bool JP_NS_nn(Input input)
     {
         if (! input.State.Flags.Sign)
         {
@@ -2296,6 +2304,39 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
+    }
+
+    private static bool RET_S(Input input)
+    {
+        if (input.State.Flags.Sign)
+        {
+            RET(input);
+        }
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool LD_RR_RR(Input input)
+    {
+        input.State.StackPointer = input.State.Registers.ReadPair(Register.HL);
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool JP_S_nn(Input input)
+    {
+        if (input.State.Flags.Sign)
+        {
+            JP_nn(input);
+        }
+
+        // Flags unaffected
 
         return true;
     }
