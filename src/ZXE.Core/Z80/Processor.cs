@@ -550,6 +550,12 @@ public class Processor
         instructions[0xEA] = new Instruction("JP PE, nn", 3, JP_PE_nn, 10);
 
         instructions[0xEB] = new Instruction("EX DE, HL", 1, i => EX_RR_RR(i, Register.DE, Register.HL), 4);
+
+        instructions[0xEC] = new Instruction("CALL PE, nn", 3, CALL_PE_nn, 10);
+
+        instructions[0xEE] = new Instruction("XOR A, n", 2, i => XOR_R_n(i, Register.A), 7);
+
+        instructions[0xEF] = new Instruction("RST 0x28", 1, i => RST(i, 0x28), 11);
     }
 
     private static bool NOP()
@@ -2103,6 +2109,8 @@ public class Processor
         {
             CALL_nn(input);
         }
+        
+        // Flags unaffected
 
         return true;
     }
@@ -2137,6 +2145,8 @@ public class Processor
         {
             return RET(input);
         }
+        
+        // Flags unaffected
 
         return true;
     }
@@ -2144,6 +2154,8 @@ public class Processor
     private static bool JP_addr_RR(Input input, Register register)
     {
         input.State.ProgramCounter = input.State.Registers.ReadPair(register);
+        
+        // Flags unaffected
 
         return false;
     }
@@ -2154,6 +2166,8 @@ public class Processor
         {
             return JP_nn(input);
         }
+        
+        // Flags unaffected
 
         return true;
     }
@@ -2165,7 +2179,44 @@ public class Processor
         input.State.Registers.WritePair(left, input.State.Registers.ReadPair(right));
 
         input.State.Registers.WritePair(right, swap);
+        
+        // Flags unaffected
 
+        return true;
+    }
+
+    private static bool CALL_PE_nn(Input input)
+    {
+        if (input.State.Flags.ParityOverflow)
+        {
+            CALL_nn(input);
+        }
+        
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool XOR_R_n(Input input, Register destination)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] ^ input.Data[1];
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can XOR overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
         return true;
     }
 }

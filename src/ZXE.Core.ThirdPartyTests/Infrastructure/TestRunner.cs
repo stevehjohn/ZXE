@@ -38,14 +38,14 @@ public class TestRunner
             }
 
             // Last test to run
-            if (Path.GetFileName(file).StartsWith("ef"))
+            if (Path.GetFileName(file).StartsWith("ff"))
             {
                 break;
             }
 
             // Not implemented yet
             // TODO: Remove once implemented...
-            if (Path.GetFileName(file).StartsWith("cb") || Path.GetFileName(file).StartsWith("db") || Path.GetFileName(file).StartsWith("dd"))
+            if (Path.GetFileName(file).StartsWith("cb") || Path.GetFileName(file).StartsWith("db") || Path.GetFileName(file).StartsWith("dd") || Path.GetFileName(file).StartsWith("ed"))
             {
                 continue;
             }
