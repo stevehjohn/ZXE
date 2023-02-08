@@ -565,6 +565,10 @@ public class Processor
         instructions[0xF3] = new Instruction("DI", 1, DI, 4);
 
         instructions[0xF4] = new Instruction("CALL S, nn", 3, CALL_S_nn, 10);
+
+        instructions[0xF5] = new Instruction("PUSH AF", 1, i => PUSH_RR(i, Register.AF), 11);
+
+        instructions[0xF6] = new Instruction("OR A, n", 2, i => OR_R_n(i, Register.A), 7);
     }
 
     private static bool NOP()
@@ -2268,6 +2272,30 @@ public class Processor
         }
 
         // Flags unaffected
+
+        return true;
+    }
+
+    private static bool OR_R_n(Input input, Register destination)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] | input.Data[1];
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can OR overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
 
         return true;
     }
