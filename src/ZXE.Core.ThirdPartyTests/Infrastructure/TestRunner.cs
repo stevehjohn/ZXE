@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using ZXE.Common.ConsoleHelpers;
@@ -212,7 +213,7 @@ public class TestRunner
         // INFO: Edge case, hopefully fixed if this gets an answer: https://github.com/raddad772/jsmoo/issues/23
         if (state.OpcodePrefix > 0)
         {
-            throw new OpcodeNotImplementedException("Not implemented");
+            return (false, operations, state, ram, new OpcodeNotImplementedException("Not implemented"));
         }
 
         var pass = state.ProgramCounter == test.Final.PC
