@@ -34,17 +34,16 @@ public class TestRunner
 
         foreach (var file in files)
         {
-            // Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("dd 0f") < 0)
-            {
-                continue;
-            }
+            //Skip a bunch of tests
+            //if (Path.GetFileName(file).CompareTo("dd 2d") < 0)
+            //{
+            //    continue;
+            //}
 
             // Not implemented yet
             // TODO: Remove once implemented...
             if (Path.GetFileName(file).StartsWith("cb") 
                 || Path.GetFileName(file).StartsWith("db") 
-                // || Path.GetFileName(file).StartsWith("dd") 
                 || Path.GetFileName(file).StartsWith("ed")
                 || Path.GetFileName(file).StartsWith("fd"))
             {
@@ -52,10 +51,10 @@ public class TestRunner
             }
 
             // End early
-            if (Path.GetFileName(file).CompareTo("dd 2f") > 0)
-            {
-                continue;
-            }
+            //if (Path.GetFileName(file).CompareTo("dd 2f") > 0)
+            //{
+            //    continue;
+            //}
 
             var tests = JsonSerializer.Deserialize<TestDefinition[]>(File.ReadAllText(file), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 

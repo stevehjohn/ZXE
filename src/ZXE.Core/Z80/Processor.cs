@@ -44,6 +44,11 @@ public class Processor
             _state.OpcodePrefix = 0;
         }
 
+        if (opcode >= _instructions.Length)
+        {
+            throw new OpcodeNotImplementedException($"Opcode not implemented: {opcode:X6}.");
+        }
+
         var instruction = _instructions[opcode];
 
         if (instruction == null)
