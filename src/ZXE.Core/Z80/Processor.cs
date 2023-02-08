@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Infrastructure.Interfaces;
+﻿using System.Net;
+using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
 // ReSharper disable IdentifierTypo
@@ -535,6 +536,16 @@ public class Processor
         instructions[0xE3] = new Instruction("EX (SP), HL", 1, EX_addr_RR_RR, 19);
 
         instructions[0xE4] = new Instruction("CALL PO, nn", 3, CALL_PO_nn, 10);
+
+        instructions[0xE5] = new Instruction("PUSH HL", 1, i => PUSH_RR(i, Register.HL), 11);
+
+        instructions[0xE6] = new Instruction("AND A, n", 2, i => AND_R_n(i, Register.A), 7);
+
+        instructions[0xE7] = new Instruction("RST 0x20", 1, i => RST(i, 0x20), 11);
+
+        instructions[0xE8] = new Instruction("RET PE", 1, RET_PE, 5);
+
+        instructions[0xE9] = new Instruction("JP (HL)", 1, i => JP_addr_RR(i, Register.HL), 4);
     }
 
     private static bool NOP()
@@ -2090,5 +2101,46 @@ public class Processor
         }
 
         return true;
+    }
+
+    private static bool AND_R_n(Input input, Register destination)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] & input.Data[1];
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can AND overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = true;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool RET_PE(Input input)
+    {
+        if (input.State.Flags.ParityOverflow)
+        {
+            return RET(input);
+        }
+
+        return true;
+    }
+
+    private static bool JP_addr_RR(Input input, Register register)
+    {
+        input.State.ProgramCounter = input.State.Registers.ReadPair(register);
+
+        return false;
     }
 }
