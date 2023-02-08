@@ -21,6 +21,13 @@ public class FormattingTracer : ITracer
 
     public void TraceAfter(Instruction instruction, byte[] data, State state, Ram ram)
     {
+        if (instruction.Mnemonic.StartsWith("SOPSET", StringComparison.InvariantCultureIgnoreCase))
+        {
+            _trace.Add(string.Empty);
+
+            return;
+        }
+
         _trace.Add($"{new string(' ', 15)}{FormatState(instruction.HelperMnemonic ?? instruction.Mnemonic, data, state, ram)}");
 
         _trace.Add(string.Empty);
@@ -32,6 +39,16 @@ public class FormattingTracer : ITracer
     }
 
     private static string FormatMnemonic(string mnemonic)
+    {
+        if (mnemonic.Contains('+'))
+        {
+            return FormatNormalMnemonic(mnemonic);
+        }
+
+        return FormatDisplacementMnemonic(mnemonic);
+    }
+
+    private static string FormatNormalMnemonic(string mnemonic)
     {
         var parts = mnemonic.Split(' ', StringSplitOptions.TrimEntries).Select(p => p.Replace(",", string.Empty)).ToArray();
 
@@ -58,6 +75,23 @@ public class FormattingTracer : ITracer
         }
 
         return $"{builder}{new string(' ', padding)}";
+    }
+
+    private static string FormatDisplacementMnemonic(string mnemonic)
+    {
+        var parts = mnemonic.Split(' ', StringSplitOptions.TrimEntries).Select(p => p.Replace(",", string.Empty)).ToArray();
+
+        var builder = new StringBuilder();
+
+        builder.Append($"&White;{parts[0]}");
+
+        builder.Append($" &Cyan;(&Magenta;{parts[1][1..]}");
+
+        builder.Append($" &White;{parts[2]}");
+
+        builder.Append($" &Green;{parts[3]}&Cyan;)");
+
+        return builder.ToString();
     }
 
     private static string ColourOperand(string operand)

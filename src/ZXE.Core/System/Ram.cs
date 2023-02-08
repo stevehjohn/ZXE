@@ -12,7 +12,7 @@ public class Ram
     public Ram(Model model)
     {
         var size = model == Model.Spectrum48K ? Constants.K64 : Constants.K128;
-        
+
         _ram = new byte[size];
 
         Size = size;
@@ -20,8 +20,35 @@ public class Ram
 
     public byte this[int address]
     {
-        get => _ram[address];
-        set => _ram[address] = value;
+        get
+        {
+            if (address > Size)
+            {
+                address -= Size;
+            }
+
+            if (address < 0)
+            {
+                address += Size;
+            }
+
+            return _ram[address];
+        }
+
+        set
+        {
+            if (address > Size)
+            {
+                address -= Size;
+            }
+
+            if (address < 0)
+            {
+                address += Size;
+            }
+
+            _ram[address] = value;
+        }
     }
 
     public byte[] this[Range range] => _ram[range];
