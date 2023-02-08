@@ -556,6 +556,10 @@ public class Processor
         instructions[0xEE] = new Instruction("XOR A, n", 2, i => XOR_R_n(i, Register.A), 7);
 
         instructions[0xEF] = new Instruction("RST 0x28", 1, i => RST(i, 0x28), 11);
+
+        instructions[0xF0] = new Instruction("RET S", 1, RET_S, 5);
+
+        instructions[0xF1] = new Instruction("POP AF", 1, i => POP_RR(i, Register.AF), 10);
     }
 
     private static bool NOP()
@@ -2217,6 +2221,19 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
+    }
+
+    private static bool RET_S(Input input)
+    {
+        if (! input.State.Flags.Sign)
+        {
+            RET(input);
+        }
+
+        // Flags unaffected
+
         return true;
     }
 }

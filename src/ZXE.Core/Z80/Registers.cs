@@ -23,22 +23,12 @@ public class Registers
     {
         var registerLocations = (int) register;
 
-        if (registerLocations < 256)
-        {
-            throw new RegisterAccessException("Please specify a pair of registers, e.g. BC, DE or HL.");
-        }
-
         return (ushort) (_registers[(registerLocations & 0xFF00) >> 8] << 8 | _registers[registerLocations & 0x00FF]);
     }
 
     public void WritePair(Register register, ushort value)
     {
         var registerLocations = (int) register;
-
-        if (registerLocations < 256)
-        {
-            throw new RegisterAccessException("Please specify a pair of registers, e.g. BC, DE or HL.");
-        }
 
         _registers[(registerLocations & 0xFF00) >> 8] = (byte) ((value & 0xFF00) >> 8);
         _registers[registerLocations & 0x00FF] = (byte) (value & 0x00FF);
