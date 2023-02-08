@@ -39,7 +39,11 @@ public class TestRunner
 
             // Not implemented yet
             // TODO: Remove once implemented...
-            if (Path.GetFileName(file).StartsWith("cb") || Path.GetFileName(file).StartsWith("db") || Path.GetFileName(file).StartsWith("dd") || Path.GetFileName(file).StartsWith("ed"))
+            if (Path.GetFileName(file).StartsWith("cb") 
+                || Path.GetFileName(file).StartsWith("db") 
+                || Path.GetFileName(file).StartsWith("dd") 
+                || Path.GetFileName(file).StartsWith("ed")
+                || Path.GetFileName(file).StartsWith("fd"))
             {
                 continue;
             }

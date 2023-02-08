@@ -564,7 +564,7 @@ public class Processor
 
         instructions[0xF3] = new Instruction("DI", 1, DI, 4);
 
-        instructions[0xF4] = new Instruction("CALL S, nn", 3, CALL_S_nn, 10);
+        instructions[0xF4] = new Instruction("CALL S, nn", 3, CALL_NS_nn, 10);
 
         instructions[0xF5] = new Instruction("PUSH AF", 1, i => PUSH_RR(i, Register.AF), 11);
 
@@ -579,6 +579,10 @@ public class Processor
         instructions[0xFA] = new Instruction("JP S, nn", 3, JP_S_nn, 10);
 
         instructions[0xFB] = new Instruction("EI", 1, EI, 4);
+
+        instructions[0xFC] = new Instruction("CALL S, nn", 3, CALL_S_nn, 10);
+
+        instructions[0xFE] = new Instruction("CP A, n", 2, i => CP_R_n(i, Register.A), 7);
     }
 
     private static bool NOP()
@@ -2274,7 +2278,7 @@ public class Processor
         return true;
     }
 
-    private static bool CALL_S_nn(Input input)
+    private static bool CALL_NS_nn(Input input)
     {
         if (! input.State.Flags.Sign)
         {
@@ -2346,6 +2350,40 @@ public class Processor
     private static bool EI(Input input)
     {
         // TODO: Enable maskable interrupt.
+        return true;
+    }
+
+    private static bool CALL_S_nn(Input input)
+    {
+        if (input.State.Flags.Sign)
+        {
+            CALL_nn(input);
+        }
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool CP_R_n(Input input, Register destination)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] - input.Data[1];
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can OR overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
         return true;
     }
 }
