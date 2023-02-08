@@ -560,6 +560,8 @@ public class Processor
         instructions[0xF0] = new Instruction("RET S", 1, RET_S, 5);
 
         instructions[0xF1] = new Instruction("POP AF", 1, i => POP_RR(i, Register.AF), 10);
+
+        instructions[0xF2] = new Instruction("JP S, nn", 3, JP_S_nn, 10);
     }
 
     private static bool NOP()
@@ -2230,6 +2232,18 @@ public class Processor
         if (! input.State.Flags.Sign)
         {
             RET(input);
+        }
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool JP_S_nn(Input input)
+    {
+        if (! input.State.Flags.Sign)
+        {
+            JP_nn(input);
         }
 
         // Flags unaffected
