@@ -42,10 +42,10 @@ public class FormattingTracer : ITracer
     {
         if (mnemonic.Contains('+'))
         {
-            return FormatNormalMnemonic(mnemonic);
+            return FormatDisplacementMnemonic(mnemonic);
         }
 
-        return FormatDisplacementMnemonic(mnemonic);
+        return FormatNormalMnemonic(mnemonic);
     }
 
     private static string FormatNormalMnemonic(string mnemonic)
@@ -89,7 +89,7 @@ public class FormattingTracer : ITracer
 
         builder.Append($" &White;{parts[2]}");
 
-        builder.Append($" &Green;{parts[3]}&Cyan;)");
+        builder.Append($" &Green;{parts[3][..^1]}&Cyan;)");
 
         return builder.ToString();
     }

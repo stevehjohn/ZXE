@@ -654,6 +654,8 @@ public class Processor
         instructions[0xDD34] = new Instruction("INC (IX + d)", 2, i => INC_addr_RR_plus_d(i, Register.IX), 19);
 
         instructions[0xDD35] = new Instruction("DEC (IX + d)", 2, i => DEC_addr_RR_plus_d(i, Register.IX), 19);
+
+        instructions[0xDD36] = new Instruction("LD (IX + d), n", 3, i => LD_addr_RR_plus_d_n(i, Register.IX), 19);
     }
 
     private static bool NOP()
@@ -2599,6 +2601,17 @@ public class Processor
         input.Ram[address]--;
         
         // Flags unaffected
+
+        return true;
+    }
+
+    private static bool LD_addr_RR_plus_d_n(Input input, Register register)
+    {
+        var address = (int) input.State.Registers.ReadPair(register);
+
+        address += (sbyte) input.Data[1];
+
+        input.Ram[address] = input.Data[1];
 
         return true;
     }
