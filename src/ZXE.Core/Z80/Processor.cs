@@ -650,6 +650,10 @@ public class Processor
         instructions[0xDD2D] = new Instruction("DEC IXl", 1, i => DEC_RRl(i, Register.IX), 4);
 
         instructions[0xDD2E] = new Instruction("LD IXl, n", 2, i => LD_RRl_n(i, Register.IX), 7);
+
+        instructions[0xDD34] = new Instruction("INC (IX + d)", 2, i => INC_addr_RR_plus_d(i, Register.IX), 19);
+
+        instructions[0xDD35] = new Instruction("DEC (IX + d)", 2, i => DEC_addr_RR_plus_d(i, Register.IX), 19);
     }
 
     private static bool NOP()
@@ -2506,6 +2510,8 @@ public class Processor
         var value = input.State.Registers.ReadPair(register);
 
         input.State.Registers.WritePair(register, (ushort) ((input.Data[1] << 8) | (value & 0x00FF)));
+        
+        // Flags unaffected
 
         return true;
     }
@@ -2565,6 +2571,34 @@ public class Processor
         var value = input.State.Registers.ReadPair(register);
 
         input.State.Registers.WritePair(register, (ushort) ((input.Data[1]) | (value & 0xFF00)));
+        
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool INC_addr_RR_plus_d(Input input, Register register)
+    {
+        var address = (int) input.State.Registers.ReadPair(register);
+
+        address += (sbyte) input.Data[1];
+
+        input.Ram[address]++;
+        
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool DEC_addr_RR_plus_d(Input input, Register register)
+    {
+        var address = (int) input.State.Registers.ReadPair(register);
+
+        address += (sbyte) input.Data[1];
+
+        input.Ram[address]--;
+        
+        // Flags unaffected
 
         return true;
     }
