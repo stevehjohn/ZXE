@@ -52,7 +52,7 @@ public class TestRunner
             }
 
             // End early
-            if (Path.GetFileName(file).CompareTo("dd 25") > 0)
+            if (Path.GetFileName(file).CompareTo("dd 2f") > 0)
             {
                 continue;
             }

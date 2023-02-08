@@ -629,6 +629,22 @@ public class Processor
         instructions[0xDD23] = new Instruction("INC IX", 1, i => INC_RR(i, Register.IX), 6);
 
         instructions[0xDD24] = new Instruction("INC IXh", 1, i => INC_RRh(i, Register.IX), 4);
+
+        instructions[0xDD25] = new Instruction("DEC IXh", 1, i => DEC_RRh(i, Register.IX), 4);
+
+        instructions[0xDD26] = new Instruction("LD IXh, n", 2, i => LD_RRh_n(i, Register.IX), 7);
+
+        instructions[0xDD29] = new Instruction("ADD IX, IX", 1, i => ADD_RR_RR(i, Register.IX, Register.IX), 11);
+
+        instructions[0xDD2A] = new Instruction("LD IX, (nn)", 3, i => LD_RR_addr_nn(i, Register.IX), 16);
+
+        instructions[0xDD2B] = new Instruction("DEC IX", 1, i => DEC_RR(i, Register.IX), 6);
+
+        instructions[0xDD2C] = new Instruction("INC IXl", 1, i => INC_RRl(i, Register.IX), 4);
+
+        instructions[0xDD2D] = new Instruction("DEC IXl", 1, i => DEC_RRl(i, Register.IX), 4);
+
+        instructions[0xDD2E] = new Instruction("LD IXl, n", 2, i => LD_RRl_n(i, Register.IX), 7);
     }
 
     private static bool NOP()
@@ -1065,9 +1081,6 @@ public class Processor
             var address = input.Data[2] << 8 | input.Data[1];
 
             input.State.Registers.WritePair(register, (ushort) (input.Ram[address + 1] << 8 | input.Ram[address]));
-
-            input.State.Registers[Register.L] = input.Ram[address];
-            input.State.Registers[Register.H] = input.Ram[address + 1];
 
             // Flags unaffected
         }
@@ -2439,7 +2452,7 @@ public class Processor
         {
             var value = input.State.Registers.ReadPair(register);
 
-            var result = (ushort) ((value & 0xFF00) + 1);
+            var result = (ushort) (byte) ((value & 0xFF00) + 1);
 
             result += (byte) (value & 0x00FF);
             
@@ -2453,6 +2466,100 @@ public class Processor
             input.State.Flags.Zero = (sbyte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
         }
+
+        return true;
+    }
+
+    private static bool DEC_RRh(Input input, Register register)
+    {
+        unchecked
+        {
+            var value = input.State.Registers.ReadPair(register);
+
+            var result = (ushort) ((value & 0xFF00) - 1);
+
+            result += (byte) (value & 0x00FF);
+            
+            // Flags
+            // Carry unaffected
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = value == 0x7F;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = (sbyte) result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool LD_RRh_n(Input input, Register register)
+    {
+        var value = input.State.Registers.ReadPair(register);
+
+        input.State.Registers.WritePair(register, (ushort) ((input.Data[1] << 8) | (value & 0x00FF)));
+
+        return true;
+    }
+
+    private static bool INC_RRl(Input input, Register register)
+    {
+        unchecked
+        {
+            var value = input.State.Registers.ReadPair(register);
+
+            var result = (ushort) (byte) ((value & 0x00FF) + 1);
+
+            result += (byte) (value & 0xFF00);
+            
+            // Flags
+            // Carry unaffected
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = value == 0x7F;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = (sbyte) result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+        }
+
+        return true;
+    }
+
+    private static bool DEC_RRl(Input input, Register register)
+    {
+        unchecked
+        {
+            var value = input.State.Registers.ReadPair(register);
+
+            var result = (ushort) (byte) ((value & 0x00FF) - 1);
+
+            result += (byte) (value & 0xFF00);
+            
+            // Flags
+            // Carry unaffected
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = value == 0x7F;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = (sbyte) result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool LD_RRl_n(Input input, Register register)
+    {
+        var value = input.State.Registers.ReadPair(register);
+
+        input.State.Registers.WritePair(register, (ushort) ((input.Data[1]) | (value & 0xFF00)));
 
         return true;
     }
