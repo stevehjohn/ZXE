@@ -762,8 +762,9 @@ public class Processor
 
         instructions[0xDD9D] = new Instruction("SBC A, IXl", 1, i => SBC_R_RRl(i, Register.A, Register.IX), 4);
 
-        instructions[0xDD9E] = new Instruction("SBC A, (IX + d)", 2, i => SBC_R_addr_RR_plus_d(i, Register.A, Register.IX), 4);
+        instructions[0xDD9E] = new Instruction("SBC A, (IX + d)", 2, i => SBC_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
 
+        instructions[0xDDA4] = new Instruction("AND A, IXh", 1, i => AND_R_RRh(i, Register.A, Register.IX), 4);
         // TODO: More...
     }
 
@@ -3228,4 +3229,29 @@ public class Processor
         }
 
         return true;
-    }}
+    }
+
+    private static bool AND_R_RRh(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] & (input.State.Registers.ReadPair(source) & 0xFF00) >> 8;
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can AND overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = true;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+}
