@@ -832,6 +832,70 @@ public class Processor
         instructions[0xFD2D] = new Instruction("DEC IYl", 1, i => DEC_RRl(i, Register.IY), 4);
 
         instructions[0xFD2E] = new Instruction("LD IYl, n", 2, i => LD_RRl_n(i, Register.IY), 7);
+
+        instructions[0xFD34] = new Instruction("INC (IY + d)", 2, i => INC_addr_RR_plus_d(i, Register.IY), 19);
+
+        instructions[0xFD35] = new Instruction("DEC (IY + d)", 2, i => DEC_addr_RR_plus_d(i, Register.IY), 19);
+
+        instructions[0xFD36] = new Instruction("LD (IY + d), n", 3, i => LD_addr_RR_plus_d_n(i, Register.IY), 15);
+
+        instructions[0xFD39] = new Instruction("ADD IY, SP", 1, i => ADD_RR_SP(i, Register.IY), 11);
+
+        instructions[0xFD44] = new Instruction("LD B, IYh", 1, i => LD_R_RRh(i, Register.B, Register.IY), 4);
+
+        instructions[0xFD45] = new Instruction("LD B, IYl", 1, i => LD_R_RRl(i, Register.B, Register.IY), 4);
+
+        instructions[0xFD46] = new Instruction("LD B, (IY + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.B, Register.IY), 15);
+
+        instructions[0xFD4C] = new Instruction("LD C, IYh", 1, i => LD_R_RRh(i, Register.C, Register.IY), 4);
+
+        instructions[0xFD4D] = new Instruction("LD C, IYl", 1, i => LD_R_RRl(i, Register.C, Register.IY), 4);
+
+        instructions[0xFD4E] = new Instruction("LD C, (IY + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.C, Register.IY), 15);
+
+        instructions[0xFD54] = new Instruction("LD D, IYh", 1, i => LD_R_RRh(i, Register.D, Register.IY), 4);
+
+        instructions[0xFD55] = new Instruction("LD D, IYl", 1, i => LD_R_RRl(i, Register.D, Register.IY), 4);
+
+        instructions[0xFD56] = new Instruction("LD D, (IY + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.D, Register.IY), 15);
+
+        instructions[0xFD5C] = new Instruction("LD E, IYh", 1, i => LD_R_RRh(i, Register.E, Register.IY), 4);
+
+        instructions[0xFD5D] = new Instruction("LD E, IYl", 1, i => LD_R_RRl(i, Register.E, Register.IY), 4);
+
+        instructions[0xFD5E] = new Instruction("LD E, (IY + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.E, Register.IY), 15);
+
+        instructions[0xFD60] = new Instruction("LD IYh, B", 1, i => LD_RRh_R(i, Register.IY, Register.B), 4);
+
+        instructions[0xFD61] = new Instruction("LD IYh, C", 1, i => LD_RRh_R(i, Register.IY, Register.C), 4);
+
+        instructions[0xFD62] = new Instruction("LD IYh, D", 1, i => LD_RRh_R(i, Register.IY, Register.D), 4);
+
+        instructions[0xFD63] = new Instruction("LD IYh, E", 1, i => LD_RRh_R(i, Register.IY, Register.E), 4);
+
+        instructions[0xFD64] = new Instruction("LD IYh, IYh", 1, i => LD_RRh_RRh(i, Register.IY, Register.IY), 4);
+
+        instructions[0xFD65] = new Instruction("LD IYh, IYl", 1, i => LD_RRh_RRl(i, Register.IY, Register.IY), 4);
+
+        instructions[0xFD66] = new Instruction("LD H, (IY + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.IY, Register.IY), 15);
+
+        instructions[0xFD67] = new Instruction("LD IYh, A", 1, i => LD_RRh_R(i, Register.IY, Register.A), 4);
+
+        instructions[0xFD68] = new Instruction("LD IYl, B", 1, i => LD_RRh_R(i, Register.IY, Register.A), 4);
+
+        instructions[0xFD69] = new Instruction("LD IYl, C", 1, i => LD_RRh_R(i, Register.IY, Register.B), 4);
+
+        instructions[0xFD6A] = new Instruction("LD IYl, D", 1, i => LD_RRh_R(i, Register.IY, Register.D), 4);
+
+        instructions[0xFD6B] = new Instruction("LD IYl, E", 1, i => LD_RRh_R(i, Register.IY, Register.E), 4);
+
+        instructions[0xFD6C] = new Instruction("LD IYl, IYh", 1, i => LD_RRl_RRh(i, Register.IY, Register.IY), 4);
+
+        instructions[0xFD6D] = new Instruction("LD IYl, IYl", 1, i => LD_RRl_RRl(i, Register.IY, Register.IY), 4);
+
+        instructions[0xFD6E] = new Instruction("LD L, (IY + d)", 1, i => LD_R_addr_RR_plus_d(i, Register.L, Register.IY), 4);
+
+        instructions[0xFD6F] = new Instruction("LD IYl, A", 1, i => LD_RRl_R(i, Register.IY, Register.A), 4);
     }
 
     private static bool NOP()
