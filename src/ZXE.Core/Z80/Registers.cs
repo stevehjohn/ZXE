@@ -47,4 +47,12 @@ public class Registers
 
         return ReadPair(Enum.Parse<Register>(register));
     }
+
+    public void WriteLow(Register register, byte value)
+    {
+    }
+
+    public void WriteHigh(Register register, byte value)
+    {
+    }
 }

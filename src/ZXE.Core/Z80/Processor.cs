@@ -566,7 +566,7 @@ public class Processor
 
         instructions[0xE2] = new Instruction("JP PO, nn", 3, JP_PO_nn, 10);
 
-        instructions[0xE3] = new Instruction("EX (SP), HL", 1, EX_addr_RR_RR, 19);
+        instructions[0xE3] = new Instruction("EX (SP), HL", 1, i => EX_addr_SP_RR(i, Register.HL), 19);
 
         instructions[0xE4] = new Instruction("CALL PO, nn", 3, CALL_PO_nn, 10);
 
@@ -781,6 +781,22 @@ public class Processor
         instructions[0xDDB5] = new Instruction("OR A, IXh", 1, i => OR_R_RRl(i, Register.A, Register.IX), 4);
 
         instructions[0xDDB6] = new Instruction("OR A, (IX + d)", 2, i => OR_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
+
+        instructions[0xDDBC] = new Instruction("CP A, IXh", 1, i => CP_R_RRh(i, Register.A, Register.IX), 4);
+
+        instructions[0xDDBD] = new Instruction("CP A, IXh", 1, i => CP_R_RRl(i, Register.A, Register.IX), 4);
+
+        instructions[0xDDBE] = new Instruction("CP A, (IX + d)", 2, i => CP_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
+
+        instructions[0xDDDD] = new Instruction("NOP", 1, _ => NOP(), 4);
+
+        instructions[0xDDE1] = new Instruction("POP IX", 1, i => POP_RR(i, Register.IX), 10);
+
+        instructions[0xDDE3] = new Instruction("EX (SP), IX", 1, i => EX_addr_SP_RR(i, Register.IX), 19);
+
+        instructions[0xDDE5] = new Instruction("PUSH IX", 1, i => PUSH_RR(i, Register.IX), 11);
+
+        instructions[0xDDE9] = new Instruction("JP (IX)", 1, i => JP_addr_RR(i, Register.IX), 11);
 
         // TODO: More...
     }
@@ -2330,11 +2346,17 @@ public class Processor
         return true;
     }
 
-    private static bool EX_addr_RR_RR(Input input)
+    private static bool EX_addr_SP_RR(Input input, Register register)
     {
-        (input.Ram[input.State.StackPointer], input.State.Registers[Register.L]) = (input.State.Registers[Register.L], input.Ram[input.State.StackPointer]);
+        var value = input.State.Registers.ReadPair(register);
 
-        (input.Ram[input.State.StackPointer + 1], input.State.Registers[Register.H]) = (input.State.Registers[Register.H], input.Ram[input.State.StackPointer + 1]);
+        input.State.Registers.WriteLow(register, input.Ram[input.State.StackPointer]);
+
+        input.State.Registers.WriteHigh(register, input.Ram[input.State.StackPointer + 1]);
+
+        input.Ram[input.State.StackPointer] = (byte) (value & 0x00FF);
+
+        input.Ram[input.State.StackPointer + 1] = (byte) ((value & 0xFF00) >> 8);
 
         // Flags unaffected
 
@@ -3457,6 +3479,84 @@ public class Processor
             input.State.Flags.X2 = (result & 0x20) > 0;
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool CP_R_RRh(Input input, Register left, Register right)
+    {
+        unchecked
+        {
+            var leftValue = input.State.Registers[left];
+
+            var rightValue = (input.State.Registers.ReadPair(right) & 0xFF00) >> 8;
+
+            var difference = leftValue - rightValue;
+
+            // Flags
+            input.State.Flags.Carry = rightValue > leftValue;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = false; // TODO: Can CP overflow?
+            input.State.Flags.X1 = (rightValue & 0x08) > 0;
+            input.State.Flags.HalfCarry = (leftValue & 0x0F) < (rightValue & 0x0F);
+            input.State.Flags.X2 = (rightValue & 0x20) > 0;
+            input.State.Flags.Zero = difference == 0;
+            input.State.Flags.Sign = (byte) difference > 0x7F;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool CP_R_RRl(Input input, Register left, Register right)
+    {
+        unchecked
+        {
+            var leftValue = input.State.Registers[left];
+
+            var rightValue = input.State.Registers.ReadPair(right) & 0x00FF;
+
+            var difference = leftValue - rightValue;
+
+            // Flags
+            input.State.Flags.Carry = rightValue > leftValue;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = false; // TODO: Can CP overflow?
+            input.State.Flags.X1 = (rightValue & 0x08) > 0;
+            input.State.Flags.HalfCarry = (leftValue & 0x0F) < (rightValue & 0x0F);
+            input.State.Flags.X2 = (rightValue & 0x20) > 0;
+            input.State.Flags.Zero = difference == 0;
+            input.State.Flags.Sign = (byte) difference > 0x7F;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool CP_R_addr_RR_plus_d(Input input, Register left, Register right)
+    {
+        unchecked
+        {
+            var leftValue = input.State.Registers[left];
+
+            var rightValue = input.Ram[input.State.Registers.ReadPair(right) + (sbyte) input.Data[1]];
+
+            var difference = leftValue - rightValue;
+
+            // Flags
+            input.State.Flags.Carry = rightValue > leftValue;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = false; // TODO: Can CP overflow?
+            input.State.Flags.X1 = (rightValue & 0x08) > 0;
+            input.State.Flags.HalfCarry = (leftValue & 0x0F) < (rightValue & 0x0F);
+            input.State.Flags.X2 = (rightValue & 0x20) > 0;
+            input.State.Flags.Zero = difference == 0;
+            input.State.Flags.Sign = (byte) difference > 0x7F;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }

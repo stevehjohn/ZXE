@@ -184,6 +184,11 @@ public class FormattingTracer : ITracer
 
         foreach (var part in parts)
         {
+            if (part == "SP")
+            {
+                continue;
+            }
+
             if (char.IsSymbol(part[0]))
             {
                 continue;
