@@ -1329,6 +1329,70 @@ public class Processor
         instructions[0xCB9E] = new Instruction("RES 3, (HL)", 1, i => RES_b_addr_RR(i, 0x08, Register.HL), 11, "RES (HL)");
 
         instructions[0xCB9F] = new Instruction("RES 3, A", 1, i => RES_b_R(i, 0x08, Register.A), 4, "RES A");
+
+        instructions[0xCBA0] = new Instruction("RES 4, B", 1, i => RES_b_R(i, 0x10, Register.B), 4, "RES B");
+
+        instructions[0xCBA1] = new Instruction("RES 4, C", 1, i => RES_b_R(i, 0x10, Register.C), 4, "RES C");
+
+        instructions[0xCBA2] = new Instruction("RES 4, D", 1, i => RES_b_R(i, 0x10, Register.D), 4, "RES D");
+
+        instructions[0xCBA3] = new Instruction("RES 4, E", 1, i => RES_b_R(i, 0x10, Register.E), 4, "RES E");
+
+        instructions[0xCBA4] = new Instruction("RES 4, H", 1, i => RES_b_R(i, 0x10, Register.H), 4, "RES H");
+
+        instructions[0xCBA5] = new Instruction("RES 4, L", 1, i => RES_b_R(i, 0x10, Register.L), 4, "RES L");
+
+        instructions[0xCBA6] = new Instruction("RES 4, (HL)", 1, i => RES_b_addr_RR(i, 0x10, Register.HL), 11, "RES (HL)");
+
+        instructions[0xCBA7] = new Instruction("RES 4, A", 1, i => RES_b_R(i, 0x10, Register.A), 4, "RES A");
+
+        instructions[0xCBA8] = new Instruction("RES 5, B", 1, i => RES_b_R(i, 0x20, Register.B), 4, "RES B");
+
+        instructions[0xCBA9] = new Instruction("RES 5, C", 1, i => RES_b_R(i, 0x20, Register.C), 4, "RES C");
+
+        instructions[0xCBAA] = new Instruction("RES 5, D", 1, i => RES_b_R(i, 0x20, Register.D), 4, "RES D");
+
+        instructions[0xCBAB] = new Instruction("RES 5, E", 1, i => RES_b_R(i, 0x20, Register.E), 4, "RES E");
+
+        instructions[0xCBAC] = new Instruction("RES 5, H", 1, i => RES_b_R(i, 0x20, Register.H), 4, "RES H");
+
+        instructions[0xCBAD] = new Instruction("RES 5, L", 1, i => RES_b_R(i, 0x20, Register.L), 4, "RES L");
+
+        instructions[0xCBAE] = new Instruction("RES 5, (HL)", 1, i => RES_b_addr_RR(i, 0x20, Register.HL), 11, "RES (HL)");
+
+        instructions[0xCBAF] = new Instruction("RES 5, A", 1, i => RES_b_R(i, 0x20, Register.A), 4, "RES A");
+
+        instructions[0xCBB0] = new Instruction("RES 6, B", 1, i => RES_b_R(i, 0x40, Register.B), 4, "RES B");
+
+        instructions[0xCBB1] = new Instruction("RES 6, C", 1, i => RES_b_R(i, 0x40, Register.C), 4, "RES C");
+
+        instructions[0xCBB2] = new Instruction("RES 6, D", 1, i => RES_b_R(i, 0x40, Register.D), 4, "RES D");
+
+        instructions[0xCBB3] = new Instruction("RES 6, E", 1, i => RES_b_R(i, 0x40, Register.E), 4, "RES E");
+
+        instructions[0xCBB4] = new Instruction("RES 6, H", 1, i => RES_b_R(i, 0x40, Register.H), 4, "RES H");
+
+        instructions[0xCBB5] = new Instruction("RES 6, L", 1, i => RES_b_R(i, 0x40, Register.L), 4, "RES L");
+
+        instructions[0xCBB6] = new Instruction("RES 6, (HL)", 1, i => RES_b_addr_RR(i, 0x40, Register.HL), 11, "RES (HL)");
+
+        instructions[0xCBB7] = new Instruction("RES 6, A", 1, i => RES_b_R(i, 0x40, Register.A), 4, "RES A");
+
+        instructions[0xCBB8] = new Instruction("RES 7, B", 1, i => RES_b_R(i, 0x80, Register.B), 4, "RES B");
+
+        instructions[0xCBB9] = new Instruction("RES 7, C", 1, i => RES_b_R(i, 0x80, Register.C), 4, "RES C");
+
+        instructions[0xCBBA] = new Instruction("RES 7, D", 1, i => RES_b_R(i, 0x80, Register.D), 4, "RES D");
+
+        instructions[0xCBBB] = new Instruction("RES 7, E", 1, i => RES_b_R(i, 0x80, Register.E), 4, "RES E");
+
+        instructions[0xCBBC] = new Instruction("RES 7, H", 1, i => RES_b_R(i, 0x80, Register.H), 4, "RES H");
+
+        instructions[0xCBBD] = new Instruction("RES 7, L", 1, i => RES_b_R(i, 0x80, Register.L), 4, "RES L");
+
+        instructions[0xCBBE] = new Instruction("RES 7, (HL)", 1, i => RES_b_addr_RR(i, 0x80, Register.HL), 11, "RES (HL)");
+
+        instructions[0xCBBF] = new Instruction("RES 7, A", 1, i => RES_b_R(i, 0x80, Register.A), 4, "RES A");
     }
 
     private static bool NOP()
