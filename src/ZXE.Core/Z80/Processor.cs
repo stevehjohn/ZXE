@@ -1043,19 +1043,19 @@ public class Processor
 
         instructions[0xCB10] = new Instruction("RL B", 1, i => RL_R(i, Register.B), 4);
 
-        instructions[0xCB10] = new Instruction("RL C", 1, i => RL_R(i, Register.C), 4);
+        instructions[0xCB11] = new Instruction("RL C", 1, i => RL_R(i, Register.C), 4);
 
-        instructions[0xCB10] = new Instruction("RL D", 1, i => RL_R(i, Register.D), 4);
+        instructions[0xCB12] = new Instruction("RL D", 1, i => RL_R(i, Register.D), 4);
 
-        instructions[0xCB10] = new Instruction("RL E", 1, i => RL_R(i, Register.E), 4);
+        instructions[0xCB13] = new Instruction("RL E", 1, i => RL_R(i, Register.E), 4);
 
-        instructions[0xCB10] = new Instruction("RL H", 1, i => RL_R(i, Register.H), 4);
+        instructions[0xCB14] = new Instruction("RL H", 1, i => RL_R(i, Register.H), 4);
 
-        instructions[0xCB10] = new Instruction("RL L", 1, i => RL_R(i, Register.L), 4);
+        instructions[0xCB15] = new Instruction("RL L", 1, i => RL_R(i, Register.L), 4);
 
+        instructions[0xCB16] = new Instruction("RL (HL)", 1, i => RL_addr_RR(i, Register.HL), 11);
 
-
-        instructions[0xCB10] = new Instruction("RL A", 1, i => RL_R(i, Register.A), 4);
+        instructions[0xCB17] = new Instruction("RL A", 1, i => RL_R(i, Register.A), 4);
     }
 
     private static bool NOP()
@@ -4016,4 +4016,35 @@ public class Processor
         }
 
         return true;
-    }}
+    }
+
+    private static bool RL_addr_RR(Input input, Register register)
+    {
+        unchecked
+        {
+            var data = input.Ram[input.State.Registers.ReadPair(register)];
+
+            var topBit = (data & 0x80) >> 7;
+
+            var result = (byte) (data << 1);
+
+            result |= (byte) (input.State.Flags.Carry ? 1 : 0);
+
+            input.Ram[input.State.Registers.ReadPair(register)] = result;
+
+            // Flags
+            input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.AddSubtract = false;
+            // ParityOverflow unaffected
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            // Zero unaffected
+            // Sign unaffected
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+}
