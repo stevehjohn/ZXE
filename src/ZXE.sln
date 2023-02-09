@@ -24,6 +24,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core.ThirdPartyTests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Common", "ZXE.Common\ZXE.Common.csproj", "{92EE2C72-0F6F-4E5B-A404-DBA5F5748120}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rom Images", "Rom Images", "{0EA62AEC-0B7B-4833-91CE-F92066E804AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum 48K", "ZX Spectrum 48K", "{57959EB0-56F2-4C3E-A94F-57E2F9672B66}"
+	ProjectSection(SolutionItems) = preProject
+		..\ROM Images\ZX Spectrum 48K\image-0.rom = ..\ROM Images\ZX Spectrum 48K\image-0.rom
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +60,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{57959EB0-56F2-4C3E-A94F-57E2F9672B66} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}

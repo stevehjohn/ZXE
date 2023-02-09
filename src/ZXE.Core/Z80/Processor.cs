@@ -746,6 +746,10 @@ public class Processor
 
         instructions[0xDD86] = new Instruction("ADD A, (IX + d)", 2, i => ADD_R_addr_RR_plus_d(i, Register.A, Register.IX), 4);
 
+        instructions[0xDD8C] = new Instruction("ADC A, IXh", 1, i => ADC_R_RRh(i, Register.A, Register.IX), 4);
+
+        instructions[0xDD8C] = new Instruction("ADC A, IXl", 1, i => ADC_R_RRl(i, Register.A, Register.IX), 4);
+
         // TODO: More...
     }
 
@@ -2934,6 +2938,66 @@ public class Processor
             input.State.Flags.ParityOverflow = result > 0xFF;
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool ADC_R_RRh(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var valueD = input.State.Registers[destination];
+
+            var valueS = input.State.Registers.ReadPair(source) & 0xFF00 >> 8;
+
+            var carry = (byte) (input.State.Flags.Carry ? 0x01 : 0x00);
+
+            var result = valueD + valueS + carry;
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = result > 0xFF;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result > 0x7F;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool ADC_R_RRl(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var valueD = input.State.Registers[destination];
+
+            var valueS = input.State.Registers.ReadPair(source) & 0x00FF;
+
+            var carry = (byte) (input.State.Flags.Carry ? 0x01 : 0x00);
+
+            var result = valueD + valueS + carry;
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = result > 0xFF;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result > 0x7F;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0xF;
             input.State.Flags.X2 = (result & 0x20) > 0;
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
