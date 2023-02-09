@@ -1056,6 +1056,22 @@ public class Processor
         instructions[0xCB16] = new Instruction("RL (HL)", 1, i => RL_addr_RR(i, Register.HL), 11);
 
         instructions[0xCB17] = new Instruction("RL A", 1, i => RL_R(i, Register.A), 4);
+
+        instructions[0xCB18] = new Instruction("RR B", 1, i => RR_R(i, Register.B), 4);
+
+        instructions[0xCB19] = new Instruction("RR C", 1, i => RR_R(i, Register.C), 4);
+
+        instructions[0xCB1A] = new Instruction("RR D", 1, i => RR_R(i, Register.D), 4);
+
+        instructions[0xCB1B] = new Instruction("RR E", 1, i => RR_R(i, Register.E), 4);
+
+        instructions[0xCB1C] = new Instruction("RR H", 1, i => RR_R(i, Register.H), 4);
+
+        instructions[0xCB1D] = new Instruction("RR L", 1, i => RR_R(i, Register.L), 4);
+
+        instructions[0xCB1E] = new Instruction("RR (HL)", 1, i => RR_addr_RR(i, Register.HL), 11);
+
+        instructions[0xCB1F] = new Instruction("RR A", 1, i => RR_R(i, Register.A), 4);
     }
 
     private static bool NOP()
@@ -4030,10 +4046,68 @@ public class Processor
 
             result |= (byte) (input.State.Flags.Carry ? 1 : 0);
 
-            input.Ram[input.State.Registers.ReadPair(register)] = result;
+             input.Ram[input.State.Registers.ReadPair(register)] = result;
 
             // Flags
             input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.AddSubtract = false;
+            // ParityOverflow unaffected
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            // Zero unaffected
+            // Sign unaffected
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool RR_R(Input input, Register register)
+    {
+        unchecked
+        {
+            var bottomBit = input.State.Registers[register] & 0x01;
+
+            var result = (byte) (input.State.Registers[register] >> 1);
+
+            result |= (byte) (input.State.Flags.Carry ? 0x80 : 0);
+
+            input.State.Registers[register] = result;
+
+            // Flags
+            input.State.Flags.Carry = bottomBit == 1;
+            input.State.Flags.AddSubtract = false;
+            // ParityOverflow unaffected
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            // Zero unaffected
+            // Sign unaffected
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool RR_addr_RR(Input input, Register register)
+    {
+        unchecked
+        {
+            var data = input.Ram[input.State.Registers.ReadPair(register)];
+
+            var bottomBit = data & 0x01;
+
+            var result = (byte) (data >> 1);
+
+            result |= (byte) (input.State.Flags.Carry ? 0x80 : 0);
+
+            input.Ram[input.State.Registers.ReadPair(register)] = result;
+
+            // Flags
+            input.State.Flags.Carry = bottomBit == 1;
             input.State.Flags.AddSubtract = false;
             // ParityOverflow unaffected
             input.State.Flags.X1 = (result & 0x08) > 0;
