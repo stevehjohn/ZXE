@@ -658,6 +658,8 @@ public class Processor
         instructions[0xDD36] = new Instruction("LD (IX + d), n", 3, i => LD_addr_RR_plus_d_n(i, Register.IX), 19);
 
         instructions[0xDD39] = new Instruction("ADD IX, SP", 1, i => ADD_RR_SP(i, Register.IX), 11);
+
+        instructions[0xDD44] = new Instruction("LD B, IXh", 1, i => LD_R_RRh(i, Register.B, Register.IX), 4);
     }
 
     private static bool NOP()
@@ -2615,6 +2617,17 @@ public class Processor
 
         input.Ram[address] = input.Data[2];
 
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool LD_R_RRh(Input input, Register destination, Register source)
+    {
+        var value = input.State.Registers.ReadPair(source);
+
+        input.State.Registers[destination] = (byte) ((value & 0xFF00) >> 8);
+        
         // Flags unaffected
 
         return true;
