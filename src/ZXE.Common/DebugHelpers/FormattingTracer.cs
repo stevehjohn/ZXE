@@ -147,82 +147,131 @@ public class FormattingTracer : ITracer
 
         builder.Append($"    &Cyan;SP&White;: &Yellow;0x{state.StackPointer:X4}");
 
-        builder.Append($"    &Cyan;Flags&White;: &Magenta;{state.Flags.GetFlags()}");
+        builder.Append($"    &Cyan;Flags&White;: &Green;{state.Flags.GetFlags()}");
 
         if (parts.Length == 1 || parts[1][0] == '0')
         {
             return builder.ToString();
         }
 
-        builder.Append($"    {FormatOperandData(parts[1], data, state, ram)}");
+        builder.Append($"    {FormatOperandData(parts[1], data, state, 1)}");
 
         if (parts.Length > 2)
         {
-            builder.Append($"    {FormatOperandData(parts[2], data, state, ram)}");
+            builder.Append($"    {FormatOperandData(parts[2], data, state, 2)}");
         }
 
         return builder.ToString();
     }
 
-    private static string FormatOperandData(string operand, byte[] data, State state, Ram ram)
+    private static string FormatOperandData(string operand, byte[] data, State state, int sequence)
     {
-        var builder = new StringBuilder();
-
-        var isIndirect = false;
-
         if (operand[0] == '(')
         {
             operand = operand[1..^1];
-
-            isIndirect = true;
         }
 
-        Register? register = null;
+        var builder = new StringBuilder();
 
-        if (char.IsUpper(operand[0]))
-        {
-            register = Enum.Parse<Register>(operand);
-        }
+        var parts = operand.Split(' ');
 
-        if (register != null)
+        foreach (var part in parts)
         {
-            if (operand.Length == 2)
+            if (char.IsSymbol(part[0]))
             {
-                builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers.ReadPair((Register) register):X4}");
+                continue;
+            }
+
+            if (char.IsUpper(part[0]))
+            {
+                if (part.Length > 1)
+                {
+                    builder.Append($"&Cyan; {part}&White;: &Magenta;0x{state.Registers.ReadByName(part):X4}    ");
+                }
+                else
+                {
+                    builder.Append($"&Cyan; {part} &White;: &Magenta;0x{state.Registers.ReadByName(part):X2}      ");
+                }
+
+                continue;
+            }
+
+            if (part.Length > 1)
+            {
+                var value = data[2] << 8 | data[1];
+
+                builder.Append($"&Cyan;{part}&White;: &Green;{value:X4}");
             }
             else
             {
-                builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers[(Register) register]:X2}  ");
-            }
-        }
-        else
-        {
-            if (operand.Length == 2)
-            {
-                builder.Append($"&Green;{operand,-4}&White;: &Yellow;0x{data[2] << 8 | data[1]:X4}");
-            }
-            else
-            {
-                builder.Append($"&Green;{operand,-4}&White;: &Yellow;0x{data[1]:X2}  ");
-            }
-        }
+                var value = data[1 + sequence];
 
-        if (isIndirect)
-        {
-            builder.Append("    ");
-
-            if (register != null)
-            {
-                builder.Append($"&Magenta;({operand})&White;: &Yellow;0x{ram[state.Registers.ReadPair((Register) register)]:X2}");
-            }
-            else
-            {
-                builder.Append($"&Green;({operand})&White;: &Yellow;0x{ram[data[2] << 8 | data[1]]:X2}");
+                builder.Append($"&Cyan;{part} &White;: &Green;{value:X2}  ");
             }
         }
 
         return builder.ToString();
     }
+
+    //private static string FormatOperandData(string operand, byte[] data, State state, Ram ram)
+    //{
+    //    var builder = new StringBuilder();
+
+    //    var isIndirect = false;
+
+    //    if (operand[0] == '(')
+    //    {
+    //        operand = operand[1..^1];
+
+    //        isIndirect = true;
+    //    }
+
+    //    Register? register = null;
+
+    //    if (char.IsUpper(operand[0]))
+    //    {
+    //        register = Enum.Parse<Register>(operand);
+    //    }
+
+    //    if (register != null)
+    //    {
+    //        if (operand.Length == 2)
+    //        {
+    //            builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers.ReadPair((Register) register):X4}");
+    //        }
+    //        else
+    //        {
+    //            builder.Append($"&Magenta;{operand,-4}&White;: &Yellow;0x{state.Registers[(Register) register]:X2}  ");
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (operand.Length == 2)
+    //        {
+    //            builder.Append($"&Green;{operand,-4}&White;: &Yellow;0x{data[2] << 8 | data[1]:X4}");
+    //        }
+    //        else
+    //        {
+    //            builder.Append($"&Green;{operand,-4}&White;: &Yellow;0x{data[1]:X2}  ");
+    //        }
+    //    }
+
+    //    if (isIndirect)
+    //    {
+    //        builder.Append("    ");
+
+    //        if (register != null)
+    //        {
+    //            builder.Append($"&Magenta;({operand})&White;: &Yellow;0x{ram[state.Registers.ReadPair((Register) register)]:X2}");
+    //        }
+    //        else
+    //        {
+    //            builder.Append($"&Green;({operand})&White;: &Yellow;0x{ram[data[2] << 8 | data[1]]:X2}");
+    //        }
+    //    }
+
+    //    return builder.ToString();
+    //}
 
     private static string[] GetMnemonicParts(string mnemonic)
     {

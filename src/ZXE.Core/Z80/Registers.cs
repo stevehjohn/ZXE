@@ -39,4 +39,14 @@ public class Registers
         get => _registers[(int) register];
         set => _registers[(int) register] = value;
     }
+
+    public ushort ReadByName(string register)
+    {
+        if (register.Length == 1)
+        {
+            return _registers[(int) Enum.Parse<Register>(register)];
+        }
+
+        return ReadPair(Enum.Parse<Register>(register));
+    }
 }
