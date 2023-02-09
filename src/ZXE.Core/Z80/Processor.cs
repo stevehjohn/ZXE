@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using ZXE.Core.Exceptions;
+﻿using ZXE.Core.Exceptions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
@@ -99,6 +98,8 @@ public class Processor
         InitialiseBaseInstructions(instructions);
 
         InitialiseDDInstructions(instructions);
+        
+        InitialiseFDInstructions(instructions);
 
         var instructionArray = new Instruction[instructions.Max(i => i.Key) + 1];
 
@@ -614,6 +615,9 @@ public class Processor
         instructions[0xFB] = new Instruction("EI", 1, EI, 4);
 
         instructions[0xFC] = new Instruction("CALL S, nn", 3, CALL_S_nn, 10);
+        
+        // Switch opcode set to FD
+        instructions[0xFD] = new Instruction("SOPSET FD", 1, _ => SetOpcodePrefix(0xFD), 4);
 
         instructions[0xFE] = new Instruction("CP A, n", 2, i => CP_R_n(i, Register.A), 7);
 
@@ -741,6 +745,22 @@ public class Processor
         instructions[0xDD85] = new Instruction("ADD A, IXl", 1, i => ADD_R_RRl(i, Register.A, Register.IX), 4);
 
         instructions[0xDD86] = new Instruction("ADD A, (IX + d)", 2, i => ADD_R_addr_RR_plus_d(i, Register.A, Register.IX), 4);
+
+        // TODO: More...
+    }
+
+    private static void InitialiseFDInstructions(Dictionary<int, Instruction> instructions)
+    {
+        instructions[0xFD09] = new Instruction("ADD IY, BC", 1, i => ADD_RR_RR(i, Register.IY, Register.BC), 11);
+
+        instructions[0xFD19] = new Instruction("ADD IY, DE", 1, i => ADD_RR_RR(i, Register.IY, Register.DE), 11);
+
+        instructions[0xFD21] = new Instruction("LD IY, nn", 3, i => LD_RR_nn(i, Register.IY), 10);
+
+        instructions[0xFD22] = new Instruction("LD (nn), IY", 3, i => LD_addr_nn_RR(i, Register.IY), 16);
+
+        instructions[0xFD23] = new Instruction("INC IY", 1, i => INC_RR(i, Register.IY), 6);
+
     }
 
     private static bool NOP()
