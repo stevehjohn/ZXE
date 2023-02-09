@@ -765,6 +765,17 @@ public class Processor
         instructions[0xDD9E] = new Instruction("SBC A, (IX + d)", 2, i => SBC_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
 
         instructions[0xDDA4] = new Instruction("AND A, IXh", 1, i => AND_R_RRh(i, Register.A, Register.IX), 4);
+
+        instructions[0xDDA5] = new Instruction("AND A, IXl", 1, i => AND_R_RRl(i, Register.A, Register.IX), 4);
+
+        instructions[0xDDA6] = new Instruction("AND A, (IX + d)", 2, i => AND_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
+
+        instructions[0xDDAC] = new Instruction("XOR A, IXh", 1, i => XOR_R_RRh(i, Register.A, Register.IX), 4);
+
+        instructions[0xDDAD] = new Instruction("XOR A, IXl", 1, i => XOR_R_RRl(i, Register.A, Register.IX), 4);
+
+        instructions[0xDDAE] = new Instruction("XOR A, (IX + d)", 2, i => XOR_R_addr_RR_plus_d(i, Register.A, Register.IX), 4);
+
         // TODO: More...
     }
 
@@ -3245,6 +3256,126 @@ public class Processor
             input.State.Flags.ParityOverflow = false; // TODO: Can AND overflow?
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = true;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool AND_R_RRl(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] & input.State.Registers.ReadPair(source) & 0x00FF;
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can AND overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = true;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool AND_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] & input.Ram[input.State.Registers.ReadPair(source) + (sbyte) input.Data[1]];
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can AND overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = true;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool XOR_R_RRh(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] ^ ((input.State.Registers.ReadPair(source) & 0xFF00) >> 8);
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can XOR overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool XOR_R_RRl(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] ^ input.State.Registers.ReadPair(source) & 0x00FF;
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can XOR overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool XOR_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var result = input.State.Registers[destination] ^ input.Ram[input.State.Registers.ReadPair(source) + (sbyte) input.Data[1]];
+
+            input.State.Registers[destination] = (byte) result;
+
+            // Flags
+            input.State.Flags.Carry = false;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = false; // TODO: Can XOR overflow?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
