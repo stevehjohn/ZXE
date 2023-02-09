@@ -1137,6 +1137,8 @@ public class Processor
         instructions[0xCB3E] = new Instruction("SRL (HL)", 1, i => SRL_addr_RR(i, Register.HL), 4);
 
         instructions[0xCB3F] = new Instruction("SRL A", 1, i => SRL_R(i, Register.A), 4);
+
+        instructions[0xCB40] = new Instruction("BIT 0, B", 1, i => BIT(i, 0x01, Register.B), 4);
     }
 
     private static bool NOP()
@@ -4303,7 +4305,7 @@ public class Processor
         return true;
     }
 
-    public static bool SLS_R(Input input, Register register)
+    private static bool SLS_R(Input input, Register register)
     {
         unchecked
         {
@@ -4333,7 +4335,7 @@ public class Processor
         return true;
     }
 
-    public static bool SLS_addr_RR(Input input, Register register)
+    private static bool SLS_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -4363,7 +4365,7 @@ public class Processor
         return true;
     }
 
-    public static bool SRL_R(Input input, Register register)
+    private static bool SRL_R(Input input, Register register)
     {
         unchecked
         {
@@ -4391,7 +4393,7 @@ public class Processor
         return true;
     }
 
-    public static bool SRL_addr_RR(Input input, Register register)
+    private static bool SRL_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -4417,4 +4419,26 @@ public class Processor
         }
 
         return true;
-    }}
+    }
+
+    private static bool BIT(Input input, byte bit, Register register)
+    {
+        var data = input.State.Registers[register];
+
+        var result = (byte) (data & bit);
+
+        // Flags
+        // Carry unaffected
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = result == 0;
+        input.State.Flags.X1 = (data & 0x08) > 0;
+        input.State.Flags.HalfCarry = true;
+        input.State.Flags.X2 = (data & 0x20) > 0;
+        input.State.Flags.Zero = (data & bit) == 0;
+        input.State.Flags.Sign = bit == 7 && result != 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+
+        return true;
+    }
+}
