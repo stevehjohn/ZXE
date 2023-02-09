@@ -748,7 +748,7 @@ public class Processor
 
         instructions[0xDD8C] = new Instruction("ADC A, IXh", 1, i => ADC_R_RRh(i, Register.A, Register.IX), 4);
 
-        instructions[0xDD8C] = new Instruction("ADC A, IXl", 1, i => ADC_R_RRl(i, Register.A, Register.IX), 4);
+        instructions[0xDD8D] = new Instruction("ADC A, IXl", 1, i => ADC_R_RRl(i, Register.A, Register.IX), 4);
 
         // TODO: More...
     }
@@ -2681,7 +2681,7 @@ public class Processor
     {
         var value = input.State.Registers.ReadPair(register);
 
-        input.State.Registers.WritePair(register, (ushort) ((input.Data[1]) | (value & 0xFF00)));
+        input.State.Registers.WritePair(register, (ushort) (input.Data[1] | (value & 0xFF00)));
         
         // Flags unaffected
 

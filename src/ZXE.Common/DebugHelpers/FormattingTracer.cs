@@ -202,7 +202,7 @@ public class FormattingTracer : ITracer
                     }
                     else
                     {
-                        builder.Append($"&Cyan; {part[..2]}&White;: &Yellow;0x{(contents & 0xFF00) >> 8:X2}&Magenta;{contents & 0x00FF:X2}    ");
+                        builder.Append($"&Cyan; {part[..2]}&White;: &Magenta;0x&Yellow;{(contents & 0xFF00) >> 8:X2}&Magenta;{contents & 0x00FF:X2}    ");
                     }
 
                 }
