@@ -1393,6 +1393,135 @@ public class Processor
         instructions[0xCBBE] = new Instruction("RES 7, (HL)", 1, i => RES_b_addr_RR(i, 0x80, Register.HL), 11, "RES (HL)");
 
         instructions[0xCBBF] = new Instruction("RES 7, A", 1, i => RES_b_R(i, 0x80, Register.A), 4, "RES A");
+
+
+        instructions[0xCBC0] = new Instruction("SET 0, B", 1, i => SET_b_R(i, 0x01, Register.B), 4, "SET B");
+
+        instructions[0xCBC1] = new Instruction("SET 0, C", 1, i => SET_b_R(i, 0x01, Register.C), 4, "SET C");
+
+        instructions[0xCBC2] = new Instruction("SET 0, D", 1, i => SET_b_R(i, 0x01, Register.D), 4, "SET D");
+
+        instructions[0xCBC3] = new Instruction("SET 0, E", 1, i => SET_b_R(i, 0x01, Register.E), 4, "SET E");
+
+        instructions[0xCBC4] = new Instruction("SET 0, H", 1, i => SET_b_R(i, 0x01, Register.H), 4, "SET H");
+
+        instructions[0xCBC5] = new Instruction("SET 0, L", 1, i => SET_b_R(i, 0x01, Register.L), 4, "SET L");
+
+        instructions[0xCBC6] = new Instruction("SET 0, (HL)", 1, i => SET_b_addr_RR(i, 0x01, Register.HL), 11, "SET (HL)");
+
+        instructions[0xCBC7] = new Instruction("SET 0, A", 1, i => SET_b_R(i, 0x01, Register.A), 4, "SET A");
+        
+        instructions[0xCBC8] = new Instruction("SET 1, B", 1, i => SET_b_R(i, 0x02, Register.B), 4, "SET B");
+
+        instructions[0xCBC9] = new Instruction("SET 1, C", 1, i => SET_b_R(i, 0x02, Register.C), 4, "SET C");
+
+        instructions[0xCBCA] = new Instruction("SET 1, D", 1, i => SET_b_R(i, 0x02, Register.D), 4, "SET D");
+
+        instructions[0xCBCB] = new Instruction("SET 1, E", 1, i => SET_b_R(i, 0x02, Register.E), 4, "SET E");
+
+        instructions[0xCBCC] = new Instruction("SET 1, H", 1, i => SET_b_R(i, 0x02, Register.H), 4, "SET H");
+
+        instructions[0xCBCD] = new Instruction("SET 1, L", 1, i => SET_b_R(i, 0x02, Register.L), 4, "SET L");
+
+        instructions[0xCBCE] = new Instruction("SET 1, (HL)", 1, i => SET_b_addr_RR(i, 0x02, Register.HL), 11, "SET (HL)");
+
+        instructions[0xCBCF] = new Instruction("SET 1, A", 1, i => SET_b_R(i, 0x02, Register.A), 4, "SET A");
+
+        instructions[0xCBD0] = new Instruction("SET 2, B", 1, i => SET_b_R(i, 0x04, Register.B), 4, "SET B");
+
+        instructions[0xCBD1] = new Instruction("SET 2, C", 1, i => SET_b_R(i, 0x04, Register.C), 4, "SET C");
+
+        instructions[0xCBD2] = new Instruction("SET 2, D", 1, i => SET_b_R(i, 0x04, Register.D), 4, "SET D");
+
+        instructions[0xCBD3] = new Instruction("SET 2, E", 1, i => SET_b_R(i, 0x04, Register.E), 4, "SET E");
+
+        instructions[0xCBD4] = new Instruction("SET 2, H", 1, i => SET_b_R(i, 0x04, Register.H), 4, "SET H");
+
+        instructions[0xCBD5] = new Instruction("SET 2, L", 1, i => SET_b_R(i, 0x04, Register.L), 4, "SET L");
+
+        instructions[0xCBD6] = new Instruction("SET 2, (HL)", 1, i => SET_b_addr_RR(i, 0x04, Register.HL), 11, "SET (HL)");
+
+        instructions[0xCBD7] = new Instruction("SET 2, A", 1, i => SET_b_R(i, 0x04, Register.A), 4, "SET A");
+
+        instructions[0xCBD8] = new Instruction("SET 3, B", 1, i => SET_b_R(i, 0x08, Register.B), 4, "SET B");
+
+        instructions[0xCBD9] = new Instruction("SET 3, C", 1, i => SET_b_R(i, 0x08, Register.C), 4, "SET C");
+
+        instructions[0xCBDA] = new Instruction("SET 3, D", 1, i => SET_b_R(i, 0x08, Register.D), 4, "SET D");
+
+        instructions[0xCBDB] = new Instruction("SET 3, E", 1, i => SET_b_R(i, 0x08, Register.E), 4, "SET E");
+
+        instructions[0xCBDC] = new Instruction("SET 3, H", 1, i => SET_b_R(i, 0x08, Register.H), 4, "SET H");
+
+        instructions[0xCBDD] = new Instruction("SET 3, L", 1, i => SET_b_R(i, 0x08, Register.L), 4, "SET L");
+
+        instructions[0xCBDE] = new Instruction("SET 3, (HL)", 1, i => SET_b_addr_RR(i, 0x08, Register.HL), 11, "SET (HL)");
+
+        instructions[0xCBDF] = new Instruction("SET 3, A", 1, i => SET_b_R(i, 0x08, Register.A), 4, "SET A");
+
+        instructions[0xCBE0] = new Instruction("SET 4, B", 1, i => SET_b_R(i, 0x10, Register.B), 4, "SET B");
+
+        instructions[0xCBE1] = new Instruction("SET 4, C", 1, i => SET_b_R(i, 0x10, Register.C), 4, "SET C");
+
+        instructions[0xCBE2] = new Instruction("SET 4, D", 1, i => SET_b_R(i, 0x10, Register.D), 4, "SET D");
+
+        instructions[0xCBE3] = new Instruction("SET 4, E", 1, i => SET_b_R(i, 0x10, Register.E), 4, "SET E");
+
+        instructions[0xCBE4] = new Instruction("SET 4, H", 1, i => SET_b_R(i, 0x10, Register.H), 4, "SET H");
+
+        instructions[0xCBE5] = new Instruction("SET 4, L", 1, i => SET_b_R(i, 0x10, Register.L), 4, "SET L");
+
+        instructions[0xCBE6] = new Instruction("SET 4, (HL)", 1, i => SET_b_addr_RR(i, 0x10, Register.HL), 11, "SET (HL)");
+
+        instructions[0xCBE7] = new Instruction("SET 4, A", 1, i => SET_b_R(i, 0x10, Register.A), 4, "SET A");
+
+        instructions[0xCBE8] = new Instruction("SET 5, B", 1, i => SET_b_R(i, 0x20, Register.B), 4, "SET B");
+
+        instructions[0xCBE9] = new Instruction("SET 5, C", 1, i => SET_b_R(i, 0x20, Register.C), 4, "SET C");
+
+        instructions[0xCBEA] = new Instruction("SET 5, D", 1, i => SET_b_R(i, 0x20, Register.D), 4, "SET D");
+
+        instructions[0xCBEB] = new Instruction("SET 5, E", 1, i => SET_b_R(i, 0x20, Register.E), 4, "SET E");
+
+        instructions[0xCBEC] = new Instruction("SET 5, H", 1, i => SET_b_R(i, 0x20, Register.H), 4, "SET H");
+
+        instructions[0xCBED] = new Instruction("SET 5, L", 1, i => SET_b_R(i, 0x20, Register.L), 4, "SET L");
+
+        instructions[0xCBEE] = new Instruction("SET 5, (HL)", 1, i => SET_b_addr_RR(i, 0x20, Register.HL), 11, "SET (HL)");
+
+        instructions[0xCBEF] = new Instruction("SET 5, A", 1, i => SET_b_R(i, 0x20, Register.A), 4, "SET A");
+
+        instructions[0xCBF0] = new Instruction("SET 6, B", 1, i => SET_b_R(i, 0x40, Register.B), 4, "SET B");
+
+        instructions[0xCBF1] = new Instruction("SET 6, C", 1, i => SET_b_R(i, 0x40, Register.C), 4, "SET C");
+
+        instructions[0xCBF2] = new Instruction("SET 6, D", 1, i => SET_b_R(i, 0x40, Register.D), 4, "SET D");
+
+        instructions[0xCBF3] = new Instruction("SET 6, E", 1, i => SET_b_R(i, 0x40, Register.E), 4, "SET E");
+
+        instructions[0xCBF4] = new Instruction("SET 6, H", 1, i => SET_b_R(i, 0x40, Register.H), 4, "SET H");
+
+        instructions[0xCBF5] = new Instruction("SET 6, L", 1, i => SET_b_R(i, 0x40, Register.L), 4, "SET L");
+
+        instructions[0xCBF6] = new Instruction("SET 6, (HL)", 1, i => SET_b_addr_RR(i, 0x40, Register.HL), 11, "SET (HL)");
+
+        instructions[0xCBF7] = new Instruction("SET 6, A", 1, i => SET_b_R(i, 0x40, Register.A), 4, "SET A");
+
+        instructions[0xCBF8] = new Instruction("SET 7, B", 1, i => SET_b_R(i, 0x80, Register.B), 4, "SET B");
+
+        instructions[0xCBF9] = new Instruction("SET 7, C", 1, i => SET_b_R(i, 0x80, Register.C), 4, "SET C");
+
+        instructions[0xCBFA] = new Instruction("SET 7, D", 1, i => SET_b_R(i, 0x80, Register.D), 4, "SET D");
+
+        instructions[0xCBFB] = new Instruction("SET 7, E", 1, i => SET_b_R(i, 0x80, Register.E), 4, "SET E");
+
+        instructions[0xCBFC] = new Instruction("SET 7, H", 1, i => SET_b_R(i, 0x80, Register.H), 4, "SET H");
+
+        instructions[0xCBFD] = new Instruction("SET 7, L", 1, i => SET_b_R(i, 0x80, Register.L), 4, "SET L");
+
+        instructions[0xCBFE] = new Instruction("SET 7, (HL)", 1, i => SET_b_addr_RR(i, 0x80, Register.HL), 11, "SET (HL)");
+
+        instructions[0xCBFF] = new Instruction("SET 7, A", 1, i => SET_b_R(i, 0x80, Register.A), 4, "SET A");
     }
 
     private static bool NOP()
@@ -4733,6 +4862,24 @@ public class Processor
         var mask = (byte) ~bit;
 
         input.Ram[input.State.Registers.ReadPair(register)] = (byte) (input.Ram[input.State.Registers.ReadPair(register)] & mask);
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    public static bool SET_b_R(Input input, byte bit, Register register)
+    {
+        input.State.Registers[register] |= bit;
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    public static bool SET_b_addr_RR(Input input, byte bit, Register register)
+    {
+        input.State.Registers[register] |= bit;
 
         // Flags unaffected
 
