@@ -684,8 +684,6 @@ public class Processor
 
         instructions[0xDD5E] = new Instruction("LD E, (IX + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.E, Register.IX), 15);
 
-        // 0x60 ..
-
         instructions[0xDD60] = new Instruction("LD IXh, B", 1, i => LD_RRh_R(i, Register.IX, Register.B), 4);
 
         instructions[0xDD61] = new Instruction("LD IXh, C", 1, i => LD_RRh_R(i, Register.IX, Register.C), 4);
@@ -704,7 +702,31 @@ public class Processor
 
         instructions[0xDD68] = new Instruction("LD IXl, B", 1, i => LD_RRl_R(i, Register.IX, Register.B), 4);
 
-        // .. 0x75
+        instructions[0xDD69] = new Instruction("LD IXl, C", 1, i => LD_RRl_R(i, Register.IX, Register.C), 4);
+
+        instructions[0xDD6A] = new Instruction("LD IXl, D", 1, i => LD_RRl_R(i, Register.IX, Register.D), 4);
+
+        instructions[0xDD6B] = new Instruction("LD IXl, E", 1, i => LD_RRl_R(i, Register.IX, Register.E), 4);
+
+        instructions[0xDD6C] = new Instruction("LD IXl, IXh", 1, i => LD_RRl_RRh(i, Register.IX, Register.IX), 4);
+
+        instructions[0xDD6D] = new Instruction("LD IXl, IXl", 1, i => LD_RRl_RRl(i, Register.IX, Register.IX), 4);
+
+        instructions[0xDD6E] = new Instruction("LD L, (IX + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.L, Register.IX), 15);
+
+        instructions[0xDD6F] = new Instruction("LD IXl, A", 1, i => LD_RRl_R(i, Register.IX, Register.A), 4);
+
+        instructions[0xDD70] = new Instruction("LD (IX + d), B", 2, i => LD_addr_RR_plus_d_R(i, Register.IX, Register.B), 4);
+
+        instructions[0xDD71] = new Instruction("LD (IX + d), C", 2, i => LD_addr_RR_plus_d_R(i, Register.IX, Register.C), 4);
+
+        instructions[0xDD72] = new Instruction("LD (IX + d), D", 2, i => LD_addr_RR_plus_d_R(i, Register.IX, Register.D), 4);
+
+        instructions[0xDD73] = new Instruction("LD (IX + d), E", 2, i => LD_addr_RR_plus_d_R(i, Register.IX, Register.E), 4);
+
+        instructions[0xDD74] = new Instruction("LD (IX + d), H", 2, i => LD_addr_RR_plus_d_R(i, Register.IX, Register.H), 4);
+
+        instructions[0xDD75] = new Instruction("LD (IX + d), L", 2, i => LD_addr_RR_plus_d_R(i, Register.IX, Register.L), 4);
 
         instructions[0xDD77] = new Instruction("LD (IX + d), A", 2, i => LD_addr_RR_plus_d_R(i, Register.IX, Register.A), 15);
 
@@ -2770,6 +2792,36 @@ public class Processor
         var value = input.State.Registers.ReadPair(destination);
 
         value = (ushort) ((value & 0xFF00) | input.State.Registers[source]);
+
+        input.State.Registers.WritePair(destination, value);
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool LD_RRl_RRh(Input input, Register destination, Register source)
+    {
+        var left = input.State.Registers.ReadPair(destination);
+
+        var right = input.State.Registers.ReadPair(source);
+
+        var value = (ushort) ((left & 0xFF00) | (right & 0xFF00));
+
+        input.State.Registers.WritePair(destination, value);
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool LD_RRl_RRl(Input input, Register destination, Register source)
+    {
+        var left = input.State.Registers.ReadPair(destination);
+
+        var right = input.State.Registers.ReadPair(source);
+        
+        var value = (ushort) ((left & 0xFF00) | (right & 0x00FF));
 
         input.State.Registers.WritePair(destination, value);
 
