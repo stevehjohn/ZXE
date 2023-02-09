@@ -1265,6 +1265,22 @@ public class Processor
         instructions[0xCB7E] = new Instruction("BIT 7, (HL)", 1, i => BIT_b_addr_RR(i, 0x80, Register.HL), 8);
         
         instructions[0xCB7F] = new Instruction("BIT 7, A", 1, i => BIT_b_R(i, 0x80, Register.A), 4);
+        
+        instructions[0xCB80] = new Instruction("RES 0, B", 1, i => RES_b_R(i, 0x01, Register.B), 4);
+
+        instructions[0xCB81] = new Instruction("RES 0, C", 1, i => RES_b_R(i, 0x01, Register.C), 4);
+
+        instructions[0xCB82] = new Instruction("RES 0, D", 1, i => RES_b_R(i, 0x01, Register.D), 4);
+
+        instructions[0xCB83] = new Instruction("RES 0, E", 1, i => RES_b_R(i, 0x01, Register.E), 4);
+
+        instructions[0xCB84] = new Instruction("RES 0, H", 1, i => RES_b_R(i, 0x01, Register.H), 4);
+
+        instructions[0xCB85] = new Instruction("RES 0, L", 1, i => RES_b_R(i, 0x01, Register.L), 4);
+
+        instructions[0xCB86] = new Instruction("RES 0, (HL)", 1, i => RES_b_addr_RR(i, 0x01, Register.HL), 8);
+        
+        instructions[0xCB87] = new Instruction("RES 0, A", 1, i => RES_b_R(i, 0x01, Register.A), 4);
     }
 
     private static bool NOP()
@@ -4589,4 +4605,23 @@ public class Processor
         return true;
     }
 
+    private static bool RES_b_R(Input input, byte bit, Register register)
+    {
+        // Flags unaffected
+        var mask = (byte) ~bit;
+
+        input.State.Registers[register] = (byte) (input.State.Registers[register] & mask);
+
+        return true;
+    }
+
+    private static bool RES_b_addr_RR(Input input, byte bit, Register register)
+    {
+        // Flags unaffected
+        var mask = (byte) ~bit;
+
+        input.Ram[input.State.Registers.ReadPair(register)] = (byte) (input.Ram[input.State.Registers.ReadPair(register)] & mask);
+
+        return true;
+    }
 }
