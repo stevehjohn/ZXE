@@ -815,6 +815,23 @@ public class Processor
 
         instructions[0xFD23] = new Instruction("INC IY", 1, i => INC_RR(i, Register.IY), 6);
 
+        instructions[0xFD24] = new Instruction("INC IYh", 1, i => INC_RRh(i, Register.IY), 4);
+
+        instructions[0xFD25] = new Instruction("DEC IYl", 1, i => DEC_RRh(i, Register.IY), 4);
+
+        instructions[0xFD26] = new Instruction("LD IYh, n", 2, i => LD_RRh_n(i, Register.IY), 4);
+
+        instructions[0xFD29] = new Instruction("ADD IY, IY", 1, i => ADD_RR_RR(i, Register.IY, Register.IY), 11);
+
+        instructions[0xFD2A] = new Instruction("LD IY, (nn)", 3, i => LD_RR_addr_nn(i, Register.IY), 11);
+
+        instructions[0xFD2B] = new Instruction("DEC IY", 1, i => DEC_RR(i, Register.IY), 6);
+
+        instructions[0xFD2C] = new Instruction("INC IYl", 1, i => INC_RRl(i, Register.IY), 4);
+
+        instructions[0xFD2D] = new Instruction("DEC IYl", 1, i => DEC_RRl(i, Register.IY), 4);
+
+        instructions[0xFD2E] = new Instruction("LD IYl, n", 2, i => LD_RRl_n(i, Register.IY), 7);
     }
 
     private static bool NOP()

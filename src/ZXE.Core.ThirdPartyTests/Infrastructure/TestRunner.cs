@@ -35,10 +35,10 @@ public class TestRunner
         foreach (var file in files)
         {
             //Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("e3") < 0)
-            //{
-            //    continue;
-            //}
+            if (Path.GetFileName(file).CompareTo("fd") < 0)
+            {
+                continue;
+            }
 
             // Not implemented yet
             // TODO: Remove once implemented...
@@ -109,7 +109,7 @@ public class TestRunner
 
         FormattedConsole.WriteLine($"\n  &Cyan;Tests Run&White;: &Yellow;{total:N0}    &Cyan;Tests Passed&White;: &Green;{passed:N0}    &Cyan;Not Implemented&White;: &Yellow;{notImplemented}");
 
-        FormattedConsole.WriteLine($"\n  &Cyan;Tests Failed&White;: {(failed == 0 ? "&Green;" : "&Red;")}{failed:N0}    &Cyan;Percent Failed&White;: &Yellow;{((float) failed) / total * 100:F2}%");
+        FormattedConsole.WriteLine($"\n  &Cyan;Tests Failed&White;: {(failed == 0 ? "&Green;" : "&Red;")}{failed:N0}    &Cyan;Percent Failed&White;: &Yellow;{(float) failed / total * 100:F2}%");
 
         FormattedConsole.WriteLine(string.Empty);
 
