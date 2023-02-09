@@ -1089,6 +1089,22 @@ public class Processor
         instructions[0xCB26] = new Instruction("SLA (HL)", 1, i => SLA_addr_RR(i, Register.HL), 11);
 
         instructions[0xCB27] = new Instruction("SLA A", 1, i => SLA_R(i, Register.A), 4);
+
+        instructions[0xCB28] = new Instruction("SRA B", 1, i => SRA_R(i, Register.B), 4);
+
+        instructions[0xCB29] = new Instruction("SRA C", 1, i => SRA_R(i, Register.C), 4);
+
+        instructions[0xCB2A] = new Instruction("SRA D", 1, i => SRA_R(i, Register.D), 4);
+
+        instructions[0xCB2B] = new Instruction("SRA E", 1, i => SRA_R(i, Register.E), 4);
+
+        instructions[0xCB2C] = new Instruction("SRA H", 1, i => SRA_R(i, Register.H), 4);
+
+        instructions[0xCB2D] = new Instruction("SRA L", 1, i => SRA_R(i, Register.L), 4);
+
+        //instructions[0xCB26] = new Instruction("SRA (HL)", 1, i => SRA_addr_RR(i, Register.HL), 11);
+
+        instructions[0xCB2F] = new Instruction("SRA A", 1, i => SRA_R(i, Register.A), 4);
     }
 
     private static bool NOP()
@@ -4190,4 +4206,35 @@ public class Processor
 
         return true;
     }
-}
+
+    private static bool SRA_R(Input input, Register register)
+    {
+        unchecked
+        {
+            var data = input.State.Registers[register];
+
+            var bottomBit = data & 0x01;
+
+            var topBit = (byte) (data & 0x80);
+
+            var result = (byte) (data >> 1);
+
+            result |= topBit;
+
+            input.State.Registers[register] = result;
+
+            // Flags
+            input.State.Flags.Carry = bottomBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }}
