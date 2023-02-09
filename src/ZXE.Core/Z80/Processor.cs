@@ -693,6 +693,17 @@ public class Processor
         instructions[0xDD62] = new Instruction("LD IXh, D", 1, i => LD_RRh_R(i, Register.IX, Register.D), 4);
 
         instructions[0xDD63] = new Instruction("LD IXh, E", 1, i => LD_RRh_R(i, Register.IX, Register.E), 4);
+
+        instructions[0xDD64] = new Instruction("LD IXh, IXh", 1, i => LD_RRh_RRh(i, Register.IX, Register.IX), 4);
+
+        instructions[0xDD65] = new Instruction("LD IXh, IXl", 1, i => LD_RRh_RRl(i, Register.IX, Register.IX), 4);
+
+        instructions[0xDD66] = new Instruction("LD H, (IX + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.H, Register.IX), 15);
+
+        instructions[0xDD67] = new Instruction("LD IXh, A", 1, i => LD_RRh_R(i, Register.IX, Register.A), 4);
+
+        instructions[0xDD68] = new Instruction("LD IXl, B", 1, i => LD_RRl_R(i, Register.IX, Register.B), 4);
+
         // .. 0x75
 
         instructions[0xDD77] = new Instruction("LD (IX + d), A", 2, i => LD_addr_RR_plus_d_R(i, Register.IX, Register.A), 15);
@@ -2716,6 +2727,49 @@ public class Processor
         var value = input.State.Registers.ReadPair(destination);
 
         value = (ushort) ((value & 0x00FF) | (input.State.Registers[source] << 8));
+
+        input.State.Registers.WritePair(destination, value);
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool LD_RRh_RRh(Input input, Register destination, Register source)
+    {
+        var left = input.State.Registers.ReadPair(destination);
+
+        var right = input.State.Registers.ReadPair(source);
+
+        var value = (ushort) ((left & 0x00FF) | (right & 0xFF00));
+
+        input.State.Registers.WritePair(destination, value);
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool LD_RRh_RRl(Input input, Register destination, Register source)
+    {
+        var left = input.State.Registers.ReadPair(destination);
+
+        var right = input.State.Registers.ReadPair(source);
+
+        var value = (ushort) ((left & 0x00FF) | (right & 0xFF00));
+
+        input.State.Registers.WritePair(destination, value);
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool LD_RRl_R(Input input, Register destination, Register source)
+    {
+        var value = input.State.Registers.ReadPair(destination);
+
+        value = (ushort) ((value & 0xFF00) | input.State.Registers[source]);
 
         input.State.Registers.WritePair(destination, value);
 
