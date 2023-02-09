@@ -113,7 +113,7 @@ public class FormattingTracer : ITracer
             }
             else if (char.IsWhiteSpace(c))
             {
-                builder.Append(" ");
+                builder.Append(' ');
             }
             else if (char.IsPunctuation(c))
             {
