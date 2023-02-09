@@ -100,6 +100,8 @@ public class Processor
         InitialiseDDInstructions(instructions);
         
         InitialiseFDInstructions(instructions);
+        
+        InitialiseEDInstructions(instructions);
 
         var instructionArray = new Instruction[instructions.Max(i => i.Key) + 1];
 
@@ -585,6 +587,9 @@ public class Processor
         instructions[0xEB] = new Instruction("EX DE, HL", 1, i => EX_RR_RR(i, Register.DE, Register.HL), 4);
 
         instructions[0xEC] = new Instruction("CALL PE, nn", 3, CALL_PE_nn, 10);
+        
+        // Switch opcode set to ED
+        instructions[0xED] = new Instruction("SOPSET ED", 1, _ => SetOpcodePrefix(0xED), 4);
 
         instructions[0xEE] = new Instruction("XOR A, n", 2, i => XOR_R_n(i, Register.A), 7);
 
@@ -978,6 +983,15 @@ public class Processor
         instructions[0xFDF9] = new Instruction("LD SP, IY", 1, i => LD_SP_RR(i, Register.IY), 6);
 
         instructions[0xFDFD] = new Instruction("NOP", 1, _ => NOP(), 4);
+    }
+
+    private static void InitialiseEDInstructions(Dictionary<int, Instruction> instructions)
+    {
+        // instructions[0xED40] = new Instruction("IN B, (C)", 1, TODO, 8);
+
+        //instructions[0xED41] = new Instruction("OUT (C), B", 1, TODO, 8);
+
+        instructions[0xED42] = new Instruction("SBC HL, BC", 1, i => SBC_RR_RR(i, Register.HL, Register.BC), 11);
     }
 
     private static bool NOP()
@@ -3734,6 +3748,36 @@ public class Processor
         input.State.StackPointer = input.State.Registers.ReadPair(register);
 
         // Flags unaffected
+
+        return true;
+    }
+
+    private static bool SBC_RR_RR(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var valueD = input.State.Registers.ReadPair(destination);
+
+            var valueS = input.State.Registers.ReadPair(source);
+
+            var carry = (byte) (input.State.Flags.Carry ? 0x01 : 0x00);
+
+            var result = valueD - valueS - carry;
+
+            input.State.Registers.WritePair(destination, (ushort) result);
+
+            // Flags
+            input.State.Flags.Carry = result < 0;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = result < -0x80; // TODO: Potential bug here?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) < ((valueS + carry) & 0x0F);
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
 
         return true;
     }
