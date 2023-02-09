@@ -2954,7 +2954,7 @@ public class Processor
         {
             var valueD = input.State.Registers[destination];
 
-            var valueS = input.State.Registers.ReadPair(source) & 0xFF00 >> 8;
+            var valueS = (input.State.Registers.ReadPair(source) & 0xFF00) >> 8;
 
             var carry = (byte) (input.State.Flags.Carry ? 0x01 : 0x00);
 
