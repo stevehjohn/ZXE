@@ -1153,6 +1153,118 @@ public class Processor
         instructions[0xCB46] = new Instruction("BIT 0, (HL)", 1, i => BIT_b_addr_RR(i, 0x01, Register.HL), 8);
         
         instructions[0xCB47] = new Instruction("BIT 0, A", 1, i => BIT_b_R(i, 0x01, Register.A), 4);
+
+        instructions[0xCB48] = new Instruction("BIT 1, B", 1, i => BIT_b_R(i, 0x02, Register.B), 4);
+
+        instructions[0xCB49] = new Instruction("BIT 1, C", 1, i => BIT_b_R(i, 0x02, Register.C), 4);
+
+        instructions[0xCB4A] = new Instruction("BIT 1, D", 1, i => BIT_b_R(i, 0x02, Register.D), 4);
+
+        instructions[0xCB4B] = new Instruction("BIT 1, E", 1, i => BIT_b_R(i, 0x02, Register.E), 4);
+
+        instructions[0xCB4C] = new Instruction("BIT 1, H", 1, i => BIT_b_R(i, 0x02, Register.H), 4);
+
+        instructions[0xCB4D] = new Instruction("BIT 1, L", 1, i => BIT_b_R(i, 0x02, Register.L), 4);
+
+        instructions[0xCB4E] = new Instruction("BIT 1, (HL)", 1, i => BIT_b_addr_RR(i, 0x02, Register.HL), 8);
+        
+        instructions[0xCB4F] = new Instruction("BIT 1, A", 1, i => BIT_b_R(i, 0x02, Register.A), 4);
+
+        instructions[0xCB50] = new Instruction("BIT 2, B", 1, i => BIT_b_R(i, 0x04, Register.B), 4);
+
+        instructions[0xCB51] = new Instruction("BIT 2, C", 1, i => BIT_b_R(i, 0x04, Register.C), 4);
+
+        instructions[0xCB52] = new Instruction("BIT 2, D", 1, i => BIT_b_R(i, 0x04, Register.D), 4);
+
+        instructions[0xCB53] = new Instruction("BIT 2, E", 1, i => BIT_b_R(i, 0x04, Register.E), 4);
+
+        instructions[0xCB54] = new Instruction("BIT 2, H", 1, i => BIT_b_R(i, 0x04, Register.H), 4);
+
+        instructions[0xCB55] = new Instruction("BIT 2, L", 1, i => BIT_b_R(i, 0x04, Register.L), 4);
+
+        instructions[0xCB56] = new Instruction("BIT 2, (HL)", 1, i => BIT_b_addr_RR(i, 0x04, Register.HL), 8);
+        
+        instructions[0xCB57] = new Instruction("BIT 2, A", 1, i => BIT_b_R(i, 0x04, Register.A), 4);
+
+        instructions[0xCB58] = new Instruction("BIT 3, B", 1, i => BIT_b_R(i, 0x08, Register.B), 4);
+
+        instructions[0xCB59] = new Instruction("BIT 3, C", 1, i => BIT_b_R(i, 0x08, Register.C), 4);
+
+        instructions[0xCB5A] = new Instruction("BIT 3, D", 1, i => BIT_b_R(i, 0x08, Register.D), 4);
+
+        instructions[0xCB5B] = new Instruction("BIT 3, E", 1, i => BIT_b_R(i, 0x08, Register.E), 4);
+
+        instructions[0xCB5C] = new Instruction("BIT 3, H", 1, i => BIT_b_R(i, 0x08, Register.H), 4);
+
+        instructions[0xCB5D] = new Instruction("BIT 3, L", 1, i => BIT_b_R(i, 0x08, Register.L), 4);
+
+        instructions[0xCB5E] = new Instruction("BIT 3, (HL)", 1, i => BIT_b_addr_RR(i, 0x08, Register.HL), 8);
+        
+        instructions[0xCB5F] = new Instruction("BIT 3, A", 1, i => BIT_b_R(i, 0x08, Register.A), 4);
+
+        instructions[0xCB60] = new Instruction("BIT 4, B", 1, i => BIT_b_R(i, 0x10, Register.B), 4);
+
+        instructions[0xCB61] = new Instruction("BIT 4, C", 1, i => BIT_b_R(i, 0x10, Register.C), 4);
+
+        instructions[0xCB62] = new Instruction("BIT 4, D", 1, i => BIT_b_R(i, 0x10, Register.D), 4);
+
+        instructions[0xCB63] = new Instruction("BIT 4, E", 1, i => BIT_b_R(i, 0x10, Register.E), 4);
+
+        instructions[0xCB64] = new Instruction("BIT 4, H", 1, i => BIT_b_R(i, 0x10, Register.H), 4);
+
+        instructions[0xCB65] = new Instruction("BIT 4, L", 1, i => BIT_b_R(i, 0x10, Register.L), 4);
+
+        instructions[0xCB66] = new Instruction("BIT 4, (HL)", 1, i => BIT_b_addr_RR(i, 0x10, Register.HL), 8);
+        
+        instructions[0xCB67] = new Instruction("BIT 4, A", 1, i => BIT_b_R(i, 0x10, Register.A), 4);
+        
+        instructions[0xCB68] = new Instruction("BIT 5, B", 1, i => BIT_b_R(i, 0x20, Register.B), 4);
+
+        instructions[0xCB69] = new Instruction("BIT 5, C", 1, i => BIT_b_R(i, 0x20, Register.C), 4);
+
+        instructions[0xCB6A] = new Instruction("BIT 5, D", 1, i => BIT_b_R(i, 0x20, Register.D), 4);
+
+        instructions[0xCB6B] = new Instruction("BIT 5, E", 1, i => BIT_b_R(i, 0x20, Register.E), 4);
+
+        instructions[0xCB6C] = new Instruction("BIT 5, H", 1, i => BIT_b_R(i, 0x20, Register.H), 4);
+
+        instructions[0xCB6D] = new Instruction("BIT 5, L", 1, i => BIT_b_R(i, 0x20, Register.L), 4);
+
+        instructions[0xCB6E] = new Instruction("BIT 5, (HL)", 1, i => BIT_b_addr_RR(i, 0x20, Register.HL), 8);
+        
+        instructions[0xCB6F] = new Instruction("BIT 5, A", 1, i => BIT_b_R(i, 0x20, Register.A), 4);
+        
+        instructions[0xCB70] = new Instruction("BIT 6, B", 1, i => BIT_b_R(i, 0x40, Register.B), 4);
+
+        instructions[0xCB71] = new Instruction("BIT 6, C", 1, i => BIT_b_R(i, 0x40, Register.C), 4);
+
+        instructions[0xCB72] = new Instruction("BIT 6, D", 1, i => BIT_b_R(i, 0x40, Register.D), 4);
+
+        instructions[0xCB73] = new Instruction("BIT 6, E", 1, i => BIT_b_R(i, 0x40, Register.E), 4);
+
+        instructions[0xCB74] = new Instruction("BIT 6, H", 1, i => BIT_b_R(i, 0x40, Register.H), 4);
+
+        instructions[0xCB75] = new Instruction("BIT 6, L", 1, i => BIT_b_R(i, 0x40, Register.L), 4);
+
+        instructions[0xCB76] = new Instruction("BIT 6, (HL)", 1, i => BIT_b_addr_RR(i, 0x40, Register.HL), 8);
+        
+        instructions[0xCB77] = new Instruction("BIT 6, A", 1, i => BIT_b_R(i, 0x40, Register.A), 4);
+        
+        instructions[0xCB78] = new Instruction("BIT 7, B", 1, i => BIT_b_R(i, 0x80, Register.B), 4);
+
+        instructions[0xCB79] = new Instruction("BIT 7, C", 1, i => BIT_b_R(i, 0x80, Register.C), 4);
+
+        instructions[0xCB7A] = new Instruction("BIT 7, D", 1, i => BIT_b_R(i, 0x80, Register.D), 4);
+
+        instructions[0xCB7B] = new Instruction("BIT 7, E", 1, i => BIT_b_R(i, 0x80, Register.E), 4);
+
+        instructions[0xCB7C] = new Instruction("BIT 7, H", 1, i => BIT_b_R(i, 0x80, Register.H), 4);
+
+        instructions[0xCB7D] = new Instruction("BIT 7, L", 1, i => BIT_b_R(i, 0x80, Register.L), 4);
+
+        instructions[0xCB7E] = new Instruction("BIT 7, (HL)", 1, i => BIT_b_addr_RR(i, 0x80, Register.HL), 8);
+        
+        instructions[0xCB7F] = new Instruction("BIT 7, A", 1, i => BIT_b_R(i, 0x80, Register.A), 4);
     }
 
     private static bool NOP()
