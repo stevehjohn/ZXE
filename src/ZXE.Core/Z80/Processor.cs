@@ -1118,9 +1118,25 @@ public class Processor
 
         instructions[0xCB35] = new Instruction("SLS L", 1, i => SLS_R(i, Register.L), 4);
 
-        instructions[0xCB36] = new Instruction("SLS (HL)", 1, i => SLS_addr_RR(i, Register.HL), 4);
+        instructions[0xCB36] = new Instruction("SLS (HL)", 1, i => SLS_addr_RR(i, Register.HL), 11);
 
         instructions[0xCB37] = new Instruction("SLS A", 1, i => SLS_R(i, Register.A), 4);
+
+        instructions[0xCB38] = new Instruction("SRL B", 1, i => SRL_R(i, Register.B), 4);
+
+        instructions[0xCB39] = new Instruction("SRL C", 1, i => SRL_R(i, Register.C), 4);
+
+        instructions[0xCB3A] = new Instruction("SRL D", 1, i => SRL_R(i, Register.D), 4);
+
+        instructions[0xCB3B] = new Instruction("SRL E", 1, i => SRL_R(i, Register.E), 4);
+
+        instructions[0xCB3C] = new Instruction("SRL H", 1, i => SRL_R(i, Register.H), 4);
+
+        instructions[0xCB3D] = new Instruction("SRL L", 1, i => SRL_R(i, Register.L), 4);
+
+        //instructions[0xCB3E] = new Instruction("SRL (HL)", 1, i => SRL_addr_RR(i, Register.HL), 4);
+
+        instructions[0xCB3F] = new Instruction("SRL A", 1, i => SRL_R(i, Register.A), 4);
     }
 
     private static bool NOP()
@@ -4333,6 +4349,36 @@ public class Processor
 
             // Flags
             input.State.Flags.Carry = topBit > 0;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    public static bool SRL_R(Input input, Register register)
+    {
+        unchecked
+        {
+            var data = input.State.Registers[register];
+
+            var bottomBit = (byte) (data & 0x01);
+
+            var result = (byte) (data >> 1);
+
+            //result &= 0x7F;
+
+            input.State.Registers[register] = result;
+
+            // Flags
+            input.State.Flags.Carry = bottomBit > 0;
             input.State.Flags.AddSubtract = false;
             input.State.Flags.ParityOverflow = result.IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
