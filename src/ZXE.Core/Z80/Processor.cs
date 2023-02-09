@@ -1394,7 +1394,6 @@ public class Processor
 
         instructions[0xCBBF] = new Instruction("RES 7, A", 1, i => RES_b_R(i, 0x80, Register.A), 4, "RES A");
 
-
         instructions[0xCBC0] = new Instruction("SET 0, B", 1, i => SET_b_R(i, 0x01, Register.B), 4, "SET B");
 
         instructions[0xCBC1] = new Instruction("SET 0, C", 1, i => SET_b_R(i, 0x01, Register.C), 4, "SET C");
