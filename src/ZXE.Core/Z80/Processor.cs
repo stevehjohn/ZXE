@@ -656,6 +656,8 @@ public class Processor
         instructions[0xDD35] = new Instruction("DEC (IX + d)", 2, i => DEC_addr_RR_plus_d(i, Register.IX), 19);
 
         instructions[0xDD36] = new Instruction("LD (IX + d), n", 3, i => LD_addr_RR_plus_d_n(i, Register.IX), 19);
+
+        instructions[0xDD39] = new Instruction("ADD IX, SP", 1, i => ADD_RR_SP(i, Register.IX), 11);
     }
 
     private static bool NOP()
@@ -2611,7 +2613,7 @@ public class Processor
 
         address += (sbyte) input.Data[1];
 
-        input.Ram[address] = input.Data[1];
+        input.Ram[address] = input.Data[2];
 
         // Flags unaffected
 
