@@ -4878,7 +4878,7 @@ public class Processor
 
     public static bool SET_b_addr_RR(Input input, byte bit, Register register)
     {
-        input.State.Registers[register] |= bit;
+        input.Ram[input.State.Registers.ReadPair(register)] |= bit;
 
         // Flags unaffected
 
