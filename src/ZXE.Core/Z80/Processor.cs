@@ -1086,7 +1086,7 @@ public class Processor
 
         instructions[0xCB25] = new Instruction("SLA L", 1, i => SLA_R(i, Register.L), 4);
 
-        instructions[0xC26E] = new Instruction("SLA (HL)", 1, i => SLA_addr_RR(i, Register.HL), 11);
+        instructions[0xCB26] = new Instruction("SLA (HL)", 1, i => SLA_addr_RR(i, Register.HL), 11);
 
         instructions[0xCB27] = new Instruction("SLA A", 1, i => SLA_R(i, Register.A), 4);
     }
@@ -4171,9 +4171,9 @@ public class Processor
 
             var topBit = (data & 0x80) >> 8;
 
-            data <<= 1;
+            var result = (byte) (data << 1);
 
-            var result = data;
+            input.Ram[input.State.Registers.ReadPair(register)] = result;
 
             // Flags
             input.State.Flags.Carry = topBit == 1;
