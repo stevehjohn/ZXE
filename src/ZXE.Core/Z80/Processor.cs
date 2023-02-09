@@ -102,6 +102,8 @@ public class Processor
         InitialiseFDInstructions(instructions);
         
         InitialiseEDInstructions(instructions);
+        
+        InitialiseCBInstructions(instructions);
 
         var instructionArray = new Instruction[instructions.Max(i => i.Key) + 1];
 
@@ -520,6 +522,9 @@ public class Processor
         instructions[0xC9] = new Instruction("RET", 1, RET, 10);
 
         instructions[0xCA] = new Instruction("JP Z, nn", 3, JP_Z_nn, 10);
+                
+        // Switch opcode set to CB
+        instructions[0xCB] = new Instruction("SOPSET CB", 1, _ => SetOpcodePrefix(0xCB), 4);
 
         instructions[0xCC] = new Instruction("CALL Z, nn", 3, CALL_Z_nn, 10);
 
@@ -992,6 +997,14 @@ public class Processor
         //instructions[0xED41] = new Instruction("OUT (C), B", 1, TODO, 8);
 
         instructions[0xED42] = new Instruction("SBC HL, BC", 1, i => SBC_RR_RR(i, Register.HL, Register.BC), 11);
+
+        instructions[0xED43] = new Instruction("LD (nn), BC", 3, i => LD_addr_nn_RR(i, Register.BC), 16);
+
+        instructions[0xED44] = new Instruction("NEG", 1, NEG, 4);
+    }
+
+    private static void InitialiseCBInstructions(Dictionary<int, Instruction> instructions)
+    {
     }
 
     private static bool NOP()
@@ -3772,6 +3785,32 @@ public class Processor
             input.State.Flags.ParityOverflow = result < -0x80; // TODO: Potential bug here?
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F) < ((valueS + carry) & 0x0F);
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool NEG(Input input)
+    {
+        unchecked
+        {
+            var value = input.State.Registers[Register.A];
+
+            var result = (byte) -(sbyte) value;
+
+            input.State.Registers[Register.A] = result;
+
+            // Flags
+            input.State.Flags.Carry = value != 0;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = value == 0x80; // TODO: Potential bug here?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (value & 0x0F) + ((~value + 1) & 0x0F) > 0xF;
             input.State.Flags.X2 = (result & 0x20) > 0;
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;

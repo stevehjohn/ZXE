@@ -22,7 +22,7 @@ public class Ram
     {
         get
         {
-            if (address > Size)
+            if (address >= Size)
             {
                 address -= Size;
             }
@@ -37,7 +37,7 @@ public class Ram
 
         set
         {
-            if (address > Size)
+            if (address >= Size)
             {
                 address -= Size;
             }
