@@ -1134,11 +1134,25 @@ public class Processor
 
         instructions[0xCB3D] = new Instruction("SRL L", 1, i => SRL_R(i, Register.L), 4);
 
-        instructions[0xCB3E] = new Instruction("SRL (HL)", 1, i => SRL_addr_RR(i, Register.HL), 4);
+        instructions[0xCB3E] = new Instruction("SRL (HL)", 1, i => SRL_addr_RR(i, Register.HL), 11);
 
         instructions[0xCB3F] = new Instruction("SRL A", 1, i => SRL_R(i, Register.A), 4);
 
-        instructions[0xCB40] = new Instruction("BIT 0, B", 1, i => BIT(i, 0x01, Register.B), 4);
+        instructions[0xCB40] = new Instruction("BIT 0, B", 1, i => BIT_b_R(i, 0x01, Register.B), 4);
+
+        instructions[0xCB41] = new Instruction("BIT 0, C", 1, i => BIT_b_R(i, 0x01, Register.C), 4);
+
+        instructions[0xCB42] = new Instruction("BIT 0, D", 1, i => BIT_b_R(i, 0x01, Register.D), 4);
+
+        instructions[0xCB43] = new Instruction("BIT 0, E", 1, i => BIT_b_R(i, 0x01, Register.E), 4);
+
+        instructions[0xCB44] = new Instruction("BIT 0, H", 1, i => BIT_b_R(i, 0x01, Register.H), 4);
+
+        instructions[0xCB45] = new Instruction("BIT 0, L", 1, i => BIT_b_R(i, 0x01, Register.L), 4);
+
+        instructions[0xCB46] = new Instruction("BIT 0, (HL)", 1, i => BIT_b_addr_RR(i, 0x01, Register.HL), 8);
+        
+        instructions[0xCB47] = new Instruction("BIT 0, A", 1, i => BIT_b_R(i, 0x01, Register.A), 4);
     }
 
     private static bool NOP()
@@ -4421,7 +4435,7 @@ public class Processor
         return true;
     }
 
-    private static bool BIT(Input input, byte bit, Register register)
+    private static bool BIT_b_R(Input input, byte bit, Register register)
     {
         var data = input.State.Registers[register];
 
@@ -4441,4 +4455,26 @@ public class Processor
 
         return true;
     }
+
+    private static bool BIT_b_addr_RR(Input input, byte bit, Register register)
+    {
+        var data = input.Ram[input.State.Registers.ReadPair(register)];
+
+        var result = (byte) (data & bit);
+
+        // Flags
+        // Carry unaffected
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = result == 0;
+        input.State.Flags.X1 = (data & 0x08) > 0;
+        input.State.Flags.HalfCarry = true;
+        input.State.Flags.X2 = (data & 0x20) > 0;
+        input.State.Flags.Zero = (data & bit) == 0;
+        input.State.Flags.Sign = bit == 7 && result != 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+
+        return true;
+    }
+
 }
