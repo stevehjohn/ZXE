@@ -106,6 +106,8 @@ public class Processor
         
         InitialiseCBInstructions(instructions);
 
+        InitialiseDDCBInstructions(instructions);
+
         var instructionArray = new Instruction[instructions.Max(i => i.Key) + 1];
 
         foreach (var instruction in instructions)
@@ -1522,6 +1524,10 @@ public class Processor
         instructions[0xCBFE] = new Instruction("SET 7, (HL)", 1, i => SET_b_addr_RR(i, 0x80, Register.HL), 11, "SET (HL)");
 
         instructions[0xCBFF] = new Instruction("SET 7, A", 1, i => SET_b_R(i, 0x80, Register.A), 4, "SET A");
+    }
+
+    private static void InitialiseDDCBInstructions(Dictionary<int, Instruction> instructions)
+    {
     }
 
     private static bool NOP()
