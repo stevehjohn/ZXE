@@ -937,9 +937,33 @@ public class Processor
 
         instructions[0xFD9C] = new Instruction("SBC A, IYh", 1, i => SBC_R_RRh(i, Register.A, Register.IY), 4);
 
-        instructions[0xFD9D] = new Instruction("SBC A, IYh", 1, i => SBC_R_RRh(i, Register.A, Register.IY), 4);
+        instructions[0xFD9D] = new Instruction("SBC A, IYl", 1, i => SBC_R_RRl(i, Register.A, Register.IY), 4);
 
         instructions[0xFD9E] = new Instruction("SBC A, (IY + d)", 2, i => SBC_R_addr_RR_plus_d(i, Register.A, Register.IY), 15);
+
+        instructions[0xFDA4] = new Instruction("AND A, IYh", 1, i => AND_R_RRh(i, Register.A, Register.IY), 4);
+
+        instructions[0xFDA5] = new Instruction("AND A, IYl", 1, i => AND_R_RRl(i, Register.A, Register.IY), 4);
+
+        instructions[0xFDA6] = new Instruction("AND A, (IY + d)", 2, i => AND_R_addr_RR_plus_d(i, Register.A, Register.IY), 15);
+
+        instructions[0xFDAC] = new Instruction("XOR A, IYh", 1, i => XOR_R_RRh(i, Register.A, Register.IY), 4);
+
+        instructions[0xFDAD] = new Instruction("XOR A, IYl", 1, i => XOR_R_RRl(i, Register.A, Register.IY), 4);
+
+        instructions[0xFDAE] = new Instruction("XOR A, (IY + d)", 2, i => XOR_R_addr_RR_plus_d(i, Register.A, Register.IY), 15);
+
+        instructions[0xFDB4] = new Instruction("OR A, IYh", 1, i => OR_R_RRh(i, Register.A, Register.IY), 4);
+
+        instructions[0xFDB5] = new Instruction("OR A, IYl", 1, i => OR_R_RRl(i, Register.A, Register.IY), 4);
+
+        instructions[0xFDB6] = new Instruction("OR A, (IY + d)", 2, i => OR_R_addr_RR_plus_d(i, Register.A, Register.IY), 15);
+
+        instructions[0xFDBC] = new Instruction("CP A, IYh", 1, i => CP_R_RRh(i, Register.A, Register.IY), 4);
+
+        instructions[0xFDBD] = new Instruction("CP A, IYl", 1, i => CP_R_RRl(i, Register.A, Register.IY), 4);
+
+        instructions[0xFDBE] = new Instruction("CP A, (IY + d)", 2, i => CP_R_addr_RR_plus_d(i, Register.A, Register.IY), 15);
     }
 
     private static bool NOP()
