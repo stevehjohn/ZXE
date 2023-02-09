@@ -134,7 +134,7 @@ public class FormattingTracer : ITracer
 
     private static string FormatState(string mnemonic, byte[] data, State state, Ram ram)
     {
-        var parts = mnemonic.Split(' ', StringSplitOptions.TrimEntries).Select(p => p.Replace(",", string.Empty)).ToArray();
+        var parts = GetMnemonicParts(mnemonic);
 
         if (parts[0] == "SOPSET")
         {

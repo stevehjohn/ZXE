@@ -655,7 +655,7 @@ public class Processor
 
         instructions[0xDD35] = new Instruction("DEC (IX + d)", 2, i => DEC_addr_RR_plus_d(i, Register.IX), 19);
 
-        instructions[0xDD36] = new Instruction("LD (IX + d), n", 3, i => LD_addr_RR_plus_d_n(i, Register.IX), 19, "X d n");
+        instructions[0xDD36] = new Instruction("LD (IX + d), n", 3, i => LD_addr_RR_plus_d_n(i, Register.IX), 19);
     }
 
     private static bool NOP()
