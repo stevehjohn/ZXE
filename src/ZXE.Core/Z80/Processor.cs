@@ -796,9 +796,11 @@ public class Processor
 
         instructions[0xDDE5] = new Instruction("PUSH IX", 1, i => PUSH_RR(i, Register.IX), 11);
 
-        instructions[0xDDE9] = new Instruction("JP (IX)", 1, i => JP_addr_RR(i, Register.IX), 11);
+        instructions[0xDDE9] = new Instruction("JP (IX)", 1, i => JP_addr_RR(i, Register.IX), 4);
 
-        // TODO: More...
+        instructions[0xDDF9] = new Instruction("LD SP, IX", 1, i => LD_SP_RR(i, Register.IX), 6);
+
+        instructions[0xDDFD] = new Instruction("NOP", 1, _ => NOP(), 4);
     }
 
     private static void InitialiseFDInstructions(Dictionary<int, Instruction> instructions)
@@ -3560,6 +3562,15 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
+    }
+
+    private static bool LD_SP_RR(Input input, Register register)
+    {
+        input.State.StackPointer = input.State.Registers.ReadPair(register);
+
+        // Flags unaffected
 
         return true;
     }
