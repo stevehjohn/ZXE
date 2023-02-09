@@ -667,6 +667,10 @@ public class Processor
         instructions[0xDD46] = new Instruction("LD B, (IX + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.B, Register.IX), 15);
 
         instructions[0xDD4C] = new Instruction("LD C, IXh", 1, i => LD_R_RRh(i, Register.C, Register.IX), 4);
+
+        instructions[0xDD4D] = new Instruction("LD C, IXl", 1, i => LD_R_RRl(i, Register.C, Register.IX), 4);
+
+        instructions[0xDD4E] = new Instruction("LD C, (IX + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.C, Register.IX), 15);
     }
 
     private static bool NOP()
