@@ -2613,6 +2613,8 @@ public class Processor
 
         input.Ram[address] = input.Data[1];
 
+        // Flags unaffected
+
         return true;
     }
 }
