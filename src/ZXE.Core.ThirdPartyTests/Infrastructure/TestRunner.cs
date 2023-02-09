@@ -35,10 +35,10 @@ public class TestRunner
         foreach (var file in files)
         {
             //Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("dd e0") < 0)
-            {
-                continue;
-            }
+            //if (Path.GetFileName(file).CompareTo("e3") < 0)
+            //{
+            //    continue;
+            //}
 
             // Not implemented yet
             // TODO: Remove once implemented...
@@ -68,10 +68,6 @@ public class TestRunner
                 total++;
 
                 var skipRemainder = false;
-
-                if (test.Name.StartsWith("db 0000", StringComparison.InvariantCultureIgnoreCase))
-                {
-                }
 
                 switch (RunTest(test))
                 {

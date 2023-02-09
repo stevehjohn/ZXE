@@ -50,9 +50,15 @@ public class Registers
 
     public void WriteLow(Register register, byte value)
     {
+        var lowPosition = ((int) register & 0xFF00) >> 8;
+
+        _registers[lowPosition] = value;
     }
 
     public void WriteHigh(Register register, byte value)
     {
+        var highPosition = (int) register & 0x00FF;
+
+        _registers[highPosition] = value;
     }
 }

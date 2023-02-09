@@ -2352,9 +2352,9 @@ public class Processor
     {
         var value = input.State.Registers.ReadPair(register);
 
-        input.State.Registers.WriteLow(register, input.Ram[input.State.StackPointer]);
+        input.State.Registers.WriteLow(register, input.Ram[input.State.StackPointer + 1]);
 
-        input.State.Registers.WriteHigh(register, input.Ram[input.State.StackPointer + 1]);
+        input.State.Registers.WriteHigh(register, input.Ram[input.State.StackPointer]);
 
         input.Ram[input.State.StackPointer] = (byte) (value & 0x00FF);
 
