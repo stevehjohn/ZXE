@@ -916,6 +916,30 @@ public class Processor
         instructions[0xFD7D] = new Instruction("LD A, IYl", 1, i => LD_R_RRl(i, Register.A, Register.IY), 4);
 
         instructions[0xFD7E] = new Instruction("LD A, (IY + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.A, Register.IY), 15);
+
+        instructions[0xFD84] = new Instruction("ADD A, IYh", 1, i => ADD_R_RRh(i, Register.A, Register.IY), 4);
+
+        instructions[0xFD85] = new Instruction("ADD A, IYl", 1, i => ADD_R_RRl(i, Register.A, Register.IY), 4);
+
+        instructions[0xFD86] = new Instruction("ADD A, (IY + d)", 2, i => ADD_R_addr_RR_plus_d(i, Register.A, Register.IY), 15);
+
+        instructions[0xFD8C] = new Instruction("ADC A, IYh", 1, i => ADC_R_RRh(i, Register.A, Register.IY), 4);
+
+        instructions[0xFD8D] = new Instruction("ADC A, IYl", 1, i => ADC_R_RRl(i, Register.A, Register.IY), 4);
+
+        instructions[0xFD8E] = new Instruction("ADC A, (IY + d)", 2, i => ADC_R_addr_RR_plus_d(i, Register.A, Register.IY), 15);
+
+        instructions[0xFD94] = new Instruction("SUB A, IYh", 1, i => SUB_R_RRh(i, Register.A, Register.IY), 4);
+
+        instructions[0xFD95] = new Instruction("SUB A, IYl", 1, i => SUB_R_RRl(i, Register.A, Register.IY), 4);
+
+        instructions[0xFD96] = new Instruction("SUB A, (IY + d)", 2, i => SUB_R_addr_RR_plus_d(i, Register.A, Register.IY), 15);
+
+        instructions[0xFD9C] = new Instruction("SBC A, IYh", 1, i => SBC_R_RRh(i, Register.A, Register.IY), 4);
+
+        instructions[0xFD9D] = new Instruction("SBC A, IYh", 1, i => SBC_R_RRh(i, Register.A, Register.IY), 4);
+
+        instructions[0xFD9E] = new Instruction("SBC A, (IY + d)", 2, i => SBC_R_addr_RR_plus_d(i, Register.A, Register.IY), 15);
     }
 
     private static bool NOP()
