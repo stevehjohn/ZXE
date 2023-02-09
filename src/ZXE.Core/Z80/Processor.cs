@@ -896,6 +896,26 @@ public class Processor
         instructions[0xFD6E] = new Instruction("LD L, (IY + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.L, Register.IY), 4);
 
         instructions[0xFD6F] = new Instruction("LD IYl, A", 1, i => LD_RRl_R(i, Register.IY, Register.A), 4);
+
+        instructions[0xFD70] = new Instruction("LD (IY + d), B", 2, i => LD_addr_RR_plus_d_R(i, Register.IY, Register.B), 15);
+
+        instructions[0xFD71] = new Instruction("LD (IY + d), C", 2, i => LD_addr_RR_plus_d_R(i, Register.IY, Register.C), 15);
+
+        instructions[0xFD72] = new Instruction("LD (IY + d), D", 2, i => LD_addr_RR_plus_d_R(i, Register.IY, Register.D), 15);
+
+        instructions[0xFD73] = new Instruction("LD (IY + d), E", 2, i => LD_addr_RR_plus_d_R(i, Register.IY, Register.E), 15);
+
+        instructions[0xFD74] = new Instruction("LD (IY + d), H", 2, i => LD_addr_RR_plus_d_R(i, Register.IY, Register.H), 15);
+
+        instructions[0xFD75] = new Instruction("LD (IY + d), L", 2, i => LD_addr_RR_plus_d_R(i, Register.IY, Register.L), 15);
+
+        instructions[0xFD77] = new Instruction("LD (IY + d), A", 2, i => LD_addr_RR_plus_d_R(i, Register.IY, Register.A), 15);
+
+        instructions[0xFD7C] = new Instruction("LD A, IYh", 1, i => LD_R_RRh(i, Register.A, Register.IY), 4);
+
+        instructions[0xFD7D] = new Instruction("LD A, IYl", 1, i => LD_R_RRl(i, Register.A, Register.IY), 4);
+
+        instructions[0xFD7E] = new Instruction("LD A, (IY + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.A, Register.IY), 15);
     }
 
     private static bool NOP()
