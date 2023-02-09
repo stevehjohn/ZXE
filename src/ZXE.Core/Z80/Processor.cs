@@ -1086,7 +1086,7 @@ public class Processor
 
         instructions[0xCB25] = new Instruction("SLA L", 1, i => SLA_R(i, Register.L), 4);
 
-        //instructions[0xC26E] = new Instruction("SLA (HL)", 1, i => RR_addr_RR(i, Register.HL), 11);
+        instructions[0xC26E] = new Instruction("SLA (HL)", 1, i => SLA_addr_RR(i, Register.HL), 11);
 
         instructions[0xCB27] = new Instruction("SLA A", 1, i => SLA_R(i, Register.A), 4);
     }
@@ -4141,21 +4141,52 @@ public class Processor
 
     private static bool SLA_R(Input input, Register register)
     {
-        var topBit = (input.State.Registers[register] & 0x80) >> 8;
+        unchecked
+        {
+            var topBit = (input.State.Registers[register] & 0x80) >> 8;
 
-        var result = input.State.Registers[register] <<= 1;
+            var result = input.State.Registers[register] <<= 1;
 
-        // Flags
-        input.State.Flags.Carry = topBit == 1;
-        input.State.Flags.AddSubtract = false;
-        input.State.Flags.ParityOverflow = result.IsEvenParity();
-        input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = false;
-        input.State.Flags.X2 = (result & 0x20) > 0;
-        input.State.Flags.Zero = result == 0;
-        input.State.Flags.Sign = (sbyte) result < 0;
+            // Flags
+            input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool SLA_addr_RR(Input input, Register register)
+    {
+        unchecked
+        {
+            var data = input.Ram[input.State.Registers.ReadPair(register)];
+
+            var topBit = (data & 0x80) >> 8;
+
+            data <<= 1;
+
+            var result = data;
+
+            // Flags
+            input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
 
         return true;
     }
