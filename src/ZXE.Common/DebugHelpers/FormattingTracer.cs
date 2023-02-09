@@ -158,7 +158,14 @@ public class FormattingTracer : ITracer
 
         if (parts.Length > 2)
         {
-            builder.Append($"    {FormatOperandData(parts[2], data, state, 1)}");
+            var sequence = 0;
+
+            if (parts[1].Contains('d'))
+            {
+                sequence = 1;
+            }
+
+            builder.Append($"    {FormatOperandData(parts[2], data, state, sequence)}");
         }
 
         return builder.ToString();
