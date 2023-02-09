@@ -177,8 +177,6 @@ public class FormattingTracer : ITracer
             isIndirect = true;
         }
 
-        operand = operand.Replace('.', ' ');
-
         Register? register = null;
 
         if (char.IsUpper(operand[0]))
