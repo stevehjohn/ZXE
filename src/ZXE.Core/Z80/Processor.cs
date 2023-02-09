@@ -684,7 +684,18 @@ public class Processor
 
         instructions[0xDD5E] = new Instruction("LD E, (IX + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.E, Register.IX), 15);
 
-        // ...
+        // 0x60 ..
+
+        instructions[0xDD60] = new Instruction("LD IXh, B", 1, i => LD_RRh_R(i, Register.IX, Register.B), 4);
+
+        instructions[0xDD61] = new Instruction("LD IXh, C", 1, i => LD_RRh_R(i, Register.IX, Register.C), 4);
+
+        instructions[0xDD62] = new Instruction("LD IXh, D", 1, i => LD_RRh_R(i, Register.IX, Register.D), 4);
+
+        instructions[0xDD63] = new Instruction("LD IXh, E", 1, i => LD_RRh_R(i, Register.IX, Register.E), 4);
+        // .. 0x75
+
+        instructions[0xDD77] = new Instruction("LD (IX + d), A", 2, i => LD_addr_RR_plus_d_R(i, Register.IX, Register.A), 15);
 
         instructions[0xDD7C] = new Instruction("LD A, IXh", 1, i => LD_R_RRh(i, Register.A, Register.IX), 4);
 
@@ -2684,6 +2695,32 @@ public class Processor
         input.State.Registers[destination] = input.Ram[address];
 
         // Flags unaffected
+        return true;
+    }
+
+    private static bool LD_addr_RR_plus_d_R(Input input, Register destination, Register source)
+    {
+        var address = (int) input.State.Registers.ReadPair(destination);
+
+        address += (sbyte) input.Data[1];
+
+        input.Ram[address] = input.State.Registers[source];
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool LD_RRh_R(Input input, Register destination, Register source)
+    {
+        var value = input.State.Registers.ReadPair(destination);
+
+        value = (ushort) ((value & 0x00FF) | (input.State.Registers[source] << 8));
+
+        input.State.Registers.WritePair(destination, value);
+
+        // Flags unaffected
+
         return true;
     }
 }
