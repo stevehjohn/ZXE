@@ -1,6 +1,4 @@
-﻿using ZXE.Core.Exceptions;
-
-namespace ZXE.Core.Z80;
+﻿namespace ZXE.Core.Z80;
 
 public class Registers
 {
