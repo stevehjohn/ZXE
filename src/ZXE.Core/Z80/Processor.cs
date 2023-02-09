@@ -1102,7 +1102,7 @@ public class Processor
 
         instructions[0xCB2D] = new Instruction("SRA L", 1, i => SRA_R(i, Register.L), 4);
 
-        //instructions[0xCB26] = new Instruction("SRA (HL)", 1, i => SRA_addr_RR(i, Register.HL), 11);
+        instructions[0xCB2E] = new Instruction("SRA (HL)", 1, i => SRA_addr_RR(i, Register.HL), 11);
 
         instructions[0xCB2F] = new Instruction("SRA A", 1, i => SRA_R(i, Register.A), 4);
     }
@@ -4237,4 +4237,36 @@ public class Processor
         }
 
         return true;
-    }}
+    }
+    private static bool SRA_addr_RR(Input input, Register register)
+    {
+        unchecked
+        {
+            var data = input.Ram[input.State.Registers.ReadPair(register)];
+
+            var bottomBit = data & 0x01;
+
+            var topBit = (byte) (data & 0x80);
+
+            var result = (byte) (data >> 1);
+
+            result |= topBit;
+
+            input.Ram[input.State.Registers.ReadPair(register)] = result;
+
+            // Flags
+            input.State.Flags.Carry = bottomBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+}
