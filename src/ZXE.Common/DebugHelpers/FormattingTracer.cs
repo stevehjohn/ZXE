@@ -154,11 +154,11 @@ public class FormattingTracer : ITracer
             return builder.ToString();
         }
 
-        builder.Append($"    {FormatOperandData(parts[1], data, state, 1)}");
+        builder.Append($"    {FormatOperandData(parts[1], data, state, 0)}");
 
         if (parts.Length > 2)
         {
-            builder.Append($"    {FormatOperandData(parts[2], data, state, 2)}");
+            builder.Append($"    {FormatOperandData(parts[2], data, state, 1)}");
         }
 
         return builder.ToString();
