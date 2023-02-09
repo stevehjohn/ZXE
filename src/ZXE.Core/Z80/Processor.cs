@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Exceptions;
+﻿using Microsoft.Win32;
+using ZXE.Core.Exceptions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
@@ -660,6 +661,10 @@ public class Processor
         instructions[0xDD39] = new Instruction("ADD IX, SP", 1, i => ADD_RR_SP(i, Register.IX), 11);
 
         instructions[0xDD44] = new Instruction("LD B, IXh", 1, i => LD_R_RRh(i, Register.B, Register.IX), 4);
+
+        instructions[0xDD45] = new Instruction("LD B, IXl", 1, i => LD_R_RRl(i, Register.B, Register.IX), 4);
+
+        instructions[0xDD46] = new Instruction("LD B, (IX + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.B, Register.IX), 15);
     }
 
     private static bool NOP()
@@ -2630,6 +2635,29 @@ public class Processor
         
         // Flags unaffected
 
+        return true;
+    }
+
+    private static bool LD_R_RRl(Input input, Register destination, Register source)
+    {
+        var value = input.State.Registers.ReadPair(source);
+
+        input.State.Registers[destination] = (byte) (value & 0x00FF);
+        
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool LD_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    {
+        var address = (int) input.State.Registers.ReadPair(source);
+
+        address += (sbyte) input.Data[1];
+
+        input.State.Registers[destination] = input.Ram[address];
+
+        // Flags unaffected
         return true;
     }
 }
