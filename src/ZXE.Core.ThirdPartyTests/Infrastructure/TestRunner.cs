@@ -34,11 +34,11 @@ public class TestRunner
 
         foreach (var file in files)
         {
-            //Skip a bunch of tests`
-            if (Path.GetFileName(file).CompareTo("dd 80") < 0)
-            {
-                continue;
-            }
+            //Skip a bunch of tests
+            //if (Path.GetFileName(file).CompareTo("dd 80") < 0)
+            //{
+            //    continue;
+            //}
 
             // Not implemented yet
             // TODO: Remove once implemented...
