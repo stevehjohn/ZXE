@@ -6,6 +6,8 @@ A ZX Spectrum emulator. Mostly about just seeing if I can.
 
 - With some conditional opcodes (e.g. CALL cc, JP cc, JR cc, RET cc), more cycles are used if condition is met. Account for this in the timings. Actually, maybe this can be handled with the condition checking being a separate function...
 - Check undocumented flag implementation against https://worldofspectrum.org/faq/reference/z80reference.htm
+- IN/OUT stuff.
+- Interrupt stuff.
 
 ## Features
 

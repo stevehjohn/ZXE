@@ -637,8 +637,6 @@ public class Processor
 
     private static void InitialiseDDInstructions(Dictionary<int, Instruction> instructions)
     {
-        // INFO: These are basically timing equivalent to base instructions with an extra 4 cycles at the start. These are added by the prefix itself, so ignore here.
-
         instructions[0xDD09] = new Instruction("ADD IX, BC", 1, i => ADD_RR_RR(i, Register.IX, Register.BC), 11);
 
         instructions[0xDD19] = new Instruction("ADD IX, DE", 1, i => ADD_RR_RR(i, Register.IX, Register.DE), 11);
@@ -991,6 +989,7 @@ public class Processor
         instructions[0xFDFD] = new Instruction("NOP", 1, _ => NOP(), 4);
     }
 
+    // TODO: Here be dragons... these are the more complicated (or emulator complicating) instructions...
     private static void InitialiseEDInstructions(Dictionary<int, Instruction> instructions)
     {
         // TODO: instructions[0xED40] = new Instruction("IN B, (C)", 1, , 8);
@@ -1005,7 +1004,9 @@ public class Processor
 
         // TODO: instructions[0xED45] = new Instruction("RETN", 1, , 10);
 
+        instructions[0xED46] = new Instruction("IM 0", 1, i => IM_m(i, InterruptMode.Mode0), 4);
 
+        instructions[0xED47] = new Instruction("ADD I, A", 1, i => ADD_R_R(i, Register.I, Register.A), 5);
     }
 
     private static void InitialiseCBInstructions(Dictionary<int, Instruction> instructions)
@@ -4867,7 +4868,7 @@ public class Processor
         return true;
     }
 
-    public static bool SET_b_R(Input input, byte bit, Register register)
+    private static bool SET_b_R(Input input, byte bit, Register register)
     {
         input.State.Registers[register] |= bit;
 
@@ -4876,9 +4877,18 @@ public class Processor
         return true;
     }
 
-    public static bool SET_b_addr_RR(Input input, byte bit, Register register)
+    private static bool SET_b_addr_RR(Input input, byte bit, Register register)
     {
         input.Ram[input.State.Registers.ReadPair(register)] |= bit;
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool IM_m(Input input, InterruptMode mode)
+    {
+        input.State.InterruptMode = mode;
 
         // Flags unaffected
 
