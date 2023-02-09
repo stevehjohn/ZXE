@@ -1,4 +1,5 @@
 ﻿using ZXE.Core.Exceptions;
+using ZXE.Core.Extensions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
@@ -1072,6 +1073,22 @@ public class Processor
         instructions[0xCB1E] = new Instruction("RR (HL)", 1, i => RR_addr_RR(i, Register.HL), 11);
 
         instructions[0xCB1F] = new Instruction("RR A", 1, i => RR_R(i, Register.A), 4);
+
+        instructions[0xCB20] = new Instruction("SLA B", 1, i => SLA_R(i, Register.B), 4);
+
+        instructions[0xCB21] = new Instruction("SLA C", 1, i => SLA_R(i, Register.C), 4);
+
+        instructions[0xCB22] = new Instruction("SLA D", 1, i => SLA_R(i, Register.D), 4);
+
+        instructions[0xCB23] = new Instruction("SLA E", 1, i => SLA_R(i, Register.E), 4);
+
+        instructions[0xCB24] = new Instruction("SLA H", 1, i => SLA_R(i, Register.H), 4);
+
+        instructions[0xCB25] = new Instruction("SLA L", 1, i => SLA_R(i, Register.L), 4);
+
+        //instructions[0xC26E] = new Instruction("SLA (HL)", 1, i => RR_addr_RR(i, Register.HL), 11);
+
+        instructions[0xCB27] = new Instruction("SLA A", 1, i => SLA_R(i, Register.A), 4);
     }
 
     private static bool NOP()
@@ -4118,6 +4135,27 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
+    }
+
+    private static bool SLA_R(Input input, Register register)
+    {
+        var topBit = (input.State.Registers[register] & 0x80) >> 8;
+
+        var result = input.State.Registers[register] <<= 1;
+
+        // Flags
+        input.State.Flags.Carry = topBit == 1;
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = result.IsEvenParity();
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        input.State.Flags.Zero = result == 0;
+        input.State.Flags.Sign = (sbyte) result < 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
 
         return true;
     }

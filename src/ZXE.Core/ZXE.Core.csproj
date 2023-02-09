@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Exceptions\" />
+    <Folder Include="Extensions\" />
     <Folder Include="Properties\" />
     <Folder Include="System\Interfaces\" />
   </ItemGroup>
