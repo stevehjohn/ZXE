@@ -877,7 +877,7 @@ public class Processor
 
         instructions[0xFD65] = new Instruction("LD IYh, IYl", 1, i => LD_RRh_RRl(i, Register.IY, Register.IY), 4);
 
-        instructions[0xFD66] = new Instruction("LD H, (IY + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.IY, Register.IY), 15);
+        instructions[0xFD66] = new Instruction("LD H, (IY + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.H, Register.IY), 15);
 
         instructions[0xFD67] = new Instruction("LD IYh, A", 1, i => LD_RRh_R(i, Register.IY, Register.A), 4);
 
@@ -893,7 +893,7 @@ public class Processor
 
         instructions[0xFD6D] = new Instruction("LD IYl, IYl", 1, i => LD_RRl_RRl(i, Register.IY, Register.IY), 4);
 
-        instructions[0xFD6E] = new Instruction("LD L, (IY + d)", 1, i => LD_R_addr_RR_plus_d(i, Register.L, Register.IY), 4);
+        instructions[0xFD6E] = new Instruction("LD L, (IY + d)", 2, i => LD_R_addr_RR_plus_d(i, Register.L, Register.IY), 4);
 
         instructions[0xFD6F] = new Instruction("LD IYl, A", 1, i => LD_RRl_R(i, Register.IY, Register.A), 4);
     }
