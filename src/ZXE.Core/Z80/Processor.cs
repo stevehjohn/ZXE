@@ -1696,6 +1696,86 @@ public class Processor
         instructions[0xDDCB46] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB46);
 
         instructions[0xDDCB47] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB47);
+
+        instructions[0xDDCB48] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB48);
+
+        instructions[0xDDCB49] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB49);
+
+        instructions[0xDDCB4A] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4A);
+
+        instructions[0xDDCB4B] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4B);
+
+        instructions[0xDDCB4C] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4C);
+
+        instructions[0xDDCB4D] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4D);
+
+        instructions[0xDDCB4E] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4E);
+
+        instructions[0xDDCB4F] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4F);
+
+        instructions[0xDDCB50] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB50);
+
+        instructions[0xDDCB51] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB51);
+
+        instructions[0xDDCB52] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB52);
+
+        instructions[0xDDCB53] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB53);
+
+        instructions[0xDDCB54] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB54);
+
+        instructions[0xDDCB55] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB55);
+
+        instructions[0xDDCB56] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB56);
+
+        instructions[0xDDCB57] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB57);
+
+        instructions[0xDDCB58] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB58);
+
+        instructions[0xDDCB59] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB59);
+
+        instructions[0xDDCB5A] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5A);
+
+        instructions[0xDDCB5B] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5B);
+
+        instructions[0xDDCB5C] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5C);
+
+        instructions[0xDDCB5D] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5D);
+
+        instructions[0xDDCB5E] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5E);
+
+        instructions[0xDDCB5F] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5F);
+
+        instructions[0xDDCB60] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB60);
+
+        instructions[0xDDCB61] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB61);
+
+        instructions[0xDDCB62] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB62);
+
+        instructions[0xDDCB63] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB63);
+
+        instructions[0xDDCB64] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB64);
+
+        instructions[0xDDCB65] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB65);
+
+        instructions[0xDDCB66] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB66);
+
+        instructions[0xDDCB67] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB67);
+
+        instructions[0xDDCB68] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB68);
+
+        instructions[0xDDCB69] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB69);
+
+        instructions[0xDDCB6A] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6A);
+
+        instructions[0xDDCB6B] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6B);
+
+        instructions[0xDDCB6C] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6C);
+
+        instructions[0xDDCB6D] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6D);
+
+        instructions[0xDDCB6E] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6E);
+
+        instructions[0xDDCB6F] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6F);
     }
 
     private static bool NOP()
