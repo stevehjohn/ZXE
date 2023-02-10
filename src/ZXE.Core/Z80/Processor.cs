@@ -18,6 +18,9 @@ public class Processor
 
     private readonly ITracer? _tracer;
 
+    // TODO: Remove - not good.
+    public Instruction?[] Instructions => _instructions;
+
     public Processor()
     {
         _state = new State();
