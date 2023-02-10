@@ -41,7 +41,7 @@ public class Processor
     {
         var opcode = (int) ram[_state.ProgramCounter];
 
-        if (_state.OpcodePrefix != 0)
+        if (_state.OpcodePrefix != 0 && _state.OpcodePrefix <= 0xFF)
         {
             opcode = _state.OpcodePrefix << 8 | opcode;
 
@@ -53,14 +53,34 @@ public class Processor
             throw new OpcodeNotImplementedException($"Opcode not implemented: {opcode:X6}.");
         }
 
-        var instruction = _instructions[opcode];
+        Instruction? instruction;
 
-        if (instruction == null)
+        byte[]? data;
+
+        if (_state.OpcodePrefix > 0xFF)
         {
-            throw new OpcodeNotImplementedException($"Opcode not implemented: {opcode:X6}.");
-        }
+            data = ram.GetData(_state.ProgramCounter, 2);
 
-        var data = ram.GetData(_state.ProgramCounter, instruction.Length);
+            instruction = _instructions[(_state.OpcodePrefix << 8) | data[1]];
+
+            _state.OpcodePrefix = 0;
+
+            if (instruction == null)
+            {
+                throw new OpcodeNotImplementedException($"Opcode not implemented: {opcode:X6}.");
+            }
+        }
+        else
+        {
+            instruction = _instructions[opcode];
+
+            if (instruction == null)
+            {
+                throw new OpcodeNotImplementedException($"Opcode not implemented: {opcode:X6}.");
+            }
+
+            data = ram.GetData(_state.ProgramCounter, instruction.Length);
+        }
 
         if (_tracer != null)
         {
@@ -640,7 +660,7 @@ public class Processor
         instructions[0xFF] = new Instruction("RST 0x38", 1, i => RST(i, 0x38), 11);
     }
 
-    private static void InitialiseDDInstructions(Dictionary<int, Instruction> instructions)
+    private void InitialiseDDInstructions(Dictionary<int, Instruction> instructions)
     {
         instructions[0xDD09] = new Instruction("ADD IX, BC", 1, i => ADD_RR_RR(i, Register.IX, Register.BC), 11);
 
@@ -801,6 +821,8 @@ public class Processor
         instructions[0xDDBD] = new Instruction("CP A, IXh", 1, i => CP_R_RRl(i, Register.A, Register.IX), 4);
 
         instructions[0xDDBE] = new Instruction("CP A, (IX + d)", 2, i => CP_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
+
+        instructions[0xDDCB] = new Instruction("SOPSET 0xDDCB", 1, _ => SetOpcodePrefix(0xDDCB), 4);
 
         instructions[0xDDDD] = new Instruction("NOP", 1, _ => NOP(), 4);
 
@@ -1531,6 +1553,7 @@ public class Processor
 
     private static void InitialiseDDCBInstructions(Dictionary<int, Instruction> instructions)
     {
+        instructions[0xDDCB21] = new Instruction("SLA (IX + d), C", 2, i => SLA_addr_RR_plus_d_C(i, Register.IX, Register.C), 15);
     }
 
     private static bool NOP()
@@ -4585,7 +4608,7 @@ public class Processor
     {
         unchecked
         {
-            var topBit = (input.State.Registers[register] & 0x80) >> 8;
+            var topBit = (input.State.Registers[register] & 0x80) >> 7;
 
             var result = input.State.Registers[register] <<= 1;
 
@@ -4611,7 +4634,7 @@ public class Processor
         {
             var data = input.Ram[input.State.Registers.ReadPair(register)];
 
-            var topBit = (data & 0x80) >> 8;
+            var topBit = (data & 0x80) >> 7;
 
             var result = (byte) (data << 1);
 
@@ -4900,6 +4923,38 @@ public class Processor
         input.State.InterruptMode = mode;
 
         // Flags unaffected
+
+        return true;
+    }
+
+    private static bool SLA_addr_RR_plus_d_C(Input input, Register source, Register destination)
+    {
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(source);
+
+            address = (ushort) (address + (sbyte) input.Data[0]); // TODO: Wrap around? I think Ram class might cope TBH...
+
+            var data = input.Ram[address];
+
+            var topBit = (data & 0x80) >> 7;
+
+            var result = (byte) (data << 1);
+
+            input.State.Registers[destination] = result;
+
+            // Flags
+            input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
 
         return true;
     }

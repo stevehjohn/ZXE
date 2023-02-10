@@ -940,4 +940,130 @@ public class ProcessorTests
 
         Assert.Equal(0x1234, _state.Registers.ReadPair(Register.IX));
     }
+
+    [Fact]
+    public void Can_execute_FD_instruction()
+    {
+        // LD IY, nn
+        _ram[0] = 0xFD;
+        _ram[1] = 0x21;
+        _ram[2] = 0x34;
+        _ram[3] = 0x12;
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0x1234, _state.Registers.ReadPair(Register.IY));
+    }
+
+    [Fact]
+    public void Can_execute_DDCB_instruction()
+    {
+        // LD IXl, 0x24
+        _ram[0] = 0xDD;
+        _ram[1] = 0x2E;
+        _ram[2] = 0x2A;
+        // LD IXh, 0x12
+        _ram[3] = 0xDD;
+        _ram[4] = 0x26;
+        _ram[5] = 0x12;
+        // SLA (IX + d), C
+        _ram[6] = 0xDD;
+        _ram[7] = 0xCB;
+        _ram[8] = 0x0A;
+        _ram[9] = 0x21;
+
+        _ram[0x1234] = 0b00100010;
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0b01000100, _state.Registers[Register.C]);
+    }
+
+    [Fact]
+    public void SLA_addr_RR_plus_d_C()
+    {
+        // LD IXl, 0x24
+        _ram[0] = 0xDD;
+        _ram[1] = 0x2E;
+        _ram[2] = 0x2A;
+        // LD IXh, 0x12
+        _ram[3] = 0xDD;
+        _ram[4] = 0x26;
+        _ram[5] = 0x12;
+        // SLA (IX + d), C
+        _ram[6] = 0xDD;
+        _ram[7] = 0xCB;
+        _ram[8] = 0x0A;
+        _ram[9] = 0x21;
+
+        _ram[0x1234] = 0b00100010;
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0b01000100, _state.Registers[Register.C]);
+
+        Assert.False(_state.Flags.Carry);
+
+        _state.ProgramCounter = 0;
+
+        // LD IXl, 0x24
+        _ram[0] = 0xDD;
+        _ram[1] = 0x2E;
+        _ram[2] = 0x2A;
+        // LD IXh, 0x12
+        _ram[3] = 0xDD;
+        _ram[4] = 0x26;
+        _ram[5] = 0x12;
+        // SLA (IX + d), C
+        _ram[6] = 0xDD;
+        _ram[7] = 0xCB;
+        _ram[8] = 0x0A;
+        _ram[9] = 0x21;
+
+        _ram[0x1234] = 0b10100010;
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        _processor.ProcessInstruction(_ram);
+
+        Assert.Equal(0b01000100, _state.Registers[Register.C]);
+
+        Assert.True(_state.Flags.Carry);
+    }
 }

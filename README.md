@@ -50,6 +50,7 @@ Runs tests against this awesome suite:
 - https://github.com/raxoft/z80test
 - https://floooh.github.io/2021/12/17/cycle-stepped-z80.html#testing
 - https://clrhome.org/asm/
+- https://ps4star.github.io/z80studio/
 
 ## Miscellaneous References
 

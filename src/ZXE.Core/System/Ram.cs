@@ -60,6 +60,8 @@ public class Ram
 
     public byte[] GetData(int start, int length)
     {
+        // TODO: Wrap?
+
         if (start + length - 1 < Size)
         {
             return this[start..(start + length)];
