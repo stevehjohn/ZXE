@@ -1665,8 +1665,6 @@ public class Processor
 
         instructions[0xDDCB37] = new Instruction("SLS (IX + d), A", 2, i => SLS_addr_RR_plus_d_R(i, Register.IX, Register.A), 15, null, 0xDDCB37);
 
-    
-    
         instructions[0xDDCB38] = new Instruction("SRL (IX + d), B", 2, i => SRL_addr_RR_plus_d_R(i, Register.IX, Register.B), 15, null, 0xDDCB38);
 
         instructions[0xDDCB39] = new Instruction("SRL (IX + d), C", 2, i => SRL_addr_RR_plus_d_R(i, Register.IX, Register.C), 15, null, 0xDDCB39);
@@ -5531,11 +5529,9 @@ public class Processor
 
             var data = input.Ram[address];
 
-            var topBit = (byte) (data & 0x80);
-
             var bottomBit = (byte) (data & 0x01);
 
-            var result = (byte) ((data >> 1) | topBit);
+            var result = (byte) (data >> 1);
 
             input.Ram[address] = result;
 
@@ -5565,11 +5561,9 @@ public class Processor
 
             var data = input.Ram[address];
 
-            var topBit = (byte) (data & 0x80);
-
             var bottomBit = (byte) (data & 0x01);
 
-            var result = (byte) ((data >> 1) | topBit);
+            var result = (byte) (data >> 1);
 
             input.State.Registers[destination] = result;
 
