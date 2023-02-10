@@ -1681,21 +1681,21 @@ public class Processor
 
         instructions[0xDDCB3F] = new Instruction("SRL (IX + d), A", 2, i => SRL_addr_RR_plus_d_R(i, Register.IX, Register.A), 15, null, 0xDDCB3F);
 
-        instructions[0xDDCB40] = new Instruction("BIT_0 B, (IX + d)", 2, i => BIT_b_R_addr_RR_plus_d(i, 0x01, Register.B, Register.IX), 12, null, 0xDDCB40);
+        instructions[0xDDCB40] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB40);
 
-        instructions[0xDDCB41] = new Instruction("BIT_0 B, (IX + d)", 2, i => BIT_b_R_addr_RR_plus_d(i, 0x01, Register.B, Register.IX), 12, null, 0xDDCB41);
+        instructions[0xDDCB41] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB41);
 
-        instructions[0xDDCB42] = new Instruction("BIT_0 B, (IX + d)", 2, i => BIT_b_R_addr_RR_plus_d(i, 0x01, Register.B, Register.IX), 12, null, 0xDDCB42);
+        instructions[0xDDCB42] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB42);
 
-        instructions[0xDDCB43] = new Instruction("BIT_0 B, (IX + d)", 2, i => BIT_b_R_addr_RR_plus_d(i, 0x01, Register.B, Register.IX), 12, null, 0xDDCB43);
+        instructions[0xDDCB43] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB43);
 
-        instructions[0xDDCB44] = new Instruction("BIT_0 B, (IX + d)", 2, i => BIT_b_R_addr_RR_plus_d(i, 0x01, Register.B, Register.IX), 12, null, 0xDDCB44);
+        instructions[0xDDCB44] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB44);
 
-        instructions[0xDDCB45] = new Instruction("BIT_0 B, (IX + d)", 2, i => BIT_b_R_addr_RR_plus_d(i, 0x01, Register.B, Register.IX), 12, null, 0xDDCB45);
+        instructions[0xDDCB45] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB45);
 
-        instructions[0xDDCB46] = new Instruction("BIT_0 (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB46);
+        instructions[0xDDCB46] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB46);
 
-        instructions[0xDDCB47] = new Instruction("BIT_0 B, (IX + d)", 2, i => BIT_b_R_addr_RR_plus_d(i, 0x01, Register.B, Register.IX), 12, null, 0xDDCB47);
+        instructions[0xDDCB47] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB47);
     }
 
     private static bool NOP()
@@ -5345,14 +5345,14 @@ public class Processor
 
             var data = input.Ram[address];
 
-            var topBit = (byte) ((data & 0x80) >> 7);
+            var bottomBit = (byte) (data & 0x01);
 
-            var result = (byte) (((data >> 1) & 0xFE) |  (byte) (input.State.Flags.Carry ? 0x80 : 0x00));
+            var result = (byte) ((data >> 1) | (byte) (input.State.Flags.Carry ? 0x80 : 0x00));
 
             input.Ram[address] = result;
 
             // Flags
-            input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.Carry = bottomBit == 1;
             input.State.Flags.AddSubtract = false;
             input.State.Flags.ParityOverflow = result.IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
@@ -5597,33 +5597,6 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
-
-        return true;
-    }
-
-    private static bool BIT_b_R_addr_RR_plus_d(Input input, byte bit, Register destination, Register source)
-    {
-        var address = input.State.Registers.ReadPair(source);
-
-        address = (ushort) (address + (sbyte) input.Data[0]); // TODO: Wrap around? I think Ram class might cope TBH...
-
-        var data = input.Ram[address];
-
-        var result = (byte) (data & bit);
-
-        input.State.Registers[destination] = result;
-
-        // Flags
-        // Carry unaffected
-        input.State.Flags.AddSubtract = false;
-        input.State.Flags.ParityOverflow = result == 0;
-        input.State.Flags.X1 = (data & 0x08) > 0;
-        input.State.Flags.HalfCarry = true;
-        input.State.Flags.X2 = (data & 0x20) > 0;
-        input.State.Flags.Zero = (data & bit) == 0;
-        input.State.Flags.Sign = bit == 7 && result != 0;
-
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
 
         return true;
     }
