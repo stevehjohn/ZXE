@@ -1664,6 +1664,24 @@ public class Processor
         instructions[0xDDCB36] = new Instruction("SLS (IX + d)", 2, i => SLS_addr_RR_plus_d(i, Register.IX), 15, null, 0xDDCB36);
 
         instructions[0xDDCB37] = new Instruction("SLS (IX + d), A", 2, i => SLS_addr_RR_plus_d_R(i, Register.IX, Register.A), 15, null, 0xDDCB37);
+
+    
+    
+        instructions[0xDDCB38] = new Instruction("SRL (IX + d), B", 2, i => SRL_addr_RR_plus_d_R(i, Register.IX, Register.B), 15, null, 0xDDCB38);
+
+        instructions[0xDDCB39] = new Instruction("SRL (IX + d), C", 2, i => SRL_addr_RR_plus_d_R(i, Register.IX, Register.C), 15, null, 0xDDCB39);
+
+        instructions[0xDDCB3A] = new Instruction("SRL (IX + d), D", 2, i => SRL_addr_RR_plus_d_R(i, Register.IX, Register.D), 15, null, 0xDDCB3A);
+
+        instructions[0xDDCB3B] = new Instruction("SRL (IX + d), E", 2, i => SRL_addr_RR_plus_d_R(i, Register.IX, Register.E), 15, null, 0xDDCB3B);
+
+        instructions[0xDDCB3C] = new Instruction("SRL (IX + d), H", 2, i => SRL_addr_RR_plus_d_R(i, Register.IX, Register.H), 15, null, 0xDDCB3C);
+
+        instructions[0xDDCB3D] = new Instruction("SRL (IX + d), L", 2, i => SRL_addr_RR_plus_d_R(i, Register.IX, Register.L), 15, null, 0xDDCB3D);
+
+        instructions[0xDDCB3E] = new Instruction("SRL (IX + d)", 2, i => SRL_addr_RR_plus_d(i, Register.IX), 15, null, 0xDDCB3E);
+
+        instructions[0xDDCB3F] = new Instruction("SRL (IX + d), A", 2, i => SRL_addr_RR_plus_d_R(i, Register.IX, Register.A), 15, null, 0xDDCB3F);
     }
 
     private static bool NOP()
@@ -5489,6 +5507,76 @@ public class Processor
 
             // Flags
             input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool SRL_addr_RR_plus_d(Input input, Register source)
+    {
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(source);
+
+            address = (ushort) (address + (sbyte) input.Data[0]); // TODO: Wrap around? I think Ram class might cope TBH...
+
+            var data = input.Ram[address];
+
+            var topBit = (byte) (data & 0x80);
+
+            var bottomBit = (byte) (data & 0x01);
+
+            var result = (byte) ((data >> 1) | topBit);
+
+            input.Ram[address] = result;
+
+            // Flags
+            input.State.Flags.Carry = bottomBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool SRL_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    {
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(source);
+
+            address = (ushort) (address + (sbyte) input.Data[0]); // TODO: Wrap around? I think Ram class might cope TBH...
+
+            var data = input.Ram[address];
+
+            var topBit = (byte) (data & 0x80);
+
+            var bottomBit = (byte) (data & 0x01);
+
+            var result = (byte) ((data >> 1) | topBit);
+
+            input.State.Registers[destination] = result;
+
+            input.Ram[address] = result;
+
+            // Flags
+            input.State.Flags.Carry = bottomBit == 1;
             input.State.Flags.AddSubtract = false;
             input.State.Flags.ParityOverflow = result.IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
