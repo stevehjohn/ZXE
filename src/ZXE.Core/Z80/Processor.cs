@@ -2063,7 +2063,8 @@ public class Processor
 
         instructions[0xDDCBFE] = new Instruction("SET_7 (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBFE);
 
-        instructions[0xDDCBFF] = new Instruction("SET_7 (IX + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x80, Register.IX, Register.A), 15, null, 0xDDCBFF);        }
+        instructions[0xDDCBFF] = new Instruction("SET_7 (IX + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x80, Register.IX, Register.A), 15, null, 0xDDCBFF);        
+    }
 
     private static bool NOP()
     {
