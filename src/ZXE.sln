@@ -31,7 +31,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum 48K", "ZX Spect
 		..\ROM Images\ZX Spectrum 48K\image-0.rom = ..\ROM Images\ZX Spectrum 48K\image-0.rom
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXE.Utilities", "ZXE.Utilities\ZXE.Utilities.csproj", "{748ABF22-ED8E-44C0-8652-F481CDBE8C03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Utilities", "ZXE.Utilities\ZXE.Utilities.csproj", "{748ABF22-ED8E-44C0-8652-F481CDBE8C03}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum +2A", "ZX Spectrum +2A", "{8EB093F9-A677-48DD-8F54-8353DEF2D3A7}"
+	ProjectSection(SolutionItems) = preProject
+		..\ROM Images\ZX Spectrum +2A\image-0.rom = ..\ROM Images\ZX Spectrum +2A\image-0.rom
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +74,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{57959EB0-56F2-4C3E-A94F-57E2F9672B66} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
+		{8EB093F9-A677-48DD-8F54-8353DEF2D3A7} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}
