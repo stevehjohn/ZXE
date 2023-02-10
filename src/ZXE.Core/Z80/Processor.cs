@@ -1555,19 +1555,70 @@ public class Processor
     {
         instructions[0xDDCB00] = new Instruction("RLC (IX + d), B", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.B), 15, null, 0xDDCB00);
 
-        instructions[0xDDCB01] = new Instruction("RLC (IX + d), C", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.C), 15, null, 0xDDCB00);
+        instructions[0xDDCB01] = new Instruction("RLC (IX + d), C", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.C), 15, null, 0xDDCB01);
 
-        instructions[0xDDCB02] = new Instruction("RLC (IX + d), D", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.D), 15, null, 0xDDCB00);
+        instructions[0xDDCB02] = new Instruction("RLC (IX + d), D", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.D), 15, null, 0xDDCB02);
 
-        instructions[0xDDCB03] = new Instruction("RLC (IX + d), E", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.E), 15, null, 0xDDCB00);
+        instructions[0xDDCB03] = new Instruction("RLC (IX + d), E", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.E), 15, null, 0xDDCB03);
 
-        instructions[0xDDCB04] = new Instruction("RLC (IX + d), H", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.H), 15, null, 0xDDCB00);
+        instructions[0xDDCB04] = new Instruction("RLC (IX + d), H", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.H), 15, null, 0xDDCB04);
 
-        instructions[0xDDCB05] = new Instruction("RLC (IX + d), L", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.L), 15, null, 0xDDCB00);
+        instructions[0xDDCB05] = new Instruction("RLC (IX + d), L", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.L), 15, null, 0xDDCB05);
 
-        instructions[0xDDCB06] = new Instruction("RLC (IX + d)", 2, i => RLC_addr_RR_plus_d(i, Register.IX), 15, null, 0xDDCB00);
+        instructions[0xDDCB06] = new Instruction("RLC (IX + d)", 2, i => RLC_addr_RR_plus_d(i, Register.IX), 15, null, 0xDDCB06);
 
-        instructions[0xDDCB07] = new Instruction("RLC (IX + d), A", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.B), 15, null, 0xDDCB00);
+        instructions[0xDDCB07] = new Instruction("RLC (IX + d), A", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.A), 15, null, 0xDDCB07);
+
+        instructions[0xDDCB08] = new Instruction("RRC (IX + d), B", 2, i => RRC_addr_RR_plus_d_R(i, Register.IX, Register.B), 15, null, 0xDDCB08);
+
+        instructions[0xDDCB09] = new Instruction("RRC (IX + d), C", 2, i => RRC_addr_RR_plus_d_R(i, Register.IX, Register.C), 15, null, 0xDDCB09);
+
+        instructions[0xDDCB0A] = new Instruction("RRC (IX + d), D", 2, i => RRC_addr_RR_plus_d_R(i, Register.IX, Register.D), 15, null, 0xDDCB0A);
+
+        instructions[0xDDCB0B] = new Instruction("RRC (IX + d), E", 2, i => RRC_addr_RR_plus_d_R(i, Register.IX, Register.E), 15, null, 0xDDCB0B);
+
+        instructions[0xDDCB0C] = new Instruction("RRC (IX + d), H", 2, i => RRC_addr_RR_plus_d_R(i, Register.IX, Register.H), 15, null, 0xDDCB0C);
+
+        instructions[0xDDCB0D] = new Instruction("RRC (IX + d), L", 2, i => RRC_addr_RR_plus_d_R(i, Register.IX, Register.L), 15, null, 0xDDCB0D);
+
+        instructions[0xDDCB0E] = new Instruction("RRC (IX + d)", 2, i => RRC_addr_RR_plus_d(i, Register.IX), 15, null, 0xDDCB0E);
+
+        instructions[0xDDCB0F] = new Instruction("RRC (IX + d), A", 2, i => RRC_addr_RR_plus_d_R(i, Register.IX, Register.A), 15, null, 0xDDCB0F);
+
+        instructions[0xDDCB10] = new Instruction("RL (IX + d), B", 2, i => RL_addr_RR_plus_d_R(i, Register.IX, Register.B), 15, null, 0xDDCB10);
+
+        instructions[0xDDCB11] = new Instruction("RL (IX + d), C", 2, i => RL_addr_RR_plus_d_R(i, Register.IX, Register.C), 15, null, 0xDDCB11);
+
+        instructions[0xDDCB12] = new Instruction("RL (IX + d), D", 2, i => RL_addr_RR_plus_d_R(i, Register.IX, Register.D), 15, null, 0xDDCB12);
+
+        instructions[0xDDCB13] = new Instruction("RL (IX + d), E", 2, i => RL_addr_RR_plus_d_R(i, Register.IX, Register.E), 15, null, 0xDDCB13);
+
+        instructions[0xDDCB14] = new Instruction("RL (IX + d), H", 2, i => RL_addr_RR_plus_d_R(i, Register.IX, Register.H), 15, null, 0xDDCB14);
+
+        instructions[0xDDCB15] = new Instruction("RL (IX + d), L", 2, i => RL_addr_RR_plus_d_R(i, Register.IX, Register.L), 15, null, 0xDDCB15);
+
+        instructions[0xDDCB16] = new Instruction("RL (IX + d)", 2, i => RL_addr_RR_plus_d(i, Register.IX), 15, null, 0xDDCB16);
+
+        instructions[0xDDCB17] = new Instruction("RL (IX + d), A", 2, i => RL_addr_RR_plus_d_R(i, Register.IX, Register.A), 15, null, 0xDDCB17);
+
+        instructions[0xDDCB18] = new Instruction("RR (IX + d), B", 2, i => RR_addr_RR_plus_d_R(i, Register.IX, Register.B), 15, null, 0xDDCB18);
+
+        instructions[0xDDCB19] = new Instruction("RR (IX + d), C", 2, i => RR_addr_RR_plus_d_R(i, Register.IX, Register.C), 15, null, 0xDDCB19);
+
+        instructions[0xDDCB1A] = new Instruction("RR (IX + d), D", 2, i => RR_addr_RR_plus_d_R(i, Register.IX, Register.D), 15, null, 0xDDCB1A);
+
+        instructions[0xDDCB1B] = new Instruction("RR (IX + d), E", 2, i => RR_addr_RR_plus_d_R(i, Register.IX, Register.E), 15, null, 0xDDCB1B);
+
+        instructions[0xDDCB1C] = new Instruction("RR (IX + d), H", 2, i => RR_addr_RR_plus_d_R(i, Register.IX, Register.H), 15, null, 0xDDCB1C);
+
+        instructions[0xDDCB1D] = new Instruction("RR (IX + d), L", 2, i => RR_addr_RR_plus_d_R(i, Register.IX, Register.L), 15, null, 0xDDCB1D);
+
+        instructions[0xDDCB1E] = new Instruction("RR (IX + d)", 2, i => RR_addr_RR_plus_d(i, Register.IX), 15, null, 0xDDCB1E);
+
+        instructions[0xDDCB1F] = new Instruction("RR (IX + d), A", 2, i => RR_addr_RR_plus_d_R(i, Register.IX, Register.A), 15, null, 0xDDCB1F);
+
+
+
 
         instructions[0xDDCB21] = new Instruction("SLA (IX + d), C", 2, i => SLA_addr_RR_plus_d_R(i, Register.IX, Register.C), 15, null, 0xDDCB21);
     }
@@ -5008,6 +5059,7 @@ public class Processor
 
         return true;
     }
+
     private static bool RLC_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
@@ -5021,6 +5073,204 @@ public class Processor
             var topBit = (byte) ((data & 0x80) >> 7);
 
             var result = (byte) (((data << 1) & 0xFE) | topBit);
+
+            input.Ram[address] = result;
+
+            // Flags
+            input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool RRC_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    {
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(source);
+
+            address = (ushort) (address + (sbyte) input.Data[0]); // TODO: Wrap around? I think Ram class might cope TBH...
+
+            var data = input.Ram[address];
+
+            var bottomBit = (byte) (data & 0x01);
+
+            var result = (byte) ((data >> 1) | (bottomBit << 7));
+
+            input.State.Registers[destination] = result;
+
+            input.Ram[address] = result;
+
+            // Flags
+            input.State.Flags.Carry = bottomBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool RRC_addr_RR_plus_d(Input input, Register source)
+    {
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(source);
+
+            address = (ushort) (address + (sbyte) input.Data[0]); // TODO: Wrap around? I think Ram class might cope TBH...
+
+            var data = input.Ram[address];
+
+            var bottomBit = (byte) (data & 0x01);
+
+            var result = (byte) ((data >> 1) | (bottomBit << 7));
+
+            input.Ram[address] = result;
+
+            // Flags
+            input.State.Flags.Carry = bottomBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool RL_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    {
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(source);
+
+            address = (ushort) (address + (sbyte) input.Data[0]); // TODO: Wrap around? I think Ram class might cope TBH...
+
+            var data = input.Ram[address];
+
+            var topBit = (byte) ((data & 0x80) >> 7);
+
+            var result = (byte) (((data << 1) & 0xFE) | (byte) (input.State.Flags.Carry ? 0x01 : 0x00));
+
+            input.State.Registers[destination] = result;
+
+            input.Ram[address] = result;
+
+            // Flags
+            input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool RL_addr_RR_plus_d(Input input, Register source)
+    {
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(source);
+
+            address = (ushort) (address + (sbyte) input.Data[0]); // TODO: Wrap around? I think Ram class might cope TBH...
+
+            var data = input.Ram[address];
+
+            var topBit = (byte) ((data & 0x80) >> 7);
+
+            var result = (byte) (((data << 1) & 0xFE) |  (byte) (input.State.Flags.Carry ? 0x01 : 0x00));
+
+            input.Ram[address] = result;
+
+            // Flags
+            input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool RR_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    {
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(source);
+
+            address = (ushort) (address + (sbyte) input.Data[0]); // TODO: Wrap around? I think Ram class might cope TBH...
+
+            var data = input.Ram[address];
+
+            var bottomBit = (byte) (data & 0x01);
+
+            var result = (byte) ((data >> 1) | (byte) (input.State.Flags.Carry ? 0x80 : 0x00));
+
+            input.State.Registers[destination] = result;
+
+            input.Ram[address] = result;
+
+            // Flags
+            input.State.Flags.Carry = bottomBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool RR_addr_RR_plus_d(Input input, Register source)
+    {
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(source);
+
+            address = (ushort) (address + (sbyte) input.Data[0]); // TODO: Wrap around? I think Ram class might cope TBH...
+
+            var data = input.Ram[address];
+
+            var topBit = (byte) ((data & 0x80) >> 7);
+
+            var result = (byte) (((data >> 1) & 0xFE) |  (byte) (input.State.Flags.Carry ? 0x80 : 0x00));
 
             input.Ram[address] = result;
 

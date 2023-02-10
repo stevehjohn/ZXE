@@ -35,20 +35,10 @@ public class TestRunner
         foreach (var file in files)
         {
             //Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("dd cb") < 0)
+            if (Path.GetFileName(file).CompareTo("dd cb __ 18") < 0)
             {
                 continue;
             }
-
-            // Not implemented yet
-            // TODO: Remove once implemented...
-            //if (Path.GetFileName(file).StartsWith("cb")
-            //    || Path.GetFileName(file).StartsWith("db")
-            //    || Path.GetFileName(file).StartsWith("ed")
-            //    || Path.GetFileName(file).StartsWith("fd"))
-            //{
-            //    continue;
-            //}
 
             // End early
             //if (Path.GetFileName(file).CompareTo("dd 2f") > 0)
