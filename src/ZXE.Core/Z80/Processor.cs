@@ -1553,7 +1553,9 @@ public class Processor
 
     private static void InitialiseDDCBInstructions(Dictionary<int, Instruction> instructions)
     {
-        instructions[0xDDCB21] = new Instruction("SLA (IX + d), C", 2, i => SLA_addr_RR_plus_d_C(i, Register.IX, Register.C), 15);
+        instructions[0xDDCB00] = new Instruction("RLC (IX + d), B", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.B), 15);
+
+        instructions[0xDDCB21] = new Instruction("SLA (IX + d), C", 2, i => SLA_addr_RR_plus_d_R(i, Register.IX, Register.C), 15);
     }
 
     private static bool NOP()
@@ -4927,7 +4929,7 @@ public class Processor
         return true;
     }
 
-    private static bool SLA_addr_RR_plus_d_C(Input input, Register source, Register destination)
+    private static bool SLA_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -4940,6 +4942,38 @@ public class Processor
             var topBit = (data & 0x80) >> 7;
 
             var result = (byte) (data << 1);
+
+            input.State.Registers[destination] = result;
+
+            // Flags
+            input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool RLC_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    {
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(source);
+
+            address = (ushort) (address + (sbyte) input.Data[0]); // TODO: Wrap around? I think Ram class might cope TBH...
+
+            var data = input.Ram[address];
+
+            var topBit = (byte) ((data & 0x80) >> 7);
+
+            var result = (byte) (((data << 1) & 0xFE) | topBit);
 
             input.State.Registers[destination] = result;
 
