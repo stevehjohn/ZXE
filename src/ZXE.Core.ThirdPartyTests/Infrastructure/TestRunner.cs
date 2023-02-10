@@ -35,7 +35,7 @@ public class TestRunner
         foreach (var file in files)
         {
             //Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("dd cb __ 18") < 0)
+            if (Path.GetFileName(file).CompareTo("dd cb __ 28") < 0)
             {
                 continue;
             }
