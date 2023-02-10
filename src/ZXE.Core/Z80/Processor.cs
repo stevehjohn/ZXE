@@ -1681,261 +1681,275 @@ public class Processor
 
         instructions[0xDDCB3F] = new Instruction("SRL (IX + d), A", 2, i => SRL_addr_RR_plus_d_R(i, Register.IX, Register.A), 15, null, 0xDDCB3F);
 
-        instructions[0xDDCB40] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB40);
+        instructions[0xDDCB40] = new Instruction("BIT_0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB40);
 
-        instructions[0xDDCB41] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB41);
+        instructions[0xDDCB41] = new Instruction("BIT_0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB41);
 
-        instructions[0xDDCB42] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB42);
+        instructions[0xDDCB42] = new Instruction("BIT_0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB42);
 
-        instructions[0xDDCB43] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB43);
+        instructions[0xDDCB43] = new Instruction("BIT_0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB43);
 
-        instructions[0xDDCB44] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB44);
+        instructions[0xDDCB44] = new Instruction("BIT_0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB44);
 
-        instructions[0xDDCB45] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB45);
+        instructions[0xDDCB45] = new Instruction("BIT_0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB45);
 
-        instructions[0xDDCB46] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB46);
+        instructions[0xDDCB46] = new Instruction("BIT_0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB46);
 
-        instructions[0xDDCB47] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB47);
+        instructions[0xDDCB47] = new Instruction("BIT_0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 12, null, 0xDDCB47);
 
-        instructions[0xDDCB48] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB48);
+        instructions[0xDDCB48] = new Instruction("BIT_1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB48);
 
-        instructions[0xDDCB49] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB49);
+        instructions[0xDDCB49] = new Instruction("BIT_1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB49);
 
-        instructions[0xDDCB4A] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4A);
+        instructions[0xDDCB4A] = new Instruction("BIT_1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4A);
 
-        instructions[0xDDCB4B] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4B);
+        instructions[0xDDCB4B] = new Instruction("BIT_1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4B);
 
-        instructions[0xDDCB4C] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4C);
+        instructions[0xDDCB4C] = new Instruction("BIT_1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4C);
 
-        instructions[0xDDCB4D] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4D);
+        instructions[0xDDCB4D] = new Instruction("BIT_1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4D);
 
-        instructions[0xDDCB4E] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4E);
+        instructions[0xDDCB4E] = new Instruction("BIT_1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4E);
 
-        instructions[0xDDCB4F] = new Instruction("BIT 1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4F);
+        instructions[0xDDCB4F] = new Instruction("BIT_1, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IX), 12, null, 0xDDCB4F);
 
-        instructions[0xDDCB50] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB50);
+        instructions[0xDDCB50] = new Instruction("BIT_2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB50);
 
-        instructions[0xDDCB51] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB51);
+        instructions[0xDDCB51] = new Instruction("BIT_2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB51);
 
-        instructions[0xDDCB52] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB52);
+        instructions[0xDDCB52] = new Instruction("BIT_2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB52);
 
-        instructions[0xDDCB53] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB53);
+        instructions[0xDDCB53] = new Instruction("BIT_2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB53);
 
-        instructions[0xDDCB54] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB54);
+        instructions[0xDDCB54] = new Instruction("BIT_2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB54);
 
-        instructions[0xDDCB55] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB55);
+        instructions[0xDDCB55] = new Instruction("BIT_2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB55);
 
-        instructions[0xDDCB56] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB56);
+        instructions[0xDDCB56] = new Instruction("BIT_2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB56);
 
-        instructions[0xDDCB57] = new Instruction("BIT 2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB57);
+        instructions[0xDDCB57] = new Instruction("BIT_2, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IX), 12, null, 0xDDCB57);
 
-        instructions[0xDDCB58] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB58);
+        instructions[0xDDCB58] = new Instruction("BIT_3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB58);
 
-        instructions[0xDDCB59] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB59);
+        instructions[0xDDCB59] = new Instruction("BIT_3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB59);
 
-        instructions[0xDDCB5A] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5A);
+        instructions[0xDDCB5A] = new Instruction("BIT_3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5A);
 
-        instructions[0xDDCB5B] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5B);
+        instructions[0xDDCB5B] = new Instruction("BIT_3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5B);
 
-        instructions[0xDDCB5C] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5C);
+        instructions[0xDDCB5C] = new Instruction("BIT_3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5C);
 
-        instructions[0xDDCB5D] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5D);
+        instructions[0xDDCB5D] = new Instruction("BIT_3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5D);
 
-        instructions[0xDDCB5E] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5E);
+        instructions[0xDDCB5E] = new Instruction("BIT_3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5E);
 
-        instructions[0xDDCB5F] = new Instruction("BIT 3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5F);
+        instructions[0xDDCB5F] = new Instruction("BIT_3, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IX), 12, null, 0xDDCB5F);
 
-        instructions[0xDDCB60] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB60);
+        instructions[0xDDCB60] = new Instruction("BIT_4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB60);
 
-        instructions[0xDDCB61] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB61);
+        instructions[0xDDCB61] = new Instruction("BIT_4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB61);
 
-        instructions[0xDDCB62] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB62);
+        instructions[0xDDCB62] = new Instruction("BIT_4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB62);
 
-        instructions[0xDDCB63] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB63);
+        instructions[0xDDCB63] = new Instruction("BIT_4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB63);
 
-        instructions[0xDDCB64] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB64);
+        instructions[0xDDCB64] = new Instruction("BIT_4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB64);
 
-        instructions[0xDDCB65] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB65);
+        instructions[0xDDCB65] = new Instruction("BIT_4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB65);
 
-        instructions[0xDDCB66] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB66);
+        instructions[0xDDCB66] = new Instruction("BIT_4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB66);
 
-        instructions[0xDDCB67] = new Instruction("BIT 4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB67);
+        instructions[0xDDCB67] = new Instruction("BIT_4, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IX), 12, null, 0xDDCB67);
 
-        instructions[0xDDCB68] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB68);
+        instructions[0xDDCB68] = new Instruction("BIT_5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB68);
 
-        instructions[0xDDCB69] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB69);
+        instructions[0xDDCB69] = new Instruction("BIT_5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB69);
 
-        instructions[0xDDCB6A] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6A);
+        instructions[0xDDCB6A] = new Instruction("BIT_5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6A);
 
-        instructions[0xDDCB6B] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6B);
+        instructions[0xDDCB6B] = new Instruction("BIT_5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6B);
 
-        instructions[0xDDCB6C] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6C);
+        instructions[0xDDCB6C] = new Instruction("BIT_5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6C);
 
-        instructions[0xDDCB6D] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6D);
+        instructions[0xDDCB6D] = new Instruction("BIT_5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6D);
 
-        instructions[0xDDCB6E] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6E);
+        instructions[0xDDCB6E] = new Instruction("BIT_5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6E);
 
-        instructions[0xDDCB6F] = new Instruction("BIT 5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6F);
+        instructions[0xDDCB6F] = new Instruction("BIT_5, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB6F);
 
-        instructions[0xDDCB70] = new Instruction("BIT 6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB70);
+        instructions[0xDDCB70] = new Instruction("BIT_6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB70);
 
-        instructions[0xDDCB71] = new Instruction("BIT 6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB71);
+        instructions[0xDDCB71] = new Instruction("BIT_6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB71);
 
-        instructions[0xDDCB72] = new Instruction("BIT 6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB72);
+        instructions[0xDDCB72] = new Instruction("BIT_6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB72);
 
-        instructions[0xDDCB73] = new Instruction("BIT 6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB73);
+        instructions[0xDDCB73] = new Instruction("BIT_6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB73);
 
-        instructions[0xDDCB74] = new Instruction("BIT 6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB74);
+        instructions[0xDDCB74] = new Instruction("BIT_6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB74);
 
-        instructions[0xDDCB75] = new Instruction("BIT 6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB75);
+        instructions[0xDDCB75] = new Instruction("BIT_6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB75);
 
-        instructions[0xDDCB76] = new Instruction("BIT 6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB76);
+        instructions[0xDDCB76] = new Instruction("BIT_6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB76);
 
-        instructions[0xDDCB77] = new Instruction("BIT 6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB77);
+        instructions[0xDDCB77] = new Instruction("BIT_6, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB77);
 
-        instructions[0xDDCB78] = new Instruction("BIT 7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB78);
+        instructions[0xDDCB78] = new Instruction("BIT_7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB78);
 
-        instructions[0xDDCB79] = new Instruction("BIT 7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB79);
+        instructions[0xDDCB79] = new Instruction("BIT_7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB79);
 
-        instructions[0xDDCB7A] = new Instruction("BIT 7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7A);
+        instructions[0xDDCB7A] = new Instruction("BIT_7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7A);
 
-        instructions[0xDDCB7B] = new Instruction("BIT 7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7B);
+        instructions[0xDDCB7B] = new Instruction("BIT_7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7B);
 
-        instructions[0xDDCB7C] = new Instruction("BIT 7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7C);
+        instructions[0xDDCB7C] = new Instruction("BIT_7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7C);
 
-        instructions[0xDDCB7D] = new Instruction("BIT 7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7D);
+        instructions[0xDDCB7D] = new Instruction("BIT_7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7D);
 
-        instructions[0xDDCB7E] = new Instruction("BIT 7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7E);
+        instructions[0xDDCB7E] = new Instruction("BIT_7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7E);
 
-        instructions[0xDDCB7F] = new Instruction("BIT 7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7F);
+        instructions[0xDDCB7F] = new Instruction("BIT_7, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7F);
 
-        instructions[0xDDCB80] = new Instruction("RES 0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB80);
+        instructions[0xDDCB80] = new Instruction("RES_0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB80);
 
-        instructions[0xDDCB81] = new Instruction("RES 0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB81);
+        instructions[0xDDCB81] = new Instruction("RES_0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB81);
 
-        instructions[0xDDCB82] = new Instruction("RES 0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB82);
+        instructions[0xDDCB82] = new Instruction("RES_0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB82);
 
-        instructions[0xDDCB83] = new Instruction("RES 0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB83);
+        instructions[0xDDCB83] = new Instruction("RES_0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB83);
 
-        instructions[0xDDCB84] = new Instruction("RES 0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB84);
+        instructions[0xDDCB84] = new Instruction("RES_0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB84);
 
-        instructions[0xDDCB85] = new Instruction("RES 0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB85);
+        instructions[0xDDCB85] = new Instruction("RES_0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB85);
 
-        instructions[0xDDCB86] = new Instruction("RES 0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB86);
+        instructions[0xDDCB86] = new Instruction("RES_0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB86);
 
-        instructions[0xDDCB87] = new Instruction("RES 0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB87);
+        instructions[0xDDCB87] = new Instruction("RES_0, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCB87);
 
-        instructions[0xDDCB88] = new Instruction("RES 1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB88);
+        instructions[0xDDCB88] = new Instruction("RES_1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB88);
 
-        instructions[0xDDCB89] = new Instruction("RES 1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB89);
+        instructions[0xDDCB89] = new Instruction("RES_1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB89);
 
-        instructions[0xDDCB8A] = new Instruction("RES 1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB8A);
+        instructions[0xDDCB8A] = new Instruction("RES_1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB8A);
 
-        instructions[0xDDCB8B] = new Instruction("RES 1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB8B);
+        instructions[0xDDCB8B] = new Instruction("RES_1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB8B);
 
-        instructions[0xDDCB8C] = new Instruction("RES 1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB8C);
+        instructions[0xDDCB8C] = new Instruction("RES_1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB8C);
 
-        instructions[0xDDCB8D] = new Instruction("RES 1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB8D);
+        instructions[0xDDCB8D] = new Instruction("RES_1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB8D);
 
-        instructions[0xDDCB8E] = new Instruction("RES 1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB8E);
+        instructions[0xDDCB8E] = new Instruction("RES_1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB8E);
 
-        instructions[0xDDCB8F] = new Instruction("RES 1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB8F);
+        instructions[0xDDCB8F] = new Instruction("RES_1, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCB8F);
 
-        instructions[0xDDCB90] = new Instruction("RES 2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB90);
+        instructions[0xDDCB90] = new Instruction("RES_2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB90);
 
-        instructions[0xDDCB91] = new Instruction("RES 2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB91);
+        instructions[0xDDCB91] = new Instruction("RES_2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB91);
 
-        instructions[0xDDCB92] = new Instruction("RES 2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB92);
+        instructions[0xDDCB92] = new Instruction("RES_2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB92);
 
-        instructions[0xDDCB93] = new Instruction("RES 2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB93);
+        instructions[0xDDCB93] = new Instruction("RES_2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB93);
 
-        instructions[0xDDCB94] = new Instruction("RES 2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB94);
+        instructions[0xDDCB94] = new Instruction("RES_2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB94);
 
-        instructions[0xDDCB95] = new Instruction("RES 2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB95);
+        instructions[0xDDCB95] = new Instruction("RES_2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB95);
 
-        instructions[0xDDCB96] = new Instruction("RES 2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB96);
+        instructions[0xDDCB96] = new Instruction("RES_2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB96);
 
-        instructions[0xDDCB97] = new Instruction("RES 2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB97);
+        instructions[0xDDCB97] = new Instruction("RES_2, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCB97);
     
-        instructions[0xDDCB98] = new Instruction("RES 3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB98);
+        instructions[0xDDCB98] = new Instruction("RES_3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB98);
 
-        instructions[0xDDCB99] = new Instruction("RES 3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB99);
+        instructions[0xDDCB99] = new Instruction("RES_3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB99);
 
-        instructions[0xDDCB9A] = new Instruction("RES 3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB9A);
+        instructions[0xDDCB9A] = new Instruction("RES_3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB9A);
 
-        instructions[0xDDCB9B] = new Instruction("RES 3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB9B);
+        instructions[0xDDCB9B] = new Instruction("RES_3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB9B);
 
-        instructions[0xDDCB9C] = new Instruction("RES 3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB9C);
+        instructions[0xDDCB9C] = new Instruction("RES_3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB9C);
 
-        instructions[0xDDCB9D] = new Instruction("RES 3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB9D);
+        instructions[0xDDCB9D] = new Instruction("RES_3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB9D);
 
-        instructions[0xDDCB9E] = new Instruction("RES 3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB9E);
+        instructions[0xDDCB9E] = new Instruction("RES_3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB9E);
 
-        instructions[0xDDCB9F] = new Instruction("RES 3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB9F);
+        instructions[0xDDCB9F] = new Instruction("RES_3, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCB9F);
 
-        instructions[0xDDCBA0] = new Instruction("RES 4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA0);
+        instructions[0xDDCBA0] = new Instruction("RES_4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA0);
 
-        instructions[0xDDCBA1] = new Instruction("RES 4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA1);
+        instructions[0xDDCBA1] = new Instruction("RES_4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA1);
 
-        instructions[0xDDCBA2] = new Instruction("RES 4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA2);
+        instructions[0xDDCBA2] = new Instruction("RES_4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA2);
 
-        instructions[0xDDCBA3] = new Instruction("RES 4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA3);
+        instructions[0xDDCBA3] = new Instruction("RES_4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA3);
 
-        instructions[0xDDCBA4] = new Instruction("RES 4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA4);
+        instructions[0xDDCBA4] = new Instruction("RES_4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA4);
 
-        instructions[0xDDCBA5] = new Instruction("RES 4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA5);
+        instructions[0xDDCBA5] = new Instruction("RES_4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA5);
 
-        instructions[0xDDCBA6] = new Instruction("RES 4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA6);
+        instructions[0xDDCBA6] = new Instruction("RES_4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA6);
 
-        instructions[0xDDCBA7] = new Instruction("RES 4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA7);
+        instructions[0xDDCBA7] = new Instruction("RES_4, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBA7);
 
-        instructions[0xDDCBA8] = new Instruction("RES 5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBA8);
+        instructions[0xDDCBA8] = new Instruction("RES_5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBA8);
 
-        instructions[0xDDCBA9] = new Instruction("RES 5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBA9);
+        instructions[0xDDCBA9] = new Instruction("RES_5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBA9);
 
-        instructions[0xDDCBAA] = new Instruction("RES 5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBAA);
+        instructions[0xDDCBAA] = new Instruction("RES_5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBAA);
 
-        instructions[0xDDCBAB] = new Instruction("RES 5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBAB);
+        instructions[0xDDCBAB] = new Instruction("RES_5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBAB);
 
-        instructions[0xDDCBAC] = new Instruction("RES 5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBAC);
+        instructions[0xDDCBAC] = new Instruction("RES_5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBAC);
 
-        instructions[0xDDCBAD] = new Instruction("RES 5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBAD);
+        instructions[0xDDCBAD] = new Instruction("RES_5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBAD);
 
-        instructions[0xDDCBAE] = new Instruction("RES 5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBAE);
+        instructions[0xDDCBAE] = new Instruction("RES_5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBAE);
 
-        instructions[0xDDCBAF] = new Instruction("RES 5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBAF);
+        instructions[0xDDCBAF] = new Instruction("RES_5, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBAF);
 
-        instructions[0xDDCBB0] = new Instruction("RES 6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB0);
+        instructions[0xDDCBB0] = new Instruction("RES_6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB0);
 
-        instructions[0xDDCBB1] = new Instruction("RES 6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB1);
+        instructions[0xDDCBB1] = new Instruction("RES_6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB1);
 
-        instructions[0xDDCBB2] = new Instruction("RES 6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB2);
+        instructions[0xDDCBB2] = new Instruction("RES_6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB2);
 
-        instructions[0xDDCBB3] = new Instruction("RES 6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB3);
+        instructions[0xDDCBB3] = new Instruction("RES_6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB3);
 
-        instructions[0xDDCBB4] = new Instruction("RES 6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB4);
+        instructions[0xDDCBB4] = new Instruction("RES_6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB4);
 
-        instructions[0xDDCBB5] = new Instruction("RES 6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB5);
+        instructions[0xDDCBB5] = new Instruction("RES_6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB5);
 
-        instructions[0xDDCBB6] = new Instruction("RES 6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB6);
+        instructions[0xDDCBB6] = new Instruction("RES_6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB6);
 
-        instructions[0xDDCBB7] = new Instruction("RES 6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB7);
+        instructions[0xDDCBB7] = new Instruction("RES_6, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IX), 15, null, 0xDDCBB7);
     
-        instructions[0xDDCBB8] = new Instruction("RES 7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBB8);
+        instructions[0xDDCBB8] = new Instruction("RES_7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBB8);
 
-        instructions[0xDDCBB9] = new Instruction("RES 7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBB9);
+        instructions[0xDDCBB9] = new Instruction("RES_7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBB9);
 
-        instructions[0xDDCBBA] = new Instruction("RES 7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBBA);
+        instructions[0xDDCBBA] = new Instruction("RES_7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBBA);
 
-        instructions[0xDDCBBB] = new Instruction("RES 7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBBB);
+        instructions[0xDDCBBB] = new Instruction("RES_7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBBB);
 
-        instructions[0xDDCBBC] = new Instruction("RES 7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBBC);
+        instructions[0xDDCBBC] = new Instruction("RES_7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBBC);
 
-        instructions[0xDDCBBD] = new Instruction("RES 7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBBD);
+        instructions[0xDDCBBD] = new Instruction("RES_7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBBD);
 
-        instructions[0xDDCBBE] = new Instruction("RES 7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBBE);
+        instructions[0xDDCBBE] = new Instruction("RES_7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBBE);
 
-        instructions[0xDDCBBF] = new Instruction("RES 7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBBF);
+        instructions[0xDDCBBF] = new Instruction("RES_7, (IX + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IX), 15, null, 0xDDCBBF);
+
+        instructions[0xDDCBC0] = new Instruction("SET 0, (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCBC0);
+
+        instructions[0xDDCBC0] = new Instruction("SET 0, (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCBC0);
+
+        instructions[0xDDCBC0] = new Instruction("SET 0, (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCBC0);
+
+        instructions[0xDDCBC0] = new Instruction("SET 0, (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCBC0);
+
+        instructions[0xDDCBC0] = new Instruction("SET 0, (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCBC0);
+
+        instructions[0xDDCBC0] = new Instruction("SET 0, (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCBC0);
+
+        instructions[0xDDCBC0] = new Instruction("SET 0, (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCBC0);
 
         instructions[0xDDCBC0] = new Instruction("SET 0, (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCBC0);
     }
