@@ -12,7 +12,10 @@ public class Instruction
 
     public int ClockCycles { get; }
 
-    public Instruction(string mnemonic,  byte length, Func<Input, bool> action, int clockCycles, string? helperMnemonic = null)
+    // TODO: Go back over all instructions to add this. Cry while doing so.
+    public int? Opcode { get; }
+
+    public Instruction(string mnemonic,  byte length, Func<Input, bool> action, int clockCycles, string? helperMnemonic = null, int? opcode = null)
     {
         Mnemonic = mnemonic;
 
@@ -23,5 +26,7 @@ public class Instruction
         ClockCycles = clockCycles;
 
         HelperMnemonic = helperMnemonic;
+
+        Opcode = opcode;
     }
 }

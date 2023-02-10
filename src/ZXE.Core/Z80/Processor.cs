@@ -1553,9 +1553,23 @@ public class Processor
 
     private static void InitialiseDDCBInstructions(Dictionary<int, Instruction> instructions)
     {
-        instructions[0xDDCB00] = new Instruction("RLC (IX + d), B", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.B), 15);
+        instructions[0xDDCB00] = new Instruction("RLC (IX + d), B", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.B), 15, null, 0xDDCB00);
 
-        instructions[0xDDCB21] = new Instruction("SLA (IX + d), C", 2, i => SLA_addr_RR_plus_d_R(i, Register.IX, Register.C), 15);
+        instructions[0xDDCB01] = new Instruction("RLC (IX + d), C", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.C), 15, null, 0xDDCB00);
+
+        instructions[0xDDCB02] = new Instruction("RLC (IX + d), D", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.D), 15, null, 0xDDCB00);
+
+        instructions[0xDDCB03] = new Instruction("RLC (IX + d), E", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.E), 15, null, 0xDDCB00);
+
+        instructions[0xDDCB04] = new Instruction("RLC (IX + d), H", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.H), 15, null, 0xDDCB00);
+
+        instructions[0xDDCB05] = new Instruction("RLC (IX + d), L", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.L), 15, null, 0xDDCB00);
+
+        instructions[0xDDCB06] = new Instruction("RLC (IX + d)", 2, i => RLC_addr_RR_plus_d(i, Register.IX), 15, null, 0xDDCB00);
+
+        instructions[0xDDCB07] = new Instruction("RLC (IX + d), A", 2, i => RLC_addr_RR_plus_d_R(i, Register.IX, Register.B), 15, null, 0xDDCB00);
+
+        instructions[0xDDCB21] = new Instruction("SLA (IX + d), C", 2, i => SLA_addr_RR_plus_d_R(i, Register.IX, Register.C), 15, null, 0xDDCB21);
     }
 
     private static bool NOP()
@@ -4976,6 +4990,39 @@ public class Processor
             var result = (byte) (((data << 1) & 0xFE) | topBit);
 
             input.State.Registers[destination] = result;
+
+            input.Ram[address] = result;
+
+            // Flags
+            input.State.Flags.Carry = topBit == 1;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+    private static bool RLC_addr_RR_plus_d(Input input, Register source)
+    {
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(source);
+
+            address = (ushort) (address + (sbyte) input.Data[0]); // TODO: Wrap around? I think Ram class might cope TBH...
+
+            var data = input.Ram[address];
+
+            var topBit = (byte) ((data & 0x80) >> 7);
+
+            var result = (byte) (((data << 1) & 0xFE) | topBit);
+
+            input.Ram[address] = result;
 
             // Flags
             input.State.Flags.Carry = topBit == 1;

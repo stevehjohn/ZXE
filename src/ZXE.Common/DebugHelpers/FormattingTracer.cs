@@ -16,7 +16,7 @@ public class FormattingTracer : ITracer
 
     public void TraceBefore(Instruction instruction, byte[] data, State state, Ram ram)
     {
-        _trace.Add($"{FormatMnemonic(instruction.Mnemonic)}{FormatState(instruction.HelperMnemonic ?? instruction.Mnemonic, data, state, ram)}");
+        _trace.Add($"{FormatMnemonic(instruction.Mnemonic)}{FormatState(instruction, data, state, ram)}");
     }
 
     public void TraceAfter(Instruction instruction, byte[] data, State state, Ram ram)
@@ -28,7 +28,7 @@ public class FormattingTracer : ITracer
             return;
         }
 
-        _trace.Add($"{new string(' ', 20)}{FormatState(instruction.HelperMnemonic ?? instruction.Mnemonic, data, state, ram)}");
+        _trace.Add($"{new string(' ', 20)}{FormatState(instruction, data, state, ram)}");
 
         _trace.Add(string.Empty);
     }
@@ -132,8 +132,10 @@ public class FormattingTracer : ITracer
         return builder.ToString();
     }
 
-    private static string FormatState(string mnemonic, byte[] data, State state, Ram ram)
+    private static string FormatState(Instruction instruction, byte[] data, State state, Ram ram)
     {
+        var mnemonic = instruction.HelperMnemonic ?? instruction.Mnemonic;
+
         var parts = GetMnemonicParts(mnemonic);
 
         if (parts[0] == "SOPSET")
@@ -154,7 +156,7 @@ public class FormattingTracer : ITracer
             return builder.ToString();
         }
 
-        builder.Append($"    {FormatOperandData(parts[1], data, state, 0)}");
+        builder.Append($"    {FormatOperandData(parts[1], data, state, 0, instruction)}");
 
         if (parts.Length > 2)
         {
@@ -165,13 +167,13 @@ public class FormattingTracer : ITracer
                 sequence = 1;
             }
 
-            builder.Append($"    {FormatOperandData(parts[2], data, state, sequence)}");
+            builder.Append($"    {FormatOperandData(parts[2], data, state, sequence, instruction)}");
         }
 
         return builder.ToString();
     }
 
-    private static string FormatOperandData(string operand, byte[] data, State state, int sequence)
+    private static string FormatOperandData(string operand, byte[] data, State state, int sequence, Instruction instruction)
     {
         if (operand[0] == '(')
         {
@@ -222,17 +224,24 @@ public class FormattingTracer : ITracer
                 continue;
             }
 
-            if (part.Length > 1)
+            if ((instruction.Opcode & 0xFFFF00) == 0xDDCB00)
             {
-                var value = data[2] << 8 | data[1];
-
-                builder.Append($"&Cyan;{part}&White;: &Green;{value:X4}");
+                builder.Append($"&Cyan;{part} &White;: &Green;{data[0]:X2}  ");
             }
             else
             {
-                var value = data[1 + sequence];
+                if (part.Length > 1)
+                {
+                    var value = data[2] << 8 | data[1];
 
-                builder.Append($"&Cyan;{part} &White;: &Green;{value:X2}  ");
+                    builder.Append($"&Cyan;{part}&White;: &Green;{value:X4}");
+                }
+                else
+                {
+                    var value = data[1 + sequence];
+
+                    builder.Append($"&Cyan;{part} &White;: &Green;{value:X2}  ");
+                }
             }
         }
 
