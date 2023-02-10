@@ -1937,21 +1937,117 @@ public class Processor
 
         instructions[0xDDCBBF] = new Instruction("RES_7 (IX + d), A", 2, i => RES_b_addr_RR_plus_d_R(i, 0x80, Register.IX, Register.A), 15, null, 0xDDCBBF);
 
-        instructions[0xDDCBC1] = new Instruction("SET 0 (IX + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.B), 15, null, 0xDDCBC1);
+        instructions[0xDDCBC0] = new Instruction("SET_0 (IX + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.B), 15, null, 0xDDCBC0);
 
-        instructions[0xDDCBC2] = new Instruction("SET 0 (IX + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.C), 15, null, 0xDDCBC2);
+        instructions[0xDDCBC1] = new Instruction("SET_0 (IX + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.C), 15, null, 0xDDCBC1);
 
-        instructions[0xDDCBC3] = new Instruction("SET 0 (IX + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.D), 15, null, 0xDDCBC3);
+        instructions[0xDDCBC2] = new Instruction("SET_0 (IX + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.D), 15, null, 0xDDCBC2);
 
-        instructions[0xDDCBC4] = new Instruction("SET 0 (IX + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.E), 15, null, 0xDDCBC4);
+        instructions[0xDDCBC3] = new Instruction("SET_0 (IX + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.E), 15, null, 0xDDCBC3);
 
-        instructions[0xDDCBC5] = new Instruction("SET 0 (IX + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.H), 15, null, 0xDDCBC5);
+        instructions[0xDDCBC4] = new Instruction("SET_0 (IX + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.H), 15, null, 0xDDCBC4);
 
-        instructions[0xDDCBC6] = new Instruction("SET 0 (IX + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.L), 15, null, 0xDDCBC6);
+        instructions[0xDDCBC5] = new Instruction("SET_0 (IX + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.L), 15, null, 0xDDCBC5);
 
-        instructions[0xDDCBC7] = new Instruction("SET 0 (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCBC7);
+        instructions[0xDDCBC6] = new Instruction("SET_0 (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCBC6);
 
-        instructions[0xDDCBC8] = new Instruction("SET 0 (IX + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.A), 15, null, 0xDDCBC8);
+        instructions[0xDDCBC7] = new Instruction("SET_0 (IX + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.A), 15, null, 0xDDCBC7);
+
+        instructions[0xDDCBC8] = new Instruction("SET_1 (IX + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.B), 15, null, 0xDDCBC8);
+
+        instructions[0xDDCBC9] = new Instruction("SET_1 (IX + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.C), 15, null, 0xDDCBC9);
+
+        instructions[0xDDCBCA] = new Instruction("SET_1 (IX + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.D), 15, null, 0xDDCBCA);
+
+        instructions[0xDDCBCB] = new Instruction("SET_1 (IX + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.E), 15, null, 0xDDCBCB);
+
+        instructions[0xDDCBCC] = new Instruction("SET_1 (IX + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.H), 15, null, 0xDDCBCC);
+
+        instructions[0xDDCBCD] = new Instruction("SET_1 (IX + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.L), 15, null, 0xDDCBCD);
+
+        instructions[0xDDCBCE] = new Instruction("SET_1 (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x01, Register.IX), 15, null, 0xDDCBCE);
+
+        instructions[0xDDCBCF] = new Instruction("SET_1 (IX + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IX, Register.A), 15, null, 0xDDCBCF);
+    
+        instructions[0xDDCBD0] = new Instruction("SET_2 (IX + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IX, Register.B), 15, null, 0xDDCBD0);
+
+        instructions[0xDDCBD1] = new Instruction("SET_2 (IX + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IX, Register.C), 15, null, 0xDDCBD1);
+
+        instructions[0xDDCBD2] = new Instruction("SET_2 (IX + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IX, Register.D), 15, null, 0xDDCBD2);
+
+        instructions[0xDDCBD3] = new Instruction("SET_2 (IX + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IX, Register.E), 15, null, 0xDDCBD3);
+
+        instructions[0xDDCBD4] = new Instruction("SET_2 (IX + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IX, Register.H), 15, null, 0xDDCBD4);
+
+        instructions[0xDDCBD5] = new Instruction("SET_2 (IX + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IX, Register.L), 15, null, 0xDDCBD5);
+
+        instructions[0xDDCBD6] = new Instruction("SET_2 (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x02, Register.IX), 15, null, 0xDDCBD6);
+
+        instructions[0xDDCBD7] = new Instruction("SET_2 (IX + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IX, Register.A), 15, null, 0xDDCBD7);
+
+        instructions[0xDDCBD8] = new Instruction("SET_3 (IX + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IX, Register.B), 15, null, 0xDDCBD8);
+
+        instructions[0xDDCBD9] = new Instruction("SET_3 (IX + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IX, Register.C), 15, null, 0xDDCBD9);
+
+        instructions[0xDDCBDA] = new Instruction("SET_3 (IX + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IX, Register.D), 15, null, 0xDDCBDA);
+
+        instructions[0xDDCBDB] = new Instruction("SET_3 (IX + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IX, Register.E), 15, null, 0xDDCBDB);
+
+        instructions[0xDDCBDC] = new Instruction("SET_3 (IX + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IX, Register.H), 15, null, 0xDDCBDC);
+
+        instructions[0xDDCBDD] = new Instruction("SET_3 (IX + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IX, Register.L), 15, null, 0xDDCBDD);
+
+        instructions[0xDDCBDE] = new Instruction("SET_3 (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x04, Register.IX), 15, null, 0xDDCBDE);
+
+        instructions[0xDDCBDF] = new Instruction("SET_3 (IX + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IX, Register.A), 15, null, 0xDDCBDF);    
+
+        instructions[0xDDCBE0] = new Instruction("SET_4 (IX + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IX, Register.B), 15, null, 0xDDCBE0);
+
+        instructions[0xDDCBE1] = new Instruction("SET_4 (IX + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IX, Register.C), 15, null, 0xDDCBE1);
+
+        instructions[0xDDCBE2] = new Instruction("SET_4 (IX + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IX, Register.D), 15, null, 0xDDCBE2);
+
+        instructions[0xDDCBE3] = new Instruction("SET_4 (IX + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IX, Register.E), 15, null, 0xDDCBE3);
+
+        instructions[0xDDCBE4] = new Instruction("SET_4 (IX + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IX, Register.H), 15, null, 0xDDCBE4);
+
+        instructions[0xDDCBE5] = new Instruction("SET_4 (IX + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IX, Register.L), 15, null, 0xDDCBE5);
+
+        instructions[0xDDCBE6] = new Instruction("SET_4 (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x08, Register.IX), 15, null, 0xDDCBE6);
+
+        instructions[0xDDCBE7] = new Instruction("SET_4 (IX + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IX, Register.A), 15, null, 0xDDCBE7);
+
+        instructions[0xDDCBE8] = new Instruction("SET_5 (IX + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IX, Register.B), 15, null, 0xDDCBE8);
+
+        instructions[0xDDCBE9] = new Instruction("SET_5 (IX + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IX, Register.C), 15, null, 0xDDCBE9);
+
+        instructions[0xDDCBEA] = new Instruction("SET_5 (IX + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IX, Register.D), 15, null, 0xDDCBEA);
+
+        instructions[0xDDCBEB] = new Instruction("SET_5 (IX + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IX, Register.E), 15, null, 0xDDCBEB);
+
+        instructions[0xDDCBEC] = new Instruction("SET_5 (IX + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IX, Register.H), 15, null, 0xDDCBEC);
+
+        instructions[0xDDCBED] = new Instruction("SET_5 (IX + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IX, Register.L), 15, null, 0xDDCBED);
+
+        instructions[0xDDCBEE] = new Instruction("SET_5 (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x10, Register.IX), 15, null, 0xDDCBEE);
+
+        instructions[0xDDCBEF] = new Instruction("SET_5 (IX + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IX, Register.A), 15, null, 0xDDCBEF);     
+
+        instructions[0xDDCBF0] = new Instruction("SET_6 (IX + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IX, Register.B), 15, null, 0xDDCBF0);
+
+        instructions[0xDDCBF1] = new Instruction("SET_6 (IX + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IX, Register.C), 15, null, 0xDDCBF1);
+
+        instructions[0xDDCBF2] = new Instruction("SET_6 (IX + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IX, Register.D), 15, null, 0xDDCBF2);
+
+        instructions[0xDDCBF3] = new Instruction("SET_6 (IX + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IX, Register.E), 15, null, 0xDDCBF3);
+
+        instructions[0xDDCBF4] = new Instruction("SET_6 (IX + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IX, Register.H), 15, null, 0xDDCBF4);
+
+        instructions[0xDDCBF5] = new Instruction("SET_6 (IX + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IX, Register.L), 15, null, 0xDDCBF5);
+
+        instructions[0xDDCBF6] = new Instruction("SET_6 (IX + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x20, Register.IX), 15, null, 0xDDCBF6);
+
+        instructions[0xDDCBF7] = new Instruction("SET_6 (IX + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IX, Register.A), 15, null, 0xDDCBF7);
     }
 
     private static bool NOP()
