@@ -1680,6 +1680,8 @@ public class Processor
         instructions[0xDDCB3E] = new Instruction("SRL (IX + d)", 2, i => SRL_addr_RR_plus_d(i, Register.IX), 15, null, 0xDDCB3E);
 
         instructions[0xDDCB3F] = new Instruction("SRL (IX + d), A", 2, i => SRL_addr_RR_plus_d_R(i, Register.IX, Register.A), 15, null, 0xDDCB3F);
+
+        instructions[0xDDCB40] = new Instruction("BIT 0, (IX + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IX), 13);
     }
 
     private static bool NOP()
@@ -5581,6 +5583,31 @@ public class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
+
+        return true;
+    }
+
+    private static bool BIT_b_addr_RR_plus_d(Input input, byte bit, Register register)
+    {
+        var address = input.State.Registers.ReadPair(register);
+
+        address = (ushort) (address + (sbyte) input.Data[0]); // TODO: Wrap around? I think Ram class might cope TBH...
+
+        var data = input.Ram[address];
+
+        var result = (byte) (data & bit);
+
+        // Flags
+        // Carry unaffected
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = result == 0;
+        input.State.Flags.X1 = (data & 0x08) > 0;
+        input.State.Flags.HalfCarry = true;
+        input.State.Flags.X2 = (data & 0x20) > 0;
+        input.State.Flags.Zero = (data & bit) == 0;
+        input.State.Flags.Sign = bit == 7 && result != 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
 
         return true;
     }
