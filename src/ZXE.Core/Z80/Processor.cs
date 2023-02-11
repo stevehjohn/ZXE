@@ -1087,6 +1087,10 @@ public class Processor
         instructions[0xED49] = new Instruction("OUT (BC), B", 1, i => OUT_addr_RR_R(i, Register.BC, Register.B), 8, null, 0xED49);
 
         instructions[0xED4A] = new Instruction("ADC HL, BC", 1, i => ADC_RR_RR(i, Register.HL, Register.BC), 11, null, 0xED4A);
+
+        instructions[0xED4B] = new Instruction("LD BC, (nn)", 3, i => LD_RR_addr_nn(i, Register.BC), 16, null, 0xED4B);
+
+        instructions[0xED4C] = new Instruction("MLT BC", 1, i => MLT_RR(i, Register.BC), 13, null, 0xED4C);
     }
 
     private static void InitialiseCBInstructions(Dictionary<int, Instruction> instructions)
@@ -6758,4 +6762,18 @@ public class Processor
         }
 
         return true;
-    }}
+    }
+
+    private static bool MLT_RR(Input input, Register register)
+    {
+        var value = input.State.Registers.ReadLow(register);
+
+        value *= input.State.Registers.ReadHigh(register);
+
+        input.State.Registers.WritePair(register, value);
+
+        // Flags unaffected
+
+        return true;
+    }
+}

@@ -61,4 +61,18 @@ public class Registers
 
         _registers[highPosition] = value;
     }
+
+    public byte ReadLow(Register register)
+    {
+        var lowPosition = ((int) register & 0xFF00) >> 8;
+
+        return _registers[lowPosition];
+    }
+
+    public byte ReadHigh(Register register)
+    {
+        var lowPosition = ((int) register & 0x00FF) >> 8;
+
+        return _registers[lowPosition];
+    }
 }
