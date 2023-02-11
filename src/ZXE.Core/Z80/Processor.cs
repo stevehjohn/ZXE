@@ -1025,37 +1025,45 @@ public class Processor
 
         instructions[0xED01] = new Instruction("OUT_0 (n), B", 2, i => OUT_b_addr_n_R(i, Register.B), 8, null, 0xED01);
 
-        instructions[0xED04] = new Instruction("TST B", 1, i => TST(i, Register.B), 6, null, 0xED04);
+        instructions[0xED04] = new Instruction("TST B", 1, i => TST_R(i, Register.B), 6, null, 0xED04);
 
         instructions[0xED08] = new Instruction("IN_0 C, (n)", 2, i => IN_b_R_addr_n(i, Register.C), 8, null, 0x0ED08);
 
         instructions[0xED09] = new Instruction("OUT_0 (n), C", 2, i => OUT_b_addr_n_R(i, Register.C), 8, null, 0xED09);
 
-        instructions[0xED0C] = new Instruction("TST C", 1, i => TST(i, Register.C), 6, null, 0xED0C);
+        instructions[0xED0C] = new Instruction("TST C", 1, i => TST_R(i, Register.C), 6, null, 0xED0C);
         
         instructions[0xED10] = new Instruction("IN_0 D, (n)", 2, i => IN_b_R_addr_n(i, Register.D), 8, null, 0x0ED10);
 
         instructions[0xED11] = new Instruction("OUT_0 (n), D", 2, i => OUT_b_addr_n_R(i, Register.D), 8, null, 0xED11);
 
-        instructions[0xED14] = new Instruction("TST D", 1, i => TST(i, Register.B), 6, null, 0xED14);
+        instructions[0xED14] = new Instruction("TST D", 1, i => TST_R(i, Register.B), 6, null, 0xED14);
 
         instructions[0xED18] = new Instruction("IN_0 E, (n)", 2, i => IN_b_R_addr_n(i, Register.E), 8, null, 0x0ED18);
 
         instructions[0xED19] = new Instruction("OUT_0 (n), E", 2, i => OUT_b_addr_n_R(i, Register.E), 8, null, 0xED19);
 
-        instructions[0xED1C] = new Instruction("TST E", 1, i => TST(i, Register.E), 6, null, 0xED1C);
+        instructions[0xED1C] = new Instruction("TST E", 1, i => TST_R(i, Register.E), 6, null, 0xED1C);
 
         instructions[0xED20] = new Instruction("IN_0 H, (n)", 2, i => IN_b_R_addr_n(i, Register.H), 8, null, 0x0ED20);
 
         instructions[0xED21] = new Instruction("OUT_0 (n), H", 2, i => OUT_b_addr_n_R(i, Register.H), 8, null, 0xED21);
 
-        instructions[0xED24] = new Instruction("TST H", 1, i => TST(i, Register.H), 6, null, 0xED24);
+        instructions[0xED24] = new Instruction("TST H", 1, i => TST_R(i, Register.H), 6, null, 0xED24);
 
         instructions[0xED28] = new Instruction("IN_0 L, (n)", 2, i => IN_b_R_addr_n(i, Register.L), 8, null, 0x0ED28);
 
         instructions[0xED29] = new Instruction("OUT_0 (n), L", 2, i => OUT_b_addr_n_R(i, Register.L), 8, null, 0xED29);
 
-        instructions[0xED2C] = new Instruction("TST L", 1, i => TST(i, Register.L), 6, null, 0xED2C);
+        instructions[0xED2C] = new Instruction("TST L", 1, i => TST_R(i, Register.L), 6, null, 0xED2C);
+
+        instructions[0xED34] = new Instruction("TST (HL)", 1, i => TST_addr_R(i, Register.HL), 6, null, 0xED34);
+
+        //instructions[0xED28] = new Instruction("IN_0 L, (n)", 2, i => IN_b_R_addr_n(i, Register.L), 8, null, 0x0ED28);
+
+        //instructions[0xED29] = new Instruction("OUT_0 (n), L", 2, i => OUT_b_addr_n_R(i, Register.L), 8, null, 0xED29);
+
+        //instructions[0xED2C] = new Instruction("TST L", 1, i => TST_R(i, Register.L), 6, null, 0xED2C);
     }
 
     private static void InitialiseCBInstructions(Dictionary<int, Instruction> instructions)
@@ -6612,9 +6620,28 @@ public class Processor
         return true;
     }
 
-    private static bool TST(Input input, Register register)
+    private static bool TST_R(Input input, Register register)
     {
         var result = (byte) (input.State.Registers[Register.A] & input.State.Registers[register]);
+
+        // Flags
+        input.State.Flags.Carry = false;
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = result.IsEvenParity();
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = true;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        input.State.Flags.Zero = result == 0;
+        input.State.Flags.Sign = (sbyte) result < 0;
+
+        input.State.Registers[register] = input.State.Flags.ToByte();
+
+        return true;
+    }
+
+    private static bool TST_addr_R(Input input, Register register)
+    {
+        var result = (byte) (input.State.Registers[Register.A] & input.State.Registers.ReadPair(register));
 
         // Flags
         input.State.Flags.Carry = false;
