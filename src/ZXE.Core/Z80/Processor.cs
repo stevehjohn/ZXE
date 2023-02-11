@@ -1044,6 +1044,18 @@ public class Processor
         instructions[0xED19] = new Instruction("OUT_0 (n), E", 2, i => OUT_b_addr_n_R(i, Register.E), 8, null, 0xED19);
 
         instructions[0xED1C] = new Instruction("TST E", 1, i => TST(i, Register.E), 6, null, 0xED1C);
+
+        instructions[0xED20] = new Instruction("IN_0 H, (n)", 2, i => IN_b_R_addr_n(i, Register.H), 8, null, 0x0ED20);
+
+        instructions[0xED21] = new Instruction("OUT_0 (n), H", 2, i => OUT_b_addr_n_R(i, Register.H), 8, null, 0xED21);
+
+        instructions[0xED24] = new Instruction("TST H", 1, i => TST(i, Register.H), 6, null, 0xED24);
+
+        instructions[0xED28] = new Instruction("IN_0 L, (n)", 2, i => IN_b_R_addr_n(i, Register.L), 8, null, 0x0ED28);
+
+        instructions[0xED29] = new Instruction("OUT_0 (n), L", 2, i => OUT_b_addr_n_R(i, Register.L), 8, null, 0xED29);
+
+        instructions[0xED2C] = new Instruction("TST L", 1, i => TST(i, Register.L), 6, null, 0xED2C);
     }
 
     private static void InitialiseCBInstructions(Dictionary<int, Instruction> instructions)
