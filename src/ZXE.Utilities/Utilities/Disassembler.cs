@@ -23,7 +23,7 @@ public class Disassembler
 
         var code = new List<CodeLine>();
 
-        while (location < _data.Length)
+        while (location < _data!.Length)
         {
             var instruction = instructions[_data[location]];
 

@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Exceptions;
+﻿using Microsoft.Win32;
+using ZXE.Core.Exceptions;
 using ZXE.Core.Extensions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
@@ -1065,9 +1066,17 @@ public class Processor
 
         instructions[0xED3C] = new Instruction("TST A", 1, i => TST_R(i, Register.A), 6, null, 0xED3C);
 
-        //instructions[0xED29] = new Instruction("OUT_0 (n), L", 2, i => OUT_b_addr_n_R(i, Register.L), 8, null, 0xED29);
 
-        //instructions[0xED2C] = new Instruction("TST L", 1, i => TST_R(i, Register.L), 6, null, 0xED2C);
+
+        instructions[0xED40] = new Instruction("IN B, (C)", 1, i => IN_R_addr_R(i, Register.B, Register.C), 8, null, 0xED40);
+
+        instructions[0xED41] = new Instruction("IN (C), B", 1, i => OUT_addr_R_R(i, Register.C, Register.B), 8, null, 0xED41);
+
+        instructions[0xED42] = new Instruction("SBC HL, BC", 1, i => SBC_RR_RR(i, Register.HL, Register.BC), 11, null, 0xED42);
+
+        instructions[0xED43] = new Instruction("LD (nn), BC", 3, i => LD_RR_addr_nn(i, Register.BC), 16, null, 0xED43);
+
+        instructions[0xED44] = new Instruction("NEG A", 3, i => NEG_R(i, Register.A), 4, null, 0xED44);
     }
 
     private static void InitialiseCBInstructions(Dictionary<int, Instruction> instructions)
@@ -6610,7 +6619,7 @@ public class Processor
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[register] = input.State.Flags.ToByte();
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
 
         return true;
     }
@@ -6638,7 +6647,7 @@ public class Processor
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[register] = input.State.Flags.ToByte();
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
 
         return true;
     }
@@ -6653,6 +6662,53 @@ public class Processor
         input.State.Flags.ParityOverflow = result.IsEvenParity();
         input.State.Flags.X1 = (result & 0x08) > 0;
         input.State.Flags.HalfCarry = true;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        input.State.Flags.Zero = result == 0;
+        input.State.Flags.Sign = (sbyte) result < 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+
+        return true;
+    }
+
+    private static bool IN_R_addr_R(Input input, Register destination, Register source)
+    {
+        var value = input.Ports.ReadByte(input.State.Registers[source]);
+
+        // Flags
+        // Carry unaffected
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = value.IsEvenParity();
+        input.State.Flags.X1 = (value & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.X2 = (value & 0x20) > 0;
+        input.State.Flags.Zero = value == 0;
+        input.State.Flags.Sign = (sbyte) value < 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+
+        return true;
+    }
+
+    private static bool OUT_addr_R_R(Input input, Register destination, Register source)
+    {
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool NEG_R(Input input, Register register)
+    {
+        var result = (byte) (0 - input.State.Registers[register]);
+
+        input.State.Registers[register] = result;
+
+        // Flags
+        input.State.Flags.Carry = false;
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = result.IsEvenParity();
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
         input.State.Flags.X2 = (result & 0x20) > 0;
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = (sbyte) result < 0;

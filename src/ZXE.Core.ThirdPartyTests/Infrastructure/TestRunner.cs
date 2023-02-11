@@ -166,6 +166,11 @@ public class TestRunner
 
         var ports = new Ports();
 
+        foreach (var port in test.Ports)
+        {
+            ports.EnqueueInput(((JsonElement) port[0]).GetInt32(), ((JsonElement) port[1]).GetByte());
+        }
+
         processor.SetState(state);
 
         state.ProgramCounter = test.Initial.PC;

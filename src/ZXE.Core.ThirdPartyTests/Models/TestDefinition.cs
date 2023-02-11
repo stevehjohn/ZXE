@@ -14,6 +14,8 @@ public class TestDefinition
     public StateDefinition Final { get; set; }
 
     public object[][] Cycles { get; set; }
+
+    public object[][] Ports { get; set; }
 }
 
 #pragma warning restore CS8618
