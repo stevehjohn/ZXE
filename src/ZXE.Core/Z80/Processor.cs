@@ -1089,11 +1089,46 @@ public class Processor
 
         instructions[0xED4B] = new Instruction("LD BC, (nn)", 3, i => LD_RR_addr_nn(i, Register.BC), 16, null, 0xED4B);
 
-        instructions[0xED4C] = new Instruction("MLT BC", 1, i => MLT_RR(i, Register.BC), 13, null, 0xED4C);
+        instructions[0xED4C] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED4C);
+
+        // TODO: Which is right? instructions[0xED4C] = new Instruction("MLT BC", 1, i => MLT_RR(i, Register.BC), 13, null, 0xED4C);
 
         // TODO: instructions[0xED4D] = new Instruction("RETI", 1, i => (i, Register.BC), 10, null, 0xED4D);
 
         instructions[0xED4F] = new Instruction("LD R, A", 1, i => LD_R_R(i, Register.R, Register.A), 5, null, 0xED4F);
+    
+    
+    
+    
+        instructions[0xED50] = new Instruction("IN D, (BC)", 1, i => IN_R_addr_R(i, Register.D, Register.BC), 8, null, 0xED50);
+
+        instructions[0xED51] = new Instruction("OUT (BC), D", 1, i => OUT_addr_RR_R(i, Register.BC, Register.D), 8, null, 0xED51);
+
+        instructions[0xED52] = new Instruction("SBC HL, DE", 1, i => SBC_RR_RR(i, Register.HL, Register.DE), 11, null, 0xED52);
+
+        instructions[0xED53] = new Instruction("LD (nn), DE", 3, i => LD_addr_nn_RR(i, Register.DE), 16, null, 0xED53);
+
+        // TODO: Exists? instructions[0xED54] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED45);
+
+        // TODO: instructions[0xED55] = new Instruction("RETN", 1, i => (i, InterruptMode.Mode0), 10, null, 0xED55);
+
+        instructions[0xED56] = new Instruction("IM 1", 1, i => IM_m(i, InterruptMode.Mode1), 4, null, 0xED56);
+
+        instructions[0xED57] = new Instruction("LD A, I", 1, i => LD_R_R(i, Register.A, Register.I), 5, null, 0xED57);
+
+        instructions[0xED58] = new Instruction("IN E, (BC)", 1, i => IN_R_addr_R(i, Register.E, Register.BC), 8, null, 0xED58);
+
+        instructions[0xED59] = new Instruction("OUT (BC), E", 1, i => OUT_addr_RR_R(i, Register.BC, Register.E), 8, null, 0xED59);
+
+        instructions[0xED5A] = new Instruction("ADC HL, DE", 1, i => ADC_RR_RR(i, Register.HL, Register.DE), 11, null, 0xED5A);
+
+        instructions[0xED5B] = new Instruction("LD DE, (nn)", 3, i => LD_RR_addr_nn(i, Register.DE), 16, null, 0xED5B);
+
+        instructions[0xED5C] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED45);
+
+        instructions[0xE55E] = new Instruction("IM 2", 1, i => IM_m(i, InterruptMode.Mode2), 5, null, 0xED5E);
+
+        instructions[0xE55F] = new Instruction("LD A, R", 1, i => LD_R_R(i, Register.A, Register.R), 5, null, 0xED5F);
     }
 
     private static void InitialiseCBInstructions(Dictionary<int, Instruction> instructions)
@@ -6767,16 +6802,16 @@ public class Processor
         return true;
     }
 
-    private static bool MLT_RR(Input input, Register register)
-    {
-        var value = (int) input.State.Registers.ReadLow(register);
+    //private static bool MLT_RR(Input input, Register register)
+    //{
+    //    var value = (int) input.State.Registers.ReadLow(register);
 
-        value *= input.State.Registers.ReadHigh(register);
+    //    value *= input.State.Registers.ReadHigh(register);
 
-        input.State.Registers.WritePair(register, (ushort) value);
+    //    input.State.Registers.WritePair(register, (ushort) value);
 
-        // Flags unaffected
+    //    // Flags unaffected
 
-        return true;
-    }
+    //    return true;
+    //}
 }

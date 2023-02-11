@@ -35,7 +35,7 @@ public class TestRunner
         foreach (var file in files)
         {
             //Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("ed 4c") < 0)
+            if (Path.GetFileName(file).CompareTo("ed 57") < 0)
             {
                 continue;
             }
@@ -186,6 +186,7 @@ public class TestRunner
         state.Registers[Register.F] = test.Initial.F;
         state.Registers[Register.H] = test.Initial.H;
         state.Registers[Register.L] = test.Initial.L;
+        state.Registers[Register.I] = test.Initial.I;
         state.Registers.WritePair(Register.IX, test.Initial.IX);
         state.Registers.WritePair(Register.IY, test.Initial.IY);
 
@@ -241,7 +242,7 @@ public class TestRunner
                    && state.Registers[Register.D] == test.Final.D
                    && state.Registers[Register.E] == test.Final.E
                    && state.Registers[Register.H] == test.Final.H
-                   && state.Registers[Register.L] == test.Final.L;
+                   && state.Registers[Register.I] == test.Final.I; // TODO: Alternate registers? IX, IY?
 
         foreach (var pair in test.Final.Ram)
         {
@@ -274,6 +275,8 @@ public class TestRunner
         FormattedConsole.WriteLine($"    &Cyan;E &White;: &Green;0x{test.Final.E:X2}          {(test.Final.E == result.State.Registers[Register.E] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.E]:X2}");
         FormattedConsole.WriteLine($"    &Cyan;H &White;: &Green;0x{test.Final.H:X2}          {(test.Final.H == result.State.Registers[Register.H] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.H]:X2}");
         FormattedConsole.WriteLine($"    &Cyan;L &White;: &Green;0x{test.Final.L:X2}          {(test.Final.L == result.State.Registers[Register.L] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.L]:X2}");
+
+        FormattedConsole.WriteLine($"    &Cyan;I &White;: &Green;0x{test.Final.I:X2}          {(test.Final.I == result.State.Registers[Register.I] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.I]:X2}");
 
         FormattedConsole.WriteLine($"    &Cyan;IX&White;: &Green;0x{test.Final.IX:X4}        {(test.Final.IX == result.State.Registers.ReadPair(Register.IX) ? "&Green;" : "&Red;")}0x{result.State.Registers.ReadPair(Register.IX):X4}");
         FormattedConsole.WriteLine($"    &Cyan;IY&White;: &Green;0x{test.Final.IY:X4}        {(test.Final.IY == result.State.Registers.ReadPair(Register.IY) ? "&Green;" : "&Red;")}0x{result.State.Registers.ReadPair(Register.IY):X4}");
