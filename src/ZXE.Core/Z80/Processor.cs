@@ -1021,7 +1021,11 @@ public class Processor
     // TODO: Here be dragons... these are the more complicated (or emulator complicating) instructions...
     private static void InitialiseEDInstructions(Dictionary<int, Instruction> instructions)
     {
-        instructions[0xED00] = new Instruction("IN_0 B, (n)", 2, i => IN_b_R_addr_n(i, Register.B), 8);
+        instructions[0xED00] = new Instruction("IN_0 B, (n)", 2, i => IN_b_R_addr_n(i, Register.B), 8, null, 0x0ED00);
+
+        instructions[0xED01] = new Instruction("OUT_0 (n), B", 2, i => OUT_b_addr_n_R(i, Register.B), 8, null, 0xED01);
+
+        instructions[0xED04] = new Instruction("TST B", 1, i => TST(i, Register.B), 6, null, 0xED04);
 
         // TODO: instructions[0xED40] = new Instruction("IN B, (C)", 1, , 8);
 
@@ -6581,6 +6585,22 @@ public class Processor
         input.State.Flags.Sign = (sbyte) result < 0;
 
         input.State.Registers[register] = input.State.Flags.ToByte();
+
+        return true;
+    }
+
+    private static bool OUT_b_addr_n_R(Input input, Register register)
+    {
+        input.Ports.WriteByte(input.Data[1], input.State.Registers[register]);
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool TST(Input input, Register register)
+    {
+        var result = input.State.Registers[Register.A] & input.State.Registers[register];
 
         return true;
     }

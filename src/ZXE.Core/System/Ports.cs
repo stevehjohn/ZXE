@@ -14,6 +14,11 @@ public class Ports
         return _input[port]!.Dequeue();
     }
 
+    public void WriteByte(int port, byte data)
+    {
+        // TODO: ?
+    }
+
     public void EnqueueInput(int port, byte data)
     {
         if (_input[port] == null)
