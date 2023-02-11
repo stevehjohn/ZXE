@@ -1179,7 +1179,7 @@ public class Processor
 
         // TODO: instructions[0xED6F] = new Instruction("RLD", 1, i => (i, Register.A, Register.R), 5, null, 0xED6F);
 
-        instructions[0xED70] = new Instruction("IN (C)", 1, i => IN_addr_R(i, Register.BC), 8, null, 0xED70);
+        instructions[0xED70] = new Instruction("IN (C)", 1, i => IN_addr_RR(i, Register.BC), 8, null, 0xED70);
     }
 
     private static void InitialiseCBInstructions(Dictionary<int, Instruction> instructions)
