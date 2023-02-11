@@ -6600,7 +6600,19 @@ public class Processor
 
     private static bool TST(Input input, Register register)
     {
-        var result = input.State.Registers[Register.A] & input.State.Registers[register];
+        var result = (byte) (input.State.Registers[Register.A] & input.State.Registers[register]);
+
+        // Flags
+        input.State.Flags.Carry = false;
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = result.IsEvenParity();
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = true;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        input.State.Flags.Zero = result == 0;
+        input.State.Flags.Sign = (sbyte) result < 0;
+
+        input.State.Registers[register] = input.State.Flags.ToByte();
 
         return true;
     }
