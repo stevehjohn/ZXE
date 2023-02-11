@@ -64,14 +64,14 @@ public class Registers
 
     public byte ReadLow(Register register)
     {
-        var lowPosition = ((int) register & 0xFF00) >> 8;
+        var highPosition = ((int) register & 0xFF00) >> 8;
 
-        return _registers[lowPosition];
+        return _registers[highPosition];
     }
 
     public byte ReadHigh(Register register)
     {
-        var lowPosition = ((int) register & 0x00FF) >> 8;
+        var lowPosition = (int) register & 0x00FF;
 
         return _registers[lowPosition];
     }

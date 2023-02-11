@@ -1019,7 +1019,6 @@ public class Processor
         instructions[0xFDFD] = new Instruction("NOP", 1, _ => NOP(), 4);
     }
 
-    // TODO: Here be dragons... these are the more complicated (or emulator complicating) instructions...
     private static void InitialiseEDInstructions(Dictionary<int, Instruction> instructions)
     {
         instructions[0xED00] = new Instruction("IN_0 B, (n)", 2, i => IN_b_R_addr_n(i, Register.B), 8, null, 0x0ED00);
@@ -1076,7 +1075,7 @@ public class Processor
 
         instructions[0xED44] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED44);
 
-        // TODO: instructions[0xED45] = new Instruction("RETN", 1, i => IM_m(i, InterruptMode.Mode0), 4, null, 0xED45);
+        // TODO: instructions[0xED45] = new Instruction("RETN", 1, i => (i, InterruptMode.Mode0), 10, null, 0xED45);
 
         instructions[0xED46] = new Instruction("IM 0", 1, i => IM_m(i, InterruptMode.Mode0), 4, null, 0xED46);
 
@@ -1091,6 +1090,10 @@ public class Processor
         instructions[0xED4B] = new Instruction("LD BC, (nn)", 3, i => LD_RR_addr_nn(i, Register.BC), 16, null, 0xED4B);
 
         instructions[0xED4C] = new Instruction("MLT BC", 1, i => MLT_RR(i, Register.BC), 13, null, 0xED4C);
+
+        // TODO: instructions[0xED4D] = new Instruction("RETI", 1, i => (i, Register.BC), 10, null, 0xED4D);
+
+        instructions[0xED4F] = new Instruction("LD R, A", 1, i => LD_R_R(i, Register.R, Register.A), 5, null, 0xED4F);
     }
 
     private static void InitialiseCBInstructions(Dictionary<int, Instruction> instructions)
@@ -6766,11 +6769,11 @@ public class Processor
 
     private static bool MLT_RR(Input input, Register register)
     {
-        var value = input.State.Registers.ReadLow(register);
+        var value = (int) input.State.Registers.ReadLow(register);
 
         value *= input.State.Registers.ReadHigh(register);
 
-        input.State.Registers.WritePair(register, value);
+        input.State.Registers.WritePair(register, (ushort) value);
 
         // Flags unaffected
 
