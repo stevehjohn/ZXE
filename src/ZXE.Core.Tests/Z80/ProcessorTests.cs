@@ -1082,7 +1082,9 @@ public class ProcessorTests
         _ports.EnqueueInput(0x10, 0x24);
 
         _processor.ProcessInstruction(_ram, _ports);
+        
+        _processor.ProcessInstruction(_ram, _ports);
 
-        Assert.Equal(0x34, _state.Registers[Register.B]);
+        Assert.Equal(0x24, _state.Registers[Register.B]);
     }
 }

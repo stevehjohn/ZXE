@@ -2,7 +2,6 @@
 using ZXE.Core.Extensions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
@@ -6581,7 +6580,7 @@ public class Processor
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.Registers[register] = input.State.Flags.ToByte();
 
         return true;
     }
