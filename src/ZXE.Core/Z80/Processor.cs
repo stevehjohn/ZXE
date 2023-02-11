@@ -2,6 +2,7 @@
 using ZXE.Core.Extensions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
@@ -87,7 +88,7 @@ public class Processor
             _tracer.TraceBefore(instruction, data, _state, ram);
         }
 
-        if (instruction.Action(new Input(data, _state, ram)))
+        if (instruction.Action(new Input(data, _state, ram, ports)))
         {
             _state.ProgramCounter += instruction.Length;
         }
@@ -1021,7 +1022,7 @@ public class Processor
     // TODO: Here be dragons... these are the more complicated (or emulator complicating) instructions...
     private static void InitialiseEDInstructions(Dictionary<int, Instruction> instructions)
     {
-        instructions[0xED00] = new Instruction("IN_0 B, (n)", 2, i => IN_b_R_addr_N(i, Register.B), 8);
+        instructions[0xED00] = new Instruction("IN_0 B, (n)", 2, i => IN_b_R_addr_n(i, Register.B), 8);
 
         // TODO: instructions[0xED40] = new Instruction("IN B, (C)", 1, , 8);
 
@@ -6564,8 +6565,24 @@ public class Processor
         return true;
     }
 
-    private static bool IN_b_R_addr_N(Input input, Register register)
+    private static bool IN_b_R_addr_n(Input input, Register register)
     {
+        var result = input.Ports.ReadByte(input.Data[1]);
+
+        input.State.Registers[register] = result;
+
+        // Flags
+        // Carry unaffected
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = result.IsEvenParity();
+        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        input.State.Flags.Zero = result == 0;
+        input.State.Flags.Sign = (sbyte) result < 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+
         return true;
     }
 }

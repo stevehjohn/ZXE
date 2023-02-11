@@ -10,12 +10,16 @@ public class Input
 
     public Ram Ram { get; }
 
-    public Input(byte[] data, State state, Ram ram)
+    public Ports Ports { get; }
+
+    public Input(byte[] data, State state, Ram ram, Ports ports)
     {
         Data = data;
 
         State = state;
 
         Ram = ram;
+
+        Ports = ports;
     }
 }

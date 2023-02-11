@@ -1071,7 +1071,18 @@ public class ProcessorTests
         Assert.True(_state.Flags.Carry);
     }
 
-    public void INB_R_addr_R()
+    [Fact]
+    public void IN_b_R_addr_n()
     {
+        // IN_0 B, (n)
+        _ram[0] = 0xED;
+        _ram[1] = 0x00;
+        _ram[2] = 0x10;
+
+        _ports.EnqueueInput(0x10, 0x24);
+
+        _processor.ProcessInstruction(_ram, _ports);
+
+        Assert.Equal(0x34, _state.Registers[Register.B]);
     }
 }
