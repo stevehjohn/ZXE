@@ -1059,7 +1059,11 @@ public class Processor
 
         instructions[0xED34] = new Instruction("TST (HL)", 1, i => TST_addr_R(i, Register.HL), 6, null, 0xED34);
 
-        //instructions[0xED28] = new Instruction("IN_0 L, (n)", 2, i => IN_b_R_addr_n(i, Register.L), 8, null, 0x0ED28);
+        instructions[0xED38] = new Instruction("IN_0 A, (n)", 2, i => IN_b_R_addr_n(i, Register.A), 8, null, 0x0ED38);
+
+        instructions[0xED39] = new Instruction("OUT_0 (n), A", 2, i => OUT_b_addr_n_R(i, Register.A), 8, null, 0xED39);
+
+        instructions[0xED3C] = new Instruction("TST A", 1, i => TST_R(i, Register.A), 6, null, 0xED3C);
 
         //instructions[0xED29] = new Instruction("OUT_0 (n), L", 2, i => OUT_b_addr_n_R(i, Register.L), 8, null, 0xED29);
 
