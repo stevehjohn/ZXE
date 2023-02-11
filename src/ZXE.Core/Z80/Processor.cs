@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using ZXE.Core.Exceptions;
+﻿using ZXE.Core.Exceptions;
 using ZXE.Core.Extensions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
@@ -93,7 +92,7 @@ public class Processor
             _state.ProgramCounter += instruction.Length;
         }
 
-        UpdateR();
+        UpdateR(instruction.ClockCycles);
 
         if (_state.ProgramCounter > 0xFFFF)
         {
@@ -118,11 +117,13 @@ public class Processor
         return true;
     }
 
-    private void UpdateR()
+    private void UpdateR(int cycles)
     {
         var value = (byte) (_state.Registers[Register.R] & 0x7F);
 
         var topBit = _state.Registers[Register.R] & 0x80;
+
+        value = (byte) (value + 2); // TODO: This seems to work... Y tho?
 
         _state.Registers[Register.R] = value;
 
