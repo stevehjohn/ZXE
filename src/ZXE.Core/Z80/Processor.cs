@@ -37,7 +37,7 @@ public class Processor
         _tracer = tracer;
     }
 
-    public void ProcessInstruction(Ram ram)
+    public void ProcessInstruction(Ram ram, Ports ports)
     {
         var opcode = (int) ram[_state.ProgramCounter];
 
@@ -1021,6 +1021,8 @@ public class Processor
     // TODO: Here be dragons... these are the more complicated (or emulator complicating) instructions...
     private static void InitialiseEDInstructions(Dictionary<int, Instruction> instructions)
     {
+        instructions[0xED00] = new Instruction("IN_0 B, (n)", 2, i => IN_b_R_addr_N(i, Register.B), 8);
+
         // TODO: instructions[0xED40] = new Instruction("IN B, (C)", 1, , 8);
 
         // TODO: instructions[0xED41] = new Instruction("OUT (C), B", 1, , 8);
@@ -4039,15 +4041,6 @@ public class Processor
         return true;
     }
 
-    private static bool IN_R_addr_N(Input input)
-    {
-        // TODO: Hmm. Might have to get into buses and stuff for this one... bugger.
-
-        // Flags unaffected
-
-        return true;
-    }
-
     private static bool CALL_C_nn(Input input)
     {
         if (input.State.Flags.Carry)
@@ -6568,6 +6561,11 @@ public class Processor
 
         // Flags unaffected
 
+        return true;
+    }
+
+    private static bool IN_b_R_addr_N(Input input, Register register)
+    {
         return true;
     }
 }

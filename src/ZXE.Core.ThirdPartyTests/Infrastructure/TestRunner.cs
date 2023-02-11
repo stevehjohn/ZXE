@@ -95,7 +95,7 @@ public class TestRunner
 
         FormattedConsole.WriteLine(string.Empty);
 
-        FormattedConsole.WriteLine($"  &Cyan;Testing complete. Time elapsed&White;: &Yellow;{stopwatch.Elapsed.Hours}:{stopwatch.Elapsed.Minutes}:{stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}");
+        FormattedConsole.WriteLine($"  &Cyan;Testing complete. Time elapsed&White;: &Yellow;{stopwatch.Elapsed.TotalHours}:{stopwatch.Elapsed.Minutes}:{stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}");
 
         FormattedConsole.WriteLine($"\n  &Cyan;Tests Run&White;: &Yellow;{total:N0}    &Cyan;Tests Passed&White;: &Green;{passed:N0}    &Cyan;Not Implemented&White;: &Yellow;{notImplemented}");
 
@@ -164,6 +164,8 @@ public class TestRunner
 
         var state = new State();
 
+        var ports = new Ports();
+
         processor.SetState(state);
 
         state.ProgramCounter = test.Initial.PC;
@@ -208,7 +210,7 @@ public class TestRunner
                     break;
                 }
 
-                processor.ProcessInstruction(ram);
+                processor.ProcessInstruction(ram, ports);
 
             } while (state.ProgramCounter != test.Final.PC);
         }
