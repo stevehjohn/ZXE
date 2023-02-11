@@ -93,6 +93,8 @@ public class Processor
             _state.ProgramCounter += instruction.Length;
         }
 
+        UpdateR();
+
         if (_state.ProgramCounter > 0xFFFF)
         {
             _state.ProgramCounter -= 0x10000;
@@ -114,6 +116,24 @@ public class Processor
         _state.OpcodePrefix = prefix;
 
         return true;
+    }
+
+    private void UpdateR()
+    {
+        var value = (byte) (_state.Registers[Register.R] & 0x7F);
+
+        var topBit = _state.Registers[Register.R] & 0x80;
+
+        _state.Registers[Register.R] = value;
+
+        if (topBit > 0)
+        {
+            _state.Registers[Register.R] |= 0x80;
+        }
+        else
+        {
+            _state.Registers[Register.R] &= 0x7F;
+        }
     }
 
     private Instruction[] InitialiseInstructions()
@@ -3326,6 +3346,7 @@ public class Processor
         input.State.Registers[destination] = input.State.Registers[source];
 
         // Flags unaffected
+        // TODO: Flags might be affected...
 
         return true;
     }
