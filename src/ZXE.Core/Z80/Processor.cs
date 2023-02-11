@@ -1027,21 +1027,23 @@ public class Processor
 
         instructions[0xED04] = new Instruction("TST B", 1, i => TST(i, Register.B), 6, null, 0xED04);
 
-        // TODO: instructions[0xED40] = new Instruction("IN B, (C)", 1, , 8);
+        instructions[0xED08] = new Instruction("IN_0 C, (n)", 2, i => IN_b_R_addr_n(i, Register.C), 8, null, 0x0ED08);
 
-        // TODO: instructions[0xED41] = new Instruction("OUT (C), B", 1, , 8);
+        instructions[0xED09] = new Instruction("OUT_0 (n), C", 2, i => OUT_b_addr_n_R(i, Register.C), 8, null, 0xED09);
 
-        instructions[0xED42] = new Instruction("SBC HL, BC", 1, i => SBC_RR_RR(i, Register.HL, Register.BC), 11);
+        instructions[0xED0C] = new Instruction("TST C", 1, i => TST(i, Register.C), 6, null, 0xED0C);
+        
+        instructions[0xED10] = new Instruction("IN_0 D, (n)", 2, i => IN_b_R_addr_n(i, Register.D), 8, null, 0x0ED10);
 
-        instructions[0xED43] = new Instruction("LD (nn), BC", 3, i => LD_addr_nn_RR(i, Register.BC), 16);
+        instructions[0xED11] = new Instruction("OUT_0 (n), D", 2, i => OUT_b_addr_n_R(i, Register.D), 8, null, 0xED11);
 
-        instructions[0xED44] = new Instruction("NEG", 1, NEG, 4);
+        instructions[0xED14] = new Instruction("TST D", 1, i => TST(i, Register.B), 6, null, 0xED14);
 
-        // TODO: instructions[0xED45] = new Instruction("RETN", 1, , 10);
+        instructions[0xED18] = new Instruction("IN_0 E, (n)", 2, i => IN_b_R_addr_n(i, Register.E), 8, null, 0x0ED18);
 
-        instructions[0xED46] = new Instruction("IM 0", 1, i => IM_m(i, InterruptMode.Mode0), 4);
+        instructions[0xED19] = new Instruction("OUT_0 (n), E", 2, i => OUT_b_addr_n_R(i, Register.E), 8, null, 0xED19);
 
-        instructions[0xED47] = new Instruction("ADD I, A", 1, i => ADD_R_R(i, Register.I, Register.A), 5);
+        instructions[0xED1C] = new Instruction("TST E", 1, i => TST(i, Register.E), 6, null, 0xED1C);
     }
 
     private static void InitialiseCBInstructions(Dictionary<int, Instruction> instructions)
