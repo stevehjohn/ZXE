@@ -1124,7 +1124,7 @@ public class Processor
 
         instructions[0xED5B] = new Instruction("LD DE, (nn)", 3, i => LD_RR_addr_nn(i, Register.DE), 16, null, 0xED5B);
 
-        instructions[0xED5C] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED45);
+        instructions[0xED5C] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED5C);
 
         instructions[0xED5E] = new Instruction("IM 2", 1, i => IM_m(i, InterruptMode.Mode2), 5, null, 0xED5E);
 

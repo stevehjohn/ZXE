@@ -31,6 +31,8 @@ public class StateDefinition
 
     public byte I { get; set; }
 
+    public byte R { get; set; }
+
     public ushort IX { get; set; }
 
     public ushort IY { get; set; }

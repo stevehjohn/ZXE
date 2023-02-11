@@ -35,7 +35,7 @@ public class TestRunner
         foreach (var file in files)
         {
             //Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("ed 5c") < 0)
+            if (Path.GetFileName(file).CompareTo("ed 56") < 0)
             {
                 continue;
             }
@@ -187,6 +187,7 @@ public class TestRunner
         state.Registers[Register.H] = test.Initial.H;
         state.Registers[Register.L] = test.Initial.L;
         state.Registers[Register.I] = test.Initial.I;
+        state.Registers[Register.R] = test.Initial.R;
         state.Registers.WritePair(Register.IX, test.Initial.IX);
         state.Registers.WritePair(Register.IY, test.Initial.IY);
 
@@ -242,7 +243,10 @@ public class TestRunner
                    && state.Registers[Register.D] == test.Final.D
                    && state.Registers[Register.E] == test.Final.E
                    && state.Registers[Register.H] == test.Final.H
-                   && state.Registers[Register.I] == test.Final.I; // TODO: Alternate registers? IX, IY?
+                   && state.Registers[Register.I] == test.Final.I;
+                   //&& state.Registers[Register.R] == test.Final.R;
+                   //&& state.Registers.ReadPair(Register.IX) == test.Final.IX
+                   //&& state.Registers.ReadHigh(Register.IY) == test.Final.IY; // TODO: Alternate registers?
 
         foreach (var pair in test.Final.Ram)
         {
