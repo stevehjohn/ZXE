@@ -35,7 +35,7 @@ public class TestRunner
         foreach (var file in files)
         {
             //Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("ed") < 0)
+            if (Path.GetFileName(file).CompareTo("ed 44") < 0)
             {
                 continue;
             }
@@ -166,9 +166,12 @@ public class TestRunner
 
         var ports = new Ports();
 
-        foreach (var port in test.Ports)
+        if (test.Ports != null)
         {
-            ports.EnqueueInput(((JsonElement) port[0]).GetInt32(), ((JsonElement) port[1]).GetByte());
+            foreach (var port in test.Ports)
+            {
+                ports.EnqueueInput(((JsonElement) port[0]).GetInt32(), ((JsonElement) port[1]).GetByte());
+            }
         }
 
         processor.SetState(state);

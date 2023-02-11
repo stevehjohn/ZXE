@@ -226,7 +226,7 @@ public class FormattingTracer : ITracer
 
             if ((instruction.Opcode & 0xFFFF00) == 0xDDCB00)
             {
-                builder.Append($"&Cyan;{part} &White;: &Green;{data[0]:X2}  ");
+                builder.Append($"&Cyan;{part} &White;: &Green;0x{data[0]:X2}  ");
             }
             else
             {
@@ -234,13 +234,13 @@ public class FormattingTracer : ITracer
                 {
                     var value = data[2] << 8 | data[1];
 
-                    builder.Append($"&Cyan;{part}&White;: &Green;{value:X4}");
+                    builder.Append($"&Cyan;{part}&White;: &Green;0x{value:X4}");
                 }
                 else
                 {
                     var value = data[1 + sequence];
 
-                    builder.Append($"&Cyan;{part} &White;: &Green;{value:X2}  ");
+                    builder.Append($"&Cyan;{part} &White;: &Green;0x{value:X2}  ");
                 }
             }
         }

@@ -1066,17 +1066,27 @@ public class Processor
 
         instructions[0xED3C] = new Instruction("TST A", 1, i => TST_R(i, Register.A), 6, null, 0xED3C);
 
+        instructions[0xED40] = new Instruction("IN B, (BC)", 1, i => IN_R_addr_R(i, Register.B, Register.BC), 8, null, 0xED40);
 
-
-        instructions[0xED40] = new Instruction("IN B, (C)", 1, i => IN_R_addr_R(i, Register.B, Register.C), 8, null, 0xED40);
-
-        instructions[0xED41] = new Instruction("IN (C), B", 1, i => OUT_addr_R_R(i, Register.C, Register.B), 8, null, 0xED41);
+        instructions[0xED41] = new Instruction("OUT (BC), B", 1, i => OUT_addr_RR_R(i, Register.BC, Register.B), 8, null, 0xED41);
 
         instructions[0xED42] = new Instruction("SBC HL, BC", 1, i => SBC_RR_RR(i, Register.HL, Register.BC), 11, null, 0xED42);
 
-        instructions[0xED43] = new Instruction("LD (nn), BC", 3, i => LD_RR_addr_nn(i, Register.BC), 16, null, 0xED43);
+        instructions[0xED43] = new Instruction("LD (nn), BC", 3, i => LD_addr_nn_RR(i, Register.BC), 16, null, 0xED43);
 
-        instructions[0xED44] = new Instruction("NEG A", 3, i => NEG_R(i, Register.A), 4, null, 0xED44);
+        instructions[0xED44] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED44);
+
+        // TODO: instructions[0xED45] = new Instruction("RETN", 1, i => IM_m(i, InterruptMode.Mode0), 4, null, 0xED45);
+
+        instructions[0xED46] = new Instruction("IM 0", 1, i => IM_m(i, InterruptMode.Mode0), 4, null, 0xED46);
+
+        instructions[0xED47] = new Instruction("LD I, A", 1, i => LD_R_R(i, Register.I, Register.A), 5, null, 0xED47);
+
+        instructions[0xED48] = new Instruction("IN C, (BC)", 1, i => IN_R_addr_R(i, Register.C, Register.BC), 8, null, 0xED48);
+
+        instructions[0xED49] = new Instruction("OUT (BC), B", 1, i => OUT_addr_RR_R(i, Register.BC, Register.B), 8, null, 0xED49);
+
+        instructions[0xED4A] = new Instruction("ADC HL, BC", 1, i => ADC_RR_RR(i, Register.HL, Register.BC), 11, null, 0xED4A);
     }
 
     private static void InitialiseCBInstructions(Dictionary<int, Instruction> instructions)
@@ -6673,7 +6683,9 @@ public class Processor
 
     private static bool IN_R_addr_R(Input input, Register destination, Register source)
     {
-        var value = input.Ports.ReadByte(input.State.Registers[source]);
+        var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source));
+
+        input.State.Registers[destination] = value;
 
         // Flags
         // Carry unaffected
@@ -6690,7 +6702,7 @@ public class Processor
         return true;
     }
 
-    private static bool OUT_addr_R_R(Input input, Register destination, Register source)
+    private static bool OUT_addr_RR_R(Input input, Register destination, Register source)
     {
         // Flags unaffected
 
@@ -6713,8 +6725,37 @@ public class Processor
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[register] = input.State.Flags.ToByte();
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
 
         return true;
     }
-}
+
+    private static bool ADC_RR_RR(Input input, Register destination, Register source)
+    {
+        unchecked
+        {
+            var valueD = input.State.Registers.ReadPair(destination);
+
+            var valueS = input.State.Registers.ReadPair(source);
+
+            var carry = (input.State.Flags.Carry ? 0x01 : 0x00);
+
+            var result = valueD + valueS + carry;
+
+            input.State.Registers.WritePair(destination, (ushort) result);
+
+            // Flags
+            input.State.Flags.Carry = result > 0xFF;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result > 0x7F;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }}
