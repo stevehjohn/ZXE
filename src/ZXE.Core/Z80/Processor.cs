@@ -1086,7 +1086,7 @@ public class Processor
 
         instructions[0xED3C] = new Instruction("TST A", 1, i => TST_R(i, Register.A), 6, null, 0xED3C);
 
-        instructions[0xED40] = new Instruction("IN B, (BC)", 1, i => IN_R_addr_R(i, Register.B, Register.BC), 8, null, 0xED40);
+        instructions[0xED40] = new Instruction("IN B, (BC)", 1, i => IN_R_addr_RR(i, Register.B, Register.BC), 8, null, 0xED40);
 
         instructions[0xED41] = new Instruction("OUT (BC), B", 1, i => OUT_addr_RR_R(i, Register.BC, Register.B), 8, null, 0xED41);
 
@@ -1102,7 +1102,7 @@ public class Processor
 
         instructions[0xED47] = new Instruction("LD I, A", 1, i => LD_R_R(i, Register.I, Register.A), 5, null, 0xED47);
 
-        instructions[0xED48] = new Instruction("IN C, (BC)", 1, i => IN_R_addr_R(i, Register.C, Register.BC), 8, null, 0xED48);
+        instructions[0xED48] = new Instruction("IN C, (BC)", 1, i => IN_R_addr_RR(i, Register.C, Register.BC), 8, null, 0xED48);
 
         instructions[0xED49] = new Instruction("OUT (BC), B", 1, i => OUT_addr_RR_R(i, Register.BC, Register.B), 8, null, 0xED49);
 
@@ -1121,7 +1121,7 @@ public class Processor
     
     
     
-        instructions[0xED50] = new Instruction("IN D, (BC)", 1, i => IN_R_addr_R(i, Register.D, Register.BC), 8, null, 0xED50);
+        instructions[0xED50] = new Instruction("IN D, (BC)", 1, i => IN_R_addr_RR(i, Register.D, Register.BC), 8, null, 0xED50);
 
         instructions[0xED51] = new Instruction("OUT (BC), D", 1, i => OUT_addr_RR_R(i, Register.BC, Register.D), 8, null, 0xED51);
 
@@ -1137,7 +1137,7 @@ public class Processor
 
         instructions[0xED57] = new Instruction("LD A, I", 1, i => LD_R_R(i, Register.A, Register.I), 5, null, 0xED57);
 
-        instructions[0xED58] = new Instruction("IN E, (BC)", 1, i => IN_R_addr_R(i, Register.E, Register.BC), 8, null, 0xED58);
+        instructions[0xED58] = new Instruction("IN E, (BC)", 1, i => IN_R_addr_RR(i, Register.E, Register.BC), 8, null, 0xED58);
 
         instructions[0xED59] = new Instruction("OUT (BC), E", 1, i => OUT_addr_RR_R(i, Register.BC, Register.E), 8, null, 0xED59);
 
@@ -1153,7 +1153,7 @@ public class Processor
 
     
     
-        instructions[0xED60] = new Instruction("IN H, (BC)", 1, i => IN_R_addr_R(i, Register.H, Register.BC), 8, null, 0xED60);
+        instructions[0xED60] = new Instruction("IN H, (BC)", 1, i => IN_R_addr_RR(i, Register.H, Register.BC), 8, null, 0xED60);
 
         instructions[0xED61] = new Instruction("OUT (BC), H", 1, i => OUT_addr_RR_R(i, Register.BC, Register.H), 8, null, 0xED61);
 
@@ -1167,7 +1167,7 @@ public class Processor
 
         // TODO: instructions[0xED67] = new Instruction("RRD", 1, i => (i, Register.A, Register.I), 5, null, 0xED67);
 
-        instructions[0xED68] = new Instruction("IN L, (BC)", 1, i => IN_R_addr_R(i, Register.L, Register.BC), 8, null, 0xED68);
+        instructions[0xED68] = new Instruction("IN L, (BC)", 1, i => IN_R_addr_RR(i, Register.L, Register.BC), 8, null, 0xED68);
 
         instructions[0xED69] = new Instruction("OUT (BC), L", 1, i => OUT_addr_RR_R(i, Register.BC, Register.L), 8, null, 0xED69);
 
@@ -1178,6 +1178,8 @@ public class Processor
         // TODO: instructions[0xED6C] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED6C);
 
         // TODO: instructions[0xED6F] = new Instruction("RLD", 1, i => (i, Register.A, Register.R), 5, null, 0xED6F);
+
+        instructions[0xED70] = new Instruction("IN (C)", 1, i => IN_addr_R(i, Register.BC), 8, null, 0xED70);
     }
 
     private static void InitialiseCBInstructions(Dictionary<int, Instruction> instructions)
@@ -6773,7 +6775,7 @@ public class Processor
         return true;
     }
 
-    private static bool IN_R_addr_R(Input input, Register destination, Register source)
+    private static bool IN_R_addr_RR(Input input, Register destination, Register source)
     {
         var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source));
 
@@ -6864,4 +6866,23 @@ public class Processor
 
     //    return true;
     //}
+
+    private static bool IN_addr_RR(Input input, Register source)
+    {
+        var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source));
+
+        // Flags
+        // Carry unaffected
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = value.IsEvenParity();
+        input.State.Flags.X1 = (value & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.X2 = (value & 0x20) > 0;
+        input.State.Flags.Zero = value == 0;
+        input.State.Flags.Sign = (sbyte) value < 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+
+        return true;
+    }
 }
