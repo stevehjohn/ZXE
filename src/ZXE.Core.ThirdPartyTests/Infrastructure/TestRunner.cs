@@ -108,7 +108,7 @@ public class TestRunner
 
     private static TestResult RunTest(TestDefinition test)
     {
-        FormattedConsole.Write($"  &Cyan;Test&White;: &Magenta;{test.Name,-12}  ");
+        FormattedConsole.Write($"  &Cyan;Test&White;: &Magenta;{test.Name,-18}  ");
 
         FormattedConsole.Write($"  &Cyan;RAM&White;: &Magenta;{test.Initial.Ram.Length,3}B  ");
 

@@ -120,14 +120,14 @@ public class Processor
         var instructions = new Dictionary<int, Instruction>();
 
         InitialiseBaseInstructions(instructions);
+        
+        InitialiseCBInstructions(instructions);
 
         InitialiseDDInstructions(instructions);
         
-        InitialiseFDInstructions(instructions);
-        
         InitialiseEDInstructions(instructions);
         
-        InitialiseCBInstructions(instructions);
+        InitialiseFDInstructions(instructions);
 
         InitialiseDDCBInstructions(instructions);
 
