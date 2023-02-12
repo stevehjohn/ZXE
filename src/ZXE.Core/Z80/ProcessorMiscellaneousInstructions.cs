@@ -4,14 +4,14 @@ namespace ZXE.Core.Z80;
 
 public static class ProcessorMiscellaneousInstructions
 {
-    private static bool NOP()
+    public static bool NOP()
     {
         // Flags unaffected
 
         return true;
     }
 
-    private static bool EX_RR_R1R1(Input input, Register register1, Register register2)
+    public static bool EX_RR_R1R1(Input input, Register register1, Register register2)
     {
         var alternate1 = Enum.Parse<Register>($"{register1}1");
 
@@ -27,7 +27,7 @@ public static class ProcessorMiscellaneousInstructions
     }
 
     // TODO: Lol, good luck adding a unit test for this one!
-    private static bool DAA(Input input)
+    public static bool DAA(Input input)
     {
         var adjust = 0;
 
@@ -90,7 +90,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool CPL(Input input)
+    public static bool CPL(Input input)
     {
         unchecked
         {
@@ -114,7 +114,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool SCF(Input input)
+    public static bool SCF(Input input)
     {
         input.State.Flags.Carry = true;
 
@@ -134,7 +134,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool CCF(Input input)
+    public static bool CCF(Input input)
     {
         var value = input.State.Flags.Carry;
 
@@ -156,7 +156,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool HALT(Input input)
+    public static bool HALT(Input input)
     {
         input.State.Halted = true;
 
@@ -165,7 +165,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool CP_R_R(Input input, Register left, Register right)
+    public static bool CP_R_R(Input input, Register left, Register right)
     {
         unchecked
         {
@@ -191,7 +191,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool CP_R_addr_RR(Input input, Register left, Register right)
+    public static bool CP_R_addr_RR(Input input, Register left, Register right)
     {
         unchecked
         {
@@ -217,7 +217,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool POP_RR(Input input, Register register)
+    public static bool POP_RR(Input input, Register register)
     {
         var data = (ushort) input.Ram[input.State.StackPointer];
 
@@ -234,7 +234,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool PUSH_RR(Input input, Register register)
+    public static bool PUSH_RR(Input input, Register register)
     {
         unchecked
         {
@@ -254,7 +254,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool RST(Input input, byte pageZeroAddress)
+    public static bool RST(Input input, byte pageZeroAddress)
     {
         var pc = input.State.ProgramCounter + 1;
 
@@ -273,7 +273,7 @@ public static class ProcessorMiscellaneousInstructions
         return false;
     }
 
-    private static bool OUT_addr_n_R(Input input, Register register)
+    public static bool OUT_addr_n_R(Input input, Register register)
     {
         // TODO: Hmm. Might have to get into buses and stuff for this one... bugger.
 
@@ -282,7 +282,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool EXX(Input input)
+    public static bool EXX(Input input)
     {
         var bc = input.State.Registers.ReadPair(Register.BC);
 
@@ -307,7 +307,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool EX_addr_SP_RR(Input input, Register register)
+    public static bool EX_addr_SP_RR(Input input, Register register)
     {
         var value = input.State.Registers.ReadPair(register);
 
@@ -324,7 +324,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool EX_RR_RR(Input input, Register left, Register right)
+    public static bool EX_RR_RR(Input input, Register left, Register right)
     {
         var swap = input.State.Registers.ReadPair(left);
 
@@ -337,19 +337,19 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool DI(Input input)
+    public static bool DI(Input input)
     {
         // TODO: Disable maskable interrupt.
         return true;
     }
 
-    private static bool EI(Input input)
+    public static bool EI(Input input)
     {
         // TODO: Enable maskable interrupt.
         return true;
     }
 
-    private static bool CP_R_n(Input input, Register destination)
+    public static bool CP_R_n(Input input, Register destination)
     {
         unchecked
         {
@@ -371,7 +371,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool CP_R_RRh(Input input, Register left, Register right)
+    public static bool CP_R_RRh(Input input, Register left, Register right)
     {
         unchecked
         {
@@ -397,7 +397,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool CP_R_RRl(Input input, Register left, Register right)
+    public static bool CP_R_RRl(Input input, Register left, Register right)
     {
         unchecked
         {
@@ -423,7 +423,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool CP_R_addr_RR_plus_d(Input input, Register left, Register right)
+    public static bool CP_R_addr_RR_plus_d(Input input, Register left, Register right)
     {
         unchecked
         {
@@ -449,7 +449,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool IM_m(Input input, InterruptMode mode)
+    public static bool IM_m(Input input, InterruptMode mode)
     {
         input.State.InterruptMode = mode;
 
@@ -458,7 +458,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool IN_b_R_addr_n(Input input, Register register)
+    public static bool IN_b_R_addr_n(Input input, Register register)
     {
         var result = input.Ports.ReadByte(input.Data[1]);
 
@@ -479,7 +479,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool OUT_b_addr_n_R(Input input, Register register)
+    public static bool OUT_b_addr_n_R(Input input, Register register)
     {
         input.Ports.WriteByte(input.Data[1], input.State.Registers[register]);
 
@@ -488,7 +488,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool TST_R(Input input, Register register)
+    public static bool TST_R(Input input, Register register)
     {
         var result = (byte) (input.State.Registers[Register.A] & input.State.Registers[register]);
 
@@ -507,7 +507,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool TST_addr_R(Input input, Register register)
+    public static bool TST_addr_R(Input input, Register register)
     {
         var result = (byte) (input.State.Registers[Register.A] & input.State.Registers.ReadPair(register));
 
@@ -526,7 +526,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool IN_R_addr_RR(Input input, Register destination, Register source)
+    public static bool IN_R_addr_RR(Input input, Register destination, Register source)
     {
         var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source));
 
@@ -547,14 +547,14 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool OUT_addr_RR_R(Input input, Register destination, Register source)
+    public static bool OUT_addr_RR_R(Input input, Register destination, Register source)
     {
         // Flags unaffected
 
         return true;
     }
 
-    //private static bool MLT_RR(Input input, Register register)
+    //public static bool MLT_RR(Input input, Register register)
     //{
     //    var value = (int) input.State.Registers.ReadLow(register);
 
@@ -567,7 +567,7 @@ public static class ProcessorMiscellaneousInstructions
     //    return true;
     //}
 
-    private static bool IN_addr_RR(Input input, Register source)
+    public static bool IN_addr_RR(Input input, Register source)
     {
         var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source));
 
@@ -586,7 +586,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool OUT_addr_R_n(Input input, Register register, byte data)
+    public static bool OUT_addr_R_n(Input input, Register register, byte data)
     {
         // TODO: Hmm. Might have to get into buses and stuff for this one... bugger.
 
@@ -595,7 +595,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool LDI(Input input)
+    public static bool LDI(Input input)
     {
         var value = input.Ram[input.State.Registers.ReadPair(Register.HL)];
 
@@ -624,7 +624,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool LDIR(Input input)
+    public static bool LDIR(Input input)
     {
         var value = input.Ram[input.State.Registers.ReadPair(Register.HL)];
 
@@ -660,7 +660,7 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    private static bool CPI(Input input)
+    public static bool CPI(Input input)
     {
         return true;
     }

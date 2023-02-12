@@ -160,26 +160,26 @@ public partial class Processor
 
         instructions[0xDDB6] = new Instruction("OR A, (IX + d)", 2, i => ProcessorBitwiseLogicInstructions.OR_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
 
-        instructions[0xDDBC] = new Instruction("CP A, IXh", 1, i => CP_R_RRh(i, Register.A, Register.IX), 4);
+        instructions[0xDDBC] = new Instruction("CP A, IXh", 1, i => ProcessorMiscellaneousInstructions.CP_R_RRh(i, Register.A, Register.IX), 4);
 
-        instructions[0xDDBD] = new Instruction("CP A, IXh", 1, i => CP_R_RRl(i, Register.A, Register.IX), 4);
+        instructions[0xDDBD] = new Instruction("CP A, IXh", 1, i => ProcessorMiscellaneousInstructions.CP_R_RRl(i, Register.A, Register.IX), 4);
 
-        instructions[0xDDBE] = new Instruction("CP A, (IX + d)", 2, i => CP_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
+        instructions[0xDDBE] = new Instruction("CP A, (IX + d)", 2, i => ProcessorMiscellaneousInstructions.CP_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
 
         instructions[0xDDCB] = new Instruction("SOPSET 0xDDCB", 1, _ => SetOpcodePrefix(0xDDCB), 4);
 
-        instructions[0xDDDD] = new Instruction("NOP", 1, _ => NOP(), 4);
+        instructions[0xDDDD] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4);
 
-        instructions[0xDDE1] = new Instruction("POP IX", 1, i => POP_RR(i, Register.IX), 10);
+        instructions[0xDDE1] = new Instruction("POP IX", 1, i => ProcessorMiscellaneousInstructions.POP_RR(i, Register.IX), 10);
 
-        instructions[0xDDE3] = new Instruction("EX (SP), IX", 1, i => EX_addr_SP_RR(i, Register.IX), 19);
+        instructions[0xDDE3] = new Instruction("EX (SP), IX", 1, i => ProcessorMiscellaneousInstructions.EX_addr_SP_RR(i, Register.IX), 19);
 
-        instructions[0xDDE5] = new Instruction("PUSH IX", 1, i => PUSH_RR(i, Register.IX), 11);
+        instructions[0xDDE5] = new Instruction("PUSH IX", 1, i => ProcessorMiscellaneousInstructions.PUSH_RR(i, Register.IX), 11);
 
         instructions[0xDDE9] = new Instruction("JP (IX)", 1, i => ProcessorBranchInstructions.JP_addr_RR(i, Register.IX), 4);
 
         instructions[0xDDF9] = new Instruction("LD SP, IX", 1, i => ProcessorLoadInstructions.LD_SP_RR(i, Register.IX), 6);
 
-        instructions[0xDDFD] = new Instruction("NOP", 1, _ => NOP(), 4);
+        instructions[0xDDFD] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4);
     }
 }

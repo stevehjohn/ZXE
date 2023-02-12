@@ -4,7 +4,7 @@ public partial class Processor
 {
     private void InitialiseBaseInstructions(Dictionary<int, Instruction> instructions)
     {
-        instructions[0x00] = new Instruction("NOP", 1, _ => NOP(), 4);
+        instructions[0x00] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4);
 
         instructions[0x01] = new Instruction("LD BC, nn", 3, i => ProcessorLoadInstructions.LD_RR_nn(i, Register.BC), 10);
 
@@ -20,7 +20,7 @@ public partial class Processor
 
         instructions[0x07] = new Instruction("RLCA", 1, ProcessorBitwiseRotationInstructions.RLCA, 4, "RLCA A");
 
-        instructions[0x08] = new Instruction("EX AF, AF'", 1, i => EX_RR_R1R1(i, Register.A, Register.F), 4);
+        instructions[0x08] = new Instruction("EX AF, AF'", 1, i => ProcessorMiscellaneousInstructions.EX_RR_R1R1(i, Register.A, Register.F), 4);
 
         instructions[0x09] = new Instruction("ADD HL, BC", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.HL, Register.BC), 11);
 
@@ -82,7 +82,7 @@ public partial class Processor
 
         instructions[0x26] = new Instruction("LD H, n", 2, i => ProcessorLoadInstructions.LD_R_n(i, Register.H), 7);
 
-        instructions[0x27] = new Instruction("DAA", 1, DAA, 4);
+        instructions[0x27] = new Instruction("DAA", 1, ProcessorMiscellaneousInstructions.DAA, 4);
 
         instructions[0x28] = new Instruction("JR Z, e", 2, ProcessorBranchInstructions.JR_Z_e, 7);
 
@@ -98,7 +98,7 @@ public partial class Processor
 
         instructions[0x2E] = new Instruction("LD L, n", 2, i => ProcessorLoadInstructions.LD_R_n(i, Register.L), 7);
 
-        instructions[0x2F] = new Instruction("CPL", 1, CPL, 4);
+        instructions[0x2F] = new Instruction("CPL", 1, ProcessorMiscellaneousInstructions.CPL, 4);
 
         instructions[0x30] = new Instruction("JR NC, e", 2, ProcessorBranchInstructions.JR_NC_e, 7);
 
@@ -114,7 +114,7 @@ public partial class Processor
 
         instructions[0x36] = new Instruction("LD (HL), n", 2, i => ProcessorLoadInstructions.LD_addr_RR_n(i, Register.HL), 10);
 
-        instructions[0x37] = new Instruction("SCF", 1, SCF, 4);
+        instructions[0x37] = new Instruction("SCF", 1, ProcessorMiscellaneousInstructions.SCF, 4);
 
         instructions[0x38] = new Instruction("JR C, e", 2, ProcessorBranchInstructions.JR_C_e, 7);
 
@@ -130,7 +130,7 @@ public partial class Processor
 
         instructions[0x3E] = new Instruction("LD A, n", 2, i => ProcessorLoadInstructions.LD_R_n(i, Register.A), 7);
 
-        instructions[0x3F] = new Instruction("CCF", 1, CCF, 4);
+        instructions[0x3F] = new Instruction("CCF", 1, ProcessorMiscellaneousInstructions.CCF, 4);
 
         instructions[0x40] = new Instruction("LD B, B", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.B, Register.B), 4);
 
@@ -240,7 +240,7 @@ public partial class Processor
 
         instructions[0x75] = new Instruction("LD (HL), L", 1, i => ProcessorLoadInstructions.LD_addr_RR_R(i, Register.HL, Register.L), 7);
 
-        instructions[0x76] = new Instruction("HALT", 1, HALT, 4);
+        instructions[0x76] = new Instruction("HALT", 1, ProcessorMiscellaneousInstructions.HALT, 4);
 
         instructions[0x77] = new Instruction("LD (HL), A", 1, i => ProcessorLoadInstructions.LD_addr_RR_R(i, Register.HL, Register.A), 7);
 
@@ -372,25 +372,25 @@ public partial class Processor
 
         instructions[0xB7] = new Instruction("OR A, A", 1, i => ProcessorBitwiseLogicInstructions.OR_R_R(i, Register.A, Register.A), 4);
 
-        instructions[0xB8] = new Instruction("CP A, B", 1, i => CP_R_R(i, Register.A, Register.B), 4);
+        instructions[0xB8] = new Instruction("CP A, B", 1, i => ProcessorMiscellaneousInstructions.CP_R_R(i, Register.A, Register.B), 4);
 
-        instructions[0xB9] = new Instruction("CP A, C", 1, i => CP_R_R(i, Register.A, Register.C), 4);
+        instructions[0xB9] = new Instruction("CP A, C", 1, i => ProcessorMiscellaneousInstructions.CP_R_R(i, Register.A, Register.C), 4);
 
-        instructions[0xBA] = new Instruction("CP A, D", 1, i => CP_R_R(i, Register.A, Register.D), 4);
+        instructions[0xBA] = new Instruction("CP A, D", 1, i => ProcessorMiscellaneousInstructions.CP_R_R(i, Register.A, Register.D), 4);
 
-        instructions[0xBB] = new Instruction("CP A, E", 1, i => CP_R_R(i, Register.A, Register.E), 4);
+        instructions[0xBB] = new Instruction("CP A, E", 1, i => ProcessorMiscellaneousInstructions.CP_R_R(i, Register.A, Register.E), 4);
 
-        instructions[0xBC] = new Instruction("CP A, H", 1, i => CP_R_R(i, Register.A, Register.H), 4);
+        instructions[0xBC] = new Instruction("CP A, H", 1, i => ProcessorMiscellaneousInstructions.CP_R_R(i, Register.A, Register.H), 4);
 
-        instructions[0xBD] = new Instruction("CP A, L", 1, i => CP_R_R(i, Register.A, Register.L), 4);
+        instructions[0xBD] = new Instruction("CP A, L", 1, i => ProcessorMiscellaneousInstructions.CP_R_R(i, Register.A, Register.L), 4);
 
-        instructions[0xBE] = new Instruction("CP A, (HL)", 1, i => CP_R_addr_RR(i, Register.A, Register.HL), 7);
+        instructions[0xBE] = new Instruction("CP A, (HL)", 1, i => ProcessorMiscellaneousInstructions.CP_R_addr_RR(i, Register.A, Register.HL), 7);
 
-        instructions[0xBF] = new Instruction("CP A, A", 1, i => CP_R_R(i, Register.A, Register.A), 4);
+        instructions[0xBF] = new Instruction("CP A, A", 1, i => ProcessorMiscellaneousInstructions.CP_R_R(i, Register.A, Register.A), 4);
 
         instructions[0xC0] = new Instruction("RET NZ", 1, ProcessorBranchInstructions.RET_NZ, 5);
 
-        instructions[0xC1] = new Instruction("POP BC", 1, i => POP_RR(i, Register.BC), 10);
+        instructions[0xC1] = new Instruction("POP BC", 1, i => ProcessorMiscellaneousInstructions.POP_RR(i, Register.BC), 10);
 
         instructions[0xC2] = new Instruction("JP NZ, nn", 3, ProcessorBranchInstructions.JP_NZ_nn, 10);
 
@@ -398,11 +398,11 @@ public partial class Processor
 
         instructions[0xC4] = new Instruction("CALL NZ, nn", 3, ProcessorBranchInstructions.CALL_NZ_nn, 10);
 
-        instructions[0xC5] = new Instruction("PUSH BC", 1, i => PUSH_RR(i, Register.BC), 11);
+        instructions[0xC5] = new Instruction("PUSH BC", 1, i => ProcessorMiscellaneousInstructions.PUSH_RR(i, Register.BC), 11);
 
         instructions[0xC6] = new Instruction("ADD A, n", 2, i => ProcessorArithmeticInstructions.ADD_R_n(i, Register.A), 7);
 
-        instructions[0xC7] = new Instruction("RST 0x00", 1, i => RST(i, 0x00), 11);
+        instructions[0xC7] = new Instruction("RST 0x00", 1, i => ProcessorMiscellaneousInstructions.RST(i, 0x00), 11);
 
         instructions[0xC8] = new Instruction("RET Z", 1, ProcessorBranchInstructions.RET_Z, 5);
 
@@ -419,11 +419,11 @@ public partial class Processor
 
         instructions[0xCE] = new Instruction("ADC A, n", 2, i => ProcessorArithmeticInstructions.ADC_R_n(i, Register.A), 7);
 
-        instructions[0xCF] = new Instruction("RST 0x08", 1, i => RST(i, 0x08), 11);
+        instructions[0xCF] = new Instruction("RST 0x08", 1, i => ProcessorMiscellaneousInstructions.RST(i, 0x08), 11);
 
         instructions[0xD0] = new Instruction("RET NC", 1, ProcessorBranchInstructions.RET_NC, 5);
 
-        instructions[0xD1] = new Instruction("POP DE", 1, i => POP_RR(i, Register.DE), 10);
+        instructions[0xD1] = new Instruction("POP DE", 1, i => ProcessorMiscellaneousInstructions.POP_RR(i, Register.DE), 10);
 
         instructions[0xD2] = new Instruction("JP NC, nn", 3, ProcessorBranchInstructions.JP_NC_nn, 10);
 
@@ -431,15 +431,15 @@ public partial class Processor
 
         instructions[0xD4] = new Instruction("CALL NC, nn", 3, ProcessorBranchInstructions.CALL_NC_nn, 10);
 
-        instructions[0xD5] = new Instruction("PUSH DE", 1, i => PUSH_RR(i, Register.DE), 11);
+        instructions[0xD5] = new Instruction("PUSH DE", 1, i => ProcessorMiscellaneousInstructions.PUSH_RR(i, Register.DE), 11);
 
         instructions[0xD6] = new Instruction("SUB A, n", 2, i => ProcessorArithmeticInstructions.SUB_R_n(i, Register.A), 7);
 
-        instructions[0xD7] = new Instruction("RST 0x10", 1, i => RST(i, 0x10), 11);
+        instructions[0xD7] = new Instruction("RST 0x10", 1, i => ProcessorMiscellaneousInstructions.RST(i, 0x10), 11);
 
         instructions[0xD8] = new Instruction("RET C", 1, ProcessorBranchInstructions.RET_C, 5);
 
-        instructions[0xD9] = new Instruction("EXX", 1, EXX, 4);
+        instructions[0xD9] = new Instruction("EXX", 1, ProcessorMiscellaneousInstructions.EXX, 4);
 
         instructions[0xDA] = new Instruction("JP C, nn", 3, ProcessorBranchInstructions.JP_C_nn, 10);
 
@@ -452,23 +452,23 @@ public partial class Processor
 
         instructions[0xDE] = new Instruction("SBC A, n", 2, i => ProcessorArithmeticInstructions.SBC_R_n(i, Register.A), 7);
 
-        instructions[0xDF] = new Instruction("RST 0x18", 1, i => RST(i, 0x18), 11);
+        instructions[0xDF] = new Instruction("RST 0x18", 1, i => ProcessorMiscellaneousInstructions.RST(i, 0x18), 11);
 
         instructions[0xE0] = new Instruction("RET PO", 1, ProcessorBranchInstructions.RET_PO, 5);
 
-        instructions[0xE1] = new Instruction("POP HL", 1, i => POP_RR(i, Register.HL), 10);
+        instructions[0xE1] = new Instruction("POP HL", 1, i => ProcessorMiscellaneousInstructions.POP_RR(i, Register.HL), 10);
 
         instructions[0xE2] = new Instruction("JP PO, nn", 3, ProcessorBranchInstructions.JP_PO_nn, 10);
 
-        instructions[0xE3] = new Instruction("EX (SP), HL", 1, i => EX_addr_SP_RR(i, Register.HL), 19);
+        instructions[0xE3] = new Instruction("EX (SP), HL", 1, i => ProcessorMiscellaneousInstructions.EX_addr_SP_RR(i, Register.HL), 19);
 
         instructions[0xE4] = new Instruction("CALL PO, nn", 3, ProcessorBranchInstructions.CALL_PO_nn, 10);
 
-        instructions[0xE5] = new Instruction("PUSH HL", 1, i => PUSH_RR(i, Register.HL), 11);
+        instructions[0xE5] = new Instruction("PUSH HL", 1, i => ProcessorMiscellaneousInstructions.PUSH_RR(i, Register.HL), 11);
 
         instructions[0xE6] = new Instruction("AND A, n", 2, i => ProcessorBitwiseLogicInstructions.AND_R_n(i, Register.A), 7);
 
-        instructions[0xE7] = new Instruction("RST 0x20", 1, i => RST(i, 0x20), 11);
+        instructions[0xE7] = new Instruction("RST 0x20", 1, i => ProcessorMiscellaneousInstructions.RST(i, 0x20), 11);
 
         instructions[0xE8] = new Instruction("RET PE", 1, ProcessorBranchInstructions.RET_PE, 5);
 
@@ -476,7 +476,7 @@ public partial class Processor
 
         instructions[0xEA] = new Instruction("JP PE, nn", 3, ProcessorBranchInstructions.JP_PE_nn, 10);
 
-        instructions[0xEB] = new Instruction("EX DE, HL", 1, i => EX_RR_RR(i, Register.DE, Register.HL), 4);
+        instructions[0xEB] = new Instruction("EX DE, HL", 1, i => ProcessorMiscellaneousInstructions.EX_RR_RR(i, Register.DE, Register.HL), 4);
 
         instructions[0xEC] = new Instruction("CALL PE, nn", 3, ProcessorBranchInstructions.CALL_PE_nn, 10);
         
@@ -485,23 +485,23 @@ public partial class Processor
 
         instructions[0xEE] = new Instruction("XOR A, n", 2, i => ProcessorBitwiseLogicInstructions.XOR_R_n(i, Register.A), 7);
 
-        instructions[0xEF] = new Instruction("RST 0x28", 1, i => RST(i, 0x28), 11);
+        instructions[0xEF] = new Instruction("RST 0x28", 1, i => ProcessorMiscellaneousInstructions.RST(i, 0x28), 11);
 
         instructions[0xF0] = new Instruction("RET NS", 1, ProcessorBranchInstructions.RET_NS, 5);
 
-        instructions[0xF1] = new Instruction("POP AF", 1, i => POP_RR(i, Register.AF), 10);
+        instructions[0xF1] = new Instruction("POP AF", 1, i => ProcessorMiscellaneousInstructions.POP_RR(i, Register.AF), 10);
 
         instructions[0xF2] = new Instruction("JP NS, nn", 3, ProcessorBranchInstructions.JP_NS_nn, 10);
 
-        instructions[0xF3] = new Instruction("DI", 1, DI, 4);
+        instructions[0xF3] = new Instruction("DI", 1, ProcessorMiscellaneousInstructions.DI, 4);
 
         instructions[0xF4] = new Instruction("CALL S, nn", 3, ProcessorBranchInstructions.CALL_NS_nn, 10);
 
-        instructions[0xF5] = new Instruction("PUSH AF", 1, i => PUSH_RR(i, Register.AF), 11);
+        instructions[0xF5] = new Instruction("PUSH AF", 1, i => ProcessorMiscellaneousInstructions.PUSH_RR(i, Register.AF), 11);
 
         instructions[0xF6] = new Instruction("OR A, n", 2, i => ProcessorBitwiseLogicInstructions.OR_R_n(i, Register.A), 7);
 
-        instructions[0xF7] = new Instruction("RST 0x30", 1, i => RST(i, 0x30), 11);
+        instructions[0xF7] = new Instruction("RST 0x30", 1, i => ProcessorMiscellaneousInstructions.RST(i, 0x30), 11);
 
         instructions[0xF8] = new Instruction("RET S", 1, ProcessorBranchInstructions.RET_S, 5);
 
@@ -509,15 +509,15 @@ public partial class Processor
 
         instructions[0xFA] = new Instruction("JP S, nn", 3, ProcessorBranchInstructions.JP_S_nn, 10);
 
-        instructions[0xFB] = new Instruction("EI", 1, EI, 4);
+        instructions[0xFB] = new Instruction("EI", 1, ProcessorMiscellaneousInstructions.EI, 4);
 
         instructions[0xFC] = new Instruction("CALL S, nn", 3, ProcessorBranchInstructions.CALL_S_nn, 10);
         
         // Switch opcode set to FD
         instructions[0xFD] = new Instruction("SOPSET 0xFD", 1, _ => SetOpcodePrefix(0xFD), 4);
 
-        instructions[0xFE] = new Instruction("CP A, n", 2, i => CP_R_n(i, Register.A), 7);
+        instructions[0xFE] = new Instruction("CP A, n", 2, i => ProcessorMiscellaneousInstructions.CP_R_n(i, Register.A), 7);
 
-        instructions[0xFF] = new Instruction("RST 0x38", 1, i => RST(i, 0x38), 11);
+        instructions[0xFF] = new Instruction("RST 0x38", 1, i => ProcessorMiscellaneousInstructions.RST(i, 0x38), 11);
     }
 }
