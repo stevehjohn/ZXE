@@ -6,9 +6,9 @@ public partial class Processor
     {
         instructions[0x00] = new Instruction("NOP", 1, _ => NOP(), 4);
 
-        instructions[0x01] = new Instruction("LD BC, nn", 3, i => LD_RR_nn(i, Register.BC), 10);
+        instructions[0x01] = new Instruction("LD BC, nn", 3, i => ProcessorLoadInstructions.LD_RR_nn(i, Register.BC), 10);
 
-        instructions[0x02] = new Instruction("LD (BC), A", 1, i => LD_addr_RR_R(i, Register.BC, Register.A), 7);
+        instructions[0x02] = new Instruction("LD (BC), A", 1, i => ProcessorLoadInstructions.LD_addr_RR_R(i, Register.BC, Register.A), 7);
 
         instructions[0x03] = new Instruction("INC BC", 1, i => ProcessorArithmeticInstructions.INC_RR(i, Register.BC), 6);
 
@@ -16,7 +16,7 @@ public partial class Processor
 
         instructions[0x05] = new Instruction("DEC B", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.B), 4);
 
-        instructions[0x06] = new Instruction("LD B, n", 2, i => LD_R_n(i, Register.B), 7);
+        instructions[0x06] = new Instruction("LD B, n", 2, i => ProcessorLoadInstructions.LD_R_n(i, Register.B), 7);
 
         instructions[0x07] = new Instruction("RLCA", 1, RLCA, 4, "RLCA A");
 
@@ -24,7 +24,7 @@ public partial class Processor
 
         instructions[0x09] = new Instruction("ADD HL, BC", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.HL, Register.BC), 11);
 
-        instructions[0x0A] = new Instruction("LD A, (BC)'", 1, i => LD_R_addr_RR(i, Register.A, Register.BC), 7);
+        instructions[0x0A] = new Instruction("LD A, (BC)'", 1, i => ProcessorLoadInstructions.LD_R_addr_RR(i, Register.A, Register.BC), 7);
 
         instructions[0x0B] = new Instruction("DEC BC", 1, i => ProcessorArithmeticInstructions.DEC_RR(i, Register.BC), 6);
 
@@ -32,15 +32,15 @@ public partial class Processor
 
         instructions[0x0D] = new Instruction("DEC C", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.C), 4);
 
-        instructions[0x0E] = new Instruction("LD C, n", 2, i => LD_R_n(i, Register.C), 7);
+        instructions[0x0E] = new Instruction("LD C, n", 2, i => ProcessorLoadInstructions.LD_R_n(i, Register.C), 7);
 
         instructions[0x0F] = new Instruction("RRCA", 1, RRCA, 4, "RRCA A");
 
         instructions[0x10] = new Instruction("DJNZ e", 2, DJNZ_e, 8, "DJNZ B, e");
 
-        instructions[0x11] = new Instruction("LD DE, nn", 3, i => LD_RR_nn(i, Register.DE), 10);
+        instructions[0x11] = new Instruction("LD DE, nn", 3, i => ProcessorLoadInstructions.LD_RR_nn(i, Register.DE), 10);
 
-        instructions[0x12] = new Instruction("LD (DE), A", 1, i => LD_addr_RR_R(i, Register.DE, Register.A), 7);
+        instructions[0x12] = new Instruction("LD (DE), A", 1, i => ProcessorLoadInstructions.LD_addr_RR_R(i, Register.DE, Register.A), 7);
 
         instructions[0x13] = new Instruction("INC DE", 1, i => ProcessorArithmeticInstructions.INC_RR(i, Register.DE), 6);
 
@@ -48,7 +48,7 @@ public partial class Processor
 
         instructions[0x15] = new Instruction("DEC D", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.D), 4);
 
-        instructions[0x16] = new Instruction("LD D, n", 2, i => LD_R_n(i, Register.D), 7);
+        instructions[0x16] = new Instruction("LD D, n", 2, i => ProcessorLoadInstructions.LD_R_n(i, Register.D), 7);
 
         instructions[0x17] = new Instruction("RLA", 1, RLA, 4, "RLA A");
 
@@ -56,7 +56,7 @@ public partial class Processor
 
         instructions[0x19] = new Instruction("ADD HL, DE", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.HL, Register.DE), 11);
 
-        instructions[0x1A] = new Instruction("LD A, (DE)", 1, i => LD_R_addr_RR(i, Register.A, Register.DE), 7);
+        instructions[0x1A] = new Instruction("LD A, (DE)", 1, i => ProcessorLoadInstructions.LD_R_addr_RR(i, Register.A, Register.DE), 7);
 
         instructions[0x1B] = new Instruction("DEC DE", 1, i => ProcessorArithmeticInstructions.DEC_RR(i, Register.DE), 6);
 
@@ -64,15 +64,15 @@ public partial class Processor
 
         instructions[0x1D] = new Instruction("DEC E", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.E), 4);
 
-        instructions[0x1E] = new Instruction("LD E, n", 2, i => LD_R_n(i, Register.E), 7);
+        instructions[0x1E] = new Instruction("LD E, n", 2, i => ProcessorLoadInstructions.LD_R_n(i, Register.E), 7);
 
         instructions[0x1F] = new Instruction("RRA", 1, RRA, 4, "RRA A");
 
         instructions[0x20] = new Instruction("JR NZ, e", 2, JR_NZ_e, 7);
 
-        instructions[0x21] = new Instruction("LD HL, nn", 3, i => LD_RR_nn(i, Register.HL), 10);
+        instructions[0x21] = new Instruction("LD HL, nn", 3, i => ProcessorLoadInstructions.LD_RR_nn(i, Register.HL), 10);
 
-        instructions[0x22] = new Instruction("LD (nn), HL", 3, i => LD_addr_nn_RR(i, Register.HL), 16);
+        instructions[0x22] = new Instruction("LD (nn), HL", 3, i => ProcessorLoadInstructions.LD_addr_nn_RR(i, Register.HL), 16);
 
         instructions[0x23] = new Instruction("INC HL", 1, i => ProcessorArithmeticInstructions.INC_RR(i, Register.HL), 6);
 
@@ -80,7 +80,7 @@ public partial class Processor
 
         instructions[0x25] = new Instruction("DEC H", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.H), 4);
 
-        instructions[0x26] = new Instruction("LD H, n", 2, i => LD_R_n(i, Register.H), 7);
+        instructions[0x26] = new Instruction("LD H, n", 2, i => ProcessorLoadInstructions.LD_R_n(i, Register.H), 7);
 
         instructions[0x27] = new Instruction("DAA", 1, DAA, 4);
 
@@ -88,7 +88,7 @@ public partial class Processor
 
         instructions[0x29] = new Instruction("ADD HL, HL", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.HL, Register.HL), 11);
 
-        instructions[0x2A] = new Instruction("LD HL, (nn)", 3, i => LD_RR_addr_nn(i, Register.HL), 16);
+        instructions[0x2A] = new Instruction("LD HL, (nn)", 3, i => ProcessorLoadInstructions.LD_RR_addr_nn(i, Register.HL), 16);
 
         instructions[0x2B] = new Instruction("DEC HL", 1, i => ProcessorArithmeticInstructions.DEC_RR(i, Register.HL), 6);
 
@@ -96,15 +96,15 @@ public partial class Processor
 
         instructions[0x2D] = new Instruction("DEC L", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.L), 4);
 
-        instructions[0x2E] = new Instruction("LD L, n", 2, i => LD_R_n(i, Register.L), 7);
+        instructions[0x2E] = new Instruction("LD L, n", 2, i => ProcessorLoadInstructions.LD_R_n(i, Register.L), 7);
 
         instructions[0x2F] = new Instruction("CPL", 1, CPL, 4);
 
         instructions[0x30] = new Instruction("JR NC, e", 2, JR_NC_e, 7);
 
-        instructions[0x31] = new Instruction("LD SP, nn", 3, LD_SP_nn, 10);
+        instructions[0x31] = new Instruction("LD SP, nn", 3, ProcessorLoadInstructions.LD_SP_nn, 10);
 
-        instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
+        instructions[0x32] = new Instruction("LD (nn), A", 3, i => ProcessorLoadInstructions.LD_addr_nn_R(i, Register.A), 13);
 
         instructions[0x33] = new Instruction("INC SP", 1, ProcessorArithmeticInstructions.INC_SP, 6);
 
@@ -112,7 +112,7 @@ public partial class Processor
 
         instructions[0x35] = new Instruction("DEC (HL)", 1, i => ProcessorArithmeticInstructions.DEC_addr_RR(i, Register.HL), 11);
 
-        instructions[0x36] = new Instruction("LD (HL), n", 2, i => LD_addr_RR_n(i, Register.HL), 10);
+        instructions[0x36] = new Instruction("LD (HL), n", 2, i => ProcessorLoadInstructions.LD_addr_RR_n(i, Register.HL), 10);
 
         instructions[0x37] = new Instruction("SCF", 1, SCF, 4);
 
@@ -120,7 +120,7 @@ public partial class Processor
 
         instructions[0x39] = new Instruction("ADD HL, SP", 1, i => ProcessorArithmeticInstructions.ADD_RR_SP(i, Register.HL), 11);
 
-        instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_R_addr_nn(i, Register.A), 13);
+        instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => ProcessorLoadInstructions.LD_R_addr_nn(i, Register.A), 13);
 
         instructions[0x3B] = new Instruction("DEC SP", 1, ProcessorArithmeticInstructions.DEC_SP, 6);
 
@@ -128,137 +128,137 @@ public partial class Processor
 
         instructions[0x3D] = new Instruction("DEC A", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.A), 4);
 
-        instructions[0x3E] = new Instruction("LD A, n", 2, i => LD_R_n(i, Register.A), 7);
+        instructions[0x3E] = new Instruction("LD A, n", 2, i => ProcessorLoadInstructions.LD_R_n(i, Register.A), 7);
 
         instructions[0x3F] = new Instruction("CCF", 1, CCF, 4);
 
-        instructions[0x40] = new Instruction("LD B, B", 1, i => LD_R_R(i, Register.B, Register.B), 4);
+        instructions[0x40] = new Instruction("LD B, B", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.B, Register.B), 4);
 
-        instructions[0x41] = new Instruction("LD B, C", 1, i => LD_R_R(i, Register.B, Register.C), 4);
+        instructions[0x41] = new Instruction("LD B, C", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.B, Register.C), 4);
 
-        instructions[0x42] = new Instruction("LD B, D", 1, i => LD_R_R(i, Register.B, Register.D), 4);
+        instructions[0x42] = new Instruction("LD B, D", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.B, Register.D), 4);
 
-        instructions[0x43] = new Instruction("LD B, E", 1, i => LD_R_R(i, Register.B, Register.E), 4);
+        instructions[0x43] = new Instruction("LD B, E", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.B, Register.E), 4);
 
-        instructions[0x44] = new Instruction("LD B, H", 1, i => LD_R_R(i, Register.B, Register.H), 4);
+        instructions[0x44] = new Instruction("LD B, H", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.B, Register.H), 4);
 
-        instructions[0x45] = new Instruction("LD B, L", 1, i => LD_R_R(i, Register.B, Register.L), 4);
+        instructions[0x45] = new Instruction("LD B, L", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.B, Register.L), 4);
 
-        instructions[0x46] = new Instruction("LD B, (HL)", 1, i => LD_R_addr_RR(i, Register.B, Register.HL), 7);
+        instructions[0x46] = new Instruction("LD B, (HL)", 1, i => ProcessorLoadInstructions.LD_R_addr_RR(i, Register.B, Register.HL), 7);
 
-        instructions[0x47] = new Instruction("LD B, A", 1, i => LD_R_R(i, Register.B, Register.A), 4);
+        instructions[0x47] = new Instruction("LD B, A", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.B, Register.A), 4);
 
-        instructions[0x48] = new Instruction("LD C, B", 1, i => LD_R_R(i, Register.C, Register.B), 4);
+        instructions[0x48] = new Instruction("LD C, B", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.C, Register.B), 4);
 
-        instructions[0x49] = new Instruction("LD C, C", 1, i => LD_R_R(i, Register.C, Register.C), 4);
+        instructions[0x49] = new Instruction("LD C, C", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.C, Register.C), 4);
 
-        instructions[0x4A] = new Instruction("LD C, D", 1, i => LD_R_R(i, Register.C, Register.D), 4);
+        instructions[0x4A] = new Instruction("LD C, D", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.C, Register.D), 4);
 
-        instructions[0x4B] = new Instruction("LD C, E", 1, i => LD_R_R(i, Register.C, Register.E), 4);
+        instructions[0x4B] = new Instruction("LD C, E", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.C, Register.E), 4);
 
-        instructions[0x4C] = new Instruction("LD C, H", 1, i => LD_R_R(i, Register.C, Register.H), 4);
+        instructions[0x4C] = new Instruction("LD C, H", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.C, Register.H), 4);
 
-        instructions[0x4D] = new Instruction("LD C, L", 1, i => LD_R_R(i, Register.C, Register.L), 4);
+        instructions[0x4D] = new Instruction("LD C, L", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.C, Register.L), 4);
 
-        instructions[0x4E] = new Instruction("LD C, (HL)", 1, i => LD_R_addr_RR(i, Register.C, Register.HL), 7);
+        instructions[0x4E] = new Instruction("LD C, (HL)", 1, i => ProcessorLoadInstructions.LD_R_addr_RR(i, Register.C, Register.HL), 7);
 
-        instructions[0x4F] = new Instruction("LD C, A", 1, i => LD_R_R(i, Register.C, Register.A), 4);
+        instructions[0x4F] = new Instruction("LD C, A", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.C, Register.A), 4);
 
-        instructions[0x50] = new Instruction("LD D, B", 1, i => LD_R_R(i, Register.D, Register.B), 4);
+        instructions[0x50] = new Instruction("LD D, B", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.D, Register.B), 4);
 
-        instructions[0x51] = new Instruction("LD D, C", 1, i => LD_R_R(i, Register.D, Register.C), 4);
+        instructions[0x51] = new Instruction("LD D, C", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.D, Register.C), 4);
 
-        instructions[0x52] = new Instruction("LD D, D", 1, i => LD_R_R(i, Register.D, Register.D), 4);
+        instructions[0x52] = new Instruction("LD D, D", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.D, Register.D), 4);
 
-        instructions[0x53] = new Instruction("LD D, E", 1, i => LD_R_R(i, Register.D, Register.E), 4);
+        instructions[0x53] = new Instruction("LD D, E", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.D, Register.E), 4);
 
-        instructions[0x54] = new Instruction("LD D, H", 1, i => LD_R_R(i, Register.D, Register.H), 4);
+        instructions[0x54] = new Instruction("LD D, H", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.D, Register.H), 4);
 
-        instructions[0x55] = new Instruction("LD D, L", 1, i => LD_R_R(i, Register.D, Register.L), 4);
+        instructions[0x55] = new Instruction("LD D, L", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.D, Register.L), 4);
 
-        instructions[0x56] = new Instruction("LD D, (HL)", 1, i => LD_R_addr_RR(i, Register.D, Register.HL), 7);
+        instructions[0x56] = new Instruction("LD D, (HL)", 1, i => ProcessorLoadInstructions.LD_R_addr_RR(i, Register.D, Register.HL), 7);
 
-        instructions[0x57] = new Instruction("LD D, A", 1, i => LD_R_R(i, Register.D, Register.A), 4);
+        instructions[0x57] = new Instruction("LD D, A", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.D, Register.A), 4);
 
-        instructions[0x58] = new Instruction("LD E, B", 1, i => LD_R_R(i, Register.E, Register.B), 4);
+        instructions[0x58] = new Instruction("LD E, B", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.E, Register.B), 4);
 
-        instructions[0x59] = new Instruction("LD E, C", 1, i => LD_R_R(i, Register.E, Register.C), 4);
+        instructions[0x59] = new Instruction("LD E, C", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.E, Register.C), 4);
 
-        instructions[0x5A] = new Instruction("LD E, D", 1, i => LD_R_R(i, Register.E, Register.D), 4);
+        instructions[0x5A] = new Instruction("LD E, D", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.E, Register.D), 4);
 
-        instructions[0x5B] = new Instruction("LD E, E", 1, i => LD_R_R(i, Register.E, Register.E), 4);
+        instructions[0x5B] = new Instruction("LD E, E", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.E, Register.E), 4);
 
-        instructions[0x5C] = new Instruction("LD E, H", 1, i => LD_R_R(i, Register.E, Register.H), 4);
+        instructions[0x5C] = new Instruction("LD E, H", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.E, Register.H), 4);
 
-        instructions[0x5D] = new Instruction("LD E, L", 1, i => LD_R_R(i, Register.E, Register.L), 4);
+        instructions[0x5D] = new Instruction("LD E, L", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.E, Register.L), 4);
 
-        instructions[0x5E] = new Instruction("LD E, (HL)", 1, i => LD_R_addr_RR(i, Register.E, Register.HL), 7);
+        instructions[0x5E] = new Instruction("LD E, (HL)", 1, i => ProcessorLoadInstructions.LD_R_addr_RR(i, Register.E, Register.HL), 7);
 
-        instructions[0x5F] = new Instruction("LD E, A", 1, i => LD_R_R(i, Register.E, Register.A), 4);
+        instructions[0x5F] = new Instruction("LD E, A", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.E, Register.A), 4);
 
-        instructions[0x60] = new Instruction("LD H, B", 1, i => LD_R_R(i, Register.H, Register.B), 4);
+        instructions[0x60] = new Instruction("LD H, B", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.H, Register.B), 4);
 
-        instructions[0x61] = new Instruction("LD H, C", 1, i => LD_R_R(i, Register.H, Register.C), 4);
+        instructions[0x61] = new Instruction("LD H, C", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.H, Register.C), 4);
 
-        instructions[0x62] = new Instruction("LD H, D", 1, i => LD_R_R(i, Register.H, Register.D), 4);
+        instructions[0x62] = new Instruction("LD H, D", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.H, Register.D), 4);
 
-        instructions[0x63] = new Instruction("LD H, E", 1, i => LD_R_R(i, Register.H, Register.E), 4);
+        instructions[0x63] = new Instruction("LD H, E", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.H, Register.E), 4);
 
-        instructions[0x64] = new Instruction("LD H, H", 1, i => LD_R_R(i, Register.H, Register.H), 4);
+        instructions[0x64] = new Instruction("LD H, H", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.H, Register.H), 4);
 
-        instructions[0x65] = new Instruction("LD H, L", 1, i => LD_R_R(i, Register.H, Register.L), 4);
+        instructions[0x65] = new Instruction("LD H, L", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.H, Register.L), 4);
 
-        instructions[0x66] = new Instruction("LD H, (HL)", 1, i => LD_R_addr_RR(i, Register.H, Register.HL), 7);
+        instructions[0x66] = new Instruction("LD H, (HL)", 1, i => ProcessorLoadInstructions.LD_R_addr_RR(i, Register.H, Register.HL), 7);
 
-        instructions[0x67] = new Instruction("LD H, A", 1, i => LD_R_R(i, Register.H, Register.A), 4);
+        instructions[0x67] = new Instruction("LD H, A", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.H, Register.A), 4);
 
-        instructions[0x68] = new Instruction("LD L, B", 1, i => LD_R_R(i, Register.L, Register.B), 4);
+        instructions[0x68] = new Instruction("LD L, B", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.L, Register.B), 4);
 
-        instructions[0x69] = new Instruction("LD L, C", 1, i => LD_R_R(i, Register.L, Register.C), 4);
+        instructions[0x69] = new Instruction("LD L, C", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.L, Register.C), 4);
 
-        instructions[0x6A] = new Instruction("LD L, D", 1, i => LD_R_R(i, Register.L, Register.D), 4);
+        instructions[0x6A] = new Instruction("LD L, D", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.L, Register.D), 4);
 
-        instructions[0x6B] = new Instruction("LD L, E", 1, i => LD_R_R(i, Register.L, Register.E), 4);
+        instructions[0x6B] = new Instruction("LD L, E", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.L, Register.E), 4);
 
-        instructions[0x6C] = new Instruction("LD L, H", 1, i => LD_R_R(i, Register.L, Register.H), 4);
+        instructions[0x6C] = new Instruction("LD L, H", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.L, Register.H), 4);
 
-        instructions[0x6D] = new Instruction("LD L, L", 1, i => LD_R_R(i, Register.L, Register.L), 4);
+        instructions[0x6D] = new Instruction("LD L, L", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.L, Register.L), 4);
 
-        instructions[0x6E] = new Instruction("LD L, (HL)", 1, i => LD_R_addr_RR(i, Register.L, Register.HL), 7);
+        instructions[0x6E] = new Instruction("LD L, (HL)", 1, i => ProcessorLoadInstructions.LD_R_addr_RR(i, Register.L, Register.HL), 7);
 
-        instructions[0x6F] = new Instruction("LD L, A", 1, i => LD_R_R(i, Register.L, Register.A), 4);
+        instructions[0x6F] = new Instruction("LD L, A", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.L, Register.A), 4);
 
-        instructions[0x70] = new Instruction("LD (HL), B", 1, i => LD_addr_RR_R(i, Register.HL, Register.B), 7);
+        instructions[0x70] = new Instruction("LD (HL), B", 1, i => ProcessorLoadInstructions.LD_addr_RR_R(i, Register.HL, Register.B), 7);
 
-        instructions[0x71] = new Instruction("LD (HL), C", 1, i => LD_addr_RR_R(i, Register.HL, Register.C), 7);
+        instructions[0x71] = new Instruction("LD (HL), C", 1, i => ProcessorLoadInstructions.LD_addr_RR_R(i, Register.HL, Register.C), 7);
 
-        instructions[0x72] = new Instruction("LD (HL), D", 1, i => LD_addr_RR_R(i, Register.HL, Register.D), 7);
+        instructions[0x72] = new Instruction("LD (HL), D", 1, i => ProcessorLoadInstructions.LD_addr_RR_R(i, Register.HL, Register.D), 7);
 
-        instructions[0x73] = new Instruction("LD (HL), E", 1, i => LD_addr_RR_R(i, Register.HL, Register.E), 7);
+        instructions[0x73] = new Instruction("LD (HL), E", 1, i => ProcessorLoadInstructions.LD_addr_RR_R(i, Register.HL, Register.E), 7);
 
-        instructions[0x74] = new Instruction("LD (HL), H", 1, i => LD_addr_RR_R(i, Register.HL, Register.H), 7);
+        instructions[0x74] = new Instruction("LD (HL), H", 1, i => ProcessorLoadInstructions.LD_addr_RR_R(i, Register.HL, Register.H), 7);
 
-        instructions[0x75] = new Instruction("LD (HL), L", 1, i => LD_addr_RR_R(i, Register.HL, Register.L), 7);
+        instructions[0x75] = new Instruction("LD (HL), L", 1, i => ProcessorLoadInstructions.LD_addr_RR_R(i, Register.HL, Register.L), 7);
 
         instructions[0x76] = new Instruction("HALT", 1, HALT, 4);
 
-        instructions[0x77] = new Instruction("LD (HL), A", 1, i => LD_addr_RR_R(i, Register.HL, Register.A), 7);
+        instructions[0x77] = new Instruction("LD (HL), A", 1, i => ProcessorLoadInstructions.LD_addr_RR_R(i, Register.HL, Register.A), 7);
 
-        instructions[0x78] = new Instruction("LD A, B", 1, i => LD_R_R(i, Register.A, Register.B), 4);
+        instructions[0x78] = new Instruction("LD A, B", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.A, Register.B), 4);
 
-        instructions[0x79] = new Instruction("LD A, C", 1, i => LD_R_R(i, Register.A, Register.C), 4);
+        instructions[0x79] = new Instruction("LD A, C", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.A, Register.C), 4);
 
-        instructions[0x7A] = new Instruction("LD A, D", 1, i => LD_R_R(i, Register.A, Register.D), 4);
+        instructions[0x7A] = new Instruction("LD A, D", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.A, Register.D), 4);
 
-        instructions[0x7B] = new Instruction("LD A, E", 1, i => LD_R_R(i, Register.A, Register.E), 4);
+        instructions[0x7B] = new Instruction("LD A, E", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.A, Register.E), 4);
 
-        instructions[0x7C] = new Instruction("LD A, H", 1, i => LD_R_R(i, Register.A, Register.H), 4);
+        instructions[0x7C] = new Instruction("LD A, H", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.A, Register.H), 4);
 
-        instructions[0x7D] = new Instruction("LD A, L", 1, i => LD_R_R(i, Register.A, Register.L), 4);
+        instructions[0x7D] = new Instruction("LD A, L", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.A, Register.L), 4);
 
-        instructions[0x7E] = new Instruction("LD A, (HL)", 1, i => LD_R_addr_RR(i, Register.A, Register.HL), 7);
+        instructions[0x7E] = new Instruction("LD A, (HL)", 1, i => ProcessorLoadInstructions.LD_R_addr_RR(i, Register.A, Register.HL), 7);
 
-        instructions[0x7F] = new Instruction("LD A, A", 1, i => LD_R_R(i, Register.A, Register.A), 4);
+        instructions[0x7F] = new Instruction("LD A, A", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.A, Register.A), 4);
 
         instructions[0x80] = new Instruction("ADD A, B", 1, i => ProcessorArithmeticInstructions.ADD_R_R(i, Register.A, Register.B), 4);
 
@@ -505,7 +505,7 @@ public partial class Processor
 
         instructions[0xF8] = new Instruction("RET S", 1, RET_S, 5);
 
-        instructions[0xF9] = new Instruction("LD SP, HL", 1, LD_RR_RR, 6);
+        instructions[0xF9] = new Instruction("LD SP, HL", 1, ProcessorLoadInstructions.LD_RR_RR, 6);
 
         instructions[0xFA] = new Instruction("JP S, nn", 3, JP_S_nn, 10);
 

@@ -1,8 +1,8 @@
 ﻿namespace ZXE.Core.Z80;
 
-public partial class Processor
+public static class ProcessorLoadInstructions
 {
-    private static bool LD_RR_nn(Input input, Register register)
+    public static bool LD_RR_nn(Input input, Register register)
     {
         input.State.Registers.LoadFromRam(register, input.Data[1..3]);
 
@@ -11,7 +11,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_addr_RR_R(Input input, Register target, Register source)
+    public static bool LD_addr_RR_R(Input input, Register target, Register source)
     {
         input.Ram[input.State.Registers.ReadPair(target)] = input.State.Registers[source];
 
@@ -20,7 +20,7 @@ public partial class Processor
         return true;
     }    
 
-    private static bool LD_R_n(Input input, Register register)
+    public static bool LD_R_n(Input input, Register register)
     {
         input.State.Registers[register] = input.Data[1];
 
@@ -29,7 +29,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_addr_nn_R(Input input, Register register)
+    public static bool LD_addr_nn_R(Input input, Register register)
     {
         input.Ram[(input.Data[2] << 8) | input.Data[1]] = input.State.Registers[register];
 
@@ -38,7 +38,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_R_addr_nn(Input input, Register register)
+    public static bool LD_R_addr_nn(Input input, Register register)
     {
         input.State.Registers[register] = input.Ram[(input.Data[2] << 8) | input.Data[1]];
 
@@ -56,7 +56,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_addr_nn_RR(Input input, Register register)
+    public static bool LD_addr_nn_RR(Input input, Register register)
     {
         unchecked
         {
@@ -73,7 +73,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_RR_addr_nn(Input input, Register register)
+    public static bool LD_RR_addr_nn(Input input, Register register)
     {
         unchecked
         {
@@ -87,7 +87,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_SP_nn(Input input)
+    public static bool LD_SP_nn(Input input)
     {
         input.State.StackPointer = input.Data[2] << 8 | input.Data[1];
 
@@ -96,7 +96,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_addr_RR_n(Input input, Register register)
+    public static bool LD_addr_RR_n(Input input, Register register)
     {
         input.Ram[input.State.Registers.ReadPair(register)] = input.Data[1];
 
@@ -105,7 +105,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_R_R(Input input, Register destination, Register source)
+    public static bool LD_R_R(Input input, Register destination, Register source)
     {
         input.State.Registers[destination] = input.State.Registers[source];
 
@@ -115,7 +115,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_RR_RR(Input input)
+    public static bool LD_RR_RR(Input input)
     {
         input.State.StackPointer = input.State.Registers.ReadPair(Register.HL);
 
@@ -124,7 +124,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_RRh_n(Input input, Register register)
+    public static bool LD_RRh_n(Input input, Register register)
     {
         var value = input.State.Registers.ReadPair(register);
 
@@ -135,7 +135,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_RRl_n(Input input, Register register)
+    public static bool LD_RRl_n(Input input, Register register)
     {
         var value = input.State.Registers.ReadPair(register);
 
@@ -146,7 +146,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_addr_RR_plus_d_n(Input input, Register register)
+    public static bool LD_addr_RR_plus_d_n(Input input, Register register)
     {
         var address = (int) input.State.Registers.ReadPair(register);
 
@@ -159,7 +159,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_R_RRh(Input input, Register destination, Register source)
+    public static bool LD_R_RRh(Input input, Register destination, Register source)
     {
         var value = input.State.Registers.ReadPair(source);
 
@@ -170,7 +170,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_R_RRl(Input input, Register destination, Register source)
+    public static bool LD_R_RRl(Input input, Register destination, Register source)
     {
         var value = input.State.Registers.ReadPair(source);
 
@@ -181,7 +181,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    public static bool LD_R_addr_RR_plus_d(Input input, Register destination, Register source)
     {
         var address = (int) input.State.Registers.ReadPair(source);
 
@@ -193,7 +193,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_addr_RR_plus_d_R(Input input, Register destination, Register source)
+    public static bool LD_addr_RR_plus_d_R(Input input, Register destination, Register source)
     {
         var address = (int) input.State.Registers.ReadPair(destination);
 
@@ -206,7 +206,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_RRh_R(Input input, Register destination, Register source)
+    public static bool LD_RRh_R(Input input, Register destination, Register source)
     {
         var value = input.State.Registers.ReadPair(destination);
 
@@ -219,7 +219,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_RRh_RRh(Input input, Register destination, Register source)
+    public static bool LD_RRh_RRh(Input input, Register destination, Register source)
     {
         var left = input.State.Registers.ReadPair(destination);
 
@@ -234,7 +234,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_RRh_RRl(Input input, Register destination, Register source)
+    public static bool LD_RRh_RRl(Input input, Register destination, Register source)
     {
         var left = input.State.Registers.ReadPair(destination);
 
@@ -249,7 +249,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_RRl_R(Input input, Register destination, Register source)
+    public static bool LD_RRl_R(Input input, Register destination, Register source)
     {
         var value = input.State.Registers.ReadPair(destination);
 
@@ -262,7 +262,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_RRl_RRh(Input input, Register destination, Register source)
+    public static bool LD_RRl_RRh(Input input, Register destination, Register source)
     {
         var left = input.State.Registers.ReadPair(destination);
 
@@ -277,7 +277,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_RRl_RRl(Input input, Register destination, Register source)
+    public static bool LD_RRl_RRl(Input input, Register destination, Register source)
     {
         var left = input.State.Registers.ReadPair(destination);
 
@@ -292,7 +292,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_SP_RR(Input input, Register register)
+    public static bool LD_SP_RR(Input input, Register register)
     {
         input.State.StackPointer = input.State.Registers.ReadPair(register);
 
@@ -301,7 +301,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool LD_addr_nn_SP(Input input)
+    public static bool LD_addr_nn_SP(Input input)
     {
         unchecked
         {
