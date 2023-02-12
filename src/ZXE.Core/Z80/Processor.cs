@@ -87,14 +87,11 @@ public partial class Processor
             _tracer.TraceBefore(instruction, data, _state, ram);
         }
 
+        UpdateR(instruction.Length);
+
         if (instruction.Action(new Input(data, _state, ram, ports)))
         {
             _state.ProgramCounter += instruction.Length;
-        }
-
-        if (! (instruction.Mnemonic.StartsWith("SOPSET") && instruction.Mnemonic.Length == 11))
-        {
-            UpdateR(instruction.Length);
         }
 
         if (_state.ProgramCounter > 0xFFFF)

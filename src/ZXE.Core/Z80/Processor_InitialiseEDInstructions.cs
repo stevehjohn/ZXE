@@ -161,7 +161,7 @@ public partial class Processor
 
         // TODO: instructions[0xED7C] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED7C);
 
-        instructions[0xED7E] = new Instruction("IM 2", 3, i => IM_m(i, InterruptMode.Mode2), 4, null, 0xED7E);
+        instructions[0xED7E] = new Instruction("IM 2", 1, i => IM_m(i, InterruptMode.Mode2), 4, null, 0xED7E);
 
         instructions[0xEDA0] = new Instruction("LDI", 1, LDI, 12, null, 0xEDA0);
 
