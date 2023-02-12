@@ -324,53 +324,53 @@ public partial class Processor
 
         instructions[0x9F] = new Instruction("SBC A, A", 1, i => ProcessorArithmeticInstructions.SBC_R_R(i, Register.A, Register.A), 4);
 
-        instructions[0xA0] = new Instruction("AND A, B", 1, i => AND_R_R(i, Register.A, Register.B), 4);
+        instructions[0xA0] = new Instruction("AND A, B", 1, i => ProcessorBitwiseLogicInstructions.AND_R_R(i, Register.A, Register.B), 4);
 
-        instructions[0xA1] = new Instruction("AND A, C", 1, i => AND_R_R(i, Register.A, Register.C), 4);
+        instructions[0xA1] = new Instruction("AND A, C", 1, i => ProcessorBitwiseLogicInstructions.AND_R_R(i, Register.A, Register.C), 4);
 
-        instructions[0xA2] = new Instruction("AND A, D", 1, i => AND_R_R(i, Register.A, Register.D), 4);
+        instructions[0xA2] = new Instruction("AND A, D", 1, i => ProcessorBitwiseLogicInstructions.AND_R_R(i, Register.A, Register.D), 4);
 
-        instructions[0xA3] = new Instruction("AND A, E", 1, i => AND_R_R(i, Register.A, Register.E), 4);
+        instructions[0xA3] = new Instruction("AND A, E", 1, i => ProcessorBitwiseLogicInstructions.AND_R_R(i, Register.A, Register.E), 4);
 
-        instructions[0xA4] = new Instruction("AND A, H", 1, i => AND_R_R(i, Register.A, Register.H), 4);
+        instructions[0xA4] = new Instruction("AND A, H", 1, i => ProcessorBitwiseLogicInstructions.AND_R_R(i, Register.A, Register.H), 4);
 
-        instructions[0xA5] = new Instruction("AND A, L", 1, i => AND_R_R(i, Register.A, Register.L), 4);
+        instructions[0xA5] = new Instruction("AND A, L", 1, i => ProcessorBitwiseLogicInstructions.AND_R_R(i, Register.A, Register.L), 4);
 
-        instructions[0xA6] = new Instruction("AND A, (HL)", 1, i => AND_R_addr_RR(i, Register.A, Register.HL), 7);
+        instructions[0xA6] = new Instruction("AND A, (HL)", 1, i => ProcessorBitwiseLogicInstructions.AND_R_addr_RR(i, Register.A, Register.HL), 7);
 
-        instructions[0xA7] = new Instruction("AND A, A", 1, i => AND_R_R(i, Register.A, Register.A), 4);
+        instructions[0xA7] = new Instruction("AND A, A", 1, i => ProcessorBitwiseLogicInstructions.AND_R_R(i, Register.A, Register.A), 4);
 
-        instructions[0xA8] = new Instruction("XOR A, B", 1, i => XOR_R_R(i, Register.A, Register.B), 4);
+        instructions[0xA8] = new Instruction("XOR A, B", 1, i => ProcessorBitwiseLogicInstructions.XOR_R_R(i, Register.A, Register.B), 4);
 
-        instructions[0xA9] = new Instruction("XOR A, C", 1, i => XOR_R_R(i, Register.A, Register.C), 4);
+        instructions[0xA9] = new Instruction("XOR A, C", 1, i => ProcessorBitwiseLogicInstructions.XOR_R_R(i, Register.A, Register.C), 4);
 
-        instructions[0xAA] = new Instruction("XOR A, D", 1, i => XOR_R_R(i, Register.A, Register.D), 4);
+        instructions[0xAA] = new Instruction("XOR A, D", 1, i => ProcessorBitwiseLogicInstructions.XOR_R_R(i, Register.A, Register.D), 4);
 
-        instructions[0xAB] = new Instruction("XOR A, E", 1, i => XOR_R_R(i, Register.A, Register.E), 4);
+        instructions[0xAB] = new Instruction("XOR A, E", 1, i => ProcessorBitwiseLogicInstructions.XOR_R_R(i, Register.A, Register.E), 4);
 
-        instructions[0xAC] = new Instruction("XOR A, H", 1, i => XOR_R_R(i, Register.A, Register.H), 4);
+        instructions[0xAC] = new Instruction("XOR A, H", 1, i => ProcessorBitwiseLogicInstructions.XOR_R_R(i, Register.A, Register.H), 4);
 
-        instructions[0xAD] = new Instruction("XOR A, L", 1, i => XOR_R_R(i, Register.A, Register.L), 4);
+        instructions[0xAD] = new Instruction("XOR A, L", 1, i => ProcessorBitwiseLogicInstructions.XOR_R_R(i, Register.A, Register.L), 4);
 
-        instructions[0xAE] = new Instruction("XOR A, (HL)", 1, i => XOR_R_addr_RR(i, Register.A, Register.HL), 7);
+        instructions[0xAE] = new Instruction("XOR A, (HL)", 1, i => ProcessorBitwiseLogicInstructions.XOR_R_addr_RR(i, Register.A, Register.HL), 7);
 
-        instructions[0xAF] = new Instruction("XOR A, A", 1, i => XOR_R_R(i, Register.A, Register.A), 4);
+        instructions[0xAF] = new Instruction("XOR A, A", 1, i => ProcessorBitwiseLogicInstructions.XOR_R_R(i, Register.A, Register.A), 4);
 
-        instructions[0xB0] = new Instruction("OR A, B", 1, i => OR_R_R(i, Register.A, Register.B), 4);
+        instructions[0xB0] = new Instruction("OR A, B", 1, i => ProcessorBitwiseLogicInstructions.OR_R_R(i, Register.A, Register.B), 4);
 
-        instructions[0xB1] = new Instruction("OR A, C", 1, i => OR_R_R(i, Register.A, Register.C), 4);
+        instructions[0xB1] = new Instruction("OR A, C", 1, i => ProcessorBitwiseLogicInstructions.OR_R_R(i, Register.A, Register.C), 4);
 
-        instructions[0xB2] = new Instruction("OR A, D", 1, i => OR_R_R(i, Register.A, Register.D), 4);
+        instructions[0xB2] = new Instruction("OR A, D", 1, i => ProcessorBitwiseLogicInstructions.OR_R_R(i, Register.A, Register.D), 4);
 
-        instructions[0xB3] = new Instruction("OR A, E", 1, i => OR_R_R(i, Register.A, Register.E), 4);
+        instructions[0xB3] = new Instruction("OR A, E", 1, i => ProcessorBitwiseLogicInstructions.OR_R_R(i, Register.A, Register.E), 4);
 
-        instructions[0xB4] = new Instruction("OR A, H", 1, i => OR_R_R(i, Register.A, Register.H), 4);
+        instructions[0xB4] = new Instruction("OR A, H", 1, i => ProcessorBitwiseLogicInstructions.OR_R_R(i, Register.A, Register.H), 4);
 
-        instructions[0xB5] = new Instruction("OR A, L", 1, i => OR_R_R(i, Register.A, Register.L), 4);
+        instructions[0xB5] = new Instruction("OR A, L", 1, i => ProcessorBitwiseLogicInstructions.OR_R_R(i, Register.A, Register.L), 4);
 
-        instructions[0xB6] = new Instruction("OR A, (HL)", 1, i => OR_R_addr_RR(i, Register.A, Register.HL), 7);
+        instructions[0xB6] = new Instruction("OR A, (HL)", 1, i => ProcessorBitwiseLogicInstructions.OR_R_addr_RR(i, Register.A, Register.HL), 7);
 
-        instructions[0xB7] = new Instruction("OR A, A", 1, i => OR_R_R(i, Register.A, Register.A), 4);
+        instructions[0xB7] = new Instruction("OR A, A", 1, i => ProcessorBitwiseLogicInstructions.OR_R_R(i, Register.A, Register.A), 4);
 
         instructions[0xB8] = new Instruction("CP A, B", 1, i => CP_R_R(i, Register.A, Register.B), 4);
 
@@ -466,7 +466,7 @@ public partial class Processor
 
         instructions[0xE5] = new Instruction("PUSH HL", 1, i => PUSH_RR(i, Register.HL), 11);
 
-        instructions[0xE6] = new Instruction("AND A, n", 2, i => AND_R_n(i, Register.A), 7);
+        instructions[0xE6] = new Instruction("AND A, n", 2, i => ProcessorBitwiseLogicInstructions.AND_R_n(i, Register.A), 7);
 
         instructions[0xE7] = new Instruction("RST 0x20", 1, i => RST(i, 0x20), 11);
 
@@ -483,7 +483,7 @@ public partial class Processor
         // Switch opcode set to ED
         instructions[0xED] = new Instruction("SOPSET 0xED", 1, _ => SetOpcodePrefix(0xED), 4);
 
-        instructions[0xEE] = new Instruction("XOR A, n", 2, i => XOR_R_n(i, Register.A), 7);
+        instructions[0xEE] = new Instruction("XOR A, n", 2, i => ProcessorBitwiseLogicInstructions.XOR_R_n(i, Register.A), 7);
 
         instructions[0xEF] = new Instruction("RST 0x28", 1, i => RST(i, 0x28), 11);
 
@@ -499,7 +499,7 @@ public partial class Processor
 
         instructions[0xF5] = new Instruction("PUSH AF", 1, i => PUSH_RR(i, Register.AF), 11);
 
-        instructions[0xF6] = new Instruction("OR A, n", 2, i => OR_R_n(i, Register.A), 7);
+        instructions[0xF6] = new Instruction("OR A, n", 2, i => ProcessorBitwiseLogicInstructions.OR_R_n(i, Register.A), 7);
 
         instructions[0xF7] = new Instruction("RST 0x30", 1, i => RST(i, 0x30), 11);
 

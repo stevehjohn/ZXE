@@ -4,9 +4,9 @@
 // ReSharper disable InconsistentNaming
 // ReSharper disable StringLiteralTypo
 
-public partial class Processor
+public static class ProcessorBitwiseLogicInstructions
 {
-    private static bool AND_R_R(Input input, Register destination, Register source)
+    public static bool AND_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -30,7 +30,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool AND_R_addr_RR(Input input, Register destination, Register source)
+    public static bool AND_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -54,7 +54,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool XOR_R_R(Input input, Register destination, Register source)
+    public static bool XOR_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -78,7 +78,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool XOR_R_addr_RR(Input input, Register destination, Register source)
+    public static bool XOR_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -102,7 +102,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool OR_R_R(Input input, Register destination, Register source)
+    public static bool OR_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -126,7 +126,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool OR_R_addr_RR(Input input, Register destination, Register source)
+    public static bool OR_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -150,7 +150,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool AND_R_n(Input input, Register destination)
+    public static bool AND_R_n(Input input, Register destination)
     {
         unchecked
         {
@@ -174,7 +174,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool XOR_R_n(Input input, Register destination)
+    public static bool XOR_R_n(Input input, Register destination)
     {
         unchecked
         {
@@ -198,7 +198,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool OR_R_n(Input input, Register destination)
+    public static bool OR_R_n(Input input, Register destination)
     {
         unchecked
         {
@@ -222,7 +222,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool AND_R_RRh(Input input, Register destination, Register source)
+    public static bool AND_R_RRh(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -246,7 +246,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool AND_R_RRl(Input input, Register destination, Register source)
+    public static bool AND_R_RRl(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -270,7 +270,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool AND_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    public static bool AND_R_addr_RR_plus_d(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -294,7 +294,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool XOR_R_RRh(Input input, Register destination, Register source)
+    public static bool XOR_R_RRh(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -318,7 +318,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool XOR_R_RRl(Input input, Register destination, Register source)
+    public static bool XOR_R_RRl(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -342,7 +342,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool XOR_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    public static bool XOR_R_addr_RR_plus_d(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -366,7 +366,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool OR_R_RRh(Input input, Register destination, Register source)
+    public static bool OR_R_RRh(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -390,7 +390,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool OR_R_RRl(Input input, Register destination, Register source)
+    public static bool OR_R_RRl(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -414,7 +414,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool OR_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    public static bool OR_R_addr_RR_plus_d(Input input, Register destination, Register source)
     {
         unchecked
         {

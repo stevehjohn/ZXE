@@ -142,23 +142,23 @@ public partial class Processor
 
         instructions[0xDD9E] = new Instruction("SBC A, (IX + d)", 2, i => ProcessorArithmeticInstructions.SBC_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
 
-        instructions[0xDDA4] = new Instruction("AND A, IXh", 1, i => AND_R_RRh(i, Register.A, Register.IX), 4);
+        instructions[0xDDA4] = new Instruction("AND A, IXh", 1, i => ProcessorBitwiseLogicInstructions.AND_R_RRh(i, Register.A, Register.IX), 4);
 
-        instructions[0xDDA5] = new Instruction("AND A, IXl", 1, i => AND_R_RRl(i, Register.A, Register.IX), 4);
+        instructions[0xDDA5] = new Instruction("AND A, IXl", 1, i => ProcessorBitwiseLogicInstructions.AND_R_RRl(i, Register.A, Register.IX), 4);
 
-        instructions[0xDDA6] = new Instruction("AND A, (IX + d)", 2, i => AND_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
+        instructions[0xDDA6] = new Instruction("AND A, (IX + d)", 2, i => ProcessorBitwiseLogicInstructions.AND_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
 
-        instructions[0xDDAC] = new Instruction("XOR A, IXh", 1, i => XOR_R_RRh(i, Register.A, Register.IX), 4);
+        instructions[0xDDAC] = new Instruction("XOR A, IXh", 1, i => ProcessorBitwiseLogicInstructions.XOR_R_RRh(i, Register.A, Register.IX), 4);
 
-        instructions[0xDDAD] = new Instruction("XOR A, IXl", 1, i => XOR_R_RRl(i, Register.A, Register.IX), 4);
+        instructions[0xDDAD] = new Instruction("XOR A, IXl", 1, i => ProcessorBitwiseLogicInstructions.XOR_R_RRl(i, Register.A, Register.IX), 4);
 
-        instructions[0xDDAE] = new Instruction("XOR A, (IX + d)", 2, i => XOR_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
+        instructions[0xDDAE] = new Instruction("XOR A, (IX + d)", 2, i => ProcessorBitwiseLogicInstructions.XOR_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
 
-        instructions[0xDDB4] = new Instruction("OR A, IXh", 1, i => OR_R_RRh(i, Register.A, Register.IX), 4);
+        instructions[0xDDB4] = new Instruction("OR A, IXh", 1, i => ProcessorBitwiseLogicInstructions.OR_R_RRh(i, Register.A, Register.IX), 4);
 
-        instructions[0xDDB5] = new Instruction("OR A, IXh", 1, i => OR_R_RRl(i, Register.A, Register.IX), 4);
+        instructions[0xDDB5] = new Instruction("OR A, IXh", 1, i => ProcessorBitwiseLogicInstructions.OR_R_RRl(i, Register.A, Register.IX), 4);
 
-        instructions[0xDDB6] = new Instruction("OR A, (IX + d)", 2, i => OR_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
+        instructions[0xDDB6] = new Instruction("OR A, (IX + d)", 2, i => ProcessorBitwiseLogicInstructions.OR_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
 
         instructions[0xDDBC] = new Instruction("CP A, IXh", 1, i => CP_R_RRh(i, Register.A, Register.IX), 4);
 
