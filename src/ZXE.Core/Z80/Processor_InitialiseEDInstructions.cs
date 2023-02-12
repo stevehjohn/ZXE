@@ -1,4 +1,5 @@
 ﻿// ReSharper disable InconsistentNaming
+// ReSharper disable StringLiteralTypo
 
 namespace ZXE.Core.Z80;
     
@@ -162,6 +163,8 @@ public partial class Processor
 
         instructions[0xED7E] = new Instruction("IM 2", 3, i => IM_m(i, InterruptMode.Mode2), 4, null, 0xED7E);
 
-        instructions[0xEDA0] = new Instruction("LDI", 1, i => LDI(i), 12, null, 0xEDA0);
+        instructions[0xEDA0] = new Instruction("LDI", 1, LDI, 12, null, 0xEDA0);
+
+        instructions[0xEDB0] = new Instruction("LDIR", 1, LDIR, 12, null, 0xEDB0);
     }
 }
