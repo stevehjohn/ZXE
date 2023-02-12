@@ -32,10 +32,12 @@ public class TestRunner
 
         var stopwatch = Stopwatch.StartNew();
 
+        var failedNames = new List<string>();
+
         foreach (var file in files)
         {
             //Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("fd cb") < 0)
+            //if (Path.GetFileName(file).CompareTo("ed 73") < 0)
             //{
             //    continue;
             //}
@@ -69,6 +71,8 @@ public class TestRunner
                     case TestResult.Fail:
                         if (dumpOnFail)
                         {
+                            failedNames.Add(test.Name);
+
                             DumpTest(test);
                         }
 
@@ -86,6 +90,8 @@ public class TestRunner
                 {
                     break;
                 }
+
+                break;
             }
         }
 
@@ -102,6 +108,29 @@ public class TestRunner
         FormattedConsole.WriteLine($"\n  &Cyan;Tests Failed&White;: {(failed == 0 ? "&Green;" : "&Red;")}{failed:N0}    &Cyan;Percent Failed&White;: &Yellow;{(float) failed / total * 100:F2}%");
 
         FormattedConsole.WriteLine(string.Empty);
+
+        if (failedNames.Count > 0)
+        {
+            FormattedConsole.WriteLine("  &Cyan;Press any key to see failed test names...\n");
+
+            Console.ReadKey();
+
+            var first = true;
+
+            foreach (var name in failedNames)
+            {
+                if (first)
+                {
+                    FormattedConsole.Write($"&Red;{name}");
+
+                    first = false;
+                }
+                else
+                {
+                    FormattedConsole.Write($"&White;, &Red;{name}");
+                }
+            }
+        }
 
         Console.CursorVisible = true;
     }
