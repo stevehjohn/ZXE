@@ -6,9 +6,9 @@ namespace ZXE.Core.Z80;
 // ReSharper disable InconsistentNaming
 // ReSharper disable StringLiteralTypo
 
-public partial class Processor
+public static class ProcessorBitwiseRotationInstructions
 {
-    private static bool RLCA(Input input)
+    public static bool RLCA(Input input)
     {
         unchecked
         {
@@ -34,7 +34,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RRCA(Input input)
+    public static bool RRCA(Input input)
     {
         unchecked
         {
@@ -65,7 +65,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RLA(Input input)
+    public static bool RLA(Input input)
     {
         unchecked
         {
@@ -93,7 +93,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RRA(Input input)
+    public static bool RRA(Input input)
     {
         unchecked
         {
@@ -121,7 +121,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RLC_R(Input input, Register register)
+    public static bool RLC_R(Input input, Register register)
     {
         unchecked
         {
@@ -147,7 +147,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RLC_addr_RR(Input input, Register register)
+    public static bool RLC_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -175,7 +175,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RRC_R(Input input, Register register)
+    public static bool RRC_R(Input input, Register register)
     {
         unchecked
         {
@@ -206,7 +206,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RRC_addr_RR(Input input, Register register)
+    public static bool RRC_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -239,7 +239,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RL_R(Input input, Register register)
+    public static bool RL_R(Input input, Register register)
     {
         unchecked
         {
@@ -267,7 +267,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RL_addr_RR(Input input, Register register)
+    public static bool RL_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -297,7 +297,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RR_R(Input input, Register register)
+    public static bool RR_R(Input input, Register register)
     {
         unchecked
         {
@@ -325,7 +325,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RR_addr_RR(Input input, Register register)
+    public static bool RR_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -355,7 +355,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SLA_R(Input input, Register register)
+    public static bool SLA_R(Input input, Register register)
     {
         unchecked
         {
@@ -379,7 +379,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SLA_addr_RR(Input input, Register register)
+    public static bool SLA_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -407,7 +407,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SRA_R(Input input, Register register)
+    public static bool SRA_R(Input input, Register register)
     {
         unchecked
         {
@@ -439,7 +439,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SRA_addr_RR(Input input, Register register)
+    public static bool SRA_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -471,7 +471,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SLS_R(Input input, Register register)
+    public static bool SLS_R(Input input, Register register)
     {
         unchecked
         {
@@ -501,7 +501,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SLS_addr_RR(Input input, Register register)
+    public static bool SLS_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -531,7 +531,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SRL_R(Input input, Register register)
+    public static bool SRL_R(Input input, Register register)
     {
         unchecked
         {
@@ -559,7 +559,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SRL_addr_RR(Input input, Register register)
+    public static bool SRL_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -587,7 +587,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SLA_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static bool SLA_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -621,7 +621,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RLC_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static bool RLC_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -655,7 +655,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RLC_addr_RR_plus_d(Input input, Register source)
+    public static bool RLC_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -687,7 +687,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RRC_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static bool RRC_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -721,7 +721,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RRC_addr_RR_plus_d(Input input, Register source)
+    public static bool RRC_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -753,7 +753,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RL_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static bool RL_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -787,7 +787,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RL_addr_RR_plus_d(Input input, Register source)
+    public static bool RL_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -819,7 +819,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RR_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static bool RR_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -853,7 +853,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RR_addr_RR_plus_d(Input input, Register source)
+    public static bool RR_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -885,7 +885,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SLA_addr_RR_plus_d(Input input, Register source)
+    public static bool SLA_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -917,7 +917,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SRA_addr_RR_plus_d(Input input, Register source)
+    public static bool SRA_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -951,7 +951,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SRA_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static bool SRA_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -987,7 +987,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SLS_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static bool SLS_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -1021,7 +1021,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SLS_addr_RR_plus_d(Input input, Register source)
+    public static bool SLS_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -1053,7 +1053,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SRL_addr_RR_plus_d(Input input, Register source)
+    public static bool SRL_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -1085,7 +1085,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SRL_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static bool SRL_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {

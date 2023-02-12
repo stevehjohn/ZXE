@@ -6,133 +6,133 @@ public partial class Processor
 {
     private static void InitialiseFDCBInstructions(Dictionary<int, Instruction> instructions)
     {
-        instructions[0xFDCB00] = new Instruction("RLC (IY + d), B", 2, i => RLC_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB00);
+        instructions[0xFDCB00] = new Instruction("RLC (IY + d), B", 2, i => ProcessorBitwiseRotationInstructions.RLC_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB00);
 
-        instructions[0xFDCB01] = new Instruction("RLC (IY + d), C", 2, i => RLC_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB01);
+        instructions[0xFDCB01] = new Instruction("RLC (IY + d), C", 2, i => ProcessorBitwiseRotationInstructions.RLC_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB01);
 
-        instructions[0xFDCB02] = new Instruction("RLC (IY + d), D", 2, i => RLC_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB02);
+        instructions[0xFDCB02] = new Instruction("RLC (IY + d), D", 2, i => ProcessorBitwiseRotationInstructions.RLC_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB02);
 
-        instructions[0xFDCB03] = new Instruction("RLC (IY + d), E", 2, i => RLC_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB03);
+        instructions[0xFDCB03] = new Instruction("RLC (IY + d), E", 2, i => ProcessorBitwiseRotationInstructions.RLC_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB03);
 
-        instructions[0xFDCB04] = new Instruction("RLC (IY + d), H", 2, i => RLC_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB04);
+        instructions[0xFDCB04] = new Instruction("RLC (IY + d), H", 2, i => ProcessorBitwiseRotationInstructions.RLC_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB04);
 
-        instructions[0xFDCB05] = new Instruction("RLC (IY + d), L", 2, i => RLC_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB05);
+        instructions[0xFDCB05] = new Instruction("RLC (IY + d), L", 2, i => ProcessorBitwiseRotationInstructions.RLC_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB05);
 
-        instructions[0xFDCB06] = new Instruction("RLC (IY + d)", 2, i => RLC_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB06);
+        instructions[0xFDCB06] = new Instruction("RLC (IY + d)", 2, i => ProcessorBitwiseRotationInstructions.RLC_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB06);
 
-        instructions[0xFDCB07] = new Instruction("RLC (IY + d), A", 2, i => RLC_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB07);
+        instructions[0xFDCB07] = new Instruction("RLC (IY + d), A", 2, i => ProcessorBitwiseRotationInstructions.RLC_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB07);
 
-        instructions[0xFDCB08] = new Instruction("RRC (IY + d), B", 2, i => RRC_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB08);
+        instructions[0xFDCB08] = new Instruction("RRC (IY + d), B", 2, i => ProcessorBitwiseRotationInstructions.RRC_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB08);
 
-        instructions[0xFDCB09] = new Instruction("RRC (IY + d), C", 2, i => RRC_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB09);
+        instructions[0xFDCB09] = new Instruction("RRC (IY + d), C", 2, i => ProcessorBitwiseRotationInstructions.RRC_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB09);
 
-        instructions[0xFDCB0A] = new Instruction("RRC (IY + d), D", 2, i => RRC_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB0A);
+        instructions[0xFDCB0A] = new Instruction("RRC (IY + d), D", 2, i => ProcessorBitwiseRotationInstructions.RRC_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB0A);
 
-        instructions[0xFDCB0B] = new Instruction("RRC (IY + d), E", 2, i => RRC_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB0B);
+        instructions[0xFDCB0B] = new Instruction("RRC (IY + d), E", 2, i => ProcessorBitwiseRotationInstructions.RRC_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB0B);
 
-        instructions[0xFDCB0C] = new Instruction("RRC (IY + d), H", 2, i => RRC_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB0C);
+        instructions[0xFDCB0C] = new Instruction("RRC (IY + d), H", 2, i => ProcessorBitwiseRotationInstructions.RRC_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB0C);
 
-        instructions[0xFDCB0D] = new Instruction("RRC (IY + d), L", 2, i => RRC_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB0D);
+        instructions[0xFDCB0D] = new Instruction("RRC (IY + d), L", 2, i => ProcessorBitwiseRotationInstructions.RRC_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB0D);
 
-        instructions[0xFDCB0E] = new Instruction("RRC (IY + d)", 2, i => RRC_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB0E);
+        instructions[0xFDCB0E] = new Instruction("RRC (IY + d)", 2, i => ProcessorBitwiseRotationInstructions.RRC_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB0E);
 
-        instructions[0xFDCB0F] = new Instruction("RRC (IY + d), A", 2, i => RRC_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB0F);
+        instructions[0xFDCB0F] = new Instruction("RRC (IY + d), A", 2, i => ProcessorBitwiseRotationInstructions.RRC_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB0F);
 
-        instructions[0xFDCB10] = new Instruction("RL (IY + d), B", 2, i => RL_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB10);
+        instructions[0xFDCB10] = new Instruction("RL (IY + d), B", 2, i => ProcessorBitwiseRotationInstructions.RL_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB10);
 
-        instructions[0xFDCB11] = new Instruction("RL (IY + d), C", 2, i => RL_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB11);
+        instructions[0xFDCB11] = new Instruction("RL (IY + d), C", 2, i => ProcessorBitwiseRotationInstructions.RL_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB11);
 
-        instructions[0xFDCB12] = new Instruction("RL (IY + d), D", 2, i => RL_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB12);
+        instructions[0xFDCB12] = new Instruction("RL (IY + d), D", 2, i => ProcessorBitwiseRotationInstructions.RL_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB12);
 
-        instructions[0xFDCB13] = new Instruction("RL (IY + d), E", 2, i => RL_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB13);
+        instructions[0xFDCB13] = new Instruction("RL (IY + d), E", 2, i => ProcessorBitwiseRotationInstructions.RL_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB13);
 
-        instructions[0xFDCB14] = new Instruction("RL (IY + d), H", 2, i => RL_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB14);
+        instructions[0xFDCB14] = new Instruction("RL (IY + d), H", 2, i => ProcessorBitwiseRotationInstructions.RL_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB14);
 
-        instructions[0xFDCB15] = new Instruction("RL (IY + d), L", 2, i => RL_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB15);
+        instructions[0xFDCB15] = new Instruction("RL (IY + d), L", 2, i => ProcessorBitwiseRotationInstructions.RL_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB15);
 
-        instructions[0xFDCB16] = new Instruction("RL (IY + d)", 2, i => RL_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB16);
+        instructions[0xFDCB16] = new Instruction("RL (IY + d)", 2, i => ProcessorBitwiseRotationInstructions.RL_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB16);
 
-        instructions[0xFDCB17] = new Instruction("RL (IY + d), A", 2, i => RL_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB17);
+        instructions[0xFDCB17] = new Instruction("RL (IY + d), A", 2, i => ProcessorBitwiseRotationInstructions.RL_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB17);
 
-        instructions[0xFDCB18] = new Instruction("RR (IY + d), B", 2, i => RR_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB18);
+        instructions[0xFDCB18] = new Instruction("RR (IY + d), B", 2, i => ProcessorBitwiseRotationInstructions.RR_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB18);
 
-        instructions[0xFDCB19] = new Instruction("RR (IY + d), C", 2, i => RR_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB19);
+        instructions[0xFDCB19] = new Instruction("RR (IY + d), C", 2, i => ProcessorBitwiseRotationInstructions.RR_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB19);
 
-        instructions[0xFDCB1A] = new Instruction("RR (IY + d), D", 2, i => RR_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB1A);
+        instructions[0xFDCB1A] = new Instruction("RR (IY + d), D", 2, i => ProcessorBitwiseRotationInstructions.RR_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB1A);
 
-        instructions[0xFDCB1B] = new Instruction("RR (IY + d), E", 2, i => RR_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB1B);
+        instructions[0xFDCB1B] = new Instruction("RR (IY + d), E", 2, i => ProcessorBitwiseRotationInstructions.RR_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB1B);
 
-        instructions[0xFDCB1C] = new Instruction("RR (IY + d), H", 2, i => RR_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB1C);
+        instructions[0xFDCB1C] = new Instruction("RR (IY + d), H", 2, i => ProcessorBitwiseRotationInstructions.RR_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB1C);
 
-        instructions[0xFDCB1D] = new Instruction("RR (IY + d), L", 2, i => RR_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB1D);
+        instructions[0xFDCB1D] = new Instruction("RR (IY + d), L", 2, i => ProcessorBitwiseRotationInstructions.RR_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB1D);
 
-        instructions[0xFDCB1E] = new Instruction("RR (IY + d)", 2, i => RR_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB1E);
+        instructions[0xFDCB1E] = new Instruction("RR (IY + d)", 2, i => ProcessorBitwiseRotationInstructions.RR_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB1E);
 
-        instructions[0xFDCB1F] = new Instruction("RR (IY + d), A", 2, i => RR_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB1F);
+        instructions[0xFDCB1F] = new Instruction("RR (IY + d), A", 2, i => ProcessorBitwiseRotationInstructions.RR_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB1F);
 
-        instructions[0xFDCB20] = new Instruction("SLA (IY + d), B", 2, i => SLA_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB20);
+        instructions[0xFDCB20] = new Instruction("SLA (IY + d), B", 2, i => ProcessorBitwiseRotationInstructions.SLA_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB20);
 
-        instructions[0xFDCB21] = new Instruction("SLA (IY + d), C", 2, i => SLA_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB21);
+        instructions[0xFDCB21] = new Instruction("SLA (IY + d), C", 2, i => ProcessorBitwiseRotationInstructions.SLA_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB21);
 
-        instructions[0xFDCB22] = new Instruction("SLA (IY + d), D", 2, i => SLA_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB22);
+        instructions[0xFDCB22] = new Instruction("SLA (IY + d), D", 2, i => ProcessorBitwiseRotationInstructions.SLA_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB22);
 
-        instructions[0xFDCB23] = new Instruction("SLA (IY + d), E", 2, i => SLA_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB23);
+        instructions[0xFDCB23] = new Instruction("SLA (IY + d), E", 2, i => ProcessorBitwiseRotationInstructions.SLA_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB23);
 
-        instructions[0xFDCB24] = new Instruction("SLA (IY + d), H", 2, i => SLA_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB24);
+        instructions[0xFDCB24] = new Instruction("SLA (IY + d), H", 2, i => ProcessorBitwiseRotationInstructions.SLA_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB24);
 
-        instructions[0xFDCB25] = new Instruction("SLA (IY + d), L", 2, i => SLA_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB25);
+        instructions[0xFDCB25] = new Instruction("SLA (IY + d), L", 2, i => ProcessorBitwiseRotationInstructions.SLA_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB25);
 
-        instructions[0xFDCB26] = new Instruction("SLA (IY + d)", 2, i => SLA_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB26);
+        instructions[0xFDCB26] = new Instruction("SLA (IY + d)", 2, i => ProcessorBitwiseRotationInstructions.SLA_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB26);
 
-        instructions[0xFDCB27] = new Instruction("SLA (IY + d), A", 2, i => SLA_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB27);
+        instructions[0xFDCB27] = new Instruction("SLA (IY + d), A", 2, i => ProcessorBitwiseRotationInstructions.SLA_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB27);
 
-        instructions[0xFDCB28] = new Instruction("SRA (IY + d), B", 2, i => SRA_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB28);
+        instructions[0xFDCB28] = new Instruction("SRA (IY + d), B", 2, i => ProcessorBitwiseRotationInstructions.SRA_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB28);
 
-        instructions[0xFDCB29] = new Instruction("SRA (IY + d), C", 2, i => SRA_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB29);
+        instructions[0xFDCB29] = new Instruction("SRA (IY + d), C", 2, i => ProcessorBitwiseRotationInstructions.SRA_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB29);
 
-        instructions[0xFDCB2A] = new Instruction("SRA (IY + d), D", 2, i => SRA_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB2A);
+        instructions[0xFDCB2A] = new Instruction("SRA (IY + d), D", 2, i => ProcessorBitwiseRotationInstructions.SRA_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB2A);
 
-        instructions[0xFDCB2B] = new Instruction("SRA (IY + d), E", 2, i => SRA_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB2B);
+        instructions[0xFDCB2B] = new Instruction("SRA (IY + d), E", 2, i => ProcessorBitwiseRotationInstructions.SRA_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB2B);
 
-        instructions[0xFDCB2C] = new Instruction("SRA (IY + d), H", 2, i => SRA_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB2C);
+        instructions[0xFDCB2C] = new Instruction("SRA (IY + d), H", 2, i => ProcessorBitwiseRotationInstructions.SRA_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB2C);
 
-        instructions[0xFDCB2D] = new Instruction("SRA (IY + d), L", 2, i => SRA_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB2D);
+        instructions[0xFDCB2D] = new Instruction("SRA (IY + d), L", 2, i => ProcessorBitwiseRotationInstructions.SRA_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB2D);
 
-        instructions[0xFDCB2E] = new Instruction("SRA (IY + d)", 2, i => SRA_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB2E);
+        instructions[0xFDCB2E] = new Instruction("SRA (IY + d)", 2, i => ProcessorBitwiseRotationInstructions.SRA_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB2E);
 
-        instructions[0xFDCB2F] = new Instruction("SRA (IY + d), A", 2, i => SRA_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB2F);
+        instructions[0xFDCB2F] = new Instruction("SRA (IY + d), A", 2, i => ProcessorBitwiseRotationInstructions.SRA_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB2F);
 
-        instructions[0xFDCB30] = new Instruction("SLS (IY + d), B", 2, i => SLS_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB30);
+        instructions[0xFDCB30] = new Instruction("SLS (IY + d), B", 2, i => ProcessorBitwiseRotationInstructions.SLS_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB30);
 
-        instructions[0xFDCB31] = new Instruction("SLS (IY + d), C", 2, i => SLS_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB31);
+        instructions[0xFDCB31] = new Instruction("SLS (IY + d), C", 2, i => ProcessorBitwiseRotationInstructions.SLS_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB31);
 
-        instructions[0xFDCB32] = new Instruction("SLS (IY + d), D", 2, i => SLS_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB32);
+        instructions[0xFDCB32] = new Instruction("SLS (IY + d), D", 2, i => ProcessorBitwiseRotationInstructions.SLS_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB32);
 
-        instructions[0xFDCB33] = new Instruction("SLS (IY + d), E", 2, i => SLS_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB33);
+        instructions[0xFDCB33] = new Instruction("SLS (IY + d), E", 2, i => ProcessorBitwiseRotationInstructions.SLS_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB33);
 
-        instructions[0xFDCB34] = new Instruction("SLS (IY + d), H", 2, i => SLS_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB34);
+        instructions[0xFDCB34] = new Instruction("SLS (IY + d), H", 2, i => ProcessorBitwiseRotationInstructions.SLS_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB34);
 
-        instructions[0xFDCB35] = new Instruction("SLS (IY + d), L", 2, i => SLS_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB35);
+        instructions[0xFDCB35] = new Instruction("SLS (IY + d), L", 2, i => ProcessorBitwiseRotationInstructions.SLS_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB35);
 
-        instructions[0xFDCB36] = new Instruction("SLS (IY + d)", 2, i => SLS_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB36);
+        instructions[0xFDCB36] = new Instruction("SLS (IY + d)", 2, i => ProcessorBitwiseRotationInstructions.SLS_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB36);
 
-        instructions[0xFDCB37] = new Instruction("SLS (IY + d), A", 2, i => SLS_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB37);
+        instructions[0xFDCB37] = new Instruction("SLS (IY + d), A", 2, i => ProcessorBitwiseRotationInstructions.SLS_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB37);
 
-        instructions[0xFDCB38] = new Instruction("SRL (IY + d), B", 2, i => SRL_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB38);
+        instructions[0xFDCB38] = new Instruction("SRL (IY + d), B", 2, i => ProcessorBitwiseRotationInstructions.SRL_addr_RR_plus_d_R(i, Register.IY, Register.B), 15, null, 0xFDCB38);
 
-        instructions[0xFDCB39] = new Instruction("SRL (IY + d), C", 2, i => SRL_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB39);
+        instructions[0xFDCB39] = new Instruction("SRL (IY + d), C", 2, i => ProcessorBitwiseRotationInstructions.SRL_addr_RR_plus_d_R(i, Register.IY, Register.C), 15, null, 0xFDCB39);
 
-        instructions[0xFDCB3A] = new Instruction("SRL (IY + d), D", 2, i => SRL_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB3A);
+        instructions[0xFDCB3A] = new Instruction("SRL (IY + d), D", 2, i => ProcessorBitwiseRotationInstructions.SRL_addr_RR_plus_d_R(i, Register.IY, Register.D), 15, null, 0xFDCB3A);
 
-        instructions[0xFDCB3B] = new Instruction("SRL (IY + d), E", 2, i => SRL_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB3B);
+        instructions[0xFDCB3B] = new Instruction("SRL (IY + d), E", 2, i => ProcessorBitwiseRotationInstructions.SRL_addr_RR_plus_d_R(i, Register.IY, Register.E), 15, null, 0xFDCB3B);
 
-        instructions[0xFDCB3C] = new Instruction("SRL (IY + d), H", 2, i => SRL_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB3C);
+        instructions[0xFDCB3C] = new Instruction("SRL (IY + d), H", 2, i => ProcessorBitwiseRotationInstructions.SRL_addr_RR_plus_d_R(i, Register.IY, Register.H), 15, null, 0xFDCB3C);
 
-        instructions[0xFDCB3D] = new Instruction("SRL (IY + d), L", 2, i => SRL_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB3D);
+        instructions[0xFDCB3D] = new Instruction("SRL (IY + d), L", 2, i => ProcessorBitwiseRotationInstructions.SRL_addr_RR_plus_d_R(i, Register.IY, Register.L), 15, null, 0xFDCB3D);
 
-        instructions[0xFDCB3E] = new Instruction("SRL (IY + d)", 2, i => SRL_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB3E);
+        instructions[0xFDCB3E] = new Instruction("SRL (IY + d)", 2, i => ProcessorBitwiseRotationInstructions.SRL_addr_RR_plus_d(i, Register.IY), 15, null, 0xFDCB3E);
 
-        instructions[0xFDCB3F] = new Instruction("SRL (IY + d), A", 2, i => SRL_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB3F);
+        instructions[0xFDCB3F] = new Instruction("SRL (IY + d), A", 2, i => ProcessorBitwiseRotationInstructions.SRL_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB3F);
 
         instructions[0xFDCB40] = new Instruction("BIT_0 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB40);
 
