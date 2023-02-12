@@ -168,5 +168,7 @@ public partial class Processor
         instructions[0xEDA1] = new Instruction("CPI", 1, ProcessorMiscellaneousInstructions.CPI, 12, null, 0xEDA1);
 
         instructions[0xEDB0] = new Instruction("LDIR", 1, ProcessorMiscellaneousInstructions.LDIR, 12, null, 0xEDB0);
+
+        instructions[0xEDB1] = new Instruction("CPIR", 1, ProcessorMiscellaneousInstructions.CPIR, 12, null, 0xEDB1);
     }
 }
