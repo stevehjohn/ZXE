@@ -11,7 +11,7 @@ public partial class Processor
         unchecked
         {
             // TODO: If B != 0, 5 more cycles... how to do this?
-            DEC_R(input, Register.B);
+            ProcessorArithmeticInstructions.DEC_R(input, Register.B);
 
             if (!input.State.Flags.Zero)
             {

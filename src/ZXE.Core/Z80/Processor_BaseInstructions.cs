@@ -10,11 +10,11 @@ public partial class Processor
 
         instructions[0x02] = new Instruction("LD (BC), A", 1, i => LD_addr_RR_R(i, Register.BC, Register.A), 7);
 
-        instructions[0x03] = new Instruction("INC BC", 1, i => INC_RR(i, Register.BC), 6);
+        instructions[0x03] = new Instruction("INC BC", 1, i => ProcessorArithmeticInstructions.INC_RR(i, Register.BC), 6);
 
-        instructions[0x04] = new Instruction("INC B", 1, i => INC_R(i, Register.B), 4);
+        instructions[0x04] = new Instruction("INC B", 1, i => ProcessorArithmeticInstructions.INC_R(i, Register.B), 4);
 
-        instructions[0x05] = new Instruction("DEC B", 1, i => DEC_R(i, Register.B), 4);
+        instructions[0x05] = new Instruction("DEC B", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.B), 4);
 
         instructions[0x06] = new Instruction("LD B, n", 2, i => LD_R_n(i, Register.B), 7);
 
@@ -22,15 +22,15 @@ public partial class Processor
 
         instructions[0x08] = new Instruction("EX AF, AF'", 1, i => EX_RR_RaRa(i, Register.A, Register.F), 4);
 
-        instructions[0x09] = new Instruction("ADD HL, BC", 1, i => ADD_RR_RR(i, Register.HL, Register.BC), 11);
+        instructions[0x09] = new Instruction("ADD HL, BC", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.HL, Register.BC), 11);
 
         instructions[0x0A] = new Instruction("LD A, (BC)'", 1, i => LD_R_addr_RR(i, Register.A, Register.BC), 7);
 
-        instructions[0x0B] = new Instruction("DEC BC", 1, i => DEC_RR(i, Register.BC), 6);
+        instructions[0x0B] = new Instruction("DEC BC", 1, i => ProcessorArithmeticInstructions.DEC_RR(i, Register.BC), 6);
 
-        instructions[0x0C] = new Instruction("INC C", 1, i => INC_R(i, Register.C), 4);
+        instructions[0x0C] = new Instruction("INC C", 1, i => ProcessorArithmeticInstructions.INC_R(i, Register.C), 4);
 
-        instructions[0x0D] = new Instruction("DEC C", 1, i => DEC_R(i, Register.C), 4);
+        instructions[0x0D] = new Instruction("DEC C", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.C), 4);
 
         instructions[0x0E] = new Instruction("LD C, n", 2, i => LD_R_n(i, Register.C), 7);
 
@@ -42,11 +42,11 @@ public partial class Processor
 
         instructions[0x12] = new Instruction("LD (DE), A", 1, i => LD_addr_RR_R(i, Register.DE, Register.A), 7);
 
-        instructions[0x13] = new Instruction("INC DE", 1, i => INC_RR(i, Register.DE), 6);
+        instructions[0x13] = new Instruction("INC DE", 1, i => ProcessorArithmeticInstructions.INC_RR(i, Register.DE), 6);
 
-        instructions[0x14] = new Instruction("INC D", 1, i => INC_R(i, Register.D), 4);
+        instructions[0x14] = new Instruction("INC D", 1, i => ProcessorArithmeticInstructions.INC_R(i, Register.D), 4);
 
-        instructions[0x15] = new Instruction("DEC D", 1, i => DEC_R(i, Register.D), 4);
+        instructions[0x15] = new Instruction("DEC D", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.D), 4);
 
         instructions[0x16] = new Instruction("LD D, n", 2, i => LD_R_n(i, Register.D), 7);
 
@@ -54,15 +54,15 @@ public partial class Processor
 
         instructions[0x18] = new Instruction("JR e", 2, JR_e, 12);
 
-        instructions[0x19] = new Instruction("ADD HL, DE", 1, i => ADD_RR_RR(i, Register.HL, Register.DE), 11);
+        instructions[0x19] = new Instruction("ADD HL, DE", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.HL, Register.DE), 11);
 
         instructions[0x1A] = new Instruction("LD A, (DE)", 1, i => LD_R_addr_RR(i, Register.A, Register.DE), 7);
 
-        instructions[0x1B] = new Instruction("DEC DE", 1, i => DEC_RR(i, Register.DE), 6);
+        instructions[0x1B] = new Instruction("DEC DE", 1, i => ProcessorArithmeticInstructions.DEC_RR(i, Register.DE), 6);
 
-        instructions[0x1C] = new Instruction("INC E", 1, i => INC_R(i, Register.E), 4);
+        instructions[0x1C] = new Instruction("INC E", 1, i => ProcessorArithmeticInstructions.INC_R(i, Register.E), 4);
 
-        instructions[0x1D] = new Instruction("DEC E", 1, i => DEC_R(i, Register.E), 4);
+        instructions[0x1D] = new Instruction("DEC E", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.E), 4);
 
         instructions[0x1E] = new Instruction("LD E, n", 2, i => LD_R_n(i, Register.E), 7);
 
@@ -74,11 +74,11 @@ public partial class Processor
 
         instructions[0x22] = new Instruction("LD (nn), HL", 3, i => LD_addr_nn_RR(i, Register.HL), 16);
 
-        instructions[0x23] = new Instruction("INC HL", 1, i => INC_RR(i, Register.HL), 6);
+        instructions[0x23] = new Instruction("INC HL", 1, i => ProcessorArithmeticInstructions.INC_RR(i, Register.HL), 6);
 
-        instructions[0x24] = new Instruction("INC H", 1, i => INC_R(i, Register.H), 4);
+        instructions[0x24] = new Instruction("INC H", 1, i => ProcessorArithmeticInstructions.INC_R(i, Register.H), 4);
 
-        instructions[0x25] = new Instruction("DEC H", 1, i => DEC_R(i, Register.H), 4);
+        instructions[0x25] = new Instruction("DEC H", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.H), 4);
 
         instructions[0x26] = new Instruction("LD H, n", 2, i => LD_R_n(i, Register.H), 7);
 
@@ -86,15 +86,15 @@ public partial class Processor
 
         instructions[0x28] = new Instruction("JR Z, e", 2, JR_Z_e, 7);
 
-        instructions[0x29] = new Instruction("ADD HL, HL", 1, i => ADD_RR_RR(i, Register.HL, Register.HL), 11);
+        instructions[0x29] = new Instruction("ADD HL, HL", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.HL, Register.HL), 11);
 
         instructions[0x2A] = new Instruction("LD HL, (nn)", 3, i => LD_RR_addr_nn(i, Register.HL), 16);
 
-        instructions[0x2B] = new Instruction("DEC HL", 1, i => DEC_RR(i, Register.HL), 6);
+        instructions[0x2B] = new Instruction("DEC HL", 1, i => ProcessorArithmeticInstructions.DEC_RR(i, Register.HL), 6);
 
-        instructions[0x2C] = new Instruction("INC L", 1, i => INC_R(i, Register.L), 4);
+        instructions[0x2C] = new Instruction("INC L", 1, i => ProcessorArithmeticInstructions.INC_R(i, Register.L), 4);
 
-        instructions[0x2D] = new Instruction("DEC L", 1, i => DEC_R(i, Register.L), 4);
+        instructions[0x2D] = new Instruction("DEC L", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.L), 4);
 
         instructions[0x2E] = new Instruction("LD L, n", 2, i => LD_R_n(i, Register.L), 7);
 
@@ -106,11 +106,11 @@ public partial class Processor
 
         instructions[0x32] = new Instruction("LD (nn), A", 3, i => LD_addr_nn_R(i, Register.A), 13);
 
-        instructions[0x33] = new Instruction("INC SP", 1, INC_SP, 6);
+        instructions[0x33] = new Instruction("INC SP", 1, ProcessorArithmeticInstructions.INC_SP, 6);
 
-        instructions[0x34] = new Instruction("INC (HL)", 1, i => INC_addr_RR(i, Register.HL), 11);
+        instructions[0x34] = new Instruction("INC (HL)", 1, i => ProcessorArithmeticInstructions.INC_addr_RR(i, Register.HL), 11);
 
-        instructions[0x35] = new Instruction("DEC (HL)", 1, i => DEC_addr_RR(i, Register.HL), 11);
+        instructions[0x35] = new Instruction("DEC (HL)", 1, i => ProcessorArithmeticInstructions.DEC_addr_RR(i, Register.HL), 11);
 
         instructions[0x36] = new Instruction("LD (HL), n", 2, i => LD_addr_RR_n(i, Register.HL), 10);
 
@@ -118,15 +118,15 @@ public partial class Processor
 
         instructions[0x38] = new Instruction("JR C, e", 2, JR_C_e, 7);
 
-        instructions[0x39] = new Instruction("ADD HL, SP", 1, i => ADD_RR_SP(i, Register.HL), 11);
+        instructions[0x39] = new Instruction("ADD HL, SP", 1, i => ProcessorArithmeticInstructions.ADD_RR_SP(i, Register.HL), 11);
 
         instructions[0x3A] = new Instruction("LD A, (nn)", 3, i => LD_R_addr_nn(i, Register.A), 13);
 
-        instructions[0x3B] = new Instruction("DEC SP", 1, DEC_SP, 6);
+        instructions[0x3B] = new Instruction("DEC SP", 1, ProcessorArithmeticInstructions.DEC_SP, 6);
 
-        instructions[0x3C] = new Instruction("INC A", 1, i => INC_R(i, Register.A), 4);
+        instructions[0x3C] = new Instruction("INC A", 1, i => ProcessorArithmeticInstructions.INC_R(i, Register.A), 4);
 
-        instructions[0x3D] = new Instruction("DEC A", 1, i => DEC_R(i, Register.A), 4);
+        instructions[0x3D] = new Instruction("DEC A", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.A), 4);
 
         instructions[0x3E] = new Instruction("LD A, n", 2, i => LD_R_n(i, Register.A), 7);
 
@@ -260,69 +260,69 @@ public partial class Processor
 
         instructions[0x7F] = new Instruction("LD A, A", 1, i => LD_R_R(i, Register.A, Register.A), 4);
 
-        instructions[0x80] = new Instruction("ADD A, B", 1, i => ADD_R_R(i, Register.A, Register.B), 4);
+        instructions[0x80] = new Instruction("ADD A, B", 1, i => ProcessorArithmeticInstructions.ADD_R_R(i, Register.A, Register.B), 4);
 
-        instructions[0x81] = new Instruction("ADD A, C", 1, i => ADD_R_R(i, Register.A, Register.C), 4);
+        instructions[0x81] = new Instruction("ADD A, C", 1, i => ProcessorArithmeticInstructions.ADD_R_R(i, Register.A, Register.C), 4);
 
-        instructions[0x82] = new Instruction("ADD A, D", 1, i => ADD_R_R(i, Register.A, Register.D), 4);
+        instructions[0x82] = new Instruction("ADD A, D", 1, i => ProcessorArithmeticInstructions.ADD_R_R(i, Register.A, Register.D), 4);
 
-        instructions[0x83] = new Instruction("ADD A, E", 1, i => ADD_R_R(i, Register.A, Register.E), 4);
+        instructions[0x83] = new Instruction("ADD A, E", 1, i => ProcessorArithmeticInstructions.ADD_R_R(i, Register.A, Register.E), 4);
 
-        instructions[0x84] = new Instruction("ADD A, H", 1, i => ADD_R_R(i, Register.A, Register.H), 4);
+        instructions[0x84] = new Instruction("ADD A, H", 1, i => ProcessorArithmeticInstructions.ADD_R_R(i, Register.A, Register.H), 4);
 
-        instructions[0x85] = new Instruction("ADD A, L", 1, i => ADD_R_R(i, Register.A, Register.L), 4);
+        instructions[0x85] = new Instruction("ADD A, L", 1, i => ProcessorArithmeticInstructions.ADD_R_R(i, Register.A, Register.L), 4);
 
-        instructions[0x86] = new Instruction("ADD A, (HL)", 1, i => ADD_R_addr_RR(i, Register.A, Register.HL), 7);
+        instructions[0x86] = new Instruction("ADD A, (HL)", 1, i => ProcessorArithmeticInstructions.ADD_R_addr_RR(i, Register.A, Register.HL), 7);
 
-        instructions[0x87] = new Instruction("ADD A, A", 1, i => ADD_R_R(i, Register.A, Register.A), 4);
+        instructions[0x87] = new Instruction("ADD A, A", 1, i => ProcessorArithmeticInstructions.ADD_R_R(i, Register.A, Register.A), 4);
 
-        instructions[0x88] = new Instruction("ADC A, B", 1, i => ADC_R_R(i, Register.A, Register.B), 4);
+        instructions[0x88] = new Instruction("ADC A, B", 1, i => ProcessorArithmeticInstructions.ADC_R_R(i, Register.A, Register.B), 4);
 
-        instructions[0x89] = new Instruction("ADC A, C", 1, i => ADC_R_R(i, Register.A, Register.C), 4);
+        instructions[0x89] = new Instruction("ADC A, C", 1, i => ProcessorArithmeticInstructions.ADC_R_R(i, Register.A, Register.C), 4);
 
-        instructions[0x8A] = new Instruction("ADC A, D", 1, i => ADC_R_R(i, Register.A, Register.D), 4);
+        instructions[0x8A] = new Instruction("ADC A, D", 1, i => ProcessorArithmeticInstructions.ADC_R_R(i, Register.A, Register.D), 4);
 
-        instructions[0x8B] = new Instruction("ADC A, E", 1, i => ADC_R_R(i, Register.A, Register.E), 4);
+        instructions[0x8B] = new Instruction("ADC A, E", 1, i => ProcessorArithmeticInstructions.ADC_R_R(i, Register.A, Register.E), 4);
 
-        instructions[0x8C] = new Instruction("ADC A, H", 1, i => ADC_R_R(i, Register.A, Register.H), 4);
+        instructions[0x8C] = new Instruction("ADC A, H", 1, i => ProcessorArithmeticInstructions.ADC_R_R(i, Register.A, Register.H), 4);
 
-        instructions[0x8D] = new Instruction("ADC A, L", 1, i => ADC_R_R(i, Register.A, Register.L), 4);
+        instructions[0x8D] = new Instruction("ADC A, L", 1, i => ProcessorArithmeticInstructions.ADC_R_R(i, Register.A, Register.L), 4);
 
-        instructions[0x8E] = new Instruction("ADC A, (HL)", 1, i => ADC_R_addr_RR(i, Register.A, Register.HL), 7);
+        instructions[0x8E] = new Instruction("ADC A, (HL)", 1, i => ProcessorArithmeticInstructions.ADC_R_addr_RR(i, Register.A, Register.HL), 7);
 
-        instructions[0x8F] = new Instruction("ADC A, A", 1, i => ADC_R_R(i, Register.A, Register.A), 4);
+        instructions[0x8F] = new Instruction("ADC A, A", 1, i => ProcessorArithmeticInstructions.ADC_R_R(i, Register.A, Register.A), 4);
 
-        instructions[0x90] = new Instruction("SUB A, B", 1, i => SUB_R_R(i, Register.A, Register.B), 4);
+        instructions[0x90] = new Instruction("SUB A, B", 1, i => ProcessorArithmeticInstructions.SUB_R_R(i, Register.A, Register.B), 4);
 
-        instructions[0x91] = new Instruction("SUB A, C", 1, i => SUB_R_R(i, Register.A, Register.C), 4);
+        instructions[0x91] = new Instruction("SUB A, C", 1, i => ProcessorArithmeticInstructions.SUB_R_R(i, Register.A, Register.C), 4);
 
-        instructions[0x92] = new Instruction("SUB A, D", 1, i => SUB_R_R(i, Register.A, Register.D), 4);
+        instructions[0x92] = new Instruction("SUB A, D", 1, i => ProcessorArithmeticInstructions.SUB_R_R(i, Register.A, Register.D), 4);
 
-        instructions[0x93] = new Instruction("SUB A, E", 1, i => SUB_R_R(i, Register.A, Register.E), 4);
+        instructions[0x93] = new Instruction("SUB A, E", 1, i => ProcessorArithmeticInstructions.SUB_R_R(i, Register.A, Register.E), 4);
 
-        instructions[0x94] = new Instruction("SUB A, H", 1, i => SUB_R_R(i, Register.A, Register.H), 4);
+        instructions[0x94] = new Instruction("SUB A, H", 1, i => ProcessorArithmeticInstructions.SUB_R_R(i, Register.A, Register.H), 4);
 
-        instructions[0x95] = new Instruction("SUB A, L", 1, i => SUB_R_R(i, Register.A, Register.L), 4);
+        instructions[0x95] = new Instruction("SUB A, L", 1, i => ProcessorArithmeticInstructions.SUB_R_R(i, Register.A, Register.L), 4);
 
-        instructions[0x96] = new Instruction("SUB A, (HL)", 1, i => SUB_R_addr_RR(i, Register.A, Register.HL), 7);
+        instructions[0x96] = new Instruction("SUB A, (HL)", 1, i => ProcessorArithmeticInstructions.SUB_R_addr_RR(i, Register.A, Register.HL), 7);
 
-        instructions[0x97] = new Instruction("SUB A, A", 1, i => SUB_R_R(i, Register.A, Register.A), 4);
+        instructions[0x97] = new Instruction("SUB A, A", 1, i => ProcessorArithmeticInstructions.SUB_R_R(i, Register.A, Register.A), 4);
 
-        instructions[0x98] = new Instruction("SBC A, B", 1, i => SBC_R_R(i, Register.A, Register.B), 4);
+        instructions[0x98] = new Instruction("SBC A, B", 1, i => ProcessorArithmeticInstructions.SBC_R_R(i, Register.A, Register.B), 4);
 
-        instructions[0x99] = new Instruction("SBC A, C", 1, i => SBC_R_R(i, Register.A, Register.C), 4);
+        instructions[0x99] = new Instruction("SBC A, C", 1, i => ProcessorArithmeticInstructions.SBC_R_R(i, Register.A, Register.C), 4);
 
-        instructions[0x9A] = new Instruction("SBC A, D", 1, i => SBC_R_R(i, Register.A, Register.D), 4);
+        instructions[0x9A] = new Instruction("SBC A, D", 1, i => ProcessorArithmeticInstructions.SBC_R_R(i, Register.A, Register.D), 4);
 
-        instructions[0x9B] = new Instruction("SBC A, E", 1, i => SBC_R_R(i, Register.A, Register.E), 4);
+        instructions[0x9B] = new Instruction("SBC A, E", 1, i => ProcessorArithmeticInstructions.SBC_R_R(i, Register.A, Register.E), 4);
 
-        instructions[0x9C] = new Instruction("SBC A, H", 1, i => SBC_R_R(i, Register.A, Register.H), 4);
+        instructions[0x9C] = new Instruction("SBC A, H", 1, i => ProcessorArithmeticInstructions.SBC_R_R(i, Register.A, Register.H), 4);
 
-        instructions[0x9D] = new Instruction("SBC A, L", 1, i => SBC_R_R(i, Register.A, Register.L), 4);
+        instructions[0x9D] = new Instruction("SBC A, L", 1, i => ProcessorArithmeticInstructions.SBC_R_R(i, Register.A, Register.L), 4);
 
-        instructions[0x9E] = new Instruction("SBC A, (HL)", 1, i => SBC_R_addr_RR(i, Register.A, Register.HL), 7);
+        instructions[0x9E] = new Instruction("SBC A, (HL)", 1, i => ProcessorArithmeticInstructions.SBC_R_addr_RR(i, Register.A, Register.HL), 7);
 
-        instructions[0x9F] = new Instruction("SBC A, A", 1, i => SBC_R_R(i, Register.A, Register.A), 4);
+        instructions[0x9F] = new Instruction("SBC A, A", 1, i => ProcessorArithmeticInstructions.SBC_R_R(i, Register.A, Register.A), 4);
 
         instructions[0xA0] = new Instruction("AND A, B", 1, i => AND_R_R(i, Register.A, Register.B), 4);
 
@@ -400,7 +400,7 @@ public partial class Processor
 
         instructions[0xC5] = new Instruction("PUSH BC", 1, i => PUSH_RR(i, Register.BC), 11);
 
-        instructions[0xC6] = new Instruction("ADD A, n", 2, i => ADD_R_n(i, Register.A), 7);
+        instructions[0xC6] = new Instruction("ADD A, n", 2, i => ProcessorArithmeticInstructions.ADD_R_n(i, Register.A), 7);
 
         instructions[0xC7] = new Instruction("RST 0x00", 1, i => RST(i, 0x00), 11);
 
@@ -417,7 +417,7 @@ public partial class Processor
 
         instructions[0xCD] = new Instruction("CALL nn", 3, CALL_nn, 17);
 
-        instructions[0xCE] = new Instruction("ADC A, n", 2, i => ADC_R_n(i, Register.A), 7);
+        instructions[0xCE] = new Instruction("ADC A, n", 2, i => ProcessorArithmeticInstructions.ADC_R_n(i, Register.A), 7);
 
         instructions[0xCF] = new Instruction("RST 0x08", 1, i => RST(i, 0x08), 11);
 
@@ -433,7 +433,7 @@ public partial class Processor
 
         instructions[0xD5] = new Instruction("PUSH DE", 1, i => PUSH_RR(i, Register.DE), 11);
 
-        instructions[0xD6] = new Instruction("SUB A, n", 2, i => SUB_R_n(i, Register.A), 7);
+        instructions[0xD6] = new Instruction("SUB A, n", 2, i => ProcessorArithmeticInstructions.SUB_R_n(i, Register.A), 7);
 
         instructions[0xD7] = new Instruction("RST 0x10", 1, i => RST(i, 0x10), 11);
 
@@ -450,7 +450,7 @@ public partial class Processor
         // Switch opcode set to DD
         instructions[0xDD] = new Instruction("SOPSET 0xDD", 1, _ => SetOpcodePrefix(0xDD), 4);
 
-        instructions[0xDE] = new Instruction("SBC A, n", 2, i => SBC_R_n(i, Register.A), 7);
+        instructions[0xDE] = new Instruction("SBC A, n", 2, i => ProcessorArithmeticInstructions.SBC_R_n(i, Register.A), 7);
 
         instructions[0xDF] = new Instruction("RST 0x18", 1, i => RST(i, 0x18), 11);
 
