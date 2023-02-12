@@ -1,5 +1,7 @@
 ﻿using ZXE.Core.Extensions;
 
+// ReSharper disable InconsistentNaming
+
 namespace ZXE.Core.Z80;
 
 public static class ProcessorMiscellaneousInstructions
@@ -662,6 +664,24 @@ public static class ProcessorMiscellaneousInstructions
 
     public static bool CPI(Input input)
     {
+        var value = input.State.Registers.ReadPair(Register.HL);
+
+        var difference = input.State.Registers[Register.A] - value;
+
+        input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) + 1));
+
+        input.State.Registers.WritePair(Register.BC, (ushort) (input.State.Registers.ReadPair(Register.BC) - 1));
+
+        // Flags
+        input.State.Flags.Carry = value > input.State.Registers[Register.A];
+        input.State.Flags.AddSubtract = true;
+        input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+        input.State.Flags.X1 = (value & 0x08) > 0;
+        input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (value & 0x0F);
+        input.State.Flags.X2 = (value & 0x20) > 0;
+        input.State.Flags.Zero = difference == 0;
+        input.State.Flags.Sign = difference > 0x7F;
+
         return true;
     }
 }
