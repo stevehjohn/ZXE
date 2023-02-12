@@ -1,5 +1,4 @@
 ﻿using ZXE.Core.Exceptions;
-using ZXE.Core.Extensions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
