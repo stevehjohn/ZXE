@@ -8,7 +8,8 @@ public class Monitor : Game
     public Monitor()
     {
         graphics = new GraphicsDeviceManager(this);
-        Content.RootDirectory = "Content";
+
+        Content.RootDirectory = "_Content";
     }
 
     protected override void Initialize()
@@ -33,7 +34,9 @@ public class Monitor : Game
     protected override void Update(GameTime gameTime)
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        {
             Exit();
+        }
 
         // TODO: Add your update logic here
 
