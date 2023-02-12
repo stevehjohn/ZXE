@@ -92,7 +92,10 @@ public class Processor
             _state.ProgramCounter += instruction.Length;
         }
 
-        UpdateR(instruction.ClockCycles);
+        if (! (instruction.Mnemonic.StartsWith("SOPSET") && instruction.Mnemonic.Length == 11))
+        {
+            UpdateR(instruction.Length);
+        }
 
         if (_state.ProgramCounter > 0xFFFF)
         {
@@ -117,13 +120,13 @@ public class Processor
         return true;
     }
 
-    private void UpdateR(int cycles)
+    private void UpdateR(int amount)
     {
         var value = (byte) (_state.Registers[Register.R] & 0x7F);
 
         var topBit = _state.Registers[Register.R] & 0x80;
 
-        value = (byte) (value + 2); // TODO: This seems to work... Y tho?
+        value = (byte) (value + 1); // + amount); // TODO: This seems to work... Y tho?
 
         _state.Registers[Register.R] = value;
 
@@ -863,7 +866,7 @@ public class Processor
         instructions[0xDDFD] = new Instruction("NOP", 1, _ => NOP(), 4);
     }
 
-    private static void InitialiseFDInstructions(Dictionary<int, Instruction> instructions)
+    private void InitialiseFDInstructions(Dictionary<int, Instruction> instructions)
     {
         instructions[0xFD09] = new Instruction("ADD IY, BC", 1, i => ADD_RR_RR(i, Register.IY, Register.BC), 11);
 
@@ -1024,6 +1027,8 @@ public class Processor
         instructions[0xFDBD] = new Instruction("CP A, IYl", 1, i => CP_R_RRl(i, Register.A, Register.IY), 4);
 
         instructions[0xFDBE] = new Instruction("CP A, (IY + d)", 2, i => CP_R_addr_RR_plus_d(i, Register.A, Register.IY), 15);
+        
+        instructions[0xFDCB] = new Instruction("SOPSET 0xFDCB", 1, _ => SetOpcodePrefix(0xFDCB), 4);
 
         instructions[0xFDDD] = new Instruction("NOP", 1, _ => NOP(), 4);
 
@@ -1117,10 +1122,7 @@ public class Processor
         // TODO: instructions[0xED4D] = new Instruction("RETI", 1, i => (i, Register.BC), 10, null, 0xED4D);
 
         instructions[0xED4F] = new Instruction("LD R, A", 1, i => LD_R_R(i, Register.R, Register.A), 5, null, 0xED4F);
-    
-    
-    
-    
+        
         instructions[0xED50] = new Instruction("IN D, (BC)", 1, i => IN_R_addr_RR(i, Register.D, Register.BC), 8, null, 0xED50);
 
         instructions[0xED51] = new Instruction("OUT (BC), D", 1, i => OUT_addr_RR_R(i, Register.BC, Register.D), 8, null, 0xED51);
@@ -1151,8 +1153,6 @@ public class Processor
 
         instructions[0xED5F] = new Instruction("LD A, R", 1, i => LD_R_R(i, Register.A, Register.R), 5, null, 0xED5F);
 
-    
-    
         instructions[0xED60] = new Instruction("IN H, (BC)", 1, i => IN_R_addr_RR(i, Register.H, Register.BC), 8, null, 0xED60);
 
         instructions[0xED61] = new Instruction("OUT (BC), H", 1, i => OUT_addr_RR_R(i, Register.BC, Register.H), 8, null, 0xED61);
@@ -1179,7 +1179,31 @@ public class Processor
 
         // TODO: instructions[0xED6F] = new Instruction("RLD", 1, i => (i, Register.A, Register.R), 5, null, 0xED6F);
 
-        instructions[0xED70] = new Instruction("IN (C)", 1, i => IN_addr_RR(i, Register.BC), 8, null, 0xED70);
+        instructions[0xED70] = new Instruction("IN (BC)", 1, i => IN_addr_RR(i, Register.BC), 8, null, 0xED70);
+
+        instructions[0xED71] = new Instruction("OUT (BC), 0", 1, i => OUT_addr_R_n(i, Register.BC, 0), 8, null, 0xED71);
+
+        instructions[0xED72] = new Instruction("SBC HL, SP", 1, i => SBC_RR_SP(i, Register.HL), 11, null, 0xED72);
+
+        instructions[0xED73] = new Instruction("LD (nn), SP", 1, i => LD_addr_nn_SP(i), 16, null, 0xED73);
+
+        // TODO: Exists? instructions[0xED74] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED74);
+
+        instructions[0xED76] = new Instruction("IM 1", 1, i => IM_m(i, InterruptMode.Mode1), 4, null, 0xED76);
+
+        instructions[0xED78] = new Instruction("IN A, (BC)", 1, i => IN_R_addr_RR(i, Register.A, Register.BC), 8, null, 0xED78);
+
+        instructions[0xED79] = new Instruction("OUT (BC), A", 1, i => OUT_addr_RR_R(i, Register.BC, Register.A), 8, null, 0xED79);
+
+        instructions[0xED7A] = new Instruction("ADC HL, SP", 1, i => ADC_RR_SP(i, Register.HL, Register.HL), 11, null, 0xED7A);
+
+        instructions[0xED7B] = new Instruction("LD HL, (nn)", 3, i => LD_RR_addr_nn(i, Register.HL), 16, null, 0xED7B);
+
+        // TODO: instructions[0xED7C] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED7C);
+
+        instructions[0xED7E] = new Instruction("IM 2", 3, i => IM_m(i, InterruptMode.Mode2), 4, null, 0xED7E);
+
+        instructions[0xEDA0] = new Instruction("LDI", 1, i => LDI(i), 12, null, 0xEDA0);
     }
 
     private static void InitialiseCBInstructions(Dictionary<int, Instruction> instructions)
@@ -6880,6 +6904,121 @@ public class Processor
         input.State.Flags.X2 = (value & 0x20) > 0;
         input.State.Flags.Zero = value == 0;
         input.State.Flags.Sign = (sbyte) value < 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+
+        return true;
+    }
+
+    private static bool OUT_addr_R_n(Input input, Register register, byte data)
+    {
+        // TODO: Hmm. Might have to get into buses and stuff for this one... bugger.
+
+        // Flags unaffected
+
+        return true;
+    }
+
+    private static bool SBC_RR_SP(Input input, Register destination)
+    {
+        unchecked
+        {
+            var valueD = input.State.Registers.ReadPair(destination);
+
+            var valueS = input.State.StackPointer;
+
+            var carry = (byte) (input.State.Flags.Carry ? 0x01 : 0x00);
+
+            var result = valueD - valueS - carry;
+
+            input.State.Registers.WritePair(destination, (ushort) result);
+
+            // Flags
+            input.State.Flags.Carry = result < 0;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = result < -0x80; // TODO: Potential bug here?
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) < ((valueS + carry) & 0x0F);
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool LD_addr_nn_SP(Input input)
+    {
+        unchecked
+        {
+            var address = input.Data[2] << 8 | input.Data[1];
+
+            var data = input.State.StackPointer;
+
+            input.Ram[address] = (byte) (data & 0x00FF);
+            input.Ram[address + 1] = (byte) ((data & 0xFF00) >> 8);
+
+            // Flags unaffected
+        }
+
+        return true;
+    }
+
+    private static bool ADC_RR_SP(Input input, Register destination)
+    {
+        unchecked
+        {
+            var valueD = input.State.Registers.ReadPair(destination);
+
+            var valueS = input.State.StackPointer;
+
+            var carry = (input.State.Flags.Carry ? 0x01 : 0x00);
+
+            var result = valueD + valueS + carry;
+
+            input.State.Registers.WritePair(destination, (ushort) result);
+
+            // Flags
+            input.State.Flags.Carry = result > 0xFF;
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = result > 0x7F;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0xF;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
+
+        return true;
+    }
+
+    private static bool LDI(Input input)
+    {
+        var value = input.Ram[input.State.Registers.ReadPair(Register.HL)];
+
+        input.Ram[input.State.Registers.ReadPair(Register.DE)] = value;
+
+        input.State.Registers.WritePair(Register.HL, input.State.Registers.ReadPair(Register.HL) + 1);
+
+        input.State.Registers.WritePair(Register.DE, input.State.Registers.ReadPair(Register.DE) + 1);
+
+        input.State.Registers.WritePair(Register.BC, input.State.Registers.ReadPair(Register.BC) - 1);
+
+        value += input.State.Registers[Register.A];
+
+        // Flags
+        // Carry unaffected
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+        input.State.Flags.X1 = (value & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.X2 = (value & 0x20) > 0;
+        // Zero unaffected
+        // Sign unaffected
 
         input.State.Registers[Register.F] = input.State.Flags.ToByte();
 

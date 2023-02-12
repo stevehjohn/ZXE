@@ -8,6 +8,7 @@ A ZX Spectrum emulator. Mostly about just seeing if I can.
 - Check undocumented flag implementation against https://worldofspectrum.org/faq/reference/z80reference.htm
 - IN/OUT stuff.
 - Interrupt stuff.
+- R register shenannigans.
 
 ## Features
 
