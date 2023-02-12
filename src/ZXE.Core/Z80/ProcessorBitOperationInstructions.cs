@@ -6,9 +6,9 @@ namespace ZXE.Core.Z80;
 // ReSharper disable InconsistentNaming
 // ReSharper disable StringLiteralTypo
 
-public partial class Processor
+public static class ProcessorBitOperationInstructions
 {
-    private static bool BIT_b_R(Input input, byte bit, Register register)
+    public static bool BIT_b_R(Input input, byte bit, Register register)
     {
         var data = input.State.Registers[register];
 
@@ -29,7 +29,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool BIT_b_addr_RR(Input input, byte bit, Register register)
+    public static bool BIT_b_addr_RR(Input input, byte bit, Register register)
     {
         var data = input.Ram[input.State.Registers.ReadPair(register)];
 
@@ -50,7 +50,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RES_b_R(Input input, byte bit, Register register)
+    public static bool RES_b_R(Input input, byte bit, Register register)
     {
         var mask = (byte) ~bit;
 
@@ -61,7 +61,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RES_b_addr_RR(Input input, byte bit, Register register)
+    public static bool RES_b_addr_RR(Input input, byte bit, Register register)
     {
         var mask = (byte) ~bit;
 
@@ -72,7 +72,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SET_b_R(Input input, byte bit, Register register)
+    public static bool SET_b_R(Input input, byte bit, Register register)
     {
         input.State.Registers[register] |= bit;
 
@@ -81,7 +81,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SET_b_addr_RR(Input input, byte bit, Register register)
+    public static bool SET_b_addr_RR(Input input, byte bit, Register register)
     {
         input.Ram[input.State.Registers.ReadPair(register)] |= bit;
 
@@ -90,7 +90,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool BIT_b_addr_RR_plus_d(Input input, byte bit, Register source)
+    public static bool BIT_b_addr_RR_plus_d(Input input, byte bit, Register source)
     {
         var address = input.State.Registers.ReadPair(source);
 
@@ -115,7 +115,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RES_b_addr_RR_plus_d_R(Input input, byte bit, Register source, Register destination)
+    public static bool RES_b_addr_RR_plus_d_R(Input input, byte bit, Register source, Register destination)
     {
         var address = input.State.Registers.ReadPair(source);
 
@@ -134,7 +134,7 @@ public partial class Processor
         return true;
     }
     
-    private static bool RES_b_addr_RR_plus_d(Input input, byte bit, Register source)
+    public static bool RES_b_addr_RR_plus_d(Input input, byte bit, Register source)
     {
         var address = input.State.Registers.ReadPair(source);
 
@@ -151,7 +151,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SET_b_addr_RR_plus_d(Input input, byte bit, Register register)
+    public static bool SET_b_addr_RR_plus_d(Input input, byte bit, Register register)
     {
         var address = (ushort) (input.State.Registers.ReadPair(register) + (sbyte) input.Data[0]);
 
@@ -162,7 +162,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool SET_b_addr_RR_plus_d_R(Input input, byte bit, Register register, Register destination)
+    public static bool SET_b_addr_RR_plus_d_R(Input input, byte bit, Register register, Register destination)
     {
         var address = (ushort) (input.State.Registers.ReadPair(register) + (sbyte) input.Data[0]);
 
@@ -175,7 +175,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool NEG_R(Input input, Register register)
+    public static bool NEG_R(Input input, Register register)
     {
         var result = (byte) (0 - input.State.Registers[register]);
 

@@ -134,388 +134,388 @@ public partial class Processor
 
         instructions[0xFDCB3F] = new Instruction("SRL (IY + d), A", 2, i => SRL_addr_RR_plus_d_R(i, Register.IY, Register.A), 15, null, 0xFDCB3F);
 
-        instructions[0xFDCB40] = new Instruction("BIT_0 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB40);
+        instructions[0xFDCB40] = new Instruction("BIT_0 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB40);
 
-        instructions[0xFDCB41] = new Instruction("BIT_0 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB41);
+        instructions[0xFDCB41] = new Instruction("BIT_0 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB41);
 
-        instructions[0xFDCB42] = new Instruction("BIT_0 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB42);
+        instructions[0xFDCB42] = new Instruction("BIT_0 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB42);
 
-        instructions[0xFDCB43] = new Instruction("BIT_0 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB43);
+        instructions[0xFDCB43] = new Instruction("BIT_0 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB43);
 
-        instructions[0xFDCB44] = new Instruction("BIT_0 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB44);
+        instructions[0xFDCB44] = new Instruction("BIT_0 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB44);
 
-        instructions[0xFDCB45] = new Instruction("BIT_0 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB45);
+        instructions[0xFDCB45] = new Instruction("BIT_0 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB45);
 
-        instructions[0xFDCB46] = new Instruction("BIT_0 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB46);
+        instructions[0xFDCB46] = new Instruction("BIT_0 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB46);
 
-        instructions[0xFDCB47] = new Instruction("BIT_0 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB47);
+        instructions[0xFDCB47] = new Instruction("BIT_0 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x01, Register.IY), 12, null, 0xFDCB47);
 
-        instructions[0xFDCB48] = new Instruction("BIT_1 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB48);
+        instructions[0xFDCB48] = new Instruction("BIT_1 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB48);
 
-        instructions[0xFDCB49] = new Instruction("BIT_1 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB49);
+        instructions[0xFDCB49] = new Instruction("BIT_1 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB49);
 
-        instructions[0xFDCB4A] = new Instruction("BIT_1 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB4A);
+        instructions[0xFDCB4A] = new Instruction("BIT_1 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB4A);
 
-        instructions[0xFDCB4B] = new Instruction("BIT_1 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB4B);
+        instructions[0xFDCB4B] = new Instruction("BIT_1 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB4B);
 
-        instructions[0xFDCB4C] = new Instruction("BIT_1 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB4C);
+        instructions[0xFDCB4C] = new Instruction("BIT_1 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB4C);
 
-        instructions[0xFDCB4D] = new Instruction("BIT_1 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB4D);
+        instructions[0xFDCB4D] = new Instruction("BIT_1 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB4D);
 
-        instructions[0xFDCB4E] = new Instruction("BIT_1 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB4E);
+        instructions[0xFDCB4E] = new Instruction("BIT_1 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB4E);
 
-        instructions[0xFDCB4F] = new Instruction("BIT_1 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB4F);
+        instructions[0xFDCB4F] = new Instruction("BIT_1 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x02, Register.IY), 12, null, 0xFDCB4F);
 
-        instructions[0xFDCB50] = new Instruction("BIT_2 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB50);
+        instructions[0xFDCB50] = new Instruction("BIT_2 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB50);
 
-        instructions[0xFDCB51] = new Instruction("BIT_2 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB51);
+        instructions[0xFDCB51] = new Instruction("BIT_2 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB51);
 
-        instructions[0xFDCB52] = new Instruction("BIT_2 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB52);
+        instructions[0xFDCB52] = new Instruction("BIT_2 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB52);
 
-        instructions[0xFDCB53] = new Instruction("BIT_2 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB53);
+        instructions[0xFDCB53] = new Instruction("BIT_2 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB53);
 
-        instructions[0xFDCB54] = new Instruction("BIT_2 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB54);
+        instructions[0xFDCB54] = new Instruction("BIT_2 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB54);
 
-        instructions[0xFDCB55] = new Instruction("BIT_2 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB55);
+        instructions[0xFDCB55] = new Instruction("BIT_2 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB55);
 
-        instructions[0xFDCB56] = new Instruction("BIT_2 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB56);
+        instructions[0xFDCB56] = new Instruction("BIT_2 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB56);
 
-        instructions[0xFDCB57] = new Instruction("BIT_2 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB57);
+        instructions[0xFDCB57] = new Instruction("BIT_2 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x04, Register.IY), 12, null, 0xFDCB57);
 
-        instructions[0xFDCB58] = new Instruction("BIT_3 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB58);
+        instructions[0xFDCB58] = new Instruction("BIT_3 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB58);
 
-        instructions[0xFDCB59] = new Instruction("BIT_3 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB59);
+        instructions[0xFDCB59] = new Instruction("BIT_3 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB59);
 
-        instructions[0xFDCB5A] = new Instruction("BIT_3 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB5A);
+        instructions[0xFDCB5A] = new Instruction("BIT_3 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB5A);
 
-        instructions[0xFDCB5B] = new Instruction("BIT_3 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB5B);
+        instructions[0xFDCB5B] = new Instruction("BIT_3 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB5B);
 
-        instructions[0xFDCB5C] = new Instruction("BIT_3 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB5C);
+        instructions[0xFDCB5C] = new Instruction("BIT_3 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB5C);
 
-        instructions[0xFDCB5D] = new Instruction("BIT_3 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB5D);
+        instructions[0xFDCB5D] = new Instruction("BIT_3 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB5D);
 
-        instructions[0xFDCB5E] = new Instruction("BIT_3 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB5E);
+        instructions[0xFDCB5E] = new Instruction("BIT_3 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB5E);
 
-        instructions[0xFDCB5F] = new Instruction("BIT_3 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB5F);
+        instructions[0xFDCB5F] = new Instruction("BIT_3 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x08, Register.IY), 12, null, 0xFDCB5F);
 
-        instructions[0xFDCB60] = new Instruction("BIT_4 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB60);
+        instructions[0xFDCB60] = new Instruction("BIT_4 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB60);
 
-        instructions[0xFDCB61] = new Instruction("BIT_4 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB61);
+        instructions[0xFDCB61] = new Instruction("BIT_4 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB61);
 
-        instructions[0xFDCB62] = new Instruction("BIT_4 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB62);
+        instructions[0xFDCB62] = new Instruction("BIT_4 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB62);
 
-        instructions[0xFDCB63] = new Instruction("BIT_4 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB63);
+        instructions[0xFDCB63] = new Instruction("BIT_4 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB63);
 
-        instructions[0xFDCB64] = new Instruction("BIT_4 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB64);
+        instructions[0xFDCB64] = new Instruction("BIT_4 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB64);
 
-        instructions[0xFDCB65] = new Instruction("BIT_4 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB65);
+        instructions[0xFDCB65] = new Instruction("BIT_4 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB65);
 
-        instructions[0xFDCB66] = new Instruction("BIT_4 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB66);
+        instructions[0xFDCB66] = new Instruction("BIT_4 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB66);
 
-        instructions[0xFDCB67] = new Instruction("BIT_4 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB67);
+        instructions[0xFDCB67] = new Instruction("BIT_4 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x10, Register.IY), 12, null, 0xFDCB67);
 
-        instructions[0xFDCB68] = new Instruction("BIT_5 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB68);
+        instructions[0xFDCB68] = new Instruction("BIT_5 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB68);
 
-        instructions[0xFDCB69] = new Instruction("BIT_5 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB69);
+        instructions[0xFDCB69] = new Instruction("BIT_5 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB69);
 
-        instructions[0xFDCB6A] = new Instruction("BIT_5 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB6A);
+        instructions[0xFDCB6A] = new Instruction("BIT_5 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB6A);
 
-        instructions[0xFDCB6B] = new Instruction("BIT_5 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB6B);
+        instructions[0xFDCB6B] = new Instruction("BIT_5 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB6B);
 
-        instructions[0xFDCB6C] = new Instruction("BIT_5 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB6C);
+        instructions[0xFDCB6C] = new Instruction("BIT_5 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB6C);
 
-        instructions[0xFDCB6D] = new Instruction("BIT_5 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB6D);
+        instructions[0xFDCB6D] = new Instruction("BIT_5 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB6D);
 
-        instructions[0xFDCB6E] = new Instruction("BIT_5 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB6E);
+        instructions[0xFDCB6E] = new Instruction("BIT_5 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB6E);
 
-        instructions[0xFDCB6F] = new Instruction("BIT_5 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB6F);
+        instructions[0xFDCB6F] = new Instruction("BIT_5 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB6F);
 
-        instructions[0xFDCB70] = new Instruction("BIT_6 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB70);
+        instructions[0xFDCB70] = new Instruction("BIT_6 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB70);
 
-        instructions[0xFDCB71] = new Instruction("BIT_6 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB71);
+        instructions[0xFDCB71] = new Instruction("BIT_6 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB71);
 
-        instructions[0xFDCB72] = new Instruction("BIT_6 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB72);
+        instructions[0xFDCB72] = new Instruction("BIT_6 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB72);
 
-        instructions[0xFDCB73] = new Instruction("BIT_6 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB73);
+        instructions[0xFDCB73] = new Instruction("BIT_6 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB73);
 
-        instructions[0xFDCB74] = new Instruction("BIT_6 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB74);
+        instructions[0xFDCB74] = new Instruction("BIT_6 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB74);
 
-        instructions[0xFDCB75] = new Instruction("BIT_6 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB75);
+        instructions[0xFDCB75] = new Instruction("BIT_6 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB75);
 
-        instructions[0xFDCB76] = new Instruction("BIT_6 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB76);
+        instructions[0xFDCB76] = new Instruction("BIT_6 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB76);
 
-        instructions[0xFDCB77] = new Instruction("BIT_6 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB77);
+        instructions[0xFDCB77] = new Instruction("BIT_6 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x40, Register.IY), 12, null, 0xFDCB77);
 
-        instructions[0xFDCB78] = new Instruction("BIT_7 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB78);
+        instructions[0xFDCB78] = new Instruction("BIT_7 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB78);
 
-        instructions[0xFDCB79] = new Instruction("BIT_7 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB79);
+        instructions[0xFDCB79] = new Instruction("BIT_7 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB79);
 
-        instructions[0xFDCB7A] = new Instruction("BIT_7 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB7A);
+        instructions[0xFDCB7A] = new Instruction("BIT_7 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB7A);
 
-        instructions[0xFDCB7B] = new Instruction("BIT_7 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB7B);
+        instructions[0xFDCB7B] = new Instruction("BIT_7 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB7B);
 
-        instructions[0xFDCB7C] = new Instruction("BIT_7 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB7C);
+        instructions[0xFDCB7C] = new Instruction("BIT_7 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB7C);
 
-        instructions[0xFDCB7D] = new Instruction("BIT_7 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB7D);
+        instructions[0xFDCB7D] = new Instruction("BIT_7 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB7D);
 
-        instructions[0xFDCB7E] = new Instruction("BIT_7 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB7E);
+        instructions[0xFDCB7E] = new Instruction("BIT_7 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB7E);
 
-        instructions[0xFDCB7F] = new Instruction("BIT_7 (IY + d)", 2, i => BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB7F);
+        instructions[0xFDCB7F] = new Instruction("BIT_7 (IY + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IY), 12, null, 0xFDCB7F);
 
-        instructions[0xFDCB80] = new Instruction("RES_0 (IY + d), B", 2, i => RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.B), 15, null, 0xFDCB80);
+        instructions[0xFDCB80] = new Instruction("RES_0 (IY + d), B", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.B), 15, null, 0xFDCB80);
 
-        instructions[0xFDCB81] = new Instruction("RES_0 (IY + d), C", 2, i => RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.C), 15, null, 0xFDCB81);
+        instructions[0xFDCB81] = new Instruction("RES_0 (IY + d), C", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.C), 15, null, 0xFDCB81);
 
-        instructions[0xFDCB82] = new Instruction("RES_0 (IY + d), D", 2, i => RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.D), 15, null, 0xFDCB82);
+        instructions[0xFDCB82] = new Instruction("RES_0 (IY + d), D", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.D), 15, null, 0xFDCB82);
 
-        instructions[0xFDCB83] = new Instruction("RES_0 (IY + d), E", 2, i => RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.E), 15, null, 0xFDCB83);
+        instructions[0xFDCB83] = new Instruction("RES_0 (IY + d), E", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.E), 15, null, 0xFDCB83);
 
-        instructions[0xFDCB84] = new Instruction("RES_0 (IY + d), H", 2, i => RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.H), 15, null, 0xFDCB84);
+        instructions[0xFDCB84] = new Instruction("RES_0 (IY + d), H", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.H), 15, null, 0xFDCB84);
 
-        instructions[0xFDCB85] = new Instruction("RES_0 (IY + d), L", 2, i => RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.L), 15, null, 0xFDCB85);
+        instructions[0xFDCB85] = new Instruction("RES_0 (IY + d), L", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.L), 15, null, 0xFDCB85);
 
-        instructions[0xFDCB86] = new Instruction("RES_0 (IY + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x01, Register.IY), 15, null, 0xFDCB86);
+        instructions[0xFDCB86] = new Instruction("RES_0 (IY + d)", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d(i, 0x01, Register.IY), 15, null, 0xFDCB86);
 
-        instructions[0xFDCB87] = new Instruction("RES_0 (IY + d), A", 2, i => RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.A), 15, null, 0xFDCB87);
+        instructions[0xFDCB87] = new Instruction("RES_0 (IY + d), A", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.A), 15, null, 0xFDCB87);
 
-        instructions[0xFDCB88] = new Instruction("RES_1 (IY + d), B", 2, i => RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.B), 15, null, 0xFDCB88);
+        instructions[0xFDCB88] = new Instruction("RES_1 (IY + d), B", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.B), 15, null, 0xFDCB88);
 
-        instructions[0xFDCB89] = new Instruction("RES_1 (IY + d), C", 2, i => RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.C), 15, null, 0xFDCB89);
+        instructions[0xFDCB89] = new Instruction("RES_1 (IY + d), C", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.C), 15, null, 0xFDCB89);
 
-        instructions[0xFDCB8A] = new Instruction("RES_1 (IY + d), D", 2, i => RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.D), 15, null, 0xFDCB8A);
+        instructions[0xFDCB8A] = new Instruction("RES_1 (IY + d), D", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.D), 15, null, 0xFDCB8A);
 
-        instructions[0xFDCB8B] = new Instruction("RES_1 (IY + d), E", 2, i => RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.E), 15, null, 0xFDCB8B);
+        instructions[0xFDCB8B] = new Instruction("RES_1 (IY + d), E", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.E), 15, null, 0xFDCB8B);
 
-        instructions[0xFDCB8C] = new Instruction("RES_1 (IY + d), H", 2, i => RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.H), 15, null, 0xFDCB8C);
+        instructions[0xFDCB8C] = new Instruction("RES_1 (IY + d), H", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.H), 15, null, 0xFDCB8C);
 
-        instructions[0xFDCB8D] = new Instruction("RES_1 (IY + d), L", 2, i => RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.L), 15, null, 0xFDCB8D);
+        instructions[0xFDCB8D] = new Instruction("RES_1 (IY + d), L", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.L), 15, null, 0xFDCB8D);
 
-        instructions[0xFDCB8E] = new Instruction("RES_1 (IY + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x02, Register.IY), 15, null, 0xFDCB8E);
+        instructions[0xFDCB8E] = new Instruction("RES_1 (IY + d)", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d(i, 0x02, Register.IY), 15, null, 0xFDCB8E);
 
-        instructions[0xFDCB8F] = new Instruction("RES_1 (IY + d), A", 2, i => RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.A), 15, null, 0xFDCB8F);
+        instructions[0xFDCB8F] = new Instruction("RES_1 (IY + d), A", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.A), 15, null, 0xFDCB8F);
 
-        instructions[0xFDCB90] = new Instruction("RES_2 (IY + d), B", 2, i => RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.B), 15, null, 0xFDCB90);
+        instructions[0xFDCB90] = new Instruction("RES_2 (IY + d), B", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.B), 15, null, 0xFDCB90);
 
-        instructions[0xFDCB91] = new Instruction("RES_2 (IY + d), C", 2, i => RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.C), 15, null, 0xFDCB91);
+        instructions[0xFDCB91] = new Instruction("RES_2 (IY + d), C", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.C), 15, null, 0xFDCB91);
 
-        instructions[0xFDCB92] = new Instruction("RES_2 (IY + d), D", 2, i => RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.D), 15, null, 0xFDCB92);
+        instructions[0xFDCB92] = new Instruction("RES_2 (IY + d), D", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.D), 15, null, 0xFDCB92);
 
-        instructions[0xFDCB93] = new Instruction("RES_2 (IY + d), E", 2, i => RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.E), 15, null, 0xFDCB93);
+        instructions[0xFDCB93] = new Instruction("RES_2 (IY + d), E", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.E), 15, null, 0xFDCB93);
 
-        instructions[0xFDCB94] = new Instruction("RES_2 (IY + d), H", 2, i => RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.H), 15, null, 0xFDCB94);
+        instructions[0xFDCB94] = new Instruction("RES_2 (IY + d), H", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.H), 15, null, 0xFDCB94);
 
-        instructions[0xFDCB95] = new Instruction("RES_2 (IY + d), L", 2, i => RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.L), 15, null, 0xFDCB95);
+        instructions[0xFDCB95] = new Instruction("RES_2 (IY + d), L", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.L), 15, null, 0xFDCB95);
 
-        instructions[0xFDCB96] = new Instruction("RES_2 (IY + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x04, Register.IY), 15, null, 0xFDCB96);
+        instructions[0xFDCB96] = new Instruction("RES_2 (IY + d)", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d(i, 0x04, Register.IY), 15, null, 0xFDCB96);
 
-        instructions[0xFDCB97] = new Instruction("RES_2 (IY + d), A", 2, i => RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.A), 15, null, 0xFDCB97);
+        instructions[0xFDCB97] = new Instruction("RES_2 (IY + d), A", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.A), 15, null, 0xFDCB97);
     
-        instructions[0xFDCB98] = new Instruction("RES_3 (IY + d), B", 2, i => RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.B), 15, null, 0xFDCB98);
+        instructions[0xFDCB98] = new Instruction("RES_3 (IY + d), B", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.B), 15, null, 0xFDCB98);
 
-        instructions[0xFDCB99] = new Instruction("RES_3 (IY + d), C", 2, i => RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.C), 15, null, 0xFDCB99);
+        instructions[0xFDCB99] = new Instruction("RES_3 (IY + d), C", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.C), 15, null, 0xFDCB99);
 
-        instructions[0xFDCB9A] = new Instruction("RES_3 (IY + d), D", 2, i => RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.D), 15, null, 0xFDCB9A);
+        instructions[0xFDCB9A] = new Instruction("RES_3 (IY + d), D", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.D), 15, null, 0xFDCB9A);
 
-        instructions[0xFDCB9B] = new Instruction("RES_3 (IY + d), E", 2, i => RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.E), 15, null, 0xFDCB9B);
+        instructions[0xFDCB9B] = new Instruction("RES_3 (IY + d), E", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.E), 15, null, 0xFDCB9B);
 
-        instructions[0xFDCB9C] = new Instruction("RES_3 (IY + d), H", 2, i => RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.H), 15, null, 0xFDCB9C);
+        instructions[0xFDCB9C] = new Instruction("RES_3 (IY + d), H", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.H), 15, null, 0xFDCB9C);
 
-        instructions[0xFDCB9D] = new Instruction("RES_3 (IY + d), L", 2, i => RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.L), 15, null, 0xFDCB9D);
+        instructions[0xFDCB9D] = new Instruction("RES_3 (IY + d), L", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.L), 15, null, 0xFDCB9D);
 
-        instructions[0xFDCB9E] = new Instruction("RES_3 (IY + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x08, Register.IY), 15, null, 0xFDCB9E);
+        instructions[0xFDCB9E] = new Instruction("RES_3 (IY + d)", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d(i, 0x08, Register.IY), 15, null, 0xFDCB9E);
 
-        instructions[0xFDCB9F] = new Instruction("RES_3 (IY + d), A", 2, i => RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.A), 15, null, 0xFDCB9F);
+        instructions[0xFDCB9F] = new Instruction("RES_3 (IY + d), A", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.A), 15, null, 0xFDCB9F);
 
-        instructions[0xFDCBA0] = new Instruction("RES_4 (IY + d), B", 2, i => RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.B), 15, null, 0xFDCBA0);
+        instructions[0xFDCBA0] = new Instruction("RES_4 (IY + d), B", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.B), 15, null, 0xFDCBA0);
 
-        instructions[0xFDCBA1] = new Instruction("RES_4 (IY + d), C", 2, i => RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.C), 15, null, 0xFDCBA1);
+        instructions[0xFDCBA1] = new Instruction("RES_4 (IY + d), C", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.C), 15, null, 0xFDCBA1);
 
-        instructions[0xFDCBA2] = new Instruction("RES_4 (IY + d), D", 2, i => RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.D), 15, null, 0xFDCBA2);
+        instructions[0xFDCBA2] = new Instruction("RES_4 (IY + d), D", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.D), 15, null, 0xFDCBA2);
 
-        instructions[0xFDCBA3] = new Instruction("RES_4 (IY + d), E", 2, i => RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.E), 15, null, 0xFDCBA3);
+        instructions[0xFDCBA3] = new Instruction("RES_4 (IY + d), E", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.E), 15, null, 0xFDCBA3);
 
-        instructions[0xFDCBA4] = new Instruction("RES_4 (IY + d), H", 2, i => RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.H), 15, null, 0xFDCBA4);
+        instructions[0xFDCBA4] = new Instruction("RES_4 (IY + d), H", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.H), 15, null, 0xFDCBA4);
 
-        instructions[0xFDCBA5] = new Instruction("RES_4 (IY + d), L", 2, i => RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.L), 15, null, 0xFDCBA5);
+        instructions[0xFDCBA5] = new Instruction("RES_4 (IY + d), L", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.L), 15, null, 0xFDCBA5);
 
-        instructions[0xFDCBA6] = new Instruction("RES_4 (IY + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x10, Register.IY), 15, null, 0xFDCBA6);
+        instructions[0xFDCBA6] = new Instruction("RES_4 (IY + d)", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d(i, 0x10, Register.IY), 15, null, 0xFDCBA6);
 
-        instructions[0xFDCBA7] = new Instruction("RES_4 (IY + d), A", 2, i => RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.A), 15, null, 0xFDCBA7);
+        instructions[0xFDCBA7] = new Instruction("RES_4 (IY + d), A", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.A), 15, null, 0xFDCBA7);
 
-        instructions[0xFDCBA8] = new Instruction("RES_5 (IY + d), B", 2, i => RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.B), 15, null, 0xFDCBA8);
+        instructions[0xFDCBA8] = new Instruction("RES_5 (IY + d), B", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.B), 15, null, 0xFDCBA8);
 
-        instructions[0xFDCBA9] = new Instruction("RES_5 (IY + d), C", 2, i => RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.C), 15, null, 0xFDCBA9);
+        instructions[0xFDCBA9] = new Instruction("RES_5 (IY + d), C", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.C), 15, null, 0xFDCBA9);
 
-        instructions[0xFDCBAA] = new Instruction("RES_5 (IY + d), D", 2, i => RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.D), 15, null, 0xFDCBAA);
+        instructions[0xFDCBAA] = new Instruction("RES_5 (IY + d), D", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.D), 15, null, 0xFDCBAA);
 
-        instructions[0xFDCBAB] = new Instruction("RES_5 (IY + d), E", 2, i => RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.E), 15, null, 0xFDCBAB);
+        instructions[0xFDCBAB] = new Instruction("RES_5 (IY + d), E", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.E), 15, null, 0xFDCBAB);
 
-        instructions[0xFDCBAC] = new Instruction("RES_5 (IY + d), H", 2, i => RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.H), 15, null, 0xFDCBAC);
+        instructions[0xFDCBAC] = new Instruction("RES_5 (IY + d), H", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.H), 15, null, 0xFDCBAC);
 
-        instructions[0xFDCBAD] = new Instruction("RES_5 (IY + d), L", 2, i => RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.L), 15, null, 0xFDCBAD);
+        instructions[0xFDCBAD] = new Instruction("RES_5 (IY + d), L", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.L), 15, null, 0xFDCBAD);
 
-        instructions[0xFDCBAE] = new Instruction("RES_5 (IY + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x20, Register.IY), 15, null, 0xFDCBAE);
+        instructions[0xFDCBAE] = new Instruction("RES_5 (IY + d)", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d(i, 0x20, Register.IY), 15, null, 0xFDCBAE);
 
-        instructions[0xFDCBAF] = new Instruction("RES_5 (IY + d), A", 2, i => RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.A), 15, null, 0xFDCBAF);
+        instructions[0xFDCBAF] = new Instruction("RES_5 (IY + d), A", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.A), 15, null, 0xFDCBAF);
 
-        instructions[0xFDCBB0] = new Instruction("RES_6 (IY + d), B", 2, i => RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.B), 15, null, 0xFDCBB0);
+        instructions[0xFDCBB0] = new Instruction("RES_6 (IY + d), B", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.B), 15, null, 0xFDCBB0);
 
-        instructions[0xFDCBB1] = new Instruction("RES_6 (IY + d), C", 2, i => RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.C), 15, null, 0xFDCBB1);
+        instructions[0xFDCBB1] = new Instruction("RES_6 (IY + d), C", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.C), 15, null, 0xFDCBB1);
 
-        instructions[0xFDCBB2] = new Instruction("RES_6 (IY + d), D", 2, i => RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.D), 15, null, 0xFDCBB2);
+        instructions[0xFDCBB2] = new Instruction("RES_6 (IY + d), D", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.D), 15, null, 0xFDCBB2);
 
-        instructions[0xFDCBB3] = new Instruction("RES_6 (IY + d), E", 2, i => RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.E), 15, null, 0xFDCBB3);
+        instructions[0xFDCBB3] = new Instruction("RES_6 (IY + d), E", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.E), 15, null, 0xFDCBB3);
 
-        instructions[0xFDCBB4] = new Instruction("RES_6 (IY + d), H", 2, i => RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.H), 15, null, 0xFDCBB4);
+        instructions[0xFDCBB4] = new Instruction("RES_6 (IY + d), H", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.H), 15, null, 0xFDCBB4);
 
-        instructions[0xFDCBB5] = new Instruction("RES_6 (IY + d), L", 2, i => RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.L), 15, null, 0xFDCBB5);
+        instructions[0xFDCBB5] = new Instruction("RES_6 (IY + d), L", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.L), 15, null, 0xFDCBB5);
 
-        instructions[0xFDCBB6] = new Instruction("RES_6, (IY + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x40, Register.IY), 15, null, 0xFDCBB6);
+        instructions[0xFDCBB6] = new Instruction("RES_6, (IY + d)", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d(i, 0x40, Register.IY), 15, null, 0xFDCBB6);
 
-        instructions[0xFDCBB7] = new Instruction("RES_6 (IY + d), A", 2, i => RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.A), 15, null, 0xFDCBB7);
+        instructions[0xFDCBB7] = new Instruction("RES_6 (IY + d), A", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.A), 15, null, 0xFDCBB7);
     
-        instructions[0xFDCBB8] = new Instruction("RES_7 (IY + d), B", 2, i => RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.B), 15, null, 0xFDCBB8);
+        instructions[0xFDCBB8] = new Instruction("RES_7 (IY + d), B", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.B), 15, null, 0xFDCBB8);
 
-        instructions[0xFDCBB9] = new Instruction("RES_7 (IY + d), C", 2, i => RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.C), 15, null, 0xFDCBB9);
+        instructions[0xFDCBB9] = new Instruction("RES_7 (IY + d), C", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.C), 15, null, 0xFDCBB9);
 
-        instructions[0xFDCBBA] = new Instruction("RES_7 (IY + d), D", 2, i => RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.D), 15, null, 0xFDCBBA);
+        instructions[0xFDCBBA] = new Instruction("RES_7 (IY + d), D", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.D), 15, null, 0xFDCBBA);
 
-        instructions[0xFDCBBB] = new Instruction("RES_7 (IY + d), E", 2, i => RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.E), 15, null, 0xFDCBBB);
+        instructions[0xFDCBBB] = new Instruction("RES_7 (IY + d), E", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.E), 15, null, 0xFDCBBB);
 
-        instructions[0xFDCBBC] = new Instruction("RES_7 (IY + d), H", 2, i => RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.H), 15, null, 0xFDCBBC);
+        instructions[0xFDCBBC] = new Instruction("RES_7 (IY + d), H", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.H), 15, null, 0xFDCBBC);
 
-        instructions[0xFDCBBD] = new Instruction("RES_7 (IY + d), L", 2, i => RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.L), 15, null, 0xFDCBBD);
+        instructions[0xFDCBBD] = new Instruction("RES_7 (IY + d), L", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.L), 15, null, 0xFDCBBD);
 
-        instructions[0xFDCBBE] = new Instruction("RES_7 (IY + d)", 2, i => RES_b_addr_RR_plus_d(i, 0x80, Register.IY), 15, null, 0xFDCBBE);
+        instructions[0xFDCBBE] = new Instruction("RES_7 (IY + d)", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d(i, 0x80, Register.IY), 15, null, 0xFDCBBE);
 
-        instructions[0xFDCBBF] = new Instruction("RES_7 (IY + d), A", 2, i => RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.A), 15, null, 0xFDCBBF);
+        instructions[0xFDCBBF] = new Instruction("RES_7 (IY + d), A", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.A), 15, null, 0xFDCBBF);
 
-        instructions[0xFDCBC0] = new Instruction("SET_0 (IY + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.B), 15, null, 0xFDCBC0);
+        instructions[0xFDCBC0] = new Instruction("SET_0 (IY + d), B", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.B), 15, null, 0xFDCBC0);
 
-        instructions[0xFDCBC1] = new Instruction("SET_0 (IY + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.C), 15, null, 0xFDCBC1);
+        instructions[0xFDCBC1] = new Instruction("SET_0 (IY + d), C", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.C), 15, null, 0xFDCBC1);
 
-        instructions[0xFDCBC2] = new Instruction("SET_0 (IY + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.D), 15, null, 0xFDCBC2);
+        instructions[0xFDCBC2] = new Instruction("SET_0 (IY + d), D", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.D), 15, null, 0xFDCBC2);
 
-        instructions[0xFDCBC3] = new Instruction("SET_0 (IY + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.E), 15, null, 0xFDCBC3);
+        instructions[0xFDCBC3] = new Instruction("SET_0 (IY + d), E", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.E), 15, null, 0xFDCBC3);
 
-        instructions[0xFDCBC4] = new Instruction("SET_0 (IY + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.H), 15, null, 0xFDCBC4);
+        instructions[0xFDCBC4] = new Instruction("SET_0 (IY + d), H", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.H), 15, null, 0xFDCBC4);
 
-        instructions[0xFDCBC5] = new Instruction("SET_0 (IY + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.L), 15, null, 0xFDCBC5);
+        instructions[0xFDCBC5] = new Instruction("SET_0 (IY + d), L", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.L), 15, null, 0xFDCBC5);
 
-        instructions[0xFDCBC6] = new Instruction("SET_0 (IY + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x01, Register.IY), 15, null, 0xFDCBC6);
+        instructions[0xFDCBC6] = new Instruction("SET_0 (IY + d)", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d(i, 0x01, Register.IY), 15, null, 0xFDCBC6);
 
-        instructions[0xFDCBC7] = new Instruction("SET_0 (IY + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.A), 15, null, 0xFDCBC7);
+        instructions[0xFDCBC7] = new Instruction("SET_0 (IY + d), A", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x01, Register.IY, Register.A), 15, null, 0xFDCBC7);
 
-        instructions[0xFDCBC8] = new Instruction("SET_1 (IY + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.B), 15, null, 0xFDCBC8);
+        instructions[0xFDCBC8] = new Instruction("SET_1 (IY + d), B", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.B), 15, null, 0xFDCBC8);
 
-        instructions[0xFDCBC9] = new Instruction("SET_1 (IY + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.C), 15, null, 0xFDCBC9);
+        instructions[0xFDCBC9] = new Instruction("SET_1 (IY + d), C", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.C), 15, null, 0xFDCBC9);
 
-        instructions[0xFDCBCA] = new Instruction("SET_1 (IY + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.D), 15, null, 0xFDCBCA);
+        instructions[0xFDCBCA] = new Instruction("SET_1 (IY + d), D", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.D), 15, null, 0xFDCBCA);
 
-        instructions[0xFDCBCB] = new Instruction("SET_1 (IY + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.E), 15, null, 0xFDCBCB);
+        instructions[0xFDCBCB] = new Instruction("SET_1 (IY + d), E", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.E), 15, null, 0xFDCBCB);
 
-        instructions[0xFDCBCC] = new Instruction("SET_1 (IY + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.H), 15, null, 0xFDCBCC);
+        instructions[0xFDCBCC] = new Instruction("SET_1 (IY + d), H", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.H), 15, null, 0xFDCBCC);
 
-        instructions[0xFDCBCD] = new Instruction("SET_1 (IY + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.L), 15, null, 0xFDCBCD);
+        instructions[0xFDCBCD] = new Instruction("SET_1 (IY + d), L", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.L), 15, null, 0xFDCBCD);
 
-        instructions[0xFDCBCE] = new Instruction("SET_1 (IY + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x02, Register.IY), 15, null, 0xFDCBCE);
+        instructions[0xFDCBCE] = new Instruction("SET_1 (IY + d)", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d(i, 0x02, Register.IY), 15, null, 0xFDCBCE);
 
-        instructions[0xFDCBCF] = new Instruction("SET_1 (IY + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.A), 15, null, 0xFDCBCF);
+        instructions[0xFDCBCF] = new Instruction("SET_1 (IY + d), A", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x02, Register.IY, Register.A), 15, null, 0xFDCBCF);
     
-        instructions[0xFDCBD0] = new Instruction("SET_2 (IY + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.B), 15, null, 0xFDCBD0);
+        instructions[0xFDCBD0] = new Instruction("SET_2 (IY + d), B", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.B), 15, null, 0xFDCBD0);
 
-        instructions[0xFDCBD1] = new Instruction("SET_2 (IY + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.C), 15, null, 0xFDCBD1);
+        instructions[0xFDCBD1] = new Instruction("SET_2 (IY + d), C", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.C), 15, null, 0xFDCBD1);
 
-        instructions[0xFDCBD2] = new Instruction("SET_2 (IY + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.D), 15, null, 0xFDCBD2);
+        instructions[0xFDCBD2] = new Instruction("SET_2 (IY + d), D", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.D), 15, null, 0xFDCBD2);
 
-        instructions[0xFDCBD3] = new Instruction("SET_2 (IY + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.E), 15, null, 0xFDCBD3);
+        instructions[0xFDCBD3] = new Instruction("SET_2 (IY + d), E", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.E), 15, null, 0xFDCBD3);
 
-        instructions[0xFDCBD4] = new Instruction("SET_2 (IY + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.H), 15, null, 0xFDCBD4);
+        instructions[0xFDCBD4] = new Instruction("SET_2 (IY + d), H", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.H), 15, null, 0xFDCBD4);
 
-        instructions[0xFDCBD5] = new Instruction("SET_2 (IY + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.L), 15, null, 0xFDCBD5);
+        instructions[0xFDCBD5] = new Instruction("SET_2 (IY + d), L", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.L), 15, null, 0xFDCBD5);
 
-        instructions[0xFDCBD6] = new Instruction("SET_2 (IY + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x04, Register.IY), 15, null, 0xFDCBD6);
+        instructions[0xFDCBD6] = new Instruction("SET_2 (IY + d)", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d(i, 0x04, Register.IY), 15, null, 0xFDCBD6);
 
-        instructions[0xFDCBD7] = new Instruction("SET_2 (IY + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.A), 15, null, 0xFDCBD7);
+        instructions[0xFDCBD7] = new Instruction("SET_2 (IY + d), A", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x04, Register.IY, Register.A), 15, null, 0xFDCBD7);
 
-        instructions[0xFDCBD8] = new Instruction("SET_3 (IY + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.B), 15, null, 0xFDCBD8);
+        instructions[0xFDCBD8] = new Instruction("SET_3 (IY + d), B", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.B), 15, null, 0xFDCBD8);
 
-        instructions[0xFDCBD9] = new Instruction("SET_3 (IY + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.C), 15, null, 0xFDCBD9);
+        instructions[0xFDCBD9] = new Instruction("SET_3 (IY + d), C", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.C), 15, null, 0xFDCBD9);
 
-        instructions[0xFDCBDA] = new Instruction("SET_3 (IY + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.D), 15, null, 0xFDCBDA);
+        instructions[0xFDCBDA] = new Instruction("SET_3 (IY + d), D", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.D), 15, null, 0xFDCBDA);
 
-        instructions[0xFDCBDB] = new Instruction("SET_3 (IY + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.E), 15, null, 0xFDCBDB);
+        instructions[0xFDCBDB] = new Instruction("SET_3 (IY + d), E", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.E), 15, null, 0xFDCBDB);
 
-        instructions[0xFDCBDC] = new Instruction("SET_3 (IY + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.H), 15, null, 0xFDCBDC);
+        instructions[0xFDCBDC] = new Instruction("SET_3 (IY + d), H", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.H), 15, null, 0xFDCBDC);
 
-        instructions[0xFDCBDD] = new Instruction("SET_3 (IY + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.L), 15, null, 0xFDCBDD);
+        instructions[0xFDCBDD] = new Instruction("SET_3 (IY + d), L", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.L), 15, null, 0xFDCBDD);
 
-        instructions[0xFDCBDE] = new Instruction("SET_3 (IY + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x08, Register.IY), 15, null, 0xFDCBDE);
+        instructions[0xFDCBDE] = new Instruction("SET_3 (IY + d)", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d(i, 0x08, Register.IY), 15, null, 0xFDCBDE);
 
-        instructions[0xFDCBDF] = new Instruction("SET_3 (IY + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.A), 15, null, 0xFDCBDF);    
+        instructions[0xFDCBDF] = new Instruction("SET_3 (IY + d), A", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x08, Register.IY, Register.A), 15, null, 0xFDCBDF);    
 
-        instructions[0xFDCBE0] = new Instruction("SET_4 (IY + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.B), 15, null, 0xFDCBE0);
+        instructions[0xFDCBE0] = new Instruction("SET_4 (IY + d), B", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.B), 15, null, 0xFDCBE0);
 
-        instructions[0xFDCBE1] = new Instruction("SET_4 (IY + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.C), 15, null, 0xFDCBE1);
+        instructions[0xFDCBE1] = new Instruction("SET_4 (IY + d), C", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.C), 15, null, 0xFDCBE1);
 
-        instructions[0xFDCBE2] = new Instruction("SET_4 (IY + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.D), 15, null, 0xFDCBE2);
+        instructions[0xFDCBE2] = new Instruction("SET_4 (IY + d), D", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.D), 15, null, 0xFDCBE2);
 
-        instructions[0xFDCBE3] = new Instruction("SET_4 (IY + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.E), 15, null, 0xFDCBE3);
+        instructions[0xFDCBE3] = new Instruction("SET_4 (IY + d), E", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.E), 15, null, 0xFDCBE3);
 
-        instructions[0xFDCBE4] = new Instruction("SET_4 (IY + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.H), 15, null, 0xFDCBE4);
+        instructions[0xFDCBE4] = new Instruction("SET_4 (IY + d), H", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.H), 15, null, 0xFDCBE4);
 
-        instructions[0xFDCBE5] = new Instruction("SET_4 (IY + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.L), 15, null, 0xFDCBE5);
+        instructions[0xFDCBE5] = new Instruction("SET_4 (IY + d), L", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.L), 15, null, 0xFDCBE5);
 
-        instructions[0xFDCBE6] = new Instruction("SET_4 (IY + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x10, Register.IY), 15, null, 0xFDCBE6);
+        instructions[0xFDCBE6] = new Instruction("SET_4 (IY + d)", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d(i, 0x10, Register.IY), 15, null, 0xFDCBE6);
 
-        instructions[0xFDCBE7] = new Instruction("SET_4 (IY + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.A), 15, null, 0xFDCBE7);
+        instructions[0xFDCBE7] = new Instruction("SET_4 (IY + d), A", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x10, Register.IY, Register.A), 15, null, 0xFDCBE7);
 
-        instructions[0xFDCBE8] = new Instruction("SET_5 (IY + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.B), 15, null, 0xFDCBE8);
+        instructions[0xFDCBE8] = new Instruction("SET_5 (IY + d), B", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.B), 15, null, 0xFDCBE8);
 
-        instructions[0xFDCBE9] = new Instruction("SET_5 (IY + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.C), 15, null, 0xFDCBE9);
+        instructions[0xFDCBE9] = new Instruction("SET_5 (IY + d), C", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.C), 15, null, 0xFDCBE9);
 
-        instructions[0xFDCBEA] = new Instruction("SET_5 (IY + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.D), 15, null, 0xFDCBEA);
+        instructions[0xFDCBEA] = new Instruction("SET_5 (IY + d), D", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.D), 15, null, 0xFDCBEA);
 
-        instructions[0xFDCBEB] = new Instruction("SET_5 (IY + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.E), 15, null, 0xFDCBEB);
+        instructions[0xFDCBEB] = new Instruction("SET_5 (IY + d), E", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.E), 15, null, 0xFDCBEB);
 
-        instructions[0xFDCBEC] = new Instruction("SET_5 (IY + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.H), 15, null, 0xFDCBEC);
+        instructions[0xFDCBEC] = new Instruction("SET_5 (IY + d), H", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.H), 15, null, 0xFDCBEC);
 
-        instructions[0xFDCBED] = new Instruction("SET_5 (IY + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.L), 15, null, 0xFDCBED);
+        instructions[0xFDCBED] = new Instruction("SET_5 (IY + d), L", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.L), 15, null, 0xFDCBED);
 
-        instructions[0xFDCBEE] = new Instruction("SET_5 (IY + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x20, Register.IY), 15, null, 0xFDCBEE);
+        instructions[0xFDCBEE] = new Instruction("SET_5 (IY + d)", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d(i, 0x20, Register.IY), 15, null, 0xFDCBEE);
 
-        instructions[0xFDCBEF] = new Instruction("SET_5 (IY + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.A), 15, null, 0xFDCBEF);     
+        instructions[0xFDCBEF] = new Instruction("SET_5 (IY + d), A", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x20, Register.IY, Register.A), 15, null, 0xFDCBEF);     
 
-        instructions[0xFDCBF0] = new Instruction("SET_6 (IY + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.B), 15, null, 0xFDCBF0);
+        instructions[0xFDCBF0] = new Instruction("SET_6 (IY + d), B", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.B), 15, null, 0xFDCBF0);
 
-        instructions[0xFDCBF1] = new Instruction("SET_6 (IY + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.C), 15, null, 0xFDCBF1);
+        instructions[0xFDCBF1] = new Instruction("SET_6 (IY + d), C", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.C), 15, null, 0xFDCBF1);
 
-        instructions[0xFDCBF2] = new Instruction("SET_6 (IY + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.D), 15, null, 0xFDCBF2);
+        instructions[0xFDCBF2] = new Instruction("SET_6 (IY + d), D", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.D), 15, null, 0xFDCBF2);
 
-        instructions[0xFDCBF3] = new Instruction("SET_6 (IY + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.E), 15, null, 0xFDCBF3);
+        instructions[0xFDCBF3] = new Instruction("SET_6 (IY + d), E", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.E), 15, null, 0xFDCBF3);
 
-        instructions[0xFDCBF4] = new Instruction("SET_6 (IY + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.H), 15, null, 0xFDCBF4);
+        instructions[0xFDCBF4] = new Instruction("SET_6 (IY + d), H", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.H), 15, null, 0xFDCBF4);
 
-        instructions[0xFDCBF5] = new Instruction("SET_6 (IY + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.L), 15, null, 0xFDCBF5);
+        instructions[0xFDCBF5] = new Instruction("SET_6 (IY + d), L", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.L), 15, null, 0xFDCBF5);
 
-        instructions[0xFDCBF6] = new Instruction("SET_6 (IY + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x40, Register.IY), 15, null, 0xFDCBF6);
+        instructions[0xFDCBF6] = new Instruction("SET_6 (IY + d)", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d(i, 0x40, Register.IY), 15, null, 0xFDCBF6);
 
-        instructions[0xFDCBF7] = new Instruction("SET_6 (IY + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.A), 15, null, 0xFDCBF7);
+        instructions[0xFDCBF7] = new Instruction("SET_6 (IY + d), A", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x40, Register.IY, Register.A), 15, null, 0xFDCBF7);
 
-        instructions[0xFDCBF8] = new Instruction("SET_7 (IY + d), B", 2, i => SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.B), 15, null, 0xFDCBF8);
+        instructions[0xFDCBF8] = new Instruction("SET_7 (IY + d), B", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.B), 15, null, 0xFDCBF8);
 
-        instructions[0xFDCBF9] = new Instruction("SET_7 (IY + d), C", 2, i => SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.C), 15, null, 0xFDCBF9);
+        instructions[0xFDCBF9] = new Instruction("SET_7 (IY + d), C", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.C), 15, null, 0xFDCBF9);
 
-        instructions[0xFDCBFA] = new Instruction("SET_7 (IY + d), D", 2, i => SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.D), 15, null, 0xFDCBFA);
+        instructions[0xFDCBFA] = new Instruction("SET_7 (IY + d), D", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.D), 15, null, 0xFDCBFA);
 
-        instructions[0xFDCBFB] = new Instruction("SET_7 (IY + d), E", 2, i => SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.E), 15, null, 0xFDCBFB);
+        instructions[0xFDCBFB] = new Instruction("SET_7 (IY + d), E", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.E), 15, null, 0xFDCBFB);
 
-        instructions[0xFDCBFC] = new Instruction("SET_7 (IY + d), H", 2, i => SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.H), 15, null, 0xFDCBFC);
+        instructions[0xFDCBFC] = new Instruction("SET_7 (IY + d), H", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.H), 15, null, 0xFDCBFC);
 
-        instructions[0xFDCBFD] = new Instruction("SET_7 (IY + d), L", 2, i => SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.L), 15, null, 0xFDCBFD);
+        instructions[0xFDCBFD] = new Instruction("SET_7 (IY + d), L", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.L), 15, null, 0xFDCBFD);
 
-        instructions[0xFDCBFE] = new Instruction("SET_7 (IY + d)", 2, i => SET_b_addr_RR_plus_d(i, 0x80, Register.IY), 15, null, 0xFDCBFE);
+        instructions[0xFDCBFE] = new Instruction("SET_7 (IY + d)", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d(i, 0x80, Register.IY), 15, null, 0xFDCBFE);
 
-        instructions[0xFDCBFF] = new Instruction("SET_7 (IY + d), A", 2, i => SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.A), 15, null, 0xFDCBFF);        
+        instructions[0xFDCBFF] = new Instruction("SET_7 (IY + d), A", 2, i => ProcessorBitOperationInstructions.SET_b_addr_RR_plus_d_R(i, 0x80, Register.IY, Register.A), 15, null, 0xFDCBFF);        
     }
 }

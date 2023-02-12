@@ -58,7 +58,7 @@ public partial class Processor
 
         instructions[0xED43] = new Instruction("LD (nn), BC", 3, i => LD_addr_nn_RR(i, Register.BC), 16, null, 0xED43);
 
-        instructions[0xED44] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED44);
+        instructions[0xED44] = new Instruction("NEG A", 1, i => ProcessorBitOperationInstructions.NEG_R(i, Register.A), 4, null, 0xED44);
 
         // TODO: instructions[0xED45] = new Instruction("RETN", 1, i => (i, InterruptMode.Mode0), 10, null, 0xED45);
 
@@ -74,7 +74,7 @@ public partial class Processor
 
         instructions[0xED4B] = new Instruction("LD BC, (nn)", 3, i => LD_RR_addr_nn(i, Register.BC), 16, null, 0xED4B);
 
-        instructions[0xED4C] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED4C);
+        instructions[0xED4C] = new Instruction("NEG A", 1, i => ProcessorBitOperationInstructions.NEG_R(i, Register.A), 4, null, 0xED4C);
 
         // TODO: Which is right? instructions[0xED4C] = new Instruction("MLT BC", 1, i => MLT_RR(i, Register.BC), 13, null, 0xED4C);
 
@@ -106,7 +106,7 @@ public partial class Processor
 
         instructions[0xED5B] = new Instruction("LD DE, (nn)", 3, i => LD_RR_addr_nn(i, Register.DE), 16, null, 0xED5B);
 
-        instructions[0xED5C] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED5C);
+        instructions[0xED5C] = new Instruction("NEG A", 1, i => ProcessorBitOperationInstructions.NEG_R(i, Register.A), 4, null, 0xED5C);
 
         instructions[0xED5E] = new Instruction("IM 2", 1, i => IM_m(i, InterruptMode.Mode2), 5, null, 0xED5E);
 
