@@ -816,6 +816,8 @@ public partial class Processor
 
         if (input.State.Registers.ReadPair(Register.BC) != 0)
         {
+            input.State.ProgramCounter--;
+
             return false;
         }
 

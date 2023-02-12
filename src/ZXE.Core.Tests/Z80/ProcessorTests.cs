@@ -1110,5 +1110,27 @@ public class ProcessorTests
         Assert.Equal(0xAB, _ram[0x5678]);
 
         Assert.Equal(0x0000, _state.Registers.ReadPair(Register.BC));
+
+        _ram[0x1234] = 0xAB;
+
+        _state.ProgramCounter = 0;
+
+        _state.Registers.WritePair(Register.HL, 0x1234);
+
+        _state.Registers.WritePair(Register.DE, 0x5678);
+
+        _state.Registers.WritePair(Register.BC, 0x0002);
+
+        _processor.ProcessInstruction(_ram, _ports);
+        
+        _processor.ProcessInstruction(_ram, _ports);
+        
+        _processor.ProcessInstruction(_ram, _ports);
+        
+        _processor.ProcessInstruction(_ram, _ports);
+
+        Assert.Equal(0xAB, _ram[0x5678]);
+
+        Assert.Equal(0x0000, _state.Registers.ReadPair(Register.BC));
     }
 }
