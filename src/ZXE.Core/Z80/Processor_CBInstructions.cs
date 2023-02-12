@@ -1,4 +1,6 @@
-﻿namespace ZXE.Core.Z80;
+﻿// ReSharper disable InconsistentNaming
+
+namespace ZXE.Core.Z80;
 
 public partial class Processor
 {
