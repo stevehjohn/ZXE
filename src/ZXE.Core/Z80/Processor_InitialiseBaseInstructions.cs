@@ -20,7 +20,7 @@ public partial class Processor
 
         instructions[0x07] = new Instruction("RLCA", 1, ProcessorBitwiseRotationInstructions.RLCA, 4, "RLCA A");
 
-        instructions[0x08] = new Instruction("EX AF, AF'", 1, i => EX_RR_RaRa(i, Register.A, Register.F), 4);
+        instructions[0x08] = new Instruction("EX AF, AF'", 1, i => EX_RR_R1R1(i, Register.A, Register.F), 4);
 
         instructions[0x09] = new Instruction("ADD HL, BC", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.HL, Register.BC), 11);
 

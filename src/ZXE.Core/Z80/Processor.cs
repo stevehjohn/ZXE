@@ -172,7 +172,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool EX_RR_RaRa(Input input, Register register1, Register register2)
+    private static bool EX_RR_R1R1(Input input, Register register1, Register register2)
     {
         var alternate1 = Enum.Parse<Register>($"{register1}1");
 
