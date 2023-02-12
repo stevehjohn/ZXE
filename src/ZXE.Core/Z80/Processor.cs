@@ -2830,24 +2830,6 @@ public partial class Processor
         return true;
     }
 
-    private static bool DJNZ_e(Input input)
-    {
-        unchecked
-        {
-            // TODO: If B != 0, 5 more cycles... how to do this?
-            DEC_R(input, Register.B);
-
-            if (! input.State.Flags.Zero)
-            {
-                input.State.ProgramCounter += (sbyte) input.Data[1];
-            }
-
-            // Flags unaffected
-        }
-
-        return true;
-    }
-
     private static bool RLA(Input input)
     {
         unchecked
@@ -2871,18 +2853,6 @@ public partial class Processor
             // Sign unaffected
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
-        }
-
-        return true;
-    }
-
-    public static bool JR_e(Input input)
-    {
-        unchecked
-        {
-            input.State.ProgramCounter += (sbyte) input.Data[1];
-
-            input.State.ProgramCounter = (ushort) input.State.ProgramCounter;
         }
 
         return true;
@@ -2912,18 +2882,6 @@ public partial class Processor
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
-
-        return true;
-    }
-
-    private static bool JR_NZ_e(Input input)
-    {
-        if (! input.State.Flags.Zero)
-        {
-            JR_e(input);
-        }
-
-        // Flags unaffected
 
         return true;
     }
@@ -2992,18 +2950,6 @@ public partial class Processor
         return true;
     }
 
-    private static bool JR_Z_e(Input input)
-    {
-        if (input.State.Flags.Zero)
-        {
-            JR_e(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
     private static bool CPL(Input input)
     {
         unchecked
@@ -3028,18 +2974,6 @@ public partial class Processor
         return true;
     }
 
-    private static bool JR_NC_e(Input input)
-    {
-        if (! input.State.Flags.Carry)
-        {
-            JR_e(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
     private static bool SCF(Input input)
     {
         input.State.Flags.Carry = true;
@@ -3056,18 +2990,6 @@ public partial class Processor
         input.State.Flags.X2 = (xFlags & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
-
-        return true;
-    }
-
-    private static bool JR_C_e(Input input)
-    {
-        if (input.State.Flags.Carry)
-        {
-            JR_e(input);
-        }
-
-        // Flags unaffected
 
         return true;
     }
@@ -3299,19 +3221,6 @@ public partial class Processor
         return true;
     }
 
-    private static bool RET_NZ(Input input)
-    {
-        // TODO: If condition true, 6 more cycles required.
-        if (! input.State.Flags.Zero)
-        {
-            return RET(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
     private static bool POP_RR(Input input, Register register)
     {
         var data = (ushort) input.Ram[input.State.StackPointer];
@@ -3325,62 +3234,6 @@ public partial class Processor
         input.State.Registers.WritePair(register, data);
 
         // Flags unaffected
-
-        return true;
-    }
-
-    private static bool JP_NZ_nn(Input input)
-    {
-        if (! input.State.Flags.Zero)
-        {
-            JP_nn(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool JP_nn(Input input)
-    {
-        // TODO: Don't like this - 3 thing... maybe return true/false to indicate whether PC should be adjusted by caller...
-        input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool CALL_NZ_nn(Input input)
-    {
-        // TODO: If condition true, 7 more cycles required.
-        if (! input.State.Flags.Zero)
-        {
-            return CALL_nn(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool CALL_nn(Input input)
-    {
-        unchecked
-        {
-            input.State.StackPointer--;
-
-            input.Ram[input.State.StackPointer] = (byte) (((input.State.ProgramCounter + 3) & 0xFF00) >> 8);
-
-            input.State.StackPointer--;
-
-            input.Ram[input.State.StackPointer] = (byte) ((input.State.ProgramCounter + 3) & 0x00FF);
-
-            // TODO: Remove -3 and return false
-            input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
-
-            // Flags unaffected
-        }
 
         return true;
     }
@@ -3424,119 +3277,9 @@ public partial class Processor
         return false;
     }
 
-    private static bool RET_Z(Input input)
-    {
-        if (input.State.Flags.Zero)
-        {
-            // TODO: Same old... more cycles if condition met.
-
-            return RET(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool RET(Input input)
-    {
-        var spContent = input.Ram[input.State.StackPointer];
-
-        input.State.ProgramCounter = (input.State.ProgramCounter & 0xFF00) | spContent;
-
-        input.State.StackPointer++;
-
-        spContent = input.Ram[input.State.StackPointer];
-
-        input.State.ProgramCounter = (input.State.ProgramCounter & 0x00FF) | spContent << 8;
-
-        input.State.StackPointer++;
-
-        input.State.ProgramCounter--;
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool JP_Z_nn(Input input)
-    {
-        if (input.State.Flags.Zero)
-        {
-            JP_nn(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool CALL_Z_nn(Input input)
-    {
-        // TODO: If condition true, 7 more cycles required.
-        if (input.State.Flags.Zero)
-        {
-            return CALL_nn(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool RET_NC(Input input)
-    {
-        if (! input.State.Flags.Carry)
-        {
-            RET(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool JP_NC_nn(Input input)
-    {
-        if (! input.State.Flags.Carry)
-        {
-            return JP_nn(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
     private static bool OUT_addr_n_R(Input input, Register register)
     {
         // TODO: Hmm. Might have to get into buses and stuff for this one... bugger.
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool CALL_NC_nn(Input input)
-    {
-        if (! input.State.Flags.Carry)
-        {
-            return CALL_nn(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool RET_C(Input input)
-    {
-        if (input.State.Flags.Carry)
-        {
-            // TODO: Same old... more cycles if condition met.
-
-            return RET(input);
-        }
 
         // Flags unaffected
 
@@ -3568,54 +3311,6 @@ public partial class Processor
         return true;
     }
 
-    private static bool JP_C_nn(Input input)
-    {
-        if (input.State.Flags.Carry)
-        {
-            return JP_nn(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool CALL_C_nn(Input input)
-    {
-        if (input.State.Flags.Carry)
-        {
-            return CALL_nn(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool RET_PO(Input input)
-    {
-        if (! input.State.Flags.ParityOverflow)
-        {
-            RET(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool JP_PO_nn(Input input)
-    {
-        if (! input.State.Flags.ParityOverflow)
-        {
-            JP_nn(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
     private static bool EX_addr_SP_RR(Input input, Register register)
     {
         var value = input.State.Registers.ReadPair(register);
@@ -3628,18 +3323,6 @@ public partial class Processor
 
         input.Ram[input.State.StackPointer + 1] = (byte) ((value & 0xFF00) >> 8);
 
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool CALL_PO_nn(Input input)
-    {
-        if (! input.State.Flags.ParityOverflow)
-        {
-            CALL_nn(input);
-        }
-        
         // Flags unaffected
 
         return true;
@@ -3669,39 +3352,6 @@ public partial class Processor
         return true;
     }
 
-    private static bool RET_PE(Input input)
-    {
-        if (input.State.Flags.ParityOverflow)
-        {
-            return RET(input);
-        }
-        
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool JP_addr_RR(Input input, Register register)
-    {
-        input.State.ProgramCounter = input.State.Registers.ReadPair(register);
-        
-        // Flags unaffected
-
-        return false;
-    }
-
-    private static bool JP_PE_nn(Input input)
-    {
-        if (input.State.Flags.ParityOverflow)
-        {
-            return JP_nn(input);
-        }
-        
-        // Flags unaffected
-
-        return true;
-    }
-
     private static bool EX_RR_RR(Input input, Register left, Register right)
     {
         var swap = input.State.Registers.ReadPair(left);
@@ -3709,18 +3359,6 @@ public partial class Processor
         input.State.Registers.WritePair(left, input.State.Registers.ReadPair(right));
 
         input.State.Registers.WritePair(right, swap);
-        
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool CALL_PE_nn(Input input)
-    {
-        if (input.State.Flags.ParityOverflow)
-        {
-            CALL_nn(input);
-        }
         
         // Flags unaffected
 
@@ -3751,45 +3389,9 @@ public partial class Processor
         return true;
     }
 
-    private static bool RET_NS(Input input)
-    {
-        if (! input.State.Flags.Sign)
-        {
-            RET(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool JP_NS_nn(Input input)
-    {
-        if (! input.State.Flags.Sign)
-        {
-            JP_nn(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
     private static bool DI(Input input)
     {
         // TODO: Disable maskable interrupt.
-        return true;
-    }
-
-    private static bool CALL_NS_nn(Input input)
-    {
-        if (! input.State.Flags.Sign)
-        {
-            CALL_nn(input);
-        }
-
-        // Flags unaffected
-
         return true;
     }
 
@@ -3817,45 +3419,9 @@ public partial class Processor
         return true;
     }
 
-    private static bool RET_S(Input input)
-    {
-        if (input.State.Flags.Sign)
-        {
-            RET(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
-    private static bool JP_S_nn(Input input)
-    {
-        if (input.State.Flags.Sign)
-        {
-            JP_nn(input);
-        }
-
-        // Flags unaffected
-
-        return true;
-    }
-
     private static bool EI(Input input)
     {
         // TODO: Enable maskable interrupt.
-        return true;
-    }
-
-    private static bool CALL_S_nn(Input input)
-    {
-        if (input.State.Flags.Sign)
-        {
-            CALL_nn(input);
-        }
-
-        // Flags unaffected
-
         return true;
     }
 
@@ -4168,32 +3734,6 @@ public partial class Processor
             input.State.Flags.X2 = (rightValue & 0x20) > 0;
             input.State.Flags.Zero = difference == 0;
             input.State.Flags.Sign = (byte) difference > 0x7F;
-
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
-        }
-
-        return true;
-    }
-
-    private static bool NEG(Input input)
-    {
-        unchecked
-        {
-            var value = input.State.Registers[Register.A];
-
-            var result = (byte) -(sbyte) value;
-
-            input.State.Registers[Register.A] = result;
-
-            // Flags
-            input.State.Flags.Carry = value != 0;
-            input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = value == 0x80; // TODO: Potential bug here?
-            input.State.Flags.X1 = (result & 0x08) > 0;
-            input.State.Flags.HalfCarry = (value & 0x0F) + ((~value + 1) & 0x0F) > 0xF;
-            input.State.Flags.X2 = (result & 0x20) > 0;
-            input.State.Flags.Zero = result == 0;
-            input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
