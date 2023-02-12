@@ -37,10 +37,10 @@ public class TestRunner
         foreach (var file in files)
         {
             //Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("ed 73") < 0)
-            //{
-            //    continue;
-            //}
+            if (Path.GetFileName(file).CompareTo("ed 5f") < 0)
+            {
+                continue;
+            }
 
             // End early
             //if (Path.GetFileName(file).CompareTo("dd 2f") > 0)
@@ -372,8 +372,8 @@ public class TestRunner
             FormattedConsole.WriteLine($"    {trace[i]}");
         }
 
-        //FormattedConsole.WriteLine("\n    &Cyan;Press any key to continue...\n");
-        
-        //Console.ReadKey();
+        FormattedConsole.WriteLine("\n    &Cyan;Press any key to continue...\n");
+
+        Console.ReadKey();
     }
 }

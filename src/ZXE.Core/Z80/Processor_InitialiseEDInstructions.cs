@@ -145,7 +145,7 @@ public partial class Processor
 
         instructions[0xED72] = new Instruction("SBC HL, SP", 1, i => ProcessorArithmeticInstructions.SBC_RR_SP(i, Register.HL), 11, null, 0xED72);
 
-        instructions[0xED73] = new Instruction("LD (nn), SP", 1, i => ProcessorLoadInstructions.LD_addr_nn_SP(i), 16, null, 0xED73);
+        instructions[0xED73] = new Instruction("LD (nn), SP", 3, ProcessorLoadInstructions.LD_addr_nn_SP, 16, null, 0xED73);
 
         // TODO: Exists? instructions[0xED74] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED74);
 
@@ -157,7 +157,7 @@ public partial class Processor
 
         instructions[0xED7A] = new Instruction("ADC HL, SP", 1, i => ProcessorArithmeticInstructions.ADC_RR_SP(i, Register.HL), 11, null, 0xED7A);
 
-        instructions[0xED7B] = new Instruction("LD HL, (nn)", 3, i => ProcessorLoadInstructions.LD_RR_addr_nn(i, Register.HL), 16, null, 0xED7B);
+        instructions[0xED7B] = new Instruction("LD SP, (nn)", 3, ProcessorLoadInstructions.LD_SP_addr_nn, 16, null, 0xED7B);
 
         // TODO: instructions[0xED7C] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED7C);
 

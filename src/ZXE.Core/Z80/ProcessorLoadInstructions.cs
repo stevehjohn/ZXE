@@ -317,4 +317,20 @@ public static class ProcessorLoadInstructions
 
         return true;
     }
+
+    public static bool LD_SP_addr_nn(Input input)
+    {
+        unchecked
+        {
+            var address = input.Data[2] << 8 | input.Data[1];
+
+            input.State.StackPointer = (input.State.StackPointer & 0xFF00) | input.Ram[address];
+
+            input.State.StackPointer = (input.State.StackPointer & 0x00FF) | (input.Ram[address + 1] << 8);
+
+            // Flags unaffected
+        }
+
+        return true;
+    }
 }
