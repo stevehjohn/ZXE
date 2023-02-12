@@ -3,6 +3,7 @@
 public class Monitor : Game
 {
     GraphicsDeviceManager graphics;
+
     SpriteBatch spriteBatch;
 
     public Monitor()
