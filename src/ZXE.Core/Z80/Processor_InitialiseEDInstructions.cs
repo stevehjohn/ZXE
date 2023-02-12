@@ -165,6 +165,8 @@ public partial class Processor
 
         instructions[0xEDA0] = new Instruction("LDI", 1, LDI, 12, null, 0xEDA0);
 
+        instructions[0xEDA1] = new Instruction("CPI", 1, CPI, 12, null, 0xEDA1);
+
         instructions[0xEDB0] = new Instruction("LDIR", 1, LDIR, 12, null, 0xEDB0);
     }
 }
