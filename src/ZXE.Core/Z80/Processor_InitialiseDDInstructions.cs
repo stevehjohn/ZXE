@@ -176,7 +176,7 @@ public partial class Processor
 
         instructions[0xDDE5] = new Instruction("PUSH IX", 1, i => PUSH_RR(i, Register.IX), 11);
 
-        instructions[0xDDE9] = new Instruction("JP (IX)", 1, i => JP_addr_RR(i, Register.IX), 4);
+        instructions[0xDDE9] = new Instruction("JP (IX)", 1, i => ProcessorBranchInstructions.JP_addr_RR(i, Register.IX), 4);
 
         instructions[0xDDF9] = new Instruction("LD SP, IX", 1, i => ProcessorLoadInstructions.LD_SP_RR(i, Register.IX), 6);
 

@@ -4,9 +4,9 @@
 // ReSharper disable InconsistentNaming
 // ReSharper disable StringLiteralTypo
 
-public partial class Processor
+public static class ProcessorBranchInstructions
 {
-    private static bool DJNZ_e(Input input)
+    public static bool DJNZ_e(Input input)
     {
         unchecked
         {
@@ -36,7 +36,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool JR_NZ_e(Input input)
+    public static bool JR_NZ_e(Input input)
     {
         if (! input.State.Flags.Zero)
         {
@@ -48,7 +48,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool JR_Z_e(Input input)
+    public static bool JR_Z_e(Input input)
     {
         if (input.State.Flags.Zero)
         {
@@ -60,7 +60,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool JR_NC_e(Input input)
+    public static bool JR_NC_e(Input input)
     {
         if (! input.State.Flags.Carry)
         {
@@ -72,7 +72,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool JR_C_e(Input input)
+    public static bool JR_C_e(Input input)
     {
         if (input.State.Flags.Carry)
         {
@@ -84,7 +84,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RET_NZ(Input input)
+    public static bool RET_NZ(Input input)
     {
         // TODO: If condition true, 6 more cycles required.
         if (! input.State.Flags.Zero)
@@ -97,7 +97,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool JP_NZ_nn(Input input)
+    public static bool JP_NZ_nn(Input input)
     {
         if (! input.State.Flags.Zero)
         {
@@ -109,7 +109,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool JP_nn(Input input)
+    public static bool JP_nn(Input input)
     {
         // TODO: Don't like this - 3 thing... maybe return true/false to indicate whether PC should be adjusted by caller...
         input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
@@ -119,7 +119,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool CALL_NZ_nn(Input input)
+    public static bool CALL_NZ_nn(Input input)
     {
         // TODO: If condition true, 7 more cycles required.
         if (! input.State.Flags.Zero)
@@ -132,7 +132,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool CALL_nn(Input input)
+    public static bool CALL_nn(Input input)
     {
         unchecked
         {
@@ -153,7 +153,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RET_Z(Input input)
+    public static bool RET_Z(Input input)
     {
         if (input.State.Flags.Zero)
         {
@@ -167,7 +167,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RET(Input input)
+    public static bool RET(Input input)
     {
         var spContent = input.Ram[input.State.StackPointer];
 
@@ -188,7 +188,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool JP_Z_nn(Input input)
+    public static bool JP_Z_nn(Input input)
     {
         if (input.State.Flags.Zero)
         {
@@ -200,7 +200,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool CALL_Z_nn(Input input)
+    public static bool CALL_Z_nn(Input input)
     {
         // TODO: If condition true, 7 more cycles required.
         if (input.State.Flags.Zero)
@@ -213,7 +213,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RET_NC(Input input)
+    public static bool RET_NC(Input input)
     {
         if (! input.State.Flags.Carry)
         {
@@ -225,7 +225,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool JP_NC_nn(Input input)
+    public static bool JP_NC_nn(Input input)
     {
         if (! input.State.Flags.Carry)
         {
@@ -237,7 +237,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool CALL_NC_nn(Input input)
+    public static bool CALL_NC_nn(Input input)
     {
         if (! input.State.Flags.Carry)
         {
@@ -249,7 +249,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RET_C(Input input)
+    public static bool RET_C(Input input)
     {
         if (input.State.Flags.Carry)
         {
@@ -263,7 +263,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool JP_C_nn(Input input)
+    public static bool JP_C_nn(Input input)
     {
         if (input.State.Flags.Carry)
         {
@@ -275,7 +275,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool CALL_C_nn(Input input)
+    public static bool CALL_C_nn(Input input)
     {
         if (input.State.Flags.Carry)
         {
@@ -287,7 +287,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RET_PO(Input input)
+    public static bool RET_PO(Input input)
     {
         if (! input.State.Flags.ParityOverflow)
         {
@@ -299,7 +299,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool JP_PO_nn(Input input)
+    public static bool JP_PO_nn(Input input)
     {
         if (! input.State.Flags.ParityOverflow)
         {
@@ -311,7 +311,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool CALL_PO_nn(Input input)
+    public static bool CALL_PO_nn(Input input)
     {
         if (! input.State.Flags.ParityOverflow)
         {
@@ -323,7 +323,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RET_PE(Input input)
+    public static bool RET_PE(Input input)
     {
         if (input.State.Flags.ParityOverflow)
         {
@@ -335,7 +335,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool JP_addr_RR(Input input, Register register)
+    public static bool JP_addr_RR(Input input, Register register)
     {
         input.State.ProgramCounter = input.State.Registers.ReadPair(register);
         
@@ -344,7 +344,7 @@ public partial class Processor
         return false;
     }
 
-    private static bool JP_PE_nn(Input input)
+    public static bool JP_PE_nn(Input input)
     {
         if (input.State.Flags.ParityOverflow)
         {
@@ -356,7 +356,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool CALL_PE_nn(Input input)
+    public static bool CALL_PE_nn(Input input)
     {
         if (input.State.Flags.ParityOverflow)
         {
@@ -368,7 +368,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RET_NS(Input input)
+    public static bool RET_NS(Input input)
     {
         if (! input.State.Flags.Sign)
         {
@@ -380,7 +380,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool JP_NS_nn(Input input)
+    public static bool JP_NS_nn(Input input)
     {
         if (! input.State.Flags.Sign)
         {
@@ -392,7 +392,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool CALL_NS_nn(Input input)
+    public static bool CALL_NS_nn(Input input)
     {
         if (! input.State.Flags.Sign)
         {
@@ -404,7 +404,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool RET_S(Input input)
+    public static bool RET_S(Input input)
     {
         if (input.State.Flags.Sign)
         {
@@ -416,7 +416,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool JP_S_nn(Input input)
+    public static bool JP_S_nn(Input input)
     {
         if (input.State.Flags.Sign)
         {
@@ -428,7 +428,7 @@ public partial class Processor
         return true;
     }
 
-    private static bool CALL_S_nn(Input input)
+    public static bool CALL_S_nn(Input input)
     {
         if (input.State.Flags.Sign)
         {
