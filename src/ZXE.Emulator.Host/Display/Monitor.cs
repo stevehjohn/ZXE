@@ -2,9 +2,9 @@
 
 public class Monitor : Game
 {
-    GraphicsDeviceManager graphics;
+    private readonly GraphicsDeviceManager _graphics;
 
-    SpriteBatch spriteBatch;
+    private SpriteBatch _spriteBatch;
 
     public Monitor()
     {
