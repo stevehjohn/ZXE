@@ -1,4 +1,5 @@
 ﻿using System;
+using ZXE.Emulator.Host.Display;
 
 namespace ZXE.Emulator.Host
 {
@@ -7,7 +8,7 @@ namespace ZXE.Emulator.Host
         [STAThread]
         public static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new Monitor())
             {
                 game.Run();
             }
