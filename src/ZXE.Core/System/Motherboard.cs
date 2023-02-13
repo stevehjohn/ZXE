@@ -10,11 +10,15 @@ public class Motherboard : IDisposable
 
     private readonly Ram _ram;
 
+    private readonly Ports _ports;
+
     private readonly ITimer _timer;
 
     public Motherboard(Model model)
     {
         _ram = new Ram(model);
+
+        _ports = new Ports();
 
         _timer = new Timer(4_000_000)
                  {
@@ -22,6 +26,16 @@ public class Motherboard : IDisposable
                  };
 
         _processor = new Processor();
+
+        switch (model)
+        {
+            case Model.Spectrum48K:
+                var data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum 48K\\image-0.rom");
+
+                _ram.Load(data, 0);
+
+                break;
+        }
     }
 
     public void Load(byte[] data, int destination)
@@ -31,6 +45,7 @@ public class Motherboard : IDisposable
 
     private void Tick()
     {
+        _processor.ProcessInstruction(_ram, _ports);
     }
 
     public void Dispose()

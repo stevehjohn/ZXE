@@ -1,22 +1,27 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ZXE.Core.System;
 
 namespace ZXE.Windows.Host.Display
 {
     public class Monitor : Game
     {
         private readonly GraphicsDeviceManager _graphics;
-        
+
+        private readonly Motherboard _motherboard;
+
         private SpriteBatch _spriteBatch;
 
-        public Monitor()
+        public Monitor(Motherboard motherboard)
         {
             _graphics = new GraphicsDeviceManager(this);
 
             Content.RootDirectory = "_Content";
 
             IsMouseVisible = true;
+
+            _motherboard = motherboard;
         }
 
         protected override void Initialize()
