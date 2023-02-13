@@ -41,16 +41,11 @@ public class Motherboard : IDisposable
         _timer.Start();
     }
 
-    public void Load(byte[] data, int destination)
-    {
-        _ram.Load(data, destination);
-    }
-
     private void Tick()
     {
         _processor.ProcessInstruction(_ram, _ports);
 
-        Debugger.Log(0, "INFO", "Tick...");
+        Debugger.Log(0, "INFO", "Tick...\n");
     }
 
     public void Dispose()

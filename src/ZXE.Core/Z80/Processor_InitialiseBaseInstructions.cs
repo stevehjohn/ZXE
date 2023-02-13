@@ -427,7 +427,7 @@ public partial class Processor
 
         instructions[0xD2] = new Instruction("JP NC, nn", 3, ProcessorBranchInstructions.JP_NC_nn, 10);
 
-        // instructions[0xD3] = new Instruction("OUT (n), A", 2, i => OUT_addr_n_R(i, Register.A), 11);
+        instructions[0xD3] = new Instruction("OUT (n), A", 2, i => ProcessorMiscellaneousInstructions.OUT_addr_n_R(i, Register.A), 11);
 
         instructions[0xD4] = new Instruction("CALL NC, nn", 3, ProcessorBranchInstructions.CALL_NC_nn, 10);
 
@@ -443,7 +443,7 @@ public partial class Processor
 
         instructions[0xDA] = new Instruction("JP C, nn", 3, ProcessorBranchInstructions.JP_C_nn, 10);
 
-        //instructions[0xDB] = new Instruction("IN A, (n)", 2, IN_R_addr_N, 11);
+        //instructions[0xDB] = new Instruction("IN A, (n)", 2, ProcessorMiscellaneousInstructions.IN_, 11);
 
         instructions[0xDC] = new Instruction("CALL C, nn", 3, ProcessorBranchInstructions.CALL_C_nn, 10);
 
