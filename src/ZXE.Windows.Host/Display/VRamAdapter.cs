@@ -24,25 +24,38 @@ public class VRamAdapter
 
         var data = new Color[256 * 192];
 
-        var address = 0x4000;
+        var i = 0;
 
-        for (var i = 0; i < data.Length; i++)
+        for (var y = 0; y < 192; y++)
         {
-            var segment = _ram[address];
-
-            for (var b = 0; b < 8; b++)
+            for (var x = 0; x < 32; x++)
             {
-                if ((segment & (0x01 << b)) > 0)
-                {
-                    data[i] = Color.Black;
-                }
-                else
-                {
-                    data[i] = Color.White;
-                }
-            }
+                var address = 0b0100000000000000;
 
-            address++;
+                address |= (y & 0b00000111) << 8;
+
+                address |= (y & 0b11000000) << 11;
+
+                address |= (y & 0b00111000) << 2;
+
+                address |= x;
+
+                var segment = _ram[address];
+
+                for (var b = 0; b < 8; b++)
+                {
+                    if ((segment & (0x01 << b)) > 0)
+                    {
+                        data[i] = Color.Black;
+                    }
+                    else
+                    {
+                        data[i] = Color.White;
+                    }
+                }
+
+                i++;
+            }
         }
 
         texture.SetData(data);
