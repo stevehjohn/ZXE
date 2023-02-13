@@ -20,7 +20,8 @@ namespace ZXE.Windows.Host.Display
             _graphicsDeviceManager = new GraphicsDeviceManager(this)
                                      {
                                          PreferredBackBufferWidth = 256 * 4,
-                                         PreferredBackBufferHeight = 192 * 4
+                                         PreferredBackBufferHeight = 192 * 4,
+                                         
                                      };
 
             Content.RootDirectory = "_Content";
@@ -60,7 +61,7 @@ namespace ZXE.Windows.Host.Display
 
             var screen = _vRamAdapter.GetDisplay();
 
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
 
             _spriteBatch.Draw(screen, new Rectangle(0, 0, 256 * 4, 192 * 4), new Rectangle(0, 0, 256, 192), Color.White);
 
