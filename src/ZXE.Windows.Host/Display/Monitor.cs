@@ -11,7 +11,7 @@ namespace ZXE.Windows.Host.Display
 
         private readonly Motherboard _motherboard;
 
-        private readonly VRamAdapter _ramReader;
+        private readonly VRamAdapter _vRamAdapter;
 
         private SpriteBatch _spriteBatch;
 
@@ -29,7 +29,7 @@ namespace ZXE.Windows.Host.Display
 
             _motherboard = motherboard;
 
-            _ramReader = new VRamAdapter(_motherboard.Ram, _graphicsDeviceManager);
+            _vRamAdapter = new VRamAdapter(_motherboard.Ram, _graphicsDeviceManager);
         }
 
         protected override void Initialize()
@@ -56,7 +56,9 @@ namespace ZXE.Windows.Host.Display
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DarkGray);
+
+            var screen = _vRamAdapter.GetDisplay();
 
             base.Draw(gameTime);
         }

@@ -21,6 +21,14 @@ public class VRamAdapter
     {
         var texture = new Texture2D(_graphicsDeviceManager.GraphicsDevice, 256, 192);
 
-        return null;
+        var data = new Color[256 * 192];
+
+        for (var i = 0; i < data.Length; i++)
+        {
+        }
+
+        texture.SetData(data);
+
+        return texture;
     }
 }
