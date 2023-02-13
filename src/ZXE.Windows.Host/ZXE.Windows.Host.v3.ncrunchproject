@@ -1,3 +1,5 @@
 ﻿<ProjectConfiguration>
-  <Settings />
+  <Settings>
+    <IgnoreThisComponentCompletely>True</IgnoreThisComponentCompletely>
+  </Settings>
 </ProjectConfiguration>
