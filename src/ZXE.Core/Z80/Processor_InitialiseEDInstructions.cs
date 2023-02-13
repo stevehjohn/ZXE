@@ -175,6 +175,12 @@ public partial class Processor
 
         instructions[0xEDA8] = new Instruction("LDD", 1, ProcessorMiscellaneousInstructions.LDD, 12, null, 0xEDA8);
 
+        instructions[0xEDA9] = new Instruction("CPD", 1, ProcessorMiscellaneousInstructions.CPD, 12, null, 0xEDA9);
+
+        instructions[0xEDAA] = new Instruction("IND", 1, ProcessorMiscellaneousInstructions.IND, 12, null, 0xEDAA);
+
+        instructions[0xEDAB] = new Instruction("OUTD", 1, ProcessorMiscellaneousInstructions.OUTD, 12, null, 0xEDAB);
+
         instructions[0xEDB0] = new Instruction("LDIR", 1, ProcessorMiscellaneousInstructions.LDIR, 12, null, 0xEDB0);
 
         instructions[0xEDB1] = new Instruction("CPIR", 1, ProcessorMiscellaneousInstructions.CPIR, 12, null, 0xEDB1);
@@ -186,5 +192,11 @@ public partial class Processor
         instructions[0xEDA8] = new Instruction("LDD", 1, ProcessorMiscellaneousInstructions.LDD, 12, null, 0xEDA8);
 
         instructions[0xEDB8] = new Instruction("LDDR", 1, ProcessorMiscellaneousInstructions.LDDR, 12, null, 0xEDB8);
+
+        instructions[0xEDB9] = new Instruction("CPDR", 1, ProcessorMiscellaneousInstructions.CPDR, 12, null, 0xEDB9);
+
+        instructions[0xEDBA] = new Instruction("INDR", 1, ProcessorMiscellaneousInstructions.INDR, 12, null, 0xEDBA);
+
+        instructions[0xEDBB] = new Instruction("OTDR", 1, ProcessorMiscellaneousInstructions.OTDR, 12, null, 0xEDBB);
     }
 }
