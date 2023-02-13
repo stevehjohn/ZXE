@@ -652,6 +652,8 @@ public static class ProcessorMiscellaneousInstructions
         // Sign unaffected
 
         input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        
+        // TODO: Correctly account for extra cycles?
 
         if (input.State.Registers.ReadPair(Register.BC) != 0)
         {
@@ -709,6 +711,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Sign = difference > 0x7F;
 
         input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        
+        // TODO: Correctly account for extra cycles?
 
         if (input.State.Registers.ReadPair(Register.BC) != 0)
         {
@@ -722,58 +726,143 @@ public static class ProcessorMiscellaneousInstructions
 
     public static bool INI(Input input)
     {
-        var address = input.State.Registers.ReadPair(Register.BC);
+        unchecked
+        {
+            var address = input.State.Registers.ReadPair(Register.BC);
 
-        var value = input.Ports.ReadByte(address);
+            var value = input.Ports.ReadByte(address);
 
-        input.Ram[input.State.Registers[Register.HL]] = value;
+            input.Ram[input.State.Registers.ReadPair(Register.HL)] = value;
 
-        input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) + 1));
+            input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) + 1));
 
-        input.State.Registers.WritePair(Register.BC, (ushort) (input.State.Registers.ReadPair(Register.BC) - 1));
+            input.State.Registers[Register.B]--;
 
-        // Flags
-        input.State.Flags.Carry = value > input.State.Registers[Register.A];
-        input.State.Flags.AddSubtract = true;
-        input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
-        input.State.Flags.X1 = (value & 0x08) > 0;
-        input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (value & 0x0F);
-        input.State.Flags.X2 = (value & 0x20) > 0;
-        input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
-        input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
+            // Flags
+            input.State.Flags.Carry = value > input.State.Registers[Register.A];
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+            input.State.Flags.X1 = (value & 0x08) > 0;
+            input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (value & 0x0F);
+            input.State.Flags.X2 = (value & 0x20) > 0;
+            input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
+            input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
+            
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
 
-        return true;
+            return true;
+        }
     }
 
     public static bool INIR(Input input)
     {
-        var address = input.State.Registers.ReadPair(Register.BC);
-
-        var value = input.Ports.ReadByte(address);
-
-        input.Ram[input.State.Registers[Register.HL]] = value;
-
-        input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) + 1));
-
-        input.State.Registers.WritePair(Register.BC, (ushort) (input.State.Registers.ReadPair(Register.BC) - 1));
-
-        // Flags
-        input.State.Flags.Carry = value > input.State.Registers[Register.A];
-        input.State.Flags.AddSubtract = true;
-        input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
-        input.State.Flags.X1 = (value & 0x08) > 0;
-        input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (value & 0x0F);
-        input.State.Flags.X2 = (value & 0x20) > 0;
-        input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
-        input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
-        
-        if (input.State.Registers.ReadPair(Register.BC) != 0)
+        unchecked
         {
-            input.State.ProgramCounter--;
+            var address = input.State.Registers.ReadPair(Register.BC);
 
-            return false;
+            var value = input.Ports.ReadByte(address);
+
+            input.Ram[input.State.Registers.ReadPair(Register.HL)] = value;
+
+            input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) + 1));
+
+            input.State.Registers[Register.B]--;
+
+            // Flags
+            input.State.Flags.Carry = value > input.State.Registers[Register.A];
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+            input.State.Flags.X1 = (value & 0x08) > 0;
+            input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (value & 0x0F);
+            input.State.Flags.X2 = (value & 0x20) > 0;
+            input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
+            input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
+            
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+
+            // TODO: Correctly account for extra cycles?
+
+            if (input.State.Registers.ReadPair(Register.BC) != 0)
+            {
+                input.State.ProgramCounter--;
+
+                return false;
+            }
+
+            return true;
         }
+    }
 
-        return true;
+    public static bool OUTI(Input input)
+    {
+        unchecked
+        {
+            var port = input.State.Registers.ReadPair(Register.BC);
+
+            var address = input.State.Registers.ReadPair(Register.HL);
+
+            var data = input.Ram[address];
+
+            input.Ports.WriteByte(port, data);
+
+            input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) + 1));
+
+            input.State.Registers[Register.B]--;
+
+            // Flags
+            input.State.Flags.Carry = data > input.State.Registers[Register.A];
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+            input.State.Flags.X1 = (data & 0x08) > 0;
+            input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (data & 0x0F);
+            input.State.Flags.X2 = (data & 0x20) > 0;
+            input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
+            input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
+            
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+
+            return true;
+        }
+    }
+
+    public static bool OTIR(Input input)
+    {
+        unchecked
+        {
+            var port = input.State.Registers.ReadPair(Register.BC);
+
+            var address = input.State.Registers.ReadPair(Register.HL);
+
+            var data = input.Ram[address];
+
+            input.Ports.WriteByte(port, data);
+
+            input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) + 1));
+
+            input.State.Registers[Register.B]--;
+
+            // Flags
+            input.State.Flags.Carry = data > input.State.Registers[Register.A];
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+            input.State.Flags.X1 = (data & 0x08) > 0;
+            input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (data & 0x0F);
+            input.State.Flags.X2 = (data & 0x20) > 0;
+            input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
+            input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
+            
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+
+            // TODO: Correctly account for extra cycles?
+
+            if (input.State.Registers.ReadPair(Register.BC) != 0)
+            {
+                input.State.ProgramCounter--;
+
+                return false;
+            }
+
+            return true;
+        }
     }
 }
