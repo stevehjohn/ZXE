@@ -242,7 +242,7 @@ public class TestRunner
             {
                 operations++;
 
-                if (operations > 99_999)
+                if (operations > 0xFFFF)
                 {
                     break;
                 }
@@ -257,10 +257,10 @@ public class TestRunner
         }
 
         // INFO: Edge case, hopefully fixed if this gets an answer: https://github.com/raddad772/jsmoo/issues/23
-        if (state.OpcodePrefix > 0)
-        {
-            return (false, operations, state, ram, new OpcodeNotImplementedException("Not implemented"));
-        }
+        //if (state.OpcodePrefix > 0)
+        //{
+        //    return (false, operations, state, ram, new OpcodeNotImplementedException("Not implemented"));
+        //}
 
         var pass = state.ProgramCounter == test.Final.PC
                    && state.StackPointer == test.Final.SP
@@ -307,11 +307,11 @@ public class TestRunner
         FormattedConsole.WriteLine($"    &Cyan;H &White;: &Green;0x{test.Initial.H:X2}          &Cyan;H &White;: &Green;0x{test.Final.H:X2}          {(test.Final.H == result.State.Registers[Register.H] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.H]:X2}");
         FormattedConsole.WriteLine($"    &Cyan;L &White;: &Green;0x{test.Initial.L:X2}          &Cyan;L &White;: &Green;0x{test.Final.L:X2}          {(test.Final.L == result.State.Registers[Register.L] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.L]:X2}");
 
-        FormattedConsole.WriteLine($"    &Cyan;L &White;: &Green;0x{test.Initial.I:X2}          &Cyan;I &White;: &Green;0x{test.Final.I:X2}          {(test.Final.I == result.State.Registers[Register.I] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.I]:X2}");
-        FormattedConsole.WriteLine($"    &Cyan;L &White;: &Green;0x{test.Initial.R:X2}          &Cyan;R &White;: &Green;0x{test.Final.R:X2}          {(test.Final.R == result.State.Registers[Register.R] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.R]:X2}");
+        FormattedConsole.WriteLine($"    &Cyan;I &White;: &Green;0x{test.Initial.I:X2}          &Cyan;I &White;: &Green;0x{test.Final.I:X2}          {(test.Final.I == result.State.Registers[Register.I] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.I]:X2}");
+        FormattedConsole.WriteLine($"    &Cyan;R &White;: &Green;0x{test.Initial.R:X2}          &Cyan;R &White;: &Green;0x{test.Final.R:X2}          {(test.Final.R == result.State.Registers[Register.R] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.R]:X2}");
 
-        FormattedConsole.WriteLine($"    &Cyan;L &White;: &Green;0x{test.Initial.IX:X4}        &Cyan;IX&White;: &Green;0x{test.Final.IX:X4}        {(test.Final.IX == result.State.Registers.ReadPair(Register.IX) ? "&Green;" : "&Red;")}0x{result.State.Registers.ReadPair(Register.IX):X4}");
-        FormattedConsole.WriteLine($"    &Cyan;L &White;: &Green;0x{test.Initial.IY:X4}        &Cyan;IY&White;: &Green;0x{test.Final.IY:X4}        {(test.Final.IY == result.State.Registers.ReadPair(Register.IY) ? "&Green;" : "&Red;")}0x{result.State.Registers.ReadPair(Register.IY):X4}");
+        FormattedConsole.WriteLine($"    &Cyan;IX&White;: &Green;0x{test.Initial.IX:X4}        &Cyan;IX&White;: &Green;0x{test.Final.IX:X4}        {(test.Final.IX == result.State.Registers.ReadPair(Register.IX) ? "&Green;" : "&Red;")}0x{result.State.Registers.ReadPair(Register.IX):X4}");
+        FormattedConsole.WriteLine($"    &Cyan;IY&White;: &Green;0x{test.Initial.IY:X4}        &Cyan;IY&White;: &Green;0x{test.Final.IY:X4}        {(test.Final.IY == result.State.Registers.ReadPair(Register.IY) ? "&Green;" : "&Red;")}0x{result.State.Registers.ReadPair(Register.IY):X4}");
         
         var initialFlags = Flags.FromByte(test.Final.F);
         
