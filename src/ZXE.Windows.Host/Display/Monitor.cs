@@ -11,6 +11,8 @@ namespace ZXE.Windows.Host.Display
 
         private readonly Motherboard _motherboard;
 
+        private readonly VRamAdapter _ramReader;
+
         private SpriteBatch _spriteBatch;
 
         public Monitor(Motherboard motherboard)
@@ -26,6 +28,8 @@ namespace ZXE.Windows.Host.Display
             IsMouseVisible = true;
 
             _motherboard = motherboard;
+
+            _ramReader = new VRamAdapter(_motherboard.Ram, _graphicsDeviceManager);
         }
 
         protected override void Initialize()

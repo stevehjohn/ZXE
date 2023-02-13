@@ -15,6 +15,8 @@ public class Motherboard : IDisposable
 
     private readonly ITimer _timer;
 
+    public Ram Ram => _ram;
+
     public Motherboard(Model model)
     {
         _ram = new Ram(model);
