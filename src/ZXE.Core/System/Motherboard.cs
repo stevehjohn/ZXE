@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Infrastructure;
+﻿using System.Diagnostics;
+using ZXE.Core.Infrastructure;
 using ZXE.Core.System.Interfaces;
 using ZXE.Core.Z80;
 
@@ -36,6 +37,8 @@ public class Motherboard : IDisposable
 
                 break;
         }
+
+        _timer.Start();
     }
 
     public void Load(byte[] data, int destination)
@@ -46,6 +49,8 @@ public class Motherboard : IDisposable
     private void Tick()
     {
         _processor.ProcessInstruction(_ram, _ports);
+
+        Debugger.Log(0, "INFO", "Tick...");
     }
 
     public void Dispose()

@@ -12,8 +12,6 @@ public static class Program
 
         using var monitor = new Monitor(motherboard);
 
-        
-
         monitor.Run();
     }
 }
