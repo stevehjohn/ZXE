@@ -86,7 +86,7 @@ public partial class Processor
             _tracer.TraceBefore(instruction, data, _state, ram);
         }
 
-        UpdateR(instruction.Length);
+        UpdateR(instruction);
 
         if (instruction.Action(new Input(data, _state, ram, ports)))
         {
@@ -116,13 +116,25 @@ public partial class Processor
         return true;
     }
 
-    private void UpdateR(int amount)
+    private void UpdateR(Instruction instruction)
     {
+        if (instruction.Mnemonic.StartsWith("SOPSET"))
+        {
+            return;
+        }
+
+        var increment = 1;
+
+        if (instruction.Opcode > 0xFF)
+        {
+            increment = 2;
+        }
+
         var value = (byte) (_state.Registers[Register.R] & 0x7F);
 
         var topBit = _state.Registers[Register.R] & 0x80;
 
-        value = (byte) (value + 1); // + amount); // TODO: This seems to work... Y tho?
+        value = (byte) (value + increment);
 
         _state.Registers[Register.R] = value;
 
@@ -158,6 +170,11 @@ public partial class Processor
 
         foreach (var instruction in instructions)
         {
+            if (instruction.Value.Opcode == null)
+            {
+                instruction.Value.Opcode = instruction.Key;
+            }
+
             instructionArray[instruction.Key] = instruction.Value;
         }
 

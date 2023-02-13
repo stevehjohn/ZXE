@@ -38,8 +38,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum +2A", "ZX Spect
 		..\ROM Images\ZX Spectrum +2A\image-0.rom = ..\ROM Images\ZX Spectrum +2A\image-0.rom
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXE.Emulator.Host", "ZXE.Emulator.Host\ZXE.Emulator.Host.csproj", "{FEDD15DA-9C40-466D-9F7E-373E65B357B1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,14 +94,6 @@ Global
 		{748ABF22-ED8E-44C0-8652-F481CDBE8C03}.Release|Any CPU.Build.0 = Release|Any CPU
 		{748ABF22-ED8E-44C0-8652-F481CDBE8C03}.Release|x86.ActiveCfg = Release|Any CPU
 		{748ABF22-ED8E-44C0-8652-F481CDBE8C03}.Release|x86.Build.0 = Release|Any CPU
-		{FEDD15DA-9C40-466D-9F7E-373E65B357B1}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{FEDD15DA-9C40-466D-9F7E-373E65B357B1}.Debug|Any CPU.Build.0 = Debug|x86
-		{FEDD15DA-9C40-466D-9F7E-373E65B357B1}.Debug|x86.ActiveCfg = Debug|x86
-		{FEDD15DA-9C40-466D-9F7E-373E65B357B1}.Debug|x86.Build.0 = Debug|x86
-		{FEDD15DA-9C40-466D-9F7E-373E65B357B1}.Release|Any CPU.ActiveCfg = Release|x86
-		{FEDD15DA-9C40-466D-9F7E-373E65B357B1}.Release|Any CPU.Build.0 = Release|x86
-		{FEDD15DA-9C40-466D-9F7E-373E65B357B1}.Release|x86.ActiveCfg = Release|x86
-		{FEDD15DA-9C40-466D-9F7E-373E65B357B1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

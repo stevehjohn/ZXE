@@ -13,7 +13,7 @@ public class Instruction
     public int ClockCycles { get; }
 
     // TODO: Go back over all instructions to add this. Cry while doing so.
-    public int? Opcode { get; }
+    public int? Opcode { get; set; }
 
     public Instruction(string mnemonic,  byte length, Func<Input, bool> action, int clockCycles, string? helperMnemonic = null, int? opcode = null)
     {
