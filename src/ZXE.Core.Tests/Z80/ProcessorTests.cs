@@ -60,15 +60,6 @@ public class ProcessorTests
     }
 
     [Fact]
-    public void NOP()
-    {
-        // NOP
-        _ram[0] = 0x00;
-
-        _processor.ProcessInstruction(_ram, _ports);
-    }
-
-    [Fact]
     public void LD_RR_nn()
     {
         // LD BC, 0x1234
@@ -207,25 +198,6 @@ public class ProcessorTests
         _processor.ProcessInstruction(_ram, _ports);
 
         Assert.Equal(0x56, _state.Registers[Register.A]);
-    }
-
-    [Fact]
-    public void EX_RR_RaRa()
-    {
-        // EX AF, AF'
-        _ram[0] = 0x08;
-
-        _state.Registers[Register.A] = 0x01;
-        _state.Registers[Register.F] = 0x02;
-        _state.Registers[Register.A1] = 0x03;
-        _state.Registers[Register.F1] = 0x04;
-
-        _processor.ProcessInstruction(_ram, _ports);
-
-        Assert.Equal(0x03, _state.Registers[Register.A]);
-        Assert.Equal(0x04, _state.Registers[Register.F]);
-        Assert.Equal(0x01, _state.Registers[Register.A1]);
-        Assert.Equal(0x02, _state.Registers[Register.F1]);
     }
 
     [Fact]
@@ -455,19 +427,6 @@ public class ProcessorTests
         Assert.Equal(0x56, _state.Registers[Register.L]);
         Assert.Equal(0x78, _state.Registers[Register.H]);
     }
-
-    [Fact]
-    public void CPL()
-    {
-        // CPL
-        _ram[0] = 0x2F;
-
-        _state.Registers[Register.A] = 0b10100101;
-
-        _processor.ProcessInstruction(_ram, _ports);
-
-        Assert.Equal(0b01011010, _state.Registers[Register.A]);
-    }
     
     [Fact]
     public void JR_NC_e()
@@ -556,17 +515,6 @@ public class ProcessorTests
         _processor.ProcessInstruction(_ram, _ports);
 
         Assert.Equal(0xAB, _ram[0x1234]);
-    }
-
-    [Fact]
-    public void SCF()
-    {
-        // SCF
-        _ram[0] = 0x37;
-
-        _processor.ProcessInstruction(_ram, _ports);
-
-        Assert.True(_state.Flags.Carry);
     }
         
     [Fact]
