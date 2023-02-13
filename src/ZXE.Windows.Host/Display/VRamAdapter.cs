@@ -28,13 +28,17 @@ public class VRamAdapter
 
         for (var y = 0; y < 192; y++)
         {
+            if (y == 64)
+            {
+            }
+
             for (var x = 0; x < 32; x++)
             {
                 var address = 0b0100000000000000;
 
                 address |= (y & 0b00000111) << 8;
 
-                address |= (y & 0b11000000) << 11;
+                address |= (y & 0b11000000) << 8;
 
                 address |= (y & 0b00111000) << 2;
 
@@ -52,9 +56,9 @@ public class VRamAdapter
                     {
                         data[i] = Color.White;
                     }
-                }
 
-                i++;
+                    i++;
+                }
             }
         }
 
