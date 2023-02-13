@@ -20,8 +20,7 @@ namespace ZXE.Windows.Host.Display
             _graphicsDeviceManager = new GraphicsDeviceManager(this)
                                      {
                                          PreferredBackBufferWidth = 256 * 4,
-                                         PreferredBackBufferHeight = 192 * 4,
-                                         
+                                         PreferredBackBufferHeight = 192 * 4
                                      };
 
             Content.RootDirectory = "_Content";
