@@ -313,9 +313,11 @@ public class TestRunner
         FormattedConsole.WriteLine($"    &Cyan;L &White;: &Green;0x{test.Initial.IX:X4}        &Cyan;IX&White;: &Green;0x{test.Final.IX:X4}        {(test.Final.IX == result.State.Registers.ReadPair(Register.IX) ? "&Green;" : "&Red;")}0x{result.State.Registers.ReadPair(Register.IX):X4}");
         FormattedConsole.WriteLine($"    &Cyan;L &White;: &Green;0x{test.Initial.IY:X4}        &Cyan;IY&White;: &Green;0x{test.Final.IY:X4}        {(test.Final.IY == result.State.Registers.ReadPair(Register.IY) ? "&Green;" : "&Red;")}0x{result.State.Registers.ReadPair(Register.IY):X4}");
         
+        var initialFlags = Flags.FromByte(test.Final.F);
+        
         var expectedFlags = Flags.FromByte(test.Final.F);
 
-        FormattedConsole.WriteLine($"\n    &Cyan;F &White;: &Green;{expectedFlags.GetFlags()}      {(test.Final.F == result.State.Registers[Register.F] ? "&Green;" : "&Red;")}{result.State.Flags.GetFlags()}");
+        FormattedConsole.WriteLine($"\n    &Cyan;F &White;: &Green;{initialFlags.GetFlags()}      &Cyan;F &White;: &Green;{expectedFlags.GetFlags()}      {(test.Final.F == result.State.Registers[Register.F] ? "&Green;" : "&Red;")}{result.State.Flags.GetFlags()}");
 
         FormattedConsole.WriteLine(string.Empty);
 
