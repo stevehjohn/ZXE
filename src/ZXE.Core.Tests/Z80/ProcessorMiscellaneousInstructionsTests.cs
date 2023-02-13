@@ -147,4 +147,5 @@ public class ProcessorMiscellaneousInstructionsTests
         Assert.False(_state.Flags.X2);
         Assert.False(_state.Flags.Zero);
         Assert.False(_state.Flags.Sign);
-    }}
+    }
+}
