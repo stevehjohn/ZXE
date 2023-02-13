@@ -865,4 +865,71 @@ public static class ProcessorMiscellaneousInstructions
             return true;
         }
     }
+
+    public static bool LDD(Input input)
+    {
+        var value = input.Ram[input.State.Registers.ReadPair(Register.HL)];
+
+        input.Ram[input.State.Registers.ReadPair(Register.DE)] = value;
+
+        input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) - 1));
+
+        input.State.Registers.WritePair(Register.DE, (ushort) (input.State.Registers.ReadPair(Register.DE) - 1));
+
+        input.State.Registers.WritePair(Register.BC, (ushort) (input.State.Registers.ReadPair(Register.BC) - 1));
+
+        value += input.State.Registers[Register.A];
+
+        // Flags
+        // Carry unaffected
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+        input.State.Flags.X1 = (value & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.X2 = (value & 0x20) > 0;
+        // Zero unaffected
+        // Sign unaffected
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+
+        return true;
+    }
+
+    public static bool LDDR(Input input)
+    {
+        var value = input.Ram[input.State.Registers.ReadPair(Register.HL)];
+
+        input.Ram[input.State.Registers.ReadPair(Register.DE)] = value;
+
+        input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) - 1));
+
+        input.State.Registers.WritePair(Register.DE, (ushort) (input.State.Registers.ReadPair(Register.DE) - 1));
+
+        input.State.Registers.WritePair(Register.BC, (ushort) (input.State.Registers.ReadPair(Register.BC) - 1));
+
+        value += input.State.Registers[Register.A];
+
+        // Flags
+        // Carry unaffected
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+        input.State.Flags.X1 = (value & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.X2 = (value & 0x20) > 0;
+        // Zero unaffected
+        // Sign unaffected
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        
+        // TODO: Correctly account for extra cycles?
+
+        if (input.State.Registers.ReadPair(Register.BC) != 0)
+        {
+            input.State.ProgramCounter--;
+
+            return false;
+        }
+
+        return true;
+    }
 }
