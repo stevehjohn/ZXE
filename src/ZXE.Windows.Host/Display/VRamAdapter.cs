@@ -28,10 +28,6 @@ public class VRamAdapter
 
         for (var y = 0; y < 192; y++)
         {
-            if (y == 64)
-            {
-            }
-
             for (var x = 0; x < 32; x++)
             {
                 var address = 0b0100000000000000;
