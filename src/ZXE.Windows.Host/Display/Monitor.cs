@@ -7,7 +7,7 @@ namespace ZXE.Windows.Host.Display
 {
     public class Monitor : Game
     {
-        private readonly GraphicsDeviceManager _graphics;
+        private readonly GraphicsDeviceManager _graphicsDeviceManager;
 
         private readonly Motherboard _motherboard;
 
@@ -15,7 +15,11 @@ namespace ZXE.Windows.Host.Display
 
         public Monitor(Motherboard motherboard)
         {
-            _graphics = new GraphicsDeviceManager(this);
+            _graphicsDeviceManager = new GraphicsDeviceManager(this)
+                                     {
+                                         PreferredBackBufferWidth = 256,
+                                         PreferredBackBufferHeight = 192
+                                     };
 
             Content.RootDirectory = "_Content";
 
@@ -26,7 +30,7 @@ namespace ZXE.Windows.Host.Display
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            Window.Title = "ZXE";
 
             base.Initialize();
         }
@@ -34,8 +38,6 @@ namespace ZXE.Windows.Host.Display
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
@@ -45,16 +47,12 @@ namespace ZXE.Windows.Host.Display
                 Exit();
             }
 
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
