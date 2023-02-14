@@ -8,4 +8,8 @@ public interface ITracer
     void TraceBefore(Instruction instruction, byte[] data, State state, Ram ram);
     
     void TraceAfter(Instruction instruction, byte[] data, State state, Ram ram);
+
+    List<string> GetTrace();
+
+    void ClearTrace();
 }

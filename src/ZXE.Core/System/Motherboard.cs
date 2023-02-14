@@ -18,6 +18,8 @@ public class Motherboard : IDisposable
 
     private readonly ITracer? _tracer;
 
+    private readonly Process? _console;
+
     public Ram Ram => _ram;
 
     public Motherboard(Model model, ITracer? tracer)
@@ -37,7 +39,15 @@ public class Motherboard : IDisposable
 
             _tracer = tracer;
 
-            Process.Start("cmd.exe");
+            var process = new Process();
+
+            process.StartInfo.RedirectStandardInput = true;
+
+            process.StartInfo.FileName = "cmd.exe";
+
+            _console = process;
+
+            process.Start();
         }
         else
         {
@@ -65,6 +75,18 @@ public class Motherboard : IDisposable
     private void Tick()
     {
         _processor.ProcessInstruction(_ram, _ports);
+
+        if (_tracer != null)
+        {
+            var trace = _tracer!.GetTrace();
+
+            foreach (var line in trace)
+            {
+                _console!.StandardInput.WriteLine(line);
+            }
+
+            _tracer!.ClearTrace();
+        }
     }
 
     public void Dispose()

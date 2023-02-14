@@ -38,6 +38,11 @@ public class FormattingTracer : ITracer
         return _trace;
     }
 
+    public void ClearTrace()
+    {
+        _trace.Clear();
+    }
+
     private static string FormatMnemonic(string mnemonic)
     {
         var parts = GetMnemonicParts(mnemonic);
