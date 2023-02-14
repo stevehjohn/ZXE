@@ -45,6 +45,8 @@ public class Motherboard : IDisposable
 
             process.StartInfo.FileName = "cmd.exe";
 
+            process.StartInfo.UseShellExecute = false;
+
             _console = process;
 
             process.Start();
