@@ -29,5 +29,7 @@ public class LogViewer
 
             System.Console.WriteLine(builder.ToString());
         }
+
+        // ReSharper disable once FunctionNeverReturns
     }
 }
