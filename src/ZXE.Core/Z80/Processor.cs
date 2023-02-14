@@ -184,11 +184,17 @@ public partial class Processor
 
             switch (_state.InterruptMode)
             {
+                case InterruptMode.Mode0:
+                    break;
+
                 case InterruptMode.Mode1:
                     PushProgramCounter(ram);
 
                     _state.ProgramCounter = 0x0038;
 
+                    break;
+
+                case InterruptMode.Mode2:
                     break;
             }
         }
