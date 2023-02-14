@@ -37,7 +37,8 @@ public partial class Processor
         _tracer = tracer;
     }
 
-    public void ProcessInstruction(Ram ram, Ports ports)
+    // TODO: Non-nullify bus...
+    public void ProcessInstruction(Ram ram, Ports ports, Bus? bus = null)
     {
         var opcode = (int) ram[_state.ProgramCounter];
 

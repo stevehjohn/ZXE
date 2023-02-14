@@ -12,6 +12,8 @@ public class Motherboard : IDisposable
 
     private readonly Ram _ram;
 
+    private readonly Bus _bus;
+
     private readonly Ports _ports;
 
     private readonly ITimer _timer;
@@ -27,6 +29,8 @@ public class Motherboard : IDisposable
         _ram = new Ram(model);
 
         _ports = new Ports();
+
+        _bus = new Bus();
 
         _timer = new Timer(4_000_000)
                  {
@@ -72,7 +76,7 @@ public class Motherboard : IDisposable
 
     private void Tick()
     {
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         if (_tracer != null)
         {
