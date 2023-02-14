@@ -67,5 +67,7 @@ public class Monitor : Game
         _spriteBatch.End();
 
         base.Draw(gameTime);
+
+        screen.Dispose();
     }
 }

@@ -91,6 +91,10 @@ public partial class Processor
 
         Debugger.Log(0, "INFO", $"0x{_state.ProgramCounter:X4} {instruction.Mnemonic}\n");
 
+        if (_state.ProgramCounter == 0x1295)
+        {
+        }
+
         if (instruction.Action(new Input(data, _state, ram, ports)))
         {
             _state.ProgramCounter += instruction.Length;
