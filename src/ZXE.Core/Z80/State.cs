@@ -16,6 +16,10 @@ public class State
 
     public int OpcodePrefix { get; set; }
 
+    public bool InterruptFlipFlop1 { get; set; }
+
+    public bool InterruptFlipFlop2 { get; set; }
+
     public State()
     {
         Registers = new Registers();

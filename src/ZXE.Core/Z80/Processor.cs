@@ -91,10 +91,6 @@ public partial class Processor
 
         Debugger.Log(0, "INFO", $"0x{_state.ProgramCounter:X4} {instruction.Mnemonic}\n");
 
-        if (_state.ProgramCounter == 0x1295)
-        {
-        }
-
         if (instruction.Action(new Input(data, _state, ram, ports)))
         {
             _state.ProgramCounter += instruction.Length;
@@ -104,6 +100,8 @@ public partial class Processor
         {
             _state.ProgramCounter -= 0x10000;
         }
+
+        HandleInterrupts();
 
         if (_tracer != null)
         {
@@ -136,6 +134,10 @@ public partial class Processor
         _state.Registers.WritePair(Register.IX, 0x00);
 
         _state.Registers.WritePair(Register.IY, 0x00);
+
+        _state.InterruptFlipFlop1 = false;
+
+        _state.InterruptFlipFlop2 = false;
     }
 
     internal void SetState(State state)
@@ -148,6 +150,21 @@ public partial class Processor
         _state.OpcodePrefix = prefix;
 
         return true;
+    }
+
+    private void HandleInterrupts()
+    {
+        HandleNonMaskableInterrupt();
+
+        HandleInterrupt();
+    }
+
+    private void HandleNonMaskableInterrupt()
+    {
+    }
+
+    private void HandleInterrupt()
+    {
     }
 
     private void UpdateR(Instruction instruction)
