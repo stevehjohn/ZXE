@@ -1,4 +1,6 @@
-﻿using ZXE.Core.Infrastructure;
+﻿using System.Diagnostics;
+using ZXE.Core.Infrastructure;
+using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System.Interfaces;
 using ZXE.Core.Z80;
 
@@ -14,9 +16,11 @@ public class Motherboard : IDisposable
 
     private readonly ITimer _timer;
 
+    private readonly ITracer? _tracer;
+
     public Ram Ram => _ram;
 
-    public Motherboard(Model model)
+    public Motherboard(Model model, ITracer? tracer)
     {
         _ram = new Ram(model);
 
@@ -27,7 +31,18 @@ public class Motherboard : IDisposable
                      OnTick = Tick
                  };
 
-        _processor = new Processor();
+        if (tracer != null)
+        {
+            _processor = new Processor(tracer);
+
+            _tracer = tracer;
+
+            Process.Start("cmd.exe");
+        }
+        else
+        {
+            _processor = new Processor();
+        }
 
         switch (model)
         {
