@@ -42,15 +42,17 @@ public class VRamAdapter
 
                 var segment = _ram[address];
 
+                var colours = GetColours(x, y);
+
                 for (var b = 0; b < 8; b++)
                 {
                     if ((segment & (0x01 << b)) > 0)
                     {
-                        data[i] = Color.Black;
+                        data[i] = colours.Foreground;
                     }
                     else
                     {
-                        data[i] = Color.White;
+                        data[i] = colours.Background;
                     }
 
                     i++;
@@ -61,5 +63,31 @@ public class VRamAdapter
         texture.SetData(data);
 
         return texture;
+    }
+
+    private (Color Foreground, Color Background) GetColours(int x, int y)
+    {
+        var colourAddress = 0x5800;
+
+        var offset = x / 8 + y / 8 * 32;
+
+        colourAddress += offset;
+
+        var data = _ram[colourAddress];
+
+        var background = (data & 0b00111000) switch
+        {
+            0 => Color.Black,
+            1 => Color.Blue,
+            2 => Color.Red,
+            3 => Color.Magenta,
+            4 => Color.Green,
+            5 => Color.Cyan,
+            6 => Color.Yellow,
+            7 => Color.White,
+            _ => Color.Black
+        };
+
+        return (Color.Black, background);
     }
 }
