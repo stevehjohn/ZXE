@@ -25,6 +25,7 @@ public class Disassembler
 
         while (location < _data!.Length)
         {
+            // TODO: Account for extended opcodes...
             var instruction = instructions[_data[location]];
 
             if (instruction != null)

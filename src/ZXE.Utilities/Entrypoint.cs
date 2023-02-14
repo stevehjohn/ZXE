@@ -18,9 +18,18 @@ public static class Entrypoint
 
         FormattedConsole.WriteLine(string.Empty);
 
+        var c = 0;
+
         foreach (var line in code)
         {
             FormattedConsole.WriteLine($"  &Cyan;{line.Address:X4}&White;: {FormatMnemonic(line)}");
+
+            if (c > 0 && c % 100 == 0)
+            {
+                Console.ReadKey();
+            }
+
+            c++;
         }
     }
 
