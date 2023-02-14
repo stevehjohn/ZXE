@@ -154,9 +154,9 @@ public partial class Processor
 
     private void HandleInterrupts(Ram ram)
     {
-        HandleNonMaskableInterrupt(ram);
+        //HandleNonMaskableInterrupt(ram);
 
-        HandleInterrupt(ram);
+        //HandleInterrupt(ram);
     }
 
     private void HandleNonMaskableInterrupt(Ram ram)
@@ -185,6 +185,29 @@ public partial class Processor
             switch (_state.InterruptMode)
             {
                 case InterruptMode.Mode0:
+                    var instructionOpcode = ram[_state.ProgramCounter];
+
+                    var instruction = _instructions[instructionOpcode];
+
+                    if (instruction!.Mnemonic.StartsWith("RST"))
+                    {
+                        PushProgramCounter(ram);
+
+                        var address = instructionOpcode & 0x38;
+
+                        _state.ProgramCounter = address;
+                    }
+                    else if (instruction.Mnemonic.StartsWith("CALL"))
+                    {
+                        PushProgramCounter(ram);
+
+                        var address = ram[_state.ProgramCounter + 2] << 8;
+
+                        address |= ram[_state.ProgramCounter + 1];
+
+                        _state.ProgramCounter = address;
+                    }
+
                     break;
 
                 case InterruptMode.Mode1:

@@ -396,7 +396,7 @@ public partial class Processor
 
         instructions[0xC3] = new Instruction("JP nn", 3, ProcessorBranchInstructions.JP_nn, 10);
 
-        instructions[0xC4] = new Instruction("CALL NZ, nn", 3, ProcessorBranchInstructions.CALL_NZ_nn, 10);
+        instructions[0xC4] = new Instruction("CALL NZ, nn", 3, ProcessorBranchInstructions.CALL_NZ_nn, 10, null);
 
         instructions[0xC5] = new Instruction("PUSH BC", 1, i => ProcessorMiscellaneousInstructions.PUSH_RR(i, Register.BC), 11);
 
