@@ -41,11 +41,7 @@ public class Motherboard : IDisposable
 
             var process = new Process();
 
-            process.StartInfo.RedirectStandardInput = true;
-
-            process.StartInfo.FileName = "cmd.exe";
-
-            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.FileName = "..\\..\\..\\..\\ZXE.Console.LogViewer\\bin\\Debug\\net7.0\\ZXE.Console.LogViewer.exe";
 
             _console = process;
 
@@ -84,7 +80,7 @@ public class Motherboard : IDisposable
 
             foreach (var line in trace)
             {
-                _console!.StandardInput.WriteLine(line);
+                // _console!.StandardInput.WriteLine(line);
             }
 
             _tracer!.ClearTrace();

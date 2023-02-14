@@ -201,33 +201,37 @@ public class FormattingTracer : ITracer
                 continue;
             }
 
-            if (char.IsUpper(part[0]))
+            try
             {
-                if (part.Length == 1)
+                if (char.IsUpper(part[0]))
                 {
-                    builder.Append($"&Cyan; {part} &White;: &Magenta;0x{state.Registers.ReadByName(part):X2}      ");
-                }
-                else if (part.Length == 2)
-                {
-                    builder.Append($"&Cyan; {part}&White;: &Magenta;0x{state.Registers.ReadByName(part):X4}    ");
-                }
-                else if (part.Length == 3)
-                {
-                    var contents = state.Registers.ReadByName(part[..2]);
-
-                    if (part[2] == 'l')
+                    if (part.Length == 1)
                     {
-                        builder.Append($"&Cyan; {part[..2]}&White;: &Magenta;0x{(contents & 0xFF00) >> 8:X2}&Yellow;{contents & 0x00FF:X2}    ");
+                        builder.Append($"&Cyan; {part} &White;: &Magenta;0x{state.Registers.ReadByName(part):X2}      ");
                     }
-                    else
+                    else if (part.Length == 2)
                     {
-                        builder.Append($"&Cyan; {part[..2]}&White;: &Magenta;0x&Yellow;{(contents & 0xFF00) >> 8:X2}&Magenta;{contents & 0x00FF:X2}    ");
+                        builder.Append($"&Cyan; {part}&White;: &Magenta;0x{state.Registers.ReadByName(part):X4}    ");
+                    }
+                    else if (part.Length == 3)
+                    {
+                        var contents = state.Registers.ReadByName(part[..2]);
+
+                        if (part[2] == 'l')
+                        {
+                            builder.Append($"&Cyan; {part[..2]}&White;: &Magenta;0x{(contents & 0xFF00) >> 8:X2}&Yellow;{contents & 0x00FF:X2}    ");
+                        }
+                        else
+                        {
+                            builder.Append($"&Cyan; {part[..2]}&White;: &Magenta;0x&Yellow;{(contents & 0xFF00) >> 8:X2}&Magenta;{contents & 0x00FF:X2}    ");
+                        }
+
                     }
 
+                    continue;
                 }
-
-                continue;
             }
+            catch { }
 
             if ((instruction.Opcode & 0xFFFF00) == 0xDDCB00)
             {
