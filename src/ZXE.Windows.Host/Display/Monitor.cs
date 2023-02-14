@@ -3,70 +3,69 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ZXE.Core.System;
 
-namespace ZXE.Windows.Host.Display
+namespace ZXE.Windows.Host.Display;
+
+public class Monitor : Game
 {
-    public class Monitor : Game
+    private readonly GraphicsDeviceManager _graphicsDeviceManager;
+
+    private readonly Motherboard _motherboard;
+
+    private readonly VRamAdapter _vRamAdapter;
+
+    private SpriteBatch _spriteBatch;
+
+    public Monitor(Motherboard motherboard)
     {
-        private readonly GraphicsDeviceManager _graphicsDeviceManager;
+        _graphicsDeviceManager = new GraphicsDeviceManager(this)
+                                 {
+                                     PreferredBackBufferWidth = 256 * 4,
+                                     PreferredBackBufferHeight = 192 * 4
+                                 };
 
-        private readonly Motherboard _motherboard;
+        Content.RootDirectory = "_Content";
 
-        private readonly VRamAdapter _vRamAdapter;
+        IsMouseVisible = true;
 
-        private SpriteBatch _spriteBatch;
+        _motherboard = motherboard;
 
-        public Monitor(Motherboard motherboard)
+        _vRamAdapter = new VRamAdapter(_motherboard.Ram, _graphicsDeviceManager);
+    }
+
+    protected override void Initialize()
+    {
+        Window.Title = "ZXE";
+
+        base.Initialize();
+    }
+
+    protected override void LoadContent()
+    {
+        _spriteBatch = new SpriteBatch(GraphicsDevice);
+    }
+
+    protected override void Update(GameTime gameTime)
+    {
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
         {
-            _graphicsDeviceManager = new GraphicsDeviceManager(this)
-                                     {
-                                         PreferredBackBufferWidth = 256 * 4,
-                                         PreferredBackBufferHeight = 192 * 4
-                                     };
-
-            Content.RootDirectory = "_Content";
-
-            IsMouseVisible = true;
-
-            _motherboard = motherboard;
-
-            _vRamAdapter = new VRamAdapter(_motherboard.Ram, _graphicsDeviceManager);
+            Exit();
         }
 
-        protected override void Initialize()
-        {
-            Window.Title = "ZXE";
+        base.Update(gameTime);
+    }
 
-            base.Initialize();
-        }
+    protected override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.DarkGray);
 
-        protected override void LoadContent()
-        {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-        }
+        var screen = _vRamAdapter.GetDisplay();
 
-        protected override void Update(GameTime gameTime)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                Exit();
-            }
+        _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
 
-            base.Update(gameTime);
-        }
+        _spriteBatch.Draw(screen, new Rectangle(0, 0, 256 * 4, 192 * 4), new Rectangle(0, 0, 256, 192), Color.White);
 
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.DarkGray);
+        _spriteBatch.End();
 
-            var screen = _vRamAdapter.GetDisplay();
-
-            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
-
-            _spriteBatch.Draw(screen, new Rectangle(0, 0, 256 * 4, 192 * 4), new Rectangle(0, 0, 256, 192), Color.White);
-
-            _spriteBatch.End();
-
-            base.Draw(gameTime);
-        }
+        base.Draw(gameTime);
     }
 }
