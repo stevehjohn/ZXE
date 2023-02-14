@@ -101,7 +101,7 @@ public partial class Processor
             _state.ProgramCounter -= 0x10000;
         }
 
-        HandleInterrupts(Ram ram);
+        HandleInterrupts(ram);
 
         if (_tracer != null)
         {
@@ -154,9 +154,9 @@ public partial class Processor
 
     private void HandleInterrupts(Ram ram)
     {
-        //HandleNonMaskableInterrupt(ram);
+        HandleNonMaskableInterrupt(ram);
 
-        //HandleInterrupt(ram);
+        HandleInterrupt(ram);
     }
 
     private void HandleNonMaskableInterrupt(Ram ram)
