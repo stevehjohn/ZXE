@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ZXE.Common;
 using ZXE.Core.System;
 
 namespace ZXE.Windows.Host.Display;
@@ -19,16 +20,15 @@ public class VRamAdapter
 
     public Texture2D GetDisplay()
     {
-        // TODO: Magic numbers...
-        var texture = new Texture2D(_graphicsDeviceManager.GraphicsDevice, 256, 192);
+        var texture = new Texture2D(_graphicsDeviceManager.GraphicsDevice, Constants.ScreenWidthPixels, Constants.ScreenHeightPixels);
 
         var data = new Color[256 * 192];
 
         var i = 0;
 
-        for (var y = 0; y < 192; y++)
+        for (var y = 0; y < Constants.ScreenHeightPixels; y++)
         {
-            for (var x = 0; x < 32; x++)
+            for (var x = 0; x < Constants.ScreenWidthBytes; x++)
             {
                 var address = 0b0100000000000000;
 
