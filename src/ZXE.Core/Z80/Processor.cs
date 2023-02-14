@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Exceptions;
+﻿using System.Diagnostics;
+using ZXE.Core.Exceptions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
@@ -88,6 +89,8 @@ public partial class Processor
 
         UpdateR(instruction);
 
+        Debugger.Log(0, "INFO", $"0x{_state.ProgramCounter:X4} {instruction.Mnemonic}\n");
+
         if (instruction.Action(new Input(data, _state, ram, ports)))
         {
             _state.ProgramCounter += instruction.Length;
@@ -102,6 +105,33 @@ public partial class Processor
         {
             _tracer.TraceAfter(instruction, data, _state, ram);
         }
+    }
+
+    public void Reset()
+    {
+        _state.Registers[Register.A] = _state.Registers[Register.A1] = 0xFF;
+
+        _state.Registers[Register.F] = _state.Registers[Register.F1] = 0xFF;
+
+        _state.Flags = Flags.FromByte(0xFF);
+
+        _state.Registers[Register.I] = _state.Registers[Register.R] = 0xFF;
+
+        _state.ProgramCounter = 0x0000;
+
+        _state.StackPointer = 0xFFFF;
+
+        _state.InterruptMode = InterruptMode.Mode0;
+
+        _state.Halted = false;
+
+        _state.Registers[Register.B] = _state.Registers[Register.C] = _state.Registers[Register.D] = _state.Registers[Register.E] = _state.Registers[Register.H] = _state.Registers[Register.L] = 0x00;
+
+        _state.Registers[Register.B1] = _state.Registers[Register.C1] = _state.Registers[Register.D1] = _state.Registers[Register.E1] = _state.Registers[Register.H1] = _state.Registers[Register.L1] = 0x00;
+
+        _state.Registers.WritePair(Register.IX, 0x00);
+
+        _state.Registers.WritePair(Register.IY, 0x00);
     }
 
     internal void SetState(State state)

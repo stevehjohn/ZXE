@@ -42,6 +42,11 @@ public class Motherboard : IDisposable
         _timer.Start();
     }
 
+    public void Reset()
+    {
+        _processor.Reset();
+    }
+
     private void Tick()
     {
         _processor.ProcessInstruction(_ram, _ports);

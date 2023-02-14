@@ -36,11 +36,16 @@ public class Disassembler
                 location += instruction.Length;
             }
             else
-            {
-                var line = new CodeLine(location, "FUCK");
+            {   
+                var line = new CodeLine(location, $"{_data[location]}");
 
                 code.Add(line);
 
+                location++;
+            }
+
+            if (location >= 16_384)
+            {
                 break;
             }
         }

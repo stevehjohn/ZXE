@@ -10,6 +10,8 @@ public static class Program
     {
         var motherboard = new Motherboard(Model.Spectrum48K);
 
+        motherboard.Reset();
+
         using var monitor = new Monitor(motherboard);
 
         monitor.Run();
