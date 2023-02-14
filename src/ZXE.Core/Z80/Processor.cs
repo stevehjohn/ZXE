@@ -182,6 +182,8 @@ public partial class Processor
 
             _state.InterruptFlipFlop2 = false;
 
+            int address;
+
             switch (_state.InterruptMode)
             {
                 case InterruptMode.Mode0:
@@ -193,7 +195,7 @@ public partial class Processor
                     {
                         PushProgramCounter(ram);
 
-                        var address = instructionOpcode & 0x38;
+                        address = instructionOpcode & 0x38;
 
                         _state.ProgramCounter = address;
                     }
@@ -201,7 +203,7 @@ public partial class Processor
                     {
                         PushProgramCounter(ram);
 
-                        var address = ram[_state.ProgramCounter + 2] << 8;
+                        address = ram[_state.ProgramCounter + 2] << 8;
 
                         address |= ram[_state.ProgramCounter + 1];
 
@@ -218,6 +220,13 @@ public partial class Processor
                     break;
 
                 case InterruptMode.Mode2:
+                    // if (bus.Data)
+                    PushProgramCounter(ram);
+
+                    address = _state.Registers[Register.I] << 8; // + bus.Data[0];
+
+                    _state.ProgramCounter = ram[address] | (ram[address + 1] << 8);
+
                     break;
             }
         }
