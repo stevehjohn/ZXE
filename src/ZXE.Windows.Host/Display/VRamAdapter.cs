@@ -75,7 +75,7 @@ public class VRamAdapter
 
         var data = _ram[colourAddress];
 
-        var background = (data & 0b00111000) switch
+        var background = ((data & 0b00111000) >> 3) switch
         {
             0 => Color.Black,
             1 => Color.Blue,
@@ -88,6 +88,19 @@ public class VRamAdapter
             _ => Color.Black
         };
 
-        return (Color.Black, background);
+        var foreground = (data & 0b00000111) switch
+        {
+            0 => Color.Black,
+            1 => Color.Blue,
+            2 => Color.Red,
+            3 => Color.Magenta,
+            4 => Color.Green,
+            5 => Color.Cyan,
+            6 => Color.Yellow,
+            7 => Color.White,
+            _ => Color.Black
+        };
+
+        return (foreground, background);
     }
 }
