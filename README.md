@@ -63,3 +63,5 @@ Runs tests against this awesome suite:
 - http://www.breakintoprogram.co.uk/hardware/computers/zx-spectrum/memory-map
 - https://landley.net/history/mirror/cpm/z80.html
 - https://worldofspectrum.org/faq/reference/z80reference.htm
+- https://github.com/reclaimed/prettybasic/tree/master/doc
+
