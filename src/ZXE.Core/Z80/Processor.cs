@@ -102,7 +102,7 @@ public partial class Processor
             _state.ProgramCounter -= 0x10000;
         }
 
-        HandleInterrupts(ram);
+        HandleInterrupts(ram, bus);
 
         if (_tracer != null)
         {
@@ -153,11 +153,11 @@ public partial class Processor
         return true;
     }
 
-    private void HandleInterrupts(Ram ram)
+    private void HandleInterrupts(Ram ram, Bus bus)
     {
         //HandleNonMaskableInterrupt(ram);
 
-        //HandleInterrupt(ram);
+        //HandleInterrupt(ram, bus);
     }
 
     private void HandleNonMaskableInterrupt(Ram ram)
@@ -173,7 +173,7 @@ public partial class Processor
         _state.ProgramCounter = 0x0066;
     }
 
-    private void HandleInterrupt(Ram ram)
+    private void HandleInterrupt(Ram ram, Bus bus)
     {
         _state.Halted = false;
 
@@ -221,12 +221,16 @@ public partial class Processor
                     break;
 
                 case InterruptMode.Mode2:
-                    // if (bus.Data)
-                    PushProgramCounter(ram);
+                    if (bus.Data.Count > 0)
+                    {
+                        PushProgramCounter(ram);
 
-                    address = _state.Registers[Register.I] << 8; // + bus.Data[0];
+                        address = _state.Registers[Register.I] << 8 + bus.Data.First();
 
-                    _state.ProgramCounter = ram[address] | (ram[address + 1] << 8);
+                        bus.Data.RemoveAt(0);
+
+                        _state.ProgramCounter = ram[address] | (ram[address + 1] << 8);
+                    }
 
                     break;
             }
