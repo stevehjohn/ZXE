@@ -101,7 +101,7 @@ public partial class Processor
             _state.ProgramCounter -= 0x10000;
         }
 
-        HandleInterrupts();
+        HandleInterrupts(Ram ram);
 
         if (_tracer != null)
         {
@@ -152,19 +152,57 @@ public partial class Processor
         return true;
     }
 
-    private void HandleInterrupts()
+    private void HandleInterrupts(Ram ram)
     {
-        HandleNonMaskableInterrupt();
+        //HandleNonMaskableInterrupt(ram);
 
-        HandleInterrupt();
+        //HandleInterrupt(ram);
     }
 
-    private void HandleNonMaskableInterrupt()
+    private void HandleNonMaskableInterrupt(Ram ram)
     {
+        _state.Halted = false;
+
+        PushProgramCounter(ram);
+
+        _state.InterruptFlipFlop2 = _state.InterruptFlipFlop1;
+
+        _state.InterruptFlipFlop1 = false;
+
+        _state.ProgramCounter = 0x0066;
     }
 
-    private void HandleInterrupt()
+    private void HandleInterrupt(Ram ram)
     {
+        _state.Halted = false;
+
+        if (_state.InterruptFlipFlop1)
+        {
+            _state.InterruptFlipFlop1 = false;
+
+            _state.InterruptFlipFlop2 = false;
+
+            switch (_state.InterruptMode)
+            {
+                case InterruptMode.Mode1:
+                    PushProgramCounter(ram);
+
+                    _state.ProgramCounter = 0x0038;
+
+                    break;
+            }
+        }
+    }
+
+    private void PushProgramCounter(Ram ram)
+    {
+        _state.StackPointer--;
+
+        ram[_state.StackPointer] = (byte) ((_state.ProgramCounter & 0xFF00) >> 8);
+
+        _state.StackPointer--;
+
+        ram[_state.StackPointer] = (byte) (_state.ProgramCounter & 0x00FF);
     }
 
     private void UpdateR(Instruction instruction)
