@@ -44,7 +44,7 @@ public class VRamAdapter
 
                 var colours = GetColours(x, y);
 
-                for (var b = 0; b < 8; b++)
+                for (var b = 7; b >= 0; b--)
                 {
                     if ((segment & (0x01 << b)) > 0)
                     {
