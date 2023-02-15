@@ -2,5 +2,5 @@
 
 public class Bus
 {
-    public List<byte> Data { get; set; }
+    public byte? Data { get; set; }
 }

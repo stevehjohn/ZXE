@@ -188,7 +188,7 @@ public partial class Processor
             switch (_state.InterruptMode)
             {
                 case InterruptMode.Mode0:
-                    var instructionOpcode = ram[_state.ProgramCounter];
+                    var instructionOpcode = bus.Data;
 
                     var instruction = _instructions[instructionOpcode];
 
@@ -221,13 +221,13 @@ public partial class Processor
                     break;
 
                 case InterruptMode.Mode2:
-                    if (bus.Data.Count > 0)
+                    if (bus.Data != null)
                     {
                         PushProgramCounter(ram);
 
-                        address = _state.Registers[Register.I] << 8 + bus.Data.First();
+                        address = (_state.Registers[Register.I] << 8) + bus.Data.Value;
 
-                        bus.Data.RemoveAt(0);
+                        bus.Data = null;
 
                         _state.ProgramCounter = ram[address] | (ram[address + 1] << 8);
                     }
