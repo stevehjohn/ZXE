@@ -95,6 +95,11 @@ public partial class Processor
             _state.ProgramCounter += instruction.Length;
         }
 
+        //if (_state.ProgramCounter == 0x0BB8)
+        //{
+        //    Debugger.Log(0, "INFO", $"{Convert.ToString(_state.Registers[Register.A], 2).Replace('0', ' '), 8}\n");
+        //}
+
         if (_state.ProgramCounter > 0xFFFF)
         {
             _state.ProgramCounter -= 0x10000;
