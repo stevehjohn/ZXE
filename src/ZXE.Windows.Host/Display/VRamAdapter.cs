@@ -30,17 +30,17 @@ public class VRamAdapter
         {
             for (var x = 0; x < Constants.ScreenWidthBytes; x++)
             {
-                var address = 0b0100000000000000;
+                var address = 0b0100_0000_0000_0000;
 
-                address |= (y & 0b00000111) << 8;
+                address |= (y & 0b0000_0111) << 8;
 
-                address |= (y & 0b11000000) << 8;
+                address |= (y & 0b1100_0000) << 5;
 
-                address |= (y & 0b00111000) << 2;
+                address |= (y & 0b0011_1000) << 2;
 
                 address |= x;
 
-                address = 0x4000 + (y * Constants.ScreenWidthBytes) + x;
+                //address = 0x4000 + (y * Constants.ScreenWidthBytes) + x;
 
                 var segment = _ram[address];
 
