@@ -193,6 +193,8 @@ public class TestRunner
 
         var ports = new Ports();
 
+        var bus = new Bus();
+
         if (test.Ports != null)
         {
             foreach (var port in test.Ports)
@@ -247,7 +249,7 @@ public class TestRunner
                     break;
                 }
 
-                processor.ProcessInstruction(ram, ports);
+                processor.ProcessInstruction(ram, ports, bus);
 
             } while (state.ProgramCounter != test.Final.PC);
         }

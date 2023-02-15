@@ -19,6 +19,8 @@ public class ProcessorLoadInstructionsTests
 
     private readonly Ports _ports;
 
+    private readonly Bus _bus;
+
     public ProcessorLoadInstructionsTests()
     {
         _processor = new Processor();
@@ -30,6 +32,8 @@ public class ProcessorLoadInstructionsTests
         _processor.SetState(_state);
 
         _ports = new Ports();
+
+        _bus = new Bus();
     }
 
     [Fact]
@@ -40,7 +44,7 @@ public class ProcessorLoadInstructionsTests
         _ram[1] = 0x34;
         _ram[2] = 0x12;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x12, _state.Registers[Register.B]);
         Assert.Equal(0x34, _state.Registers[Register.C]);
@@ -57,7 +61,7 @@ public class ProcessorLoadInstructionsTests
 
         _state.Registers[Register.A] = 0x56;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x56, _ram[0x1234]);
     }
@@ -69,7 +73,7 @@ public class ProcessorLoadInstructionsTests
         _ram[0] = 0x06;
         _ram[1] = 0x23;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x23, _state.Registers[Register.B]);
     }
@@ -84,7 +88,7 @@ public class ProcessorLoadInstructionsTests
 
         _state.Registers[Register.A] = 0x56;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x56, _ram[0x1234]);
     }
@@ -99,7 +103,7 @@ public class ProcessorLoadInstructionsTests
 
         _ram[0x1234] = 0x56;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x56, _state.Registers[Register.A]);
     }
@@ -113,7 +117,7 @@ public class ProcessorLoadInstructionsTests
 
         _state.Registers.WritePair(Register.BC, 0x1234);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x56, _state.Registers[Register.A]);
     }
@@ -128,7 +132,7 @@ public class ProcessorLoadInstructionsTests
 
         _state.Registers.WritePair(Register.HL, 0x5678);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x78, _ram[0x1234]);
         Assert.Equal(0x56, _ram[0x1235]);
@@ -145,7 +149,7 @@ public class ProcessorLoadInstructionsTests
         _ram[0x1234] = 0x56;
         _ram[0x1235] = 0x78;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x56, _state.Registers[Register.L]);
         Assert.Equal(0x78, _state.Registers[Register.H]);
@@ -159,7 +163,7 @@ public class ProcessorLoadInstructionsTests
         _ram[1] = 0x34;
         _ram[2] = 0x12;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x1234, _state.StackPointer);
     }
@@ -173,7 +177,7 @@ public class ProcessorLoadInstructionsTests
 
         _state.Registers.WritePair(Register.HL, 0x1234);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0xAB, _ram[0x1234]);
     }
@@ -186,7 +190,7 @@ public class ProcessorLoadInstructionsTests
 
         _state.Registers[Register.C] = 0x12;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x12, _state.Registers[Register.B]);
     }

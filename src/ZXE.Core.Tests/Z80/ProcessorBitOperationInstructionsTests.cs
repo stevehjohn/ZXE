@@ -19,6 +19,8 @@ public class ProcessorBitOperationInstructionsTests
 
     private readonly Ports _ports;
 
+    private readonly Bus _bus;
+
     public ProcessorBitOperationInstructionsTests()
     {
         _processor = new Processor();
@@ -30,6 +32,8 @@ public class ProcessorBitOperationInstructionsTests
         _processor.SetState(_state);
 
         _ports = new Ports();
+
+        _bus = new Bus();
     }
 
     [Fact]
@@ -41,9 +45,9 @@ public class ProcessorBitOperationInstructionsTests
 
         _state.Registers[Register.B] = 0b11111111;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.False(_state.Flags.Zero);
 
@@ -51,9 +55,9 @@ public class ProcessorBitOperationInstructionsTests
 
         _state.Registers[Register.B] = 0b11111110;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.True(_state.Flags.Zero);
     }

@@ -19,6 +19,8 @@ public class ProcessorBitwiseRotationInstructionsTests
 
     private readonly Ports _ports;
 
+    private readonly Bus _bus;
+
     public ProcessorBitwiseRotationInstructionsTests()
     {
         _processor = new Processor();
@@ -30,6 +32,8 @@ public class ProcessorBitwiseRotationInstructionsTests
         _processor.SetState(_state);
 
         _ports = new Ports();
+
+        _bus = new Bus();
     }
 
     [Fact]
@@ -40,14 +44,14 @@ public class ProcessorBitwiseRotationInstructionsTests
 
         _state.Registers[Register.A] = 0b01101001;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b11010010, _state.Registers[Register.A]);
         Assert.False(_state.Flags.Carry);
 
         _state.ProgramCounter = 0;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b10100101, _state.Registers[Register.A]);
         Assert.True(_state.Flags.Carry);
@@ -61,14 +65,14 @@ public class ProcessorBitwiseRotationInstructionsTests
 
         _state.Registers[Register.A] = 0b11010010;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b01101001, _state.Registers[Register.A]);
         Assert.False(_state.Flags.Carry);
 
         _state.ProgramCounter = 0;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b10110100, _state.Registers[Register.A]);
         Assert.True(_state.Flags.Carry);
@@ -82,21 +86,21 @@ public class ProcessorBitwiseRotationInstructionsTests
 
         _state.Registers[Register.A] = 0b10000001;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b00000010, _state.Registers[Register.A]);
         Assert.True(_state.Flags.Carry);
 
         _state.ProgramCounter = 0;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b00000101, _state.Registers[Register.A]);
         Assert.False(_state.Flags.Carry);
 
         _state.ProgramCounter = 0;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b00001010, _state.Registers[Register.A]);
         Assert.False(_state.Flags.Carry);
@@ -110,21 +114,21 @@ public class ProcessorBitwiseRotationInstructionsTests
 
         _state.Registers[Register.A] = 0b10000010;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b01000001, _state.Registers[Register.A]);
         Assert.False(_state.Flags.Carry);
 
         _state.ProgramCounter = 0;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b00100000, _state.Registers[Register.A]);
         Assert.True(_state.Flags.Carry);
 
         _state.ProgramCounter = 0;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b10010000, _state.Registers[Register.A]);
         Assert.False(_state.Flags.Carry);
@@ -149,19 +153,19 @@ public class ProcessorBitwiseRotationInstructionsTests
 
         _ram[0x1234] = 0b00100010;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b01000100, _state.Registers[Register.C]);
 
@@ -185,19 +189,19 @@ public class ProcessorBitwiseRotationInstructionsTests
 
         _ram[0x1234] = 0b10100010;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b01000100, _state.Registers[Register.C]);
 

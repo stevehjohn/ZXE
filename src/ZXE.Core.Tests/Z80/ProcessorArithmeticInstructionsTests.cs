@@ -19,6 +19,8 @@ public class ProcessorArithmeticInstructionsTests
 
     private readonly Ports _ports;
 
+    private readonly Bus _bus;
+
     public ProcessorArithmeticInstructionsTests()
     {
         _processor = new Processor();
@@ -30,6 +32,8 @@ public class ProcessorArithmeticInstructionsTests
         _processor.SetState(_state);
 
         _ports = new Ports();
+
+        _bus = new Bus();
     }
 
     [Fact]
@@ -41,14 +45,14 @@ public class ProcessorArithmeticInstructionsTests
         _state.Registers[Register.B] = 0x00;
         _state.Registers[Register.C] = 0xFE;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x00, _state.Registers[Register.B]);
         Assert.Equal(0xFF, _state.Registers[Register.C]);
 
         _state.ProgramCounter = 0;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x01, _state.Registers[Register.B]);
         Assert.Equal(0x00, _state.Registers[Register.C]);
@@ -62,7 +66,7 @@ public class ProcessorArithmeticInstructionsTests
 
         _state.Registers[Register.B] = 0x12;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x13, _state.Registers[Register.B]);
     }
@@ -75,7 +79,7 @@ public class ProcessorArithmeticInstructionsTests
 
         _state.Registers[Register.B] = 0x12;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x11, _state.Registers[Register.B]);
     }
@@ -89,7 +93,7 @@ public class ProcessorArithmeticInstructionsTests
         _state.Registers.WritePair(Register.HL, 0x0034);
         _state.Registers.WritePair(Register.BC, 0x1200);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x1234, _state.Registers.ReadPair(Register.HL));
     }
@@ -102,7 +106,7 @@ public class ProcessorArithmeticInstructionsTests
 
         _state.Registers.WritePair(Register.BC, 0x1234);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x1233, _state.Registers.ReadPair(Register.BC));
     }
@@ -115,7 +119,7 @@ public class ProcessorArithmeticInstructionsTests
 
         _state.StackPointer = 0x1234;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x1235, _state.StackPointer);
     }
@@ -129,7 +133,7 @@ public class ProcessorArithmeticInstructionsTests
 
         _state.Registers.WritePair(Register.HL, 0x1234);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x0A, _ram[0x1234]);
     }
@@ -143,7 +147,7 @@ public class ProcessorArithmeticInstructionsTests
 
         _state.Registers.WritePair(Register.HL, 0x1234);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x09, _ram[0x1234]);
     }
@@ -157,7 +161,7 @@ public class ProcessorArithmeticInstructionsTests
         _state.Registers.WritePair(Register.HL, 0x0101);
         _state.StackPointer = 0xA0A0;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0xA1A1, _state.Registers.ReadPair(Register.HL));
     }
@@ -170,7 +174,7 @@ public class ProcessorArithmeticInstructionsTests
 
         _state.StackPointer = 0x1235;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x1234, _state.StackPointer);
     }
@@ -184,7 +188,7 @@ public class ProcessorArithmeticInstructionsTests
         _state.Registers[Register.A] = 0x10;
         _state.Registers[Register.B] = 0x0A;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x1A, _state.Registers[Register.A]);
     }
@@ -199,7 +203,7 @@ public class ProcessorArithmeticInstructionsTests
         _state.Registers[Register.A] = 0x10;
         _state.Registers.WritePair(Register.HL, 0x1234);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x1A, _state.Registers[Register.A]);
     }
@@ -213,7 +217,7 @@ public class ProcessorArithmeticInstructionsTests
         _state.Registers[Register.A] = 0x10;
         _state.Registers[Register.B] = 0x0A;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x1A, _state.Registers[Register.A]);
 
@@ -224,7 +228,7 @@ public class ProcessorArithmeticInstructionsTests
 
         _state.Flags.Carry = true;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x1B, _state.Registers[Register.A]);
     }
@@ -239,7 +243,7 @@ public class ProcessorArithmeticInstructionsTests
         _state.Registers[Register.A] = 0x10;
         _state.Registers.WritePair(Register.HL, 0x1234);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x1A, _state.Registers[Register.A]);
 
@@ -249,7 +253,7 @@ public class ProcessorArithmeticInstructionsTests
 
         _state.Flags.Carry = true;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x1B, _state.Registers[Register.A]);
     }
@@ -263,7 +267,7 @@ public class ProcessorArithmeticInstructionsTests
         _state.Registers[Register.A] = 0x0A;
         _state.Registers[Register.B] = 0x05;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x05, _state.Registers[Register.A]);
     }
@@ -278,7 +282,7 @@ public class ProcessorArithmeticInstructionsTests
         _state.Registers[Register.A] = 0x20;
         _state.Registers.WritePair(Register.HL, 0x1234);
         
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x10, _state.Registers[Register.A]);
     }
@@ -292,7 +296,7 @@ public class ProcessorArithmeticInstructionsTests
         _state.Registers[Register.A] = 0x20;
         _state.Registers[Register.B] = 0x10;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x10, _state.Registers[Register.A]);
 
@@ -302,7 +306,7 @@ public class ProcessorArithmeticInstructionsTests
         _state.Registers[Register.B] = 0x10;
         _state.Flags.Carry = true;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x0F, _state.Registers[Register.A]);
     }
@@ -317,7 +321,7 @@ public class ProcessorArithmeticInstructionsTests
         _state.Registers[Register.A] = 0x20;
         _state.Registers.WritePair(Register.HL, 0x1234);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x10, _state.Registers[Register.A]);
     }

@@ -19,6 +19,8 @@ public class ProcessorBitwiseLogicInstructionsTests
 
     private readonly Ports _ports;
 
+    private readonly Bus _bus;
+
     public ProcessorBitwiseLogicInstructionsTests()
     {
         _processor = new Processor();
@@ -30,6 +32,8 @@ public class ProcessorBitwiseLogicInstructionsTests
         _processor.SetState(_state);
 
         _ports = new Ports();
+
+        _bus = new Bus();
     }
 
     [Fact]
@@ -41,7 +45,7 @@ public class ProcessorBitwiseLogicInstructionsTests
         _state.Registers[Register.A] = 0b01111000;
         _state.Registers[Register.B] = 0b00011110;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b00011000, _state.Registers[Register.A]);
     }
@@ -56,7 +60,7 @@ public class ProcessorBitwiseLogicInstructionsTests
         _state.Registers[Register.A] = 0b01111000;
         _state.Registers.WritePair(Register.HL, 0x1234);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b00011000, _state.Registers[Register.A]);
     }
@@ -70,7 +74,7 @@ public class ProcessorBitwiseLogicInstructionsTests
         _state.Registers[Register.A] = 0b01011010;
         _state.Registers[Register.B] = 0b11111111;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b10100101, _state.Registers[Register.A]);
     }
@@ -85,7 +89,7 @@ public class ProcessorBitwiseLogicInstructionsTests
         _state.Registers[Register.A] = 0b01011010;
         _state.Registers.WritePair(Register.HL, 0x1234);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b10100101, _state.Registers[Register.A]);
     }
@@ -99,7 +103,7 @@ public class ProcessorBitwiseLogicInstructionsTests
         _state.Registers[Register.A] = 0b00110000;
         _state.Registers[Register.B] = 0b00001100;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b00111100, _state.Registers[Register.A]);
     }
@@ -114,7 +118,7 @@ public class ProcessorBitwiseLogicInstructionsTests
         _state.Registers[Register.A] = 0b00110000;
         _state.Registers.WritePair(Register.HL, 0x1234);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b00111100, _state.Registers[Register.A]);
     }

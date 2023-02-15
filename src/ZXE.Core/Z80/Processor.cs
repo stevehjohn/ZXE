@@ -38,7 +38,7 @@ public partial class Processor
     }
 
     // TODO: Non-nullify bus...
-    public void ProcessInstruction(Ram ram, Ports ports, Bus? bus = null)
+    public void ProcessInstruction(Ram ram, Ports ports, Bus bus)
     {
         var opcode = (int) ram[_state.ProgramCounter];
 
@@ -160,9 +160,15 @@ public partial class Processor
 
     private void HandleInterrupts(Ram ram, Bus bus)
     {
-        //HandleNonMaskableInterrupt(ram);
+        if (bus.NonMaskableInterrupt)
+        {
+            HandleNonMaskableInterrupt(ram);
+        }
 
-        //HandleInterrupt(ram, bus);
+        if (bus.Interrupt)
+        {
+            HandleInterrupt(ram, bus);
+        }
     }
 
     private void HandleNonMaskableInterrupt(Ram ram)

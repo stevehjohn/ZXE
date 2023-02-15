@@ -21,6 +21,8 @@ public class ProcessorTests
 
     private readonly Ports _ports;
 
+    private readonly Bus _bus;
+
     public ProcessorTests()
     {
         _processor = new Processor();
@@ -32,6 +34,8 @@ public class ProcessorTests
         _processor.SetState(_state);
 
         _ports = new Ports();
+
+        _bus = new Bus();
     }
 
     [Fact]
@@ -41,7 +45,7 @@ public class ProcessorTests
 
         _state.ProgramCounter = 0xFFFD;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
     }
 
     [Fact]
@@ -53,7 +57,7 @@ public class ProcessorTests
 
         _ram[0] = 0x00;
 
-        processor.ProcessInstruction(_ram, _ports);
+        processor.ProcessInstruction(_ram, _ports, _bus);
 
         tracer.Verify(t => t.TraceBefore(It.Is<Instruction>(i => i.Mnemonic == "NOP"), new byte[] { 0x00 }, It.IsAny<State>(), It.IsAny<Ram>()));
         tracer.Verify(t => t.TraceAfter(It.Is<Instruction>(i => i.Mnemonic == "NOP"), new byte[] { 0x00 }, It.IsAny<State>(), It.IsAny<Ram>()));
@@ -68,9 +72,9 @@ public class ProcessorTests
         _ram[2] = 0x34;
         _ram[3] = 0x12;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x1234, _state.Registers.ReadPair(Register.IX));
     }
@@ -84,9 +88,9 @@ public class ProcessorTests
         _ram[2] = 0x34;
         _ram[3] = 0x12;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x1234, _state.Registers.ReadPair(Register.IY));
     }
@@ -110,19 +114,19 @@ public class ProcessorTests
 
         _ram[0x1234] = 0b00100010;
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        _processor.ProcessInstruction(_ram, _ports);
+        _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0b01000100, _state.Registers[Register.C]);
     }

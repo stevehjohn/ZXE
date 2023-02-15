@@ -27,6 +27,8 @@ public class ExecutesSimpleProgramWithLoop : ITest
 
         var ports = new Ports();
 
+        var bus = new Bus();
+
         processor.SetState(state);
 
         ram.Load(new byte[]
@@ -41,7 +43,7 @@ public class ExecutesSimpleProgramWithLoop : ITest
 
         while (! state.Halted)
         {
-            processor.ProcessInstruction(ram, ports);
+            processor.ProcessInstruction(ram, ports, bus);
         }
 
         return tracer.GetTrace();
