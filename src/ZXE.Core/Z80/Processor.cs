@@ -95,10 +95,12 @@ public partial class Processor
             _state.ProgramCounter += instruction.Length;
         }
 
-        if (_state.ProgramCounter == 0x0BB7)
-        {
-            Debugger.Log(0, "INFO", $"OUTPUTTING: {Convert.ToString(ram[_state.Registers.ReadPair(Register.HL)], 2).Replace('0', ' '), 8}\n");
-        }
+        //if (_state.ProgramCounter == 0x0B7D)
+        //{
+        //    Debugger.Log(0, "INFO", $"0x{_state.Registers.ReadPair(Register.HL):X4}\n");
+        //    //Debugger.Log(0, "INFO", $"{_state.Registers[Register.A]:X2} {(char) (_state.Registers[Register.A] & 0b00000000)}\n");
+        //    //Debugger.Log(0, "INFO", $"OUTPUTTING: 0x{_state.Registers.ReadPair(Register.DE):X4} 0x{_state.Registers.ReadPair(Register.HL):X4} {Convert.ToString(ram[_state.Registers.ReadPair(Register.HL)], 2).Replace('0', ' '), 8}\n");
+        //}
 
         if (_state.ProgramCounter > 0xFFFF)
         {
