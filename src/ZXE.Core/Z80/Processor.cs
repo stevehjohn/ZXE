@@ -92,7 +92,7 @@ public partial class Processor
 
         Debugger.Log(0, "INFO", $"0x{_state.ProgramCounter:X4} {instruction.Mnemonic}\n");
 
-        //if (_state.ProgramCounter == 0x0010)
+        //if (_state.ProgramCounter == 0x0C22)
         //{
         //}
 

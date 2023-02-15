@@ -40,6 +40,8 @@ public class VRamAdapter
 
                 address |= x;
 
+                address = 0x4000 + (y * Constants.ScreenWidthBytes) + x;
+
                 var segment = _ram[address];
 
                 var colours = GetColours(x, y);
