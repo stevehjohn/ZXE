@@ -32,6 +32,10 @@ public class Ram
                 address += Size;
             }
 
+            if (address == 0x3e98)
+            {
+            }
+
             return _ram[address];
         }
 
