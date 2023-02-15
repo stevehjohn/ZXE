@@ -259,7 +259,7 @@ public static class ProcessorMiscellaneousInstructions
 
     public static bool RST(Input input, byte pageZeroAddress)
     {
-        var pc = input.State.ProgramCounter + 1;
+        var pc = input.State.ProgramCounter; // + 1;
 
         input.State.StackPointer--;
 
