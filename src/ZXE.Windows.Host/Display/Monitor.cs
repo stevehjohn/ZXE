@@ -51,6 +51,17 @@ public class Monitor : Game
             Exit();
         }
 
+        var keys = Keyboard.GetState().GetPressedKeys();
+
+        if (keys.Length > 0)
+        {
+//            _motherboard.Bus.Data = (byte) keys[0];
+
+            _motherboard.Ports.WriteByte(65278, 30);
+
+            _motherboard.Bus.Interrupt = true;
+        }
+
         base.Update(gameTime);
     }
 

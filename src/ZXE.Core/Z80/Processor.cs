@@ -163,11 +163,15 @@ public partial class Processor
         if (bus.NonMaskableInterrupt)
         {
             HandleNonMaskableInterrupt(ram);
+
+            bus.NonMaskableInterrupt = false;
         }
 
         if (bus.Interrupt)
         {
             HandleInterrupt(ram, bus);
+
+            bus.Interrupt = false;
         }
     }
 

@@ -11,6 +11,11 @@ public class Ports
 
     public byte ReadByte(int port)
     {
+        if (_input[port] == null)
+        {
+            return 0;
+        }
+
         return _input[port]!.Dequeue();
     }
 

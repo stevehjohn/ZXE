@@ -24,6 +24,10 @@ public class Motherboard : IDisposable
 
     public Ram Ram => _ram;
 
+    public Bus Bus => _bus;
+
+    public Ports Ports => _ports;
+
     public Motherboard(Model model, ITracer? tracer)
     {
         _ram = new Ram(model);
