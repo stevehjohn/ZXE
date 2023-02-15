@@ -188,15 +188,15 @@ public partial class Processor
             switch (_state.InterruptMode)
             {
                 case InterruptMode.Mode0:
-                    var instructionOpcode = bus.Data;
+                    var instructionOpcode = bus.Data!;
 
-                    var instruction = _instructions[instructionOpcode];
+                    var instruction = _instructions[(int) instructionOpcode];
 
                     if (instruction!.Mnemonic.StartsWith("RST"))
                     {
                         PushProgramCounter(ram);
 
-                        address = instructionOpcode & 0x38;
+                        address = (int) instructionOpcode & 0x38;
 
                         _state.ProgramCounter = address;
                     }

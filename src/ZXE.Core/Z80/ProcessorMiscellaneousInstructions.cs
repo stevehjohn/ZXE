@@ -342,13 +342,19 @@ public static class ProcessorMiscellaneousInstructions
 
     public static bool DI(Input input)
     {
-        // TODO: Disable maskable interrupt.
+        input.State.InterruptFlipFlop1 = false;
+        
+        input.State.InterruptFlipFlop2 = false;
+        
         return true;
     }
 
     public static bool EI(Input input)
     {
-        // TODO: Enable maskable interrupt.
+        input.State.InterruptFlipFlop1 = true;
+        
+        input.State.InterruptFlipFlop2 = true;
+
         return true;
     }
 
