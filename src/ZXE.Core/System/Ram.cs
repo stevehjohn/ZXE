@@ -32,11 +32,6 @@ public class Ram
                 address += Size;
             }
 
-            if (address >= 0x3d00 && address <= 0x3fff)
-            {
-                Debugger.Log(0, "INFO", $"{Convert.ToString(_ram[address], 2).Replace('0', ' '),8}\n");
-            }
-
             return _ram[address];
         }
 
