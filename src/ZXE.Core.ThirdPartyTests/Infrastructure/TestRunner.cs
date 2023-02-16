@@ -375,8 +375,8 @@ public class TestRunner
             FormattedConsole.WriteLine($"    {trace[i]}");
         }
 
-        FormattedConsole.WriteLine("\n    &Cyan;Press any key to continue...\n");
+        //FormattedConsole.WriteLine("\n    &Cyan;Press any key to continue...\n");
 
-        Console.ReadKey();
+        //Console.ReadKey();
     }
 }
