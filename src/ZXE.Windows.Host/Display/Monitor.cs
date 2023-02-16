@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ZXE.Core.System;
+using ZXE.Windows.Host.Infrastructure;
 
 namespace ZXE.Windows.Host.Display;
 
@@ -75,10 +76,13 @@ public class Monitor : Game
 
         if (keys.Length > 0)
         {
-//            _motherboard.Bus.Data = (byte) keys[0];
+            var portData = KeyboardMapper.MapKeyState(keys);
 
-            _motherboard.Ports.WriteByte(65278, 30);
-
+            foreach (var port in portData)
+            {
+                _motherboard.Ports.WriteByte(port.Port, port.data);
+            }
+            
             _motherboard.Bus.Interrupt = true;
         }
 
