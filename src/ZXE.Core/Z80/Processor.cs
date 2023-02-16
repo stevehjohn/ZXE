@@ -95,7 +95,10 @@ public partial class Processor
             _state.ProgramCounter += instruction.Length;
         }
 
-        //if (_state.ProgramCounter == 0x0B7D)
+        if (_state.ProgramCounter == 0x0B24)
+        {
+            Debugger.Log(0, "INFO", $"0x{_state.Registers[Register.A]:X2} {(char) _state.Registers[Register.A]}\n");
+        }
         //{
         //    Debugger.Log(0, "INFO", $"0x{_state.Registers.ReadPair(Register.HL):X4}\n");
         //    //Debugger.Log(0, "INFO", $"{_state.Registers[Register.A]:X2} {(char) (_state.Registers[Register.A] & 0b00000000)}\n");
