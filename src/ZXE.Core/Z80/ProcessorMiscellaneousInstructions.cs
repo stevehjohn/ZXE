@@ -165,7 +165,7 @@ public static class ProcessorMiscellaneousInstructions
 
         // Flags unaffected
 
-        return false;
+        return true;
     }
 
     public static bool CP_R_R(Input input, Register left, Register right)
