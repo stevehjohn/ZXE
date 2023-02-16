@@ -113,7 +113,10 @@ public partial class Processor
             _state.ProgramCounter -= 0x10000;
         }
 
-        HandleInterrupts(ram, bus);
+        if (_state.OpcodePrefix == 0)
+        {
+            HandleInterrupts(ram, bus);
+        }
 
         if (_tracer != null)
         {

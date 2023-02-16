@@ -75,4 +75,34 @@ public static class KeyboardMapper
 
         return 0;
     }
+
+    private static byte ScanForFBFEKeys(Keys keys)
+    {
+        if (keys == Keys.Q)
+        {
+            return 0b11111110;
+        }
+
+        if (keys == Keys.W)
+        {
+            return 0b11111101;
+        }
+
+        if (keys == Keys.E)
+        {
+            return 0b11111011;
+        }
+
+        if (keys == Keys.R)
+        {
+            return 0b11110111;
+        }
+
+        if (keys == Keys.T)
+        {
+            return 0b11101111;
+        }
+
+        return 0;
+    }
 }
