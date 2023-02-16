@@ -90,20 +90,20 @@ public partial class Processor
 
         UpdateR(instruction);
 
-        if (instruction.Action(new Input(data, _state, ram, ports)))
-        {
-            _state.ProgramCounter += instruction.Length;
-        }
-
         if (_state.ProgramCounter == 0x0B24)
         {
             Debugger.Log(0, "INFO", $"0x{_state.Registers[Register.A]:X2} {(char) _state.Registers[Register.A]}\n");
         }
-        //{
-        //    Debugger.Log(0, "INFO", $"0x{_state.Registers.ReadPair(Register.HL):X4}\n");
-        //    //Debugger.Log(0, "INFO", $"{_state.Registers[Register.A]:X2} {(char) (_state.Registers[Register.A] & 0b00000000)}\n");
-        //    //Debugger.Log(0, "INFO", $"OUTPUTTING: 0x{_state.Registers.ReadPair(Register.DE):X4} 0x{_state.Registers.ReadPair(Register.HL):X4} {Convert.ToString(ram[_state.Registers.ReadPair(Register.HL)], 2).Replace('0', ' '), 8}\n");
-        //}
+
+        if (_state.ProgramCounter == 0x0B7F)
+        {
+            Debugger.Log(0, "INFO", $"0x{_state.Registers.ReadPair(Register.DE):X4}\n"); // {Convert.ToString(ram[_state.Registers.ReadPair(Register.A)], 2).PadLeft(8, '0')}\n");
+        }
+
+        if (instruction.Action(new Input(data, _state, ram, ports)))
+        {
+            _state.ProgramCounter += instruction.Length;
+        }
 
         if (_state.ProgramCounter > 0xFFFF)
         {
