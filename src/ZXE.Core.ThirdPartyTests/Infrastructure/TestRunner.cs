@@ -273,9 +273,10 @@ public class TestRunner
                    && state.Registers[Register.E] == test.Final.E
                    && state.Registers[Register.H] == test.Final.H
                    && state.Registers[Register.I] == test.Final.I
-                   && state.Registers[Register.R] == test.Final.R;
-        //&& state.Registers.ReadPair(Register.IX) == test.Final.IX
-        //&& state.Registers.ReadHigh(Register.IY) == test.Final.IY; // TODO: Alternate registers?
+                   && state.Registers[Register.R] == test.Final.R
+                   && state.Registers.ReadPair(Register.IX) == test.Final.IX
+                   && state.Registers.ReadPair(Register.IY) == test.Final.IY; 
+        // TODO: Alternate registers?
 
         foreach (var pair in test.Final.Ram)
         {
