@@ -365,9 +365,9 @@ public static class ProcessorMiscellaneousInstructions
             var result = input.State.Registers[destination] - input.Data[1];
 
             // Flags
-            input.State.Flags.Carry = false;
+            input.State.Flags.Carry = input.Data[1] > input.State.Registers[destination];
             input.State.Flags.AddSubtract = false;
-            input.State.Flags.ParityOverflow = false; // TODO: Can OR overflow?
+            input.State.Flags.ParityOverflow = false; // TODO
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
