@@ -89,14 +89,14 @@ public partial class Processor
 
         UpdateR(instruction);
 
-        if (_state.ProgramCounter == 0x0B24)
-        {
-            Debugger.Log(0, "INFO", $"{(char) _state.Registers[Register.A]}");
-        }
+        //if (_state.ProgramCounter == 0x0B24)
+        //{
+        //    Debugger.Log(0, "INFO", $"{(char) _state.Registers[Register.A]}");
+        //}
 
-        if (_state.ProgramCounter == 0x0B65)
-        {
-        }
+        //if (_state.ProgramCounter == 0x0B70)
+        //{
+        //}
 
         //if (_state.ProgramCounter == 0x0BBC)
         //{
