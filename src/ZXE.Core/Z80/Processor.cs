@@ -89,19 +89,14 @@ public partial class Processor
 
         UpdateR(instruction);
 
-        if (_state.ProgramCounter == 0x0BB8)
-        {
-        }
+        //if (_state.ProgramCounter == 0x121C)
+        //{
+        //}
 
-        if (_state.ProgramCounter == 0x0B24)
-        {
-            Debugger.Log(0, "INFO", $"0x{_state.Registers[Register.A]:X2} {(char) _state.Registers[Register.A]}\n");
-        }
-
-        if (_state.ProgramCounter == 0x0B7F)
-        {
-            Debugger.Log(0, "INFO", $"0x{_state.Registers.ReadPair(Register.DE):X4}\n"); // {Convert.ToString(ram[_state.Registers.ReadPair(Register.A)], 2).PadLeft(8, '0')}\n");
-        }
+        //if (_state.ProgramCounter == 0x0BBC)
+        //{
+        //    Debugger.Log(0, "INFO", $"0x{_state.Registers.ReadPair(Register.DE):X4} {Convert.ToString(ram[_state.Registers.ReadPair(Register.A)], 2).PadLeft(8, '0')}\n");
+        //}
 
         if (instruction.Action(new Input(data, _state, ram, ports)))
         {
