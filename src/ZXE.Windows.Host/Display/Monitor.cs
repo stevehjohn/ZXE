@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿#define DELAY
+// Use the above to pause boot to allow for recording.
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ZXE.Core.System;
@@ -15,6 +18,10 @@ public class Monitor : Game
 
     private SpriteBatch _spriteBatch;
 
+#if DELAY
+    private int _count = 0;
+#endif
+
     public Monitor(Motherboard motherboard)
     {
         _graphicsDeviceManager = new GraphicsDeviceManager(this)
@@ -30,6 +37,10 @@ public class Monitor : Game
         _motherboard = motherboard;
 
         _vRamAdapter = new VRamAdapter(_motherboard.Ram, _graphicsDeviceManager);
+
+#if ! DELAY
+        _motherboard.Start();
+#endif
     }
 
     protected override void Initialize()
@@ -46,6 +57,15 @@ public class Monitor : Game
 
     protected override void Update(GameTime gameTime)
     {
+#if DELAY
+        _count++;
+
+        if (_count == 400)
+        {
+            _motherboard.Start();
+        }
+#endif
+
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
         {
             Exit();

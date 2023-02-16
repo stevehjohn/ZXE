@@ -69,7 +69,10 @@ public class Motherboard : IDisposable
 
                 break;
         }
+    }
 
+    public void Start()
+    {
         _timer.Start();
     }
 
