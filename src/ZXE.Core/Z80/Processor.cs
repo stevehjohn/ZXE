@@ -89,6 +89,10 @@ public partial class Processor
 
         UpdateR(instruction);
 
+        if (_state.ProgramCounter == 0x0BB8)
+        {
+        }
+
         if (_state.ProgramCounter == 0x0B24)
         {
             Debugger.Log(0, "INFO", $"0x{_state.Registers[Register.A]:X2} {(char) _state.Registers[Register.A]}\n");
