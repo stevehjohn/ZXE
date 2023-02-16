@@ -65,3 +65,4 @@ Runs tests against this awesome suite:
 - https://worldofspectrum.org/faq/reference/z80reference.htm
 - https://github.com/reclaimed/prettybasic/tree/master/doc
 - https://www.tablix.org/~avian/spectrum/rom/zx82.htm
+- http://www.breakintoprogram.co.uk/hardware/computers/zx-spectrum/keyboard
