@@ -78,9 +78,9 @@ public class Motherboard : IDisposable
         _processor.Reset();
     }
 
-    private void Tick()
+    private int Tick()
     {
-        _processor.ProcessInstruction(_ram, _ports, _bus);
+        var cycles = _processor.ProcessInstruction(_ram, _ports, _bus);
 
         if (_tracer != null)
         {
@@ -93,6 +93,8 @@ public class Motherboard : IDisposable
 
             _tracer!.ClearTrace();
         }
+
+        return cycles;
     }
 
     public void Dispose()

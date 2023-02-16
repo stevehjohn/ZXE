@@ -5,20 +5,29 @@ namespace ZXE.Core.Tests.System;
 
 public class TimerTests
 {
+    private int _callCount;
+
     [Fact]
     public void Timer_fires_rapidly()
     {
-        var callCount = 0L;
+        _callCount = 0;
 
         using var timer = new Timer(3_500_000)
                           {
-                              OnTick = () => callCount++
+                              OnTick = OnTick
                           };
 
         timer.Start();
 
         Thread.Sleep(200);
 
-        Assert.True(callCount > 5);
+        Assert.True(_callCount > 5);
+    }
+
+    private int OnTick()
+    {
+        _callCount++;
+
+        return 5;
     }
 }

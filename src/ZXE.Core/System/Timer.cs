@@ -1,21 +1,21 @@
-﻿using ZXE.Core.System.Interfaces;
+﻿using System.Diagnostics;
+using ZXE.Core.System.Interfaces;
 
 namespace ZXE.Core.System;
 
 public class Timer : ITimer
 {
-    public required Action OnTick { get; init; }
+    public required Func<int> OnTick { get; init; }
 
     private readonly CancellationTokenSource _cancellationTokenSource;
 
     private readonly CancellationToken _cancellationToken;
 
-    private Task? _timer;
+    private readonly double _microsecondsPerCycle;
 
-    // ReSharper disable once UnusedParameter.Local - Will be used eventually.
     public Timer(double speedHz)
     {
-        // TODO: Gonna need to use speedHz to slow the timer down when in Release mode I think.
+        _microsecondsPerCycle = 1.0f / speedHz * Stopwatch.Frequency;
 
         _cancellationTokenSource = new CancellationTokenSource();
 
@@ -24,7 +24,7 @@ public class Timer : ITimer
 
     public void Start()
     {
-        _timer = Task.Run(TimerWorker, _cancellationToken);
+        Task.Run(TimerWorker, _cancellationToken);
     }
 
     public void Dispose()
@@ -32,15 +32,23 @@ public class Timer : ITimer
         _cancellationTokenSource.Cancel();
 
         _cancellationTokenSource.Dispose();
-
-        _timer = null;
     }
 
     private void TimerWorker()
     {
+        var stopwatch = new Stopwatch();
+
+        var cycles = 0;
+
         while (true)
         {
-            OnTick();
+            stopwatch.Restart();
+
+            while (stopwatch.ElapsedTicks < cycles * _microsecondsPerCycle)
+            {
+            }
+
+            cycles = OnTick();
         }
         // ReSharper disable once FunctionNeverReturns
     }

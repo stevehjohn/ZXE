@@ -2,7 +2,7 @@
 
 public interface ITimer : IDisposable
 {
-    Action OnTick { init; }
+    Func<int> OnTick { init; }
 
     void Start();
 }
