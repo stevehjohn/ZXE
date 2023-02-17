@@ -106,22 +106,25 @@ public class Motherboard : IDisposable
     {
         var cycles = _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        if (_tracer != null && _tracing)
+        if (_tracer != null)
         {
-            var client = new TcpClient();
-
-            client.Connect(IPAddress.Loopback, 1234);
-
-            var stream = client.GetStream();
-
-            var trace = _tracer!.GetTrace();
-
-            foreach (var line in trace)
+            if (_tracing)
             {
-                stream.Write(Encoding.ASCII.GetBytes($"{line}\n"));
-            }
+                using var client = new TcpClient();
 
-            stream.Flush();
+                client.Connect(IPAddress.Loopback, 1234);
+
+                using var stream = client.GetStream();
+
+                var trace = _tracer!.GetTrace();
+
+                foreach (var line in trace)
+                {
+                    stream.Write(Encoding.ASCII.GetBytes($"{line}\n"));
+                }
+
+                stream.Flush();
+            }
 
             _tracer!.ClearTrace();
         }
