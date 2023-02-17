@@ -2,11 +2,11 @@
 
 public class Ports
 {
-    private readonly Queue<byte>?[] _input;
+    private readonly byte?[] _input;
 
     public Ports()
     {
-        _input = new Queue<byte>[65_536];
+        _input = new byte?[65_536];
     }
 
     public byte ReadByte(int port)
@@ -16,21 +16,11 @@ public class Ports
             return 0;
         }
 
-        return _input[port]!.Dequeue();
+        return _input[port]!.Value;
     }
 
     public void WriteByte(int port, byte data)
     {
-        // TODO: ?
-    }
-
-    public void EnqueueInput(int port, byte data)
-    {
-        if (_input[port] == null)
-        {
-            _input[port] = new Queue<byte>();
-        }
-
-        _input[port]!.Enqueue(data);
+        _input[port] = data;
     }
 }

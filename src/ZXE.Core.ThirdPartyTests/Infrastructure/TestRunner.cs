@@ -37,7 +37,7 @@ public class TestRunner
         foreach (var file in files)
         {
             //Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("ed b2") < 0)
+            if (Path.GetFileName(file).CompareTo("fd 18") < 0)
             {
                 continue;
             }
@@ -199,7 +199,7 @@ public class TestRunner
         {
             foreach (var port in test.Ports)
             {
-                ports.EnqueueInput(((JsonElement) port[0]).GetInt32(), ((JsonElement) port[1]).GetByte());
+                ports.WriteByte(((JsonElement) port[0]).GetInt32(), ((JsonElement) port[1]).GetByte());
             }
         }
 
@@ -375,8 +375,8 @@ public class TestRunner
             FormattedConsole.WriteLine($"    {trace[i]}");
         }
 
-        FormattedConsole.WriteLine("\n    &Cyan;Press any key to continue...\n");
+        //FormattedConsole.WriteLine("\n    &Cyan;Press any key to continue...\n");
 
-        Console.ReadKey();
+        //Console.ReadKey();
     }
 }

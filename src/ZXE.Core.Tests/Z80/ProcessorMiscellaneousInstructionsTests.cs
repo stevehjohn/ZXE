@@ -161,7 +161,7 @@ public class ProcessorMiscellaneousInstructionsTests
         _ram[1] = 0x00;
         _ram[2] = 0x10;
 
-        _ports.EnqueueInput(0x10, 0x24);
+        _ports.WriteByte(0x10, 0x24);
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
         
