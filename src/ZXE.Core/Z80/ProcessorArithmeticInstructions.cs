@@ -609,8 +609,10 @@ public static class ProcessorArithmeticInstructions
 
             var result = (ushort) (byte) ((value & 0x00FF) + 1);
 
-            result += (byte) (value & 0xFF00);
+            result |= (ushort) (value & 0xFF00);
             
+            input.State.Registers.WritePair(register, result);
+
             // Flags
             // Carry unaffected
             input.State.Flags.AddSubtract = false;
@@ -633,7 +635,9 @@ public static class ProcessorArithmeticInstructions
 
             var result = (ushort) (byte) ((value & 0x00FF) - 1);
 
-            result += (byte) (value & 0xFF00);
+            result += (ushort) (value & 0xFF00);
+            
+            input.State.Registers.WritePair(register, result);
             
             // Flags
             // Carry unaffected
