@@ -21,6 +21,8 @@ public class Motherboard : IDisposable
 
     private readonly ITimer _timer;
 
+    private readonly TcpClient? _tcpClient;
+
     private readonly ITracer? _tracer;
 
     private readonly Process? _console;
@@ -109,7 +111,7 @@ public class Motherboard : IDisposable
 
             foreach (var line in trace)
             {
-                stream.Write(Encoding.ASCII.GetBytes(line));
+                stream.Write(Encoding.ASCII.GetBytes($"{line}\n"));
             }
 
             stream.Flush();

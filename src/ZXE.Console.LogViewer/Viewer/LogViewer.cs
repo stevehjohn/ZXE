@@ -27,7 +27,7 @@ public class LogViewer
             {
                 var read = stream.Read(buffer, 0, buffer.Length);
 
-                builder.AppendLine(Encoding.ASCII.GetString(buffer, 0, read));
+                builder.Append(Encoding.ASCII.GetString(buffer, 0, read));
             }
 
             FormattedConsole.WriteLine(builder.ToString());
