@@ -240,7 +240,7 @@ public static class ProcessorLoadInstructions
 
         var right = input.State.Registers.ReadPair(source);
 
-        var value = (ushort) ((left & 0x00FF) | (right & 0xFF00));
+        var value = (ushort) ((left & 0x00FF) | ((right & 0x00FF) << 8));
 
         input.State.Registers.WritePair(destination, value);
 
@@ -268,7 +268,7 @@ public static class ProcessorLoadInstructions
 
         var right = input.State.Registers.ReadPair(source);
 
-        var value = (ushort) ((left & 0xFF00) | (right & 0xFF00));
+        var value = (ushort) ((left & 0xFF00) | ((right & 0xFF00) >> 8));
 
         input.State.Registers.WritePair(destination, value);
 
