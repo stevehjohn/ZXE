@@ -553,9 +553,11 @@ public static class ProcessorArithmeticInstructions
         {
             var value = input.State.Registers.ReadPair(register);
 
-            var result = (ushort) (byte) ((value & 0xFF00) + 1);
+            var result = (ushort) ((value & 0xFF00) + 0x0100);
 
-            result += (byte) (value & 0x00FF);
+            result |= (byte) (value & 0x00FF);
+
+            input.State.Registers.WritePair(register, result);
             
             // Flags
             // Carry unaffected
@@ -577,9 +579,11 @@ public static class ProcessorArithmeticInstructions
         {
             var value = input.State.Registers.ReadPair(register);
 
-            var result = (ushort) ((value & 0xFF00) - 1);
+            var result = (ushort) ((value & 0xFF00) - 0x0100);
 
             result += (byte) (value & 0x00FF);
+
+            input.State.Registers.WritePair(register, result);
             
             // Flags
             // Carry unaffected
