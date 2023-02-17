@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using ZXE.Common.ConsoleHelpers;
 
 namespace ZXE.Console.LogViewer.Viewer;
 
@@ -8,7 +9,7 @@ public class LogViewer
 {
     public void Run()
     {
-        var listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 1234);
+        var listener = new TcpListener(IPAddress.Loopback, 1234);
 
         listener.Start();
 
@@ -29,7 +30,7 @@ public class LogViewer
                 builder.Append(Encoding.ASCII.GetString(buffer, 0, read));
             }
 
-            System.Console.WriteLine(builder.ToString());
+            FormattedConsole.WriteLine(builder.ToString());
         }
 
         // ReSharper disable once FunctionNeverReturns

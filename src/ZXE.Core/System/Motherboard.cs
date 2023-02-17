@@ -1,4 +1,7 @@
 ﻿using System.Diagnostics;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System.Interfaces;
@@ -96,12 +99,20 @@ public class Motherboard : IDisposable
 
         if (_tracer != null)
         {
+            var client = new TcpClient();
+
+            client.Connect(IPAddress.Loopback, 1234);
+
+            var stream = client.GetStream();
+
             var trace = _tracer!.GetTrace();
 
             foreach (var line in trace)
             {
-                // _console!.StandardInput.WriteLine(line);
+                stream.Write(Encoding.ASCII.GetBytes(line));
             }
+
+            stream.Flush();
 
             _tracer!.ClearTrace();
         }
