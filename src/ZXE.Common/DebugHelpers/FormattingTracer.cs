@@ -201,37 +201,67 @@ public class FormattingTracer : ITracer
                 continue;
             }
 
-            try
+            if (Enum.TryParse(part, out Register register))
             {
-                if (char.IsUpper(part[0]))
+                if (part.Length == 1)
                 {
-                    if (part.Length == 1)
-                    {
-                        builder.Append($"&Cyan; {part} &White;: &Magenta;0x{state.Registers.ReadByName(part):X2}      ");
-                    }
-                    else if (part.Length == 2)
-                    {
-                        builder.Append($"&Cyan; {part}&White;: &Magenta;0x{state.Registers.ReadByName(part):X4}    ");
-                    }
-                    else if (part.Length == 3)
-                    {
-                        var contents = state.Registers.ReadByName(part[..2]);
-
-                        if (part[2] == 'l')
-                        {
-                            builder.Append($"&Cyan; {part[..2]}&White;: &Magenta;0x{(contents & 0xFF00) >> 8:X2}&Yellow;{contents & 0x00FF:X2}    ");
-                        }
-                        else
-                        {
-                            builder.Append($"&Cyan; {part[..2]}&White;: &Magenta;0x&Yellow;{(contents & 0xFF00) >> 8:X2}&Magenta;{contents & 0x00FF:X2}    ");
-                        }
-
-                    }
-
-                    continue;
+                    builder.Append($"&Cyan; {part} &White;: &Magenta;0x{state.Registers[register]:X2}      ");
                 }
+                else if (part.Length == 2)
+                {
+                    builder.Append($"&Cyan; {part}&White;: &Magenta;0x{state.Registers.ReadPair(register):X4}    ");
+                }
+                else if (part.Length == 3)
+                {
+                    var contents = state.Registers.ReadByName(part[..2]);
+
+                    if (part[2] == 'l')
+                    {
+                        builder.Append($"&Cyan; {part[..2]}&White;: &Magenta;0x{(contents & 0xFF00) >> 8:X2}&Yellow;{contents & 0x00FF:X2}    ");
+                    }
+                    else
+                    {
+                        builder.Append($"&Cyan; {part[..2]}&White;: &Magenta;0x&Yellow;{(contents & 0xFF00) >> 8:X2}&Magenta;{contents & 0x00FF:X2}    ");
+                    }
+
+                }
+
+                continue;
             }
-            catch { }
+            else
+            {
+                builder.Append($"{part}");
+
+                continue;
+            }
+
+            //if (char.IsUpper(part[0]))
+            //{
+            //    if (part.Length == 1)
+            //    {
+            //        builder.Append($"&Cyan; {part} &White;: &Magenta;0x{state.Registers.ReadByName(part):X2}      ");
+            //    }
+            //    else if (part.Length == 2)
+            //    {
+            //        builder.Append($"&Cyan; {part}&White;: &Magenta;0x{state.Registers.ReadByName(part):X4}    ");
+            //    }
+            //    else if (part.Length == 3)
+            //    {
+            //        var contents = state.Registers.ReadByName(part[..2]);
+
+            //        if (part[2] == 'l')
+            //        {
+            //            builder.Append($"&Cyan; {part[..2]}&White;: &Magenta;0x{(contents & 0xFF00) >> 8:X2}&Yellow;{contents & 0x00FF:X2}    ");
+            //        }
+            //        else
+            //        {
+            //            builder.Append($"&Cyan; {part[..2]}&White;: &Magenta;0x&Yellow;{(contents & 0xFF00) >> 8:X2}&Magenta;{contents & 0x00FF:X2}    ");
+            //        }
+
+            //    }
+
+            //    continue;
+            //}
 
             if ((instruction.Opcode & 0xFFFF00) == 0xDDCB00)
             {

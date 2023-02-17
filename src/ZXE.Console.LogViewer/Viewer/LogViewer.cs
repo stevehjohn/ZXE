@@ -22,9 +22,11 @@ public class LogViewer
 
             var builder = new StringBuilder();
 
-            while (stream.Read(buffer, 0, buffer.Length) != 0)
+            while (stream.DataAvailable)
             {
-                builder.Append(Encoding.ASCII.GetString(buffer));
+                var read = stream.Read(buffer, 0, buffer.Length);
+
+                builder.Append(Encoding.ASCII.GetString(buffer, 0, read));
             }
 
             System.Console.WriteLine(builder.ToString());
