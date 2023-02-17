@@ -86,6 +86,16 @@ public class Monitor : Game
             _motherboard.Bus.Interrupt = true;
         }
 
+        if (Keyboard.GetState().IsKeyDown(Keys.F11))
+        {
+            _motherboard.SetTraceState(true);
+        }
+
+        if (Keyboard.GetState().IsKeyDown(Keys.F12))
+        {
+            _motherboard.SetTraceState(false);
+        }
+
         base.Update(gameTime);
     }
 

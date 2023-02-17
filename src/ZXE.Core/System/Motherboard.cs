@@ -27,6 +27,8 @@ public class Motherboard : IDisposable
 
     private readonly Process? _console;
 
+    private bool _tracing = false;
+
     public Ram Ram => _ram;
 
     public Bus Bus => _bus;
@@ -95,11 +97,16 @@ public class Motherboard : IDisposable
         _processor.Reset();
     }
 
+    public void SetTraceState(bool enabled)
+    {
+        _tracing = enabled;
+    }
+
     private int Tick()
     {
         var cycles = _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        if (_tracer != null)
+        if (_tracer != null && _tracing)
         {
             var client = new TcpClient();
 
