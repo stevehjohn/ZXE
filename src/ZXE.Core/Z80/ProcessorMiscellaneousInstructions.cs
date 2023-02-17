@@ -698,7 +698,7 @@ public static class ProcessorMiscellaneousInstructions
 
     public static bool CPIR(Input input)
     {
-        var value = input.State.Registers.ReadPair(Register.HL);
+        var value = input.Ram[input.State.Registers.ReadPair(Register.HL)];
 
         var difference = input.State.Registers[Register.A] - value;
 
@@ -707,7 +707,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Registers.WritePair(Register.BC, (ushort) (input.State.Registers.ReadPair(Register.BC) - 1));
 
         // Flags
-        input.State.Flags.Carry = value > input.State.Registers[Register.A];
+        // Carry unaffected
+        //input.State.Flags.Carry = value > input.State.Registers[Register.A];
         input.State.Flags.AddSubtract = true;
         input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
         input.State.Flags.X1 = (value & 0x08) > 0;
