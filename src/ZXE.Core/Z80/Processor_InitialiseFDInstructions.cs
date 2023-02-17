@@ -82,13 +82,13 @@ public partial class Processor
 
         instructions[0xFD67] = new Instruction("LD IYh, A", 1, i => ProcessorLoadInstructions.LD_RRh_R(i, Register.IY, Register.A), 4);
 
-        instructions[0xFD68] = new Instruction("LD IYl, B", 1, i => ProcessorLoadInstructions.LD_RRh_R(i, Register.IY, Register.A), 4);
+        instructions[0xFD68] = new Instruction("LD IYl, B", 1, i => ProcessorLoadInstructions.LD_RRl_R(i, Register.IY, Register.B), 4);
 
-        instructions[0xFD69] = new Instruction("LD IYl, C", 1, i => ProcessorLoadInstructions.LD_RRh_R(i, Register.IY, Register.B), 4);
+        instructions[0xFD69] = new Instruction("LD IYl, C", 1, i => ProcessorLoadInstructions.LD_RRl_R(i, Register.IY, Register.C), 4);
 
-        instructions[0xFD6A] = new Instruction("LD IYl, D", 1, i => ProcessorLoadInstructions.LD_RRh_R(i, Register.IY, Register.D), 4);
+        instructions[0xFD6A] = new Instruction("LD IYl, D", 1, i => ProcessorLoadInstructions.LD_RRl_R(i, Register.IY, Register.D), 4);
 
-        instructions[0xFD6B] = new Instruction("LD IYl, E", 1, i => ProcessorLoadInstructions.LD_RRh_R(i, Register.IY, Register.E), 4);
+        instructions[0xFD6B] = new Instruction("LD IYl, E", 1, i => ProcessorLoadInstructions.LD_RRl_R(i, Register.IY, Register.E), 4);
 
         instructions[0xFD6C] = new Instruction("LD IYl, IYh", 1, i => ProcessorLoadInstructions.LD_RRl_RRh(i, Register.IY, Register.IY), 4);
 
