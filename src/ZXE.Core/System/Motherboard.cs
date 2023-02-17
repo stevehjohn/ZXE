@@ -60,10 +60,19 @@ public class Motherboard : IDisposable
             _processor = new Processor();
         }
 
+        byte[] data;
+
         switch (model)
         {
             case Model.Spectrum48K:
-                var data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum 48K\\image-0.rom");
+                data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum 48K\\image-0.rom");
+
+                _ram.Load(data, 0);
+
+                break;
+
+            case Model.SpectrumPlus2A:
+                data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum +2A\\image-0.rom");
 
                 _ram.Load(data, 0);
 
