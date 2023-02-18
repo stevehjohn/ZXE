@@ -21,13 +21,11 @@ public class Motherboard : IDisposable
 
     private readonly ITimer _timer;
 
-    private readonly TcpClient? _tcpClient;
-
     private readonly ITracer? _tracer;
 
     private readonly Process? _console;
 
-    private bool _tracing = false;
+    private bool _tracing;
 
     public Ram Ram => _ram;
 
