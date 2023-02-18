@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using ZXE.Core.Exceptions;
+﻿using ZXE.Core.Exceptions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
@@ -93,15 +92,6 @@ public partial class Processor
         {
             // TODO: Check why no leading spaces in display output.
         }
-
-        //if (_state.ProgramCounter == 0x0B70)
-        //{
-        //}
-
-        //if (_state.ProgramCounter == 0x0BBC)
-        //{
-        //    Debugger.Log(0, "INFO", $"0x{_state.Registers.ReadPair(Register.DE):X4} {Convert.ToString(ram[_state.Registers.ReadPair(Register.A)], 2).PadLeft(8, '0')}\n");
-        //}
 
         if (instruction.Action(new Input(data, _state, ram, ports)))
         {
