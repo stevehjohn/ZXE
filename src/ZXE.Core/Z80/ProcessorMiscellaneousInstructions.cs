@@ -849,20 +849,20 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Registers[Register.B]--;
 
             // Flags
-            input.State.Flags.Carry = data > input.State.Registers[Register.A];
-            input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+            // Carry unaffected
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = data.IsEvenParity();
             input.State.Flags.X1 = (data & 0x08) > 0;
-            input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (data & 0x0F);
+            // Half carry unknown
             input.State.Flags.X2 = (data & 0x20) > 0;
-            input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
-            input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
+            input.State.Flags.Zero = true;
+            // Sign unknown
             
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
 
             // TODO: Correctly account for extra cycles?
 
-            if (input.State.Registers.ReadPair(Register.BC) != 0)
+            if (input.State.Registers.ReadPair(Register.B) != 0)
             {
                 input.State.ProgramCounter--;
 
