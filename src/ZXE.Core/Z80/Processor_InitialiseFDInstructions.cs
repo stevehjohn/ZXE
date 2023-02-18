@@ -8,6 +8,8 @@ public partial class Processor
     {
         instructions[0xFD09] = new Instruction("ADD IY, BC", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.IY, Register.BC), 11);
 
+        instructions[0xFD18] = new Instruction("JR C, e", 2, ProcessorBranchInstructions.JR_C_e, 7, null, 0xFD18);
+
         instructions[0xFD19] = new Instruction("ADD IY, DE", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.IY, Register.DE), 11);
 
         instructions[0xFD21] = new Instruction("LD IY, nn", 3, i => ProcessorLoadInstructions.LD_RR_nn(i, Register.IY), 10);

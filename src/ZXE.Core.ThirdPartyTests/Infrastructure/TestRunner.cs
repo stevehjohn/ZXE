@@ -37,10 +37,10 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("fd 18") < 0)
-            //{
-            //    continue;
-            //}
+            if (Path.GetFileName(file).CompareTo("fd 18") < 0)
+            {
+                continue;
+            }
 
             // End early
             //if (Path.GetFileName(file).CompareTo("dd 2f") > 0)
@@ -240,7 +240,7 @@ public class TestRunner
 
         try
         {
-            do
+            while (true)
             {
                 operations++;
 
@@ -251,7 +251,12 @@ public class TestRunner
 
                 processor.ProcessInstruction(ram, ports, bus);
 
-            } while (state.ProgramCounter != test.Final.PC);
+                if (state.ProgramCounter == test.Final.PC && state.OpcodePrefix == 0)
+                {
+                    break;
+                }
+
+            } //while (state.ProgramCounter != test.Final.PC && state.OpcodePrefix == 0);
         }
         catch (Exception exception)
         {
@@ -375,8 +380,8 @@ public class TestRunner
             FormattedConsole.WriteLine($"    {trace[i]}");
         }
 
-        //FormattedConsole.WriteLine("\n    &Cyan;Press any key to continue...\n");
+        FormattedConsole.WriteLine("\n    &Cyan;Press any key to continue...\n");
 
-        //Console.ReadKey();
+        Console.ReadKey();
     }
 }
