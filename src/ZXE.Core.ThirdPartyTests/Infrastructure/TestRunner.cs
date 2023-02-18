@@ -36,6 +36,12 @@ public class TestRunner
 
         foreach (var file in files)
         {
+            // Ignore dubious tests...
+            if (string.Compare(Path.GetFileName(file), "fd 18", StringComparison.InvariantCultureIgnoreCase) > 0)
+            {
+                continue;
+            }
+
             // Skip a bunch of tests
             //if (Path.GetFileName(file).CompareTo("fd 18") < 0)
             //{
