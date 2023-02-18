@@ -187,7 +187,7 @@ public partial class Processor
 
         instructions[0xEDB2] = new Instruction("INIR", 1, ProcessorMiscellaneousInstructions.INIR, 12, null, 0xEDB2);
 
-        instructions[0xEDB3] = new Instruction("OTIR", 1, ProcessorMiscellaneousInstructions.OTIR, 12, null, 0xEDB3);
+        instructions[0xEDB3] = new Instruction("OTIR", 1, ProcessorMiscellaneousInstructions.OTIR, 12, "OTIR B", 0xEDB3);
 
         instructions[0xEDA8] = new Instruction("LDD", 1, ProcessorMiscellaneousInstructions.LDD, 12, null, 0xEDA8);
 
