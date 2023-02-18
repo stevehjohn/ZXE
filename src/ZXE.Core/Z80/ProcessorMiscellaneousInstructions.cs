@@ -789,7 +789,7 @@ public static class ProcessorMiscellaneousInstructions
 
             // TODO: Correctly account for extra cycles?
 
-            if (input.State.Registers.ReadPair(Register.BC) != 0)
+            if (input.State.Registers[Register.B] != 0)
             {
                 input.State.ProgramCounter--;
 
@@ -1057,7 +1057,7 @@ public static class ProcessorMiscellaneousInstructions
 
             // TODO: Correctly account for extra cycles?
 
-            if (input.State.Registers.ReadPair(Register.BC) != 0)
+            if (input.State.Registers[Register.B] != 0)
             {
                 input.State.ProgramCounter--;
 
