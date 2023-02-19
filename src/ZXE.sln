@@ -45,6 +45,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum +3", "ZX Spectr
 		..\ROM Images\ZX Spectrum +3\image-3.rom = ..\ROM Images\ZX Spectrum +3\image-3.rom
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game Images", "Game Images", "{40236FC3-1E09-4D60-8380-FD727C9BBF70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Treasure Island Dizzy", "Treasure Island Dizzy", "{B5437754-C6C2-4FBE-A72C-850B777A9FB7}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Treasure Island Dizzy\image-0.z80 = ..\Game Images\Treasure Island Dizzy\image-0.z80
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,6 +131,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{57959EB0-56F2-4C3E-A94F-57E2F9672B66} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
 		{D4F1D69F-9FB5-4004-8B9E-DE312B60E432} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
+		{B5437754-C6C2-4FBE-A72C-850B777A9FB7} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}
