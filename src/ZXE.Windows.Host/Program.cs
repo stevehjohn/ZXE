@@ -19,6 +19,8 @@ public static class Program
 
         motherboard.LoadData(data, 0x5B00);
 
+        motherboard.Reset(0x5B00);
+
         using var monitor = new Monitor(motherboard);
 
         monitor.Run();

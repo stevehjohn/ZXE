@@ -117,7 +117,7 @@ public partial class Processor
         return instruction.ClockCycles;
     }
 
-    public void Reset()
+    public void Reset(int programCounter = 0x0000)
     {
         _state.Registers[Register.A] = _state.Registers[Register.A1] = 0xFF;
 
@@ -127,7 +127,7 @@ public partial class Processor
 
         _state.Registers[Register.I] = _state.Registers[Register.R] = 0xFF;
 
-        _state.ProgramCounter = 0x0000;
+        _state.ProgramCounter = programCounter;
 
         _state.StackPointer = 0xFFFF;
 

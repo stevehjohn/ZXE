@@ -91,9 +91,9 @@ public class Motherboard : IDisposable
         _timer.Start();
     }
 
-    public void Reset()
+    public void Reset(int programCounter = 0x0000)
     {
-        _processor.Reset();
+        _processor.Reset(programCounter);
     }
 
     public void SetTraceState(bool enabled)
