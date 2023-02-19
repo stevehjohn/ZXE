@@ -15,7 +15,7 @@ public static class Program
 
         motherboard.Reset();
 
-        //var data = File.ReadAllBytes("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.z80");
+        //var data = File.ReadAllBytes("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\load-screen.bin");
 
         //motherboard.LoadData(data, 0x4000);
 

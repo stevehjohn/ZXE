@@ -68,3 +68,4 @@ Runs tests against this awesome suite:
 - http://www.breakintoprogram.co.uk/hardware/computers/zx-spectrum/keyboard
 - https://skoolkid.github.io/rom/maps/all.html
 - https://luckyredfish.com/interrupts-on-the-zx-spectrum/
+- https://worldofspectrum.org/

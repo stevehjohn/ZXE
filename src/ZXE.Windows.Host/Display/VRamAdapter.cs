@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.MediaFoundation.DirectX;
 using ZXE.Common;
 using ZXE.Core.System;
+using Color = Microsoft.Xna.Framework.Color;
 
 namespace ZXE.Windows.Host.Display;
 
@@ -69,7 +71,7 @@ public class VRamAdapter
     {
         var colourAddress = 0x5800;
 
-        var offset = x / 8 + y / 8 * 32;
+        var offset = x + y / 8 * 32;
 
         colourAddress += offset;
 

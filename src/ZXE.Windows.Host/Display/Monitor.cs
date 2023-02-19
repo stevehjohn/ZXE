@@ -1,6 +1,7 @@
 ﻿// #define DELAY
 // Use the above to pause boot to allow for recording.
 
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -92,6 +93,13 @@ public class Monitor : Game
         if (Keyboard.GetState().IsKeyDown(Keys.F12))
         {
             _motherboard.SetTraceState(false);
+        }
+
+        if (Keyboard.GetState().IsKeyDown(Keys.F10))
+        {
+            var data = File.ReadAllBytes("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\load-screen.bin");
+
+            _motherboard.LoadData(data, 0x4000);
         }
 
         base.Update(gameTime);
