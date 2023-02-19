@@ -138,6 +138,8 @@ public class Motherboard : IDisposable
 
     private void RefreshInterrupt()
     {
+        _bus.Interrupt = true;
+
         _processor.HandleInterrupts(_ram, _bus);
     }
 }
