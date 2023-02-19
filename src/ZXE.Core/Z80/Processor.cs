@@ -104,7 +104,7 @@ public partial class Processor
             _state.ProgramCounter -= 0x10000;
         }
 
-        if (! instruction.Mnemonic.StartsWith("SOPSET"))
+        if (! instruction.Mnemonic.StartsWith("SOPSET") && _state.OpcodePrefix == 0)
         {
             HandleInterrupts(ram, bus);
         }
