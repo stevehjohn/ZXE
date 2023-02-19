@@ -67,3 +67,4 @@ Runs tests against this awesome suite:
 - https://www.tablix.org/~avian/spectrum/rom/zx82.htm
 - http://www.breakintoprogram.co.uk/hardware/computers/zx-spectrum/keyboard
 - https://skoolkid.github.io/rom/maps/all.html
+- https://luckyredfish.com/interrupts-on-the-zx-spectrum/
