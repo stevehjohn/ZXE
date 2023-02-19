@@ -20,11 +20,11 @@ public static class KeyboardMapper
 
         foreach (var port in Ports)
         {
-            var data = GetPortData(0xFEFE, keys[0]);
+            var data = GetPortData(port, keys[0]);
 
             if (keys.Length > 1)
             {
-                data |= GetPortData(0xFEFE, keys[1]);
+                data |= GetPortData(port, keys[1]);
             }
 
             portData.Add((port, data));
