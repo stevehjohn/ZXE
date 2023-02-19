@@ -101,6 +101,11 @@ public class Motherboard : IDisposable
         _tracing = enabled;
     }
 
+    public void LoadData(byte[] data, int address)
+    {
+        _ram.Load(data, address);
+    }
+
     public void Dispose()
     {
         _timer.Dispose();
