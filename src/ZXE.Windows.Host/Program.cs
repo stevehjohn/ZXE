@@ -15,11 +15,11 @@ public static class Program
 
         motherboard.Reset();
 
-        var data = File.ReadAllBytes("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.z80");
+        //var data = File.ReadAllBytes("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.z80");
 
-        motherboard.LoadData(data, 0x5B00);
+        //motherboard.LoadData(data, 0x4000);
 
-        motherboard.Reset(0x5B00);
+        //motherboard.Reset(0x4000);
 
         using var monitor = new Monitor(motherboard);
 
