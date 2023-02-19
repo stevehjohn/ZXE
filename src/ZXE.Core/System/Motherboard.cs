@@ -43,7 +43,8 @@ public class Motherboard : IDisposable
 
         _timer = new Timer(4_000_000)
                  {
-                     OnTick = Tick
+                     OnTick = Tick,
+                     HandleRefreshInterrupt = RefreshInterrupt
                  };
 
         if (tracer != null)
@@ -100,6 +101,11 @@ public class Motherboard : IDisposable
         _tracing = enabled;
     }
 
+    public void Dispose()
+    {
+        _timer.Dispose();
+    }
+
     private int Tick()
     {
         var cycles = _processor.ProcessInstruction(_ram, _ports, _bus);
@@ -130,8 +136,8 @@ public class Motherboard : IDisposable
         return cycles;
     }
 
-    public void Dispose()
+    private void RefreshInterrupt()
     {
-        _timer.Dispose();
+        _processor.HandleInterrupts(_ram, _bus);
     }
 }

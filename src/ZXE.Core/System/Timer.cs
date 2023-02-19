@@ -7,6 +7,8 @@ public class Timer : ITimer
 {
     public required Func<int> OnTick { get; init; }
 
+    public required Action HandleRefreshInterrupt { get; init; }
+
     private readonly CancellationTokenSource _cancellationTokenSource;
 
     private readonly CancellationToken _cancellationToken;
@@ -25,6 +27,8 @@ public class Timer : ITimer
     public void Start()
     {
         Task.Run(TimerWorker, _cancellationToken);
+
+        Task.Run(InterruptWorker, _cancellationToken);
     }
 
     public void Dispose()
@@ -49,6 +53,23 @@ public class Timer : ITimer
             }
 
             cycles = OnTick();
+        }
+        // ReSharper disable once FunctionNeverReturns
+    }
+
+    private void InterruptWorker()
+    {
+        var stopwatch = new Stopwatch();
+
+        while (true)
+        {
+            stopwatch.Restart();
+
+            while (stopwatch.ElapsedMilliseconds < 50)
+            {
+            }
+
+            HandleRefreshInterrupt();
         }
         // ReSharper disable once FunctionNeverReturns
     }

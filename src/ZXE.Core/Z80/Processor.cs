@@ -146,20 +146,8 @@ public partial class Processor
 
         _state.InterruptFlipFlop2 = false;
     }
-
-    internal void SetState(State state)
-    {
-        _state = state;
-    }
     
-    private bool SetOpcodePrefix(int prefix)
-    {
-        _state.OpcodePrefix = prefix;
-
-        return true;
-    }
-
-    private void HandleInterrupts(Ram ram, Bus bus)
+    public void HandleInterrupts(Ram ram, Bus bus)
     {
         if (bus.NonMaskableInterrupt)
         {
@@ -174,6 +162,18 @@ public partial class Processor
 
             bus.Interrupt = false;
         }
+    }
+
+    internal void SetState(State state)
+    {
+        _state = state;
+    }
+    
+    private bool SetOpcodePrefix(int prefix)
+    {
+        _state.OpcodePrefix = prefix;
+
+        return true;
     }
 
     private void HandleNonMaskableInterrupt(Ram ram)

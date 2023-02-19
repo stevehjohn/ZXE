@@ -82,8 +82,6 @@ public class Monitor : Game
             {
                 _motherboard.Ports.WriteByte(port.Port, port.data);
             }
-            
-            _motherboard.Bus.Interrupt = true;
         }
 
         if (Keyboard.GetState().IsKeyDown(Keys.F11))
