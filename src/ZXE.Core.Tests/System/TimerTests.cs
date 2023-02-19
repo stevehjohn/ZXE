@@ -14,7 +14,8 @@ public class TimerTests
 
         using var timer = new Timer(3_500_000)
                           {
-                              OnTick = OnTick
+                              OnTick = OnTick,
+                              HandleRefreshInterrupt = RefreshInterrupt
                           };
 
         timer.Start();
@@ -29,5 +30,9 @@ public class TimerTests
         _callCount++;
 
         return 5;
+    }
+
+    private static void RefreshInterrupt()
+    {
     }
 }
