@@ -100,6 +100,10 @@ public class Monitor : Game
             var data = File.ReadAllBytes("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\load-screen.bin");
 
             _motherboard.LoadData(data, 0x4000);
+
+            //data = File.ReadAllBytes("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.z80");
+
+            //_motherboard.LoadData(data, 0x4000);
         }
 
         base.Update(gameTime);
