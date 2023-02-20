@@ -33,6 +33,8 @@ public class Motherboard : IDisposable
 
     public Ports Ports => _ports;
 
+    public Processor Processor => _processor;
+
     public Motherboard(Model model, ITracer? tracer)
     {
         _ram = new Ram(model);

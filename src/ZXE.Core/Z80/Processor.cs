@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using ZXE.Core.Exceptions;
+﻿using ZXE.Core.Exceptions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
@@ -20,6 +19,8 @@ public partial class Processor
 
     // TODO: Remove - not good.
     public Instruction?[] Instructions => _instructions;
+
+    public State State => _state;
 
     public Processor()
     {
