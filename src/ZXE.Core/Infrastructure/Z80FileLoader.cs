@@ -5,9 +5,9 @@ namespace ZXE.Core.Infrastructure;
 
 public class Z80FileLoader
 {
-    private State _state;
+    private readonly State _state;
 
-    private Ram _ram;
+    private readonly Ram _ram;
 
     public Z80FileLoader(State state, Ram ram)
     {
@@ -21,6 +21,65 @@ public class Z80FileLoader
         var data = File.ReadAllBytes(fileName);
 
         LoadRegisters(data);
+
+        LoadRam(data);
+    }
+
+    private void LoadRam(byte[] data)
+    {
+        if (_state.ProgramCounter == 0)
+        {
+            throw new Exception("V2. Not currently supported.");
+        }
+
+        var compressed = (data[12] & 0x20) > 0;
+
+        // 30 == V1 header length
+        var dataToLoad = compressed ? Decompress(data[30..]) : data[30..];
+
+        _ram.Load(dataToLoad, 0x4000);
+    }
+
+    private byte[] Decompress(byte[] data)
+    {
+        var decompressed = new List<byte>();
+
+        var i = 0;
+
+        while (i < data.Length)
+        {
+            if (data[i] == 0x00)
+            {
+            }
+            else if (data[i] == 0xED)
+            {
+                if (data[i + 1] == 0xED)
+                {
+                    var length = data[i + 2];
+
+                    for (var r = 0; r < length; r++)
+                    {
+                        decompressed.Add(data[i + 3]);
+                    }
+
+                    i += 4;
+
+                    continue;
+                }
+
+                decompressed.Add(data[i]);
+
+                i++;
+            }
+            else
+            {
+                decompressed.Add(data[i]);
+
+                i++;
+            }
+        }
+
+        return decompressed.ToArray();
     }
 
     private void LoadRegisters(byte[] data)
