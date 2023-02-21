@@ -50,6 +50,20 @@ public class Z80FileLoader
         {
             if (data[i] == 0x00)
             {
+                if (data[i + 1] == 0xED)
+                {
+                    if (data[i + 2] == 0xED)
+                    {
+                        if (data[i + 3] == 0x00)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                decompressed.Add(0);
+
+                i++;
             }
             else if (data[i] == 0xED)
             {
@@ -117,5 +131,7 @@ public class Z80FileLoader
         _state.InterruptFlipFlop2 = data[28] != 0;
 
         _state.InterruptMode = (InterruptMode) (data[29] & 0x03);
+
+        _state.OpcodePrefix = 0;
     }
 }
