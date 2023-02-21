@@ -28,6 +28,7 @@ public enum Register
     BC  = 0x0203,
     DE  = 0x0405,
     HL  = 0x0607,
+    AF1 = 0x0809,
     BC1 = 0x0A0B,
     DE1 = 0x0C0D,
     HL1 = 0x0E0F

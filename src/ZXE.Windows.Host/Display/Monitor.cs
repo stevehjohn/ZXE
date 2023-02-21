@@ -5,6 +5,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Windows.Host.Infrastructure;
 
@@ -97,17 +98,9 @@ public class Monitor : Game
 
         if (Keyboard.GetState().IsKeyDown(Keys.F10))
         {
-            //var data = File.ReadAllBytes("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\load-screen.bin");
+            var loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
 
-            //_motherboard.LoadData(data, 0x4000);
-
-            var data = File.ReadAllBytes("..\\..\\..\\..\\..\\Game Images\\Dizzy\\image-0.z80");
-
-            _motherboard.LoadData(data[0xB7..], 0x4000);
-
-            _motherboard.Processor.State.OpcodePrefix = 0;
-
-            _motherboard.Processor.State.ProgramCounter = 0x5B00;
+            loader.Load("..\\..\\..\\..\\..\\Game Images\\Dizzy\\image-0.z80");
         }
 
         base.Update(gameTime);
