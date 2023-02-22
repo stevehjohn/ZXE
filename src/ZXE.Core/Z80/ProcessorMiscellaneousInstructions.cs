@@ -538,7 +538,7 @@ public static class ProcessorMiscellaneousInstructions
 
     public static bool IN_R_port_RRl(Input input, Register destination, Register source)
     {
-        var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source) & 0xFF00 >> 8);
+        var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source));
 
         Debugger.Log(0, "INFO", $"IN_R_port_RRl Checking {input.State.Registers.ReadPair(source) & 0xFF00 >> 8:X2}\n");
 
