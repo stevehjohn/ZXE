@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Extensions;
+﻿using System.Diagnostics;
+using ZXE.Core.Extensions;
 
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
@@ -535,9 +536,11 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    public static bool IN_R_addr_RR(Input input, Register destination, Register source)
+    public static bool IN_R_port_RRl(Input input, Register destination, Register source)
     {
-        var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source));
+        var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source) & 0xFF00 >> 8);
+
+        Debugger.Log(0, "INFO", $"Checking {input.State.Registers.ReadPair(source) & 0xFF00 >> 8:X2}\n");
 
         input.State.Registers[destination] = value;
 
@@ -556,8 +559,14 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    public static bool IN_R_p(Input input)
+    public static bool IN_R_p(Input input, Register register)
     {
+        var portData = input.Ports.ReadByte(input.Data[1]);
+
+        //Debugger.Log(0, "INFO", $"Checking {input.Data[1]:X2}\n");
+
+        input.State.Registers[register] = portData;
+
         return true;
     }
 
