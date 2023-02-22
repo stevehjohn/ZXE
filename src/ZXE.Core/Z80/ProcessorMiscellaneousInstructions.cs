@@ -556,6 +556,11 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
+    public static bool IN_R_p(Input input)
+    {
+        return true;
+    }
+
     public static bool OUT_addr_RR_R(Input input, Register destination, Register source)
     {
         // Flags unaffected

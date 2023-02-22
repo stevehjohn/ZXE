@@ -443,7 +443,7 @@ public partial class Processor
 
         instructions[0xDA] = new Instruction("JP C, nn", 3, ProcessorBranchInstructions.JP_C_nn, 10);
 
-        //instructions[0xDB] = new Instruction("IN A, (n)", 2, ProcessorMiscellaneousInstructions.IN_, 11);
+        instructions[0xDB] = new Instruction("IN A, (n)", 2, ProcessorMiscellaneousInstructions.IN_R_p, 11);
 
         instructions[0xDC] = new Instruction("CALL C, nn", 3, ProcessorBranchInstructions.CALL_C_nn, 10);
 
