@@ -304,7 +304,7 @@ public class TestRunner
             FormattedConsole.WriteLine($"\n    &Cyan;Exception&White;: &Red;{result.exception.GetType().Name}");
         }
 
-        FormattedConsole.WriteLine("\n&Cyan;        Initial       Expected      Actual");
+        FormattedConsole.WriteLine("\n&Cyan;        Initial       Expected          Actual");
 
         FormattedConsole.WriteLine($"    &Cyan;PC&White;: &Green;0x{test.Initial.PC:X4}        &Cyan;PC&White;: &Green;0x{test.Final.PC:X4}        {(test.Final.PC == result.State.ProgramCounter ? "&Green;" : "&Red;")}0x{result.State.ProgramCounter:X4}");
         FormattedConsole.WriteLine($"    &Cyan;SP&White;: &Green;0x{test.Initial.SP:X4}        &Cyan;SP&White;: &Green;0x{test.Final.SP:X4}        {(test.Final.SP == result.State.StackPointer ? "&Green;" : "&Red;")}0x{result.State.StackPointer:X4}");
