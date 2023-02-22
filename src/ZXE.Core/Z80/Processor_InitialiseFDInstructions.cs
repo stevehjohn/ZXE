@@ -20,7 +20,7 @@ public partial class Processor
 
         instructions[0xFD24] = new Instruction("INC IYh", 1, i => ProcessorArithmeticInstructions.INC_RRh(i, Register.IY), 4);
 
-        instructions[0xFD25] = new Instruction("DEC IYl", 1, i => ProcessorArithmeticInstructions.DEC_RRh(i, Register.IY), 4);
+        instructions[0xFD25] = new Instruction("DEC IYh", 1, i => ProcessorArithmeticInstructions.DEC_RRh(i, Register.IY), 4);
 
         instructions[0xFD26] = new Instruction("LD IYh, n", 2, i => ProcessorLoadInstructions.LD_RRh_n(i, Register.IY), 4);
 

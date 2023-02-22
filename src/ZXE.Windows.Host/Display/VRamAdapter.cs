@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.MediaFoundation.DirectX;
 using ZXE.Common;
 using ZXE.Core.System;
 using Color = Microsoft.Xna.Framework.Color;
