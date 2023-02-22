@@ -561,7 +561,7 @@ public static class ProcessorMiscellaneousInstructions
 
     public static bool IN_R_p(Input input, Register register)
     {
-        var portData = input.Ports.ReadByte(input.Data[1]);
+        var portData = input.Ports.ReadByte(input.State.Registers[Register.A] << 8 | input.Data[1]);
 
         Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2}\n");
 
