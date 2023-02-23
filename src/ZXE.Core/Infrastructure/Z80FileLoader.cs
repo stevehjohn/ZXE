@@ -132,6 +132,8 @@ public class Z80FileLoader
 
         _state.InterruptMode = (InterruptMode) (data[29] & 0x03);
 
+        _state.Flags = Flags.FromByte(_state.Registers[Register.F]);
+
         _state.OpcodePrefix = 0;
     }
 }
