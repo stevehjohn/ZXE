@@ -30,7 +30,7 @@ public static class ProcessorBranchInstructions
         {
             input.State.ProgramCounter += (sbyte) input.Data[1];
 
-            //input.State.ProgramCounter = (ushort) input.State.ProgramCounter;
+            input.State.ProgramCounter = (ushort) input.State.ProgramCounter;
         }
 
         return true;
