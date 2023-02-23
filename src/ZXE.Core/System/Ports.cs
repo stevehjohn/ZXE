@@ -2,25 +2,25 @@
 
 public class Ports
 {
-    private readonly byte?[] _input;
+    private readonly byte?[] _ports;
 
     public Ports()
     {
-        _input = new byte?[65_536];
+        _ports = new byte?[65_536];
     }
 
     public byte ReadByte(int port)
     {
-        if (_input[port] == null)
+        if (_ports[port] == null)
         {
             return 0;
         }
 
-        return _input[port]!.Value;
+        return _ports[port]!.Value;
     }
 
     public void WriteByte(int port, byte data)
     {
-        _input[port] = data;
+        _ports[port] = data;
     }
 }

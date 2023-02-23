@@ -540,7 +540,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source));
 
-        Debugger.Log(0, "INFO", $"IN_R_port_RRl Checking {input.State.Registers.ReadPair(source) & 0xFF00 >> 8:X2} Value: {value}\n");
+        //Debugger.Log(0, "INFO", $"IN_R_port_RRl Checking {input.State.Registers.ReadPair(source) & 0xFF00 >> 8:X2} Value: {value}\n");
 
         input.State.Registers[destination] = value;
 
@@ -563,7 +563,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         var portData = input.Ports.ReadByte(input.State.Registers[Register.A] << 8 | input.Data[1]);
 
-        Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {portData}\n");
+        //Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {portData}\n");
 
         input.State.Registers[register] = portData;
 
@@ -574,7 +574,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         var value = input.Ports.ReadByte(input.State.Registers[Register.C]);
 
-        Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
+        //Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
 
         input.State.Registers[register] = value;
 

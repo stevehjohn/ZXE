@@ -1,6 +1,7 @@
 ﻿// #define DELAY
 // Use the above to pause boot to allow for recording.
 
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -75,14 +76,13 @@ public class Monitor : Game
 
         var keys = Keyboard.GetState().GetPressedKeys();
 
-        if (keys.Length > 0)
-        {
-            var portData = KeyboardMapper.MapKeyState(keys);
+        var portData = KeyboardMapper.MapKeyState(keys);
 
-            foreach (var port in portData)
-            {
-                _motherboard.Ports.WriteByte(port.Port, port.data);
-            }
+        foreach (var port in portData)
+        {
+            _motherboard.Ports.WriteByte(port.Port, port.data);
+
+            Debugger.Log(0, "INFO", $"{port.Port}: {port.data}\n");
         }
 
         if (Keyboard.GetState().IsKeyDown(Keys.F11))

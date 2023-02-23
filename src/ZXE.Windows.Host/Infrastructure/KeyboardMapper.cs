@@ -20,6 +20,13 @@ public static class KeyboardMapper
 
         foreach (var port in Ports)
         {
+            if (keys.Length == 0)
+            {
+                portData.Add((port, 0xFF));
+
+                continue;
+            }
+
             var data = GetPortData(port, keys[0]);
 
             if (keys.Length > 1)
@@ -63,7 +70,7 @@ public static class KeyboardMapper
 
             default:
                 // TODO: Should probably throw an exception.
-                return 0;
+                return 0xFF;
         }
     }
 
@@ -94,7 +101,7 @@ public static class KeyboardMapper
             return 0b11101111;
         }
 
-        return 0;
+        return 0xFF;
     }
 
     private static byte ScanForFDFEKeys(Keys keys)
@@ -124,7 +131,7 @@ public static class KeyboardMapper
             return 0b11101111;
         }
 
-        return 0;
+        return 0xFF;
     }
 
     private static byte ScanForFBFEKeys(Keys keys)
@@ -154,7 +161,7 @@ public static class KeyboardMapper
             return 0b11101111;
         }
 
-        return 0;
+        return 0xFF;
     }
 
     private static byte ScanForF7FEKeys(Keys keys)
@@ -184,7 +191,7 @@ public static class KeyboardMapper
             return 0b11101111;
         }
 
-        return 0;
+        return 0xFF;
     }
 
     private static byte ScanForEFFEKeys(Keys keys)
@@ -214,7 +221,7 @@ public static class KeyboardMapper
             return 0b11101111;
         }
 
-        return 0;
+        return 0xFF;
     }
 
     private static byte ScanForDFFEKeys(Keys keys)
@@ -244,7 +251,7 @@ public static class KeyboardMapper
             return 0b11101111;
         }
 
-        return 0;
+        return 0xFF;
     }
 
     private static byte ScanForBFFEKeys(Keys keys)
@@ -275,7 +282,7 @@ public static class KeyboardMapper
             return 0b11101111;
         }
 
-        return 0;
+        return 0xFF;
     }
 
     private static byte ScanFor7FFEKeys(Keys keys)
@@ -305,6 +312,6 @@ public static class KeyboardMapper
             return 0b11101111;
         }
 
-        return 0;
+        return 0xFF;
     }
 }
