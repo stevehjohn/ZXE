@@ -572,7 +572,7 @@ public static class ProcessorMiscellaneousInstructions
 
     public static bool IN_R_C(Input input, Register register)
     {
-        var value = input.Ports.ReadByte(input.State.Registers[Register.C]);
+        var value = input.Ports.ReadByte(input.State.Registers.ReadPair(Register.BC));
 
         //Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
 
