@@ -540,7 +540,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source));
 
-        Debugger.Log(0, "INFO", $"IN_R_port_RRl Checking {input.State.Registers.ReadPair(source) & 0xFF00 >> 8:X2}\n");
+        Debugger.Log(0, "INFO", $"IN_R_port_RRl Checking {input.State.Registers.ReadPair(source) & 0xFF00 >> 8:X2} Value: {value}\n");
 
         input.State.Registers[destination] = value;
 
@@ -563,9 +563,32 @@ public static class ProcessorMiscellaneousInstructions
     {
         var portData = input.Ports.ReadByte(input.State.Registers[Register.A] << 8 | input.Data[1]);
 
-        Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2}\n");
+        Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {portData}\n");
 
         input.State.Registers[register] = portData;
+
+        return true;
+    }
+
+    public static bool IN_R_C(Input input, Register register)
+    {
+        var value = input.Ports.ReadByte(input.State.Registers[Register.C]);
+
+        Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]} Value: {value}\n");
+
+        input.State.Registers[register] = value;
+
+        // Flags
+        // Carry unaffected
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = value.IsEvenParity();
+        input.State.Flags.X1 = (value & 0x08) > 0;
+        input.State.Flags.HalfCarry = false;
+        input.State.Flags.X2 = (value & 0x20) > 0;
+        input.State.Flags.Zero = value == 0;
+        input.State.Flags.Sign = (sbyte) value < 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
 
         return true;
     }
