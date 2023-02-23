@@ -574,7 +574,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         var value = input.Ports.ReadByte(input.State.Registers[Register.C]);
 
-        Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]} Value: {value}\n");
+        Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
 
         input.State.Registers[register] = value;
 

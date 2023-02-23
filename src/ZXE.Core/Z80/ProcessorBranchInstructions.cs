@@ -84,6 +84,38 @@ public static class ProcessorBranchInstructions
         return true;
     }
 
+    public static bool RETI(Input input)
+    {
+        var value = (ushort) input.Ram[input.State.StackPointer];
+
+        input.State.StackPointer--;
+
+        value |= (ushort) (input.Ram[input.State.StackPointer] << 8);
+
+        input.State.StackPointer--;
+
+        input.State.ProgramCounter = value;
+
+        return true;
+    }
+
+    public static bool RETN(Input input)
+    {
+        var value = (ushort) input.Ram[input.State.StackPointer];
+
+        input.State.StackPointer--;
+
+        value |= (ushort) (input.Ram[input.State.StackPointer] << 8);
+
+        input.State.StackPointer--;
+
+        input.State.ProgramCounter = value;
+
+        input.State.InterruptFlipFlop1 = input.State.InterruptFlipFlop2;
+
+        return true;
+    }
+
     public static bool RET_NZ(Input input)
     {
         // TODO: If condition true, 6 more cycles required.

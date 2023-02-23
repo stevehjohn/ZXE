@@ -61,7 +61,7 @@ public partial class Processor
 
         instructions[0xED44] = new Instruction("NEG A", 1, i => ProcessorBitOperationInstructions.NEG_R(i, Register.A), 4, null, 0xED44);
 
-        // TODO: instructions[0xED45] = new Instruction("RETN", 1, i => (i, InterruptMode.Mode0), 10, null, 0xED45);
+        instructions[0xED45] = new Instruction("RETN", 1, ProcessorBranchInstructions.RETN, 10, null, 0xED45);
 
         instructions[0xED46] = new Instruction("IM 0", 1, i => ProcessorMiscellaneousInstructions.IM_m(i, InterruptMode.Mode0), 4, null, 0xED46);
 
@@ -79,7 +79,7 @@ public partial class Processor
 
         // TODO: Which is right? instructions[0xED4C] = new Instruction("MLT BC", 1, i => MLT_RR(i, Register.BC), 13, null, 0xED4C);
 
-        // TODO: instructions[0xED4D] = new Instruction("RETI", 1, i => (i, Register.BC), 10, null, 0xED4D);
+        instructions[0xED4D] = new Instruction("RETI", 1, ProcessorBranchInstructions.RETI, 10, null, 0xED4D);
 
         instructions[0xED4F] = new Instruction("LD R, A", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.R, Register.A), 5, null, 0xED4F);
         
@@ -92,8 +92,6 @@ public partial class Processor
         instructions[0xED53] = new Instruction("LD (nn), DE", 3, i => ProcessorLoadInstructions.LD_addr_nn_RR(i, Register.DE), 16, null, 0xED53);
 
         // TODO: Exists? instructions[0xED54] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED45);
-
-        // TODO: instructions[0xED55] = new Instruction("RETN", 1, i => (i, InterruptMode.Mode0), 10, null, 0xED55);
 
         instructions[0xED56] = new Instruction("IM 1", 1, i => ProcessorMiscellaneousInstructions.IM_m(i, InterruptMode.Mode1), 4, null, 0xED56);
 
@@ -122,8 +120,6 @@ public partial class Processor
         instructions[0xED63] = new Instruction("LD (nn), HL", 3, i => ProcessorLoadInstructions.LD_addr_nn_RR(i, Register.HL), 16, null, 0xED63);
 
         // TODO: Exists? instructions[0xED64] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED64);
-
-        // TODO: instructions[0xED65] = new Instruction("RETN", 1, i => (i, InterruptMode.Mode0), 10, null, 0xED65);
 
         // TODO: instructions[0xED67] = new Instruction("RRD", 1, i => (i, Register.A, Register.I), 5, null, 0xED67);
 
