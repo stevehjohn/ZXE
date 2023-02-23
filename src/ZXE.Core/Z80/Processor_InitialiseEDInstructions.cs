@@ -133,7 +133,7 @@ public partial class Processor
 
         // TODO: instructions[0xED6C] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED6C);
 
-        // TODO: instructions[0xED6F] = new Instruction("RLD", 1, i => (i, Register.A, Register.R), 5, null, 0xED6F);
+        instructions[0xED6F] = new Instruction("RLD", 1, ProcessorMiscellaneousInstructions.RLD, 5, null, 0xED6F);
 
         instructions[0xED70] = new Instruction("IN (BC)", 1, i => ProcessorMiscellaneousInstructions.IN_addr_RR(i, Register.BC), 8, null, 0xED70);
 
