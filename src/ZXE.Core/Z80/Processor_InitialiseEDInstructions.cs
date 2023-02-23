@@ -121,7 +121,7 @@ public partial class Processor
 
         // TODO: Exists? instructions[0xED64] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED64);
 
-        // TODO: instructions[0xED67] = new Instruction("RRD", 1, i => (i, Register.A, Register.I), 5, null, 0xED67);
+        instructions[0xED67] = new Instruction("RRD", 1, ProcessorMiscellaneousInstructions.RRD, 5, null, 0xED67);
 
         instructions[0xED68] = new Instruction("IN L, (C)", 1, i => ProcessorMiscellaneousInstructions.IN_R_C(i, Register.L), 8, null, 0xED68);
 
