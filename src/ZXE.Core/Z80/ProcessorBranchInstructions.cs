@@ -103,17 +103,17 @@ public static class ProcessorBranchInstructions
     {
         var value = (ushort) input.Ram[input.State.StackPointer];
 
-        input.State.StackPointer--;
+        input.State.StackPointer++;
 
         value |= (ushort) (input.Ram[input.State.StackPointer] << 8);
 
-        input.State.StackPointer--;
+        input.State.StackPointer++;
 
         input.State.ProgramCounter = value;
 
         input.State.InterruptFlipFlop1 = input.State.InterruptFlipFlop2;
 
-        return true;
+        return false;
     }
 
     public static bool RET_NZ(Input input)
