@@ -88,15 +88,15 @@ public static class ProcessorBranchInstructions
     {
         var value = (ushort) input.Ram[input.State.StackPointer];
 
-        input.State.StackPointer--;
+        input.State.StackPointer++;
 
         value |= (ushort) (input.Ram[input.State.StackPointer] << 8);
 
-        input.State.StackPointer--;
+        input.State.StackPointer++;
 
         input.State.ProgramCounter = value;
 
-        return true;
+        return false;
     }
 
     public static bool RETN(Input input)
