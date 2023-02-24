@@ -122,6 +122,18 @@ public partial class Processor
 
         instructions[0xDD39] = new Instruction("ADD IX, SP", 1, i => ProcessorArithmeticInstructions.ADD_RR_SP(i, Register.IX), 11);
 
+        instructions[0xDD3A] = new Instruction("LD A, (nn)", 3, i => ProcessorLoadInstructions.LD_R_addr_nn(i, Register.A), 13);
+
+        instructions[0xDD3B] = new Instruction("DEC SP", 1, ProcessorArithmeticInstructions.DEC_SP, 6);
+
+        instructions[0xDD3C] = new Instruction("INC A", 1, i => ProcessorArithmeticInstructions.INC_R(i, Register.A), 4);
+
+        instructions[0xDD3D] = new Instruction("DEC A", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.A), 4);
+
+        instructions[0xDD3E] = new Instruction("LD A, n", 2, i => ProcessorLoadInstructions.LD_R_n(i, Register.A), 7);
+
+        instructions[0xDD3F] = new Instruction("CCF", 1, ProcessorMiscellaneousInstructions.CCF, 4);
+
         instructions[0xDD40] = new Instruction("LD B, B", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.B, Register.B), 4, null, 0xDD40);
 
         instructions[0xDD41] = new Instruction("LD B, C", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.B, Register.C), 4, null, 0xDD41);
@@ -401,6 +413,10 @@ public partial class Processor
         instructions[0xDDCA] = new Instruction("JP Z, nn", 3, ProcessorBranchInstructions.JP_Z_nn, 10);
 
         instructions[0xDDCB] = new Instruction("SOPSET 0xDDCB", 1, _ => SetOpcodePrefix(0xDDCB), 4);
+
+        instructions[0xDDCC] = new Instruction("CALL Z, nn", 3, ProcessorBranchInstructions.CALL_Z_nn, 10);
+
+        instructions[0xDDCD] = new Instruction("CALL nn", 3, ProcessorBranchInstructions.CALL_nn, 17);
 
         instructions[0xDDCE] = new Instruction("ADC A, n", 2, i => ProcessorArithmeticInstructions.ADC_R_n(i, Register.A), 7);
 
