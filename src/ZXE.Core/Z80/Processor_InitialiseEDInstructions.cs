@@ -123,7 +123,11 @@ public partial class Processor
 
         instructions[0xED63] = new Instruction("LD (nn), HL", 3, i => ProcessorLoadInstructions.LD_addr_nn_RR(i, Register.HL), 16, null, 0xED63);
 
-        // TODO: Exists? instructions[0xED64] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED64);
+        instructions[0xED64] = new Instruction("NEG A", 1, i => ProcessorBitOperationInstructions.NEG_R(i, Register.A), 8);
+
+        instructions[0xED65] = new Instruction("RETN", 1, ProcessorBranchInstructions.RETN, 10, null, 0xED65);
+
+        instructions[0xED66] = new Instruction("IM 0", 1, i => ProcessorMiscellaneousInstructions.IM_m(i, InterruptMode.Mode0), 4, null, 0xED66);
 
         instructions[0xED67] = new Instruction("RRD", 1, ProcessorMiscellaneousInstructions.RRD, 5, null, 0xED67);
 
@@ -135,7 +139,11 @@ public partial class Processor
 
         instructions[0xED6B] = new Instruction("LD HL, (nn)", 3, i => ProcessorLoadInstructions.LD_RR_addr_nn(i, Register.HL), 16, null, 0xED6B);
 
-        // TODO: instructions[0xED6C] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED6C);
+        instructions[0xED6C] = new Instruction("NEG A", 1, i => ProcessorBitOperationInstructions.NEG_R(i, Register.A), 8);
+
+        instructions[0xED6D] = new Instruction("RETN", 1, ProcessorBranchInstructions.RETN, 10, null, 0xED45);
+
+        instructions[0xED6E] = new Instruction("IM 0", 1, i => ProcessorMiscellaneousInstructions.IM_m(i, InterruptMode.Mode0), 4, null, 0xED6E);
 
         instructions[0xED6F] = new Instruction("RLD", 1, ProcessorMiscellaneousInstructions.RLD, 5, null, 0xED6F);
 

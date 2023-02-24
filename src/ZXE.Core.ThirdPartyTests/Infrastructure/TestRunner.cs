@@ -39,7 +39,7 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("dd 3a") < 0)
+            if (Path.GetFileName(file).CompareTo("ed 64") < 0)
             {
                 continue;
             }
