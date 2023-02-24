@@ -158,9 +158,9 @@ public partial class Processor
             bus.NonMaskableInterrupt = false;
         }
 
-        if (bus.Interrupt)
+        if (bus.Interrupt && _state.InterruptFlipFlop1)
         {
-            HandleInterrupt(ram, bus);
+            HandleMaskableInterrupt(ram, bus);
 
             bus.Interrupt = false;
         }
@@ -191,7 +191,7 @@ public partial class Processor
         _state.ProgramCounter = 0x0066;
     }
 
-    private void HandleInterrupt(Ram ram, Bus bus)
+    private void HandleMaskableInterrupt(Ram ram, Bus bus)
     {
         _state.Halted = false;
 
