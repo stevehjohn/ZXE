@@ -229,7 +229,7 @@ public class FormattingTracer : ITracer
                 continue;
             }
 
-            if (part == "e")
+            if (part == "e" || part == "d")
             {
                 builder.Append($"&Cyan;{part}&White; : &Green;0x{data[1]:X2}");
 

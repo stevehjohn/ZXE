@@ -23,3 +23,9 @@ xx = Opcode, dd = Displacement value (byte).
 - CB: `CBxx`
 - DDCB: `DDCBddxx`
 - FDCB: `FDCBddxx`
+
+## Tests
+
+Tests exist, but I can't verify what the instructions should be:
+
+Failing test. I think the parameters are not correct:
