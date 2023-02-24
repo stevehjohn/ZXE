@@ -464,12 +464,42 @@ public partial class Processor
 
         instructions[0xDDEC] = new Instruction("CALL PE, nn", 3, ProcessorBranchInstructions.CALL_PE_nn, 10);
 
+        instructions[0xDDED] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4);
+
         instructions[0xDDEE] = new Instruction("XOR A, n", 2, i => ProcessorBitwiseLogicInstructions.XOR_R_n(i, Register.A), 7);
 
         instructions[0xDDEF] = new Instruction("RST 0x28", 1, i => ProcessorMiscellaneousInstructions.RST(i, 0x28), 11);
 
+        instructions[0xDDF0] = new Instruction("RET NS", 1, ProcessorBranchInstructions.RET_NS, 5);
+
+        instructions[0xDDF1] = new Instruction("POP AF", 1, i => ProcessorMiscellaneousInstructions.POP_RR(i, Register.AF), 10);
+
+        instructions[0xDDF2] = new Instruction("JP NS, nn", 3, ProcessorBranchInstructions.JP_NS_nn, 10);
+
+        instructions[0xDDF3] = new Instruction("DI", 1, ProcessorMiscellaneousInstructions.DI, 4);
+
+        instructions[0xDDF4] = new Instruction("CALL S, nn", 3, ProcessorBranchInstructions.CALL_NS_nn, 10);
+
+        instructions[0xDDF5] = new Instruction("PUSH AF", 1, i => ProcessorMiscellaneousInstructions.PUSH_RR(i, Register.AF), 11);
+
+        instructions[0xDDF6] = new Instruction("OR A, n", 2, i => ProcessorBitwiseLogicInstructions.OR_R_n(i, Register.A), 7);
+
+        instructions[0xDDF7] = new Instruction("RST 0x30", 1, i => ProcessorMiscellaneousInstructions.RST(i, 0x30), 11);
+
+        instructions[0xDDF8] = new Instruction("RET S", 1, ProcessorBranchInstructions.RET_S, 5);
+
         instructions[0xDDF9] = new Instruction("LD SP, IX", 1, i => ProcessorLoadInstructions.LD_SP_RR(i, Register.IX), 6);
 
+        instructions[0xDDFA] = new Instruction("JP S, nn", 3, ProcessorBranchInstructions.JP_S_nn, 10);
+
+        instructions[0xDDFB] = new Instruction("EI", 1, ProcessorMiscellaneousInstructions.EI, 4);
+
+        instructions[0xDDFC] = new Instruction("CALL S, nn", 3, ProcessorBranchInstructions.CALL_S_nn, 10);
+
         instructions[0xDDFD] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4);
+
+        instructions[0xDDFE] = new Instruction("CP A, n", 2, i => ProcessorMiscellaneousInstructions.CP_R_n(i, Register.A), 7);
+
+        instructions[0xDDFF] = new Instruction("RST 0x38", 1, i => ProcessorMiscellaneousInstructions.RST(i, 0x38), 11);
     }
 }
