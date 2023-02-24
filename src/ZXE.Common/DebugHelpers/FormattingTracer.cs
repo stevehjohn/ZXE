@@ -228,8 +228,15 @@ public class FormattingTracer : ITracer
 
                 continue;
             }
-         
-            builder.Append($"{part}");
+
+            if (part == "e")
+            {
+                builder.Append($"&Cyan;{part}&White; : &Green;0x{data[1]:X2}");
+
+                continue;
+            }
+
+            builder.Append($"&White;{part}");
         }
 
         return builder.ToString();
