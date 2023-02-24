@@ -58,6 +58,20 @@ public partial class Processor
 
         instructions[0xFD19] = new Instruction("ADD IY, DE", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.IY, Register.DE), 11);
 
+        instructions[0xFD1A] = new Instruction("LD A, (DE)", 1, i => ProcessorLoadInstructions.LD_R_addr_RR(i, Register.A, Register.DE), 7);
+
+        instructions[0xFD1B] = new Instruction("DEC DE", 1, i => ProcessorArithmeticInstructions.DEC_RR(i, Register.DE), 6);
+
+        instructions[0xFD1C] = new Instruction("INC E", 1, i => ProcessorArithmeticInstructions.INC_R(i, Register.E), 4);
+
+        instructions[0xFD1D] = new Instruction("DEC E", 1, i => ProcessorArithmeticInstructions.DEC_R(i, Register.E), 4);
+
+        instructions[0xFD1E] = new Instruction("LD E, n", 2, i => ProcessorLoadInstructions.LD_R_n(i, Register.E), 7);
+
+        instructions[0xFD1F] = new Instruction("RRA", 1, ProcessorBitwiseRotationInstructions.RRA, 4, "RRA A");
+
+        instructions[0xFD20] = new Instruction("JR NZ, e", 2, ProcessorBranchInstructions.JR_NZ_e, 7);
+
         instructions[0xFD21] = new Instruction("LD IY, nn", 3, i => ProcessorLoadInstructions.LD_RR_nn(i, Register.IY), 10);
 
         instructions[0xFD22] = new Instruction("LD (nn), IY", 3, i => ProcessorLoadInstructions.LD_addr_nn_RR(i, Register.IY), 16);
