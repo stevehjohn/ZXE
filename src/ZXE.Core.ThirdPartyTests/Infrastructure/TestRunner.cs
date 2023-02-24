@@ -34,13 +34,15 @@ public class TestRunner
 
         var failedNames = new List<string>();
 
+        var notImplementedNames = new List<string>();
+
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("fd 18") < 0)
-            {
-                continue;
-            }
+            //if (Path.GetFileName(file).CompareTo("fd 18") < 0)
+            //{
+            //    continue;
+            //}
 
             // End early
             //if (Path.GetFileName(file).CompareTo("dd 2f") > 0)
@@ -69,10 +71,10 @@ public class TestRunner
                         break;
 
                     case TestResult.Fail:
+                        failedNames.Add(test.Name);
+
                         if (dumpOnFail)
                         {
-                            failedNames.Add(test.Name);
-
                             DumpTest(test);
                         }
 
@@ -84,6 +86,8 @@ public class TestRunner
                         notImplemented++;
 
                         skipRemainder = true;
+
+                        notImplementedNames.Add(test.Name);
 
                         break;
                 }
@@ -111,7 +115,7 @@ public class TestRunner
 
         if (failedNames.Count > 0)
         {
-            FormattedConsole.WriteLine("  &Cyan;Press any key to see failed test names...\n");
+            FormattedConsole.WriteLine("  &Cyan;Press any key to see failed and not implemented test names...\n");
 
             Console.ReadKey();
 
@@ -130,6 +134,24 @@ public class TestRunner
                     FormattedConsole.Write($"&White;, &Red;{name}");
                 }
             }
+
+            Console.WriteLine();
+
+            foreach (var name in notImplementedNames)
+            {
+                if (first)
+                {
+                    FormattedConsole.Write($"&Yellow;{name}");
+
+                    first = false;
+                }
+                else
+                {
+                    FormattedConsole.Write($"&White;, &Yellow;{name}");
+                }
+            }
+
+            Console.WriteLine();
         }
 
         Console.CursorVisible = true;
@@ -382,8 +404,8 @@ public class TestRunner
             FormattedConsole.WriteLine($"    {trace[i]}");
         }
 
-        FormattedConsole.WriteLine("\n    &Cyan;Press any key to continue...\n");
+        //FormattedConsole.WriteLine("\n    &Cyan;Press any key to continue...\n");
 
-        Console.ReadKey();
+        //Console.ReadKey();
     }
 }
