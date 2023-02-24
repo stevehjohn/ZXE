@@ -6,6 +6,8 @@ public partial class Processor
 {
     private void InitialiseFDInstructions(Dictionary<int, Instruction> instructions)
     {
+        instructions[0xFD00] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4, null, 0xFD00);
+
         instructions[0xFD09] = new Instruction("ADD IY, BC", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.IY, Register.BC), 11);
 
         instructions[0xFD18] = new Instruction("JR C, e", 2, ProcessorBranchInstructions.JR_C_e, 7, null, 0xFD18);
