@@ -135,7 +135,9 @@ public class TestRunner
                 }
             }
 
-            Console.WriteLine();
+            Console.WriteLine("\n");
+
+            first = true;
 
             foreach (var name in notImplementedNames)
             {
