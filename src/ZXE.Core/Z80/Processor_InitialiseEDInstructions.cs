@@ -77,9 +77,9 @@ public partial class Processor
 
         instructions[0xED4C] = new Instruction("NEG A", 1, i => ProcessorBitOperationInstructions.NEG_R(i, Register.A), 4, null, 0xED4C);
 
-        // TODO: Which is right? instructions[0xED4C] = new Instruction("MLT BC", 1, i => MLT_RR(i, Register.BC), 13, null, 0xED4C);
-
         instructions[0xED4D] = new Instruction("RETI", 1, ProcessorBranchInstructions.RETI, 10, null, 0xED4D);
+
+        instructions[0xED4E] = new Instruction("IM 0", 1, i => ProcessorMiscellaneousInstructions.IM_m(i, InterruptMode.Mode0), 4, null, 0xED4E);
 
         instructions[0xED4F] = new Instruction("LD R, A", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.R, Register.A), 5, null, 0xED4F);
         
@@ -91,7 +91,9 @@ public partial class Processor
 
         instructions[0xED53] = new Instruction("LD (nn), DE", 3, i => ProcessorLoadInstructions.LD_addr_nn_RR(i, Register.DE), 16, null, 0xED53);
 
-        // TODO: Exists? instructions[0xED54] = new Instruction("NEG A", 1, i => NEG_R(i, Register.A), 4, null, 0xED45);
+        instructions[0xED54] = new Instruction("NEG A", 1, i => ProcessorBitOperationInstructions.NEG_R(i, Register.A), 4, null, 0xED54);
+
+        instructions[0xED55] = new Instruction("RETN", 1, ProcessorBranchInstructions.RETN, 10, null, 0xED55);
 
         instructions[0xED56] = new Instruction("IM 1", 1, i => ProcessorMiscellaneousInstructions.IM_m(i, InterruptMode.Mode1), 4, null, 0xED56);
 
@@ -106,6 +108,8 @@ public partial class Processor
         instructions[0xED5B] = new Instruction("LD DE, (nn)", 3, i => ProcessorLoadInstructions.LD_RR_addr_nn(i, Register.DE), 16, null, 0xED5B);
 
         instructions[0xED5C] = new Instruction("NEG A", 1, i => ProcessorBitOperationInstructions.NEG_R(i, Register.A), 4, null, 0xED5C);
+
+        instructions[0xED5D] = new Instruction("RETN", 1, ProcessorBranchInstructions.RETN, 10, null, 0xED5D);
 
         instructions[0xED5E] = new Instruction("IM 2", 1, i => ProcessorMiscellaneousInstructions.IM_m(i, InterruptMode.Mode2), 5, null, 0xED5E);
 
