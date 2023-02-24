@@ -26,10 +26,6 @@ xx = Opcode, dd = Displacement value (byte).
 
 ## Tests
 
-Tests exist, but I can't verify what the instructions should be:
-
-FD 47, FD 48, FD 49, FD 4A, FD 4B, FD 4F, FD 50, FD 51, FD 52, FD 53, FD 57, FD 58, FD 59, FD 5A, FD 5B, FD 5F, FD 76, FD 78, FD 79, FD 7A, FD 7B, FD 7F, FD 80, FD 81, FD 82, FD 83, FD 87, FD 88, FD 89, FD 8A, FD 8B, FD 8F, FD 90, FD 91, FD 92, FD 93, FD 97, FD 98, FD 99, FD 9A, FD 9B, FD 9F, FD A0, FD A1, FD A2, FD A3, FD A7, FD A8, FD A9, FD AA, FD AB, FD AF, FD B0, FD B1, FD B2, FD B3, FD B7, FD B8, FD B9, FD BA, FD BB, FD BF, FD C0, FD C1, FD C2, FD C3, FD C4, FD C5, FD C6, FD C7, FD C8, FD C9, FD CA, FD CC, FD CD, FD CE, FD CF, FD D0, FD D1, FD D2, FD D3, FD D4, FD D5, FD D6, FD D7, FD D8, FD D9, FD DA, FD DB, FD DC, FD DE, FD DF, FD E0, FD E2, FD E4, FD E6, FD E7, FD E8, FD EA, FD EB, FD EC, FD EE, FD EF, FD F0, FD F1, FD F2, FD F3, FD F4, FD F5, FD F6, FD F7, FD F8, FD FA, FD FB, FD FC, FD FE, FD FF
-
 Failing test. I think the parameters are not correct:
 
 FD 18
