@@ -9,11 +9,11 @@ namespace ZXE.Windows.Host.Infrastructure;
 
 public static class KeyboardMapper
 {
-    private static readonly int[] Ports = { 0xFEFE, 0xFDFE, 0xFBFE, 0xF7FE, 0xEFFE, 0xDFFE, 0xBFFE, 0x7FFE };
+    private static readonly byte[] Ports = { 0xFE, 0xFD, 0xFB, 0xF7, 0xEF, 0xDF, 0xBF, 0x7F };
 
-    public static List<(int Port, byte data)> MapKeyState(Keys[] keyboardState)
+    public static List<(byte Port, byte data)> MapKeyState(Keys[] keyboardState)
     {
-        var portData = new List<(int Port, byte data)>();
+        var portData = new List<(byte Port, byte data)>();
 
         // Just assume up to 2 keys for now.
         var keys = keyboardState.Take(2).ToArray();

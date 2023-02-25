@@ -6,10 +6,10 @@ public class Ports
 
     public Ports()
     {
-        _ports = new byte?[65_536];
+        _ports = new byte?[256];
     }
 
-    public byte ReadByte(int port)
+    public byte ReadByte(byte port)
     {
         if (_ports[port] == null)
         {
@@ -19,7 +19,7 @@ public class Ports
         return _ports[port]!.Value;
     }
 
-    public void WriteByte(int port, byte data)
+    public void WriteByte(byte port, byte data)
     {
         _ports[port] = data;
     }

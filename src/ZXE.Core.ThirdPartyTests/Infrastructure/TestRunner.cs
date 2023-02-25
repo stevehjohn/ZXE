@@ -1,4 +1,4 @@
-﻿//#define UNATTENDED
+﻿#define UNATTENDED
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -40,10 +40,10 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("fd 10") < 0)
-            {
-                continue;
-            }
+            //if (Path.GetFileName(file).CompareTo("fd 10") < 0)
+            //{
+            //    continue;
+            //}
 
             // End early
             //if (Path.GetFileName(file).CompareTo("dd 2f") > 0)
@@ -228,7 +228,7 @@ public class TestRunner
         {
             foreach (var port in test.Ports)
             {
-                ports.WriteByte(((JsonElement) port[0]).GetInt32(), ((JsonElement) port[1]).GetByte());
+                ports.WriteByte((byte) (((JsonElement) port[0]).GetInt32() & 0xFF), ((JsonElement) port[1]).GetByte());
             }
         }
 

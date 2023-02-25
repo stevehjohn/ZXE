@@ -536,34 +536,11 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    public static bool IN_R_port_RRl(Input input, Register destination, Register source)
-    {
-        var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source));
-
-        //Debugger.Log(0, "INFO", $"IN_R_port_RRl Checking {input.State.Registers.ReadPair(source) & 0xFF00 >> 8:X2} Value: {value}\n");
-
-        input.State.Registers[destination] = value;
-
-        // Flags
-        // Carry unaffected
-        input.State.Flags.AddSubtract = false;
-        input.State.Flags.ParityOverflow = value.IsEvenParity();
-        input.State.Flags.X1 = (value & 0x08) > 0;
-        input.State.Flags.HalfCarry = false;
-        input.State.Flags.X2 = (value & 0x20) > 0;
-        input.State.Flags.Zero = value == 0;
-        input.State.Flags.Sign = (sbyte) value < 0;
-
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
-
-        return true;
-    }
-
     public static bool IN_R_p(Input input, Register register)
     {
-        var portData = input.Ports.ReadByte(input.State.Registers[Register.A] << 8 | input.Data[1]);
+        var portData = input.Ports.ReadByte(input.Data[1]);
 
-        //Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {portData}\n");
+        Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {portData}\n");
 
         input.State.Registers[register] = portData;
 
@@ -572,9 +549,9 @@ public static class ProcessorMiscellaneousInstructions
 
     public static bool IN_R_C(Input input, Register register)
     {
-        var value = input.Ports.ReadByte(input.State.Registers.ReadPair(Register.BC));
+        var value = input.Ports.ReadByte(input.State.Registers[Register.C]);
 
-        //Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
+        Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
 
         input.State.Registers[register] = value;
 
@@ -600,22 +577,9 @@ public static class ProcessorMiscellaneousInstructions
         return true;
     }
 
-    //public static bool MLT_RR(Input input, Register register)
-    //{
-    //    var value = (int) input.State.Registers.ReadLow(register);
-
-    //    value *= input.State.Registers.ReadHigh(register);
-
-    //    input.State.Registers.WritePair(register, (ushort) value);
-
-    //    // Flags unaffected
-
-    //    return true;
-    //}
-
     public static bool IN_addr_RR(Input input, Register source)
     {
-        var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source));
+        var value = input.Ports.ReadByte(input.Ram[input.State.Registers.ReadPair(source)]);
 
         // Flags
         // Carry unaffected
@@ -772,7 +736,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var address = input.State.Registers.ReadPair(Register.BC);
+            var address = input.State.Registers[Register.C];
 
             var value = input.Ports.ReadByte(address);
 
@@ -802,7 +766,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var address = input.State.Registers.ReadPair(Register.BC);
+            var address = input.State.Registers[Register.C];
 
             var value = input.Ports.ReadByte(address);
 
@@ -841,7 +805,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var port = input.State.Registers.ReadPair(Register.BC);
+            var port = input.State.Registers[Register.C];
 
             var address = input.State.Registers.ReadPair(Register.HL);
 
@@ -873,7 +837,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var port = input.State.Registers.ReadPair(Register.BC);
+            var port = input.State.Registers[Register.C];
 
             var address = input.State.Registers.ReadPair(Register.HL);
 
@@ -1040,9 +1004,9 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var address = input.State.Registers.ReadPair(Register.BC);
+            var port = input.State.Registers[Register.C];
 
-            var value = input.Ports.ReadByte(address);
+            var value = input.Ports.ReadByte(port);
 
             input.Ram[input.State.Registers.ReadPair(Register.HL)] = value;
 
@@ -1070,9 +1034,9 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var address = input.State.Registers.ReadPair(Register.BC);
+            var port = input.State.Registers[Register.C];
 
-            var value = input.Ports.ReadByte(address);
+            var value = input.Ports.ReadByte(port);
 
             input.Ram[input.State.Registers.ReadPair(Register.HL)] = value;
 
@@ -1109,7 +1073,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var port = input.State.Registers.ReadPair(Register.BC);
+            var port = input.State.Registers[Register.C];
 
             var address = input.State.Registers.ReadPair(Register.HL);
 
@@ -1141,7 +1105,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var port = input.State.Registers.ReadPair(Register.BC);
+            var port = input.State.Registers[Register.C];
 
             var address = input.State.Registers.ReadPair(Register.HL);
 
