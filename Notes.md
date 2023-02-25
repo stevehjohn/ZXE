@@ -26,6 +26,8 @@ xx = Opcode, dd = Displacement value (byte).
 
 ## Tests
 
+18 0363, 28 03D9, D0 0106, D4 000B, DD 18 0385, DD 30 024B, DD CD 0040, FD 10 0230, FD 18 0000, FD 20 0193, FD 38 0327, FD C3 031A
+
 Failing test. I think the parameters are not correct:
 
 FD 18
