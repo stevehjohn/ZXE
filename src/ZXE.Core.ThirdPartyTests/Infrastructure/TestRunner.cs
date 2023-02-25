@@ -39,10 +39,10 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("fd 01") < 0)
-            //{
-            //    continue;
-            //}
+            if (Path.GetFileName(file).CompareTo("fd 10") < 0)
+            {
+                continue;
+            }
 
             // End early
             //if (Path.GetFileName(file).CompareTo("dd 2f") > 0)
@@ -78,7 +78,9 @@ public class TestRunner
                             DumpTest(test);
                         }
 
+#if UNATTENDED
                         skipRemainder = true;
+#endif
 
                         break;
 
@@ -281,7 +283,6 @@ public class TestRunner
                 {
                     break;
                 }
-
             } //while (state.ProgramCounter != test.Final.PC && state.OpcodePrefix == 0);
         }
         catch (Exception exception)
@@ -306,7 +307,7 @@ public class TestRunner
                    && state.Registers[Register.I] == test.Final.I
                    && state.Registers[Register.R] == test.Final.R
                    && state.Registers.ReadPair(Register.IX) == test.Final.IX
-                   && state.Registers.ReadPair(Register.IY) == test.Final.IY; 
+                   && state.Registers.ReadPair(Register.IY) == test.Final.IY;
         // TODO: Alternate registers?
 
         foreach (var pair in test.Final.Ram)
@@ -344,14 +345,17 @@ public class TestRunner
         FormattedConsole.WriteLine($"    &Cyan;I &White;: &Green;0x{test.Initial.I:X2}          0x{test.Final.I:X2}          {(test.Final.I == result.State.Registers[Register.I] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.I]:X2}");
         FormattedConsole.WriteLine($"    &Cyan;R &White;: &Green;0x{test.Initial.R:X2}          0x{test.Final.R:X2}          {(test.Final.R == result.State.Registers[Register.R] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.R]:X2}");
 
-        FormattedConsole.WriteLine($"    &Cyan;IX&White;: &Green;0x{test.Initial.IX:X4}        0x{test.Final.IX:X4}        {(test.Final.IX == result.State.Registers.ReadPair(Register.IX) ? "&Green;" : "&Red;")}0x{result.State.Registers.ReadPair(Register.IX):X4}");
-        FormattedConsole.WriteLine($"    &Cyan;IY&White;: &Green;0x{test.Initial.IY:X4}        0x{test.Final.IY:X4}        {(test.Final.IY == result.State.Registers.ReadPair(Register.IY) ? "&Green;" : "&Red;")}0x{result.State.Registers.ReadPair(Register.IY):X4}");
-        
+        FormattedConsole.WriteLine(
+            $"    &Cyan;IX&White;: &Green;0x{test.Initial.IX:X4}        0x{test.Final.IX:X4}        {(test.Final.IX == result.State.Registers.ReadPair(Register.IX) ? "&Green;" : "&Red;")}0x{result.State.Registers.ReadPair(Register.IX):X4}");
+        FormattedConsole.WriteLine(
+            $"    &Cyan;IY&White;: &Green;0x{test.Initial.IY:X4}        0x{test.Final.IY:X4}        {(test.Final.IY == result.State.Registers.ReadPair(Register.IY) ? "&Green;" : "&Red;")}0x{result.State.Registers.ReadPair(Register.IY):X4}");
+
         var initialFlags = Flags.FromByte(test.Final.F);
-        
+
         var expectedFlags = Flags.FromByte(test.Final.F);
 
-        FormattedConsole.WriteLine($"\n    &Cyan;F &White;: &Green;{initialFlags.GetFlags()}      &Cyan;F &White;: &Green;{expectedFlags.GetFlags()}      {(test.Final.F == result.State.Registers[Register.F] ? "&Green;" : "&Red;")}{result.State.Flags.GetFlags()}");
+        FormattedConsole.WriteLine(
+            $"\n    &Cyan;F &White;: &Green;{initialFlags.GetFlags()}      &Cyan;F &White;: &Green;{expectedFlags.GetFlags()}      {(test.Final.F == result.State.Registers[Register.F] ? "&Green;" : "&Red;")}{result.State.Flags.GetFlags()}");
 
         FormattedConsole.WriteLine(string.Empty);
 
@@ -376,7 +380,7 @@ public class TestRunner
         else
         {
             FormattedConsole.WriteLine("\n");
-            
+
             FormattedConsole.WriteLine("&Cyan;              Expected    Actual");
 
             foreach (var entry in test.Final.Ram)
@@ -406,8 +410,10 @@ public class TestRunner
             FormattedConsole.WriteLine($"    {trace[i]}");
         }
 
-        //FormattedConsole.WriteLine("\n    &Cyan;Press any key to continue...\n");
+#if ! UNATTENDED
+        FormattedConsole.WriteLine("\n    &Cyan;Press any key to continue...\n");
 
-        //Console.ReadKey();
+        Console.ReadKey();
+#endif
     }
 }

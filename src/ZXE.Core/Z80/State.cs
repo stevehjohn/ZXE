@@ -2,7 +2,21 @@
 
 public class State
 {
-    public int ProgramCounter = 0;
+    private int _programCounter;
+
+    public int ProgramCounter
+    {
+        get => _programCounter;
+        set
+        {
+            if (value < 0)
+            {
+                value += 0xFFFF;
+            }
+
+            _programCounter = value;
+        }
+    }
 
     public int StackPointer = 0;
 

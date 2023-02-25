@@ -3,7 +3,6 @@
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
 // ReSharper disable StringLiteralTypo
-
 public static class ProcessorBranchInstructions
 {
     public static bool DJNZ_e(Input input)
@@ -11,11 +10,28 @@ public static class ProcessorBranchInstructions
         unchecked
         {
             // TODO: If B != 0, 5 more cycles... how to do this?
-            ProcessorArithmeticInstructions.DEC_R(input, Register.B);
 
-            if (!input.State.Flags.Zero)
+            var value = input.State.Registers[Register.B];
+
+            var result = (byte) (value - 1);
+
+            input.State.Registers[Register.B] = result;
+
+            // Flags
+            // Carry unaffected
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = value == 0x80;
+            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.HalfCarry = (value & 0x0F) < 1;
+            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.Zero = (sbyte)result == 0;
+            input.State.Flags.Sign = (sbyte)result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+
+            if (! input.State.Flags.Zero)
             {
-                input.State.ProgramCounter += (sbyte)input.Data[1];
+                input.State.ProgramCounter += (sbyte) input.Data[1];
             }
 
             // Flags unaffected
@@ -349,7 +365,7 @@ public static class ProcessorBranchInstructions
         {
             CALL_nn(input);
         }
-        
+
         // Flags unaffected
 
         return true;
@@ -361,7 +377,7 @@ public static class ProcessorBranchInstructions
         {
             return RET(input);
         }
-        
+
         // Flags unaffected
 
         return true;
@@ -370,7 +386,7 @@ public static class ProcessorBranchInstructions
     public static bool JP_addr_RR(Input input, Register register)
     {
         input.State.ProgramCounter = input.State.Registers.ReadPair(register);
-        
+
         // Flags unaffected
 
         return false;
@@ -382,7 +398,7 @@ public static class ProcessorBranchInstructions
         {
             return JP_nn(input);
         }
-        
+
         // Flags unaffected
 
         return true;
@@ -394,7 +410,7 @@ public static class ProcessorBranchInstructions
         {
             CALL_nn(input);
         }
-        
+
         // Flags unaffected
 
         return true;
