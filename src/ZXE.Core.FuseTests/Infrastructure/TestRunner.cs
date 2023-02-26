@@ -44,11 +44,11 @@ public static class TestRunner
             test.Add(input[i]);
         }
 
-        FormattedConsole.WriteLine("  &Cyan;Testing complete&White;.\n");
+        FormattedConsole.WriteLine("\n  &Cyan;Testing complete&White;.\n");
 
         FormattedConsole.WriteLine($"  &Cyan;Executed&White;: &Yellow;{testCount}    &Cyan;Passed&White;: &Green;{passed}   &Cyan;Failed&White;: &Red;{testCount - passed}");
 
-        FormattedConsole.WriteLine(string.Empty);
+        FormattedConsole.WriteLine("&Green;");
     }
 
     private static bool RunTest(TestInput input)
