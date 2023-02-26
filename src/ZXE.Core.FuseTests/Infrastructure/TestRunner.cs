@@ -131,6 +131,8 @@ public static class TestRunner
         FormattedConsole.Write($"      &Cyan;Mode&White;: {(expectedResult.ProcessorState.InterruptMode == (int) processor.State.InterruptMode ? "&Green;" : "&Red;")}{(int) processor.State.InterruptMode}");
         FormattedConsole.WriteLine($"      &Cyan;HALT&White;: {(expectedResult.ProcessorState.Halted == processor.State.Halted ? "&Green;" : "&Red;")}{processor.State.Halted.ToString().ToLower()}");
 
+        // TODO: Verify RAM and Bus activity.
+
         return false;
     }
 
