@@ -91,6 +91,10 @@ public static class TestRunner
         FormattedConsole.WriteLine($"    &Cyan;BC'&White;: &Green;0x{expectedResult.ProcessorState.BC_:X4}      &Cyan;BC'&White;: {(expectedResult.ProcessorState.BC_ == processor.State.Registers.ReadPair(Register.BC_) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.BC_):X4}");
         FormattedConsole.WriteLine($"    &Cyan;DE'&White;: &Green;0x{expectedResult.ProcessorState.DE_:X4}      &Cyan;DE'&White;: {(expectedResult.ProcessorState.DE_ == processor.State.Registers.ReadPair(Register.DE_) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.DE_):X4}");
         FormattedConsole.WriteLine($"    &Cyan;HL'&White;: &Green;0x{expectedResult.ProcessorState.HL_:X4}      &Cyan;HL'&White;: {(expectedResult.ProcessorState.HL_ == processor.State.Registers.ReadPair(Register.HL_) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.HL_):X4}");
+        FormattedConsole.WriteLine($"    &Cyan;IX &White;: &Green;0x{expectedResult.ProcessorState.IX:X4}      &Cyan;AF'&White;: {(expectedResult.ProcessorState.IX == processor.State.Registers.ReadPair(Register.IX) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.AF_):X4}");
+        FormattedConsole.WriteLine($"    &Cyan;IY &White;: &Green;0x{expectedResult.ProcessorState.IY:X4}      &Cyan;BC'&White;: {(expectedResult.ProcessorState.IY == processor.State.Registers.ReadPair(Register.IY) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.BC_):X4}");
+        FormattedConsole.WriteLine($"    &Cyan;PC &White;: &Green;0x{expectedResult.ProcessorState.PC:X4}      &Cyan;DE'&White;: {(expectedResult.ProcessorState.PC == processor.State.ProgramCounter ? "&Green;" : "&Red;")}0x{processor.State.ProgramCounter:X4}");
+        FormattedConsole.WriteLine($"    &Cyan;SP &White;: &Green;0x{expectedResult.ProcessorState.SP:X4}      &Cyan;HL'&White;: {(expectedResult.ProcessorState.SP == processor.State.StackPointer ? "&Green;" : "&Red;")}0x{processor.State.StackPointer:X4}");
     }
 
     private static TestExpectedResult LoadExpectedResult(string testName)
