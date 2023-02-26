@@ -35,7 +35,7 @@ public static class TestRunner
 
     private static void RunTest(TestInput input)
     {
-        FormattedConsole.WriteLine($"\n  &Cyan;Test&White;: &Yellow;{input.Name}");
+        FormattedConsole.Write($"\n  &Cyan;Test&White;: &Yellow;{input.Name}");
 
         var processor = new Processor();
 
@@ -68,12 +68,16 @@ public static class TestRunner
             && processor.State.Registers.ReadPair(Register.DE) == expectedResult.ProcessorState.DE
             && processor.State.Registers.ReadPair(Register.HL) == expectedResult.ProcessorState.HL)
         {
+            FormattedConsole.WriteLine(" &White;[&Green;PASS&White;]");
+
             return;
         }
 
+        FormattedConsole.WriteLine(" &White;[&Red;FAIL&White;]");
+
         FormattedConsole.WriteLine(string.Empty);
 
-        FormattedConsole.WriteLine("        &Cyan;Expected    Actual");
+        FormattedConsole.WriteLine("        &Cyan;Expected        Actual");
 
         FormattedConsole.WriteLine($"    &Cyan;AF&White;: &Green;0x{expectedResult.ProcessorState.AF:X4}      &Cyan;AF&White;: {(expectedResult.ProcessorState.AF == processor.State.Registers.ReadPair(Register.AF) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.AF):X4}");
         FormattedConsole.WriteLine($"    &Cyan;BC&White;: &Green;0x{expectedResult.ProcessorState.BC:X4}      &Cyan;BC&White;: {(expectedResult.ProcessorState.BC == processor.State.Registers.ReadPair(Register.BC) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.BC):X4}");
