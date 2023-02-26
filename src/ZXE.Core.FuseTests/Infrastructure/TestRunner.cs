@@ -136,7 +136,7 @@ public static class TestRunner
 
         // TODO: Verify RAM and Bus activity.
 
-        foreach (var line in tracer.GetTrace().Take(10))
+        foreach (var line in tracer.GetTrace().Take(14))
         {
             FormattedConsole.WriteLine($"      {line}");
         }
