@@ -90,7 +90,7 @@ public partial class Processor
 
         UpdateR(instruction);
 
-        if (instruction.Action(new Input(data, _state, ram, ports)))
+        if (instruction.Action(new Input(data, _state, ram, ports)) > -1)
         {
             _state.ProgramCounter += instruction.Length;
         }
@@ -166,11 +166,11 @@ public partial class Processor
         _state = state;
     }
     
-    private bool SetOpcodePrefix(int prefix)
+    private int SetOpcodePrefix(int prefix)
     {
         _state.OpcodePrefix = prefix;
 
-        return true;
+        return 0;
     }
 
     private void HandleNonMaskableInterrupt(Ram ram)

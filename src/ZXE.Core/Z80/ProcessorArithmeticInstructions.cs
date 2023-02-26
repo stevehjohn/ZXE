@@ -2,7 +2,7 @@
 
 public static class ProcessorArithmeticInstructions
 {
-    public static bool INC_RR(Input input, Register register)
+    public static int INC_RR(Input input, Register register)
     {
         unchecked
         {
@@ -11,10 +11,10 @@ public static class ProcessorArithmeticInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool INC_R(Input input, Register register)
+    public static int INC_R(Input input, Register register)
     {
         unchecked
         {
@@ -37,10 +37,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool DEC_R(Input input, Register register)
+    public static int DEC_R(Input input, Register register)
     {
         unchecked
         {
@@ -63,10 +63,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }    
 
-    public static bool ADD_RR_RR(Input input, Register target, Register operand)
+    public static int ADD_RR_RR(Input input, Register target, Register operand)
     {
         unchecked
         {
@@ -89,10 +89,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool DEC_RR(Input input, Register register)
+    public static int DEC_RR(Input input, Register register)
     {
         var result = input.State.Registers.ReadPair(register);
 
@@ -102,19 +102,19 @@ public static class ProcessorArithmeticInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool INC_SP(Input input)
+    public static int INC_SP(Input input)
     {
         input.State.StackPointer++;
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool INC_addr_RR(Input input, Register register)
+    public static int INC_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -137,10 +137,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool DEC_addr_RR(Input input, Register register)
+    public static int DEC_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -163,10 +163,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool ADD_RR_SP(Input input, Register register)
+    public static int ADD_RR_SP(Input input, Register register)
     {
         unchecked
         {
@@ -189,19 +189,19 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool DEC_SP(Input input)
+    public static int DEC_SP(Input input)
     {
         input.State.StackPointer--;
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool ADD_R_R(Input input, Register destination, Register source)
+    public static int ADD_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -226,10 +226,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool ADD_R_addr_RR(Input input, Register destination, Register source)
+    public static int ADD_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -254,10 +254,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool ADC_R_R(Input input, Register destination, Register source)
+    public static int ADC_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -284,10 +284,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool ADC_R_addr_RR(Input input, Register destination, Register source)
+    public static int ADC_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -314,10 +314,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SUB_R_R(Input input, Register destination, Register source)
+    public static int SUB_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -342,10 +342,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SUB_R_addr_RR(Input input, Register destination, Register source)
+    public static int SUB_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -370,10 +370,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SBC_R_R(Input input, Register destination, Register source)
+    public static int SBC_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -400,10 +400,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SBC_R_addr_RR(Input input, Register destination, Register source)
+    public static int SBC_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -430,10 +430,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool ADD_R_n(Input input, Register register)
+    public static int ADD_R_n(Input input, Register register)
     {
         unchecked
         {
@@ -456,10 +456,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool ADC_R_n(Input input, Register destination)
+    public static int ADC_R_n(Input input, Register destination)
     {
         unchecked
         {
@@ -486,10 +486,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SUB_R_n(Input input, Register register)
+    public static int SUB_R_n(Input input, Register register)
     {
         unchecked
         {
@@ -514,10 +514,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SBC_R_n(Input input, Register destination)
+    public static int SBC_R_n(Input input, Register destination)
     {
         unchecked
         {
@@ -544,10 +544,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool INC_RRh(Input input, Register register)
+    public static int INC_RRh(Input input, Register register)
     {
         unchecked
         {
@@ -570,10 +570,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool DEC_RRh(Input input, Register register)
+    public static int DEC_RRh(Input input, Register register)
     {
         unchecked
         {
@@ -598,10 +598,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool INC_RRl(Input input, Register register)
+    public static int INC_RRl(Input input, Register register)
     {
         unchecked
         {
@@ -624,10 +624,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool DEC_RRl(Input input, Register register)
+    public static int DEC_RRl(Input input, Register register)
     {
         unchecked
         {
@@ -652,10 +652,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool INC_addr_RR_plus_d(Input input, Register register)
+    public static int INC_addr_RR_plus_d(Input input, Register register)
     {
         var address = (int) input.State.Registers.ReadPair(register);
 
@@ -665,10 +665,10 @@ public static class ProcessorArithmeticInstructions
         
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool DEC_addr_RR_plus_d(Input input, Register register)
+    public static int DEC_addr_RR_plus_d(Input input, Register register)
     {
         var address = (int) input.State.Registers.ReadPair(register);
 
@@ -678,10 +678,10 @@ public static class ProcessorArithmeticInstructions
         
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool ADD_R_RRh(Input input, Register destination, Register source)
+    public static int ADD_R_RRh(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -706,10 +706,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool ADD_R_RRl(Input input, Register destination, Register source)
+    public static int ADD_R_RRl(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -734,10 +734,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool ADD_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    public static int ADD_R_addr_RR_plus_d(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -766,10 +766,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool ADC_R_RRh(Input input, Register destination, Register source)
+    public static int ADC_R_RRh(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -796,10 +796,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool ADC_R_RRl(Input input, Register destination, Register source)
+    public static int ADC_R_RRl(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -826,10 +826,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool ADC_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    public static int ADC_R_addr_RR_plus_d(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -860,10 +860,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SUB_R_RRh(Input input, Register destination, Register source)
+    public static int SUB_R_RRh(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -888,10 +888,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SUB_R_RRl(Input input, Register destination, Register source)
+    public static int SUB_R_RRl(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -916,10 +916,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SUB_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    public static int SUB_R_addr_RR_plus_d(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -944,10 +944,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SBC_R_RRh(Input input, Register destination, Register source)
+    public static int SBC_R_RRh(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -974,10 +974,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SBC_R_RRl(Input input, Register destination, Register source)
+    public static int SBC_R_RRl(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1004,10 +1004,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SBC_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    public static int SBC_R_addr_RR_plus_d(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1034,10 +1034,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SBC_RR_RR(Input input, Register destination, Register source)
+    public static int SBC_RR_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1064,10 +1064,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool ADC_RR_RR(Input input, Register destination, Register source)
+    public static int ADC_RR_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -1094,10 +1094,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SBC_RR_SP(Input input, Register destination)
+    public static int SBC_RR_SP(Input input, Register destination)
     {
         unchecked
         {
@@ -1124,10 +1124,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool ADC_RR_SP(Input input, Register destination)
+    public static int ADC_RR_SP(Input input, Register destination)
     {
         unchecked
         {
@@ -1154,6 +1154,6 @@ public static class ProcessorArithmeticInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 }

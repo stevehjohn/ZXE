@@ -6,7 +6,7 @@
 
 public static class ProcessorBranchInstructions
 {
-    public static bool DJNZ_e(Input input)
+    public static int DJNZ_e(Input input)
     {
         unchecked
         {
@@ -38,10 +38,10 @@ public static class ProcessorBranchInstructions
             // Flags unaffected
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool JR_e(Input input)
+    public static int JR_e(Input input)
     {
         unchecked
         {
@@ -50,10 +50,10 @@ public static class ProcessorBranchInstructions
             input.State.ProgramCounter = (ushort) input.State.ProgramCounter;
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool JR_NZ_e(Input input)
+    public static int JR_NZ_e(Input input)
     {
         if (! input.State.Flags.Zero)
         {
@@ -62,10 +62,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool JR_Z_e(Input input)
+    public static int JR_Z_e(Input input)
     {
         if (input.State.Flags.Zero)
         {
@@ -74,10 +74,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool JR_NC_e(Input input)
+    public static int JR_NC_e(Input input)
     {
         if (! input.State.Flags.Carry)
         {
@@ -86,10 +86,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool JR_C_e(Input input)
+    public static int JR_C_e(Input input)
     {
         if (input.State.Flags.Carry)
         {
@@ -98,10 +98,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool RETI(Input input)
+    public static int RETI(Input input)
     {
         var value = (ushort) input.Ram[input.State.StackPointer];
 
@@ -113,10 +113,10 @@ public static class ProcessorBranchInstructions
 
         input.State.ProgramCounter = value;
 
-        return false;
+        return -1;
     }
 
-    public static bool RETN(Input input)
+    public static int RETN(Input input)
     {
         var value = (ushort) input.Ram[input.State.StackPointer];
 
@@ -130,10 +130,10 @@ public static class ProcessorBranchInstructions
 
         input.State.InterruptFlipFlop1 = input.State.InterruptFlipFlop2;
 
-        return false;
+        return -1;
     }
 
-    public static bool RET_NZ(Input input)
+    public static int RET_NZ(Input input)
     {
         // TODO: If condition true, 6 more cycles required.
         if (! input.State.Flags.Zero)
@@ -143,10 +143,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool JP_NZ_nn(Input input)
+    public static int JP_NZ_nn(Input input)
     {
         if (! input.State.Flags.Zero)
         {
@@ -155,20 +155,20 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool JP_nn(Input input)
+    public static int JP_nn(Input input)
     {
         // TODO: Don't like this - 3 thing... maybe return true/false to indicate whether PC should be adjusted by caller...
         input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool CALL_NZ_nn(Input input)
+    public static int CALL_NZ_nn(Input input)
     {
         // TODO: If condition true, 7 more cycles required.
         if (! input.State.Flags.Zero)
@@ -178,10 +178,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool CALL_nn(Input input)
+    public static int CALL_nn(Input input)
     {
         unchecked
         {
@@ -199,10 +199,10 @@ public static class ProcessorBranchInstructions
             // Flags unaffected
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RET_Z(Input input)
+    public static int RET_Z(Input input)
     {
         if (input.State.Flags.Zero)
         {
@@ -213,10 +213,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool RET(Input input)
+    public static int RET(Input input)
     {
         var spContent = input.Ram[input.State.StackPointer];
 
@@ -234,10 +234,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool JP_Z_nn(Input input)
+    public static int JP_Z_nn(Input input)
     {
         if (input.State.Flags.Zero)
         {
@@ -246,10 +246,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool CALL_Z_nn(Input input)
+    public static int CALL_Z_nn(Input input)
     {
         // TODO: If condition true, 7 more cycles required.
         if (input.State.Flags.Zero)
@@ -259,10 +259,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool RET_NC(Input input)
+    public static int RET_NC(Input input)
     {
         if (! input.State.Flags.Carry)
         {
@@ -271,10 +271,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool JP_NC_nn(Input input)
+    public static int JP_NC_nn(Input input)
     {
         if (! input.State.Flags.Carry)
         {
@@ -283,10 +283,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool CALL_NC_nn(Input input)
+    public static int CALL_NC_nn(Input input)
     {
         if (! input.State.Flags.Carry)
         {
@@ -295,10 +295,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool RET_C(Input input)
+    public static int RET_C(Input input)
     {
         if (input.State.Flags.Carry)
         {
@@ -309,10 +309,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool JP_C_nn(Input input)
+    public static int JP_C_nn(Input input)
     {
         if (input.State.Flags.Carry)
         {
@@ -321,10 +321,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool CALL_C_nn(Input input)
+    public static int CALL_C_nn(Input input)
     {
         if (input.State.Flags.Carry)
         {
@@ -333,10 +333,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool RET_PO(Input input)
+    public static int RET_PO(Input input)
     {
         if (! input.State.Flags.ParityOverflow)
         {
@@ -345,10 +345,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool JP_PO_nn(Input input)
+    public static int JP_PO_nn(Input input)
     {
         if (! input.State.Flags.ParityOverflow)
         {
@@ -357,10 +357,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool CALL_PO_nn(Input input)
+    public static int CALL_PO_nn(Input input)
     {
         if (! input.State.Flags.ParityOverflow)
         {
@@ -369,10 +369,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool RET_PE(Input input)
+    public static int RET_PE(Input input)
     {
         if (input.State.Flags.ParityOverflow)
         {
@@ -381,19 +381,19 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool JP_addr_RR(Input input, Register register)
+    public static int JP_addr_RR(Input input, Register register)
     {
         input.State.ProgramCounter = input.State.Registers.ReadPair(register);
 
         // Flags unaffected
 
-        return false;
+        return -1;
     }
 
-    public static bool JP_PE_nn(Input input)
+    public static int JP_PE_nn(Input input)
     {
         if (input.State.Flags.ParityOverflow)
         {
@@ -402,10 +402,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool CALL_PE_nn(Input input)
+    public static int CALL_PE_nn(Input input)
     {
         if (input.State.Flags.ParityOverflow)
         {
@@ -414,10 +414,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool RET_NS(Input input)
+    public static int RET_NS(Input input)
     {
         if (! input.State.Flags.Sign)
         {
@@ -426,10 +426,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool JP_NS_nn(Input input)
+    public static int JP_NS_nn(Input input)
     {
         if (! input.State.Flags.Sign)
         {
@@ -438,10 +438,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool CALL_NS_nn(Input input)
+    public static int CALL_NS_nn(Input input)
     {
         if (! input.State.Flags.Sign)
         {
@@ -450,10 +450,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool RET_S(Input input)
+    public static int RET_S(Input input)
     {
         if (input.State.Flags.Sign)
         {
@@ -462,10 +462,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool JP_S_nn(Input input)
+    public static int JP_S_nn(Input input)
     {
         if (input.State.Flags.Sign)
         {
@@ -474,10 +474,10 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 
-    public static bool CALL_S_nn(Input input)
+    public static int CALL_S_nn(Input input)
     {
         if (input.State.Flags.Sign)
         {
@@ -486,6 +486,6 @@ public static class ProcessorBranchInstructions
 
         // Flags unaffected
 
-        return true;
+        return 0;
     }
 }

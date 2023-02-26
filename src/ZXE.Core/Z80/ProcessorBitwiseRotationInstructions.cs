@@ -8,7 +8,7 @@ namespace ZXE.Core.Z80;
 
 public static class ProcessorBitwiseRotationInstructions
 {
-    public static bool RLCA(Input input)
+    public static int RLCA(Input input)
     {
         unchecked
         {
@@ -31,10 +31,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RRCA(Input input)
+    public static int RRCA(Input input)
     {
         unchecked
         {
@@ -62,10 +62,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RLA(Input input)
+    public static int RLA(Input input)
     {
         unchecked
         {
@@ -90,10 +90,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RRA(Input input)
+    public static int RRA(Input input)
     {
         unchecked
         {
@@ -118,10 +118,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RLC_R(Input input, Register register)
+    public static int RLC_R(Input input, Register register)
     {
         unchecked
         {
@@ -144,10 +144,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RLC_addr_RR(Input input, Register register)
+    public static int RLC_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -172,10 +172,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RRC_R(Input input, Register register)
+    public static int RRC_R(Input input, Register register)
     {
         unchecked
         {
@@ -203,10 +203,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RRC_addr_RR(Input input, Register register)
+    public static int RRC_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -236,10 +236,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RL_R(Input input, Register register)
+    public static int RL_R(Input input, Register register)
     {
         unchecked
         {
@@ -264,10 +264,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RL_addr_RR(Input input, Register register)
+    public static int RL_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -294,10 +294,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RR_R(Input input, Register register)
+    public static int RR_R(Input input, Register register)
     {
         unchecked
         {
@@ -322,10 +322,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RR_addr_RR(Input input, Register register)
+    public static int RR_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -352,10 +352,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SLA_R(Input input, Register register)
+    public static int SLA_R(Input input, Register register)
     {
         unchecked
         {
@@ -376,10 +376,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SLA_addr_RR(Input input, Register register)
+    public static int SLA_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -404,10 +404,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SRA_R(Input input, Register register)
+    public static int SRA_R(Input input, Register register)
     {
         unchecked
         {
@@ -436,10 +436,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SRA_addr_RR(Input input, Register register)
+    public static int SRA_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -468,10 +468,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SLS_R(Input input, Register register)
+    public static int SLS_R(Input input, Register register)
     {
         unchecked
         {
@@ -498,10 +498,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SLS_addr_RR(Input input, Register register)
+    public static int SLS_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -528,10 +528,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SRL_R(Input input, Register register)
+    public static int SRL_R(Input input, Register register)
     {
         unchecked
         {
@@ -556,10 +556,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SRL_addr_RR(Input input, Register register)
+    public static int SRL_addr_RR(Input input, Register register)
     {
         unchecked
         {
@@ -584,10 +584,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SLA_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static int SLA_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -618,10 +618,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RLC_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static int RLC_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -652,10 +652,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RLC_addr_RR_plus_d(Input input, Register source)
+    public static int RLC_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -684,10 +684,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RRC_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static int RRC_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -718,10 +718,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RRC_addr_RR_plus_d(Input input, Register source)
+    public static int RRC_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -750,10 +750,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RL_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static int RL_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -784,10 +784,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RL_addr_RR_plus_d(Input input, Register source)
+    public static int RL_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -816,10 +816,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RR_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static int RR_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -850,10 +850,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool RR_addr_RR_plus_d(Input input, Register source)
+    public static int RR_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -882,10 +882,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SLA_addr_RR_plus_d(Input input, Register source)
+    public static int SLA_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -914,10 +914,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SRA_addr_RR_plus_d(Input input, Register source)
+    public static int SRA_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -948,10 +948,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SRA_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static int SRA_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -984,10 +984,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SLS_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static int SLS_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -1018,10 +1018,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SLS_addr_RR_plus_d(Input input, Register source)
+    public static int SLS_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -1050,10 +1050,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SRL_addr_RR_plus_d(Input input, Register source)
+    public static int SRL_addr_RR_plus_d(Input input, Register source)
     {
         unchecked
         {
@@ -1082,10 +1082,10 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool SRL_addr_RR_plus_d_R(Input input, Register source, Register destination)
+    public static int SRL_addr_RR_plus_d_R(Input input, Register source, Register destination)
     {
         unchecked
         {
@@ -1116,6 +1116,6 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 }
