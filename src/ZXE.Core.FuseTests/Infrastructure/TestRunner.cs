@@ -98,12 +98,12 @@ public static class TestRunner
             && processor.State.ProgramCounter == expectedResult.ProcessorState.PC
             && processor.State.StackPointer == expectedResult.ProcessorState.SP)
         {
-            FormattedConsole.WriteLine(" &White;[&Green;PASS&White;]");
+            FormattedConsole.WriteLine(" &White;[ &Green;PASS&White; ]");
 
             return true;
         }
 
-        FormattedConsole.WriteLine(" &White;[&Red;FAIL&White;]");
+        FormattedConsole.WriteLine(" &White;[ &Red;FAIL&White; ]");
 
         FormattedConsole.WriteLine(string.Empty);
 
