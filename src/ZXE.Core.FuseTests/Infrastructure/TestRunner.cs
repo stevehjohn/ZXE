@@ -121,8 +121,8 @@ public static class TestRunner
         FormattedConsole.WriteLine($"    &Cyan;IY &White;: &Green;0x{expectedResult.ProcessorState.IY:X4}      &Cyan;IY &White;: {(expectedResult.ProcessorState.IY == processor.State.Registers.ReadPair(Register.IY) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.BC_):X4}");
         FormattedConsole.WriteLine($"    &Cyan;PC &White;: &Green;0x{expectedResult.ProcessorState.PC:X4}      &Cyan;PC &White;: {(expectedResult.ProcessorState.PC == processor.State.ProgramCounter ? "&Green;" : "&Red;")}0x{processor.State.ProgramCounter:X4}");
         FormattedConsole.WriteLine($"    &Cyan;SP &White;: &Green;0x{expectedResult.ProcessorState.SP:X4}      &Cyan;SP &White;: {(expectedResult.ProcessorState.SP == processor.State.StackPointer ? "&Green;" : "&Red;")}0x{processor.State.StackPointer:X4}");
-        FormattedConsole.WriteLine($"    &Cyan;I  &White;: &Green;0x{expectedResult.ProcessorState.I:X2}        &Cyan;I  &White;: {(expectedResult.ProcessorState.PC == processor.State.ProgramCounter ? "&Green;" : "&Red;")}0x{processor.State.ProgramCounter:X2}");
-        FormattedConsole.WriteLine($"    &Cyan;R  &White;: &Green;0x{expectedResult.ProcessorState.R:X2}        &Cyan;R  &White;: {(expectedResult.ProcessorState.SP == processor.State.StackPointer ? "&Green;" : "&Red;")}0x{processor.State.StackPointer:X2}");
+        FormattedConsole.WriteLine($"    &Cyan;I  &White;: &Green;0x{expectedResult.ProcessorState.I:X2}        &Cyan;I  &White;: {(expectedResult.ProcessorState.I == processor.State.Registers[Register.I] ? "&Green;" : "&Red;")}0x{processor.State.Registers[Register.I]:X2}");
+        FormattedConsole.WriteLine($"    &Cyan;R  &White;: &Green;0x{expectedResult.ProcessorState.R:X2}        &Cyan;R  &White;: {(expectedResult.ProcessorState.R == processor.State.Registers[Register.R] ? "&Green;" : "&Red;")}0x{processor.State.Registers[Register.R]:X2}");
 
         FormattedConsole.WriteLine(string.Empty);
 
