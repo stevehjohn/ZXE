@@ -114,13 +114,13 @@ public class Z80FileLoader
 
         _state.Registers.WritePair(Register.DE, (ushort) (data[13] << 8 | data[14]));
 
-        _state.Registers.WritePair(Register.BC1, (ushort) (data[15] << 8 | data[16]));
+        _state.Registers.WritePair(Register.BC_, (ushort) (data[15] << 8 | data[16]));
 
-        _state.Registers.WritePair(Register.DE1, (ushort) (data[17] << 8 | data[18]));
+        _state.Registers.WritePair(Register.DE_, (ushort) (data[17] << 8 | data[18]));
 
-        _state.Registers.WritePair(Register.HL1, (ushort) (data[19] << 8 | data[20]));
+        _state.Registers.WritePair(Register.HL_, (ushort) (data[19] << 8 | data[20]));
 
-        _state.Registers.WritePair(Register.AF1, (ushort) (data[21] << 8 | data[21]));
+        _state.Registers.WritePair(Register.AF_, (ushort) (data[21] << 8 | data[21]));
 
         _state.Registers.WritePair(Register.IX, (ushort) (data[23] << 8 | data[24]));
 

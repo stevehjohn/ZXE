@@ -294,17 +294,17 @@ public static class ProcessorMiscellaneousInstructions
 
         var hl = input.State.Registers.ReadPair(Register.HL);
 
-        input.State.Registers.WritePair(Register.BC, input.State.Registers.ReadPair(Register.BC1));
+        input.State.Registers.WritePair(Register.BC, input.State.Registers.ReadPair(Register.BC_));
 
-        input.State.Registers.WritePair(Register.DE, input.State.Registers.ReadPair(Register.DE1));
+        input.State.Registers.WritePair(Register.DE, input.State.Registers.ReadPair(Register.DE_));
 
-        input.State.Registers.WritePair(Register.HL, input.State.Registers.ReadPair(Register.HL1));
+        input.State.Registers.WritePair(Register.HL, input.State.Registers.ReadPair(Register.HL_));
 
-        input.State.Registers.WritePair(Register.BC1, bc);
+        input.State.Registers.WritePair(Register.BC_, bc);
 
-        input.State.Registers.WritePair(Register.DE1, de);
+        input.State.Registers.WritePair(Register.DE_, de);
 
-        input.State.Registers.WritePair(Register.HL1, hl);
+        input.State.Registers.WritePair(Register.HL_, hl);
 
         // Flags unaffected
 

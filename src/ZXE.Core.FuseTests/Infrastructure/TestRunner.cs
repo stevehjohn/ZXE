@@ -100,13 +100,13 @@ public static class TestRunner
 
         processor.State.Registers.WritePair(Register.HL, input.HL);
 
-        processor.State.Registers.WritePair(Register.AF1, input.AF_);
+        processor.State.Registers.WritePair(Register.AF_, input.AF_);
 
-        processor.State.Registers.WritePair(Register.BC1, input.BC_);
+        processor.State.Registers.WritePair(Register.BC_, input.BC_);
 
-        processor.State.Registers.WritePair(Register.DE1, input.DE_);
+        processor.State.Registers.WritePair(Register.DE_, input.DE_);
 
-        processor.State.Registers.WritePair(Register.HL1, input.HL_);
+        processor.State.Registers.WritePair(Register.HL_, input.HL_);
 
         processor.State.Registers.WritePair(Register.IX, input.IX);
 
