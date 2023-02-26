@@ -44,7 +44,7 @@ public class TestInput
 
     public bool Halted { get; }
 
-    public byte TStates { get; }
+    public int TStates { get; }
 
     public byte?[] Ram { get; }
 
@@ -78,7 +78,7 @@ public class TestInput
 
         PC = ushort.Parse(registers[11], NumberStyles.HexNumber);
 
-        var interrupts = testData[2].Split(' ');
+        var interrupts = testData[2].Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
         I = byte.Parse(interrupts[0], NumberStyles.HexNumber);
 
@@ -92,7 +92,7 @@ public class TestInput
 
         Halted = interrupts[5] == "1";
 
-        TStates = byte.Parse(interrupts[6], NumberStyles.HexNumber);
+        TStates = int.Parse(interrupts[6], NumberStyles.HexNumber);
 
         Ram = new byte?[0xFFFF];
 

@@ -43,6 +43,17 @@ public static class TestRunner
         var ram = new Ram(Model.Spectrum48K);
 
         PopulateRam(ram, input);
+
+        var ports = new Ports();
+
+        var bus = new Bus();
+
+        var tStates = 0;
+
+        while (tStates < input.TStates)
+        {
+            tStates += processor.ProcessInstruction(ram, ports, bus);
+        }
     }
 
     private static void SetProcessorState(Processor processor, TestInput input)
