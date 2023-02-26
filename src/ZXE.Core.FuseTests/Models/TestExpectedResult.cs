@@ -4,6 +4,8 @@ public class TestExpectedResult
 {
     public TestResultStep[] Steps { get; }
 
+    public ProcessorState ProcessorState { get; }
+
     public TestExpectedResult(string[] testData)
     {
         var steps = new List<TestResultStep>();
@@ -18,5 +20,7 @@ public class TestExpectedResult
         }
 
         Steps = steps.ToArray();
+
+        ProcessorState = new ProcessorState(testData[line..]);
     }
 }
