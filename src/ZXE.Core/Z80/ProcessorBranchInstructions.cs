@@ -3,6 +3,7 @@
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
 // ReSharper disable StringLiteralTypo
+
 public static class ProcessorBranchInstructions
 {
     public static bool DJNZ_e(Input input)
