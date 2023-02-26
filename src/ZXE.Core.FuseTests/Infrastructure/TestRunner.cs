@@ -99,7 +99,9 @@ public static class TestRunner
             && processor.State.Registers.ReadPair(Register.IX) == expectedResult.ProcessorState.IX
             && processor.State.Registers.ReadPair(Register.IY) == expectedResult.ProcessorState.IY
             && processor.State.ProgramCounter == expectedResult.ProcessorState.PC
-            && processor.State.StackPointer == expectedResult.ProcessorState.SP)
+            && processor.State.StackPointer == expectedResult.ProcessorState.SP
+            && processor.State.Registers[Register.I] == expectedResult.ProcessorState.I
+            && processor.State.Registers[Register.R] == expectedResult.ProcessorState.R)
         {
             FormattedConsole.WriteLine(" &White;[ &Green;PASS&White; ]");
 
