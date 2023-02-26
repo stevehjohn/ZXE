@@ -1,4 +1,4 @@
-﻿#define UNATTENDED
+﻿//#define UNATTENDED
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -40,7 +40,7 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("fd 10") < 0)
+            //if (Path.GetFileName(file).CompareTo("d4") < 0)
             //{
             //    continue;
             //}
