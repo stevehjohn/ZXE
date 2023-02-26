@@ -70,3 +70,4 @@ Runs tests against this awesome suite:
 - https://skoolkid.github.io/rom/maps/all.html
 - https://luckyredfish.com/interrupts-on-the-zx-spectrum/
 - https://worldofspectrum.org/
+- https://github.com/floooh/chips-test/tree/master/tests/fuse
