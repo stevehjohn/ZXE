@@ -22,6 +22,8 @@ public static class TestRunner
 
         var stopwatch = Stopwatch.StartNew();
 
+        Console.CursorVisible = false;
+
         for (var i = 0; i < input.Length; i++)
         {
             if (string.IsNullOrWhiteSpace(input[i]))
@@ -49,6 +51,8 @@ public static class TestRunner
         FormattedConsole.WriteLine($"  &Cyan;Executed&White;: &Yellow;{testCount}    &Cyan;Passed&White;: &Green;{passed}   &Cyan;Failed&White;: &Red;{testCount - passed}");
 
         FormattedConsole.WriteLine("&Green;");
+
+        Console.CursorVisible = true;
     }
 
     private static bool RunTest(TestInput input)
