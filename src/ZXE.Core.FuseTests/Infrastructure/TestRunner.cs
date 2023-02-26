@@ -46,9 +46,9 @@ public static class TestRunner
             test.Add(input[i]);
         }
 
-        FormattedConsole.WriteLine($"\n  &Cyan;Testing complete&White;. &Cyan;Elapsed&White;: &Yellow;{stopwatch.Elapsed.Minutes}:{stopwatch.Elapsed.Seconds}:{stopwatch.Elapsed.Milliseconds}\n");
+        FormattedConsole.WriteLine($"\n  &Cyan;Testing complete&White;. &Cyan;Elapsed&White;: &Yellow;{stopwatch.Elapsed.Minutes:D2}:{stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}\n");
 
-        FormattedConsole.WriteLine($"  &Cyan;Executed&White;: &Yellow;{testCount}    &Cyan;Passed&White;: &Green;{passed}   &Cyan;Failed&White;: &Red;{testCount - passed}");
+        FormattedConsole.WriteLine($"  &Cyan;Executed&White;: &Yellow;{testCount:N0}    &Cyan;Passed&White;: &Green;{passed:N0}   &Cyan;Failed&White;: &Red;{testCount - passed:N0}");
 
         FormattedConsole.WriteLine("&Green;");
 
