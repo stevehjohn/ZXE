@@ -14,6 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ZXE.Common\ZXE.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="TestDefinitions\expected.fuse">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

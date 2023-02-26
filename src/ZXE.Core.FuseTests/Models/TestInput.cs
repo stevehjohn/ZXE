@@ -50,7 +50,7 @@ public class TestInput
     {
         Name = testData[0];
 
-        var registers = testData[1].Split(' ');
+        var registers = testData[1].Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
         AF = ushort.Parse(registers[0], NumberStyles.HexNumber);
 

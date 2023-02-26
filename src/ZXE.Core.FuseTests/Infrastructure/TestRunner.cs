@@ -1,4 +1,5 @@
-﻿using ZXE.Core.FuseTests.Models;
+﻿using ZXE.Common.ConsoleHelpers;
+using ZXE.Core.FuseTests.Models;
 
 namespace ZXE.Core.FuseTests.Infrastructure;
 
@@ -30,6 +31,6 @@ public static class TestRunner
 
     private static void RunTest(TestInput input)
     {
-        Console.WriteLine(input.Name);
+        FormattedConsole.WriteLine($"\n  &Cyan;Test&White;: &Yellow;{input.Name}");
     }
 }
