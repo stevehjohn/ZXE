@@ -90,9 +90,11 @@ public partial class Processor
 
         UpdateR(instruction);
 
+        var cycles = instruction.ClockCycles;
+
         if (instruction.Action(new Input(data, _state, ram, ports)) > -1)
         {
-            _state.ProgramCounter += instruction.Length;
+            cycles += _state.ProgramCounter += instruction.Length;
         }
 
         if (_state.ProgramCounter > 0xFFFF)
@@ -110,7 +112,7 @@ public partial class Processor
             _tracer.TraceAfter(instruction, data, _state, ram);
         }
 
-        return instruction.ClockCycles;
+        return cycles;
     }
 
     public void Reset(int programCounter = 0x0000)

@@ -8,6 +8,8 @@ public static class ProcessorBranchInstructions
 {
     public static int DJNZ_e(Input input)
     {
+        var cycles = 0;
+
         unchecked
         {
             // TODO: If B != 0, 5 more cycles... how to do this?
@@ -33,12 +35,12 @@ public static class ProcessorBranchInstructions
             if (! input.State.Flags.Zero)
             {
                 input.State.ProgramCounter += (sbyte) input.Data[1];
-            }
 
-            // Flags unaffected
+                cycles += 5;
+            }
         }
 
-        return 0;
+        return cycles;
     }
 
     public static int JR_e(Input input)
