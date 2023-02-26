@@ -66,18 +66,23 @@ public static class TestRunner
 
         var line = 0;
 
+        int? startLine = null;
+
         while (line < results.Length)
         {
             if (results[line] == testName)
             {
-                var startLine = line;
-
-                return new TestExpectedResult(results[startLine..]);
+                startLine = line;
             }
 
             while (! string.IsNullOrWhiteSpace(results[line]) && line < results.Length)
             {
                 line++;
+            }
+
+            if (startLine.HasValue)
+            {
+                return new TestExpectedResult(results[startLine!.Value..line]);
             }
 
             line++;
