@@ -52,6 +52,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Treasure Island Dizzy", "Tr
 		..\Game Images\Treasure Island Dizzy\image-0.z80 = ..\Game Images\Treasure Island Dizzy\image-0.z80
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXE.Core.FuseTests", "ZXE.Core.FuseTests\ZXE.Core.FuseTests.csproj", "{BF53FA1E-5D66-4073-97E7-642F85755FDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,6 +126,14 @@ Global
 		{821FFE18-6651-4663-913E-FD16EE296257}.Release|Any CPU.Build.0 = Release|Any CPU
 		{821FFE18-6651-4663-913E-FD16EE296257}.Release|x86.ActiveCfg = Release|Any CPU
 		{821FFE18-6651-4663-913E-FD16EE296257}.Release|x86.Build.0 = Release|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Debug|x86.Build.0 = Debug|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Release|x86.ActiveCfg = Release|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
