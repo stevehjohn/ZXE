@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using ZXE.Common.ConsoleHelpers;
+using ZXE.Common.DebugHelpers;
 using ZXE.Core.FuseTests.Exceptions;
 using ZXE.Core.FuseTests.Models;
 using ZXE.Core.Infrastructure;
@@ -46,7 +47,7 @@ public static class TestRunner
             test.Add(input[i]);
         }
 
-        FormattedConsole.WriteLine($"\n  &Cyan;Testing complete&White;. &Cyan;Elapsed&White;: &Yellow;{stopwatch.Elapsed.Minutes:D2}:{stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}\n");
+        FormattedConsole.WriteLine($"\n  &Cyan;Testing complete&White;. &Cyan;Elapsed&White;: &Yellow;{stopwatch.Elapsed.Minutes:D2}:{stopwatch.Elapsed.Seconds:D2}.{stopwatch.Elapsed.Milliseconds:D3}\n");
 
         FormattedConsole.WriteLine($"  &Cyan;Executed&White;: &Yellow;{testCount:N0}    &Cyan;Passed&White;: &Green;{passed:N0}   &Cyan;Failed&White;: &Red;{testCount - passed:N0}");
 
@@ -59,7 +60,9 @@ public static class TestRunner
     {
         FormattedConsole.Write($"\n  &Cyan;Test&White;: &Yellow;{input.Name}");
 
-        var processor = new Processor();
+        var tracer = new FormattingTracer();
+
+        var processor = new Processor(tracer);
 
         SetProcessorState(processor, input.ProcessorState);
 
@@ -80,10 +83,10 @@ public static class TestRunner
 
         var expectedResult = LoadExpectedResult(input.Name);
 
-        return OutputResult(processor, expectedResult);
+        return OutputResult(processor, expectedResult, tracer);
     }
 
-    private static bool OutputResult(Processor processor, TestExpectedResult expectedResult)
+    private static bool OutputResult(Processor processor, TestExpectedResult expectedResult, FormattingTracer tracer)
     {
         if (processor.State.Registers.ReadPair(Register.AF) == expectedResult.ProcessorState.AF
             && processor.State.Registers.ReadPair(Register.BC) == expectedResult.ProcessorState.BC
@@ -129,9 +132,14 @@ public static class TestRunner
         FormattedConsole.Write($"    &Cyan;IFF1&White;: {(expectedResult.ProcessorState.IFF1 == processor.State.InterruptFlipFlop1 ? "&Green;" : "&Red;")}{processor.State.InterruptFlipFlop1.ToString().ToLower()}");
         FormattedConsole.Write($"      &Cyan;IFF2&White;: {(expectedResult.ProcessorState.IFF2 == processor.State.InterruptFlipFlop2 ? "&Green;" : "&Red;")}{processor.State.InterruptFlipFlop2.ToString().ToLower()}");
         FormattedConsole.Write($"      &Cyan;Mode&White;: {(expectedResult.ProcessorState.InterruptMode == (int) processor.State.InterruptMode ? "&Green;" : "&Red;")}{(int) processor.State.InterruptMode}");
-        FormattedConsole.WriteLine($"      &Cyan;HALT&White;: {(expectedResult.ProcessorState.Halted == processor.State.Halted ? "&Green;" : "&Red;")}{processor.State.Halted.ToString().ToLower()}");
+        FormattedConsole.WriteLine($"      &Cyan;HALT&White;: {(expectedResult.ProcessorState.Halted == processor.State.Halted ? "&Green;" : "&Red;")}{processor.State.Halted.ToString().ToLower()}\n");
 
         // TODO: Verify RAM and Bus activity.
+
+        foreach (var line in tracer.GetTrace().Take(10))
+        {
+            FormattedConsole.WriteLine($"      {line}");
+        }
 
         return false;
     }
