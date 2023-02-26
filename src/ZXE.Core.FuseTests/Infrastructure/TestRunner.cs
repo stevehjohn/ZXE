@@ -1,5 +1,6 @@
 ﻿using ZXE.Common.ConsoleHelpers;
 using ZXE.Core.FuseTests.Models;
+using ZXE.Core.Z80;
 
 namespace ZXE.Core.FuseTests.Infrastructure;
 
@@ -32,5 +33,48 @@ public static class TestRunner
     private static void RunTest(TestInput input)
     {
         FormattedConsole.WriteLine($"\n  &Cyan;Test&White;: &Yellow;{input.Name}");
+
+        var processor = new Processor();
+
+        SetProcessorState(processor, input);
+    }
+
+    private static void SetProcessorState(Processor processor, TestInput input)
+    {
+        processor.State.Registers.WritePair(Register.AF, input.AF);
+
+        processor.State.Registers.WritePair(Register.BC, input.BC);
+
+        processor.State.Registers.WritePair(Register.DE, input.DE);
+
+        processor.State.Registers.WritePair(Register.HL, input.HL);
+
+        processor.State.Registers.WritePair(Register.AF1, input.AF_);
+
+        processor.State.Registers.WritePair(Register.BC1, input.BC_);
+
+        processor.State.Registers.WritePair(Register.DE1, input.DE_);
+
+        processor.State.Registers.WritePair(Register.HL1, input.HL_);
+
+        processor.State.Registers.WritePair(Register.IX, input.IX);
+
+        processor.State.Registers.WritePair(Register.IY, input.IY);
+
+        processor.State.ProgramCounter = input.PC;
+
+        processor.State.StackPointer = input.SP;
+
+        processor.State.Registers[Register.I] = input.I;
+
+        processor.State.Registers[Register.R] = input.R;
+
+        processor.State.InterruptFlipFlop1 = input.IFF1;
+
+        processor.State.InterruptFlipFlop2 = input.IFF2;
+
+        processor.State.InterruptMode = (InterruptMode) input.InterruptMode;
+
+        processor.State.Halted = input.Halted;
     }
 }
