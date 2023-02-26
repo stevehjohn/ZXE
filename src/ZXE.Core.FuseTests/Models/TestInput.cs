@@ -44,7 +44,9 @@ public class TestInput
 
     public bool Halted { get; }
 
-    public byte[] Ram { get; }
+    public byte TStates { get; }
+
+    public byte?[] Ram { get; }
 
     public TestInput(string[] testData)
     {
@@ -90,7 +92,9 @@ public class TestInput
 
         Halted = interrupts[5] == "1";
 
-        Ram = new byte[0xFFFF];
+        TStates = byte.Parse(interrupts[6], NumberStyles.HexNumber);
+
+        Ram = new byte?[0xFFFF];
 
         var line = 3;
 

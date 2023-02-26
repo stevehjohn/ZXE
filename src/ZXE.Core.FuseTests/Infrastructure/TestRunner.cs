@@ -1,5 +1,7 @@
 ﻿using ZXE.Common.ConsoleHelpers;
 using ZXE.Core.FuseTests.Models;
+using ZXE.Core.Infrastructure;
+using ZXE.Core.System;
 using ZXE.Core.Z80;
 
 namespace ZXE.Core.FuseTests.Infrastructure;
@@ -37,6 +39,10 @@ public static class TestRunner
         var processor = new Processor();
 
         SetProcessorState(processor, input);
+
+        var ram = new Ram(Model.Spectrum48K);
+
+        PopulateRam(ram, input);
     }
 
     private static void SetProcessorState(Processor processor, TestInput input)
@@ -76,5 +82,16 @@ public static class TestRunner
         processor.State.InterruptMode = (InterruptMode) input.InterruptMode;
 
         processor.State.Halted = input.Halted;
+    }
+
+    private static void PopulateRam(Ram ram, TestInput input)
+    {
+        for (var i = 0; i < 0xFFFF; i++)
+        {
+            if (input.Ram[i].HasValue)
+            {
+                ram[i] = input.Ram[i]!.Value;
+            }
+        }
     }
 }
