@@ -1,4 +1,6 @@
-﻿using ZXE.Common.ConsoleHelpers;
+﻿using System.Net.Http.Headers;
+using ZXE.Common.ConsoleHelpers;
+using ZXE.Core.FuseTests.Exceptions;
 using ZXE.Core.FuseTests.Models;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
@@ -54,6 +56,34 @@ public static class TestRunner
         {
             tStates += processor.ProcessInstruction(ram, ports, bus);
         }
+
+        var expectedResult = LoadExpectedResult(input.Name);
+    }
+
+    private static TestExpectedResult LoadExpectedResult(string testName)
+    {
+        var results = File.ReadAllLines("TestDefinitions\\expected.fuse");
+
+        var line = 0;
+
+        while (line < results.Length)
+        {
+            if (results[line] == testName)
+            {
+                var startLine = line;
+
+                return new TestExpectedResult(results[startLine..]);
+            }
+
+            while (! string.IsNullOrWhiteSpace(results[line]) && line < results.Length)
+            {
+                line++;
+            }
+
+            line++;
+        }
+
+        throw new TestExpectedResultNotFoundException($"Could not find test expected result for {testName}.");
     }
 
     private static void SetProcessorState(Processor processor, TestInput input)

@@ -90,11 +90,6 @@ public partial class Processor
 
         UpdateR(instruction);
 
-        //if (_state.ProgramCounter == 0x0038)
-        //{
-        //    Debugger.Log(0, "INFO", $"{ports.ReadByte(0xFEFE)}");
-        //}
-
         if (instruction.Action(new Input(data, _state, ram, ports)))
         {
             _state.ProgramCounter += instruction.Length;
