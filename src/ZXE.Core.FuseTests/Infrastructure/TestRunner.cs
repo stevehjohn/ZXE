@@ -76,12 +76,12 @@ public static class TestRunner
 
         var tStates = 0;
 
+        var expectedResult = LoadExpectedResult(input.Name);
+
         while (tStates < input.ProcessorState.TStates)
         {
             tStates += processor.ProcessInstruction(ram, ports, bus);
         }
-
-        var expectedResult = LoadExpectedResult(input.Name);
 
         return OutputResult(processor, expectedResult, tracer);
     }
