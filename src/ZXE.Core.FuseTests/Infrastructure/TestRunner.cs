@@ -39,7 +39,7 @@ public static class TestRunner
 
         var processor = new Processor();
 
-        SetProcessorState(processor, input);
+        SetProcessorState(processor, input.ProcessorState);
 
         var ram = new Ram(Model.Spectrum48K);
 
@@ -51,7 +51,7 @@ public static class TestRunner
 
         var tStates = 0;
 
-        while (tStates < input.TStates)
+        while (tStates < input.ProcessorState.TStates)
         {
             tStates += processor.ProcessInstruction(ram, ports, bus);
         }
@@ -90,43 +90,43 @@ public static class TestRunner
         throw new TestExpectedResultNotFoundException($"Could not find test expected result for {testName}.");
     }
 
-    private static void SetProcessorState(Processor processor, TestInput input)
+    private static void SetProcessorState(Processor processor, ProcessorState processorState)
     {
-        processor.State.Registers.WritePair(Register.AF, input.AF);
+        processor.State.Registers.WritePair(Register.AF, processorState.AF);
 
-        processor.State.Registers.WritePair(Register.BC, input.BC);
+        processor.State.Registers.WritePair(Register.BC, processorState.BC);
 
-        processor.State.Registers.WritePair(Register.DE, input.DE);
+        processor.State.Registers.WritePair(Register.DE, processorState.DE);
 
-        processor.State.Registers.WritePair(Register.HL, input.HL);
+        processor.State.Registers.WritePair(Register.HL, processorState.HL);
 
-        processor.State.Registers.WritePair(Register.AF_, input.AF_);
+        processor.State.Registers.WritePair(Register.AF_, processorState.AF_);
 
-        processor.State.Registers.WritePair(Register.BC_, input.BC_);
+        processor.State.Registers.WritePair(Register.BC_, processorState.BC_);
 
-        processor.State.Registers.WritePair(Register.DE_, input.DE_);
+        processor.State.Registers.WritePair(Register.DE_, processorState.DE_);
 
-        processor.State.Registers.WritePair(Register.HL_, input.HL_);
+        processor.State.Registers.WritePair(Register.HL_, processorState.HL_);
 
-        processor.State.Registers.WritePair(Register.IX, input.IX);
+        processor.State.Registers.WritePair(Register.IX, processorState.IX);
 
-        processor.State.Registers.WritePair(Register.IY, input.IY);
+        processor.State.Registers.WritePair(Register.IY, processorState.IY);
 
-        processor.State.ProgramCounter = input.PC;
+        processor.State.ProgramCounter = processorState.PC;
 
-        processor.State.StackPointer = input.SP;
+        processor.State.StackPointer = processorState.SP;
 
-        processor.State.Registers[Register.I] = input.I;
+        processor.State.Registers[Register.I] = processorState.I;
 
-        processor.State.Registers[Register.R] = input.R;
+        processor.State.Registers[Register.R] = processorState.R;
 
-        processor.State.InterruptFlipFlop1 = input.IFF1;
+        processor.State.InterruptFlipFlop1 = processorState.IFF1;
 
-        processor.State.InterruptFlipFlop2 = input.IFF2;
+        processor.State.InterruptFlipFlop2 = processorState.IFF2;
 
-        processor.State.InterruptMode = (InterruptMode) input.InterruptMode;
+        processor.State.InterruptMode = (InterruptMode) processorState.InterruptMode;
 
-        processor.State.Halted = input.Halted;
+        processor.State.Halted = processorState.Halted;
     }
 
     private static void PopulateRam(Ram ram, TestInput input)
