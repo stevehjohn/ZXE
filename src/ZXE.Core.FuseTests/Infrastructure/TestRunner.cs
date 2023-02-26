@@ -57,6 +57,28 @@ public static class TestRunner
         }
 
         var expectedResult = LoadExpectedResult(input.Name);
+
+        OutputResult(processor, expectedResult);
+    }
+
+    private static void OutputResult(Processor processor, TestExpectedResult expectedResult)
+    {
+        if (processor.State.Registers.ReadPair(Register.AF) == expectedResult.ProcessorState.AF
+            && processor.State.Registers.ReadPair(Register.BC) == expectedResult.ProcessorState.BC
+            && processor.State.Registers.ReadPair(Register.DE) == expectedResult.ProcessorState.DE
+            && processor.State.Registers.ReadPair(Register.HL) == expectedResult.ProcessorState.HL)
+        {
+            return;
+        }
+
+        FormattedConsole.WriteLine(string.Empty);
+
+        FormattedConsole.WriteLine("        &Cyan;Expected    Actual");
+
+        FormattedConsole.WriteLine($"    &Cyan;AF&White;: &Green;0x{expectedResult.ProcessorState.AF:X4}      &Cyan;AF&White;: {(expectedResult.ProcessorState.AF == processor.State.Registers.ReadPair(Register.AF) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.AF):X4}");
+        FormattedConsole.WriteLine($"    &Cyan;BC&White;: &Green;0x{expectedResult.ProcessorState.BC:X4}      &Cyan;BC&White;: {(expectedResult.ProcessorState.BC == processor.State.Registers.ReadPair(Register.BC) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.BC):X4}");
+        FormattedConsole.WriteLine($"    &Cyan;DE&White;: &Green;0x{expectedResult.ProcessorState.DE:X4}      &Cyan;DE&White;: {(expectedResult.ProcessorState.DE == processor.State.Registers.ReadPair(Register.DE) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.DE):X4}");
+        FormattedConsole.WriteLine($"    &Cyan;HL&White;: &Green;0x{expectedResult.ProcessorState.HL:X4}      &Cyan;HL&White;: {(expectedResult.ProcessorState.HL == processor.State.Registers.ReadPair(Register.HL) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.HL):X4}");
     }
 
     private static TestExpectedResult LoadExpectedResult(string testName)
