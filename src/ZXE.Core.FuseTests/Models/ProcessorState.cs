@@ -86,6 +86,6 @@ public class ProcessorState
 
         Halted = interrupts[5] == "1";
 
-        TStates = int.Parse(interrupts[6], NumberStyles.HexNumber);
+        TStates = int.Parse(interrupts[6]);
     }
 }
