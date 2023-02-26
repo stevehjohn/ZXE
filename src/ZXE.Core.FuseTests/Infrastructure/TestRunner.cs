@@ -127,8 +127,9 @@ public static class TestRunner
         FormattedConsole.WriteLine(string.Empty);
 
         FormattedConsole.Write($"    &Cyan;IFF1&White;: {(expectedResult.ProcessorState.IFF1 == processor.State.InterruptFlipFlop1 ? "&Green;" : "&Red;")}{processor.State.InterruptFlipFlop1.ToString().ToLower()}");
-        FormattedConsole.Write($"    &Cyan;IFF2&White;: {(expectedResult.ProcessorState.IFF2 == processor.State.InterruptFlipFlop2 ? "&Green;" : "&Red;")}{processor.State.InterruptFlipFlop2.ToString().ToLower()}");
-        FormattedConsole.Write($"    &Cyan;Mode&White;: {(expectedResult.ProcessorState.InterruptMode == (int) processor.State.InterruptMode ? "&Green;" : "&Red;")}{processor.State.InterruptMode}");
+        FormattedConsole.Write($"      &Cyan;IFF2&White;: {(expectedResult.ProcessorState.IFF2 == processor.State.InterruptFlipFlop2 ? "&Green;" : "&Red;")}{processor.State.InterruptFlipFlop2.ToString().ToLower()}");
+        FormattedConsole.Write($"      &Cyan;Mode&White;: {(expectedResult.ProcessorState.InterruptMode == (int) processor.State.InterruptMode ? "&Green;" : "&Red;")}{(int) processor.State.InterruptMode}");
+        FormattedConsole.WriteLine($"      &Cyan;HALT&White;: {(expectedResult.ProcessorState.Halted == processor.State.Halted ? "&Green;" : "&Red;")}{processor.State.Halted.ToString().ToLower()}");
 
         return false;
     }
