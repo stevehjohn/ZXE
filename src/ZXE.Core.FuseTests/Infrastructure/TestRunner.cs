@@ -103,7 +103,7 @@ public static class TestRunner
 
         FormattedConsole.WriteLine(string.Empty);
 
-        FormattedConsole.WriteLine("         &Cyan;Expected          Actual");
+        FormattedConsole.WriteLine("         &Cyan;Expected         Actual");
 
         FormattedConsole.WriteLine($"    &Cyan;AF &White;: &Green;0x{expectedResult.ProcessorState.AF:X4}      &Cyan;AF &White;: {(expectedResult.ProcessorState.AF == processor.State.Registers.ReadPair(Register.AF) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.AF):X4}");
         FormattedConsole.WriteLine($"    &Cyan;BC &White;: &Green;0x{expectedResult.ProcessorState.BC:X4}      &Cyan;BC &White;: {(expectedResult.ProcessorState.BC == processor.State.Registers.ReadPair(Register.BC) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.BC):X4}");
