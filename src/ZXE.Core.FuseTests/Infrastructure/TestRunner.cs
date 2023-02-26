@@ -78,7 +78,7 @@ public static class TestRunner
 
         var expectedResult = LoadExpectedResult(input.Name);
 
-        while (tStates < input.ProcessorState.TStates)
+        while (tStates < expectedResult.ProcessorState.TStates)
         {
             tStates += processor.ProcessInstruction(ram, ports, bus);
         }
