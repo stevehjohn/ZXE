@@ -1,4 +1,5 @@
-﻿using ZXE.Common.ConsoleHelpers;
+﻿using System.Diagnostics;
+using ZXE.Common.ConsoleHelpers;
 using ZXE.Core.FuseTests.Exceptions;
 using ZXE.Core.FuseTests.Models;
 using ZXE.Core.Infrastructure;
@@ -15,13 +16,24 @@ public static class TestRunner
 
         var test = new List<string>();
 
+        var testCount = 0;
+
+        var passed = 0;
+
+        var stopwatch = Stopwatch.StartNew();
+
         for (var i = 0; i < input.Length; i++)
         {
             if (string.IsNullOrWhiteSpace(input[i]))
             {
                 if (test.Count > 0)
                 {
-                    RunTest(new TestInput(test.ToArray()));
+                    testCount++;
+
+                    if (RunTest(new TestInput(test.ToArray())))
+                    {
+                        passed++;
+                    }
 
                     test.Clear();
                 }
@@ -31,9 +43,15 @@ public static class TestRunner
 
             test.Add(input[i]);
         }
+
+        FormattedConsole.WriteLine("  &Cyan;Testing complete&White;.\n");
+
+        FormattedConsole.WriteLine($"  &Cyan;Executed&White;: &Yellow;{testCount}    &Cyan;Passed&White;: &Green;{passed}   &Cyan;Failed&White;: &Red;{testCount - passed}");
+
+        FormattedConsole.WriteLine(string.Empty);
     }
 
-    private static void RunTest(TestInput input)
+    private static bool RunTest(TestInput input)
     {
         FormattedConsole.Write($"\n  &Cyan;Test&White;: &Yellow;{input.Name}");
 
@@ -58,10 +76,10 @@ public static class TestRunner
 
         var expectedResult = LoadExpectedResult(input.Name);
 
-        OutputResult(processor, expectedResult);
+        return OutputResult(processor, expectedResult);
     }
 
-    private static void OutputResult(Processor processor, TestExpectedResult expectedResult)
+    private static bool OutputResult(Processor processor, TestExpectedResult expectedResult)
     {
         if (processor.State.Registers.ReadPair(Register.AF) == expectedResult.ProcessorState.AF
             && processor.State.Registers.ReadPair(Register.BC) == expectedResult.ProcessorState.BC
@@ -74,7 +92,7 @@ public static class TestRunner
         {
             FormattedConsole.WriteLine(" &White;[&Green;PASS&White;]");
 
-            return;
+            return true;
         }
 
         FormattedConsole.WriteLine(" &White;[&Red;FAIL&White;]");
@@ -95,6 +113,8 @@ public static class TestRunner
         FormattedConsole.WriteLine($"    &Cyan;IY &White;: &Green;0x{expectedResult.ProcessorState.IY:X4}      &Cyan;BC'&White;: {(expectedResult.ProcessorState.IY == processor.State.Registers.ReadPair(Register.IY) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.BC_):X4}");
         FormattedConsole.WriteLine($"    &Cyan;PC &White;: &Green;0x{expectedResult.ProcessorState.PC:X4}      &Cyan;DE'&White;: {(expectedResult.ProcessorState.PC == processor.State.ProgramCounter ? "&Green;" : "&Red;")}0x{processor.State.ProgramCounter:X4}");
         FormattedConsole.WriteLine($"    &Cyan;SP &White;: &Green;0x{expectedResult.ProcessorState.SP:X4}      &Cyan;HL'&White;: {(expectedResult.ProcessorState.SP == processor.State.StackPointer ? "&Green;" : "&Red;")}0x{processor.State.StackPointer:X4}");
+
+        return false;
     }
 
     private static TestExpectedResult LoadExpectedResult(string testName)
