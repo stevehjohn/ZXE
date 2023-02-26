@@ -102,6 +102,7 @@ public static class TestRunner
             && processor.State.StackPointer == expectedResult.ProcessorState.SP
             && processor.State.Registers[Register.I] == expectedResult.ProcessorState.I
             && processor.State.Registers[Register.R] == expectedResult.ProcessorState.R)
+            // TODO: IFFs, mode and HALT
         {
             FormattedConsole.WriteLine(" &White;[ &Green;PASS&White; ]");
 
