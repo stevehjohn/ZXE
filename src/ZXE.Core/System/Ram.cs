@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using ZXE.Core.Infrastructure;
+﻿using ZXE.Core.Infrastructure;
 
 namespace ZXE.Core.System;
 
@@ -31,11 +30,6 @@ public class Ram
             {
                 address += Size;
             }
-
-            //if (address >= 0x3D00 && address <= 0x3FFF)
-            //{
-            //    Debugger.Log(0, "INFO", $"{Convert.ToString(_ram[address], 2).Replace('0', ' '),8}\n");
-            //}
 
             return _ram[address];
         }

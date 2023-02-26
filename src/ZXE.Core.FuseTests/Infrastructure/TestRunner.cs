@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using ZXE.Common.ConsoleHelpers;
+﻿using ZXE.Common.ConsoleHelpers;
 using ZXE.Core.FuseTests.Exceptions;
 using ZXE.Core.FuseTests.Models;
 using ZXE.Core.Infrastructure;
