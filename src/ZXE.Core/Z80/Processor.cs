@@ -90,16 +90,11 @@ public partial class Processor
 
         UpdateR(instruction);
 
-        var cycles = instruction.ClockCycles;
+        var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
 
-        if (instruction.Action(new Input(data, _state, ram, ports)) > -1)
+        if (additionalCycles > -1)
         {
-            cycles += _state.ProgramCounter += instruction.Length;
-        }
-
-        if (_state.ProgramCounter > 0xFFFF)
-        {
-            _state.ProgramCounter -= 0x10000;
+            _state.ProgramCounter += instruction.Length;
         }
 
         if (! instruction.Mnemonic.StartsWith("SOPSET") && _state.OpcodePrefix == 0)
@@ -112,7 +107,7 @@ public partial class Processor
             _tracer.TraceAfter(instruction, data, _state, ram);
         }
 
-        return cycles;
+        return instruction.ClockCycles + additionalCycles;
     }
 
     public void Reset(int programCounter = 0x0000)
