@@ -80,9 +80,9 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Carry = result > 0xFFFF;
             input.State.Flags.AddSubtract = false;
             // ParityOverflow unaffected
-            input.State.Flags.X1 = (result & 0x08) > 0;
+            input.State.Flags.X1 = (result & 0x0800) > 0;
             input.State.Flags.HalfCarry = (source & 0x0800) > 0 && (result & 0x1000) > 0;
-            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.X2 = (result & 0x2000) > 0;
             // Zero unaffected
             // Sign unaffected
 
