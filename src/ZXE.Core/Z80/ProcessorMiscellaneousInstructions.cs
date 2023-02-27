@@ -82,7 +82,7 @@ public static class ProcessorMiscellaneousInstructions
         // Flags
         // Carry adjusted by operation
         input.State.Flags.AddSubtract = true;
-        // TODO: ParityOverflow
+        input.State.Flags.ParityOverflow = input.State.Registers[Register.A].IsEvenParity();
         input.State.Flags.X1 = (input.State.Registers[Register.A] & 0x08) > 0;
         input.State.Flags.HalfCarry = true;
         input.State.Flags.X2 = (input.State.Registers[Register.A] & 0x20) > 0;
