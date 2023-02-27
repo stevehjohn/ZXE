@@ -275,6 +275,8 @@ public static class TestRunner
         processor.State.InterruptMode = (InterruptMode) processorState.InterruptMode;
 
         processor.State.Halted = processorState.Halted;
+
+        processor.State.Flags = Flags.FromByte((byte) (processorState.AF & 0xFF));
     }
 
     private static void PopulateRam(Ram ram, TestInput input)
