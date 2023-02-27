@@ -12,9 +12,9 @@ public static class FlagsExtensions
         builder.Append(flags.Carry ? 'C' : ' ');
         builder.Append(flags.AddSubtract ? 'N' : ' ');
         builder.Append(flags.ParityOverflow ? 'P' : ' ');
-        builder.Append(flags.X1 ? 'X' : ' ');
+        builder.Append(flags.X1 ? '3' : ' ');
         builder.Append(flags.HalfCarry ? 'H' : ' ');
-        builder.Append(flags.X2 ? 'X' : ' ');
+        builder.Append(flags.X2 ? '5' : ' ');
         builder.Append(flags.Zero ? 'Z' : ' ');
         builder.Append(flags.Sign ? 'S' : ' ');
 
