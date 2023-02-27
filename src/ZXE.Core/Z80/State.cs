@@ -14,6 +14,11 @@ public class State
                 value += 0xFFFF;
             }
 
+            if (value > 0xFFFF)
+            {
+                value -= 0xFFFF;
+            }
+
             _programCounter = value;
         }
     }

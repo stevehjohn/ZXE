@@ -1,7 +1,8 @@
-﻿#define UNATTENDED
+﻿//#define UNATTENDED
 using System.Diagnostics;
 using ZXE.Common.ConsoleHelpers;
 using ZXE.Common.DebugHelpers;
+using ZXE.Common.Extensions;
 using ZXE.Core.FuseTests.Exceptions;
 using ZXE.Core.FuseTests.Models;
 using ZXE.Core.Infrastructure;
@@ -177,6 +178,11 @@ public static class TestRunner
             $"    &Cyan;I  &White;: &Green;0x{expectedResult.ProcessorState.I:X2}        &Cyan;I  &White;: {(expectedResult.ProcessorState.I == processor.State.Registers[Register.I] ? "&Green;" : "&Red;")}0x{processor.State.Registers[Register.I]:X2}");
         FormattedConsole.WriteLine(
             $"    &Cyan;R  &White;: &Green;0x{expectedResult.ProcessorState.R:X2}        &Cyan;R  &White;: {(expectedResult.ProcessorState.R == processor.State.Registers[Register.R] ? "&Green;" : "&Red;")}0x{processor.State.Registers[Register.R]:X2}");
+
+        var expectedFlags = Flags.FromByte((byte) (expectedResult.ProcessorState.AF & 0xFF));
+
+        FormattedConsole.WriteLine(
+            $"\n    &Cyan;F  &White;: &Green;{expectedFlags.GetFlags()}    {((byte) (expectedResult.ProcessorState.AF & 0xFF) == processor.State.Registers[Register.F] ? "&Green;" : "&Red;")}{processor.State.Flags.GetFlags()}");
 
         FormattedConsole.WriteLine(string.Empty);
 
