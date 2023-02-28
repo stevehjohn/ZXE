@@ -22,7 +22,7 @@ public static class KeyboardMapper
         {
             if (keys.Length == 0)
             {
-                portData.Add((port, 0xFF));
+                portData.Add((port, 0b00011111));
 
                 continue;
             }
