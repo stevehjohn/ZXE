@@ -154,4 +154,20 @@ public class ProcessorBranchInstructionsTests
 
         Assert.Equal(0x12, _state.ProgramCounter);
     }
+
+    [Fact]
+    public void RET()
+    {
+        _ram[0x3535] = 0xC9;
+        _ram[0x2000] = 0xB5;
+        _ram[0x2001] = 0x18;
+
+        _state.ProgramCounter = 0x3535;
+        _state.StackPointer = 0x2000;
+
+        _processor.ProcessInstruction(_ram, _ports, _bus);
+
+        Assert.Equal(0x2002, _state.StackPointer);
+        Assert.Equal(0x18B5, _state.ProgramCounter);
+    }
 }

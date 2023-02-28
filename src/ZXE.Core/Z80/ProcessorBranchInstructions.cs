@@ -159,7 +159,7 @@ public static class ProcessorBranchInstructions
     {
         if (! input.State.Flags.Zero)
         {
-            JP_nn(input);
+            return JP_nn(input);
         }
 
         // Flags unaffected
@@ -169,12 +169,11 @@ public static class ProcessorBranchInstructions
 
     public static int JP_nn(Input input)
     {
-        // TODO: Don't like this - 3 thing... maybe return true/false to indicate whether PC should be adjusted by caller...
-        input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
+        input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]);
 
         // Flags unaffected
 
-        return 0;
+        return -1;
     }
 
     public static int CALL_NZ_nn(Input input)
@@ -252,7 +251,7 @@ public static class ProcessorBranchInstructions
     {
         if (input.State.Flags.Zero)
         {
-            JP_nn(input);
+            return JP_nn(input);
         }
 
         // Flags unaffected
@@ -372,7 +371,7 @@ public static class ProcessorBranchInstructions
     {
         if (! input.State.Flags.ParityOverflow)
         {
-            JP_nn(input);
+            return JP_nn(input);
         }
 
         // Flags unaffected
@@ -461,7 +460,7 @@ public static class ProcessorBranchInstructions
     {
         if (! input.State.Flags.Sign)
         {
-            JP_nn(input);
+            return JP_nn(input);
         }
 
         // Flags unaffected
@@ -501,7 +500,7 @@ public static class ProcessorBranchInstructions
     {
         if (input.State.Flags.Sign)
         {
-            JP_nn(input);
+            return JP_nn(input);
         }
 
         // Flags unaffected
