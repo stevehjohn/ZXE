@@ -1,4 +1,6 @@
-﻿namespace ZXE.Core.Z80;
+﻿using ZXE.Core.Extensions;
+
+namespace ZXE.Core.Z80;
 
 public static class ProcessorArithmeticInstructions
 {
@@ -476,7 +478,7 @@ public static class ProcessorArithmeticInstructions
             // Flags
             input.State.Flags.Carry = result > 0xFF;
             input.State.Flags.AddSubtract = false;
-            input.State.Flags.ParityOverflow = result > 0x7F;
+            input.State.Flags.ParityOverflow = ((byte) result).IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0xF;
             input.State.Flags.X2 = (result & 0x20) > 0;
