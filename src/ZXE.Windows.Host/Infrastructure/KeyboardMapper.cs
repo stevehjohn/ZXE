@@ -258,7 +258,6 @@ public static class KeyboardMapper
     {
         if (keys == Keys.Enter)
         {
-            
             return 0b11111110;
         }
 

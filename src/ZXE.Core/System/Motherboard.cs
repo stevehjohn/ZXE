@@ -112,6 +112,8 @@ public class Motherboard : IDisposable
     {
         var cycles = _processor.ProcessInstruction(_ram, _ports, _bus);
 
+        _ports.Clear();
+
         if (_tracer != null)
         {
             if (_tracing)
