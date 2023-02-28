@@ -589,6 +589,11 @@ public static class ProcessorMiscellaneousInstructions
     public static int IN_addr_RR(Input input, Register source)
     {
         var value = input.Ports.ReadByte(input.Ram[input.State.Registers.ReadPair(source)]);
+        
+        if (value != 31)
+        {
+            Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
+        }
 
         // Flags
         // Carry unaffected
