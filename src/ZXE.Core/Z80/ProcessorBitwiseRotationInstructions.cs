@@ -134,12 +134,12 @@ public static class ProcessorBitwiseRotationInstructions
             // Flags
             input.State.Flags.Carry = topBit == 1;
             input.State.Flags.AddSubtract = false;
-            // ParityOverflow unaffected
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            // Zero unaffected
-            // Sign unaffected
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
@@ -162,12 +162,12 @@ public static class ProcessorBitwiseRotationInstructions
             // Flags
             input.State.Flags.Carry = topBit == 1;
             input.State.Flags.AddSubtract = false;
-            // ParityOverflow unaffected
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            // Zero unaffected
-            // Sign unaffected
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
@@ -193,12 +193,12 @@ public static class ProcessorBitwiseRotationInstructions
             // Flags
             input.State.Flags.Carry = bottomBit == 1;
             input.State.Flags.AddSubtract = false;
-            // ParityOverflow unaffected
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            // Zero unaffected
-            // Sign unaffected
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
@@ -226,12 +226,12 @@ public static class ProcessorBitwiseRotationInstructions
             // Flags
             input.State.Flags.Carry = bottomBit == 1;
             input.State.Flags.AddSubtract = false;
-            // ParityOverflow unaffected
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            // Zero unaffected
-            // Sign unaffected
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
@@ -254,12 +254,12 @@ public static class ProcessorBitwiseRotationInstructions
             // Flags
             input.State.Flags.Carry = topBit == 1;
             input.State.Flags.AddSubtract = false;
-            // ParityOverflow unaffected
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            // Zero unaffected
-            // Sign unaffected
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
@@ -284,12 +284,12 @@ public static class ProcessorBitwiseRotationInstructions
             // Flags
             input.State.Flags.Carry = topBit == 1;
             input.State.Flags.AddSubtract = false;
-            // ParityOverflow unaffected
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            // Zero unaffected
-            // Sign unaffected
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
@@ -312,12 +312,12 @@ public static class ProcessorBitwiseRotationInstructions
             // Flags
             input.State.Flags.Carry = bottomBit == 1;
             input.State.Flags.AddSubtract = false;
-            // ParityOverflow unaffected
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            // Zero unaffected
-            // Sign unaffected
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
@@ -342,12 +342,12 @@ public static class ProcessorBitwiseRotationInstructions
             // Flags
             input.State.Flags.Carry = bottomBit == 1;
             input.State.Flags.AddSubtract = false;
-            // ParityOverflow unaffected
+            input.State.Flags.ParityOverflow = result.IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            // Zero unaffected
-            // Sign unaffected
+            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }

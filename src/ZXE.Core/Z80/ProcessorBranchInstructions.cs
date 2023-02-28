@@ -143,10 +143,11 @@ public static class ProcessorBranchInstructions
 
     public static int RET_NZ(Input input)
     {
-        // TODO: If condition true, 6 more cycles required.
         if (! input.State.Flags.Zero)
         {
-            return RET(input);
+            RET(input);
+
+            return 6;
         }
 
         // Flags unaffected
@@ -178,10 +179,11 @@ public static class ProcessorBranchInstructions
 
     public static int CALL_NZ_nn(Input input)
     {
-        // TODO: If condition true, 7 more cycles required.
         if (! input.State.Flags.Zero)
         {
-            return CALL_nn(input);
+            CALL_nn(input);
+
+            return 7;
         }
 
         // Flags unaffected
@@ -215,8 +217,9 @@ public static class ProcessorBranchInstructions
         if (input.State.Flags.Zero)
         {
             // TODO: Same old... more cycles if condition met.
+            RET(input);
 
-            return RET(input);
+            return 6;
         }
 
         // Flags unaffected
@@ -259,10 +262,11 @@ public static class ProcessorBranchInstructions
 
     public static int CALL_Z_nn(Input input)
     {
-        // TODO: If condition true, 7 more cycles required.
         if (input.State.Flags.Zero)
         {
-            return CALL_nn(input);
+            CALL_nn(input);
+
+            return 7;
         }
 
         // Flags unaffected
@@ -275,6 +279,8 @@ public static class ProcessorBranchInstructions
         if (! input.State.Flags.Carry)
         {
             RET(input);
+
+            return 6;
         }
 
         // Flags unaffected
@@ -298,7 +304,9 @@ public static class ProcessorBranchInstructions
     {
         if (! input.State.Flags.Carry)
         {
-            return CALL_nn(input);
+            CALL_nn(input);
+
+            return 7;
         }
 
         // Flags unaffected
@@ -310,9 +318,9 @@ public static class ProcessorBranchInstructions
     {
         if (input.State.Flags.Carry)
         {
-            // TODO: Same old... more cycles if condition met.
+            RET(input);
 
-            return RET(input);
+            return 6;
         }
 
         // Flags unaffected
@@ -336,7 +344,9 @@ public static class ProcessorBranchInstructions
     {
         if (input.State.Flags.Carry)
         {
-            return CALL_nn(input);
+            CALL_nn(input);
+
+            return 7;
         }
 
         // Flags unaffected
@@ -349,6 +359,8 @@ public static class ProcessorBranchInstructions
         if (! input.State.Flags.ParityOverflow)
         {
             RET(input);
+
+            return 6;
         }
 
         // Flags unaffected
@@ -373,6 +385,8 @@ public static class ProcessorBranchInstructions
         if (! input.State.Flags.ParityOverflow)
         {
             CALL_nn(input);
+
+            return 7;
         }
 
         // Flags unaffected
@@ -384,7 +398,9 @@ public static class ProcessorBranchInstructions
     {
         if (input.State.Flags.ParityOverflow)
         {
-            return RET(input);
+            RET(input);
+
+            return 6;
         }
 
         // Flags unaffected
@@ -418,6 +434,8 @@ public static class ProcessorBranchInstructions
         if (input.State.Flags.ParityOverflow)
         {
             CALL_nn(input);
+
+            return 7;
         }
 
         // Flags unaffected
@@ -430,6 +448,8 @@ public static class ProcessorBranchInstructions
         if (! input.State.Flags.Sign)
         {
             RET(input);
+
+            return 6;
         }
 
         // Flags unaffected
@@ -454,6 +474,8 @@ public static class ProcessorBranchInstructions
         if (! input.State.Flags.Sign)
         {
             CALL_nn(input);
+
+            return 7;
         }
 
         // Flags unaffected
@@ -466,6 +488,8 @@ public static class ProcessorBranchInstructions
         if (input.State.Flags.Sign)
         {
             RET(input);
+
+            return 6;
         }
 
         // Flags unaffected
@@ -490,6 +514,8 @@ public static class ProcessorBranchInstructions
         if (input.State.Flags.Sign)
         {
             CALL_nn(input);
+
+            return 7;
         }
 
         // Flags unaffected
