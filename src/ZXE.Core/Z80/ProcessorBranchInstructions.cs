@@ -86,6 +86,8 @@ public static class ProcessorBranchInstructions
         if (! input.State.Flags.Carry)
         {
             JR_e(input);
+
+            return 5;
         }
 
         // Flags unaffected
@@ -98,6 +100,8 @@ public static class ProcessorBranchInstructions
         if (input.State.Flags.Carry)
         {
             JR_e(input);
+
+            return 5;
         }
 
         // Flags unaffected
