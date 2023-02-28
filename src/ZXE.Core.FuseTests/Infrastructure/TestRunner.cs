@@ -113,10 +113,6 @@ public static class TestRunner
 
         var expectedResult = LoadExpectedResult(input.Name);
 
-        if (input.Name == "76")
-        {
-        }
-
         while (tStates < expectedResult.ProcessorState.TStates)
         {
             tStates += processor.ProcessInstruction(ram, ports, bus);
