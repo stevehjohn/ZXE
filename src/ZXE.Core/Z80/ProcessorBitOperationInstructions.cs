@@ -22,7 +22,7 @@ public static class ProcessorBitOperationInstructions
         input.State.Flags.HalfCarry = true;
         input.State.Flags.X2 = (data & 0x20) > 0;
         input.State.Flags.Zero = (data & bit) == 0;
-        input.State.Flags.Sign = bit == 7 && result != 0;
+        input.State.Flags.Sign = bit == 0x80 && result != 0;
 
         input.State.Registers[Register.F] = input.State.Flags.ToByte();
 
@@ -43,7 +43,7 @@ public static class ProcessorBitOperationInstructions
         input.State.Flags.HalfCarry = true;
         input.State.Flags.X2 = (data & 0x20) > 0;
         input.State.Flags.Zero = (data & bit) == 0;
-        input.State.Flags.Sign = bit == 7 && result != 0;
+        input.State.Flags.Sign = bit == 0x80 && result != 0;
 
         input.State.Registers[Register.F] = input.State.Flags.ToByte();
 
