@@ -570,6 +570,8 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.X2 = (result & 0x20) > 0;
             input.State.Flags.Zero = (sbyte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
         return 0;
@@ -581,21 +583,23 @@ public static class ProcessorArithmeticInstructions
         {
             var value = input.State.Registers.ReadPair(register);
 
-            var result = (ushort) ((value & 0xFF00) - 0x0100);
+            var high = (byte) (value >> 8);
 
-            result += (byte) (value & 0x00FF);
+            var low = value & 0xFF;
+
+            var result = (ushort) (((high - 1) << 8) | low);
 
             input.State.Registers.WritePair(register, result);
             
             // Flags
             // Carry unaffected
-            input.State.Flags.AddSubtract = false;
+            input.State.Flags.AddSubtract = true;
             input.State.Flags.ParityOverflow = value == 0x7F;
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0xF;
             input.State.Flags.X2 = (result & 0x20) > 0;
             input.State.Flags.Zero = (sbyte) result == 0;
-            input.State.Flags.Sign = (sbyte) result < 0;
+            input.State.Flags.Sign = (high - 1) < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
@@ -624,6 +628,8 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.X2 = (result & 0x20) > 0;
             input.State.Flags.Zero = (sbyte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
         return 0;
