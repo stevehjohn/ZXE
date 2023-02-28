@@ -40,16 +40,16 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("d4") < 0)
-            //{
-            //    continue;
-            //}
+            if (Path.GetFileName(file).CompareTo("dd") < 0)
+            {
+                continue;
+            }
 
             // End early
-            //if (Path.GetFileName(file).CompareTo("dd 2f") > 0)
-            //{
-            //    continue;
-            //}
+            if (Path.GetFileName(file).CompareTo("de") > 0)
+            {
+                continue;
+            }
 
             var tests = JsonSerializer.Deserialize<TestDefinition[]>(File.ReadAllText(file), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
