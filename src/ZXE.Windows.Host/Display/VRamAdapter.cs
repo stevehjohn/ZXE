@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 using ZXE.Common;
 using ZXE.Core.System;
 using Color = Microsoft.Xna.Framework.Color;
@@ -12,11 +13,17 @@ public class VRamAdapter
 
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
 
+    private readonly Stopwatch _stopwatch;
+
+    private bool _alternate;
+
     public VRamAdapter(Ram ram, GraphicsDeviceManager graphicsDeviceManager)
     {
         _ram = ram;
 
         _graphicsDeviceManager = graphicsDeviceManager;
+
+        _stopwatch = Stopwatch.StartNew();
     }
 
     public Texture2D GetDisplay()
@@ -26,6 +33,8 @@ public class VRamAdapter
         var data = new Color[Constants.ScreenWidthPixels * Constants.ScreenHeightPixels];
 
         var i = 0;
+
+        _alternate = _stopwatch.ElapsedMilliseconds > 500;
 
         for (var y = 0; y < Constants.ScreenHeightPixels; y++)
         {
@@ -62,6 +71,11 @@ public class VRamAdapter
         }
 
         texture.SetData(data);
+
+        if (_stopwatch.ElapsedMilliseconds > 1_000)
+        {
+            _stopwatch.Restart();
+        }
 
         return texture;
     }
@@ -101,6 +115,11 @@ public class VRamAdapter
             7 => Color.White,
             _ => Color.Black
         };
+
+        if ((data & 0x80) > 0 && _alternate)
+        {
+            return (background, foreground);
+        }
 
         return (foreground, background);
     }
