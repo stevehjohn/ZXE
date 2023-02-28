@@ -82,7 +82,10 @@ public class Monitor : Game
         {
             _motherboard.Ports.WriteByte(port.Port, port.data);
 
-            //Debugger.Log(0, "INFO", $"{port.Port}: {port.data}\n");
+            if (port.data != 31)
+            {
+                Debugger.Log(0, "INFO", $"{port.Port:X2}: {port.data}\n");
+            }
         }
 
         if (Keyboard.GetState().IsKeyDown(Keys.F11))
