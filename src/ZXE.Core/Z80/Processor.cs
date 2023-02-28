@@ -118,7 +118,7 @@ public partial class Processor
 
         _state.Flags = Flags.FromByte(0xFF);
 
-        _state.Registers[Register.I] = _state.Registers[Register.R] = 0xFF;
+        _state.Registers[Register.I] = _state.Registers[Register.R] = 0x00;
 
         _state.ProgramCounter = programCounter;
 
