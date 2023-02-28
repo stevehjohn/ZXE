@@ -1,4 +1,4 @@
-﻿//#define UNATTENDED
+﻿#define UNATTENDED
 using System.Diagnostics;
 using ZXE.Common.ConsoleHelpers;
 using ZXE.Common.DebugHelpers;
@@ -112,6 +112,10 @@ public static class TestRunner
         var tStates = 0;
 
         var expectedResult = LoadExpectedResult(input.Name);
+
+        if (input.Name == "76")
+        {
+        }
 
         while (tStates < expectedResult.ProcessorState.TStates)
         {

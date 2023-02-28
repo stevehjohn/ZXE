@@ -107,7 +107,7 @@ public partial class Processor
             _tracer.TraceAfter(instruction, data, _state, ram);
         }
 
-        return instruction.ClockCycles + additionalCycles;
+        return instruction.ClockCycles + (additionalCycles > -1 ? additionalCycles : 0);
     }
 
     public void Reset(int programCounter = 0x0000)
