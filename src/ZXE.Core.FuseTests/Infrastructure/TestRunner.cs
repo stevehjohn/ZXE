@@ -1,4 +1,4 @@
-﻿//#define UNATTENDED
+﻿#define UNATTENDED
 using System.Diagnostics;
 using ZXE.Common.ConsoleHelpers;
 using ZXE.Common.DebugHelpers;
