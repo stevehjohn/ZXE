@@ -40,13 +40,13 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("d4") < 0)
+            //if (Path.GetFileName(file).CompareTo("fd cb __ 85") < 0)
             //{
             //    continue;
             //}
 
             // End early
-            //if (Path.GetFileName(file).CompareTo("dd 2f") > 0)
+            //if (Path.GetFileName(file).CompareTo("dd cc") > 0)
             //{
             //    continue;
             //}

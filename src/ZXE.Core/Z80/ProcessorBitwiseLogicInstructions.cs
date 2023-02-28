@@ -6,7 +6,7 @@
 
 public static class ProcessorBitwiseLogicInstructions
 {
-    public static bool AND_R_R(Input input, Register destination, Register source)
+    public static int AND_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -27,10 +27,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool AND_R_addr_RR(Input input, Register destination, Register source)
+    public static int AND_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -51,10 +51,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool XOR_R_R(Input input, Register destination, Register source)
+    public static int XOR_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -75,10 +75,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool XOR_R_addr_RR(Input input, Register destination, Register source)
+    public static int XOR_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -99,10 +99,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool OR_R_R(Input input, Register destination, Register source)
+    public static int OR_R_R(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -123,10 +123,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool OR_R_addr_RR(Input input, Register destination, Register source)
+    public static int OR_R_addr_RR(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -147,10 +147,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool AND_R_n(Input input, Register destination)
+    public static int AND_R_n(Input input, Register destination)
     {
         unchecked
         {
@@ -171,10 +171,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool XOR_R_n(Input input, Register destination)
+    public static int XOR_R_n(Input input, Register destination)
     {
         unchecked
         {
@@ -195,10 +195,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool OR_R_n(Input input, Register destination)
+    public static int OR_R_n(Input input, Register destination)
     {
         unchecked
         {
@@ -219,10 +219,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool AND_R_RRh(Input input, Register destination, Register source)
+    public static int AND_R_RRh(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -243,10 +243,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool AND_R_RRl(Input input, Register destination, Register source)
+    public static int AND_R_RRl(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -267,10 +267,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool AND_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    public static int AND_R_addr_RR_plus_d(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -291,10 +291,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool XOR_R_RRh(Input input, Register destination, Register source)
+    public static int XOR_R_RRh(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -315,10 +315,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool XOR_R_RRl(Input input, Register destination, Register source)
+    public static int XOR_R_RRl(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -339,10 +339,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool XOR_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    public static int XOR_R_addr_RR_plus_d(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -363,10 +363,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool OR_R_RRh(Input input, Register destination, Register source)
+    public static int OR_R_RRh(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -387,10 +387,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool OR_R_RRl(Input input, Register destination, Register source)
+    public static int OR_R_RRl(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -411,10 +411,10 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 
-    public static bool OR_R_addr_RR_plus_d(Input input, Register destination, Register source)
+    public static int OR_R_addr_RR_plus_d(Input input, Register destination, Register source)
     {
         unchecked
         {
@@ -435,6 +435,6 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
 
-        return true;
+        return 0;
     }
 }

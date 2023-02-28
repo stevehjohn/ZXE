@@ -11,7 +11,12 @@ public class State
         {
             if (value < 0)
             {
-                value += 0xFFFF;
+                value += 0x10_000;
+            }
+
+            if (value > 0xFFFF)
+            {
+                value -= 0x10_000;
             }
 
             _programCounter = value;

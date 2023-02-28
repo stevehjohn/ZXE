@@ -90,14 +90,11 @@ public partial class Processor
 
         UpdateR(instruction);
 
-        if (instruction.Action(new Input(data, _state, ram, ports)))
+        var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
+
+        if (additionalCycles > -1)
         {
             _state.ProgramCounter += instruction.Length;
-        }
-
-        if (_state.ProgramCounter > 0xFFFF)
-        {
-            _state.ProgramCounter -= 0x10000;
         }
 
         if (! instruction.Mnemonic.StartsWith("SOPSET") && _state.OpcodePrefix == 0)
@@ -110,7 +107,7 @@ public partial class Processor
             _tracer.TraceAfter(instruction, data, _state, ram);
         }
 
-        return instruction.ClockCycles;
+        return instruction.ClockCycles + additionalCycles;
     }
 
     public void Reset(int programCounter = 0x0000)
@@ -166,11 +163,11 @@ public partial class Processor
         _state = state;
     }
     
-    private bool SetOpcodePrefix(int prefix)
+    private int SetOpcodePrefix(int prefix)
     {
         _state.OpcodePrefix = prefix;
 
-        return true;
+        return 0;
     }
 
     private void HandleNonMaskableInterrupt(Ram ram)
