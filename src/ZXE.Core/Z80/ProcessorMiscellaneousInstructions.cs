@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using ZXE.Core.Extensions;
 
 // ReSharper disable IdentifierTypo
@@ -1203,7 +1202,7 @@ public static class ProcessorMiscellaneousInstructions
 
         input.State.Registers[Register.A] = (byte) (ah | vh >> 4);
 
-        value = (byte) ((vl << 4) | (al));
+        value = (byte) ((vl << 4) | al);
 
         input.Ram[input.State.Registers.ReadPair(Register.HL)] = value;
 
