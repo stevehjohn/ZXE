@@ -28,7 +28,7 @@ xx = Opcode, dd = Displacement value (byte).
 
 ### Third Party Tests Failing
 
-FD 74 01C4, FD 98 026E, FD CB __ 0A 030E, FD CB __ 46 009D, FD CB __ 49 003B, FD CB __ 4F 0042, FD CB __ 85 0344, FD CB __ 86 012E, FD CB __ 96 0022, FD CB __ A7 0198, FD CB __ AE 007C, FD CB __ B0 008F, FD CB __ BC 02DA, FD CB __ BF 0071, FD CB __ D7 0035, FD CB __ D8 0083, FD CB __ DC 0328, FD CB __ F7 0054, FD D5 006A
+FD CB __ 0A 030E, FD CB __ 46 009D, FD CB __ 49 003B, FD CB __ 4F 0042, FD CB __ 85 0344, FD CB __ 86 012E, FD CB __ 96 0022, FD CB __ A7 0198, FD CB __ AE 007C, FD CB __ B0 008F, FD CB __ BC 02DA, FD CB __ BF 0071, FD CB __ D7 0035, FD CB __ D8 0083, FD CB __ DC 0328, FD CB __ F7 0054, FD D5 006A
 
 Failing test. I think the test parameters are not correct:
 
