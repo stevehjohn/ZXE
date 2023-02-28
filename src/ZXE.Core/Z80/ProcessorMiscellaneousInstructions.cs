@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using ZXE.Core.Extensions;
 
 // ReSharper disable IdentifierTypo
@@ -540,11 +541,14 @@ public static class ProcessorMiscellaneousInstructions
 
     public static int IN_R_p(Input input, Register register)
     {
-        var portData = input.Ports.ReadByte(input.Data[1]);
+        var value = input.Ports.ReadByte(input.Data[1]);
 
-        Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {portData}\n");
+        if (value != 31)
+        {
+            Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {value}\n");
+        }
 
-        input.State.Registers[register] = portData;
+        input.State.Registers[register] = value;
 
         return 0;
     }
@@ -553,7 +557,10 @@ public static class ProcessorMiscellaneousInstructions
     {
         var value = input.Ports.ReadByte(input.State.Registers[Register.C]);
 
-        Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
+        if (value != 31)
+        {
+            Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
+        }
 
         input.State.Registers[register] = value;
 

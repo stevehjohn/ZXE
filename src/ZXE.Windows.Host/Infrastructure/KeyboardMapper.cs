@@ -44,28 +44,28 @@ public static class KeyboardMapper
     {
         switch (port)
         {
-            case 0xFEFE:
+            case 0xFE:
                 return ScanForFEFEKeys(keys);
 
-            case 0xFDFE:
+            case 0xFD:
                 return ScanForFDFEKeys(keys);
 
-            case 0xFBFE:
+            case 0xFB:
                 return ScanForFBFEKeys(keys);
 
-            case 0xF7FE:
+            case 0xF7:
                 return ScanForF7FEKeys(keys);
 
-            case 0xEFFE:
+            case 0xEF:
                 return ScanForEFFEKeys(keys);
 
-            case 0xDFFE:
+            case 0xDF:
                 return ScanForDFFEKeys(keys);
 
-            case 0xBFFE:
+            case 0xBF:
                 return ScanForBFFEKeys(keys);
 
-            case 0x7FFE:
+            case 0x7F:
                 return ScanFor7FFEKeys(keys);
 
             default:
