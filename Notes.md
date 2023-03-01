@@ -34,7 +34,7 @@ Failing test, but I think the test parameters are not correct: FD 18
 
 ### Fuse Tests Failing
 
-Count: 68
+Count: 66
 
 ```
 27_1: DAA
@@ -57,10 +57,8 @@ ed42: SBC HL, BC
 ed48: IN C, (C)
 ed4a: ADC HL, BC
 ed50: IN D, (C)
-ed57: LD A, I
 ed58: IN E, (C)
 ed5a: ADC HL, DE
-ed5f: LD A, R
 ed60: IN H, (C)
 ed67: RRD
 ed68: IN L, (C)

@@ -107,10 +107,24 @@ public static class ProcessorLoadInstructions
 
     public static int LD_R_R(Input input, Register destination, Register source)
     {
-        input.State.Registers[destination] = input.State.Registers[source];
+        var value = input.State.Registers[source];
 
-        // Flags unaffected
-        // TODO: Flags might be affected...
+        input.State.Registers[destination] = value;
+
+        if (source == Register.I || source == Register.R)
+        {
+            // Flags
+            // Carry unaffected
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = input.State.InterruptFlipFlop2;
+            input.State.Flags.X1 = (value & 0x08) > 0;
+            input.State.Flags.HalfCarry = false;
+            input.State.Flags.X2 = (value & 0x20) > 0;
+            input.State.Flags.Zero = value == 0;
+            input.State.Flags.Sign = (sbyte) value < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
 
         return 0;
     }
