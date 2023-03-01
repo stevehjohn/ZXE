@@ -246,21 +246,21 @@ public partial class Processor
 
         instructions[0xDDCB77] = new Instruction("BIT_6 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x40, Register.IX), 12, null, 0xDDCB77);
 
-        instructions[0xDDCB78] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB78);
+        instructions[0xDDCB78] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x80, Register.IX), 12, null, 0xDDCB78);
 
-        instructions[0xDDCB79] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB79);
+        instructions[0xDDCB79] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x80, Register.IX), 12, null, 0xDDCB79);
 
-        instructions[0xDDCB7A] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7A);
+        instructions[0xDDCB7A] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x80, Register.IX), 12, null, 0xDDCB7A);
 
-        instructions[0xDDCB7B] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7B);
+        instructions[0xDDCB7B] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x80, Register.IX), 12, null, 0xDDCB7B);
 
-        instructions[0xDDCB7C] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7C);
+        instructions[0xDDCB7C] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x80, Register.IX), 12, null, 0xDDCB7C);
 
-        instructions[0xDDCB7D] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7D);
+        instructions[0xDDCB7D] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x80, Register.IX), 12, null, 0xDDCB7D);
 
-        instructions[0xDDCB7E] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7E);
+        instructions[0xDDCB7E] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x80, Register.IX), 12, null, 0xDDCB7E);
 
-        instructions[0xDDCB7F] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x20, Register.IX), 12, null, 0xDDCB7F);
+        instructions[0xDDCB7F] = new Instruction("BIT_7 (IX + d)", 2, i => ProcessorBitOperationInstructions.BIT_b_addr_RR_plus_d(i, 0x80, Register.IX), 12, null, 0xDDCB7F);
 
         instructions[0xDDCB80] = new Instruction("RES_0 (IX + d), B", 2, i => ProcessorBitOperationInstructions.RES_b_addr_RR_plus_d_R(i, 0x01, Register.IX, Register.B), 15, null, 0xDDCB80);
 
