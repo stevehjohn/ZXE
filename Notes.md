@@ -34,7 +34,7 @@ Failing test, but I think the test parameters are not correct: FD 18
 
 ### Fuse Tests Failing
 
-Count: 64
+Count: 63
 
 ```
 27_1: DAA
@@ -75,7 +75,6 @@ eda3_02: OUTI
 eda3_04: OUTI
 eda3_06: OUTI
 eda3_08: OUTI
-eda8: LDD
 eda9: CPD
 edaa: IND
 edaa_01: IND
