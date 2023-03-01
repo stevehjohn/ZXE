@@ -70,20 +70,9 @@ public static class TestRunner
 
             Console.ReadKey();
 
-            var first = true;
-
             foreach (var name in failedTestNames)
             {
-                if (first)
-                {
-                    FormattedConsole.Write($"&Red;{name}");
-
-                    first = false;
-                }
-                else
-                {
-                    FormattedConsole.Write($"&White;, &Red;{name}");
-                }
+                FormattedConsole.WriteLine($"&Red;{name}");
             }
 
             Console.WriteLine("\n");

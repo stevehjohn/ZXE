@@ -36,4 +36,92 @@ FD 18
 
 Count: 87
 
-27_1 (DAA), 27 (DAA), 37_1 (SCF), 37_2 (SCF), 3f (CCF), db_1 (IN A, (n)), db_2 (IN A, (n)), db_3 (IN A, (n)), db (IN A, (n)), dd2d (DEC IXl), dd34 (INC (IX + d)), dd35 (DEC (IX + d)), dd39 (ADD IX, SP), dd70 (LD (IX + d), B), dd71 (LD (IX + d), C), dd72 (LD (IX + d), D), dd73 (LD (IX + d), E), dd74 (LD (IX + d), H), dd75 (LD (IX + d), L), dd86 (ADD A, (IX + d)), dd95 (SUB A, IXl), dd96 (SUB A, (IX + d)), ddbc (CP A, IXh), ddbe (CP A, (IX + d)), ed40 (IN B, (C)), ed42 (SBC HL, BC), ed44 (NEG A), ed48 (IN C, (C)), ed4a (ADC HL, BC), ed4c (NEG A), ed50 (IN D, (C)), ed54 (NEG A), ed57 (LD A, I), ed58 (IN E, (C)), ed5a (ADC HL, DE), ed5c (NEG A), ed5f (LD A, R), ed60 (IN H, (C)), ed64 (NEG A), ed67 (RRD), ed68 (IN L, (C)), ed6a (ADC HL, HL), ed6c (NEG A), ed6f (RLD), ed70 (IN (BC)), ed72 (SBC HL, SP), ed74 (NEG A), ed78 (IN A, (C)), ed7a (ADC HL, SP), ed7c (NEG A), eda1 (CPI), eda2 (INI), eda2_01 (INI), eda2_02 (INI), eda2_03 (INI), eda3_02 (OUTI), eda3_04 (OUTI), eda3_06 (OUTI), eda3_08 (OUTI), eda8 (LDD), eda9 (CPD), edaa (IND), edaa_01 (IND), edaa_02 (IND), edaa_03 (IND), edab (OUTD), edab_01 (OUTD), edab_02 (OUTD), edb0 (LDIR), edb1 (CPIR), edb2 (INIR), edb3 (OTIR), edb8 (LDDR), edb9 (CPDR), edba (INDR), edbb (OTDR), fd25 (DEC IYh), fd26 (LD IYh, n), fd2a (LD IY, (nn)), fd2d (DEC IYl), fd34 (INC (IY + d)), fd35 (DEC (IY + d)), fd39 (ADD IY, SP), fd6e (LD L, (IY + d)), fd94 (SUB A, IYh), fd96 (SUB A, (IY + d)), fe (CP A, n)
+```
+27_1: DAA
+27: DAA
+37_1: SCF
+37_2: SCF
+3f: CCF
+db_1: IN A, (n)
+db_2: IN A, (n)
+db_3: IN A, (n)
+db: IN A, (n)
+dd2d: DEC IXl
+dd34: INC (IX + d)
+dd35: DEC (IX + d)
+dd39: ADD IX, SP
+dd70: LD (IX + d), B
+dd71: LD (IX + d), C
+dd72: LD (IX + d), D
+dd73: LD (IX + d), E
+dd74: LD (IX + d), H
+dd75: LD (IX + d), L
+dd86: ADD A, (IX + d)
+dd95: SUB A, IXl
+dd96: SUB A, (IX + d)
+ddbc: CP A, IXh
+ddbe: CP A, (IX + d)
+ed40: IN B, (C)
+ed42: SBC HL, BC
+ed44: NEG A
+ed48: IN C, (C)
+ed4a: ADC HL, BC
+ed4c: NEG A
+ed50: IN D, (C)
+ed54: NEG A
+ed57: LD A, I
+ed58: IN E, (C)
+ed5a: ADC HL, DE
+ed5c: NEG A
+ed5f: LD A, R
+ed60: IN H, (C)
+ed64: NEG A
+ed67: RRD
+ed68: IN L, (C)
+ed6a: ADC HL, HL
+ed6c: NEG A
+ed6f: RLD
+ed70: IN (BC)
+ed72: SBC HL, SP
+ed74: NEG A
+ed78: IN A, (C)
+ed7a: ADC HL, SP
+ed7c: NEG A
+eda1: CPI
+eda2: INI
+eda2_01: INI
+eda2_02: INI
+eda2_03: INI
+eda3_02: OUTI
+eda3_04: OUTI
+eda3_06: OUTI
+eda3_08: OUTI
+eda8: LDD
+eda9: CPD
+edaa: IND
+edaa_01: IND
+edaa_02: IND
+edaa_03: IND
+edab: OUTD
+edab_01: OUTD
+edab_02: OUTD
+edb0: LDIR
+edb1: CPIR
+edb2: INIR
+edb3: OTIR
+edb8: LDDR
+edb9: CPDR
+edba: INDR
+edbb: OTDR
+fd25: DEC IYh
+fd26: LD IYh, n
+fd2a: LD IY, (nn)
+fd2d: DEC IYl
+fd34: INC (IY + d)
+fd35: DEC (IY + d)
+fd39: ADD IY, SP
+fd6e: LD L, (IY + d)
+fd94: SUB A, IYh
+fd96: SUB A, (IY + d)
+fe: CP A, n
+```

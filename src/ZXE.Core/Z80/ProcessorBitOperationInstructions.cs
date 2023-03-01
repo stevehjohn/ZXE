@@ -177,19 +177,25 @@ public static class ProcessorBitOperationInstructions
 
     public static int NEG_R(Input input, Register register)
     {
-        var result = (byte) (0 - input.State.Registers[register]);
+        //var result = (byte) (0 - input.State.Registers[register]);
+
+        var value = input.State.Registers[register];
+
+        var result = (byte) ~value;
+
+        result++;
 
         input.State.Registers[register] = result;
 
         // Flags
-        input.State.Flags.Carry = false;
-        input.State.Flags.AddSubtract = false;
-        input.State.Flags.ParityOverflow = result.IsEvenParity();
+        input.State.Flags.Carry = value != 0;
+        input.State.Flags.AddSubtract = true;
+        input.State.Flags.ParityOverflow = value == 0x80;
         input.State.Flags.X1 = (result & 0x08) > 0;
-        input.State.Flags.HalfCarry = false;
+        input.State.Flags.HalfCarry = (value & 0x0F) + (result & 0x0F) > 0x0F;
         input.State.Flags.X2 = (result & 0x20) > 0;
         input.State.Flags.Zero = result == 0;
-        input.State.Flags.Sign = (sbyte) result < 0;
+        input.State.Flags.Sign = (result & 0x80) > 0;
 
         input.State.Registers[Register.F] = input.State.Flags.ToByte();
 
