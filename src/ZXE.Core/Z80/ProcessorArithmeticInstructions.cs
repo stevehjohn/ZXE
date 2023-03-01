@@ -599,7 +599,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0xF;
             input.State.Flags.X2 = (result & 0x20) > 0;
             input.State.Flags.Zero = (sbyte) result == 0;
-            input.State.Flags.Sign = (high - 1) < 0;
+            input.State.Flags.Sign = (sbyte) high - 1 < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
