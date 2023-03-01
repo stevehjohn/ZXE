@@ -1,5 +1,6 @@
 ﻿#define UNATTENDED
 using System.Diagnostics;
+using System.Globalization;
 using ZXE.Common.ConsoleHelpers;
 using ZXE.Common.DebugHelpers;
 using ZXE.Common.Extensions;
@@ -39,13 +40,15 @@ public static class TestRunner
 
                     var testInput = new TestInput(test.ToArray());
 
-                    if (RunTest(testInput))
+                    var result = RunTest(testInput);
+
+                    if (result.Passed)
                     {
                         passed++;
                     }
                     else
                     {
-                        failedTestNames.Add(testInput.Name);
+                        failedTestNames.Add($"{testInput.Name}: {result.Instruction}");
                     }
 
                     test.Clear();
@@ -91,7 +94,7 @@ public static class TestRunner
         Console.CursorVisible = true;
     }
 
-    private static bool RunTest(TestInput input)
+    private static (bool Passed, string Instruction) RunTest(TestInput input)
     {
         FormattedConsole.Write($"\n  &Cyan;Test&White;: &Yellow;{input.Name}");
 
@@ -118,7 +121,18 @@ public static class TestRunner
             tStates += processor.ProcessInstruction(ram, ports, bus);
         }
 
-        return OutputResult(processor, expectedResult, tracer);
+        var instructionCode = input.Name;
+
+        if (instructionCode.Contains('_'))
+        {
+            instructionCode = instructionCode[..instructionCode.IndexOf('_')];
+        }
+
+        var instructionIndex = int.Parse(instructionCode, NumberStyles.HexNumber);
+
+        var mnemonic = processor.Instructions[instructionIndex] != null ? processor.Instructions[instructionIndex]!.Mnemonic : "UNKNOWN";
+
+        return (OutputResult(processor, expectedResult, tracer), mnemonic);
     }
 
     private static bool OutputResult(Processor processor, TestExpectedResult expectedResult, FormattingTracer tracer)
