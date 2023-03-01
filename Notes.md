@@ -34,7 +34,7 @@ Failing test, but I think the test parameters are not correct: FD 18
 
 ### Fuse Tests Failing
 
-Count: 72
+Count: 70
 
 ```
 27_1: DAA
@@ -46,7 +46,6 @@ db_1: IN A, (n)
 db_2: IN A, (n)
 db_3: IN A, (n)
 db: IN A, (n)
-dd2d: DEC IXl
 dd34: INC (IX + d)
 dd35: DEC (IX + d)
 dd39: ADD IX, SP
@@ -101,7 +100,6 @@ edbb: OTDR
 fd25: DEC IYh
 fd26: LD IYh, n
 fd2a: LD IY, (nn)
-fd2d: DEC IYl
 fd34: INC (IY + d)
 fd35: DEC (IY + d)
 fd39: ADD IY, SP
