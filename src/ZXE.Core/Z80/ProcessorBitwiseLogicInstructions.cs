@@ -355,7 +355,7 @@ public static class ProcessorBitwiseLogicInstructions
             // Flags
             input.State.Flags.Carry = false;
             input.State.Flags.AddSubtract = false;
-            input.State.Flags.ParityOverflow = false; // TODO: Can XOR overflow?
+            input.State.Flags.ParityOverflow = ((byte) result).IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
@@ -379,7 +379,7 @@ public static class ProcessorBitwiseLogicInstructions
             // Flags
             input.State.Flags.Carry = false;
             input.State.Flags.AddSubtract = false;
-            input.State.Flags.ParityOverflow = false; // TODO: Can OR overflow?
+            input.State.Flags.ParityOverflow = ((byte) result).IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
@@ -403,7 +403,7 @@ public static class ProcessorBitwiseLogicInstructions
             // Flags
             input.State.Flags.Carry = false;
             input.State.Flags.AddSubtract = false;
-            input.State.Flags.ParityOverflow = false; // TODO: Can OR overflow?
+            input.State.Flags.ParityOverflow = ((byte) result).IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
@@ -427,7 +427,7 @@ public static class ProcessorBitwiseLogicInstructions
             // Flags
             input.State.Flags.Carry = false;
             input.State.Flags.AddSubtract = false;
-            input.State.Flags.ParityOverflow = false; // TODO: Can OR overflow?
+            input.State.Flags.ParityOverflow = ((byte) result).IsEvenParity();
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = false;
             input.State.Flags.X2 = (result & 0x20) > 0;
