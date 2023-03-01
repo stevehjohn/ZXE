@@ -112,9 +112,9 @@ public partial class Processor
 
     public void Reset(int programCounter = 0x0000)
     {
-        _state.Registers[Register.A] = _state.Registers[Register.A1] = 0xFF;
+        _state.Registers[Register.A] = _state.Registers[Register.A_] = 0xFF;
 
-        _state.Registers[Register.F] = _state.Registers[Register.F1] = 0xFF;
+        _state.Registers[Register.F] = _state.Registers[Register.F_] = 0xFF;
 
         _state.Flags = Flags.FromByte(0xFF);
 
@@ -130,7 +130,7 @@ public partial class Processor
 
         _state.Registers[Register.B] = _state.Registers[Register.C] = _state.Registers[Register.D] = _state.Registers[Register.E] = _state.Registers[Register.H] = _state.Registers[Register.L] = 0x00;
 
-        _state.Registers[Register.B1] = _state.Registers[Register.C1] = _state.Registers[Register.D1] = _state.Registers[Register.E1] = _state.Registers[Register.H1] = _state.Registers[Register.L1] = 0x00;
+        _state.Registers[Register.B_] = _state.Registers[Register.C_] = _state.Registers[Register.D_] = _state.Registers[Register.E_] = _state.Registers[Register.H_] = _state.Registers[Register.L_] = 0x00;
 
         _state.Registers.WritePair(Register.IX, 0x00);
 

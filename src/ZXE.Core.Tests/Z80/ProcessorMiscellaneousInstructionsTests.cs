@@ -53,15 +53,15 @@ public class ProcessorMiscellaneousInstructionsTests
 
         _state.Registers[Register.A] = 0x01;
         _state.Registers[Register.F] = 0x02;
-        _state.Registers[Register.A1] = 0x03;
-        _state.Registers[Register.F1] = 0x04;
+        _state.Registers[Register.A_] = 0x03;
+        _state.Registers[Register.F_] = 0x04;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x03, _state.Registers[Register.A]);
         Assert.Equal(0x04, _state.Registers[Register.F]);
-        Assert.Equal(0x01, _state.Registers[Register.A1]);
-        Assert.Equal(0x02, _state.Registers[Register.F1]);
+        Assert.Equal(0x01, _state.Registers[Register.A_]);
+        Assert.Equal(0x02, _state.Registers[Register.F_]);
     }
 
     [Fact]

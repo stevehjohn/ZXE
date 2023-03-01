@@ -9,7 +9,7 @@ This document just contains notes for me to refer to during implementation.
 
 ## Coding Conventions
 
-- In code the alternate registers are suffixed with `1`. E.g. `B'` is `B1`, `C'` is `C1` etc...
+- In code the alternate registers are suffixed with `_`. E.g. `B'` is `B_`, `C'` is `C_` etc...
 - Dereferencing registers in method names are prefixed with `addr`. E.g. `LD (BC), nn` would be called `LD_addr_BC_nn` as a C# method.
 
 ## Instruction sets
