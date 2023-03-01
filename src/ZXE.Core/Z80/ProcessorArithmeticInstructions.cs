@@ -669,11 +669,23 @@ public static class ProcessorArithmeticInstructions
     {
         var address = (int) input.State.Registers.ReadPair(register);
 
-        address += (sbyte) input.Data[1];
+        address += (ushort) (sbyte) input.Data[1];
 
         input.Ram[address]++;
-        
-        // Flags unaffected
+
+        var value = input.Ram[address];
+
+        // Flags
+        // Carry unaffected
+        input.State.Flags.AddSubtract = false;
+        input.State.Flags.ParityOverflow = value == 0x7F;
+        input.State.Flags.X1 = (value & 0x08) > 0;
+        input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0xF;
+        input.State.Flags.X2 = (value & 0x20) > 0;
+        input.State.Flags.Zero = (sbyte) value == 0;
+        input.State.Flags.Sign = (sbyte) value < 0;
+
+        input.State.Registers[Register.F] = input.State.Flags.ToByte();
 
         return 0;
     }
