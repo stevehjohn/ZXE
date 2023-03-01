@@ -230,17 +230,17 @@ public partial class Processor
 
         instructions[0xDD6F] = new Instruction("LD IXl, A", 1, i => ProcessorLoadInstructions.LD_RRl_R(i, Register.IX, Register.A), 4);
 
-        instructions[0xDD70] = new Instruction("LD (IX + d), B", 2, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_R(i, Register.IX, Register.B), 4);
+        instructions[0xDD70] = new Instruction("LD (IX + d), B", 2, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_R(i, Register.IX, Register.B), 15);
 
-        instructions[0xDD71] = new Instruction("LD (IX + d), C", 2, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_R(i, Register.IX, Register.C), 4);
+        instructions[0xDD71] = new Instruction("LD (IX + d), C", 2, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_R(i, Register.IX, Register.C), 15);
 
-        instructions[0xDD72] = new Instruction("LD (IX + d), D", 2, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_R(i, Register.IX, Register.D), 4);
+        instructions[0xDD72] = new Instruction("LD (IX + d), D", 2, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_R(i, Register.IX, Register.D), 15);
 
-        instructions[0xDD73] = new Instruction("LD (IX + d), E", 2, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_R(i, Register.IX, Register.E), 4);
+        instructions[0xDD73] = new Instruction("LD (IX + d), E", 2, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_R(i, Register.IX, Register.E), 15);
 
-        instructions[0xDD74] = new Instruction("LD (IX + d), H", 2, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_R(i, Register.IX, Register.H), 4);
+        instructions[0xDD74] = new Instruction("LD (IX + d), H", 2, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_R(i, Register.IX, Register.H), 15);
 
-        instructions[0xDD75] = new Instruction("LD (IX + d), L", 2, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_R(i, Register.IX, Register.L), 4);
+        instructions[0xDD75] = new Instruction("LD (IX + d), L", 2, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_R(i, Register.IX, Register.L), 15);
 
         instructions[0xDD76] = new Instruction("HALT", 1, ProcessorMiscellaneousInstructions.HALT, 4, null, 0xDD76);
 
@@ -274,7 +274,7 @@ public partial class Processor
 
         instructions[0xDD85] = new Instruction("ADD A, IXl", 1, i => ProcessorArithmeticInstructions.ADD_R_RRl(i, Register.A, Register.IX), 4);
 
-        instructions[0xDD86] = new Instruction("ADD A, (IX + d)", 2, i => ProcessorArithmeticInstructions.ADD_R_addr_RR_plus_d(i, Register.A, Register.IX), 4);
+        instructions[0xDD86] = new Instruction("ADD A, (IX + d)", 2, i => ProcessorArithmeticInstructions.ADD_R_addr_RR_plus_d(i, Register.A, Register.IX), 15);
 
         instructions[0xDD87] = new Instruction("ADD A, A", 1, i => ProcessorArithmeticInstructions.ADD_R_R(i, Register.A, Register.A), 4, null, 0xDD87);
 

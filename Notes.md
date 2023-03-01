@@ -34,7 +34,7 @@ FD 18
 
 ### Fuse Tests Failing
 
-Count: 79
+Count: 72
 
 ```
 27_1: DAA
@@ -50,13 +50,6 @@ dd2d: DEC IXl
 dd34: INC (IX + d)
 dd35: DEC (IX + d)
 dd39: ADD IX, SP
-dd70: LD (IX + d), B
-dd71: LD (IX + d), C
-dd72: LD (IX + d), D
-dd73: LD (IX + d), E
-dd74: LD (IX + d), H
-dd75: LD (IX + d), L
-dd86: ADD A, (IX + d)
 dd95: SUB A, IXl
 dd96: SUB A, (IX + d)
 ddbc: CP A, IXh

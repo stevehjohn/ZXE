@@ -105,6 +105,10 @@ public static class TestRunner
 
         var expectedResult = LoadExpectedResult(input.Name);
 
+        if (input.Name == "dd70")
+        {
+        }
+
         while (tStates < expectedResult.ProcessorState.TStates)
         {
             tStates += processor.ProcessInstruction(ram, ports, bus);
@@ -170,9 +174,9 @@ public static class TestRunner
         FormattedConsole.WriteLine(
             $"    &Cyan;HL'&White;: &Green;0x{expectedResult.ProcessorState.HL_:X4}      &Cyan;HL'&White;: {(expectedResult.ProcessorState.HL_ == processor.State.Registers.ReadPair(Register.HL_) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.HL_):X4}");
         FormattedConsole.WriteLine(
-            $"    &Cyan;IX &White;: &Green;0x{expectedResult.ProcessorState.IX:X4}      &Cyan;IX &White;: {(expectedResult.ProcessorState.IX == processor.State.Registers.ReadPair(Register.IX) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.AF_):X4}");
+            $"    &Cyan;IX &White;: &Green;0x{expectedResult.ProcessorState.IX:X4}      &Cyan;IX &White;: {(expectedResult.ProcessorState.IX == processor.State.Registers.ReadPair(Register.IX) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.IX):X4}");
         FormattedConsole.WriteLine(
-            $"    &Cyan;IY &White;: &Green;0x{expectedResult.ProcessorState.IY:X4}      &Cyan;IY &White;: {(expectedResult.ProcessorState.IY == processor.State.Registers.ReadPair(Register.IY) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.BC_):X4}");
+            $"    &Cyan;IY &White;: &Green;0x{expectedResult.ProcessorState.IY:X4}      &Cyan;IY &White;: {(expectedResult.ProcessorState.IY == processor.State.Registers.ReadPair(Register.IY) ? "&Green;" : "&Red;")}0x{processor.State.Registers.ReadPair(Register.IY):X4}");
         FormattedConsole.WriteLine(
             $"    &Cyan;PC &White;: &Green;0x{expectedResult.ProcessorState.PC:X4}      &Cyan;PC &White;: {(expectedResult.ProcessorState.PC == processor.State.ProgramCounter ? "&Green;" : "&Red;")}0x{processor.State.ProgramCounter:X4}");
         FormattedConsole.WriteLine(
