@@ -34,6 +34,6 @@ FD 18
 
 ### Fuse Tests Failing
 
-Count: 100
+Count: 88
 
-27_1, 27, 37_1, 37_2, 3f, db_1, db_2, db_3, db, dd25, dd2d, dd34, dd35, dd39, dd70, dd71, dd72, dd73, dd74, dd75, dd86, dd95, dd96, dda5, dda6, ddad, ddb4, ddb6, ddbc, ddbe, ed40, ed42, ed44, ed48, ed4a, ed4c, ed50, ed54, ed57, ed58, ed5a, ed5c, ed5f, ed60, ed64, ed67, ed68, ed6a, ed6c, ed6f, ed70, ed72, ed74, ed78, ed7a, ed7c, eda0, eda1, eda2, eda2_01, eda2_02, eda2_03, eda3_02, eda3_04, eda3_06, eda3_08, eda3_11, eda8, eda9, edaa, edaa_01, edaa_02, edaa_03, edab, edab_01, edab_02, edb0, edb1, edb2, edb3, edb8, edb9, edba, edbb, fd25, fd26, fd2a, fd2d, fd34, fd35, fd39, fd6e, fd94, fd96, fda5, fda6, fdac, fdb4, fdb6, fe
+27_1, 27, 37_1, 37_2, 3f, db_1, db_2, db_3, db, dd2d, dd34, dd35, dd39, dd70, dd71, dd72, dd73, dd74, dd75, dd86, dd95, dd96, ddbc, ddbe, ed40, ed42, ed44, ed48, ed4a, ed4c, ed50, ed54, ed57, ed58, ed5a, ed5c, ed5f, ed60, ed64, ed67, ed68, ed6a, ed6c, ed6f, ed70, ed72, ed74, ed78, ed7a, ed7c, eda0, eda1, eda2, eda2_01, eda2_02, eda2_03, eda3_02, eda3_04, eda3_06, eda3_08, eda8, eda9, edaa, edaa_01, edaa_02, edaa_03, edab, edab_01, edab_02, edb0, edb1, edb2, edb3, edb8, edb9, edba, edbb, fd25, fd26, fd2a, fd2d, fd34, fd35, fd39, fd6e, fd94, fd96, fe

@@ -636,9 +636,9 @@ public static class ProcessorMiscellaneousInstructions
         // Carry unaffected
         input.State.Flags.AddSubtract = false;
         input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
-        input.State.Flags.X1 = (value & 0x08) > 0;
+        input.State.Flags.X1 = (value & 0x02) > 0;
         input.State.Flags.HalfCarry = false;
-        input.State.Flags.X2 = (value & 0x20) > 0;
+        input.State.Flags.X2 = (value & 0x08) > 0;
         // Zero unaffected
         // Sign unaffected
 
