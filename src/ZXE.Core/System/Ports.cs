@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace ZXE.Core.System;
+﻿namespace ZXE.Core.System;
 
 public class Ports
 {
@@ -21,8 +19,6 @@ public class Ports
         }
 
         var value = _ports[port]!.Value;
-
-        Debugger.Log(0, "INFO", $"Port: {port:X2}, Value: {value}\n");
 
         ResetPort(port);
 
