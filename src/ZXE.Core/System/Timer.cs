@@ -44,6 +44,7 @@ public class Timer : ITimer
 
         var cycles = 0;
 
+        // TODO: Get this working properly.
         while (true)
         {
             //stopwatch.Restart();
