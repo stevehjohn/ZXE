@@ -40,6 +40,11 @@ public partial class Processor
 
     public int ProcessInstruction(Ram ram, Ports ports, Bus bus)
     {
+        if (_state.Halted)
+        {
+            return _instructions[0x00]!.Action(new Input(Array.Empty<byte>(), _state, ram, ports));
+        }
+
         var opcode = (int) ram[_state.ProgramCounter];
 
         if (_state.OpcodePrefix != 0 && _state.OpcodePrefix <= 0xFF)

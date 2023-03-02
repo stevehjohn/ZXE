@@ -167,7 +167,7 @@ public static class ProcessorMiscellaneousInstructions
 
         // Flags unaffected
 
-        return 0;
+        return -1;
     }
 
     public static int CP_R_R(Input input, Register left, Register right)
