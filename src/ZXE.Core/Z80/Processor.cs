@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using ZXE.Core.Exceptions;
+﻿using ZXE.Core.Exceptions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 
@@ -101,6 +100,11 @@ public partial class Processor
         //if (_state.ProgramCounter == 0x02BE)
         //{
         //    Debugger.Log(0, "INFO", $"E: {_state.Registers[Register.E]:X2}\n");
+        //}
+
+        //if (_state.ProgramCounter == 0x02BF)
+        //{
+        //    Debugger.Log(0, "INFO", $"{ram[0x5C08]:X2}\n");
         //}
 
         if (additionalCycles > -1)
