@@ -583,10 +583,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         var value = input.Ports.ReadByte(input.Ram[input.State.Registers.ReadPair(source)]);
         
-        if (value != 255)
-        {
-            Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
-        }
+        Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
 
         // Flags
         // Carry unaffected
