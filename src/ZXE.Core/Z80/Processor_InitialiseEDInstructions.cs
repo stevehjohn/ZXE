@@ -147,6 +147,7 @@ public partial class Processor
 
         instructions[0xED6F] = new Instruction("RLD", 1, ProcessorMiscellaneousInstructions.RLD, 18, null, 0xED6F);
 
+        // TODO: Is this correct?
         instructions[0xED70] = new Instruction("IN (BC)", 1, i => ProcessorMiscellaneousInstructions.IN_addr_RR(i, Register.BC), 8, null, 0xED70);
 
         instructions[0xED71] = new Instruction("OUT (BC), 0", 1, i => ProcessorMiscellaneousInstructions.OUT_addr_R_n(i, Register.BC, 0), 8, null, 0xED71);
