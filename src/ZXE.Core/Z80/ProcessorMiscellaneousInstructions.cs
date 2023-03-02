@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using ZXE.Core.Extensions;
+﻿using ZXE.Core.Extensions;
 
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
@@ -542,7 +541,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         var value = input.Ports.ReadByte(input.Data[1]);
 
-        Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {value}\n");
+        //Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {value}\n");
 
         input.State.Registers[register] = value;
 
@@ -554,10 +553,10 @@ public static class ProcessorMiscellaneousInstructions
         // TODO: Some weirdness going on with the port stuff.
         var value = input.Ports.ReadByte(input.State.Registers[Register.B]);
 
-        if (value != 255)
-        {
-            Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.B]:X2} Value: {value}\n");
-        }
+        //if (value != 255)
+        //{
+        //    Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.B]:X2} Value: {value}\n");
+        //}
 
         input.State.Registers[register] = value;
 
@@ -587,7 +586,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         var value = input.Ports.ReadByte(input.Ram[input.State.Registers.ReadPair(source)]);
         
-        Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
+        //Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
 
         // Flags
         // Carry unaffected
