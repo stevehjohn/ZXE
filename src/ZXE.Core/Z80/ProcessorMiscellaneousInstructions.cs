@@ -542,10 +542,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         var value = input.Ports.ReadByte(input.Data[1]);
 
-        if (value != 255)
-        {
-            Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {value}\n");
-        }
+        Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {value}\n");
 
         input.State.Registers[register] = value;
 
@@ -556,10 +553,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         var value = input.Ports.ReadByte(input.State.Registers[Register.C]);
 
-        if (value != 255)
-        {
-            Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
-        }
+        Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
 
         input.State.Registers[register] = value;
 
