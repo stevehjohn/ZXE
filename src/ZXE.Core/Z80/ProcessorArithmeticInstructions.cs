@@ -645,7 +645,7 @@ public static class ProcessorArithmeticInstructions
 
             var low = value & 0xFF;
 
-            var result = (byte) low - 1;
+            var result = (byte) (low - 1);
 
             input.State.Registers.WritePair(register, (ushort) (high << 8 | result));
             
