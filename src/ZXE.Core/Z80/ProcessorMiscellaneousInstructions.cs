@@ -551,9 +551,13 @@ public static class ProcessorMiscellaneousInstructions
 
     public static int IN_R_C(Input input, Register register)
     {
-        var value = input.Ports.ReadByte(input.State.Registers[Register.C]);
+        // TODO: Some weirdness going on with the port stuff.
+        var value = input.Ports.ReadByte(input.State.Registers[Register.B]);
 
-        Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
+        if (value != 255)
+        {
+            Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.B]:X2} Value: {value}\n");
+        }
 
         input.State.Registers[register] = value;
 

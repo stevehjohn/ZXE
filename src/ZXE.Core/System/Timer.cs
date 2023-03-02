@@ -46,11 +46,11 @@ public class Timer : ITimer
 
         while (true)
         {
-            stopwatch.Restart();
+            //stopwatch.Restart();
 
-            while (stopwatch.ElapsedTicks < cycles * _microsecondsPerCycle)
-            {
-            }
+            //while (stopwatch.ElapsedTicks < cycles * _microsecondsPerCycle)
+            //{
+            //}
 
             cycles = OnTick();
         }
