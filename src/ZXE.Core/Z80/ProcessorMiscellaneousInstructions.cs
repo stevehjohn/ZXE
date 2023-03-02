@@ -17,9 +17,9 @@ public static class ProcessorMiscellaneousInstructions
 
     public static int EX_RR_R1R1(Input input, Register register1, Register register2)
     {
-        var alternate1 = Enum.Parse<Register>($"{register1}1");
+        var alternate1 = Enum.Parse<Register>($"{register1}_");
 
-        var alternate2 = Enum.Parse<Register>($"{register2}1");
+        var alternate2 = Enum.Parse<Register>($"{register2}_");
 
         (input.State.Registers[register1], input.State.Registers[alternate1]) = (input.State.Registers[alternate1], input.State.Registers[register1]);
 

@@ -105,15 +105,6 @@ public static class TestRunner
 
         var expectedResult = LoadExpectedResult(input.Name);
 
-        if (input.Name == "dd70")
-        {
-        }
-
-        while (tStates < expectedResult.ProcessorState.TStates)
-        {
-            tStates += processor.ProcessInstruction(ram, ports, bus);
-        }
-
         var instructionCode = input.Name;
 
         if (instructionCode.Contains('_'))
@@ -124,6 +115,16 @@ public static class TestRunner
         var instructionIndex = int.Parse(instructionCode, NumberStyles.HexNumber);
 
         var mnemonic = processor.Instructions[instructionIndex] != null ? processor.Instructions[instructionIndex]!.Mnemonic : "UNKNOWN";
+
+        //if (instructionIndex == 0xDB)
+        //{
+        //    ports.WriteByte(ram[1], (byte) ((ram[1] * 2) & 0xFF));
+        //}
+
+        while (tStates < expectedResult.ProcessorState.TStates)
+        {
+            tStates += processor.ProcessInstruction(ram, ports, bus);
+        }
 
         return (OutputResult(processor, expectedResult, tracer), mnemonic);
     }
