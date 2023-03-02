@@ -368,13 +368,13 @@ public static class ProcessorMiscellaneousInstructions
 
             // Flags
             input.State.Flags.Carry = input.Data[1] > input.State.Registers[destination];
-            input.State.Flags.AddSubtract = false;
-            input.State.Flags.ParityOverflow = false; // TODO
-            input.State.Flags.X1 = (result & 0x08) > 0;
-            input.State.Flags.HalfCarry = false;
-            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = ((input.State.Registers[destination] ^ input.Data[1]) & 0x80) != 0 && ((input.Data[1] ^ (byte) result) & 0x80) == 0;
+            input.State.Flags.X1 = (input.Data[1] & 0x08) > 0;
+            input.State.Flags.HalfCarry = (input.State.Registers[destination] & 0x0F) < (input.Data[1] & 0x0F);
+            input.State.Flags.X2 = (input.Data[1] & 0x20) > 0;
             input.State.Flags.Zero = result == 0;
-            input.State.Flags.Sign = (sbyte) result < 0;
+            input.State.Flags.Sign = (byte) result > 0x7F;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
