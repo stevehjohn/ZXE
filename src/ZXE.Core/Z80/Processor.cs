@@ -98,6 +98,11 @@ public partial class Processor
 
         var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
 
+        //if (_state.ProgramCounter == 0x02BE)
+        //{
+        //    Debugger.Log(0, "INFO", $"E: {_state.Registers[Register.E]:X2}\n");
+        //}
+
         if (additionalCycles > -1)
         {
             _state.ProgramCounter += instruction.Length;
