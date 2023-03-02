@@ -28,7 +28,7 @@ xx = Opcode, dd = Displacement value (byte).
 
 ### Third Party Tests Failing
 
-76 0000, DD 76 0000, FD 18 0000, FD 76 0000
+76 0000, DD 2D 0035, DD 76 0000, FD 18 0000, FD 2D 00BC, FD 76 0000
 
 Failing test, but I think the test parameters are not correct: FD 18
 
