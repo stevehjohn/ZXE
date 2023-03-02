@@ -35,7 +35,7 @@ Failing test, but I think the test parameters are not correct: FD 18
 Count: 61
 
 ```
- 27_1: DAA
+27_1: DAA
 27: DAA
 37_1: SCF
 37_2: SCF
