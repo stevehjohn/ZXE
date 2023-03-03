@@ -66,7 +66,7 @@ public static class ProcessorArithmeticInstructions
         }
 
         return 0;
-    }    
+    }
 
     public static int ADD_RR_RR(Input input, Register target, Register operand)
     {
@@ -560,7 +560,7 @@ public static class ProcessorArithmeticInstructions
             result |= (byte) (value & 0x00FF);
 
             input.State.Registers.WritePair(register, result);
-            
+
             // Flags
             // Carry unaffected
             input.State.Flags.AddSubtract = false;
@@ -590,7 +590,7 @@ public static class ProcessorArithmeticInstructions
             var result = (ushort) (((high - 1) << 8) | low);
 
             input.State.Registers.WritePair(register, result);
-            
+
             // Flags
             // Carry unaffected
             input.State.Flags.AddSubtract = true;
@@ -616,7 +616,7 @@ public static class ProcessorArithmeticInstructions
             var result = (ushort) (byte) ((value & 0x00FF) + 1);
 
             result |= (ushort) (value & 0xFF00);
-            
+
             input.State.Registers.WritePair(register, result);
 
             // Flags
@@ -648,7 +648,7 @@ public static class ProcessorArithmeticInstructions
             var result = (byte) (low - 1);
 
             input.State.Registers.WritePair(register, (ushort) (high << 8 | result));
-            
+
             // Flags
             // Carry unaffected
             input.State.Flags.AddSubtract = true;
@@ -877,7 +877,7 @@ public static class ProcessorArithmeticInstructions
             address += (sbyte) input.Data[1];
 
             var valueS = input.Ram[address];
-            
+
             var carry = (byte) (input.State.Flags.Carry ? 0x01 : 0x00);
 
             var result = valueD + valueS + carry;
@@ -1118,10 +1118,13 @@ public static class ProcessorArithmeticInstructions
 
             input.State.Registers.WritePair(destination, (ushort) result);
 
+            var highA = (byte) ((valueD & 0xFF00) >> 8);
+            var highB = (byte) ((valueS & 0xFF00) >> 8);
+
             // Flags
             input.State.Flags.Carry = result > 0xFFFF;
             input.State.Flags.AddSubtract = false;
-            input.State.Flags.ParityOverflow = (((valueD & 0xFF00) ^ valueS & 0xFF00) & 0x8000) == 0 && (((valueD & 0xFF00) ^ ((valueS & 0xFF00) + (valueD & 0x0F00))) & 0x8000) != 0;
+            input.State.Flags.ParityOverflow = ((highA ^ highB) & 0x80) == 0 && ((highA ^ (highA + highB)) & 0x80) != 0;
             input.State.Flags.X1 = (result & 0x0800) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F00) + (valueS & 0x0F00) > 0x0F00;
             input.State.Flags.X2 = (result & 0x2000) > 0;
