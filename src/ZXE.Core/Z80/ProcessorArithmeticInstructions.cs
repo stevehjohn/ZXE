@@ -591,15 +591,17 @@ public static class ProcessorArithmeticInstructions
 
             input.State.Registers.WritePair(register, result);
 
+            var decrementedValue = (sbyte) (high - 1);
+
             // Flags
             // Carry unaffected
             input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = value == 0x7F;
-            input.State.Flags.X1 = (result & 0x08) > 0;
-            input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0xF;
-            input.State.Flags.X2 = (result & 0x20) > 0;
-            input.State.Flags.Zero = (sbyte) result == 0;
-            input.State.Flags.Sign = (sbyte) high - 1 < 0;
+            input.State.Flags.ParityOverflow = value == 0x80;
+            input.State.Flags.X1 = (decrementedValue & 0x08) > 0;
+            input.State.Flags.HalfCarry = (value & 0x0F) < 1;
+            input.State.Flags.X2 = (decrementedValue & 0x20) > 0;
+            input.State.Flags.Zero = decrementedValue == 0;
+            input.State.Flags.Sign = decrementedValue < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
