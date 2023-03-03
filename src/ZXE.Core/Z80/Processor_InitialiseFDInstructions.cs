@@ -226,7 +226,7 @@ public partial class Processor
 
         instructions[0xFD6D] = new Instruction("LD IYl, IYl", 1, i => ProcessorLoadInstructions.LD_RRl_RRl(i, Register.IY, Register.IY), 4);
 
-        instructions[0xFD6E] = new Instruction("LD L, (IY + d)", 2, i => ProcessorLoadInstructions.LD_R_addr_RR_plus_d(i, Register.L, Register.IY), 4);
+        instructions[0xFD6E] = new Instruction("LD L, (IY + d)", 2, i => ProcessorLoadInstructions.LD_R_addr_RR_plus_d(i, Register.L, Register.IY), 15);
 
         instructions[0xFD6F] = new Instruction("LD IYl, A", 1, i => ProcessorLoadInstructions.LD_RRl_R(i, Register.IY, Register.A), 4);
 
