@@ -32,10 +32,10 @@ Failing test, but I think the test parameters are not correct: FD 18
 
 ### Fuse Tests Failing
 
-Count: 60
+Count: 58
 
 ```
-27_1: DAA
+ 27_1: DAA
 27: DAA
 37_1: SCF
 37_2: SCF
@@ -44,7 +44,6 @@ db_1: IN A, (n)
 db_2: IN A, (n)
 db_3: IN A, (n)
 db: IN A, (n)
-dd35: DEC (IX + d)
 dd39: ADD IX, SP
 dd95: SUB A, IXl
 dd96: SUB A, (IX + d)
@@ -90,7 +89,6 @@ edbb: OTDR
 fd25: DEC IYh
 fd26: LD IYh, n
 fd2a: LD IY, (nn)
-fd35: DEC (IY + d)
 fd39: ADD IY, SP
 fd6e: LD L, (IY + d)
 fd94: SUB A, IYh

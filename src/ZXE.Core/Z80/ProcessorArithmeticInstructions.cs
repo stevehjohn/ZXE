@@ -692,13 +692,28 @@ public static class ProcessorArithmeticInstructions
 
     public static int DEC_addr_RR_plus_d(Input input, Register register)
     {
-        var address = (int) input.State.Registers.ReadPair(register);
+        unchecked
+        {
+            var address = (int) input.State.Registers.ReadPair(register);
 
-        address += (sbyte) input.Data[1];
+            address += (sbyte) input.Data[1];
 
-        input.Ram[address]--;
-        
-        // Flags unaffected
+            var originalValue = input.Ram[address];
+
+            input.Ram[address]--;
+
+            // Flags
+            // Carry unaffected
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = originalValue == 0x80;
+            input.State.Flags.X1 = (input.Ram[address] & 0x08) > 0;
+            input.State.Flags.HalfCarry = (originalValue & 0x0F) < (0x01 & 0x0F);
+            input.State.Flags.X2 = (input.Ram[address] & 0x20) > 0;
+            input.State.Flags.Zero = input.Ram[address] == 0;
+            input.State.Flags.Sign = (sbyte) input.Ram[address] < 0;
+
+            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        }
 
         return 0;
     }
