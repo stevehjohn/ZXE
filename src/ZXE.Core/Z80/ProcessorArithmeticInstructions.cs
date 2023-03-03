@@ -1121,7 +1121,7 @@ public static class ProcessorArithmeticInstructions
             // Flags
             input.State.Flags.Carry = result > 0xFFFF;
             input.State.Flags.AddSubtract = false;
-            input.State.Flags.ParityOverflow = (((valueD & 0xFF00) ^ valueS & 0xFF00) & 0x8000) == 0 && ((valueD & 0xFF00) ^ ((valueS & 0xFF00) + (valueD & 0x0F00)) & 0x8000) != 0;
+            input.State.Flags.ParityOverflow = (((valueD & 0xFF00) ^ valueS & 0xFF00) & 0x8000) == 0 && (((valueD & 0xFF00) ^ ((valueS & 0xFF00) + (valueD & 0x0F00))) & 0x8000) != 0;
             input.State.Flags.X1 = (result & 0x0800) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F00) + (valueS & 0x0F00) > 0x0F00;
             input.State.Flags.X2 = (result & 0x2000) > 0;
