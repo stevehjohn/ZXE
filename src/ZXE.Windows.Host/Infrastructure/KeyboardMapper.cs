@@ -76,7 +76,7 @@ public static class KeyboardMapper
 
     private static byte ScanForFEFEKeys(Keys keys)
     {
-        if (keys == Keys.LeftShift)
+        if (keys == Keys.LeftShift || keys == Keys.RightShift)
         {
             return 0b11111110;
         }
