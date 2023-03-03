@@ -52,7 +52,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Treasure Island Dizzy", "Tr
 		..\Game Images\Treasure Island Dizzy\image-0.z80 = ..\Game Images\Treasure Island Dizzy\image-0.z80
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXE.Core.FuseTests", "ZXE.Core.FuseTests\ZXE.Core.FuseTests.csproj", "{BF53FA1E-5D66-4073-97E7-642F85755FDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core.FuseTests", "ZXE.Core.FuseTests\ZXE.Core.FuseTests.csproj", "{BF53FA1E-5D66-4073-97E7-642F85755FDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JetPac", "JetPac", "{72890252-B5E8-45D6-8D5D-65A571180330}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\JetPac\image-0.z80 = ..\Game Images\JetPac\image-0.z80
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -142,6 +147,7 @@ Global
 		{57959EB0-56F2-4C3E-A94F-57E2F9672B66} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
 		{D4F1D69F-9FB5-4004-8B9E-DE312B60E432} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
 		{B5437754-C6C2-4FBE-A72C-850B777A9FB7} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{72890252-B5E8-45D6-8D5D-65A571180330} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}
