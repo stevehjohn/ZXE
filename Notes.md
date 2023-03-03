@@ -32,7 +32,7 @@ Failing test, but I think the test parameters are not correct: FD 18
 
 ### Fuse Tests Failing
 
-Count: 45
+Count: 43
 
 ```
 27_1: DAA
@@ -77,7 +77,5 @@ edb8: LDDR
 edb9: CPDR
 edba: INDR
 edbb: OTDR
-fd26: LD IYh, n
-fd2a: LD IY, (nn)
 fd6e: LD L, (IY + d)
 ```

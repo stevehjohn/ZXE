@@ -82,7 +82,7 @@ public partial class Processor
 
         instructions[0xFD25] = new Instruction("DEC IYh", 1, i => ProcessorArithmeticInstructions.DEC_RRh(i, Register.IY), 4);
 
-        instructions[0xFD26] = new Instruction("LD IYh, n", 2, i => ProcessorLoadInstructions.LD_RRh_n(i, Register.IY), 4);
+        instructions[0xFD26] = new Instruction("LD IYh, n", 2, i => ProcessorLoadInstructions.LD_RRh_n(i, Register.IY), 7);
 
         instructions[0xFD27] = new Instruction("DAA", 1, ProcessorMiscellaneousInstructions.DAA, 4);
 
@@ -90,7 +90,7 @@ public partial class Processor
 
         instructions[0xFD29] = new Instruction("ADD IY, IY", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.IY, Register.IY), 11);
 
-        instructions[0xFD2A] = new Instruction("LD IY, (nn)", 3, i => ProcessorLoadInstructions.LD_RR_addr_nn(i, Register.IY), 11);
+        instructions[0xFD2A] = new Instruction("LD IY, (nn)", 3, i => ProcessorLoadInstructions.LD_RR_addr_nn(i, Register.IY), 16);
 
         instructions[0xFD2B] = new Instruction("DEC IY", 1, i => ProcessorArithmeticInstructions.DEC_RR(i, Register.IY), 6);
 
