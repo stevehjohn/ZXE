@@ -550,7 +550,8 @@ public static class ProcessorMiscellaneousInstructions
 
     public static int IN_R_C(Input input, Register register)
     {
-        var value = input.Ports.ReadByte(input.State.Registers[Register.C]);
+        // TODO: Using B makes the keyboard "work", but C is specified in the docs.
+        var value = input.Ports.ReadByte(input.State.Registers[Register.B]);
 
         //if (value != 255)
         //{
