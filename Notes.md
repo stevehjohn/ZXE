@@ -32,7 +32,7 @@ Failing test, but I think the test parameters are not correct: FD 18
 
 ### Fuse Tests Failing
 
-Count: 48
+Count: 46
 
 ```
 27_1: DAA
@@ -50,10 +50,8 @@ ed50: IN D, (C)
 ed58: IN E, (C)
 ed60: IN H, (C)
 ed68: IN L, (C)
-ed6a: ADC HL, HL
 ed70: IN (BC)
 ed78: IN A, (C)
-ed7a: ADC HL, SP
 eda1: CPI
 eda2: INI
 eda2_01: INI

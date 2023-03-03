@@ -1181,15 +1181,18 @@ public static class ProcessorArithmeticInstructions
 
             input.State.Registers.WritePair(destination, (ushort) result);
 
+            var highA = (byte) ((valueD & 0xFF00) >> 8);
+            var highB = (byte) ((valueS & 0xFF00) >> 8);
+
             // Flags
-            input.State.Flags.Carry = result > 0xFF;
+            input.State.Flags.Carry = result > 0xFFFF;
             input.State.Flags.AddSubtract = false;
-            input.State.Flags.ParityOverflow = result > 0x7F;
-            input.State.Flags.X1 = (result & 0x08) > 0;
-            input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0xF;
-            input.State.Flags.X2 = (result & 0x20) > 0;
+            input.State.Flags.ParityOverflow = ((highA ^ highB) & 0x80) == 0 && ((highA ^ (highA + highB)) & 0x80) != 0;
+            input.State.Flags.X1 = (result & 0x0800) > 0;
+            input.State.Flags.HalfCarry = (valueD & 0x0F00) + (valueS & 0x0F00) > 0x0F00;
+            input.State.Flags.X2 = (result & 0x2000) > 0;
             input.State.Flags.Zero = result == 0;
-            input.State.Flags.Sign = (sbyte) result < 0;
+            input.State.Flags.Sign = (short) result < 0;
 
             input.State.Registers[Register.F] = input.State.Flags.ToByte();
         }
