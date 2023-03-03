@@ -32,7 +32,7 @@ Failing test, but I think the test parameters are not correct: FD 18
 
 ### Fuse Tests Failing
 
-Count: 61
+Count: 60
 
 ```
 27_1: DAA
@@ -40,7 +40,6 @@ Count: 61
 37_1: SCF
 37_2: SCF
 3f: CCF
-76: HALT
 db_1: IN A, (n)
 db_2: IN A, (n)
 db_3: IN A, (n)

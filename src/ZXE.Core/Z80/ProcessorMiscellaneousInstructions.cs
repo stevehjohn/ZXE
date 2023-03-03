@@ -551,7 +551,7 @@ public static class ProcessorMiscellaneousInstructions
     public static int IN_R_C(Input input, Register register)
     {
         // TODO: Some weirdness going on with the port stuff. Reg B passes TPTs, Reg C passes Fuse Tests. :shrug:
-        var value = input.Ports.ReadByte(input.State.Registers[Register.B]);
+        var value = input.Ports.ReadByte(input.State.Registers[Register.C]);
 
         //if (value != 255)
         //{
