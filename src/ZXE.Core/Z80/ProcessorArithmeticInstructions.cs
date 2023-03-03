@@ -499,7 +499,7 @@ public static class ProcessorArithmeticInstructions
 
             var valueS = input.Data[1];
 
-            var result = (valueD - valueS);
+            var result = valueD - valueS;
 
             input.State.Registers[register] = (byte) result;
 
@@ -1112,7 +1112,7 @@ public static class ProcessorArithmeticInstructions
 
             var valueS = input.State.Registers.ReadPair(source);
 
-            var carry = (input.State.Flags.Carry ? 0x01 : 0x00);
+            var carry = input.State.Flags.Carry ? 0x01 : 0x00;
 
             var result = valueD + valueS + carry;
 
@@ -1172,7 +1172,7 @@ public static class ProcessorArithmeticInstructions
 
             var valueS = input.State.StackPointer;
 
-            var carry = (input.State.Flags.Carry ? 0x01 : 0x00);
+            var carry = input.State.Flags.Carry ? 0x01 : 0x00;
 
             var result = valueD + valueS + carry;
 
