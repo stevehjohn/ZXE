@@ -34,11 +34,9 @@ Failing test, but I think the test parameters are not correct: FD 18
 
 ### Fuse Tests Failing
 
-Count: 42
+Count: 40
 
 ```
-27_1: DAA
-27: DAA
 37_1: SCF
 37_2: SCF
 3f: CCF
