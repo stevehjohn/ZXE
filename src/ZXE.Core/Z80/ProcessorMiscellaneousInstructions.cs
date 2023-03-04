@@ -121,7 +121,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         input.State.Flags.Carry = true;
 
-        // TODO: XOR with Q register?
+        // TODO: Stuff.
         var xFlags = input.State.Q ^ (input.State.Flags.ToByte() | input.State.Registers[Register.A]);
 
         // Flags
