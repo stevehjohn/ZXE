@@ -88,7 +88,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = input.State.Registers[Register.A] == 0;
         input.State.Flags.Sign = (input.State.Registers[Register.A] & 0x80) > 0;
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
 
         return 0;
     }
@@ -111,7 +111,7 @@ public static class ProcessorMiscellaneousInstructions
             // Zero unaffected
             // Sign unaffected
 
-            input.State.PutFlagsInFRegister();
+            input.State.PutFlagsInFRegister(true);
         }
 
         return 0;
@@ -134,7 +134,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
 
         return 0;
     }
@@ -157,6 +157,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.X2 = (xFlags & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
+
+        input.State.PutFlagsInFRegister(true);
 
         return 0;
     }
@@ -636,7 +638,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
 
         return 0;
     }
@@ -665,7 +667,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
         
         // TODO: Correctly account for extra cycles?
 
@@ -699,7 +701,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = difference == 0;
         input.State.Flags.Sign = difference > 0x7F;
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
 
         return 0;
     }
@@ -725,7 +727,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = difference == 0;
         input.State.Flags.Sign = difference > 0x7F;
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
         
         // TODO: Correctly account for extra cycles?
 
@@ -905,7 +907,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
 
         return 0;
     }
@@ -934,7 +936,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
         
         // TODO: Correctly account for extra cycles?
 
@@ -968,7 +970,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = difference == 0;
         input.State.Flags.Sign = difference > 0x7F;
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
 
         return 0;
     }
@@ -993,7 +995,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = difference == 0;
         input.State.Flags.Sign = difference > 0x7F;
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
         
         // TODO: Correctly account for extra cycles?
 
@@ -1177,7 +1179,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = input.State.Registers[Register.A] == 0;
         input.State.Flags.Sign = (sbyte) input.State.Registers[Register.A] < 0;
             
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
 
         return 0;
     }
@@ -1210,7 +1212,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = input.State.Registers[Register.A] == 0;
         input.State.Flags.Sign = (sbyte) input.State.Registers[Register.A] < 0;
             
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
 
         return 0;
     }

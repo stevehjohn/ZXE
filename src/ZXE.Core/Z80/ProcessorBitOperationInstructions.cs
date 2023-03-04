@@ -24,7 +24,7 @@ public static class ProcessorBitOperationInstructions
         input.State.Flags.Zero = (data & bit) == 0;
         input.State.Flags.Sign = bit == 0x80 && result != 0;
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
 
         return 0;
     }
@@ -45,7 +45,7 @@ public static class ProcessorBitOperationInstructions
         input.State.Flags.Zero = (data & bit) == 0;
         input.State.Flags.Sign = bit == 0x80 && result != 0;
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
 
         return 0;
     }
@@ -110,7 +110,7 @@ public static class ProcessorBitOperationInstructions
         input.State.Flags.Zero = (data & bit) == 0;
         input.State.Flags.Sign = bit == 0x80 && result != 0;
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
 
         return 0;
     }
@@ -197,7 +197,7 @@ public static class ProcessorBitOperationInstructions
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = (result & 0x80) > 0;
 
-        input.State.PutFlagsInFRegister();
+        input.State.PutFlagsInFRegister(true);
 
         return 0;
     }
