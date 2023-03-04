@@ -39,6 +39,8 @@ public class State
 
     public bool InterruptFlipFlop2 { get; set; }
 
+    public byte Q { get; private set; }
+
     public State()
     {
         Registers = new Registers();
@@ -48,6 +50,10 @@ public class State
 
     public void PutFlagsInFRegister()
     {
-        Registers[Register.F] = Flags.ToByte();
+        var asByte = Flags.ToByte();
+        
+        Registers[Register.F] = asByte;
+
+        Q = asByte;
     }
 }
