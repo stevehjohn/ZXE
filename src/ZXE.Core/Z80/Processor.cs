@@ -214,6 +214,8 @@ public partial class Processor
                         address = (int) instructionOpcode & 0x38;
 
                         _state.ProgramCounter = address;
+
+                        _state.ResetQ();
                     }
                     else if (instruction.Mnemonic.StartsWith("CALL"))
                     {
@@ -224,6 +226,8 @@ public partial class Processor
                         address |= ram[_state.ProgramCounter + 1];
 
                         _state.ProgramCounter = address;
+
+                        _state.ResetQ();
                     }
 
                     break;

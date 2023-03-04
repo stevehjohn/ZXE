@@ -63,4 +63,9 @@ public class State
             Q = 0;
         }
     }
+
+    public void ResetQ()
+    {
+        Q = 0;
+    }
 }
