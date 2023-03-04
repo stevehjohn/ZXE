@@ -48,12 +48,19 @@ public class State
         Flags = new Flags();
     }
 
-    public void PutFlagsInFRegister()
+    public void PutFlagsInFRegister(bool setQ = false)
     {
         var asByte = Flags.ToByte();
-        
+
         Registers[Register.F] = asByte;
 
-        Q = asByte;
+        if (setQ)
+        {
+            Q = asByte;
+        }
+        else
+        {
+            Q = 0;
+        }
     }
 }
