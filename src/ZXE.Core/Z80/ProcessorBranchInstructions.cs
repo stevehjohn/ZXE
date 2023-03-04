@@ -28,7 +28,7 @@ public static class ProcessorBranchInstructions
             input.State.Flags.Zero = (sbyte)result == 0;
             input.State.Flags.Sign = (sbyte)result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
 
             if (! input.State.Flags.Zero)
             {

@@ -88,7 +88,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = input.State.Registers[Register.A] == 0;
         input.State.Flags.Sign = (input.State.Registers[Register.A] & 0x80) > 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -111,7 +111,7 @@ public static class ProcessorMiscellaneousInstructions
             // Zero unaffected
             // Sign unaffected
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -134,7 +134,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -190,7 +190,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = difference == 0;
             input.State.Flags.Sign = (byte) difference > 0x7F;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -216,7 +216,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = difference == 0;
             input.State.Flags.Sign = (byte) difference > 0x7F;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -376,7 +376,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (byte) result > 0x7F;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -402,7 +402,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = difference == 0;
             input.State.Flags.Sign = (byte) difference > 0x7F;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -428,7 +428,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = difference == 0;
             input.State.Flags.Sign = (byte) difference > 0x7F;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -454,7 +454,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = difference == 0;
             input.State.Flags.Sign = (byte) difference > 0x7F;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -485,7 +485,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -513,7 +513,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -532,7 +532,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = (sbyte) result < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -570,7 +570,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = value == 0;
         input.State.Flags.Sign = (sbyte) value < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -598,7 +598,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = value == 0;
         input.State.Flags.Sign = (sbyte) value < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -636,7 +636,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -665,7 +665,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
         
         // TODO: Correctly account for extra cycles?
 
@@ -699,7 +699,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = difference == 0;
         input.State.Flags.Sign = difference > 0x7F;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -725,7 +725,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = difference == 0;
         input.State.Flags.Sign = difference > 0x7F;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
         
         // TODO: Correctly account for extra cycles?
 
@@ -763,7 +763,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
             
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
 
             return 0;
         }
@@ -793,7 +793,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
             
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
 
             // TODO: Correctly account for extra cycles?
 
@@ -834,7 +834,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
             
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
 
             return 0;
         }
@@ -866,7 +866,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = true;
             // Sign unknown
             
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
 
             // TODO: Correctly account for extra cycles?
 
@@ -905,7 +905,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -934,7 +934,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
         
         // TODO: Correctly account for extra cycles?
 
@@ -968,7 +968,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = difference == 0;
         input.State.Flags.Sign = difference > 0x7F;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -993,7 +993,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = difference == 0;
         input.State.Flags.Sign = difference > 0x7F;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
         
         // TODO: Correctly account for extra cycles?
 
@@ -1031,7 +1031,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
             
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
 
             return 0;
         }
@@ -1061,7 +1061,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
             
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
 
             // TODO: Correctly account for extra cycles?
 
@@ -1102,7 +1102,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
             
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
 
             return 0;
         }
@@ -1134,7 +1134,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
             
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
 
             // TODO: Correctly account for extra cycles?
 
@@ -1177,7 +1177,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = input.State.Registers[Register.A] == 0;
         input.State.Flags.Sign = (sbyte) input.State.Registers[Register.A] < 0;
             
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -1210,7 +1210,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = input.State.Registers[Register.A] == 0;
         input.State.Flags.Sign = (sbyte) input.State.Registers[Register.A] < 0;
             
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }

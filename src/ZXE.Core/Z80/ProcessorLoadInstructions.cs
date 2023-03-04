@@ -123,7 +123,7 @@ public static class ProcessorLoadInstructions
             input.State.Flags.Zero = value == 0;
             input.State.Flags.Sign = (sbyte) value < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;

@@ -36,7 +36,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = (sbyte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -62,7 +62,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = (sbyte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -88,7 +88,7 @@ public static class ProcessorArithmeticInstructions
             // Zero unaffected
             // Sign unaffected
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -136,7 +136,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -162,7 +162,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -188,7 +188,7 @@ public static class ProcessorArithmeticInstructions
             // Zero unaffected
             // Sign unaffected
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -225,7 +225,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -253,7 +253,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -283,7 +283,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -313,7 +313,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -341,7 +341,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -369,7 +369,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -399,7 +399,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -429,7 +429,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -455,7 +455,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -485,7 +485,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -513,7 +513,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -543,7 +543,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -571,7 +571,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = (sbyte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -603,7 +603,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = decrementedValue == 0;
             input.State.Flags.Sign = decrementedValue < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -631,7 +631,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = (sbyte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -661,7 +661,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -687,7 +687,7 @@ public static class ProcessorArithmeticInstructions
         input.State.Flags.Zero = (sbyte) value == 0;
         input.State.Flags.Sign = (sbyte) value < 0;
 
-        input.State.Registers[Register.F] = input.State.Flags.ToByte();
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -714,7 +714,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = input.Ram[address] == 0;
             input.State.Flags.Sign = (sbyte) input.Ram[address] < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -742,7 +742,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -770,7 +770,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -802,7 +802,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -832,7 +832,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -862,7 +862,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -896,7 +896,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -924,7 +924,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -952,7 +952,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -980,7 +980,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -1010,7 +1010,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -1040,7 +1040,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -1070,7 +1070,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -1100,7 +1100,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (short) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -1133,7 +1133,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (short) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -1163,7 +1163,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -1196,7 +1196,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (short) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;

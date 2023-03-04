@@ -45,4 +45,9 @@ public class State
 
         Flags = new Flags();
     }
+
+    public void PutFlagsInFRegister()
+    {
+        Registers[Register.F] = Flags.ToByte();
+    }
 }

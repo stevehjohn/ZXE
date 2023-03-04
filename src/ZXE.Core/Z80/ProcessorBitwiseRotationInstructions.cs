@@ -28,7 +28,7 @@ public static class ProcessorBitwiseRotationInstructions
             // Zero unaffected
             // Sign unaffected
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -59,7 +59,7 @@ public static class ProcessorBitwiseRotationInstructions
             // Zero unaffected
             // Sign unaffected
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -87,7 +87,7 @@ public static class ProcessorBitwiseRotationInstructions
             // Zero unaffected
             // Sign unaffected
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -115,7 +115,7 @@ public static class ProcessorBitwiseRotationInstructions
             // Zero unaffected
             // Sign unaffected
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -141,7 +141,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -169,7 +169,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -200,7 +200,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -233,7 +233,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -261,7 +261,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -291,7 +291,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -319,7 +319,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -349,7 +349,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -373,7 +373,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -401,7 +401,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -433,7 +433,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -465,7 +465,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -495,7 +495,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -525,7 +525,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -553,7 +553,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -581,7 +581,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -615,7 +615,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -649,7 +649,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -681,7 +681,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -715,7 +715,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -747,7 +747,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -781,7 +781,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -813,7 +813,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -847,7 +847,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -879,7 +879,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -911,7 +911,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -945,7 +945,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -981,7 +981,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -1015,7 +1015,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -1047,7 +1047,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -1079,7 +1079,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -1113,7 +1113,7 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.Registers[Register.F] = input.State.Flags.ToByte();
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
