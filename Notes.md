@@ -26,7 +26,7 @@ xx = Opcode, dd = Displacement value (byte).
 
 ## Tests
 
-### Third Party Tests Failingt
+### Third Party Tests Failing
 
 76 0000 (HALT), DD 76 0000 (HALT), FD 76 0000 (HALT)
 ED 40 0000, ED 48 0000, ED 50 0000, ED 58 0000, ED 60 0000, ED 78 0000 (IN R, (C))
