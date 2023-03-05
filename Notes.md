@@ -28,7 +28,9 @@ xx = Opcode, dd = Displacement value (byte).
 
 ### Third Party Tests Failing
 
-76 0000, DD 76 0000, ED 40 0000, ED 48 0000, ED 50 0000, ED 58 0000, ED 60 0000, ED 78 0000, FD 76 0000
+76 0000 (HALT), DD 76 0000 (HALT), FD 76 0000 (HALT)
+ED 40 0000, ED 48 0000, ED 50 0000, ED 58 0000, ED 60 0000, ED 78 0000 (IN R, (C))
+See TODO note in IN_R_C method.
 
 Failing test, but I think the test parameters are not correct: FD 18
 
