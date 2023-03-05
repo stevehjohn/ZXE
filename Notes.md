@@ -26,7 +26,7 @@ xx = Opcode, dd = Displacement value (byte).
 
 ## Tests
 
-### Third Party Tests Failing
+### Third Party Tests Failingt
 
 76 0000 (HALT), DD 76 0000 (HALT), FD 76 0000 (HALT)
 ED 40 0000, ED 48 0000, ED 50 0000, ED 58 0000, ED 60 0000, ED 78 0000 (IN R, (C))
@@ -36,11 +36,9 @@ Failing test, but I think the test parameters are not correct: FD 18
 
 ### Fuse Tests Failing
 
-Count: 40
+Count: 38
 
 ```
-37_1: SCF
-37_2: SCF
 3f: CCF
 db_1: IN A, (n)
 db_2: IN A, (n)
