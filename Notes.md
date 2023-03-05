@@ -36,10 +36,9 @@ Failing test, but I think the test parameters are not correct: FD 18
 
 ### Fuse Tests Failing
 
-Count: 38
+Count: 37
 
 ```
-3f: CCF
 db_1: IN A, (n)
 db_2: IN A, (n)
 db_3: IN A, (n)
