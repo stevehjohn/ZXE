@@ -36,7 +36,7 @@ Failing test, but I think the test parameters are not correct: FD 18
 
 ### Fuse Tests Failing
 
-Count: 36
+Count: 35
 
 ```
 db_1: IN A, (n)
@@ -71,7 +71,6 @@ edb0: LDIR
 edb1: CPIR
 edb2: INIR
 edb3: OTIR
-edb8: LDDR
 edb9: CPDR
 edba: INDR
 edbb: OTDR

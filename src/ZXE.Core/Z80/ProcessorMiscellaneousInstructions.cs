@@ -942,9 +942,9 @@ public static class ProcessorMiscellaneousInstructions
 
         if (input.State.Registers.ReadPair(Register.BC) != 0)
         {
-            input.State.ProgramCounter--;
+            input.State.ProgramCounter -= 2;
 
-            return -1;
+            return 5;
         }
 
         return 0;
