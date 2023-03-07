@@ -979,23 +979,25 @@ public static class ProcessorMiscellaneousInstructions
 
     public static int CPDR(Input input)
     {
-        var value = input.State.Registers.ReadPair(Register.HL);
+        var value = input.Ram[input.State.Registers.ReadPair(Register.HL)];
 
-        var difference = input.State.Registers[Register.A] - value;
+        var difference = (sbyte) (input.State.Registers[Register.A] - value);
 
         input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) - 1));
 
         input.State.Registers.WritePair(Register.BC, (ushort) (input.State.Registers.ReadPair(Register.BC) - 1));
 
+        var x = difference - (input.State.Flags.HalfCarry ? 1 : 0);
+
         // Flags
-        input.State.Flags.Carry = value > input.State.Registers[Register.A];
+        // Carry unaffected
         input.State.Flags.AddSubtract = true;
         input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
-        input.State.Flags.X1 = (value & 0x08) > 0;
+        input.State.Flags.X1 = (x & 0x08) > 0;
         input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (value & 0x0F);
-        input.State.Flags.X2 = (value & 0x20) > 0;
+        input.State.Flags.X2 = (x & 0x02) > 0;
         input.State.Flags.Zero = difference == 0;
-        input.State.Flags.Sign = difference > 0x7F;
+        input.State.Flags.Sign = difference < 0;
 
         input.State.PutFlagsInFRegister(true);
         
@@ -1003,9 +1005,9 @@ public static class ProcessorMiscellaneousInstructions
 
         if (input.State.Registers.ReadPair(Register.BC) != 0)
         {
-            input.State.ProgramCounter--;
+            input.State.ProgramCounter -= 2;
 
-            return -1;
+            return 5;
         }
 
         return 0;

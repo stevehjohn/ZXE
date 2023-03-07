@@ -68,7 +68,6 @@ edab_01: OUTD
 edab_02: OUTD
 edb2: INIR
 edb3: OTIR
-edb9: CPDR
 edba: INDR
 edbb: OTDR
 ```
