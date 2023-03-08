@@ -69,6 +69,8 @@ public class TestRunner
                     case TestResult.Pass:
                         passed++;
 
+                        skipRemainder = true;
+
                         break;
 
                     case TestResult.Fail:
@@ -269,6 +271,8 @@ public class TestRunner
 
         try
         {
+            var cycles = 0;
+
             while (true)
             {
                 operations++;
@@ -278,9 +282,9 @@ public class TestRunner
                     break;
                 }
 
-                processor.ProcessInstruction(ram, ports, bus);
+                cycles += processor.ProcessInstruction(ram, ports, bus);
 
-                if (state.ProgramCounter == test.Final.PC && state.OpcodePrefix == 0)
+                if (cycles >= test.Cycles.Length)
                 {
                     break;
                 }

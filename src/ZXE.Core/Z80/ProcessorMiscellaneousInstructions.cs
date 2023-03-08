@@ -801,9 +801,9 @@ public static class ProcessorMiscellaneousInstructions
 
             if (input.State.Registers[Register.B] != 0)
             {
-                input.State.ProgramCounter--;
+                input.State.ProgramCounter -= 2;
 
-                return -1;
+                return 5;
             }
 
             return 0;
@@ -870,13 +870,11 @@ public static class ProcessorMiscellaneousInstructions
             
             input.State.PutFlagsInFRegister();
 
-            // TODO: Correctly account for extra cycles?
-
             if (input.State.Registers[Register.B] != 0)
             {
-                input.State.ProgramCounter--;
+                input.State.ProgramCounter -= 2;
 
-                return -1;
+                return 5;
             }
 
             return 0;
@@ -1001,8 +999,6 @@ public static class ProcessorMiscellaneousInstructions
 
         input.State.PutFlagsInFRegister(true);
         
-        // TODO: Correctly account for extra cycles?
-
         if (input.State.Registers.ReadPair(Register.BC) != 0)
         {
             input.State.ProgramCounter -= 2;
@@ -1069,13 +1065,11 @@ public static class ProcessorMiscellaneousInstructions
             
             input.State.PutFlagsInFRegister();
 
-            // TODO: Correctly account for extra cycles?
-
             if (input.State.Registers[Register.B] != 0)
             {
-                input.State.ProgramCounter--;
+                input.State.ProgramCounter -= 2;
 
-                return -1;
+                return 5;
             }
 
             return 0;
@@ -1142,13 +1136,11 @@ public static class ProcessorMiscellaneousInstructions
             
             input.State.PutFlagsInFRegister();
 
-            // TODO: Correctly account for extra cycles?
-
             if (input.State.Registers.ReadPair(Register.BC) != 0)
             {
-                input.State.ProgramCounter--;
+                input.State.ProgramCounter -= 2;
 
-                return -1;
+                return 5;
             }
 
             return 0;
