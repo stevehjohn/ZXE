@@ -72,3 +72,4 @@ Runs tests against this awesome suite:
 - https://luckyredfish.com/interrupts-on-the-zx-spectrum/
 - https://worldofspectrum.org/
 - https://github.com/floooh/chips-test/tree/master/tests/fuse
+- http://rk.nvg.ntnu.no/sinclair/faq/tech_z80.html
