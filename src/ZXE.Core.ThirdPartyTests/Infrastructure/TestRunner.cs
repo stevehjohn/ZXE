@@ -69,8 +69,6 @@ public class TestRunner
                     case TestResult.Pass:
                         passed++;
 
-                        skipRemainder = true;
-
                         break;
 
                     case TestResult.Fail:

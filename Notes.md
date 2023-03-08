@@ -37,7 +37,7 @@ Failing test, but I think the test parameters are not correct: FD 18
 
 ### Fuse Tests Failing
 
-Count: 32
+Count: 31
 
 ```
 db_1: IN A, (n)
