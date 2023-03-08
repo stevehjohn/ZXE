@@ -73,3 +73,4 @@ Runs tests against this awesome suite:
 - https://worldofspectrum.org/
 - https://github.com/floooh/chips-test/tree/master/tests/fuse
 - http://rk.nvg.ntnu.no/sinclair/faq/tech_z80.html
+- https://dotneteer.github.io/zx-spectrum/2018/01/26/zxspectrum-part-4.html
