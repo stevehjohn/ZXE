@@ -40,10 +40,10 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("90 ") < 0)
-            {
-                continue;
-            }
+            //if (Path.GetFileName(file).CompareTo("90 ") < 0)
+            //{
+            //    continue;
+            //}
 
             // End early
             //if (Path.GetFileName(file).CompareTo("dd cc") > 0)
@@ -306,6 +306,7 @@ public class TestRunner
                    && state.Registers[Register.C] == test.Final.C
                    && state.Registers[Register.D] == test.Final.D
                    && state.Registers[Register.E] == test.Final.E
+                   && state.Registers[Register.F] == test.Final.F
                    && state.Registers[Register.H] == test.Final.H
                    && state.Registers[Register.I] == test.Final.I
                    && state.Registers[Register.R] == test.Final.R
