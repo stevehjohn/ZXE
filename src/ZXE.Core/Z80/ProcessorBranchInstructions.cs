@@ -3,15 +3,12 @@
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
 // ReSharper disable StringLiteralTypo
-
 public static class ProcessorBranchInstructions
 {
     public static int DJNZ_e(Input input)
     {
         unchecked
         {
-            // TODO: If B != 0, 5 more cycles... how to do this?
-
             var value = input.State.Registers[Register.B];
 
             var result = (byte) (value - 1);
@@ -25,10 +22,10 @@ public static class ProcessorBranchInstructions
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (value & 0x0F) < 1;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            input.State.Flags.Zero = (sbyte)result == 0;
-            input.State.Flags.Sign = (sbyte)result < 0;
+            input.State.Flags.Zero = (sbyte) result == 0;
+            input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.PutFlagsInFRegister();
+            input.State.PutFlagsInFRegister(true);
 
             if (! input.State.Flags.Zero)
             {
