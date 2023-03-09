@@ -40,9 +40,11 @@ public class ProcessorLoadInstructionsTests
     public void LD_RR_nn()
     {
         // LD BC, 0x1234
-        _ram[0] = 0x01;
-        _ram[1] = 0x34;
-        _ram[2] = 0x12;
+        _ram[0x4000] = 0x01;
+        _ram[0x4001] = 0x34;
+        _ram[0x4002] = 0x12;
+
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -54,24 +56,28 @@ public class ProcessorLoadInstructionsTests
     public void LD_addr_RR_A()
     {
         // LD (BC), A
-        _ram[0] = 0x02;
+        _ram[0x4000] = 0x02;
 
-        _state.Registers[Register.B] = 0x12;
+        _state.Registers[Register.B] = 0x42;
         _state.Registers[Register.C] = 0x34;
 
         _state.Registers[Register.A] = 0x56;
 
+        _state.ProgramCounter = 0x4000;
+
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x56, _ram[0x1234]);
+        Assert.Equal(0x56, _ram[0x4234]);
     }
 
     [Fact]
     public void LD_R_n()
     {
         // LD B, 0x23
-        _ram[0] = 0x06;
-        _ram[1] = 0x23;
+        _ram[0x4000] = 0x06;
+        _ram[0x4001] = 0x23;
+
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -82,26 +88,30 @@ public class ProcessorLoadInstructionsTests
     public void LD_addr_nn_R()
     {
         // LD (0x1234), A
-        _ram[0] = 0x32;
-        _ram[1] = 0x34;
-        _ram[2] = 0x12;
+        _ram[0x4000] = 0x32;
+        _ram[0x4001] = 0x34;
+        _ram[0x4002] = 0x42;
 
         _state.Registers[Register.A] = 0x56;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x56, _ram[0x1234]);
+        Assert.Equal(0x56, _ram[0x4234]);
     }
 
     [Fact]
     public void LD_R_addr_nn()
     {
         // LD A, (0x1234)
-        _ram[0] = 0x3A;
-        _ram[1] = 0x34;
-        _ram[2] = 0x12;
+        _ram[0x4000] = 0x3A;
+        _ram[0x4001] = 0x34;
+        _ram[0x4002] = 0x42;
 
-        _ram[0x1234] = 0x56;
+        _ram[0x4234] = 0x56;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -112,10 +122,12 @@ public class ProcessorLoadInstructionsTests
     public void LD_R_addr_RR()
     {
         // LD A, (BC)
-        _ram[0] = 0x0A;
-        _ram[0x1234] = 0x56;
+        _ram[0x4000] = 0x0A;
+        _ram[0x4234] = 0x56;
 
-        _state.Registers.WritePair(Register.BC, 0x1234);
+        _state.Registers.WritePair(Register.BC, 0x4234);
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -126,28 +138,32 @@ public class ProcessorLoadInstructionsTests
     public void LD_addr_nn_RR()
     {
         // LD (0x1234), HL
-        _ram[0] = 0x22;
-        _ram[1] = 0x34;
-        _ram[2] = 0x12;
+        _ram[0x4000] = 0x22;
+        _ram[0x4001] = 0x34;
+        _ram[0x4002] = 0x42;
 
         _state.Registers.WritePair(Register.HL, 0x5678);
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x78, _ram[0x1234]);
-        Assert.Equal(0x56, _ram[0x1235]);
+        Assert.Equal(0x78, _ram[0x4234]);
+        Assert.Equal(0x56, _ram[0x4235]);
     }
 
     [Fact]
     public void LD_RR_addr_nn()
     {
         // LD HL, (0x1234)
-        _ram[0] = 0x2A;
-        _ram[1] = 0x34;
-        _ram[2] = 0x12;
+        _ram[0x4000] = 0x2A;
+        _ram[0x4001] = 0x34;
+        _ram[0x4002] = 0x42;
 
-        _ram[0x1234] = 0x56;
-        _ram[0x1235] = 0x78;
+        _ram[0x4234] = 0x56;
+        _ram[0x4235] = 0x78;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -159,9 +175,11 @@ public class ProcessorLoadInstructionsTests
     public void LD_SP_nn()
     {
         // LD SP, 0x1234
-        _ram[0] = 0x31;
-        _ram[1] = 0x34;
-        _ram[2] = 0x12;
+        _ram[0x4000] = 0x31;
+        _ram[0x4001] = 0x34;
+        _ram[0x4002] = 0x12;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -172,23 +190,27 @@ public class ProcessorLoadInstructionsTests
     public void LD_addr_RR_n()
     {
         // LD (HL), 0xAB
-        _ram[0] = 0x36;
-        _ram[1] = 0xAB;
+        _ram[0x4000] = 0x36;
+        _ram[0x4001] = 0xAB;
 
-        _state.Registers.WritePair(Register.HL, 0x1234);
+        _state.Registers.WritePair(Register.HL, 0x4234);
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0xAB, _ram[0x1234]);
+        Assert.Equal(0xAB, _ram[0x4234]);
     }
 
     [Fact]
     public void LD_R_R()
     {
         // LD B, C
-        _ram[0] = 0x41;
+        _ram[0x4000] = 0x41;
 
         _state.Registers[Register.C] = 0x12;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
