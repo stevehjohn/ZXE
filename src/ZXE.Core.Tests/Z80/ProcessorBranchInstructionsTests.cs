@@ -40,134 +40,152 @@ public class ProcessorBranchInstructionsTests
     public void DJNZ_e()
     {
         // DJNZ 0x20
-        _ram[0] = 0x10;
-        _ram[1] = 0x20;
+        _ram[0x4000] = 0x10;
+        _ram[0x4001] = 0x20;
 
         _state.Registers[Register.B] = 0x10;
+
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x0F, _state.Registers[Register.B]);
-        Assert.Equal(0x22, _state.ProgramCounter);
+        Assert.Equal(0x4022, _state.ProgramCounter);
 
-        _state.ProgramCounter = 0;
         _state.Registers[Register.B] = 0x01;
+
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
         Assert.Equal(0x00, _state.Registers[Register.B]);
-        Assert.Equal(0x02, _state.ProgramCounter);
+        Assert.Equal(0x4002, _state.ProgramCounter);
     }
 
     [Fact]
     public void JR_e()
     {
         // JR 0x20
-        _ram[0] = 0x18;
-        _ram[1] = 0x20;
+        _ram[0x4000] = 0x18;
+        _ram[0x4001] = 0x20;
+
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x22, _state.ProgramCounter);
+        Assert.Equal(0x4022, _state.ProgramCounter);
     }
 
     [Fact]
     public void JR_NZ_e()
     {
         // JR NZ, 0x10
-        _ram[0] = 0x20;
-        _ram[1] = 0x10;
+        _ram[0x4000] = 0x20;
+        _ram[0x4001] = 0x10;
 
         _state.Flags.Zero = true;
 
+        _state.ProgramCounter = 0x4000;
+
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x02, _state.ProgramCounter);
+        Assert.Equal(0x4002, _state.ProgramCounter);
 
         _state.Flags.Zero = false;
         _state.ProgramCounter = 0;
 
+        _state.ProgramCounter = 0x4000;
+
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x12, _state.ProgramCounter);
+        Assert.Equal(0x4012, _state.ProgramCounter);
     }
 
     [Fact]
     public void JR_Z_e()
     {
         // JR Z, 0x10
-        _ram[0] = 0x28;
-        _ram[1] = 0x10;
+        _ram[0x4000] = 0x28;
+        _ram[0x4001] = 0x10;
 
         _state.Flags.Zero = false;
 
+        _state.ProgramCounter = 0x4000;
+
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x02, _state.ProgramCounter);
+        Assert.Equal(0x4002, _state.ProgramCounter);
 
         _state.Flags.Zero = true;
-        _state.ProgramCounter = 0;
+
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x12, _state.ProgramCounter);
+        Assert.Equal(0x4012, _state.ProgramCounter);
     }
 
     [Fact]
     public void JR_NC_e()
     {
         // JR NC, 0x10
-        _ram[0] = 0x30;
-        _ram[1] = 0x10;
+        _ram[0x4000] = 0x30;
+        _ram[0x4001] = 0x10;
 
         _state.Flags.Carry = true;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x02, _state.ProgramCounter);
+        Assert.Equal(0x4002, _state.ProgramCounter);
 
         _state.Flags.Carry = false;
-        _state.ProgramCounter = 0;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x12, _state.ProgramCounter);
+        Assert.Equal(0x4012, _state.ProgramCounter);
     }
 
     [Fact]
     public void JR_C_e()
     {
         // JR NC, 0x10
-        _ram[0] = 0x38;
-        _ram[1] = 0x10;
+        _ram[0x4000] = 0x38;
+        _ram[0x4001] = 0x10;
 
         _state.Flags.Carry = false;
 
+        _state.ProgramCounter = 0x4000;
+
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x02, _state.ProgramCounter);
+        Assert.Equal(0x4002, _state.ProgramCounter);
 
         _state.Flags.Carry = true;
-        _state.ProgramCounter = 0;
+
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x12, _state.ProgramCounter);
+        Assert.Equal(0x4012, _state.ProgramCounter);
     }
 
     [Fact]
     public void RET()
     {
-        _ram[0x3535] = 0xC9;
-        _ram[0x2000] = 0xB5;
-        _ram[0x2001] = 0x18;
+        _ram[0x4535] = 0xC9;
+        _ram[0xFF00] = 0xB5;
+        _ram[0xFF01] = 0x18;
 
-        _state.ProgramCounter = 0x3535;
-        _state.StackPointer = 0x2000;
+        _state.ProgramCounter = 0x4535;
+        _state.StackPointer = 0xFF00;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x2002, _state.StackPointer);
+        Assert.Equal(0xFF02, _state.StackPointer);
         Assert.Equal(0x18B5, _state.ProgramCounter);
     }
 }
