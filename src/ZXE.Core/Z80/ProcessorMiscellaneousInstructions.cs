@@ -551,6 +551,7 @@ public static class ProcessorMiscellaneousInstructions
     public static int IN_R_C(Input input, Register register)
     {
         // TODO: Using B makes the keyboard "work", but C is specified in the docs.
+        // Also, C passes third party tests... :shrug:
         var value = input.Ports.ReadByte(input.State.Registers[Register.B]);
 
         //if (value != 255)
