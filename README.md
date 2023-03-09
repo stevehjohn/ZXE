@@ -54,6 +54,7 @@ Runs tests against this awesome suite:
 - https://floooh.github.io/2021/12/06/z80-instruction-timing.html
 - https://clrhome.org/asm/
 - https://ps4star.github.io/z80studio/
+- https://github.com/redcode/Z80/wiki/Z80-Test-Suite
 
 ## Miscellaneous References
 

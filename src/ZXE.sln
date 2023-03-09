@@ -59,6 +59,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JetPac", "JetPac", "{728902
 		..\Game Images\JetPac\image-0.z80 = ..\Game Images\JetPac\image-0.z80
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other Images", "Other Images", "{B7EC1DE2-308E-4C6D-B15F-FE4A011E9D4C}"
+	ProjectSection(SolutionItems) = preProject
+		..\Other Images\snaptest.v1.z80 = ..\Other Images\snaptest.v1.z80
+		..\Other Images\z80-tests.z80 = ..\Other Images\z80-tests.z80
+		..\Other Images\zexall.z80 = ..\Other Images\zexall.z80
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
