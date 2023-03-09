@@ -36,6 +36,11 @@ public class Ram
 
         set
         {
+            if (address < 0x4000)
+            {
+                return;
+            }
+
             if (address >= Size)
             {
                 address -= Size;
