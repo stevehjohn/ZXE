@@ -40,7 +40,7 @@ public class ProcessorMiscellaneousInstructionsTests
     public void NOP()
     {
         // NOP
-        _ram[0] = 0x00;
+        _ram[0x4000] = 0x00;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
     }
@@ -49,12 +49,14 @@ public class ProcessorMiscellaneousInstructionsTests
     public void EX_RR_RaRa()
     {
         // EX AF, AF'
-        _ram[0] = 0x08;
+        _ram[0x4000] = 0x08;
 
         _state.Registers[Register.A] = 0x01;
         _state.Registers[Register.F] = 0x02;
         _state.Registers[Register.A_] = 0x03;
         _state.Registers[Register.F_] = 0x04;
+
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -68,9 +70,11 @@ public class ProcessorMiscellaneousInstructionsTests
     public void CPL()
     {
         // CPL
-        _ram[0] = 0x2F;
+        _ram[0x4000] = 0x2F;
 
         _state.Registers[Register.A] = 0b10100101;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -81,7 +85,9 @@ public class ProcessorMiscellaneousInstructionsTests
     public void SCF()
     {
         // SCF
-        _ram[0] = 0x37;
+        _ram[0x4000] = 0x37;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -92,7 +98,9 @@ public class ProcessorMiscellaneousInstructionsTests
     public void CCF()
     {
         // CCF
-        _ram[0] = 0x3F;
+        _ram[0x4000] = 0x3F;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -103,7 +111,9 @@ public class ProcessorMiscellaneousInstructionsTests
     public void HALT()
     {
         // HALT
-        _ram[0] = 0x76;
+        _ram[0x4000] = 0x76;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -114,10 +124,12 @@ public class ProcessorMiscellaneousInstructionsTests
     public void CP_R_R()
     {
         // CP A, B
-        _ram[0] = 0xB8;
+        _ram[0x4000] = 0xB8;
         
         _state.Registers[Register.A] = 0b00110000;
         _state.Registers[Register.B] = 0b00001100;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -135,11 +147,13 @@ public class ProcessorMiscellaneousInstructionsTests
     public void CP_R_addr_RR()
     {
         // CP A, (HL)
-        _ram[0] = 0xBE;
-        _ram[0x1234] = 0b00001100;
+        _ram[0x4000] = 0xBE;
+        _ram[0x4234] = 0b00001100;
 
         _state.Registers[Register.A] = 0b00110000;
-        _state.Registers.WritePair(Register.HL, 0x1234);
+        _state.Registers.WritePair(Register.HL, 0x4234);
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -157,11 +171,13 @@ public class ProcessorMiscellaneousInstructionsTests
     public void IN_b_R_addr_n()
     {
         // IN_0 B, (n)
-        _ram[0] = 0xED;
-        _ram[1] = 0x00;
-        _ram[2] = 0x10;
+        _ram[0x4000] = 0xED;
+        _ram[0x4001] = 0x00;
+        _ram[0x4002] = 0x10;
 
         _ports.WriteByte(0x10, 0x24);
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
         
@@ -174,16 +190,18 @@ public class ProcessorMiscellaneousInstructionsTests
     public void LDIR()
     {
         // LDIR
-        _ram[0] = 0xED;
-        _ram[1] = 0xB0;
+        _ram[0x4000] = 0xED;
+        _ram[0x4001] = 0xB0;
 
-        _ram[0x1234] = 0xAB;
+        _ram[0x4234] = 0xAB;
 
-        _state.Registers.WritePair(Register.HL, 0x1234);
+        _state.Registers.WritePair(Register.HL, 0x4234);
 
         _state.Registers.WritePair(Register.DE, 0x5678);
 
         _state.Registers.WritePair(Register.BC, 0x0001);
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
         
@@ -193,11 +211,11 @@ public class ProcessorMiscellaneousInstructionsTests
 
         Assert.Equal(0x0000, _state.Registers.ReadPair(Register.BC));
 
-        _ram[0x1234] = 0xAB;
+        _ram[0x4234] = 0xAB;
 
-        _state.ProgramCounter = 0;
+        _state.ProgramCounter = 0x4000;
 
-        _state.Registers.WritePair(Register.HL, 0x1234);
+        _state.Registers.WritePair(Register.HL, 0x4234);
 
         _state.Registers.WritePair(Register.DE, 0x5678);
 

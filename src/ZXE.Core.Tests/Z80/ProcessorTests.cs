@@ -67,26 +67,30 @@ public class ProcessorTests
     public void Can_execute_DD_instruction()
     {
         // LD IX, nn
-        _ram[0] = 0xDD;
-        _ram[1] = 0x21;
-        _ram[2] = 0x34;
-        _ram[3] = 0x12;
+        _ram[0x4000] = 0xDD;
+        _ram[0x4001] = 0x21;
+        _ram[0x4002] = 0x34;
+        _ram[0x4003] = 0x42;
+
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x1234, _state.Registers.ReadPair(Register.IX));
+        Assert.Equal(0x4234, _state.Registers.ReadPair(Register.IX));
     }
 
     [Fact]
     public void Can_execute_FD_instruction()
     {
         // LD IY, nn
-        _ram[0] = 0xFD;
-        _ram[1] = 0x21;
-        _ram[2] = 0x34;
-        _ram[3] = 0x12;
+        _ram[0x4000] = 0xFD;
+        _ram[0x4001] = 0x21;
+        _ram[0x4002] = 0x34;
+        _ram[0x4003] = 0x12;
+
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -99,20 +103,22 @@ public class ProcessorTests
     public void Can_execute_DDCB_instruction()
     {
         // LD IXl, 0x24
-        _ram[0] = 0xDD;
-        _ram[1] = 0x2E;
-        _ram[2] = 0x2A;
+        _ram[0x4000] = 0xDD;
+        _ram[0x4001] = 0x2E;
+        _ram[0x4002] = 0x2A;
         // LD IXh, 0x12
-        _ram[3] = 0xDD;
-        _ram[4] = 0x26;
-        _ram[5] = 0x12;
+        _ram[0x4003] = 0xDD;
+        _ram[0x4004] = 0x26;
+        _ram[0x4005] = 0x42;
         // SLA (IX + d), C
-        _ram[6] = 0xDD;
-        _ram[7] = 0xCB;
-        _ram[8] = 0x0A;
-        _ram[9] = 0x21;
+        _ram[0x4006] = 0xDD;
+        _ram[0x4007] = 0xCB;
+        _ram[0x4008] = 0x0A;
+        _ram[0x4009] = 0x21;
 
-        _ram[0x1234] = 0b00100010;
+        _ram[0x4234] = 0b00100010;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
