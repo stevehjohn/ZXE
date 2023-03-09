@@ -148,7 +148,7 @@ public class ProcessorBitwiseRotationInstructionsTests
         // LD IXl, 0x24
         _ram[0x4000] = 0xDD;
         _ram[0x4001] = 0x2E;
-        _ram[0x4002] = 0x23;
+        _ram[0x4002] = 0x2A;
         // LD IXh, 0x12
         _ram[0x4003] = 0xDD;
         _ram[0x4004] = 0x26;
@@ -159,7 +159,7 @@ public class ProcessorBitwiseRotationInstructionsTests
         _ram[0x4008] = 0x0A;
         _ram[0x4009] = 0x21;
 
-        _ram[0x4123] = 0b00100010;
+        _ram[0x4134] = 0b00100010;
 
         _processor.State.ProgramCounter = 0x4000;
 
@@ -197,7 +197,7 @@ public class ProcessorBitwiseRotationInstructionsTests
         _ram[8] = 0x0A;
         _ram[9] = 0x21;
 
-        _ram[0x1234] = 0b10100010;
+        _ram[0x4134] = 0b10100010;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
