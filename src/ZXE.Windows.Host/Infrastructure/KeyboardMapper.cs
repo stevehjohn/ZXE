@@ -9,11 +9,11 @@ namespace ZXE.Windows.Host.Infrastructure;
 
 public static class KeyboardMapper
 {
-    private static readonly byte[] Ports = { 0xFE, 0xFD, 0xFB, 0xF7, 0xEF, 0xDF, 0xBF, 0x7F };
+    private static readonly ushort[] Ports = { 0xFEFE, 0xFDFE, 0xFBFE, 0xF7FE, 0xEFFE, 0xDFFE, 0xBFFE, 0x7FFE };
 
-    public static List<(byte Port, byte data)> MapKeyState(Keys[] keyboardState)
+    public static List<(ushort Port, byte data)> MapKeyState(Keys[] keyboardState)
     {
-        var portData = new List<(byte Port, byte data)>();
+        var portData = new List<(ushort Port, byte data)>();
 
         // Just assume up to 2 keys for now.
         var keys = keyboardState.Take(2).ToArray();
@@ -44,28 +44,28 @@ public static class KeyboardMapper
     {
         switch (port)
         {
-            case 0xFE:
+            case 0xFEFE:
                 return ScanForFEFEKeys(keys);
 
-            case 0xFD:
+            case 0xFDFE:
                 return ScanForFDFEKeys(keys);
 
-            case 0xFB:
+            case 0xFBFE:
                 return ScanForFBFEKeys(keys);
 
-            case 0xF7:
+            case 0xF7FE:
                 return ScanForF7FEKeys(keys);
 
-            case 0xEF:
+            case 0xEFFE:
                 return ScanForEFFEKeys(keys);
 
-            case 0xDF:
+            case 0xDFFE:
                 return ScanForDFFEKeys(keys);
 
-            case 0xBF:
+            case 0xBFFE:
                 return ScanForBFFEKeys(keys);
 
-            case 0x7F:
+            case 0x7FFE:
                 return ScanFor7FFEKeys(keys);
 
             default:

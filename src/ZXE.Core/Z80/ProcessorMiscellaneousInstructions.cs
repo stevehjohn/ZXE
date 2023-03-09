@@ -550,9 +550,7 @@ public static class ProcessorMiscellaneousInstructions
 
     public static int IN_R_C(Input input, Register register)
     {
-        // TODO: Using B makes the keyboard "work", but C is specified in the docs.
-        // Also, C passes third party tests... :shrug:
-        var value = input.Ports.ReadByte(input.State.Registers[Register.B]);
+        var value = input.Ports.ReadByte(input.State.Registers.ReadPair(Register.BC));
 
         //if (value != 255)
         //{
@@ -746,15 +744,15 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var address = input.State.Registers[Register.C];
+            input.State.Registers[Register.B]--;
+
+            var address = input.State.Registers.ReadPair(Register.BC);
 
             var value = input.Ports.ReadByte(address);
 
             input.Ram[input.State.Registers.ReadPair(Register.HL)] = value;
 
             input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) + 1));
-
-            input.State.Registers[Register.B]--;
 
             // Flags
             input.State.Flags.Carry = value > input.State.Registers[Register.A];
@@ -776,15 +774,15 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var address = input.State.Registers[Register.C];
+            input.State.Registers[Register.B]--;
+
+            var address = input.State.Registers.ReadPair(Register.BC);
 
             var value = input.Ports.ReadByte(address);
 
             input.Ram[input.State.Registers.ReadPair(Register.HL)] = value;
 
             input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) + 1));
-
-            input.State.Registers[Register.B]--;
 
             // Flags
             input.State.Flags.Carry = value > input.State.Registers[Register.A];
@@ -1014,15 +1012,15 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var port = input.State.Registers[Register.C];
+            input.State.Registers[Register.B]--;
+
+            var port = input.State.Registers.ReadPair(Register.BC);
 
             var value = input.Ports.ReadByte(port);
 
             input.Ram[input.State.Registers.ReadPair(Register.HL)] = value;
 
             input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) - 1));
-
-            input.State.Registers[Register.B]--;
 
             // Flags
             input.State.Flags.Carry = value > input.State.Registers[Register.A];
@@ -1044,15 +1042,15 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var port = input.State.Registers[Register.C];
+            input.State.Registers[Register.B]--;
+
+            var port = input.State.Registers.ReadPair(Register.BC);
 
             var value = input.Ports.ReadByte(port);
 
             input.Ram[input.State.Registers.ReadPair(Register.HL)] = value;
 
             input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) - 1));
-
-            input.State.Registers[Register.B]--;
 
             // Flags
             input.State.Flags.Carry = value > input.State.Registers[Register.A];

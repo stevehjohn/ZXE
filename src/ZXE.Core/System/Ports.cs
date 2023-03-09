@@ -6,12 +6,12 @@ public class Ports
 
     public Ports()
     {
-        _ports = new byte?[256];
+        _ports = new byte?[0xFFFF];
 
         ResetKeyboardPorts();
     }
 
-    public byte ReadByte(byte port)
+    public byte ReadByte(ushort port)
     {
         if (_ports[port] == null)
         {
@@ -25,14 +25,14 @@ public class Ports
         return value;
     }
 
-    public void WriteByte(byte port, byte data)
+    public void WriteByte(ushort port, byte data)
     {
         _ports[port] = data;
     }
 
-    private void ResetPort(byte port)
+    private void ResetPort(ushort port)
     {
-        if (port == 0xFE || port == 0xFD || port == 0xFB || port == 0xF7 || port == 0xEF || port == 0xDF || port == 0xBF || port == 0x7F)
+        if (port == 0xFEFE || port == 0xFDFE || port == 0xFBFE || port == 0xF7FE || port == 0xEFFE || port == 0xDFFE || port == 0xBFFE || port == 0x7FFE)
         {
             _ports[port] = 0xFF;
         }
@@ -44,13 +44,13 @@ public class Ports
 
     private void ResetKeyboardPorts()
     {
-        _ports[0xFE] = 0xFF;
-        _ports[0xFD] = 0xFF;
-        _ports[0xFB] = 0xFF;
-        _ports[0xF7] = 0xFF;
-        _ports[0xEF] = 0xFF;
-        _ports[0xDF] = 0xFF;
-        _ports[0xBF] = 0xFF;
-        _ports[0x7F] = 0xFF;
+        _ports[0xFEFE] = 0xFF;
+        _ports[0xFDFE] = 0xFF;
+        _ports[0xFBFE] = 0xFF;
+        _ports[0xF7FE] = 0xFF;
+        _ports[0xEFFE] = 0xFF;
+        _ports[0xDFFE] = 0xFF;
+        _ports[0xBFFE] = 0xFF;
+        _ports[0x7FFE] = 0xFF;
     }
 }
