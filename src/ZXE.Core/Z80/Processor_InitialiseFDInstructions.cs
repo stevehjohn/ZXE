@@ -54,7 +54,7 @@ public partial class Processor
 
         instructions[0xFD17] = new Instruction("RLA", 1, ProcessorBitwiseRotationInstructions.RLA, 4, "RLA A");
 
-        instructions[0xFD18] = new Instruction("JR e", 2, ProcessorBranchInstructions.JR_e, 8, null, 0xFD18);
+        instructions[0xFD18] = new Instruction("JR e", 2, ProcessorBranchInstructions.JR_e, 12, null, 0xFD18);
 
         instructions[0xFD19] = new Instruction("ADD IY, DE", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.IY, Register.DE), 11);
 

@@ -8,6 +8,8 @@ public class Ram
 
     public int Size { get; }
 
+    public bool ProtectRom { get; set; }
+
     public Ram(Model model)
     {
         var size = model == Model.Spectrum48K ? Constants.K64 : Constants.K128;
@@ -36,7 +38,7 @@ public class Ram
 
         set
         {
-            if (address < 0x4000)
+            if (address < 0x4000 && ProtectRom)
             {
                 return;
             }
