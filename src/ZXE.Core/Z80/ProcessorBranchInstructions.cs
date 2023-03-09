@@ -15,19 +15,9 @@ public static class ProcessorBranchInstructions
 
             input.State.Registers[Register.B] = result;
 
-            // Flags
-            // Carry unaffected
-            input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = value == 0x80;
-            input.State.Flags.X1 = (result & 0x08) > 0;
-            input.State.Flags.HalfCarry = (value & 0x0F) < 1;
-            input.State.Flags.X2 = (result & 0x20) > 0;
-            input.State.Flags.Zero = (sbyte) result == 0;
-            input.State.Flags.Sign = (sbyte) result < 0;
+            // Flags unaffected
 
-            input.State.PutFlagsInFRegister(true);
-
-            if (! input.State.Flags.Zero)
+            if (result != 0)
             {
                 input.State.ProgramCounter += (sbyte) input.Data[1];
 
