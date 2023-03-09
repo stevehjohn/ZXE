@@ -334,7 +334,7 @@ public static class ProcessorArithmeticInstructions
             // Flags
             input.State.Flags.Carry = result < 0;
             input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = ((valueD ^ valueS) & 0x80) != 0 && ((valueD ^ (byte) result) & 0x80) == 0;
+            input.State.Flags.ParityOverflow = ((valueD ^ valueS) & 0x80) != 0 && ((valueS ^ result) & 0x80) == 0;
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F) < (valueS & 0x0F);
             input.State.Flags.X2 = (result & 0x20) > 0;
@@ -362,7 +362,7 @@ public static class ProcessorArithmeticInstructions
             // Flags
             input.State.Flags.Carry = result < 0;
             input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = result < -0x80; // TODO: Potential bug here?
+            input.State.Flags.ParityOverflow = ((valueD ^ valueS) & 0x80) != 0 && ((valueS ^ result) & 0x80) == 0;
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F) < (valueS & 0x0F);
             input.State.Flags.X2 = (result & 0x20) > 0;
