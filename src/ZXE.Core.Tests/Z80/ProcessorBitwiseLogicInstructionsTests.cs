@@ -40,10 +40,12 @@ public class ProcessorBitwiseLogicInstructionsTests
     public void AND_R_R()
     {
         // AND A, B
-        _ram[0] = 0xA0;
+        _ram[0x4000] = 0xA0;
         
         _state.Registers[Register.A] = 0b01111000;
         _state.Registers[Register.B] = 0b00011110;
+
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -54,11 +56,13 @@ public class ProcessorBitwiseLogicInstructionsTests
     public void AND_R_addr_RR()
     {
         // AND A, (HL)
-        _ram[0] = 0xA6;
-        _ram[0x1234] = 0b00011110;
+        _ram[0x4000] = 0xA6;
+        _ram[0x4123] = 0b00011110;
 
         _state.Registers[Register.A] = 0b01111000;
-        _state.Registers.WritePair(Register.HL, 0x1234);
+        _state.Registers.WritePair(Register.HL, 0x4123);
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -69,10 +73,12 @@ public class ProcessorBitwiseLogicInstructionsTests
     public void XOR_R_R()
     {
         // XOR A, B
-        _ram[0] = 0xA8;
+        _ram[0x4000] = 0xA8;
         
         _state.Registers[Register.A] = 0b01011010;
         _state.Registers[Register.B] = 0b11111111;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -83,11 +89,13 @@ public class ProcessorBitwiseLogicInstructionsTests
     public void XOR_R_addr_RR()
     {
         // XOR A, (HL)
-        _ram[0] = 0xAE;
-        _ram[0x1234] = 0b11111111;
+        _ram[0x4000] = 0xAE;
+        _ram[0x4123] = 0b11111111;
 
         _state.Registers[Register.A] = 0b01011010;
-        _state.Registers.WritePair(Register.HL, 0x1234);
+        _state.Registers.WritePair(Register.HL, 0x4123);
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -98,10 +106,12 @@ public class ProcessorBitwiseLogicInstructionsTests
     public void OR_R_R()
     {
         // OR A, B
-        _ram[0] = 0xB0;
+        _ram[0x4000] = 0xB0;
         
         _state.Registers[Register.A] = 0b00110000;
         _state.Registers[Register.B] = 0b00001100;
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -112,11 +122,13 @@ public class ProcessorBitwiseLogicInstructionsTests
     public void OR_R_addr_RR()
     {
         // OR A, (HL)
-        _ram[0] = 0xB6;
-        _ram[0x1234] = 0b00001100;
+        _ram[0x4000] = 0xB6;
+        _ram[0x4123] = 0b00001100;
 
         _state.Registers[Register.A] = 0b00110000;
-        _state.Registers.WritePair(Register.HL, 0x1234);
+        _state.Registers.WritePair(Register.HL, 0x4123);
+        
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 

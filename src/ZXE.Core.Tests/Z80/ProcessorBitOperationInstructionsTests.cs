@@ -40,10 +40,12 @@ public class ProcessorBitOperationInstructionsTests
     public void BIT_b_R()
     {
         // BIT 0, B
-        _ram[0] = 0xCB;
-        _ram[1] = 0x40;
+        _ram[0x4000] = 0xCB;
+        _ram[0x4001] = 0x40;
 
         _state.Registers[Register.B] = 0b11111111;
+
+        _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
@@ -51,7 +53,7 @@ public class ProcessorBitOperationInstructionsTests
 
         Assert.False(_state.Flags.Zero);
 
-        _state.ProgramCounter = 0;
+        _state.ProgramCounter = 0x4000;
 
         _state.Registers[Register.B] = 0b11111110;
 
