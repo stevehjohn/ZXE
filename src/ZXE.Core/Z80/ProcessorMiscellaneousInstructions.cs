@@ -120,15 +120,15 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Carry = true;
 
         //// TODO: Stuff. https://github.com/floooh/chips/blob/05cd84e43a1070a16c4edbcaa53a761561b629b8/chips/z80.h#L629-L631
-        //var xFlags = input.State.Q ^ (input.State.Flags.ToByte() | input.State.Registers[Register.A]);
+        var x = (byte) (input.State.Flags.ToByte() | input.State.Registers[Register.A]);
 
         // Flags
         input.State.Flags.Carry = true;
         input.State.Flags.AddSubtract = false;
         // ParityOverflow unaffected
-        input.State.Flags.X1 = (input.State.Registers[Register.A] & 0x08) > 0;
+        input.State.Flags.X1 = (x & 0x08) > 0;
         input.State.Flags.HalfCarry = false;
-        input.State.Flags.X2 = (input.State.Registers[Register.A] & 0x20) > 0;
+        input.State.Flags.X2 = (x & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
 
