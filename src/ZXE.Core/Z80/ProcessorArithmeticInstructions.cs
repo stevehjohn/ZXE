@@ -226,7 +226,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) > 0xF;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Zero = (byte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
@@ -254,7 +254,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) > 0xF;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Zero = (byte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
@@ -282,9 +282,9 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.AddSubtract = false;
             input.State.Flags.ParityOverflow = ((valueD ^ valueS) & 0x80) == 0 && ((valueD ^ result) & 0x80) != 0;
             input.State.Flags.X1 = (result & 0x08) > 0;
-            input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0xF;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) + carry > 0x0F;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Zero = (byte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
@@ -312,9 +312,9 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.AddSubtract = false;
             input.State.Flags.ParityOverflow = ((valueD ^ valueS) & 0x80) == 0 && ((valueD ^ result) & 0x80) != 0;
             input.State.Flags.X1 = (result & 0x08) > 0;
-            input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0xF;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) + carry > 0xF;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Zero = (byte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
@@ -396,7 +396,7 @@ public static class ProcessorArithmeticInstructions
             // Flags
             input.State.Flags.Carry = result < 0;
             input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = ((valueD ^ (valueS + carry)) & 0x80) != 0 && (((valueS + carry) ^ (byte) result) & 0x80) == 0;
+            input.State.Flags.ParityOverflow = (sbyte) valueD - (sbyte) valueS - carry is < -128 or > 127;
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F) < (valueS & 0x0F) + carry;
             input.State.Flags.X2 = (result & 0x20) > 0;
@@ -426,9 +426,9 @@ public static class ProcessorArithmeticInstructions
             // Flags
             input.State.Flags.Carry = result < 0;
             input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = result < -0x80; // TODO: Potential bug here?
+            input.State.Flags.ParityOverflow = (sbyte) valueD - (sbyte) valueS - carry is < -128 or > 127;
             input.State.Flags.X1 = (result & 0x08) > 0;
-            input.State.Flags.HalfCarry = (valueD & 0x0F) < ((valueS + carry) & 0x0F);
+            input.State.Flags.HalfCarry = (valueD & 0x0F) < (valueS & 0x0F) + carry;
             input.State.Flags.X2 = (result & 0x20) > 0;
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
@@ -456,7 +456,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (original & 0x0F) < (result & 0x10);
             input.State.Flags.X2 = (result & 0x20) > 0;
-            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Zero = (byte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
@@ -803,7 +803,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) > 0xF;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Zero = (byte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
