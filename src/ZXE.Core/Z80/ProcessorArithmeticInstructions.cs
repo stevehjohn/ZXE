@@ -72,18 +72,30 @@ public static class ProcessorArithmeticInstructions
     {
         unchecked
         {
-            var source = (int) input.State.Registers.ReadPair(target);
+            var source = input.State.Registers.ReadPair(target);
 
-            var result = source + input.State.Registers.ReadPair(operand);
+            var destination = input.State.Registers.ReadPair(operand);
+
+            var result = source + destination;
 
             input.State.Registers.WritePair(target, (ushort) result);
+
+            var lowS = (byte) (source & 0xFF);
+            var lowD = (byte) (destination & 0xFF);
+            var highS = (byte) ((source & 0xFF00) >> 8);
+            var highD = (byte) ((destination & 0xFF00) >> 8);
+
+            if (lowS + lowD > 0xFF)
+            {
+                highD++;
+            }
 
             // Flags
             input.State.Flags.Carry = result > 0xFFFF;
             input.State.Flags.AddSubtract = false;
             // ParityOverflow unaffected
             input.State.Flags.X1 = (result & 0x0800) > 0;
-            input.State.Flags.HalfCarry = (source & 0x0800) > 0 && (result & 0x1000) > 0;
+            input.State.Flags.HalfCarry = (highS & 0x0F) + (highD & 0x0F) > 0x0F;
             input.State.Flags.X2 = (result & 0x2000) > 0;
             // Zero unaffected
             // Sign unaffected
