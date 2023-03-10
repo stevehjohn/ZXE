@@ -33,6 +33,8 @@ public class StateDefinition
 
     public byte R { get; set; }
 
+    public byte Q { get; set; }
+
     public ushort IX { get; set; }
 
     public ushort IY { get; set; }

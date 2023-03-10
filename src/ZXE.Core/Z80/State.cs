@@ -39,7 +39,7 @@ public class State
 
     public bool InterruptFlipFlop2 { get; set; }
 
-    public byte Q { get; private set; }
+    public byte Q { get; set; }
 
     public State()
     {
@@ -48,7 +48,7 @@ public class State
         Flags = new Flags();
     }
 
-    public void PutFlagsInFRegister(bool setQ = false)
+    public void PutFlagsInFRegister(bool setQ = false, bool resetQ = false)
     {
         var asByte = Flags.ToByte();
 
@@ -58,7 +58,8 @@ public class State
         {
             Q = asByte;
         }
-        else
+
+        if (resetQ)
         {
             Q = 0;
         }

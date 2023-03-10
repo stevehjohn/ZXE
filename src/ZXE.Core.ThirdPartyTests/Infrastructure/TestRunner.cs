@@ -40,7 +40,7 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("09 ") < 0)
+            if (Path.GetFileName(file).CompareTo("37 ") < 0)
             {
                 continue;
             }
@@ -249,6 +249,8 @@ public class TestRunner
         state.Registers.WritePair(Register.IX, test.Initial.IX);
         state.Registers.WritePair(Register.IY, test.Initial.IY);
 
+        state.Q = test.Initial.Q;
+
         state.Flags = Flags.FromByte(test.Initial.F);
 
         state.Registers[Register.A_] = (byte) ((test.Initial.AF_ & 0xFF00) >> 8);
@@ -349,6 +351,8 @@ public class TestRunner
 
         FormattedConsole.WriteLine($"    &Cyan;I &White;: &Green;0x{test.Initial.I:X2}          0x{test.Final.I:X2}          {(test.Final.I == result.State.Registers[Register.I] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.I]:X2}");
         FormattedConsole.WriteLine($"    &Cyan;R &White;: &Green;0x{test.Initial.R:X2}          0x{test.Final.R:X2}          {(test.Final.R == result.State.Registers[Register.R] ? "&Green;" : "&Red;")}0x{result.State.Registers[Register.R]:X2}");
+
+        FormattedConsole.WriteLine($"    &Cyan;Q &White;: &Green;0x{test.Initial.Q:X2}          0x{test.Final.Q:X2}          {(test.Final.Q == result.State.Q ? "&Green;" : "&Red;")}0x{result.State.Q:X2}");
 
         FormattedConsole.WriteLine(
             $"    &Cyan;IX&White;: &Green;0x{test.Initial.IX:X4}        0x{test.Final.IX:X4}        {(test.Final.IX == result.State.Registers.ReadPair(Register.IX) ? "&Green;" : "&Red;")}0x{result.State.Registers.ReadPair(Register.IX):X4}");

@@ -120,7 +120,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Carry = true;
 
         //// TODO: Stuff. https://github.com/floooh/chips/blob/05cd84e43a1070a16c4edbcaa53a761561b629b8/chips/z80.h#L629-L631
-        var x = (byte) (input.State.Flags.ToByte() | input.State.Registers[Register.A]);
+        var x = input.State.Q ^ (input.State.Flags.ToByte() | input.State.Registers[Register.A]);
 
         // Flags
         input.State.Flags.Carry = true;
@@ -132,7 +132,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.PutFlagsInFRegister(true);
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }

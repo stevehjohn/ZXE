@@ -176,6 +176,8 @@ public static class ProcessorArithmeticInstructions
         {
             var source = input.State.StackPointer;
 
+            var destination = input.State.Registers.ReadPair(register);
+
             var result = source + input.State.Registers.ReadPair(register);
 
             input.State.Registers.WritePair(register, (ushort) result);
@@ -185,7 +187,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.AddSubtract = false;
             // ParityOverflow unaffected
             input.State.Flags.X1 = (result & 0x0800) > 0;
-            input.State.Flags.HalfCarry = (source & 0x0800) > 0 && (result & 0x1000) > 0;
+            input.State.Flags.HalfCarry = (input.State.StackPointer & 0x0FFF) + (destination & 0x0FFF) > 0x0FFF;
             input.State.Flags.X2 = (result & 0x2000) > 0;
             // Zero unaffected
             // Sign unaffected
