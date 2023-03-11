@@ -183,7 +183,7 @@ public static class ProcessorMiscellaneousInstructions
             // Flags
             input.State.Flags.Carry = rightValue > leftValue;
             input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = false; // TODO: Can CP overflow?
+            input.State.Flags.ParityOverflow = ((leftValue ^ rightValue) & 0x80) != 0 && ((rightValue ^ (byte) difference) & 0x80) == 0;
             input.State.Flags.X1 = (rightValue & 0x08) > 0;
             input.State.Flags.HalfCarry = (leftValue & 0x0F) < (rightValue & 0x0F);
             input.State.Flags.X2 = (rightValue & 0x20) > 0;
@@ -209,7 +209,7 @@ public static class ProcessorMiscellaneousInstructions
             // Flags
             input.State.Flags.Carry = rightValue > leftValue;
             input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = false; // TODO: Can CP overflow?
+            input.State.Flags.ParityOverflow = ((leftValue ^ rightValue) & 0x80) != 0 && ((rightValue ^ (byte) difference) & 0x80) == 0;
             input.State.Flags.X1 = (rightValue & 0x08) > 0;
             input.State.Flags.HalfCarry = (leftValue & 0x0F) < (rightValue & 0x0F);
             input.State.Flags.X2 = (rightValue & 0x20) > 0;
