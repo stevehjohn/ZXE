@@ -1,4 +1,4 @@
-﻿#define UNATTENDED
+﻿//#define UNATTENDED
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -40,10 +40,10 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("08 ") < 0)
-            //{
-            //    continue;
-            //}
+            if (Path.GetFileName(file).CompareTo("dd 24 ") < 0)
+            {
+                continue;
+            }
 
             // End early
             //if (Path.GetFileName(file).CompareTo("ff") > 0)
@@ -164,11 +164,11 @@ public class TestRunner
 
     private static TestResult RunTest(TestDefinition test)
     {
+        var result = ExecuteTest(test);
+
         FormattedConsole.Write($"  &Cyan;Test&White;: &Magenta;{test.Name,-18}  ");
 
         FormattedConsole.Write($"  &Cyan;RAM&White;: &Magenta;{test.Initial.Ram.Length,3}B  ");
-
-        var result = ExecuteTest(test);
 
         FormattedConsole.Write($"  &Cyan;Operations&White;: &Magenta;{result.Operations,6}  ");
 
