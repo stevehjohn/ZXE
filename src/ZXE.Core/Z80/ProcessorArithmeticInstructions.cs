@@ -568,12 +568,12 @@ public static class ProcessorArithmeticInstructions
             // Flags
             // Carry unaffected
             input.State.Flags.AddSubtract = false;
-            input.State.Flags.ParityOverflow = value == 0x7F;
-            input.State.Flags.X1 = (result & 0x08) > 0;
-            input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0xF;
-            input.State.Flags.X2 = (result & 0x20) > 0;
-            input.State.Flags.Zero = result == 0;
-            input.State.Flags.Sign = result < 0;
+            input.State.Flags.ParityOverflow = (value & 0xFF00) == 0x7F00;
+            input.State.Flags.X1 = (result & 0x0800) > 0;
+            input.State.Flags.HalfCarry = (value & 0x0F00) + 1 > 0x0F00;
+            input.State.Flags.X2 = (result & 0x2000) > 0;
+            input.State.Flags.Zero = (result & 0xFF00) == 0;
+            input.State.Flags.Sign = (sbyte) ((result & 0xFF00) >> 8) < 0;
 
             input.State.PutFlagsInFRegister();
         }
@@ -602,7 +602,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.AddSubtract = true;
             input.State.Flags.ParityOverflow = value == 0x80;
             input.State.Flags.X1 = (decrementedValue & 0x08) > 0;
-            input.State.Flags.HalfCarry = (value & 0x0F) < 1;
+            input.State.Flags.HalfCarry = (decrementedValue & 0x0F) < 1;
             input.State.Flags.X2 = (decrementedValue & 0x20) > 0;
             input.State.Flags.Zero = decrementedValue == 0;
             input.State.Flags.Sign = decrementedValue < 0;
