@@ -238,7 +238,7 @@ public static class ProcessorMiscellaneousInstructions
 
         input.State.Registers.WritePair(register, data);
 
-        // Flags unaffected
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -257,7 +257,7 @@ public static class ProcessorMiscellaneousInstructions
 
             input.Ram[input.State.StackPointer] = (byte) (data & 0x00FF);
 
-            // Flags unaffected
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
