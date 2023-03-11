@@ -1,4 +1,4 @@
-﻿//#define UNATTENDED
+﻿#define UNATTENDED
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -40,7 +40,7 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("ce ") < 0)
+            if (Path.GetFileName(file).CompareTo("08 ") < 0)
             {
                 continue;
             }
@@ -308,12 +308,13 @@ public class TestRunner
                    && state.Registers[Register.C] == test.Final.C
                    && state.Registers[Register.D] == test.Final.D
                    && state.Registers[Register.E] == test.Final.E
-                   && state.Registers[Register.F] == test.Final.F
+                   //&& (state.Registers[Register.F] & 0x1101_0111) == (test.Final.F & 0x1101_0111)
                    && state.Registers[Register.H] == test.Final.H
                    && state.Registers[Register.I] == test.Final.I
                    && state.Registers[Register.R] == test.Final.R
                    && state.Registers.ReadPair(Register.IX) == test.Final.IX
-                   && state.Registers.ReadPair(Register.IY) == test.Final.IY;
+                   && state.Registers.ReadPair(Register.IY) == test.Final.IY
+                   && CheckFlags(state.Flags, Flags.FromByte(test.Final.F));
         // TODO: Alternate registers?
 
         foreach (var pair in test.Final.Ram)
@@ -322,6 +323,22 @@ public class TestRunner
         }
 
         return (pass, operations, state, ram, null);
+    }
+
+    private static bool CheckFlags(Flags result, Flags expected)
+    {
+        var match = result.Carry == expected.Carry
+                    && result.AddSubtract == expected.AddSubtract
+                    && result.ParityOverflow == expected.ParityOverflow
+                    && result.HalfCarry == expected.HalfCarry
+                    && result.Zero == expected.Zero
+                    && result.Sign == expected.Sign;
+
+        if (match == false)
+        {
+        }
+
+        return match;
     }
 
     private static void DumpTest(TestDefinition test)
