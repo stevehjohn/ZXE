@@ -42,6 +42,8 @@ public partial class Processor
     {
         if (_state.Halted)
         {
+            HandleInterrupts(ram, bus);
+
             return _instructions[0x00]!.Action(new Input(Array.Empty<byte>(), _state, ram, ports));
         }
 
