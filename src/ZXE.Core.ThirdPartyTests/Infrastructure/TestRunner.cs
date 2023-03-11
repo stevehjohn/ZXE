@@ -48,7 +48,7 @@ public class TestRunner
             // End early
             //if (Path.GetFileName(file).CompareTo("ff") > 0)
             //{
-            //    continue;
+            //    break;
             //}
 
             var tests = JsonSerializer.Deserialize<TestDefinition[]>(File.ReadAllText(file), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
