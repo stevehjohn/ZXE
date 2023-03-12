@@ -20,7 +20,7 @@ public class Ports
 
         var value = _ports[port]!.Value;
 
-        ResetPort(port);
+        //ResetPort(port);
 
         return value;
     }
