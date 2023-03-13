@@ -102,14 +102,14 @@ public partial class Processor
 
         var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
 
-        if (ProcessorExtension != null)
-        {
-            ProcessorExtension.InstructionProcessed(_state, ram);
-        }
-
         if (additionalCycles > -1)
         {
             _state.ProgramCounter += instruction.Length;
+        }
+
+        if (ProcessorExtension != null)
+        {
+            ProcessorExtension.InstructionProcessed(_state, ram);
         }
 
         if (! instruction.Mnemonic.StartsWith("SOPSET") && _state.OpcodePrefix == 0)
