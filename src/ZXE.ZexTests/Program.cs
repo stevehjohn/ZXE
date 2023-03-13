@@ -6,7 +6,9 @@ namespace ZXE.ZexTests
     {
         public static void Main()
         {
-            TestRunner.RunZexDoc();
+            var runner = new TestRunner();
+
+            runner.RunZexDoc();
         }
     }
 }

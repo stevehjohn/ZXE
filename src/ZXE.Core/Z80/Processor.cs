@@ -104,7 +104,7 @@ public partial class Processor
 
         if (ProcessorExtension != null)
         {
-            ProcessorExtension.InstructionProcessed(_state);
+            ProcessorExtension.InstructionProcessed(_state, ram);
         }
 
         if (additionalCycles > -1)

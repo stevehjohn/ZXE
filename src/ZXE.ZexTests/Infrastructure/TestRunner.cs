@@ -5,7 +5,9 @@ namespace ZXE.ZexTests.Infrastructure;
 
 public class TestRunner
 {
-    public static void RunZexDoc()
+    private bool _complete;
+
+    public void RunZexDoc()
     {
         var motherboard = new Motherboard(Model.Spectrum48K, null);
 
@@ -22,6 +24,19 @@ public class TestRunner
 
         motherboard.Processor.State.ProgramCounter = 0x0100;
 
+        var cpmProcessorExtension = new CpmProcessorExtension(TestsComplete);
+
+        motherboard.Processor.ProcessorExtension = cpmProcessorExtension;
+
         motherboard.Start();
+
+        while (! _complete)
+        {
+        }
+    }
+
+    private void TestsComplete()
+    {
+        _complete = true;
     }
 }
