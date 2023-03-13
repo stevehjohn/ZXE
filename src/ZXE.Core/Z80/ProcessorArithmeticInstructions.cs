@@ -658,7 +658,7 @@ public static class ProcessorArithmeticInstructions
             // Flags
             // Carry unaffected
             input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = value == 0x80;
+            input.State.Flags.ParityOverflow = (value & 0x00FF) == 0x80;
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (value & 0x0F) < (0x01 & 0x0F);
             input.State.Flags.X2 = (result & 0x20) > 0;
@@ -677,19 +677,21 @@ public static class ProcessorArithmeticInstructions
 
         address += (ushort) (sbyte) input.Data[1];
 
+        var value = input.Ram[address];
+
         input.Ram[address]++;
 
-        var value = input.Ram[address];
+        var result = input.Ram[address];
 
         // Flags
         // Carry unaffected
         input.State.Flags.AddSubtract = false;
         input.State.Flags.ParityOverflow = value == 0x7F;
-        input.State.Flags.X1 = (value & 0x08) > 0;
+        input.State.Flags.X1 = (result & 0x08) > 0;
         input.State.Flags.HalfCarry = (value & 0x0F) + 1 > 0xF;
-        input.State.Flags.X2 = (value & 0x20) > 0;
-        input.State.Flags.Zero = (sbyte) value == 0;
-        input.State.Flags.Sign = (sbyte) value < 0;
+        input.State.Flags.X2 = (result & 0x20) > 0;
+        input.State.Flags.Zero = (sbyte) result == 0;
+        input.State.Flags.Sign = (sbyte) result < 0;
 
         input.State.PutFlagsInFRegister();
 
