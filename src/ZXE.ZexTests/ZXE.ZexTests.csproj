@@ -12,4 +12,14 @@
     <Folder Include="TestFiles\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ZXE.Core\ZXE.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TestFiles\zexdoc.com">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
