@@ -3,6 +3,7 @@ using ZXE.Common.ConsoleHelpers;
 using ZXE.Common.DebugHelpers;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
+using ZXE.Core.Z80;
 
 namespace ZXE.ZexTests.Infrastructure;
 
@@ -14,31 +15,33 @@ public class TestRunner
     {
         var tracer = new FormattingTracer();
 
-        var motherboard = new Motherboard(Model.None, tracer);
+        var processor = new Processor(tracer);
 
-        motherboard.Reset();
+        var ram = new Ram(Model.Spectrum48K);
 
         var data = File.ReadAllBytes("TestFiles\\zexdoc.com");
 
-        motherboard.Ram.ProtectRom = false;
+        ram.ProtectRom = false;
 
-        motherboard.Ram.Load(data, 0x0100);
+        ram.Load(data, 0x0100);
 
-        motherboard.Ram[0] = 0xC3;
-        motherboard.Ram[1] = 0x00;
-        motherboard.Ram[2] = 0x01;
-        motherboard.Ram[5] = 0xC9;
+        ram[0] = 0xC3;
+        ram[1] = 0x00;
+        ram[2] = 0x01;
+        ram[5] = 0xC9;
 
-        motherboard.Processor.State.ProgramCounter = 0x0100;
+        processor.State.ProgramCounter = 0x0100;
 
-        motherboard.Processor.State.InterruptFlipFlop1 = false;
-        motherboard.Processor.State.InterruptFlipFlop2 = false;
+        processor.State.InterruptFlipFlop1 = false;
+        processor.State.InterruptFlipFlop2 = false;
 
         var cpmProcessorExtension = new CpmProcessorExtension(TestsComplete);
 
-        motherboard.Processor.ProcessorExtension = cpmProcessorExtension;
+        processor.ProcessorExtension = cpmProcessorExtension;
 
-        motherboard.Start();
+        var ports = new Ports();
+
+        var bus = new Bus();
 
         var sw = new Stopwatch();
 
@@ -46,13 +49,13 @@ public class TestRunner
 
         while (! _complete)
         {
+            processor.ProcessInstruction(ram, ports, bus);
+
             if (sw.Elapsed.Seconds > 10)
             {
                 break;
             }
         }
-
-        motherboard.Stop();
 
         Dump(tracer);
     }
