@@ -1,6 +1,4 @@
-﻿using ZXE.Core.Extensions;
-
-namespace ZXE.Core.Z80;
+﻿namespace ZXE.Core.Z80;
 
 public static class ProcessorArithmeticInstructions
 {
