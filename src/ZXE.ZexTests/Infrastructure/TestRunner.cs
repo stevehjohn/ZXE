@@ -29,6 +29,8 @@ public class TestRunner
 
         motherboard.Processor.State.ProgramCounter = 0x0100;
 
+        motherboard.Processor.State.StackPointer = 0;
+
         var cpmProcessorExtension = new CpmProcessorExtension(TestsComplete);
 
         motherboard.Processor.ProcessorExtension = cpmProcessorExtension;

@@ -3,6 +3,7 @@
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
 // ReSharper disable StringLiteralTypo
+
 public static class ProcessorBranchInstructions
 {
     public static int DJNZ_e(Input input)
@@ -190,12 +191,12 @@ public static class ProcessorBranchInstructions
             input.Ram[input.State.StackPointer] = (byte) ((input.State.ProgramCounter + 3) & 0x00FF);
 
             // TODO: Remove -3 and return false
-            input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
+            input.State.ProgramCounter = input.Data[2] << 8 | input.Data[1];
 
             // Flags unaffected
         }
 
-        return 0;
+        return -1;
     }
 
     public static int RET_Z(Input input)
