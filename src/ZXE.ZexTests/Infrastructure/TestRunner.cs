@@ -65,8 +65,6 @@ public class TestRunner
         {
             FormattedConsole.WriteLine($"    {trace[i]}");
 
-            i++;
-
             if (i > 200)
             {
                 break;
