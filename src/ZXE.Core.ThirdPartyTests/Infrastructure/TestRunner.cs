@@ -40,7 +40,7 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("dd 8c ") < 0)
+            if (Path.GetFileName(file).CompareTo("ed 40 ") < 0)
             {
                 continue;
             }
@@ -228,7 +228,7 @@ public class TestRunner
         {
             foreach (var port in test.Ports)
             {
-                ports.WriteByte((byte) (((JsonElement) port[0]).GetInt32() & 0xFF), ((JsonElement) port[1]).GetByte());
+                ports.WriteByte((ushort) ((JsonElement) port[0]).GetInt32(), ((JsonElement) port[1]).GetByte());
             }
         }
 
