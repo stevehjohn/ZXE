@@ -1,4 +1,7 @@
-﻿using ZXE.Core.Infrastructure;
+﻿using System.Diagnostics;
+using ZXE.Common.ConsoleHelpers;
+using ZXE.Common.DebugHelpers;
+using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 
 namespace ZXE.ZexTests.Infrastructure;
@@ -9,7 +12,9 @@ public class TestRunner
 
     public void RunZexDoc()
     {
-        var motherboard = new Motherboard(Model.Spectrum48K, null);
+        var tracer = new FormattingTracer();
+
+        var motherboard = new Motherboard(Model.Spectrum48K, tracer);
 
         motherboard.Reset();
 
@@ -30,13 +35,35 @@ public class TestRunner
 
         motherboard.Start();
 
+        var sw = new Stopwatch();
+
+        sw.Start();
+
         while (! _complete)
         {
+            if (sw.Elapsed.Seconds > 1)
+            {
+                break;
+            }
         }
+
+        motherboard.Dispose();
+
+        Dump(tracer);
     }
 
     private void TestsComplete()
     {
         _complete = true;
+    }
+
+    private void Dump(FormattingTracer tracer)
+    {
+        var trace = tracer.GetTrace();
+
+        foreach (var line in trace)
+        {
+            FormattedConsole.WriteLine($"    {line}");
+        }
     }
 }

@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ZXE.Common\ZXE.Common.csproj" />
     <ProjectReference Include="..\ZXE.Core\ZXE.Core.csproj" />
   </ItemGroup>
 
