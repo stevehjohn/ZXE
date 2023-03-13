@@ -49,8 +49,6 @@ public class TestRunner
 
         motherboard.Stop();
 
-        Thread.Sleep(500);
-
         Dump(tracer);
     }
 
@@ -63,11 +61,9 @@ public class TestRunner
     {
         var trace = tracer.GetTrace();
 
-        var i = 0;
-
-        foreach (var line in trace)
+        for (var i = 0; i < 200; i++)
         {
-            FormattedConsole.WriteLine($"    {line}");
+            FormattedConsole.WriteLine($"    {trace[i]}");
 
             i++;
 
