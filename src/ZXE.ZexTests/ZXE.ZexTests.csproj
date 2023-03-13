@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="TestFiles\zexall.com">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestFiles\zexdoc.com">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
