@@ -345,10 +345,6 @@ public class TestRunner
                     && result.Zero == expected.Zero
                     && result.Sign == expected.Sign;
 
-        if (match == false)
-        {
-        }
-
         return match;
     }
 
