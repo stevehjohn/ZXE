@@ -47,7 +47,7 @@ public class TestRunner
             processor.ProcessInstruction(ram, ports, bus);
         }
 
-        //Dump(tracer);
+        Dump(tracer);
     }
 
     private void TestsComplete()
