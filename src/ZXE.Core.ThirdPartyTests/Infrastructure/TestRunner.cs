@@ -64,7 +64,9 @@ public class TestRunner
 
                 var skipRemainder = false;
 
-                switch (RunTest(test))
+                var result = RunTest(test);
+
+                switch (result.Result)
                 {
                     case TestResult.Pass:
                         passed++;
@@ -72,7 +74,7 @@ public class TestRunner
                         break;
 
                     case TestResult.Fail:
-                        failedNames.Add(test.Name);
+                        failedNames.Add($"{test.Name}: {result.Mnemonic ?? "UNKNOWN"}");
 
                         if (dumpOnFail)
                         {
@@ -162,7 +164,7 @@ public class TestRunner
         Console.CursorVisible = true;
     }
 
-    private static TestResult RunTest(TestDefinition test)
+    private static (TestResult Result, string? Mnemonic) RunTest(TestDefinition test)
     {
         var result = ExecuteTest(test);
 
@@ -184,9 +186,9 @@ public class TestRunner
         }
         else
         {
-            if (result.exception != null)
+            if (result.Exception != null)
             {
-                if (result.exception is OpcodeNotImplementedException)
+                if (result.Exception is OpcodeNotImplementedException)
                 {
                     FormattedConsole.Write("&Yellow;NIMP");
 
@@ -207,10 +209,10 @@ public class TestRunner
 
         FormattedConsole.WriteLine(string.Empty);
 
-        return testResult;
+        return (testResult, result.Mnemonic);
     }
 
-    private static (bool Passed, int Operations, State State, Ram Ram, Exception? exception) ExecuteTest(TestDefinition test, ITracer? tracer = null)
+    private static (bool Passed, int Operations, State State, Ram Ram, Exception? Exception, string? Mnemonic) ExecuteTest(TestDefinition test, ITracer? tracer = null)
     {
         var ram = new Ram(Model.Spectrum48K);
 
@@ -269,6 +271,8 @@ public class TestRunner
 
         var operations = 0;
 
+        string? firstMnemonic = null;
+
         try
         {
             var cycles = 0;
@@ -282,7 +286,14 @@ public class TestRunner
                     break;
                 }
 
-                cycles += processor.ProcessInstruction(ram, ports, bus).Cycles;
+                var result = processor.ProcessInstruction(ram, ports, bus);
+
+                if (firstMnemonic == null && ! result.Mnemonic.StartsWith("SOPSET"))
+                {
+                    firstMnemonic = result.Mnemonic;
+                }
+
+                cycles += result.Cycles;
 
                 if (cycles >= test.Cycles.Length)
                 {
@@ -292,7 +303,7 @@ public class TestRunner
         }
         catch (Exception exception)
         {
-            return (false, operations, state, ram, exception);
+            return (false, operations, state, ram, exception, firstMnemonic);
         }
 
         // INFO: Edge case, hopefully fixed if this gets an answer: https://github.com/raddad772/jsmoo/issues/23
@@ -322,7 +333,7 @@ public class TestRunner
             pass = pass && ram[pair[0]] == pair[1];
         }
 
-        return (pass, operations, state, ram, null);
+        return (pass, operations, state, ram, null, firstMnemonic);
     }
 
     private static bool CheckFlags(Flags result, Flags expected)
@@ -347,9 +358,9 @@ public class TestRunner
 
         var result = ExecuteTest(test, tracer);
 
-        if (result.exception != null)
+        if (result.Exception != null)
         {
-            FormattedConsole.WriteLine($"\n    &Cyan;Exception&White;: &Red;{result.exception.GetType().Name}");
+            FormattedConsole.WriteLine($"\n    &Cyan;Exception&White;: &Red;{result.Exception.GetType().Name}");
         }
 
         FormattedConsole.WriteLine("\n&Cyan;        Initial       Expected      Actual");
