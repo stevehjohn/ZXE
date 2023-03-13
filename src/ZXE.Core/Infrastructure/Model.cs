@@ -2,6 +2,7 @@
 
 public enum Model
 {
+    None,
     Spectrum48K,
     Spectrum128K,
     SpectrumPlus2,

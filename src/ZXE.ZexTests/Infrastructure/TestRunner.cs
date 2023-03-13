@@ -14,11 +14,13 @@ public class TestRunner
     {
         var tracer = new FormattingTracer();
 
-        var motherboard = new Motherboard(Model.Spectrum48K, tracer);
+        var motherboard = new Motherboard(Model.None, tracer);
 
         motherboard.Reset();
 
         var data = File.ReadAllBytes("TestFiles\\zexdoc.com");
+
+        motherboard.Ram.ProtectRom = false;
 
         motherboard.Ram.Load(data, 0x0100);
 
@@ -29,7 +31,8 @@ public class TestRunner
 
         motherboard.Processor.State.ProgramCounter = 0x0100;
 
-        motherboard.Processor.State.StackPointer = 0;
+        motherboard.Processor.State.InterruptFlipFlop1 = false;
+        motherboard.Processor.State.InterruptFlipFlop2 = false;
 
         var cpmProcessorExtension = new CpmProcessorExtension(TestsComplete);
 
@@ -43,7 +46,7 @@ public class TestRunner
 
         while (! _complete)
         {
-            if (sw.Elapsed.Seconds > 1)
+            if (sw.Elapsed.Seconds > 10)
             {
                 break;
             }
