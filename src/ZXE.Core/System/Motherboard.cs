@@ -1,7 +1,11 @@
-﻿using System.Diagnostics;
+﻿//#define TRACE_OVER_IP
+
+using System.Diagnostics;
+#if TRACE_OVER_IP
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+#endif
 using ZXE.Core.Infrastructure;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System.Interfaces;
@@ -58,6 +62,7 @@ public class Motherboard : IDisposable
 
             _tracer = tracer;
 
+#if TRACE_OVER_IP
             var process = new Process();
 
             process.StartInfo.FileName = "..\\..\\..\\..\\ZXE.Console.LogViewer\\bin\\Debug\\net7.0\\ZXE.Console.LogViewer.exe";
@@ -65,6 +70,7 @@ public class Motherboard : IDisposable
             _console = process;
 
             process.Start();
+#endif
         }
         else
         {
@@ -96,6 +102,11 @@ public class Motherboard : IDisposable
         _timer.Start();
     }
 
+    public void Stop()
+    {
+        _timer.Stop();
+    }
+
     public void Reset(int programCounter = 0x0000)
     {
         _processor.Reset(programCounter);
@@ -115,6 +126,7 @@ public class Motherboard : IDisposable
     {
         var cycles = _processor.ProcessInstruction(_ram, _ports, _bus);
 
+#if TRACE_OVER_IP
         if (_tracer != null)
         {
             if (_tracing)
@@ -137,6 +149,7 @@ public class Motherboard : IDisposable
 
             _tracer!.ClearTrace();
         }
+#endif
 
         return cycles;
     }

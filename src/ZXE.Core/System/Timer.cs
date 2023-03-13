@@ -31,6 +31,11 @@ public class Timer : ITimer
         Task.Run(InterruptWorker, _cancellationToken);
     }
 
+    public void Stop()
+    {
+        _cancellationTokenSource.Cancel();
+    }
+
     public void Dispose()
     {
         _cancellationTokenSource.Cancel();

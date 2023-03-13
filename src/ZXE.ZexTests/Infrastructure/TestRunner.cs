@@ -47,7 +47,9 @@ public class TestRunner
             }
         }
 
-        motherboard.Dispose();
+        motherboard.Stop();
+
+        Thread.Sleep(500);
 
         Dump(tracer);
     }
@@ -57,13 +59,22 @@ public class TestRunner
         _complete = true;
     }
 
-    private void Dump(FormattingTracer tracer)
+    private static void Dump(FormattingTracer tracer)
     {
         var trace = tracer.GetTrace();
+
+        var i = 0;
 
         foreach (var line in trace)
         {
             FormattedConsole.WriteLine($"    {line}");
+
+            i++;
+
+            if (i > 200)
+            {
+                break;
+            }
         }
     }
 }
