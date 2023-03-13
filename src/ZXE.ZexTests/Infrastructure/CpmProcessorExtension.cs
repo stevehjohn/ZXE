@@ -44,7 +44,7 @@ public class CpmProcessorExtension : IProcessorExtension
                     address++;
                 }
 
-                if (text.ToString().Contains("Tests complete"))
+                if (text.ToString().Contains("Tests complete", StringComparison.InvariantCultureIgnoreCase))
                 {
                     _onComplete();
                 }

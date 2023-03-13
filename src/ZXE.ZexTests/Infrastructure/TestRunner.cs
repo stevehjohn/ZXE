@@ -18,7 +18,7 @@ public class TestRunner
 
         var ram = new Ram(Model.Spectrum48K);
 
-        var data = File.ReadAllBytes("TestFiles\\zexdoc.com");
+        var data = File.ReadAllBytes("TestFiles\\zexprelim.com");
 
         ram.ProtectRom = false;
 
