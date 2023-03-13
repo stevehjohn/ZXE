@@ -1,6 +1,7 @@
 ﻿using ZXE.Core.Exceptions;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
+using ZXE.Core.System.Interfaces;
 
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
@@ -21,6 +22,8 @@ public partial class Processor
     public Instruction?[] Instructions => _instructions;
 
     public State State => _state;
+    
+    public IProcessorExtension? ProcessorExtension { get; set; }
 
     public Processor()
     {
@@ -98,6 +101,11 @@ public partial class Processor
         UpdateR(instruction);
 
         var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
+
+        if (ProcessorExtension != null)
+        {
+            ProcessorExtension.InstructionProcessed(_state);
+        }
 
         if (additionalCycles > -1)
         {
