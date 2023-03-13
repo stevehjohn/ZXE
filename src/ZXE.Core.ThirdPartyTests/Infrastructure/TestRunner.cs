@@ -282,7 +282,7 @@ public class TestRunner
                     break;
                 }
 
-                cycles += processor.ProcessInstruction(ram, ports, bus);
+                cycles += processor.ProcessInstruction(ram, ports, bus).Cycles;
 
                 if (cycles >= test.Cycles.Length)
                 {

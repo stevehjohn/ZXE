@@ -41,13 +41,13 @@ public partial class Processor
         _tracer = tracer;
     }
 
-    public int ProcessInstruction(Ram ram, Ports ports, Bus bus)
+    public (int Cycles, string Mnemonic) ProcessInstruction(Ram ram, Ports ports, Bus bus)
     {
         if (_state.Halted)
         {
             HandleInterrupts(ram, bus);
 
-            return _instructions[0x00]!.Action(new Input(Array.Empty<byte>(), _state, ram, ports));
+            return (_instructions[0x00]!.Action(new Input(Array.Empty<byte>(), _state, ram, ports)), "NOP");
         }
 
         var opcode = (int) ram[_state.ProgramCounter];
@@ -122,7 +122,7 @@ public partial class Processor
             _tracer.TraceAfter(instruction, data, _state, ram);
         }
 
-        return instruction.ClockCycles + (additionalCycles > -1 ? additionalCycles : 0);
+        return (instruction.ClockCycles + (additionalCycles > -1 ? additionalCycles : 0), instruction.Mnemonic);
     }
 
     public void Reset(int programCounter = 0x0000)

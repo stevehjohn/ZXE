@@ -123,7 +123,7 @@ public static class TestRunner
 
         while (tStates < expectedResult.ProcessorState.TStates)
         {
-            tStates += processor.ProcessInstruction(ram, ports, bus);
+            tStates += processor.ProcessInstruction(ram, ports, bus).Cycles;
         }
 
         return (OutputResult(processor, expectedResult, tracer), mnemonic);

@@ -124,7 +124,7 @@ public class Motherboard : IDisposable
 
     private int Tick()
     {
-        var cycles = _processor.ProcessInstruction(_ram, _ports, _bus);
+        var result = _processor.ProcessInstruction(_ram, _ports, _bus);
 
 #if TRACE_OVER_IP
         if (_tracer != null)
@@ -151,7 +151,7 @@ public class Motherboard : IDisposable
         }
 #endif
 
-        return cycles;
+        return result.Cycles;
     }
 
     private void RefreshInterrupt()
