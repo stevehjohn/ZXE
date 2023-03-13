@@ -69,14 +69,9 @@ public class TestRunner
     {
         var trace = tracer.GetTrace();
 
-        for (var i = 0; i < 200; i++)
+        for (var i = 0; i < 2000; i++)
         {
             FormattedConsole.WriteLine($"    {trace[i]}");
-
-            if (i > 200)
-            {
-                break;
-            }
         }
     }
 }
