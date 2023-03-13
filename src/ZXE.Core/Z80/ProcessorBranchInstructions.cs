@@ -191,12 +191,12 @@ public static class ProcessorBranchInstructions
             input.Ram[input.State.StackPointer] = (byte) ((input.State.ProgramCounter + 3) & 0x00FF);
 
             // TODO: Remove -3 and return false
-            input.State.ProgramCounter = input.Data[2] << 8 | input.Data[1];
+            input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
 
             // Flags unaffected
         }
 
-        return -1;
+        return 0;
     }
 
     public static int RET_Z(Input input)
