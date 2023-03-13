@@ -600,9 +600,9 @@ public static class ProcessorArithmeticInstructions
             // Flags
             // Carry unaffected
             input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = value == 0x80;
+            input.State.Flags.ParityOverflow = (value & 0xFF00) == 0x8000;
             input.State.Flags.X1 = (decrementedValue & 0x08) > 0;
-            input.State.Flags.HalfCarry = (decrementedValue & 0x0F) < 1;
+            input.State.Flags.HalfCarry = (value & 0x0F00) < 1;
             input.State.Flags.X2 = (decrementedValue & 0x20) > 0;
             input.State.Flags.Zero = decrementedValue == 0;
             input.State.Flags.Sign = decrementedValue < 0;
