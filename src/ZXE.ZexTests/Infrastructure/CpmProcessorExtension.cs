@@ -39,6 +39,8 @@ public class CpmProcessorExtension : IProcessorExtension
                 {
                     Console.Write(c);
 
+                    text.Append(c);
+
                     address++;
                 }
 

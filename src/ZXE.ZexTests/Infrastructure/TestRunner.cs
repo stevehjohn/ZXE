@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using ZXE.Common.ConsoleHelpers;
+﻿using ZXE.Common.ConsoleHelpers;
 using ZXE.Common.DebugHelpers;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
@@ -43,21 +42,12 @@ public class TestRunner
 
         var bus = new Bus();
 
-        var sw = new Stopwatch();
-
-        sw.Start();
-
         while (! _complete)
         {
             processor.ProcessInstruction(ram, ports, bus);
-
-            if (sw.Elapsed.Seconds > 10)
-            {
-                break;
-            }
         }
 
-        Dump(tracer);
+        //Dump(tracer);
     }
 
     private void TestsComplete()
