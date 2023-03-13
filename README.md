@@ -55,6 +55,7 @@ Runs tests against this awesome suite:
 - https://clrhome.org/asm/
 - https://ps4star.github.io/z80studio/
 - https://github.com/redcode/Z80/wiki/Z80-Test-Suite
+- https://github.com/anotherlin/z80emu/blob/master/zextest.c
 
 ## Miscellaneous References
 
