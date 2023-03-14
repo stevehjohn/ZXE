@@ -50,6 +50,7 @@ Runs tests against this awesome suite:
 ## Useful Resources
 
 - https://github.com/raxoft/z80test
+- https://floooh.github.io/
 - https://floooh.github.io/2021/12/17/cycle-stepped-z80.html#testing
 - https://floooh.github.io/2021/12/06/z80-instruction-timing.html
 - https://clrhome.org/asm/
