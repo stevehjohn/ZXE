@@ -40,13 +40,13 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("ed 50 ") < 0)
-            //{
-            //    continue;
-            //}
+            if (Path.GetFileName(file).CompareTo("db ") < 0)
+            {
+                continue;
+            }
 
             // End early
-            //if (Path.GetFileName(file).CompareTo("ff") > 0)
+            //if (Path.GetFileName(file).CompareTo("fd df") > 0)
             //{
             //    break;
             //}
@@ -124,38 +124,16 @@ public class TestRunner
 
             Console.ReadKey();
 
-            var first = true;
-
             foreach (var name in failedNames)
             {
-                if (first)
-                {
-                    FormattedConsole.Write($"&Red;{name}");
-
-                    first = false;
-                }
-                else
-                {
-                    FormattedConsole.Write($"&White;, &Red;{name}");
-                }
+                FormattedConsole.Write($"&Red;{name}\n");
             }
 
             Console.WriteLine("\n");
 
-            first = true;
-
             foreach (var name in notImplementedNames)
             {
-                if (first)
-                {
-                    FormattedConsole.Write($"&Yellow;{name}");
-
-                    first = false;
-                }
-                else
-                {
-                    FormattedConsole.Write($"&White;, &Yellow;{name}");
-                }
+                FormattedConsole.Write($"&Yellow;{name}\n");
             }
 
             Console.WriteLine();
