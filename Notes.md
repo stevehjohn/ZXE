@@ -24,10 +24,6 @@ xx = Opcode, dd = Displacement value (byte).
 - DDCB: `DDCBddxx`
 - FDCB: `FDCBddxx`
 
-## TODO
-
-Implement these https://github.com/anotherlin/z80emu/blob/master/zextest.c
-
 ## Tests
 
 ### Third Party Tests Failing - not considering undocumented flags.
