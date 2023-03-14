@@ -68,6 +68,7 @@ FD 9D 0011: SBC A, IYl
 FD 9E 0000: SBC A, (IY + d)
 FD DB 0000: IN A, (n)
 FD DE 000E: SBC A, n
+
 ### Fuse Tests Failing
 
 Count: 31
