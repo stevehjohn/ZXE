@@ -34,6 +34,8 @@ public class TestRunner
         processor.State.InterruptFlipFlop1 = false;
         processor.State.InterruptFlipFlop2 = false;
 
+        processor.State.StackPointer = 0xF000;
+
         var cpmProcessorExtension = new CpmProcessorExtension(TestsComplete);
 
         processor.ProcessorExtension = cpmProcessorExtension;
@@ -45,6 +47,11 @@ public class TestRunner
         while (! _complete)
         {
             processor.ProcessInstruction(ram, ports, bus);
+
+            if (processor.State.ProgramCounter == 0)
+            {
+                break;
+            }
         }
 
         Dump(tracer);
