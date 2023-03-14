@@ -7,23 +7,16 @@ public class State
     public int ProgramCounter
     {
         get => _programCounter;
-        set
-        {
-            if (value < 0)
-            {
-                value += 0x10_000;
-            }
-
-            if (value > 0xFFFF)
-            {
-                value -= 0x10_000;
-            }
-
-            _programCounter = value;
-        }
+        set => _programCounter = value & 0xFFFF;
     }
 
-    public int StackPointer = 0;
+    private int _stackPointer;
+
+    public int StackPointer
+    {
+        get => _stackPointer;
+        set => _stackPointer = value & 0xFFFF;
+    }
 
     public Registers Registers;
 
