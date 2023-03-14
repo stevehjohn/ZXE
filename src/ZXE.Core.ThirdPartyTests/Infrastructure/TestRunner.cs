@@ -40,10 +40,10 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("dd 8c ") < 0)
-            //{
-            //    continue;
-            //}
+            if (Path.GetFileName(file).CompareTo("ed 57 ") < 0)
+            {
+                continue;
+            }
 
             // End early
             //if (Path.GetFileName(file).CompareTo("fd df") > 0)
@@ -241,6 +241,9 @@ public class TestRunner
         state.Registers[Register.F_] = (byte) (test.Initial.AF_ & 0x00FF);
         state.Registers[Register.H_] = (byte) ((test.Initial.HL_ & 0xFF00) >> 8);
         state.Registers[Register.L_] = (byte) (test.Initial.HL_ & 0x00FF);
+
+        state.InterruptFlipFlop1 = test.Initial.IFF1 > 0;
+        state.InterruptFlipFlop2 = test.Initial.IFF2 > 0;
 
         foreach (var pair in test.Initial.Ram)
         {
