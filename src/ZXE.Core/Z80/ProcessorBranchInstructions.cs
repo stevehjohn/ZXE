@@ -157,7 +157,7 @@ public static class ProcessorBranchInstructions
 
     public static int JP_nn(Input input)
     {
-        input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]);
+        input.State.ProgramCounter = input.Data[2] << 8 | input.Data[1];
 
         // Flags unaffected
 
