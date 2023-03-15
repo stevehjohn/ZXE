@@ -52,6 +52,11 @@ public class TestRunner
             {
                 break;
             }
+
+            if (Console.KeyAvailable)
+            {
+                break;
+            }
         }
 
         Dump(tracer);
@@ -66,7 +71,7 @@ public class TestRunner
     {
         var trace = tracer.GetTrace();
 
-        for (var i = 0; i < 2000; i++)
+        for (var i = trace.Count - 1; i > trace.Count - 2_000; i--)
         {
             FormattedConsole.WriteLine($"    {trace[i]}");
         }
