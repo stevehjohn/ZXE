@@ -10,6 +10,7 @@ A ZX Spectrum emulator. Mostly about just seeing if I can.
 - IN/OUT stuff.
 - Interrupt stuff.
 - R register shenannigans.
+- Opposite of PutFlagsInFRegister.
 
 ## Features
 
