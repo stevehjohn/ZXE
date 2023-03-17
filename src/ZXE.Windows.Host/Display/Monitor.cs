@@ -101,8 +101,8 @@ public class Monitor : Game
         {
             var loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
 
-            //loader.Load("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.z80");
-            loader.Load("..\\..\\..\\..\\..\\Other Images\\snaptest.v1.z80");
+            loader.Load("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.z80");
+            //loader.Load("..\\..\\..\\..\\..\\Other Images\\snaptest.v1.z80");
         }
 
         base.Update(gameTime);
