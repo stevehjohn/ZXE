@@ -342,6 +342,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Registers.WritePair(right, swap);
         
         // Flags unaffected
+        input.State.Flags = Flags.FromByte(input.State.Registers[Register.F]);
 
         return 0;
     }
