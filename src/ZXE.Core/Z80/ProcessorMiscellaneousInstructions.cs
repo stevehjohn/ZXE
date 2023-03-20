@@ -476,6 +476,7 @@ public static class ProcessorMiscellaneousInstructions
 
     public static int IN_b_R_addr_n(Input input, Register register)
     {
+        // TODO: Not sure this is correct.
         var result = input.Ports.ReadByte(input.Data[1]);
 
         input.State.Registers[register] = result;
