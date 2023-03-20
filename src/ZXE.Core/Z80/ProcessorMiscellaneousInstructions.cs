@@ -544,7 +544,7 @@ public static class ProcessorMiscellaneousInstructions
 
     public static int IN_R_p(Input input, Register register)
     {
-        var value = input.Ports.ReadByte(input.Data[1]);
+        var value = input.Ports.ReadByte((ushort) (input.State.Registers[register] << 8 | input.Data[1]));
 
         //Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {value}\n");
 
