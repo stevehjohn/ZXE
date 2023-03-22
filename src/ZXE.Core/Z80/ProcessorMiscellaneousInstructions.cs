@@ -686,7 +686,7 @@ public static class ProcessorMiscellaneousInstructions
 
     public static int CPI(Input input)
     {
-        var value = input.State.Registers.ReadPair(Register.HL);
+        var value = input.Ram[input.State.Registers.ReadPair(Register.HL)];
 
         var difference = input.State.Registers[Register.A] - value;
 
@@ -730,7 +730,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (value & 0x0F);
         input.State.Flags.X2 = (value & 0x02) > 0;
         input.State.Flags.Zero = difference == 0;
-        input.State.Flags.Sign = difference > 0x7F;
+        input.State.Flags.Sign = (byte) difference > 0x7F;
 
         input.State.PutFlagsInFRegister(true);
         
@@ -780,8 +780,6 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            input.State.Registers[Register.B]--;
-
             var address = input.State.Registers.ReadPair(Register.BC);
 
             var value = input.Ports.ReadByte(address);
@@ -803,6 +801,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.PutFlagsInFRegister();
 
             // TODO: Correctly account for extra cycles?
+            input.State.Registers[Register.B]--;
 
             if (input.State.Registers[Register.B] != 0)
             {
