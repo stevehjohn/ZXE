@@ -116,7 +116,9 @@ public class Motherboard : IDisposable
 
     public void SetTraceState(bool enabled)
     {
+#if TRACE_OVER_IP
         _tracing = enabled;
+#endif
     }
 
     public void Dispose()
