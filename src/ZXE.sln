@@ -78,6 +78,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Head Over Heels", "Head Ove
 		..\Game Images\Head Over Heels\image-0.z80 = ..\Game Images\Head Over Heels\image-0.z80
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Horace Goes Skiing", "Horace Goes Skiing", "{76162651-1960-482F-9C07-2D34C67088E8}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Horace Goes Skiing\image-0.z80 = ..\Game Images\Horace Goes Skiing\image-0.z80
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -177,6 +182,7 @@ Global
 		{ECC5A18D-9623-4760-9334-4B2871B302F0} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{B8945F25-4341-4602-82EF-3DD5FD63DD77} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{2C8ABA5C-0CF1-4CCB-AB96-72ECF7DCA5C1} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{76162651-1960-482F-9C07-2D34C67088E8} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}
