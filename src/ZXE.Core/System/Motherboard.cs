@@ -27,13 +27,15 @@ public class Motherboard : IDisposable
 
     private readonly ITracer? _tracer;
 
+#if TRACE_OVER_IP
     private readonly Process? _console;
+#endif
 
+#if TRACE_OVER_IP
     private bool _tracing;
+#endif
 
     public Ram Ram => _ram;
-
-    public Bus Bus => _bus;
 
     public Ports Ports => _ports;
 
