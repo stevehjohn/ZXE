@@ -8,7 +8,7 @@ namespace ZXE.ZexTests
         {
             var runner = new TestRunner();
 
-            runner.RunZexDoc();
+            runner.RunZexTests("zexdoc.com");
 
             Console.ReadKey();
         }

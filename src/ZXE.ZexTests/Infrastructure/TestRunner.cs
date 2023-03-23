@@ -10,7 +10,7 @@ public class TestRunner
 {
     private bool _complete;
 
-    public void RunZexDoc()
+    public void RunZexTests(string filename)
     {
         var tracer = new FormattingTracer();
 
@@ -18,7 +18,7 @@ public class TestRunner
 
         var ram = new Ram(Model.Spectrum48K);
 
-        var data = File.ReadAllBytes("TestFiles\\zexdoc.com");
+        var data = File.ReadAllBytes($"TestFiles\\{filename}");
 
         ram.ProtectRom = false;
 
