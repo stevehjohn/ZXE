@@ -77,6 +77,7 @@ ed60: IN H, (C)
 ed68: IN L, (C)
 ed70: IN (BC)
 ed78: IN A, (C)
+eda1: CPI
 eda2: INI
 eda2_01: INI
 eda2_02: INI
