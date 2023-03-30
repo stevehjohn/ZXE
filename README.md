@@ -4,7 +4,7 @@ A ZX Spectrum emulator. Mostly about just seeing if I can.
 
 Currently in a state where it will execute BASIC programs. 
 
-![YouTube video of BASIC running on emulator](https://www.youtube.com/watch?v=xhBduCZw9LE)
+https://www.youtube.com/watch?v=xhBduCZw9LE
 
 Alas Treasure Island Dizzy does not run yet.
 
