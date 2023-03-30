@@ -28,6 +28,9 @@ xx = Opcode, dd = Displacement value (byte).
 
 ### Third Party Tests Failing - not considering undocumented flags.
 
+Number failing: 
+
+```
 DB 0000: IN A, (n)
 DD 8C 0037: ADC A, IXh
 DD 8D 000B: ADC A, IXl
@@ -60,8 +63,11 @@ FD 9D 0011: SBC A, IYl
 FD 9E 0000: SBC A, (IY + d)
 FD DB 0000: IN A, (n)
 FD DE 000E: SBC A, n
+```
 
 ### Fuse Tests Failing
+
+Number failing: 33
 
 ```
 76: HALT
