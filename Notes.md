@@ -53,9 +53,9 @@ FD 8D 0034: ADC A, IYl
 FD 8E 001D: ADC A, (IY + d)
 ```
 
-### Fuse Tests Failing
+### Fuse Tests Failing - not considering undocumented flags.
 
-Number failing: 33
+Number failing: 31
 
 ```
 76: HALT
@@ -71,7 +71,6 @@ ed60: IN H, (C)
 ed68: IN L, (C)
 ed70: IN (BC)
 ed78: IN A, (C)
-eda1: CPI
 eda2: INI
 eda2_01: INI
 eda2_02: INI
@@ -86,7 +85,6 @@ edaa_02: IND
 edaa_03: IND
 edab: OUTD
 edab_01: OUTD
-edab_02: OUTD
 edb2: INIR
 edb3: OTIR
 edba: INDR

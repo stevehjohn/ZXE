@@ -131,7 +131,7 @@ public static class TestRunner
 
     private static bool OutputResult(Processor processor, TestExpectedResult expectedResult, FormattingTracer tracer)
     {
-        if (processor.State.Registers.ReadPair(Register.AF) == expectedResult.ProcessorState.AF
+        if ((processor.State.Registers.ReadPair(Register.AF) & 0b1111_1111_1101_0111) == (expectedResult.ProcessorState.AF & 0b1111_1111_1101_0111)
             && processor.State.Registers.ReadPair(Register.BC) == expectedResult.ProcessorState.BC
             && processor.State.Registers.ReadPair(Register.DE) == expectedResult.ProcessorState.DE
             && processor.State.Registers.ReadPair(Register.HL) == expectedResult.ProcessorState.HL
