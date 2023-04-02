@@ -28,17 +28,14 @@ xx = Opcode, dd = Displacement value (byte).
 
 ### Third Party Tests Failing - not considering undocumented flags.
 
-Number failing: 20
+Number failing: 16
 
 ```
 DD 8C 0037: ADC A, IXh
 DD 8D 000B: ADC A, IXl
 DD 8E 0006: ADC A, (IX + d)
-ED 4A 0032: ADC HL, BC
-ED 5A 0047: ADC HL, DE
 ED 62 0289: SBC HL, HL
 ED 72 0002: SBC HL, SP
-ED 7A 0001: ADC HL, SP
 ED A2 0000: INI
 ED A3 0000: OUTI
 ED AA 0000: IND
