@@ -831,7 +831,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.AddSubtract = false;
             input.State.Flags.ParityOverflow = ((valueD ^ (valueS + carry)) & 0x80) == 0 && ((valueD ^ result) & 0x80) != 0;
             input.State.Flags.X1 = (result & 0x08) > 0;
-            input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0x0F;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) + carry > 0x0F;
             input.State.Flags.X2 = (result & 0x20) > 0;
             input.State.Flags.Zero = (sbyte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
@@ -861,9 +861,9 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.AddSubtract = false;
             input.State.Flags.ParityOverflow = ((valueD ^ valueS) & 0x80) == 0 && ((valueD ^ result) & 0x80) != 0;
             input.State.Flags.X1 = (result & 0x08) > 0;
-            input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0xF;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) + carry > 0x0F;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Zero = (byte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
@@ -895,9 +895,9 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.AddSubtract = false;
             input.State.Flags.ParityOverflow = ((valueD ^ valueS) & 0x80) == 0 && ((valueD ^ result) & 0x80) != 0;
             input.State.Flags.X1 = (result & 0x08) > 0;
-            input.State.Flags.HalfCarry = (valueD & 0x0F) + ((valueS + carry) & 0x0F) > 0xF;
+            input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) + carry > 0x0F;
             input.State.Flags.X2 = (result & 0x20) > 0;
-            input.State.Flags.Zero = result == 0;
+            input.State.Flags.Zero = (byte) result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
