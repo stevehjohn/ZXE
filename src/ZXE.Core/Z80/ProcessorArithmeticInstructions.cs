@@ -1,4 +1,6 @@
-﻿namespace ZXE.Core.Z80;
+﻿using ZXE.Core.Extensions;
+
+namespace ZXE.Core.Z80;
 
 public static class ProcessorArithmeticInstructions
 {
@@ -830,6 +832,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Carry = result > 0xFF;
             input.State.Flags.AddSubtract = false;
             input.State.Flags.ParityOverflow = ((valueD ^ (valueS + carry)) & 0x80) == 0 && ((valueD ^ result) & 0x80) != 0;
+            input.State.Flags.ParityOverflow = ((valueD ^ ~valueS) & (valueD ^ (byte) result) & 0x80) != 0; 
             input.State.Flags.X1 = (result & 0x08) > 0;
             input.State.Flags.HalfCarry = (valueD & 0x0F) + (valueS & 0x0F) + carry > 0x0F;
             input.State.Flags.X2 = (result & 0x20) > 0;
@@ -1099,10 +1102,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.AddSubtract = true;
             input.State.Flags.ParityOverflow = ((valueD ^ (valueS + carry)) & 0x8000) != 0 && (((valueS + carry) ^ (ushort)result) & 0x8000) == 0;
             input.State.Flags.X1 = (result & 0x0800) > 0;
-            input.State.Flags.HalfCarry = (valueD & 0x0FFF) < ((valueS + carry) & 0x0FFF);
+            input.State.Flags.HalfCarry = ((valueD & 0x0FFF) - (valueS & 0x0FFF) - carry & 0x1000) != 0;
             input.State.Flags.X2 = (result & 0x2000) > 0;
             input.State.Flags.Zero = result == 0;
-            input.State.Flags.Sign = (short)result < 0;
+            input.State.Flags.Sign = (short) result < 0;
 
             input.State.PutFlagsInFRegister();
         }
@@ -1159,10 +1162,10 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.AddSubtract = true;
             input.State.Flags.ParityOverflow = ((valueD ^ (valueS + carry)) & 0x8000) != 0 && (((valueS + carry) ^ (ushort) result) & 0x8000) == 0;
             input.State.Flags.X1 = (result & 0x0800) > 0;
-            input.State.Flags.HalfCarry = (valueD & 0x0FFF) < ((valueS + carry) & 0x0FFF);
+            input.State.Flags.HalfCarry = ((valueD & 0x0FFF) - (valueS & 0x0FFF) - carry & 0x1000) != 0;
             input.State.Flags.X2 = (result & 0x2000) > 0;
             input.State.Flags.Zero = result == 0;
-            input.State.Flags.Sign = result < 0;
+            input.State.Flags.Sign = (short) result < 0;
 
             input.State.PutFlagsInFRegister();
         }
