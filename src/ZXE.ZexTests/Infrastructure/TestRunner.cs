@@ -59,7 +59,7 @@ public class TestRunner
             }
         }
 
-        Dump(tracer);
+        //Dump(tracer);
     }
 
     private void TestsComplete()
