@@ -72,6 +72,7 @@ Runs tests against this awesome suite:
 - http://www.z80.info/z80code.htm
 - http://www.z80.info/z80oplist.txt
 - http://www.z80.info/decoding.htm
+- http://www.z80.info/z80sflag.htm
 - http://www.breakintoprogram.co.uk/hardware/computers/zx-spectrum/memory-map
 - https://landley.net/history/mirror/cpm/z80.html
 - https://worldofspectrum.org/faq/reference/z80reference.htm
