@@ -116,10 +116,11 @@ public static class TestRunner
 
         var mnemonic = processor.Instructions[instructionIndex] != null ? processor.Instructions[instructionIndex]!.Mnemonic : "UNKNOWN";
 
-        //if (instructionIndex == 0xDB)
-        //{
-        //    ports.WriteByte(ram[1], (byte) ((ram[1] * 2) & 0xFF));
-        //}
+        // https://github.com/floooh/chips-test/issues/27#issuecomment-1451670089
+        if (instructionIndex == 0xDB)
+        {
+            ports.WriteByte((ushort) ((processor.State.Registers[Register.A] << 8) + ram[1]), (byte) ((ram[1] & 0xFF) * 2));
+        }
 
         while (tStates < expectedResult.ProcessorState.TStates)
         {
