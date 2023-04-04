@@ -751,8 +751,6 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            input.State.Registers[Register.B]--;
-
             var address = input.State.Registers.ReadPair(Register.BC);
 
             var value = input.Ports.ReadByte(address);
@@ -761,12 +759,14 @@ public static class ProcessorMiscellaneousInstructions
 
             input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) + 1));
 
+            input.State.Registers[Register.B]--;
+
             // Flags
-            input.State.Flags.Carry = value > input.State.Registers[Register.A];
-            input.State.Flags.AddSubtract = true;
-            input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+            input.State.Flags.Carry = value + ((input.State.Registers[Register.C] + 1) & 0xFF) > 0xFF;
+            input.State.Flags.AddSubtract = (value & 0x80) > 0;
+            input.State.Flags.ParityOverflow = ((ushort) ((value + ((input.State.Registers[Register.C] + 1) & 0xFF)) & 0x07 ^ input.State.Registers[Register.B])).IsEvenParity();
             input.State.Flags.X1 = (value & 0x08) > 0;
-            input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (value & 0x0F);
+            input.State.Flags.HalfCarry = value + ((input.State.Registers[Register.C] + 1) & 0xFF) > 0xFF;
             input.State.Flags.X2 = (value & 0x20) > 0;
             input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
