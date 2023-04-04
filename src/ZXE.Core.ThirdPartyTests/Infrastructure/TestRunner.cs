@@ -34,16 +34,16 @@ public class TestRunner
         var stopwatch = Stopwatch.StartNew();
 
         var failedNames = new List<string>();
-
+        
         var notImplementedNames = new List<string>();
 
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("ed a2 ") < 0)
-            //{
-            //    continue;
-            //}
+            if (Path.GetFileName(file).CompareTo("ed a2 ") < 0)
+            {
+                continue;
+            }
 
             // End early
             //if (Path.GetFileName(file).CompareTo("fd df") > 0)

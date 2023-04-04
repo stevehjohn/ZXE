@@ -764,10 +764,10 @@ public static class ProcessorMiscellaneousInstructions
             // Flags
             input.State.Flags.Carry = value + ((input.State.Registers[Register.C] + 1) & 0xFF) > 0xFF;
             input.State.Flags.AddSubtract = (value & 0x80) > 0;
-            input.State.Flags.ParityOverflow = ((ushort) ((value + ((input.State.Registers[Register.C] + 1) & 0xFF)) & 0x07 ^ input.State.Registers[Register.B])).IsEvenParity();
-            input.State.Flags.X1 = (value & 0x08) > 0;
+            input.State.Flags.ParityOverflow = ((ushort) (((value + ((input.State.Registers[Register.C] + 1) & 0xFF)) & 0x07) ^ input.State.Registers[Register.B])).IsEvenParity();
+            input.State.Flags.X1 = (input.State.Registers[Register.B] & 0x08) > 0;
             input.State.Flags.HalfCarry = value + ((input.State.Registers[Register.C] + 1) & 0xFF) > 0xFF;
-            input.State.Flags.X2 = (value & 0x20) > 0;
+            input.State.Flags.X2 = (input.State.Registers[Register.B] & 0x20) > 0;
             input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
             
