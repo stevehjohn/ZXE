@@ -119,7 +119,7 @@ public static class TestRunner
         // https://github.com/floooh/chips-test/issues/27#issuecomment-1451670089
         if (instructionIndex == 0xDB)
         {
-            ports.WriteByte((ushort) ((processor.State.Registers[Register.A] << 8) + ram[1]), (byte) ((ram[1] & 0xFF) * 2));
+            ports.WriteByte((ushort) ((processor.State.Registers[Register.A] << 8) + ram[1]), processor.State.Registers[Register.A]);
         }
 
         while (tStates < expectedResult.ProcessorState.TStates)
