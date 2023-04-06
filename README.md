@@ -56,6 +56,7 @@ Runs tests against this awesome suite:
 
 ## Useful Resources
 
+- https://mdfs.net/Software/Z80/Exerciser/Spectrum/
 - https://github.com/raxoft/z80test
 - https://floooh.github.io/
 - https://floooh.github.io/2021/12/17/cycle-stepped-z80.html#testing

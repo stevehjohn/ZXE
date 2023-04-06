@@ -1,6 +1,7 @@
 ﻿// #define DELAY
 // Use the above to pause boot to allow for recording.
 
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -99,14 +100,23 @@ public class Monitor : Game
 
         if (Keyboard.GetState().IsKeyDown(Keys.F10))
         {
-            var loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
+            //var loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
 
-            //loader.Load("..\\..\\..\\..\\..\\Game Images\\Horace Goes Skiing\\image-0.z80");
-            loader.Load("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.z80");
-            //loader.Load("..\\..\\..\\..\\..\\Game Images\\Jet Pac\\image-0.z80");
-            //loader.Load("..\\..\\..\\..\\..\\Game Images\\Manic Miner\\image-0.z80");
-            //loader.Load("..\\..\\..\\..\\..\\Game Images\\Head Over Heels\\image-0.z80");
+            ////loader.Load("..\\..\\..\\..\\..\\Game Images\\Horace Goes Skiing\\image-0.z80");
+            ////loader.Load("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.z80");
+            ////loader.Load("..\\..\\..\\..\\..\\Game Images\\Jet Pac\\image-0.z80");
+            ////loader.Load("..\\..\\..\\..\\..\\Game Images\\Manic Miner\\image-0.z80");
+            ////loader.Load("..\\..\\..\\..\\..\\Game Images\\Head Over Heels\\image-0.z80");
+            ////loader.Load("..\\..\\..\\..\\..\\Other Images\\snaptest.v1.z80");
             //loader.Load("..\\..\\..\\..\\..\\Other Images\\snaptest.v1.z80");
+
+            var data = File.ReadAllBytes("..\\..\\..\\..\\..\\Other Images\\zexdoc-spectrum.com");
+
+            //_motherboard.Processor.Reset();
+
+            _motherboard.Ram.Load(data, 0x8000);
+
+            _motherboard.Processor.State.ProgramCounter = 0x8000;
         }
 
         base.Update(gameTime);

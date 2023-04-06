@@ -58,6 +58,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other Images", "Other Image
 	ProjectSection(SolutionItems) = preProject
 		..\Other Images\snaptest.v1.z80 = ..\Other Images\snaptest.v1.z80
 		..\Other Images\z80-tests.z80 = ..\Other Images\z80-tests.z80
+		..\Other Images\zexall-spectrum.z80 = ..\Other Images\zexall-spectrum.z80
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.ZexTests", "ZXE.ZexTests\ZXE.ZexTests.csproj", "{4ED315F7-1395-49D8-9C2B-154402393832}"
