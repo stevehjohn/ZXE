@@ -41,6 +41,12 @@ public class Motherboard : IDisposable
 
     public Processor Processor => _processor;
 
+    public bool Fast
+    {
+        get => _timer.Fast;
+        set => _timer.Fast = value;
+    }
+
     public Motherboard(Model model, ITracer? tracer)
     {
         _ram = new Ram(model)

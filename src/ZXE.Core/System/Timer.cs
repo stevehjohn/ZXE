@@ -15,6 +15,8 @@ public class Timer : ITimer
 
     private readonly double _microsecondsPerCycle;
 
+    public bool Fast { get; set; }
+
     public Timer(double speedHz)
     {
         _microsecondsPerCycle = 1.0f / speedHz * Stopwatch.Frequency;
@@ -52,10 +54,13 @@ public class Timer : ITimer
         // TODO: Get this working properly.
         while (true)
         {
-            stopwatch.Restart();
-
-            while (stopwatch.ElapsedTicks < cycles * _microsecondsPerCycle)
+            if (! Fast)
             {
+                stopwatch.Restart();
+
+                while (stopwatch.ElapsedTicks < cycles * _microsecondsPerCycle)
+                {
+                }
             }
 
             cycles = OnTick();

@@ -7,4 +7,6 @@ public interface ITimer : IDisposable
     void Start();
 
     void Stop();
+
+    bool Fast { get; set; }
 }

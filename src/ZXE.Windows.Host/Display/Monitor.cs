@@ -118,6 +118,20 @@ public class Monitor : Game
             //_motherboard.Processor.State.ProgramCounter = 0x8000;
         }
 
+        if (Keyboard.GetState().IsKeyDown(Keys.F9))
+        {
+            _motherboard.Fast = ! _motherboard.Fast;
+
+            if (_motherboard.Fast)
+            {
+                Window.Title = "ZXE - Fast";
+            }
+            else
+            {
+                Window.Title = "ZXE";
+            }
+        }
+
         base.Update(gameTime);
     }
 
