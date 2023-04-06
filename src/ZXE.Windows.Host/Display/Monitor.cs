@@ -116,7 +116,7 @@ public class Monitor : Game
 
             _motherboard.Ram.Load(data, 0x8000);
 
-            _motherboard.Processor.State.ProgramCounter = 0x8000;
+            //_motherboard.Processor.State.ProgramCounter = 0x8000;
         }
 
         base.Update(gameTime);
