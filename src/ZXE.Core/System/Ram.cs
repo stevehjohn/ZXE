@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Infrastructure;
+﻿using System.Reflection.Metadata.Ecma335;
+using ZXE.Core.Infrastructure;
 
 namespace ZXE.Core.System;
 
@@ -21,40 +22,9 @@ public class Ram
 
     public byte this[int address]
     {
-        get
-        {
-            if (address >= Size)
-            {
-                address -= Size;
-            }
+        get => _ram[address & 0xFFFF];
 
-            if (address < 0)
-            {
-                address += Size;
-            }
-
-            return _ram[address];
-        }
-
-        set
-        {
-            if (address < 0x4000 && ProtectRom)
-            {
-                return;
-            }
-
-            if (address >= Size)
-            {
-                address -= Size;
-            }
-
-            if (address < 0)
-            {
-                address += Size;
-            }
-
-            _ram[address] = value;
-        }
+        set => _ram[address & 0xFFFF] = address < 0x4000 && ProtectRom ? _ram[address] : value;
     }
 
     public byte[] this[Range range] => _ram[range];

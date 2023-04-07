@@ -100,10 +100,12 @@ public class Monitor : Game
 
         if (Keyboard.GetState().IsKeyDown(Keys.F10))
         {
-            var loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
+            //var loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
+
+            var loader = new SnaFileLoader(_motherboard.Processor.State, _motherboard.Ram);
 
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Horace Goes Skiing\\image-0.z80");
-            loader.Load("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.z80");
+            loader.Load("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.sna");
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Jet Pac\\image-0.z80");
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Manic Miner\\image-0.z80");
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Head Over Heels\\image-0.z80");
