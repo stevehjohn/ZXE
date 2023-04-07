@@ -717,6 +717,8 @@ public static class ProcessorMiscellaneousInstructions
 
         input.State.PutFlagsInFRegister(true);
 
+        input.State.MemPtr++;
+
         return 0;
     }
 
@@ -744,6 +746,15 @@ public static class ProcessorMiscellaneousInstructions
         input.State.PutFlagsInFRegister(true);
         
         // TODO: Correctly account for extra cycles?
+
+        if (input.State.Registers.ReadPair(Register.BC) == 1 || difference == 0)
+        {
+            input.State.MemPtr++;
+        }
+        else
+        {
+            input.State.MemPtr = (ushort) (input.State.ProgramCounter + 1);
+        }
 
         if (input.State.Registers.ReadPair(Register.BC) != 0 && difference != 0)
         {
@@ -985,6 +996,8 @@ public static class ProcessorMiscellaneousInstructions
 
         input.State.PutFlagsInFRegister(true);
 
+        input.State.MemPtr--;
+
         return 0;
     }
 
@@ -1011,7 +1024,16 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Sign = (byte) difference > 0x7F;
 
         input.State.PutFlagsInFRegister(true);
-        
+
+        if (input.State.Registers.ReadPair(Register.BC) == 1 || difference == 0)
+        {
+            input.State.MemPtr--;
+        }
+        else
+        {
+            input.State.MemPtr = (ushort) (input.State.ProgramCounter + 1);
+        }
+
         if (input.State.Registers.ReadPair(Register.BC) == 0 || input.State.Registers[Register.A] == value)
         {
             return 0;
