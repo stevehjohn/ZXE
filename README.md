@@ -56,6 +56,7 @@ Runs tests against this awesome suite:
 
 ## Useful Resources
 
+- https://gist.github.com/drhelius/8497817
 - https://mdfs.net/Software/Z80/Exerciser/Spectrum/
 - https://github.com/raxoft/z80test
 - https://floooh.github.io/
