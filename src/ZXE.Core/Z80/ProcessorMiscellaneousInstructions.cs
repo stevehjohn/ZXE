@@ -279,6 +279,8 @@ public static class ProcessorMiscellaneousInstructions
 
         // Flags unaffected
 
+        input.State.MemPtr = (ushort) input.State.ProgramCounter;
+
         return -1;
     }
 

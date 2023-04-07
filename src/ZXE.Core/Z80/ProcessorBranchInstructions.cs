@@ -22,6 +22,8 @@ public static class ProcessorBranchInstructions
             {
                 input.State.ProgramCounter += (sbyte) input.Data[1];
 
+                input.State.MemPtr = (ushort) input.State.ProgramCounter;
+
                 return 5;
             }
         }
@@ -36,6 +38,8 @@ public static class ProcessorBranchInstructions
             input.State.ProgramCounter += (sbyte) input.Data[1];
 
             input.State.ProgramCounter = (ushort) input.State.ProgramCounter;
+
+            input.State.MemPtr = (ushort) input.State.ProgramCounter;
         }
 
         return 0;
@@ -108,6 +112,8 @@ public static class ProcessorBranchInstructions
         input.State.StackPointer++;
 
         input.State.ProgramCounter = value;
+
+        input.State.MemPtr = (ushort) input.State.ProgramCounter;
 
         return -1;
     }
@@ -231,6 +237,8 @@ public static class ProcessorBranchInstructions
         input.State.ProgramCounter--;
 
         // Flags unaffected
+
+        input.State.MemPtr = (ushort) input.State.ProgramCounter;
 
         return 0;
     }
