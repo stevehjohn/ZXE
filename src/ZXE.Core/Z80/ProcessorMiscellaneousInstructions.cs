@@ -1184,6 +1184,8 @@ public static class ProcessorMiscellaneousInstructions
             
         input.State.PutFlagsInFRegister(true);
 
+        input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.HL) + 1);
+
         return 0;
     }
 
@@ -1216,6 +1218,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Sign = (sbyte) input.State.Registers[Register.A] < 0;
             
         input.State.PutFlagsInFRegister(true);
+
+        input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.HL) + 1);
 
         return 0;
     }
