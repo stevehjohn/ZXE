@@ -778,6 +778,8 @@ public static class ProcessorMiscellaneousInstructions
 
             input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) + 1));
 
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) + 1);
+
             input.State.Registers[Register.B]--;
 
             // Flags
@@ -819,6 +821,8 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
             
             input.State.PutFlagsInFRegister();
+            
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) + 1);
 
             // TODO: Correctly account for extra cycles?
             input.State.Registers[Register.B]--;
@@ -1048,6 +1052,8 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) - 1);
+
             input.State.Registers[Register.B]--;
 
             var port = input.State.Registers.ReadPair(Register.BC);
@@ -1078,6 +1084,8 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) - 1);
+
             input.State.Registers[Register.B]--;
 
             var port = input.State.Registers.ReadPair(Register.BC);
