@@ -290,6 +290,8 @@ public static class ProcessorMiscellaneousInstructions
 
         // Flags unaffected
 
+        input.State.MemPtr = (ushort) (((input.Data[1] + 1) & 0xFF) | (input.State.Registers[register] << 8));
+
         return 0;
     }
 
@@ -508,6 +510,8 @@ public static class ProcessorMiscellaneousInstructions
 
         // Flags unaffected
 
+        input.State.MemPtr = (ushort) (((input.Data[1] + 1) & 0xFF) | (input.State.Registers[register] << 8));
+
         return 0;
     }
 
@@ -594,6 +598,8 @@ public static class ProcessorMiscellaneousInstructions
     {
         // Flags unaffected
 
+        input.State.MemPtr = (ushort) (((input.Ram[input.State.Registers.ReadPair(destination)] + 1) & 0xFF) | (input.State.Registers[source] << 8));
+
         return 0;
     }
 
@@ -624,6 +630,8 @@ public static class ProcessorMiscellaneousInstructions
         // TODO: Hmm. Might have to get into buses and stuff for this one... bugger.
 
         // Flags unaffected
+
+        input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) + 1);
 
         return 0;
     }
