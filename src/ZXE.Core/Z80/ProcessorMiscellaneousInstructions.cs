@@ -873,6 +873,8 @@ public static class ProcessorMiscellaneousInstructions
             
             input.State.PutFlagsInFRegister();
 
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) + 1);
+
             return 0;
         }
     }
@@ -904,6 +906,8 @@ public static class ProcessorMiscellaneousInstructions
             // Sign unknown
             
             input.State.PutFlagsInFRegister();
+            
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) + 1);
 
             if (input.State.Registers[Register.B] != 0)
             {
@@ -1158,6 +1162,8 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
             
             input.State.PutFlagsInFRegister();
+            
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) - 1);
 
             return 0;
         }
@@ -1190,6 +1196,8 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
             
             input.State.PutFlagsInFRegister();
+            
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) - 1);
 
             if (input.State.Registers.ReadPair(Register.BC) != 0)
             {
