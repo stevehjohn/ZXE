@@ -157,6 +157,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -166,6 +168,8 @@ public static class ProcessorBranchInstructions
         input.State.ProgramCounter = input.Data[2] << 8 | input.Data[1];
 
         // Flags unaffected
+
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return -1;
     }
@@ -180,6 +184,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -200,6 +206,8 @@ public static class ProcessorBranchInstructions
             input.State.ProgramCounter = (input.Data[2] << 8 | input.Data[1]) - 3;
 
             // Flags unaffected
+
+            input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
         }
 
         return 0;
@@ -251,6 +259,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -265,6 +275,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -291,6 +303,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -305,6 +319,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -319,6 +335,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -331,6 +349,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -345,6 +365,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -371,6 +393,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -385,6 +409,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -420,6 +446,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -434,6 +462,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -460,6 +490,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -474,6 +506,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -500,6 +534,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
@@ -514,6 +550,8 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
