@@ -464,6 +464,8 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Sign = (byte) difference > 0x7F;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(right) + (sbyte) input.Data[1]);
         }
 
         return 0;

@@ -194,6 +194,8 @@ public static class ProcessorLoadInstructions
 
         // Flags unaffected
 
+        input.State.MemPtr = (ushort) address;
+
         return 0;
     }
 
@@ -228,6 +230,9 @@ public static class ProcessorLoadInstructions
         input.State.Registers[destination] = input.Ram[address];
 
         // Flags unaffected
+
+        input.State.MemPtr = (ushort) address;
+
         return 0;
     }
 
@@ -240,6 +245,8 @@ public static class ProcessorLoadInstructions
         input.Ram[address] = input.State.Registers[source];
 
         // Flags unaffected
+        
+        input.State.MemPtr = (ushort) address;
 
         return 0;
     }

@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Extensions;
+﻿using System.Net;
+using ZXE.Core.Extensions;
 
 namespace ZXE.Core.Z80;
 
@@ -697,6 +698,8 @@ public static class ProcessorArithmeticInstructions
 
         input.State.PutFlagsInFRegister();
 
+        input.State.MemPtr = (ushort) address;
+
         return 0;
     }
 
@@ -723,6 +726,8 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Sign = (sbyte) input.Ram[address] < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = (ushort) address;
         }
 
         return 0;
@@ -811,6 +816,8 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = (ushort) address;
         }
 
         return 0;
@@ -906,6 +913,8 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = (ushort) address;
         }
 
         return 0;
@@ -990,6 +999,8 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(source) + (sbyte) input.Data[1]);
         }
 
         return 0;
@@ -1080,6 +1091,8 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(source) + (sbyte) input.Data[1]);
         }
 
         return 0;

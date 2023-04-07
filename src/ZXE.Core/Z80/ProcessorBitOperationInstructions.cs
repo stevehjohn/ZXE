@@ -112,6 +112,8 @@ public static class ProcessorBitOperationInstructions
 
         input.State.PutFlagsInFRegister(true);
 
+        input.State.MemPtr = address;
+
         return 0;
     }
 
@@ -130,6 +132,8 @@ public static class ProcessorBitOperationInstructions
         input.State.Registers[destination] = result;
 
         // Flags unaffected
+
+        input.State.MemPtr = address;
 
         return 0;
     }
@@ -171,6 +175,8 @@ public static class ProcessorBitOperationInstructions
         input.State.Registers[destination] = input.Ram[address];
 
         // Flags unaffected
+        
+        input.State.MemPtr = address;
 
         return 0;
     }

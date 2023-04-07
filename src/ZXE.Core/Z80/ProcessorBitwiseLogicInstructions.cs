@@ -291,6 +291,8 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(source) + (sbyte) input.Data[1]);
         }
 
         return 0;
@@ -363,6 +365,8 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(source) + (sbyte) input.Data[1]);
         }
 
         return 0;
@@ -435,6 +439,8 @@ public static class ProcessorBitwiseLogicInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(source) + (sbyte) input.Data[1]);
         }
 
         return 0;

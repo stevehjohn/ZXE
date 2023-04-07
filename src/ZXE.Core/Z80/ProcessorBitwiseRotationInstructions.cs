@@ -616,6 +616,8 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = address;
         }
 
         return 0;
@@ -650,6 +652,8 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = address;
         }
 
         return 0;
@@ -716,6 +720,8 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = address;
         }
 
         return 0;
@@ -782,6 +788,8 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = address;
         }
 
         return 0;
@@ -848,6 +856,8 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = address;
         }
 
         return 0;
@@ -982,6 +992,8 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = address;
         }
 
         return 0;
@@ -1016,6 +1028,8 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = address;
         }
 
         return 0;
@@ -1114,6 +1128,8 @@ public static class ProcessorBitwiseRotationInstructions
             input.State.Flags.Sign = (sbyte) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = address;
         }
 
         return 0;
