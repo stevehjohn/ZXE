@@ -53,6 +53,8 @@ public static class ProcessorLoadInstructions
 
         // Flags unaffected
 
+        input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(source) + 1);
+
         return 0;
     }
 

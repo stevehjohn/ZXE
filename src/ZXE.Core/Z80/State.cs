@@ -22,6 +22,8 @@ public class State
 
     public Flags Flags { get; set; }
 
+    public ushort MemPtr { get; set; }
+
     public bool Halted { get; set; }
 
     public InterruptMode InterruptMode { get; set; } = InterruptMode.Mode0;

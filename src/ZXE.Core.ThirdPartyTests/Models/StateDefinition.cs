@@ -47,6 +47,8 @@ public class StateDefinition
 
     public ushort HL_ { get; set; }
 
+    public ushort WZ { get; set; }
+
     public byte IFF1 { get; set; }
 
     public byte IFF2 { get; set; }

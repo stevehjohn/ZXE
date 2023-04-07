@@ -18,9 +18,9 @@ public static class ProcessorBitOperationInstructions
         // Carry unaffected
         input.State.Flags.AddSubtract = false;
         input.State.Flags.ParityOverflow = result == 0;
-        input.State.Flags.X1 = (result & 0x08) > 0;
+        input.State.Flags.X1 = (data & 0x08) > 0;
         input.State.Flags.HalfCarry = true;
-        input.State.Flags.X2 = (result & 0x20) > 0;
+        input.State.Flags.X2 = (data & 0x20) > 0;
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = bit == 0x80 && result != 0;
 
@@ -39,9 +39,9 @@ public static class ProcessorBitOperationInstructions
         // Carry unaffected
         input.State.Flags.AddSubtract = false;
         input.State.Flags.ParityOverflow = result == 0;
-        input.State.Flags.X1 = (data & 0x08) > 0;
+        input.State.Flags.X1 = (input.State.MemPtr & 0x0800) > 0;
         input.State.Flags.HalfCarry = true;
-        input.State.Flags.X2 = (data & 0x20) > 0;
+        input.State.Flags.X2 = (input.State.MemPtr & 0x2000) > 0;
         input.State.Flags.Zero = (data & bit) == 0;
         input.State.Flags.Sign = bit == 0x80 && result != 0;
 

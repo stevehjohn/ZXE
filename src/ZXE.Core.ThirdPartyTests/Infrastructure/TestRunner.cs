@@ -40,7 +40,7 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            if (Path.GetFileName(file).CompareTo("ed a2 ") < 0)
+            if (Path.GetFileName(file).CompareTo("cb 46 ") < 0)
             {
                 continue;
             }
@@ -228,6 +228,7 @@ public class TestRunner
         state.Registers[Register.R] = test.Initial.R;
         state.Registers.WritePair(Register.IX, test.Initial.IX);
         state.Registers.WritePair(Register.IY, test.Initial.IY);
+        state.MemPtr = test.Initial.WZ;
 
         state.Q = test.Initial.Q;
 
@@ -300,13 +301,12 @@ public class TestRunner
                    && state.Registers[Register.C] == test.Final.C
                    && state.Registers[Register.D] == test.Final.D
                    && state.Registers[Register.E] == test.Final.E
-                   //&& (state.Registers[Register.F] & 0x1101_0111) == (test.Final.F & 0x1101_0111)
+                   && state.Registers[Register.F] == test.Final.F
                    && state.Registers[Register.H] == test.Final.H
                    && state.Registers[Register.I] == test.Final.I
                    && state.Registers[Register.R] == test.Final.R
                    && state.Registers.ReadPair(Register.IX) == test.Final.IX
-                   && state.Registers.ReadPair(Register.IY) == test.Final.IY
-                   && CheckFlags(state.Flags, Flags.FromByte(test.Final.F));
+                   && state.Registers.ReadPair(Register.IY) == test.Final.IY;
         // TODO: Alternate registers?
 
         foreach (var pair in test.Final.Ram)
