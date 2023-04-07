@@ -972,8 +972,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.X1 = (x & 0x08) > 0;
         input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (value & 0x0F);
         input.State.Flags.X2 = (x & 0x02) > 0;
-        input.State.Flags.Zero = difference == 0;
-        input.State.Flags.Sign = difference < 0;
+        input.State.Flags.Zero = input.State.Registers[Register.A] == value;
+        input.State.Flags.Sign = (byte) difference > 0x7F;
 
         input.State.PutFlagsInFRegister(true);
 
@@ -999,19 +999,19 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.X1 = (x & 0x08) > 0;
         input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (value & 0x0F);
         input.State.Flags.X2 = (x & 0x02) > 0;
-        input.State.Flags.Zero = difference == 0;
-        input.State.Flags.Sign = difference < 0;
+        input.State.Flags.Zero = input.State.Registers[Register.A] == value;
+        input.State.Flags.Sign = (byte) difference > 0x7F;
 
         input.State.PutFlagsInFRegister(true);
         
-        if (input.State.Registers.ReadPair(Register.BC) != 0)
+        if (input.State.Registers.ReadPair(Register.BC) == 0 || input.State.Registers[Register.A] == value)
         {
-            input.State.ProgramCounter -= 2;
-
-            return 5;
+            return 0;
         }
 
-        return 0;
+        input.State.ProgramCounter -= 2;
+
+        return 5;
     }
 
     public static int IND(Input input)

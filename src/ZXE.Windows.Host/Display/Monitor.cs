@@ -109,7 +109,7 @@ public class Monitor : Game
             ////loader.Load("..\\..\\..\\..\\..\\Other Images\\snaptest.v1.z80");
             //loader.Load("..\\..\\..\\..\\..\\Other Images\\snaptest.v1.z80");
 
-            var data = File.ReadAllBytes("..\\..\\..\\..\\..\\Other Images\\zexdoc-spectrum.com");
+            var data = File.ReadAllBytes("..\\..\\..\\..\\..\\Other Images\\zexall-spectrum.com");
 
             //_motherboard.Processor.Reset();
 
