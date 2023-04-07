@@ -36,23 +36,23 @@ public class SnaFileLoader
     {
         _state.Registers[Register.I] = data[0];
 
-        _state.Registers.WritePair(Register.HL_, (ushort) (data[0x01] << 8 | data[0x02]));
+        _state.Registers.WritePair(Register.HL_, (ushort) (data[0x02] << 8 | data[0x01]));
 
-        _state.Registers.WritePair(Register.DE_, (ushort) (data[0x03] << 8 | data[0x04]));
+        _state.Registers.WritePair(Register.DE_, (ushort) (data[0x04] << 8 | data[0x03]));
 
-        _state.Registers.WritePair(Register.BC_, (ushort) (data[0x05] << 8 | data[0x06]));
+        _state.Registers.WritePair(Register.BC_, (ushort) (data[0x06] << 8 | data[0x05]));
 
-        _state.Registers.WritePair(Register.AF_, (ushort) (data[0x07] << 8 | data[0x08]));
+        _state.Registers.WritePair(Register.AF_, (ushort) (data[0x08] << 8 | data[0x07]));
 
-        _state.Registers.WritePair(Register.HL, (ushort) (data[0x09] << 8 | data[0x0A]));
+        _state.Registers.WritePair(Register.HL, (ushort) (data[0x0A] << 8 | data[0x09]));
 
-        _state.Registers.WritePair(Register.DE, (ushort) (data[0x0B] << 8 | data[0x0C]));
+        _state.Registers.WritePair(Register.DE, (ushort) (data[0x0C] << 8 | data[0x0B]));
 
-        _state.Registers.WritePair(Register.BC, (ushort) (data[0x0D] << 8 | data[0x0E]));
+        _state.Registers.WritePair(Register.BC, (ushort) (data[0x0E] << 8 | data[0x0D]));
 
-        _state.Registers.WritePair(Register.IY, (ushort) (data[0x0F] << 8 | data[0x10]));
+        _state.Registers.WritePair(Register.IY, (ushort) (data[0x10] << 8 | data[0x0F]));
 
-        _state.Registers.WritePair(Register.IX, (ushort) (data[0x11] << 8 | data[0x12]));
+        _state.Registers.WritePair(Register.IX, (ushort) (data[0x12] << 8 | data[0x11]));
 
         _state.InterruptFlipFlop1 = (data[0x13] & 0x04) > 0;
 
@@ -60,9 +60,9 @@ public class SnaFileLoader
 
         _state.Registers[Register.R] = data[0x14];
 
-        _state.Registers.WritePair(Register.AF, (ushort) (data[0x15] << 8 | data[0x16]));
+        _state.Registers.WritePair(Register.AF, (ushort) (data[0x16] << 8 | data[0x15]));
 
-        _state.StackPointer = (ushort) (data[0x17] << 8 | data[0x18]);
+        _state.StackPointer = (ushort) (data[0x18] << 8 | data[0x17]);
 
         _state.InterruptMode = (InterruptMode) data[0x19];
 

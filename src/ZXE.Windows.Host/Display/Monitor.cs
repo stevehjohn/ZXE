@@ -2,6 +2,7 @@
 // Use the above to pause boot to allow for recording.
 
 using System.IO;
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -118,7 +119,7 @@ public class Monitor : Game
 
             //_motherboard.Ram.Load(data, 0x8000);
 
-            _motherboard.Start();
+            //_motherboard.Start();
         }
 
         if (Keyboard.GetState().IsKeyDown(Keys.F9))
