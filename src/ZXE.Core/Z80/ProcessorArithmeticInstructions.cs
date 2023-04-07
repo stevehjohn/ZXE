@@ -91,6 +91,8 @@ public static class ProcessorArithmeticInstructions
             // Sign unaffected
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(target) + 1);
         }
 
         return 0;
@@ -1108,6 +1110,8 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Sign = (short) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(destination) + 1);
         }
 
         return 0;
@@ -1138,6 +1142,8 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Sign = (short) result < 0;
 
             input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(destination) + 1);
         }
 
         return 0;
