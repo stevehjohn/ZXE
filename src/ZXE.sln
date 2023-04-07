@@ -49,7 +49,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game Images", "Game Images"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Treasure Island Dizzy", "Treasure Island Dizzy", "{B5437754-C6C2-4FBE-A72C-850B777A9FB7}"
 	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Treasure Island Dizzy\image-0.sna = ..\Game Images\Treasure Island Dizzy\image-0.sna
 		..\Game Images\Treasure Island Dizzy\image-0.z80 = ..\Game Images\Treasure Island Dizzy\image-0.z80
+		..\Game Images\Treasure Island Dizzy\load-screen.bin = ..\Game Images\Treasure Island Dizzy\load-screen.bin
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core.FuseTests", "ZXE.Core.FuseTests\ZXE.Core.FuseTests.csproj", "{BF53FA1E-5D66-4073-97E7-642F85755FDA}"
@@ -67,6 +69,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.ZexTests", "ZXE.ZexTest
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jet Pac", "Jet Pac", "{ECC5A18D-9623-4760-9334-4B2871B302F0}"
 	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Jet Pac\image-0.sna = ..\Game Images\Jet Pac\image-0.sna
 		..\Game Images\Jet Pac\image-0.z80 = ..\Game Images\Jet Pac\image-0.z80
 	EndProjectSection
 EndProject

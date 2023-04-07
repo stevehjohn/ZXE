@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Extensions;
+﻿using System.Diagnostics;
+using ZXE.Core.Extensions;
 
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
@@ -557,7 +558,7 @@ public static class ProcessorMiscellaneousInstructions
     {
         var value = input.Ports.ReadByte((ushort) (input.State.Registers[register] << 8 | input.Data[1]));
 
-        //Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {value}\n");
+        //Debugger.Log(0, "INFO", $"IN_R_p Checking {input.State.Registers[register]:X2} Value: {value}\n");
 
         input.State.MemPtr = (ushort) ((input.State.Registers[register] << 8 | input.Data[1]) + 1);
 
