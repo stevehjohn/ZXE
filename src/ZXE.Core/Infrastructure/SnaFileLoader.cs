@@ -69,19 +69,15 @@ public class SnaFileLoader
         _state.Flags = Flags.FromByte(_state.Registers[Register.F]);
 
         _state.OpcodePrefix = 0;
-
-        _state.ProgramCounter = _state.StackPointer;
-
-        var spContent = _ram[_state.StackPointer];
-
-        _state.ProgramCounter = (_state.ProgramCounter & 0xFF00) | spContent;
+        
+        var value = (ushort) _ram[_state.StackPointer];
 
         _state.StackPointer++;
 
-        spContent = _ram[_state.StackPointer];
-
-        _state.ProgramCounter = (_state.ProgramCounter & 0x00FF) | spContent << 8;
+        value |= (ushort) (_ram[_state.StackPointer] << 8);
 
         _state.StackPointer++;
+
+        _state.ProgramCounter = value;
     }
 }

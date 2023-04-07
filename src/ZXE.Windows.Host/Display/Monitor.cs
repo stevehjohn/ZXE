@@ -100,6 +100,8 @@ public class Monitor : Game
 
         if (Keyboard.GetState().IsKeyDown(Keys.F10))
         {
+            _motherboard.Stop();
+
             //var loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
 
             var loader = new SnaFileLoader(_motherboard.Processor.State, _motherboard.Ram);
@@ -115,6 +117,8 @@ public class Monitor : Game
             //var data = File.ReadAllBytes("..\\..\\..\\..\\..\\Other Images\\zexall-spectrum.com");
 
             //_motherboard.Ram.Load(data, 0x8000);
+
+            _motherboard.Start();
         }
 
         if (Keyboard.GetState().IsKeyDown(Keys.F9))
