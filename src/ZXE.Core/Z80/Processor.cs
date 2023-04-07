@@ -241,6 +241,8 @@ public partial class Processor
 
                         _state.ProgramCounter = address;
 
+                        _state.MemPtr = (ushort) _state.ProgramCounter;
+
                         _state.ResetQ();
                     }
 
