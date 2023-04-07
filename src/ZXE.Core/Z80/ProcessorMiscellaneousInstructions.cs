@@ -553,6 +553,8 @@ public static class ProcessorMiscellaneousInstructions
 
         //Debugger.Log(0, "INFO", $"IN_R_p Checking {input.Data[1]:X2} Value: {value}\n");
 
+        input.State.MemPtr = (ushort) ((input.State.Registers[register] << 8 | input.Data[1]) + 1);
+
         input.State.Registers[register] = value;
 
         return 0;
@@ -580,6 +582,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Sign = (sbyte) value < 0;
 
         input.State.PutFlagsInFRegister();
+
+        input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) + 1);
 
         return 0;
     }
