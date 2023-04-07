@@ -83,6 +83,8 @@ edbb: OTDR
 
 None.
 
-### ZelAll failures.
+### ZexAll failures.
 
-
+bit n,[r]
+cpd[r]
+cpi[r]
