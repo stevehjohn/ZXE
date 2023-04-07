@@ -330,6 +330,8 @@ public static class ProcessorMiscellaneousInstructions
 
         // Flags unaffected
 
+        input.State.MemPtr = input.State.Registers.ReadPair(register);
+
         return 0;
     }
 
