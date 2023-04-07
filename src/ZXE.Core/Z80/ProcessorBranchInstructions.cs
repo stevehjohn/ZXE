@@ -335,8 +335,6 @@ public static class ProcessorBranchInstructions
         }
 
         // Flags unaffected
-        
-        input.State.MemPtr = (ushort) (input.Data[2] << 8 | input.Data[1]);
 
         return 0;
     }
