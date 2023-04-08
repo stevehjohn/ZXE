@@ -1,4 +1,4 @@
-﻿//#define TRACE_OVER_IP
+﻿#define TRACE_OVER_IP
 
 #if TRACE_OVER_IP
 using System.Diagnostics;

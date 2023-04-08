@@ -109,6 +109,7 @@ public class Monitor : Game
 
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Horace Goes Skiing\\image-0.z80");
             loader.Load("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.sna");
+            //loader.Load("..\\..\\..\\..\\..\\Other Images\\snaptest.sna");
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Dizzy\\image-0.sna");
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Jet Pac\\image-0.sna");
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Manic Miner\\image-0.z80");
