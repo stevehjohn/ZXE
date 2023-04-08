@@ -103,18 +103,38 @@ public class VRamAdapter
             _ => Color.Black
         };
 
-        var foreground = (data & 0b00000111) switch
+        Color foreground;
+
+        if ((data & 0b0100_0000) > 0)
         {
-            0 => Color.Black,
-            1 => Color.Blue,
-            2 => Color.Red,
-            3 => Color.Magenta,
-            4 => Color.Green,
-            5 => Color.Cyan,
-            6 => Color.Yellow,
-            7 => Color.White,
-            _ => Color.Black
-        };
+            foreground = (data & 0b00000111) switch
+            {
+                0 => Color.Black,
+                1 => Color.DarkBlue,
+                2 => Color.Red,
+                3 => Color.Magenta,
+                4 => Color.FromNonPremultiplied(0, 200, 0, 255),
+                5 => Color.Cyan,
+                6 => Color.Yellow,
+                7 => Color.White,
+                _ => Color.Black
+            };
+        }
+        else
+        {
+            foreground = (data & 0b00000111) switch
+            {
+                0 => Color.Black,
+                1 => Color.Blue,
+                2 => Color.FromNonPremultiplied(192, 0, 0, 255),
+                3 => Color.DarkMagenta,
+                4 => Color.Green,
+                5 => Color.DarkCyan,
+                6 => Color.FromNonPremultiplied(204, 204, 0, 255),
+                7 => Color.LightGray,
+                _ => Color.Black
+            };
+        }
 
         if ((data & 0x80) > 0 && _alternate)
         {
