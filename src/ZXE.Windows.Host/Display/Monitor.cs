@@ -174,7 +174,10 @@ public class Monitor : Game
     {
         GraphicsDevice.Clear(Color.DarkGray);
 
-        var screen = _vRamAdapter.GetDisplay();
+        // TODO: Call from motherboard at appropriate point.
+        _vRamAdapter.RenderDisplay();
+
+        var screen = _vRamAdapter.Display;
 
         _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
 

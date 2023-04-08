@@ -17,6 +17,10 @@ public class VRamAdapter
 
     private bool _alternate;
 
+    private Texture2D _display;
+
+    public Texture2D Display => _display;
+
     public VRamAdapter(Ram ram, GraphicsDeviceManager graphicsDeviceManager)
     {
         _ram = ram;
@@ -26,7 +30,7 @@ public class VRamAdapter
         _stopwatch = Stopwatch.StartNew();
     }
 
-    public Texture2D GetDisplay()
+    public void RenderDisplay()
     {
         var texture = new Texture2D(_graphicsDeviceManager.GraphicsDevice, Constants.ScreenWidthPixels, Constants.ScreenHeightPixels);
 
@@ -77,7 +81,7 @@ public class VRamAdapter
             _stopwatch.Restart();
         }
 
-        return texture;
+        _display = texture;
     }
 
     private (Color Foreground, Color Background) GetColours(int x, int y)
