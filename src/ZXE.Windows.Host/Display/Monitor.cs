@@ -102,7 +102,7 @@ public class Monitor : Game
         {
             _motherboard.Pause();
 
-            var file = "..\\..\\..\\..\\..\\Game Images\\Manic Miner\\image-0.z80";
+            var file = "..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.z80";
 
             //var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
