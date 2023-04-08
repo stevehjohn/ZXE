@@ -100,10 +100,10 @@ public class Monitor : Game
 
             //var loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
 
-            var loader = new SnaFileLoader(_motherboard.Processor.State, _motherboard.Ram);
+            var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Horace Goes Skiing\\image-0.z80");
-            loader.Load("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.sna");
+            adapter.Load("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.sna");
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Fantasy World Dizzy\\image-0.sna");
             //loader.Load("..\\..\\..\\..\\..\\Other Images\\snaptest.sna");
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Dizzy\\image-0.sna");
@@ -131,6 +131,28 @@ public class Monitor : Game
             {
                 Window.Title = "ZXE";
             }
+        }
+
+        if (Keyboard.GetState().IsKeyDown(Keys.F8))
+        {
+            _motherboard.Pause();
+
+            var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+
+            adapter.Save("state.sna");
+
+            _motherboard.Resume();
+        }
+
+        if (Keyboard.GetState().IsKeyDown(Keys.F7))
+        {
+            _motherboard.Pause();
+
+            var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+
+            adapter.Load("state.sna");
+
+            _motherboard.Resume();
         }
 
         base.Update(gameTime);

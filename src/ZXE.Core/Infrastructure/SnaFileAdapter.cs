@@ -3,13 +3,13 @@ using ZXE.Core.Z80;
 
 namespace ZXE.Core.Infrastructure;
 
-public class SnaFileLoader
+public class SnaFileAdapter
 {
     private readonly State _state;
 
     private readonly Ram _ram;
 
-    public SnaFileLoader(State state, Ram ram)
+    public SnaFileAdapter(State state, Ram ram)
     {
         _state = state;
 
@@ -24,7 +24,67 @@ public class SnaFileLoader
 
         LoadRegisters(data);
     }
-    
+
+    public void Save(string filename)
+    {
+        using var file = File.Create(filename);
+
+        WriteRegisters(file);
+
+        WriteRam(file);
+
+        file.Close();
+    }
+
+    private void WriteRegisters(FileStream file)
+    {
+        file.WriteByte(_state.Registers[Register.I]);
+
+        file.WriteByte(_state.Registers[Register.L_]);
+        file.WriteByte(_state.Registers[Register.H_]);
+
+        file.WriteByte(_state.Registers[Register.D_]);
+        file.WriteByte(_state.Registers[Register.E_]);
+
+        file.WriteByte(_state.Registers[Register.B_]);
+        file.WriteByte(_state.Registers[Register.C_]);
+
+        file.WriteByte(_state.Registers[Register.A_]);
+        file.WriteByte(_state.Registers[Register.F_]);
+
+        file.WriteByte(_state.Registers[Register.L]);
+        file.WriteByte(_state.Registers[Register.H]);
+
+        file.WriteByte(_state.Registers[Register.D]);
+        file.WriteByte(_state.Registers[Register.E]);
+
+        file.WriteByte(_state.Registers[Register.B]);
+        file.WriteByte(_state.Registers[Register.C]);
+
+        file.WriteByte((byte) (_state.Registers.ReadPair(Register.IY) & 0x00FF));
+        file.WriteByte((byte) ((_state.Registers.ReadPair(Register.IY) & 0xFF00) >> 8));
+
+        file.WriteByte((byte) (_state.Registers.ReadPair(Register.IX) & 0x00FF));
+        file.WriteByte((byte) ((_state.Registers.ReadPair(Register.IX) & 0xFF00) >> 8));
+
+        file.WriteByte((byte) (_state.InterruptFlipFlop1 ? 0x02 : 0x00));
+
+        file.WriteByte(_state.Registers[Register.R]);
+
+        file.WriteByte(_state.Registers[Register.A]);
+        file.WriteByte(_state.Registers[Register.F]);
+
+        file.WriteByte((byte) (_state.StackPointer & 0x00FF));
+        file.WriteByte((byte) ((_state.StackPointer & 0xFF00) >> 8));
+
+        file.WriteByte((byte) _state.InterruptMode);
+    }
+
+    private void WriteRam(FileStream file)
+    {
+        file.Write(_ram[0x4000..]);
+    }
+
     private void LoadRam(byte[] data)
     {
         var dataToLoad = data[0x1B..];
