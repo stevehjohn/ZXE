@@ -117,7 +117,7 @@ public class Z80FileLoader
             byte12 = 0x01;
         }
 
-        _state.Registers[Register.R] = (byte) (data[11] | ((byte12 & 0x01) << 7));
+        _state.Registers[Register.R] = (byte) ((data[11] & 0x7F) | ((byte12 & 0x01) << 7));
 
         _state.Registers.WritePair(Register.DE, (ushort) (data[14] << 8 | data[13]));
 
