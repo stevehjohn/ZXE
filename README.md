@@ -2,11 +2,7 @@
 
 A ZX Spectrum emulator. Mostly about just seeing if I can.
 
-Currently in a state where it will execute BASIC programs. 
-
-https://www.youtube.com/watch?v=xhBduCZw9LE
-
-Alas Treasure Island Dizzy does not run yet.
+Runs BASIC, and I've tested it with the first Dizzy, Treasure Island Dizzy and Fantasy World Dizzy. No sound yet though.
 
 ## Main TODOs
 

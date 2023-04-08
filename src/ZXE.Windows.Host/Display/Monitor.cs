@@ -103,8 +103,8 @@ public class Monitor : Game
             var loader = new SnaFileLoader(_motherboard.Processor.State, _motherboard.Ram);
 
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Horace Goes Skiing\\image-0.z80");
-            //loader.Load("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.sna");
-            loader.Load("..\\..\\..\\..\\..\\Game Images\\Fantasy World Dizzy\\image-0.sna");
+            loader.Load("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.sna");
+            //loader.Load("..\\..\\..\\..\\..\\Game Images\\Fantasy World Dizzy\\image-0.sna");
             //loader.Load("..\\..\\..\\..\\..\\Other Images\\snaptest.sna");
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Dizzy\\image-0.sna");
             //loader.Load("..\\..\\..\\..\\..\\Game Images\\Jet Pac\\image-0.sna");
