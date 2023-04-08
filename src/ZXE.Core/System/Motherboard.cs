@@ -176,6 +176,8 @@ public class Motherboard : IDisposable
 
     private void RefreshInterrupt()
     {
+        _bus.Data = 0xFF;
+
         _bus.Interrupt = true;
     }
 }
