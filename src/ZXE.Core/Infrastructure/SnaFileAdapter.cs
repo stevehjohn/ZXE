@@ -67,15 +67,28 @@ public class SnaFileAdapter
         file.WriteByte((byte) (_state.Registers.ReadPair(Register.IX) & 0x00FF));
         file.WriteByte((byte) ((_state.Registers.ReadPair(Register.IX) & 0xFF00) >> 8));
 
-        file.WriteByte((byte) (_state.InterruptFlipFlop2 ? 0x02 : 0x00));
+        file.WriteByte((byte) (_state.InterruptFlipFlop2 ? 0x04 : 0x00));
 
         file.WriteByte(_state.Registers[Register.R]);
 
         file.WriteByte(_state.Registers[Register.F]);
         file.WriteByte(_state.Registers[Register.A]);
 
+        var programCounter = _state.ProgramCounter;
+
+        _state.StackPointer--;
+
+        _ram[_state.StackPointer] = (byte) ((_state.ProgramCounter & 0xFF00) >> 8);
+
+        _state.StackPointer--;
+
+        _ram[_state.StackPointer] = (byte) (_state.ProgramCounter & 0x00FF);
+
         file.WriteByte((byte) (_state.StackPointer & 0x00FF));
         file.WriteByte((byte) ((_state.StackPointer & 0xFF00) >> 8));
+
+        _state.ProgramCounter = programCounter;
+        _state.StackPointer += 2;
 
         file.WriteByte((byte) _state.InterruptMode);
 
