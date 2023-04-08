@@ -154,6 +154,12 @@ public partial class Processor
         _state.InterruptFlipFlop1 = false;
 
         _state.InterruptFlipFlop2 = false;
+
+        _state.OpcodePrefix = 0;
+
+        _state.MemPtr = 0;
+
+        _state.Q = 0;
     }
     
     public void HandleInterrupts(Ram ram, Bus bus)

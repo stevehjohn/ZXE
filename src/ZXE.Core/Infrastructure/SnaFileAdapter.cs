@@ -43,23 +43,23 @@ public class SnaFileAdapter
         file.WriteByte(_state.Registers[Register.L_]);
         file.WriteByte(_state.Registers[Register.H_]);
 
-        file.WriteByte(_state.Registers[Register.D_]);
         file.WriteByte(_state.Registers[Register.E_]);
+        file.WriteByte(_state.Registers[Register.D_]);
 
-        file.WriteByte(_state.Registers[Register.B_]);
         file.WriteByte(_state.Registers[Register.C_]);
+        file.WriteByte(_state.Registers[Register.B_]);
 
-        file.WriteByte(_state.Registers[Register.A_]);
         file.WriteByte(_state.Registers[Register.F_]);
+        file.WriteByte(_state.Registers[Register.A_]);
 
         file.WriteByte(_state.Registers[Register.L]);
         file.WriteByte(_state.Registers[Register.H]);
 
-        file.WriteByte(_state.Registers[Register.D]);
         file.WriteByte(_state.Registers[Register.E]);
+        file.WriteByte(_state.Registers[Register.D]);
 
-        file.WriteByte(_state.Registers[Register.B]);
         file.WriteByte(_state.Registers[Register.C]);
+        file.WriteByte(_state.Registers[Register.B]);
 
         file.WriteByte((byte) (_state.Registers.ReadPair(Register.IY) & 0x00FF));
         file.WriteByte((byte) ((_state.Registers.ReadPair(Register.IY) & 0xFF00) >> 8));
@@ -71,13 +71,15 @@ public class SnaFileAdapter
 
         file.WriteByte(_state.Registers[Register.R]);
 
-        file.WriteByte(_state.Registers[Register.A]);
         file.WriteByte(_state.Registers[Register.F]);
+        file.WriteByte(_state.Registers[Register.A]);
 
         file.WriteByte((byte) (_state.StackPointer & 0x00FF));
         file.WriteByte((byte) ((_state.StackPointer & 0xFF00) >> 8));
 
         file.WriteByte((byte) _state.InterruptMode);
+
+        file.WriteByte(7); // Border colour
     }
 
     private void WriteRam(FileStream file)
