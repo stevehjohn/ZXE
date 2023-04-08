@@ -43,10 +43,6 @@ public partial class Processor
 
     public (int Cycles, string Mnemonic) ProcessInstruction(Ram ram, Ports ports, Bus bus)
     {
-        if (_state.ProgramCounter == 0x1F58)
-        {
-        }
-
         if (_state.Halted)
         {
             HandleInterrupts(ram, bus);
