@@ -66,7 +66,7 @@ public class Timer : ITimer
         // TODO: Get this working properly.
         while (true)
         {
-            if (! Fast)
+            if (!Fast)
             {
                 stopwatch.Restart();
 
@@ -91,7 +91,7 @@ public class Timer : ITimer
         {
             stopwatch.Restart();
 
-            while (stopwatch.ElapsedMilliseconds < 50)
+            while (stopwatch.ElapsedMilliseconds < 20)
             {
             }
 

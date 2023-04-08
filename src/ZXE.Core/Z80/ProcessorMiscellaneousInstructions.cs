@@ -360,8 +360,6 @@ public static class ProcessorMiscellaneousInstructions
         
         input.State.InterruptFlipFlop2 = false;
 
-        Debugger.Log(0, "INFO", "DI\n");
-
         return 0;
     }
 
@@ -370,8 +368,6 @@ public static class ProcessorMiscellaneousInstructions
         input.State.InterruptFlipFlop1 = true;
         
         input.State.InterruptFlipFlop2 = true;
-
-        Debugger.Log(0, "INFO", "EI\n");
 
         return 0;
     }
@@ -562,8 +558,6 @@ public static class ProcessorMiscellaneousInstructions
     {
         var value = input.Ports.ReadByte((ushort) (input.State.Registers[register] << 8 | input.Data[1]));
 
-        //Debugger.Log(0, "INFO", $"IN_R_p Checking {input.State.Registers[register]:X2} Value: {value}\n");
-
         input.State.MemPtr = (ushort) ((input.State.Registers[register] << 8 | input.Data[1]) + 1);
 
         input.State.Registers[register] = value;
@@ -574,11 +568,6 @@ public static class ProcessorMiscellaneousInstructions
     public static int IN_R_C(Input input, Register register)
     {
         var value = input.Ports.ReadByte(input.State.Registers.ReadPair(Register.BC));
-
-        //if (value != 255)
-        //{
-        //    Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.B]:X2} Value: {value}\n");
-        //}
 
         input.State.Registers[register] = value;
 
@@ -613,8 +602,6 @@ public static class ProcessorMiscellaneousInstructions
         //var value = input.Ports.ReadByte(input.Ram[input.State.Registers.ReadPair(source)]);
         var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source));
         
-        //Debugger.Log(0, "INFO", $"IN_R_C Checking {input.State.Registers[Register.C]:X2} Value: {value}\n");
-
         // Flags
         // Carry unaffected
         input.State.Flags.AddSubtract = false;

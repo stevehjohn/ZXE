@@ -1,4 +1,4 @@
-﻿//#define DELAY
+﻿#define DELAY
 // Use the above to pause boot to allow for recording.
 
 using System.IO;
@@ -82,11 +82,6 @@ public class Monitor : Game
         foreach (var port in portData)
         {
             _motherboard.Ports.WriteByte(port.Port, port.data);
-
-            //if (port.data != 31)
-            //{
-            //    Debugger.Log(0, "INFO", $"{port.Port:X2}: {port.data}\n");
-            //}
         }
 
         if (Keyboard.GetState().IsKeyDown(Keys.F11))
