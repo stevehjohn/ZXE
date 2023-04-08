@@ -110,7 +110,14 @@ public class Z80FileLoader
 
         _state.Registers[Register.I] = data[10];
 
-        _state.Registers[Register.R] = (byte) (data[11] | ((data[12] & 0x01) << 7));
+        var byte12 = data[12];
+
+        if (byte12 == 0xFF)
+        {
+            byte12 = 0x01;
+        }
+
+        _state.Registers[Register.R] = (byte) (data[11] | ((byte12 & 0x01) << 7));
 
         _state.Registers.WritePair(Register.DE, (ushort) (data[14] << 8 | data[13]));
 
