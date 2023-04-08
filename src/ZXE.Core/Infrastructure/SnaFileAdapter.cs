@@ -67,7 +67,7 @@ public class SnaFileAdapter
         file.WriteByte((byte) (_state.Registers.ReadPair(Register.IX) & 0x00FF));
         file.WriteByte((byte) ((_state.Registers.ReadPair(Register.IX) & 0xFF00) >> 8));
 
-        file.WriteByte((byte) (_state.InterruptFlipFlop1 | _state.InterruptFlipFlop2 ? 0x02 : 0x00));
+        file.WriteByte((byte) (_state.InterruptFlipFlop2 ? 0x02 : 0x00));
 
         file.WriteByte(_state.Registers[Register.R]);
 
