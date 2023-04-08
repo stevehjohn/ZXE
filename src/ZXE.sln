@@ -94,6 +94,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fantasy World Dizzy", "Fant
 		..\Game Images\Fantasy World Dizzy\image-0.sna = ..\Game Images\Fantasy World Dizzy\image-0.sna
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Myth", "Myth", "{60AC96CF-F447-4D8B-8E87-2469FD963D91}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Myth\image-0.z80 = ..\Game Images\Myth\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{EAF02B70-2163-493B-AC0D-9EF298590FA3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dizzy", "Dizzy", "{1D23B8E8-313A-4D5D-9366-9F3B49519664}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Dizzy\image-0.sna = ..\Game Images\Dizzy\image-0.sna
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -195,6 +207,9 @@ Global
 		{2C8ABA5C-0CF1-4CCB-AB96-72ECF7DCA5C1} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{76162651-1960-482F-9C07-2D34C67088E8} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{A5E75E76-6140-4BDE-B507-18A72B2C4176} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{60AC96CF-F447-4D8B-8E87-2469FD963D91} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{EAF02B70-2163-493B-AC0D-9EF298590FA3} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{1D23B8E8-313A-4D5D-9366-9F3B49519664} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}
