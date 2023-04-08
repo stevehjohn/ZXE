@@ -17,6 +17,8 @@ public class Timer : ITimer
 
     public bool Fast { get; set; }
 
+    private bool _paused;
+
     public Timer(double speedHz)
     {
         _microsecondsPerCycle = 1.0f / speedHz * Stopwatch.Frequency;
@@ -36,6 +38,16 @@ public class Timer : ITimer
     public void Stop()
     {
         _cancellationTokenSource.Cancel();
+    }
+
+    public void Pause()
+    {
+        _paused = true;
+    }
+
+    public void Resume()
+    {
+        _paused = false;
     }
 
     public void Dispose()
@@ -63,7 +75,10 @@ public class Timer : ITimer
                 }
             }
 
-            cycles = OnTick();
+            if (! _paused)
+            {
+                cycles = OnTick();
+            }
         }
         // ReSharper disable once FunctionNeverReturns
     }
@@ -80,7 +95,10 @@ public class Timer : ITimer
             {
             }
 
-            HandleRefreshInterrupt();
+            if (! _paused)
+            {
+                HandleRefreshInterrupt();
+            }
         }
         // ReSharper disable once FunctionNeverReturns
     }

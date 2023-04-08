@@ -101,7 +101,7 @@ public class Monitor : Game
 
         if (Keyboard.GetState().IsKeyDown(Keys.F10))
         {
-            _motherboard.Stop();
+            _motherboard.Pause();
 
             //var loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
 
@@ -119,7 +119,7 @@ public class Monitor : Game
 
             //_motherboard.Ram.Load(data, 0x8000);
 
-            //_motherboard.Start();
+            _motherboard.Resume();
         }
 
         if (Keyboard.GetState().IsKeyDown(Keys.F9))

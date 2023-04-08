@@ -1,7 +1,7 @@
 ﻿//#define TRACE_OVER_IP
 
-using System.Diagnostics;
 #if TRACE_OVER_IP
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -113,6 +113,16 @@ public class Motherboard : IDisposable
     public void Stop()
     {
         _timer.Stop();
+    }
+
+    public void Pause()
+    {
+        _timer.Pause();
+    }
+
+    public void Resume()
+    {
+        _timer.Resume();
     }
 
     public void Reset(int programCounter = 0x0000)

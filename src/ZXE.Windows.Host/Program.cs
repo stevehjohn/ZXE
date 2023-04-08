@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Infrastructure;
+﻿using ZXE.Common.DebugHelpers;
+using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Windows.Host.Display;
 

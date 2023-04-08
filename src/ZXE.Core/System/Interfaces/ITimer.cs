@@ -8,5 +8,9 @@ public interface ITimer : IDisposable
 
     void Stop();
 
+    void Pause();
+
+    void Resume();
+
     bool Fast { get; set; }
 }

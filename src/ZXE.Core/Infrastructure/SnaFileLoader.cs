@@ -60,7 +60,7 @@ public class SnaFileLoader
 
         _state.Registers[Register.R] = data[0x14];
 
-        _state.Registers.WritePair(Register.AF, (ushort) (data[0x16] << 8 | data[0x15]));
+        _state.Registers.WritePair(Register.AF, (ushort) ((data[0x16] << 8) | data[0x15]));
 
         _state.StackPointer = (ushort) (data[0x18] << 8 | data[0x17]);
 
