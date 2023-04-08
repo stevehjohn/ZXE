@@ -32,17 +32,7 @@ public class State
 
     public int OpcodePrefix { get; set; }
 
-    private bool _iff1;
-
-    public bool InterruptFlipFlop1
-    {
-        get => _iff1;
-        set
-        {
-            _iff1 = value;
-            Debugger.Log(0, "INFO", $"{value}\n");
-        }
-    }
+    public bool InterruptFlipFlop1 { get; set; }
 
     public bool InterruptFlipFlop2 { get; set; }
 
