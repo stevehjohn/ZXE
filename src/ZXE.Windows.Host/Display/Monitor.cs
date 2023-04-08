@@ -1,11 +1,12 @@
 ﻿//#define DELAY
 // Use the above to pause boot to allow for recording.
 
-using System.IO;
-using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.IO;
+using System.Linq;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Windows.Host.Infrastructure;
@@ -21,6 +22,8 @@ public class Monitor : Game
     private readonly VRamAdapter _vRamAdapter;
 
     private SpriteBatch _spriteBatch;
+
+    private string _imageName = "Standard ROM";
 
 #if DELAY
     private int _count = 0;
@@ -98,23 +101,13 @@ public class Monitor : Game
         {
             _motherboard.Pause();
 
-            //var loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
-
             var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
-            //loader.Load("..\\..\\..\\..\\..\\Game Images\\Horace Goes Skiing\\image-0.z80");
-            adapter.Load("..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.sna");
-            //loader.Load("..\\..\\..\\..\\..\\Game Images\\Fantasy World Dizzy\\image-0.sna");
-            //loader.Load("..\\..\\..\\..\\..\\Other Images\\snaptest.sna");
-            //loader.Load("..\\..\\..\\..\\..\\Game Images\\Dizzy\\image-0.sna");
-            //loader.Load("..\\..\\..\\..\\..\\Game Images\\Jet Pac\\image-0.sna");
-            //loader.Load("..\\..\\..\\..\\..\\Game Images\\Manic Miner\\image-0.z80");
-            //loader.Load("..\\..\\..\\..\\..\\Game Images\\Head Over Heels\\image-0.z80");
-            //loader.Load("..\\..\\..\\..\\..\\Other Images\\snaptest.v1.z80");
+            var file = "..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.sna";
 
-            //var data = File.ReadAllBytes("..\\..\\..\\..\\..\\Other Images\\zexall-spectrum.com");
+            adapter.Load(file);
 
-            //_motherboard.Ram.Load(data, 0x8000);
+            _imageName = file.Split('\\')[^2];
 
             _motherboard.Resume();
         }
@@ -139,7 +132,12 @@ public class Monitor : Game
 
             var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
-            adapter.Save("state.sna");
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ZXE Snapshots", $"{_imageName} {DateTime.Now:yyyy-MM-dd HH-mm}.sna");
+
+            // TODO: This is me-specific.
+            path = path.Replace("OneDrive\\", string.Empty);
+
+            adapter.Save(path);
 
             _motherboard.Resume();
         }
@@ -152,7 +150,19 @@ public class Monitor : Game
 
             var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
-            adapter.Load("state.sna");
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ZXE Snapshots");
+
+            // TODO: This is me-specific.
+            path = path.Replace("OneDrive\\", string.Empty);
+
+            var directoryInfo = new DirectoryInfo(path);
+
+            var file = directoryInfo.EnumerateFiles("*").MaxBy(f => f.CreationTimeUtc);
+
+            if (file != null)
+            {
+                adapter.Load(file.FullName);
+            }
 
             _motherboard.Resume();
         }

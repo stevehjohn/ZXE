@@ -26,6 +26,10 @@ xx = Opcode, dd = Displacement value (byte).
 
 ## Tests
 
+### Running ZexAll/ZexDoc
+
+Load zex[all|doc]-spectrum.com into 0x8000 and run `RANDOMIZE USR 32768`.
+
 ### Third Party Tests Failing - not considering undocumented flags.
 
 Number failing: 8

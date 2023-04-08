@@ -27,6 +27,8 @@ public class SnaFileAdapter
 
     public void Save(string filename)
     {
+        Directory.CreateDirectory(Path.GetDirectoryName(filename)!);
+
         using var file = File.Create(filename);
 
         WriteRegisters(file);
