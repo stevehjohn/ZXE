@@ -208,9 +208,7 @@ public partial class Processor
 
         if (_state.InterruptFlipFlop1)
         {
-            _state.InterruptFlipFlop1 = false;
-
-            _state.InterruptFlipFlop2 = false;
+            _state.InterruptFlipFlop1 = _state.InterruptFlipFlop2 = false;
 
             int address;
 

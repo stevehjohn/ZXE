@@ -359,7 +359,9 @@ public static class ProcessorMiscellaneousInstructions
         input.State.InterruptFlipFlop1 = false;
         
         input.State.InterruptFlipFlop2 = false;
-        
+
+        Debugger.Log(0, "INFO", "DI\n");
+
         return 0;
     }
 
@@ -368,6 +370,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.InterruptFlipFlop1 = true;
         
         input.State.InterruptFlipFlop2 = true;
+
+        Debugger.Log(0, "INFO", "EI\n");
 
         return 0;
     }

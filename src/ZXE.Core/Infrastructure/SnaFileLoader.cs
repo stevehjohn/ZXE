@@ -57,7 +57,7 @@ public class SnaFileLoader
         _state.InterruptFlipFlop1 = (data[0x13] & 0x04) > 0;
 
         _state.InterruptFlipFlop2 = (data[0x13] & 0x04) > 0;
-
+        
         _state.Registers[Register.R] = data[0x14];
 
         _state.Registers.WritePair(Register.AF, (ushort) ((data[0x16] << 8) | data[0x15]));
