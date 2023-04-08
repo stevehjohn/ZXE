@@ -4,6 +4,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.DXGI;
 using System;
 using System.IO;
 using System.Linq;
@@ -101,11 +102,15 @@ public class Monitor : Game
         {
             _motherboard.Pause();
 
-            var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+            var file = "..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.z80";
 
-            var file = "..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.sna";
+            //var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
-            adapter.Load(file);
+            //adapter.Load(file);
+
+            var loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
+
+            loader.Load(file);
 
             _imageName = file.Split('\\')[^2];
 

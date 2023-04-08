@@ -100,31 +100,31 @@ public class Z80FileLoader
     {
         _state.Registers.WritePair(Register.AF, (ushort) (data[0] << 8 | data[1]));
 
-        _state.Registers.WritePair(Register.BC, (ushort) (data[2] << 8 | data[3]));
+        _state.Registers.WritePair(Register.BC, (ushort) (data[3] << 8 | data[2]));
 
-        _state.Registers.WritePair(Register.HL, (ushort) (data[4] << 8 | data[5]));
+        _state.Registers.WritePair(Register.HL, (ushort) (data[5] << 8 | data[4]));
 
-        _state.ProgramCounter = (ushort) (data[6] << 8 | data[7]);
+        _state.ProgramCounter = (ushort) (data[7] << 8 | data[6]);
 
-        _state.StackPointer = (ushort) (data[8] << 8 | data[9]);
+        _state.StackPointer = (ushort) (data[9] << 8 | data[8]);
 
         _state.Registers[Register.I] = data[10];
 
-        _state.Registers[Register.R] = (byte) (data[11] | data[12] & 0x80);
+        _state.Registers[Register.R] = (byte) (data[11] | ((data[12] & 0x01) << 7));
 
-        _state.Registers.WritePair(Register.DE, (ushort) (data[13] << 8 | data[14]));
+        _state.Registers.WritePair(Register.DE, (ushort) (data[14] << 8 | data[13]));
 
-        _state.Registers.WritePair(Register.BC_, (ushort) (data[15] << 8 | data[16]));
+        _state.Registers.WritePair(Register.BC_, (ushort) (data[16] << 8 | data[15]));
 
-        _state.Registers.WritePair(Register.DE_, (ushort) (data[17] << 8 | data[18]));
+        _state.Registers.WritePair(Register.DE_, (ushort) (data[18] << 8 | data[17]));
 
-        _state.Registers.WritePair(Register.HL_, (ushort) (data[19] << 8 | data[20]));
+        _state.Registers.WritePair(Register.HL_, (ushort) (data[20] << 8 | data[19]));
 
-        _state.Registers.WritePair(Register.AF_, (ushort) (data[21] << 8 | data[21]));
+        _state.Registers.WritePair(Register.AF_, (ushort) (data[21] << 8 | data[22]));
 
-        _state.Registers.WritePair(Register.IX, (ushort) (data[23] << 8 | data[24]));
+        _state.Registers.WritePair(Register.IY, (ushort) (data[24] << 8 | data[23]));
 
-        _state.Registers.WritePair(Register.IY, (ushort) (data[25] << 8 | data[26]));
+        _state.Registers.WritePair(Register.IX, (ushort) (data[26] << 8 | data[25]));
 
         _state.InterruptFlipFlop1 = data[27] != 0;
 
