@@ -101,13 +101,13 @@ public class Monitor : Game
         {
             _motherboard.Pause();
 
-            var file = "..\\..\\..\\..\\..\\Game Images\\Treasure Island Dizzy\\image-0.z80";
+            var file = "..\\..\\..\\..\\..\\Game Images\\Fantasy World Dizzy\\image-0.sna";
 
             //var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
             //adapter.Load(file);
 
-            var loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
+            var loader = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
             loader.Load(file);
 
