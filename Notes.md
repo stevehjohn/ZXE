@@ -47,6 +47,31 @@ ED BB 0002: OTDR
 
 ### Third Party Tests Failing - including undocumented flags.
 
+Number failing: 20
+
+```
+37 0000: SCF
+3F 0001: CCF
+DD 37 0009: SCF
+DD 3F 0001: CCF
+ED A1 0004: CPI
+ED A2 0157: INI
+ED A3 0000: OUTI
+ED A9 0000: CPD
+ED AA 0000: IND
+ED AB 0000: OUTD
+ED B0 0001: LDIR
+ED B1 0000: CPIR
+ED B2 0000: INIR
+ED B3 0000: OTIR
+ED B8 0000: LDDR
+ED B9 0000: CPDR
+ED BA 0000: INDR
+ED BB 0000: OTDR
+FD 37 0003: SCF
+FD 3F 0000: CCF
+```
+
 ### Fuse Tests Failing - not considering undocumented flags.
 
 Number failing: 31
