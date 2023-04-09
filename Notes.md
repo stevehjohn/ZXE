@@ -45,6 +45,8 @@ ED BA 0000: INDR
 ED BB 0002: OTDR
 ```
 
+### Third Party Tests Failing - including undocumented flags.
+
 ### Fuse Tests Failing - not considering undocumented flags.
 
 Number failing: 31

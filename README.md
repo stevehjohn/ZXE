@@ -4,15 +4,7 @@ A ZX Spectrum emulator. Mostly about just seeing if I can.
 
 Runs BASIC, and I've tested it with the first Dizzy, Treasure Island Dizzy and Fantasy World Dizzy. No sound yet though.
 
-## Main TODOs
-
-- Check which instructions set/reset Q.
-- With some conditional opcodes (e.g. CALL cc, JP cc, JR cc, RET cc), more cycles are used if condition is met. Account for this in the timings. Actually, maybe this can be handled with the condition checking being a separate function...
-- Check undocumented flag implementation against https://worldofspectrum.org/faq/reference/z80reference.htm
-- IN/OUT stuff.
-- Interrupt stuff.
-- R register shenannigans.
-- Opposite of PutFlagsInFRegister.
+https://www.outsidecontextproblem.com/zxe-tid-works.html
 
 ## Features
 
