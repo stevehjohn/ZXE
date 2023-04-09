@@ -4,7 +4,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.DXGI;
 using System;
 using System.IO;
 using System.Linq;
@@ -113,6 +112,19 @@ public class Monitor : Game
             loader.Load(file);
 
             _imageName = file.Split('\\')[^2];
+
+            _motherboard.Resume();
+        }
+
+        if (Keyboard.GetState().IsKeyDown(Keys.F6))
+        {
+            _motherboard.Pause();
+
+            var file = "..\\..\\..\\..\\..\\Other Images\\zexall-spectrum.com";
+
+            _imageName = file.Split('\\')[^2];
+
+            _motherboard.Ram.Load(File.ReadAllBytes(file), 0x8000);
 
             _motherboard.Resume();
         }
