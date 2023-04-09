@@ -118,6 +118,8 @@ public class Motherboard : IDisposable
     public void Pause()
     {
         _timer.Pause();
+
+        Thread.Sleep(100);
     }
 
     public void Resume()
