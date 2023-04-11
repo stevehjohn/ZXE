@@ -100,24 +100,16 @@ public partial class Processor
 
         UpdateR(instruction);
 
-        var intercepted = false;
-
         if (ProcessorExtension != null)
         {
-            intercepted = ProcessorExtension.InterceptInstruction(_state, ram);
+            ProcessorExtension.InterceptInstruction(_state, ram);
         }
 
-        var additionalCycles = 0;
+        var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
 
-        if (! intercepted)
+        if (additionalCycles > -1)
         {
-
-            additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
-
-            if (additionalCycles > -1)
-            {
-                _state.ProgramCounter += instruction.Length;
-            }
+            _state.ProgramCounter += instruction.Length;
         }
 
         if (! instruction.Mnemonic.StartsWith("SOPSET") && _state.OpcodePrefix == 0)
