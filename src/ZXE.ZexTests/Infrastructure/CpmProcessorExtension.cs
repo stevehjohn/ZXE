@@ -14,11 +14,11 @@ public class CpmProcessorExtension : IProcessorExtension
         _onComplete = onComplete;
     }
 
-    public void InstructionProcessed(State state, Ram ram)
+    public bool InterceptInstruction(State state, Ram ram)
     {
         if (state.ProgramCounter != 0x05)
         {
-            return;
+            return false;
         }
 
         switch (state.Registers[Register.C])
@@ -51,5 +51,7 @@ public class CpmProcessorExtension : IProcessorExtension
 
                 break;
         }
+
+        return true;
     }
 }

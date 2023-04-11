@@ -4,5 +4,5 @@ namespace ZXE.Core.System.Interfaces;
 
 public interface IProcessorExtension
 {
-    void InstructionProcessed(State state, Ram ram);
+    bool InterceptInstruction(State state, Ram ram);
 }
