@@ -161,7 +161,13 @@ public class FormattingTracer : ITracer
             return builder.ToString();
         }
 
-        builder.Append($"    {FormatOperandData(parts[1], data, state, 0, instruction)}");
+        var operandData = FormatOperandData(parts[1], data, state, 0, instruction);
+
+        if (! string.IsNullOrWhiteSpace(operandData))
+        {
+            builder.Append($"    {operandData}");
+        }
+
 
         if (parts.Length > 2)
         {
@@ -238,9 +244,9 @@ public class FormattingTracer : ITracer
 
             if (part == "nn")
             {
-                builder.Append($"&Cyan;{part}&White; : &Green;0x{data[1] | (data[2] << 8):X4}");
+                builder.Append($"& Cyan;{part}&White;: &Green;0x{data[1] | (data[2] << 8):X4}");
 
-                continue;
+                //continue;
             }
 
             //builder.Append($"&White;{part}");
