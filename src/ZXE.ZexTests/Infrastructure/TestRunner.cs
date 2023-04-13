@@ -43,6 +43,8 @@ public class TestRunner
 
         var bus = new Bus();
 
+        var count = int.MaxValue;
+
         while (! _complete)
         {
             processor.ProcessInstruction(ram, ports, bus);
@@ -53,6 +55,13 @@ public class TestRunner
             }
 
             if (Console.KeyAvailable)
+            {
+                break;
+            }
+
+            count++;
+
+            if (count == 100)
             {
                 break;
             }
@@ -70,7 +79,14 @@ public class TestRunner
     {
         var trace = tracer.GetTrace();
 
-        for (var i = trace.Count - 2_000; i < trace.Count - 1; i++)
+        var start = trace.Count - 2_000;
+
+        if (start < 0)
+        {
+            start = 0;
+        }
+
+        for (var i = start; i < trace.Count - 1; i++)
         {
             FormattedConsole.WriteLine($"    {trace[i]}");
         }
