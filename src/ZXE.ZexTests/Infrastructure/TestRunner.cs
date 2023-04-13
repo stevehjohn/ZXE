@@ -43,7 +43,7 @@ public class TestRunner
 
         var bus = new Bus();
 
-        var count = int.MaxValue;
+        var count = 0;
 
         while (! _complete)
         {
@@ -61,11 +61,13 @@ public class TestRunner
 
             count++;
 
-            if (count == 100)
+            if (count == 3_168 + 2_000)
             {
                 break;
             }
         }
+
+        //Console.WriteLine("EXIT");
 
         Dump(tracer);
     }

@@ -243,7 +243,7 @@ public class FormattingTracer : ITracer
                 continue;
             }
 
-            builder.Append($"&White;{part}");
+            //builder.Append($"&White;{part}");
         }
 
         return builder.ToString();
