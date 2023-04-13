@@ -24,9 +24,6 @@ public class TestRunner
 
         ram.Load(data, 0x0100);
 
-        ram[0] = 0xC3;
-        ram[1] = 0x00;
-        ram[2] = 0x01;
         ram[5] = 0xC9;
 
         processor.State.ProgramCounter = 0x0100;
@@ -34,7 +31,9 @@ public class TestRunner
         processor.State.InterruptFlipFlop1 = false;
         processor.State.InterruptFlipFlop2 = false;
 
-        processor.State.StackPointer = 0xF000;
+        processor.State.InterruptMode = InterruptMode.Mode0;
+
+        processor.State.StackPointer = 0xFFFF;
 
         var cpmProcessorExtension = new CpmProcessorExtension(TestsComplete);
 
@@ -59,7 +58,7 @@ public class TestRunner
             }
         }
 
-        //Dump(tracer);
+        Dump(tracer);
     }
 
     private void TestsComplete()
@@ -71,7 +70,7 @@ public class TestRunner
     {
         var trace = tracer.GetTrace();
 
-        for (var i = trace.Count - 1; i > trace.Count - 2_000; i--)
+        for (var i = trace.Count - 2_000; i < trace.Count - 1; i++)
         {
             FormattedConsole.WriteLine($"    {trace[i]}");
         }

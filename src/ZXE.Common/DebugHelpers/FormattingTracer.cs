@@ -236,6 +236,13 @@ public class FormattingTracer : ITracer
                 continue;
             }
 
+            if (part == "nn")
+            {
+                builder.Append($"&Cyan;{part}&White; : &Green;0x{data[1] | (data[2] << 8):X4}");
+
+                continue;
+            }
+
             builder.Append($"&White;{part}");
         }
 
