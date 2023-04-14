@@ -61,13 +61,11 @@ public class TestRunner
 
             count++;
 
-            if (count == 3_168 + 2_000)
-            {
-                break;
-            }
+            //if (count == 3_168 + 2_000)
+            //{
+            //    break;
+            //}
         }
-
-        //Console.WriteLine("EXIT");
 
         Dump(tracer);
     }
