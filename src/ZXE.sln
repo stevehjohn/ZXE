@@ -92,6 +92,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fantasy World Dizzy", "Fantasy World Dizzy", "{A5E75E76-6140-4BDE-B507-18A72B2C4176}"
 	ProjectSection(SolutionItems) = preProject
 		..\Game Images\Fantasy World Dizzy\image-0.sna = ..\Game Images\Fantasy World Dizzy\image-0.sna
+		..\Game Images\Fantasy World Dizzy\image-0.z80 = ..\Game Images\Fantasy World Dizzy\image-0.z80
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Myth", "Myth", "{60AC96CF-F447-4D8B-8E87-2469FD963D91}"
