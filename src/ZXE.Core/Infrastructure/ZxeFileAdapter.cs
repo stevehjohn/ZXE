@@ -51,7 +51,9 @@ public class ZxeFileAdapter
 
         _state.StackPointer = model.State.StackPointer;
 
-        _ram.Load(model.Ram, 0x4000);
+        _state.Registers.PutRawRegisters(model.Registers!);
+
+        _ram.Load(model.Ram!, 0x4000);
     }
 
     public void Save(string filename)
@@ -61,7 +63,8 @@ public class ZxeFileAdapter
         var data = new ZxeFile
                    {
                        State = _state,
-                       Ram = _ram[0x4000..]
+                       Ram = _ram[0x4000..],
+                       Registers = _state.Registers.GetRawRegisters()
                    };
 
         var json = JsonSerializer.Serialize(data);

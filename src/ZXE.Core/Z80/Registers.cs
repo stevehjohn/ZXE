@@ -2,7 +2,7 @@
 
 public class Registers
 {
-    private readonly byte[] _registers;
+    private byte[] _registers;
 
     public Registers()
     {
@@ -74,5 +74,15 @@ public class Registers
         var lowPosition = (int) register & 0x00FF;
 
         return _registers[lowPosition];
+    }
+
+    public byte[] GetRawRegisters()
+    {
+        return _registers;
+    }
+
+    public void PutRawRegisters(byte[] registers)
+    {
+        _registers = registers;
     }
 }
