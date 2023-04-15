@@ -67,7 +67,10 @@ public class ZxeFileAdapter
                        Registers = _state.Registers.GetRawRegisters()
                    };
 
-        var json = JsonSerializer.Serialize(data);
+        var json = JsonSerializer.Serialize(data, new JsonSerializerOptions
+                                                  {
+                                                      WriteIndented = true
+                                                  });
 
         File.WriteAllText(filename, json);
     }
