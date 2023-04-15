@@ -29,7 +29,7 @@ public class ZxeFileAdapter
             return;
         }
 
-        _state.Flags = model.State.Flags;
+        _state.Flags = model.State!.Flags;
 
         _state.Halted = model.State.Halted;
 
