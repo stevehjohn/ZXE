@@ -152,7 +152,7 @@ public class Monitor : Game
             // TODO: This is me-specific.
             path = path.Replace("OneDrive\\", string.Empty);
 
-            adapter.Save(path);
+            adapter.Save(path, _imageName);
 
             _motherboard.Resume();
         }
@@ -176,7 +176,7 @@ public class Monitor : Game
 
             if (file != null)
             {
-                adapter.Load(file.FullName);
+                _imageName = adapter.Load(file.FullName);
             }
 
             _motherboard.Resume();

@@ -9,4 +9,6 @@ public class ZxeFile
     public byte[]? Ram { get; set; }
 
     public byte[]? Registers { get; set; }
+
+    public string? RomTitle { get; set; }
 }

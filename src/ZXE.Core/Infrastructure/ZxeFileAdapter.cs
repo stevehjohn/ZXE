@@ -18,7 +18,7 @@ public class ZxeFileAdapter
         _ram = ram;
     }
 
-    public void Load(string filename)
+    public string? Load(string filename)
     {
         var json = File.ReadAllText(filename);
 
@@ -26,7 +26,7 @@ public class ZxeFileAdapter
 
         if (model == null)
         {
-            return;
+            return null;
         }
 
         _state.Flags = model.State!.Flags;
@@ -54,9 +54,11 @@ public class ZxeFileAdapter
         _state.Registers.PutRawRegisters(model.Registers!);
 
         _ram.Load(model.Ram!, 0x4000);
+
+        return model.RomTitle;
     }
 
-    public void Save(string filename)
+    public void Save(string filename, string romTitle)
     {
         Directory.CreateDirectory(Path.GetDirectoryName(filename)!);
 
@@ -64,7 +66,8 @@ public class ZxeFileAdapter
                    {
                        State = _state,
                        Ram = _ram[0x4000..],
-                       Registers = _state.Registers.GetRawRegisters()
+                       Registers = _state.Registers.GetRawRegisters(),
+                       RomTitle = romTitle
                    };
 
         var json = JsonSerializer.Serialize(data, new JsonSerializerOptions
