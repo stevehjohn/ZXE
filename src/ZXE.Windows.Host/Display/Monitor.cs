@@ -101,15 +101,13 @@ public class Monitor : Game
         {
             _motherboard.Pause();
 
-            var file = "..\\..\\..\\..\\..\\Game Images\\Fantasy World Dizzy\\image-0.sna";
+            var file = "..\\..\\..\\..\\..\\Game Images\\Fantasy World Dizzy\\image-0.z80";
 
             //var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
-            //adapter.Load(file);
+            var adapter = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
 
-            var loader = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
-
-            loader.Load(file);
+            adapter.Load(file);
 
             _imageName = file.Split('\\')[^2];
 
@@ -147,9 +145,9 @@ public class Monitor : Game
         {
             _motherboard.Pause();
 
-            var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+            var adapter = new ZxeFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ZXE Snapshots", $"{_imageName} {DateTime.Now:yyyy-MM-dd HH-mm}.sna");
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ZXE Snapshots", $"{_imageName} {DateTime.Now:yyyy-MM-dd HH-mm}.zxe");
 
             // TODO: This is me-specific.
             path = path.Replace("OneDrive\\", string.Empty);
@@ -165,7 +163,7 @@ public class Monitor : Game
 
             _motherboard.Reset();
 
-            var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+            var adapter = new ZxeFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ZXE Snapshots");
 
