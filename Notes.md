@@ -2,6 +2,10 @@
 
 This document just contains notes for me to refer to during implementation.
 
+## TODOs
+
+- https://worldofspectrum.org/faq/reference/128kreference.htm#Plus3
+
 ## Assembly Language
 
 - The destination is always the first parameter. `LD BC, nn` puts `nn` into the `BC` register pair.

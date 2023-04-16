@@ -29,7 +29,7 @@ public class Ram
             }
             else
             {
-                Array.Copy(_ram, 0x4000, screenRam, 0, Constants.K16);
+                Array.Copy(_banks[7], 0, screenRam, 0, Constants.K16);
             }
 
             return screenRam;
