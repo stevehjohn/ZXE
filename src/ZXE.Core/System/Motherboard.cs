@@ -54,7 +54,10 @@ public class Motherboard : IDisposable
                    ProtectRom = true
                };
 
-        _ports = new Ports();
+        _ports = new Ports
+                 {
+                     PagedEvent = PagedEvent
+                 };
 
         _bus = new Bus();
 
@@ -103,6 +106,11 @@ public class Motherboard : IDisposable
 
                 break;
         }
+    }
+
+    private void PagedEvent(byte data)
+    {
+        _ram.SetBank(data & 0b0000_0111);
     }
 
     public void Start()
