@@ -103,6 +103,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dizzy", "Dizzy", "{1D23B8E8-313A-4D5D-9366-9F3B49519664}"
 	ProjectSection(SolutionItems) = preProject
 		..\Game Images\Dizzy\image-0.sna = ..\Game Images\Dizzy\image-0.sna
+		..\Game Images\Dizzy\image-0.z80 = ..\Game Images\Dizzy\image-0.z80
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum 128", "ZX Spectrum 128", "{88199B3B-864A-4474-81DC-A1C92463C377}"
