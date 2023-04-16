@@ -133,6 +133,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Barbarian", "Barbarian", "{
 		..\Game Images\Barbarian\image-0.z80 = ..\Game Images\Barbarian\image-0.z80
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Robocop", "Robocop", "{31F4F688-EE97-4621-BBBA-20A8FCC89240}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Robocop\image-0.z80 = ..\Game Images\Robocop\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cybernoid", "Cybernoid", "{417E6891-E55D-4FDF-938F-48272C63DF85}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Cybernoid\image-0.z80 = ..\Game Images\Cybernoid\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Exolon", "Exolon", "{8CC52AD5-AC2E-4F2C-8CFF-8E31B30AE44F}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Exolon\image-0.z80 = ..\Game Images\Exolon\image-0.z80
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -241,6 +256,9 @@ Global
 		{260A7DA2-05BA-4638-B23D-0D88CD5D3006} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{6358DF9D-5C3A-4FDF-9CAE-3435AB2F5857} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{0174D6EB-3CAB-45D2-8587-37F2B91CDC0B} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{31F4F688-EE97-4621-BBBA-20A8FCC89240} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{417E6891-E55D-4FDF-938F-48272C63DF85} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{8CC52AD5-AC2E-4F2C-8CFF-8E31B30AE44F} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}
