@@ -4,7 +4,7 @@ public class Ports
 {
     private readonly byte?[] _ports;
 
-    public Action<byte>? PagedEvent { set; private get; }
+    public Action<byte, byte>? PagedEvent { set; private get; }
 
     public Ports()
     {
@@ -25,13 +25,25 @@ public class Ports
         return value;
     }
 
+    private bool _pagingDisabled;
+
     public void WriteByte(ushort port, byte data)
     {
         _ports[port] = data;
 
-        if ((port == 0x7FFD || port == 0x1FFD) && PagedEvent != null)
+        if (port == 0x7FFD && PagedEvent != null && ! _pagingDisabled)
         {
-            PagedEvent(data);
+            if ((data & 0b00010000) > 0)
+            {
+                _pagingDisabled = true;
+            }
+
+            PagedEvent(0x7F, data);
+        }
+
+        if (port == 0x1FFD && PagedEvent != null && ! _pagingDisabled)
+        {
+            PagedEvent(0x1F, data);
         }
     }
 

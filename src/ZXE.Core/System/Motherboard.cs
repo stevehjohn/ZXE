@@ -122,7 +122,7 @@ public class Motherboard : IDisposable
         }
     }
 
-    private void PagedEvent(byte data)
+    private void PagedEvent(byte port, byte data)
     {
         _ram.SetBank(data & 0b0000_0111);
 
