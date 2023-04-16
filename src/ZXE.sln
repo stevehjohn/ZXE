@@ -118,6 +118,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum +2", "ZX Spectr
 		..\ROM Images\ZX Spectrum +2\image-1.rom = ..\ROM Images\ZX Spectrum +2\image-1.rom
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Teenage Mutant Hero Turtles", "Teenage Mutant Hero Turtles", "{260A7DA2-05BA-4638-B23D-0D88CD5D3006}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Teenage Mutant Hero Turtles\image-0.z80 = ..\Game Images\Teenage Mutant Hero Turtles\image-0.z80
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -223,6 +228,7 @@ Global
 		{1D23B8E8-313A-4D5D-9366-9F3B49519664} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{88199B3B-864A-4474-81DC-A1C92463C377} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
 		{94D5F65D-6B17-46DD-8659-83893E5D06F5} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
+		{260A7DA2-05BA-4638-B23D-0D88CD5D3006} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}
