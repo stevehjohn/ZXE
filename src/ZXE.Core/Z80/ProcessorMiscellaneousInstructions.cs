@@ -149,15 +149,15 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Carry = ! input.State.Flags.Carry;
 
         // TODO: XOR with Q register?
-        var xFlags = input.State.Flags.ToByte() | input.State.Registers[Register.A];
+        var x = (byte) (input.State.Q ^ (input.State.Flags.ToByte() | input.State.Registers[Register.A]));
 
         // Flags
         // Carry adjusted by operation
         input.State.Flags.AddSubtract = false;
         // ParityOverflow unaffected
-        input.State.Flags.X1 = (input.State.Registers[Register.A] & 0x08) > 0;
+        input.State.Flags.X1 = (x & 0x08) > 0;
         input.State.Flags.HalfCarry = value;
-        input.State.Flags.X2 = (input.State.Registers[Register.A] & 0x20) > 0;
+        input.State.Flags.X2 = (x & 0x20) > 0;
         // Zero unaffected
         // Sign unaffected
 

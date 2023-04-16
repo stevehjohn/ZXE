@@ -1,4 +1,4 @@
-﻿#define UNATTENDED
+﻿//#define UNATTENDED
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -6,7 +6,6 @@ using ZXE.Common.ConsoleHelpers;
 using ZXE.Common.DebugHelpers;
 using ZXE.Common.Extensions;
 using ZXE.Core.Exceptions;
-using ZXE.Core.Infrastructure;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System;
 using ZXE.Core.ThirdPartyTests.Models;
@@ -40,7 +39,7 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
-            //if (Path.GetFileName(file).CompareTo("cb 46 ") < 0)
+            //if (Path.GetFileName(file).CompareTo("dd 3f ") < 0)
             //{
             //    continue;
             //}
