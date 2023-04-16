@@ -44,7 +44,7 @@ public class VRamAdapter
         {
             for (var x = 0; x < Constants.ScreenWidthBytes; x++)
             {
-                var address = 0b0100_0000_0000_0000;
+                var address = 0;
 
                 address |= (y & 0b0000_0111) << 8;
 
@@ -54,7 +54,7 @@ public class VRamAdapter
 
                 address |= x;
 
-                var segment = _ram[address];
+                var segment = _ram.ScreenRam[address];
 
                 var colours = GetColours(x, y);
 
@@ -86,13 +86,14 @@ public class VRamAdapter
 
     private (Color Foreground, Color Background) GetColours(int x, int y)
     {
-        var colourAddress = 0x5800;
+        var colourAddress = 0x1800;
 
         var offset = x + y / 8 * 32;
 
         colourAddress += offset;
 
-        var data = _ram[colourAddress];
+        // TODO: This will cause array to be copied twice.
+        var data = _ram.ScreenRam[colourAddress];
 
         var background = ((data & 0b00111000) >> 3) switch
         {

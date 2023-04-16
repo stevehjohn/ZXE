@@ -14,6 +14,18 @@ public class Ram
 
     public bool ProtectRom { get; set; }
 
+    public byte[] ScreenRam
+    {
+        get
+        {
+            var screenRam = new byte[Constants.K16];
+
+            Array.Copy(_ram, 0x4000, screenRam, 0, Constants.K16);
+
+            return screenRam;
+        }
+    }
+
     public Ram()
     {
         _ram = new byte[RamSize];
