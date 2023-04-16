@@ -290,6 +290,7 @@ public static class ProcessorMiscellaneousInstructions
         // TODO: Hmm. Might have to get into buses and stuff for this one... bugger.
 
         // Flags unaffected
+        input.Ports.WriteByte((ushort) (input.Data[1] & (input.State.Registers[Register.A] << 8)), input.State.Registers[Register.A]);
 
         input.State.MemPtr = (ushort) (((input.Data[1] + 1) & 0xFF) | (input.State.Registers[register] << 8));
 
@@ -591,6 +592,7 @@ public static class ProcessorMiscellaneousInstructions
     public static int OUT_addr_RR_R(Input input, Register destination, Register source)
     {
         // Flags unaffected
+        input.Ports.WriteByte(input.State.Registers.ReadPair(destination), input.State.Registers[source]);
 
         input.State.MemPtr = (ushort) (((input.Ram[input.State.Registers.ReadPair(destination)] + 1) & 0xFF) | (input.State.Registers[source] << 8));
 

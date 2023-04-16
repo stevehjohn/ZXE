@@ -29,7 +29,7 @@ public class Ports
     {
         _ports[port] = data;
 
-        if (port == 0x7FFD && PagedEvent != null)
+        if ((port == 0x7FFD || port == 0x1FFD) && PagedEvent != null)
         {
             PagedEvent(data);
         }
