@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Infrastructure;
+﻿using ZXE.Core.Exceptions;
+using ZXE.Core.Infrastructure;
 
 namespace ZXE.Core.System;
 
@@ -12,6 +13,8 @@ public class Ram
 
     private int _bank;
 
+    private int _screen = 1;
+
     public bool ProtectRom { get; set; }
 
     public byte[] ScreenRam
@@ -20,7 +23,14 @@ public class Ram
         {
             var screenRam = new byte[Constants.K16];
 
-            Array.Copy(_ram, 0x4000, screenRam, 0, Constants.K16);
+            if (_screen == 1)
+            {
+                Array.Copy(_ram, 0x4000, screenRam, 0, Constants.K16);
+            }
+            else
+            {
+                Array.Copy(_ram, 0x4000, screenRam, 0, Constants.K16);
+            }
 
             return screenRam;
         }
@@ -36,6 +46,16 @@ public class Ram
         {
             _banks[b] = new byte[Constants.K16];
         }
+    }
+
+    public void SetScreen(int screen)
+    {
+        if (screen < 1 || screen > 2)
+        {
+            throw new RamException($"Invalid screen {screen}");
+        }
+
+        _screen = screen;
     }
 
     public void SetBank(int bank)
