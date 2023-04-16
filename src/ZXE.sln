@@ -105,6 +105,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dizzy", "Dizzy", "{1D23B8E8
 		..\Game Images\Dizzy\image-0.sna = ..\Game Images\Dizzy\image-0.sna
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum 128", "ZX Spectrum 128", "{88199B3B-864A-4474-81DC-A1C92463C377}"
+	ProjectSection(SolutionItems) = preProject
+		..\ROM Images\ZX Spectrum 128\image-0.rom = ..\ROM Images\ZX Spectrum 128\image-0.rom
+		..\ROM Images\ZX Spectrum 128\image-1.rom = ..\ROM Images\ZX Spectrum 128\image-1.rom
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -208,6 +214,7 @@ Global
 		{A5E75E76-6140-4BDE-B507-18A72B2C4176} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{60AC96CF-F447-4D8B-8E87-2469FD963D91} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{1D23B8E8-313A-4D5D-9366-9F3B49519664} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{88199B3B-864A-4474-81DC-A1C92463C377} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}

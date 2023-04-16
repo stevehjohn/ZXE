@@ -99,6 +99,13 @@ public class Motherboard : IDisposable
 
                 break;
 
+            case Model.Spectrum128:
+                data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum 128\\image-0.rom");
+
+                _ram.Load(data, 0);
+
+                break;
+
             case Model.SpectrumPlus3:
                 data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum +3\\image-0.rom");
 
