@@ -124,6 +124,11 @@ public class Motherboard : IDisposable
 
     private void PagedEvent(byte port, byte data)
     {
+        if (port == 0x1F && (data & 0x01) > 0)
+        {
+            // Special paging.
+        }
+
         _ram.SetBank(data & 0b0000_0111);
 
         _ram.SetScreen((data & 0b0000_1000) > 0 ? 2 : 1);

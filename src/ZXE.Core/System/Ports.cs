@@ -35,13 +35,13 @@ public class Ports
         {
             if ((data & 0b00010000) > 0)
             {
-                _pagingDisabled = true;
+                //_pagingDisabled = true;
             }
 
             PagedEvent(0x7F, data);
         }
 
-        if (port == 0x1FFD && PagedEvent != null && ! _pagingDisabled)
+        if (port == 0x1FFD && PagedEvent != null)
         {
             PagedEvent(0x1F, data);
         }
