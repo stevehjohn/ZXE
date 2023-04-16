@@ -10,6 +10,8 @@ public class Ram
 
     private readonly byte[][] _banks;
 
+    private int _bank;
+
     public bool ProtectRom { get; set; }
 
     public Ram()
@@ -24,11 +26,28 @@ public class Ram
         }
     }
 
+    public void SetBank(int bank)
+    {
+        _bank = bank;
+
+        Array.Copy(_banks[bank], 0, _ram, 0xC000, Constants.K16);
+    }
+
     public byte this[int address]
     {
         get => _ram[address & 0xFFFF];
 
-        set => _ram[address & 0xFFFF] = address < 0x4000 && ProtectRom ? _ram[address] : value;
+        set
+        {
+            address &= 0xFFFF;
+
+            _ram[address] = address < 0x4000 && ProtectRom ? _ram[address] : value;
+
+            if (address >= 0xC000)
+            {
+                _banks[_bank][address - 0xC000] = value;
+            }
+        }
     }
 
     public byte[] this[Range range] => _ram[range];
@@ -36,6 +55,8 @@ public class Ram
     public void Load(byte[] data, int destination)
     {
         Array.Copy(data, 0, _ram, destination, data.Length);
+
+        Array.Copy(_ram, 0xC000, _banks[_bank], 0, Constants.K16);
     }
 
     public byte[] GetData(int start, int length)
