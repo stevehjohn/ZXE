@@ -5,6 +5,7 @@ This document just contains notes for me to refer to during implementation.
 ## TODOs
 
 - https://worldofspectrum.org/faq/reference/128kreference.htm#Plus3
+- Tricky one: Render screen when 14336 TStates have passed since 50Hz refresh.
 
 ## Assembly Language
 
