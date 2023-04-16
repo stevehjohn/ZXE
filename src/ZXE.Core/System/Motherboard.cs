@@ -49,7 +49,7 @@ public class Motherboard : IDisposable
 
     public Motherboard(Model model, ITracer? tracer)
     {
-        _ram = new Ram(model)
+        _ram = new Ram
                {
                    ProtectRom = true
                };

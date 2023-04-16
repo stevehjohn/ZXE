@@ -192,7 +192,7 @@ public class TestRunner
 
     private static (bool Passed, int Operations, State State, Ram Ram, Exception? Exception, string? Mnemonic) ExecuteTest(TestDefinition test, ITracer? tracer = null)
     {
-        var ram = new Ram(Model.Spectrum48K);
+        var ram = new Ram();
 
         var processor = tracer != null
                             ? new Processor(tracer)

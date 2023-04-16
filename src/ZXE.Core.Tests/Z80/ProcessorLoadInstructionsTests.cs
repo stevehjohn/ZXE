@@ -25,7 +25,7 @@ public class ProcessorLoadInstructionsTests
     {
         _processor = new Processor();
 
-        _ram = new Ram(Model.Spectrum48K);
+        _ram = new Ram();
 
         _state = new State();
 

@@ -4,19 +4,24 @@ namespace ZXE.Core.System;
 
 public class Ram
 {
+    private const int RamSize = Constants.K64;
+
     private readonly byte[] _ram;
 
-    public int Size { get; }
+    private readonly byte[][] _banks;
 
     public bool ProtectRom { get; set; }
 
-    public Ram(Model model)
+    public Ram()
     {
-        var size = model == Model.Spectrum48K ? Constants.K64 : Constants.K128;
+        _ram = new byte[RamSize];
 
-        _ram = new byte[size];
+        _banks = new byte[8][];
 
-        Size = size;
+        for (var b = 0; b < 8; b++)
+        {
+            _banks[b] = new byte[Constants.K16];
+        }
     }
 
     public byte this[int address]
@@ -37,7 +42,7 @@ public class Ram
     {
         // TODO: Wrap?
 
-        if (start + length - 1 < Size)
+        if (start + length - 1 < RamSize)
         {
             return this[start..(start + length)];
         }
@@ -54,7 +59,7 @@ public class Ram
 
             position++;
 
-            if (position >= Size)
+            if (position >= RamSize)
             {
                 position = 0;
             }

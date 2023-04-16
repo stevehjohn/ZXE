@@ -93,7 +93,7 @@ public static class TestRunner
 
         SetProcessorState(processor, input.ProcessorState);
 
-        var ram = new Ram(Model.Spectrum48K);
+        var ram = new Ram();
 
         PopulateRam(ram, input);
 

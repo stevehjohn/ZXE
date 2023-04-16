@@ -21,7 +21,7 @@ public class ExecutesSimpleProgramWithLoop : ITest
 
         var processor = new Processor(tracer);
 
-        var ram = new Ram(Model.Spectrum48K);
+        var ram = new Ram();
 
         var state = new State();
 
