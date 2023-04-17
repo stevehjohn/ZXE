@@ -132,3 +132,73 @@ CCF
 SBC 8
 ADC 16
 SBC 16
+LDD
+CPI
+CPD
+INI
+IND
+OUTI
+OUTD
+DD CB (00 - FF) ROM
+FD CB (00 - FF) ROM
+
+### Woody Tests - Memptr results.
+
+LD A, (nn)
+LD (nn), A
+LD A, (BC)
+LD A, (DE)
+LD A, (HL)
+LD (BC), A
+LD (DE), A
+LD (HL), A
+LD HL, (nn)
+LD HL, (nn) [ED]
+LD DE, (nn)
+LD BC, (nn)
+LD IX, (nn)
+PASSED: LD IY, (nn)
+LD SP, (nn)
+LD (nn), HL
+LD (nn), HL [ED]
+LD (nn), DE
+LD (nn), BC
+LD (nn), IX
+LD (nn), IY
+LD (nn), SP
+EX (SP), HL
+EX (SP), IX
+EX (SP), IY
+ADD HL, BC
+ADD IX, BC
+ADD IY, BC
+ADC HL, BC
+SBC HL, BC
+DJNZ [NZ]
+DJNZ [Z]
+RLD
+RRD
+IN A, (nn)
+IN A, (C)
+OUT (nn), A
+OUT (C), A
+LDI,
+LDD,
+LDIR [BC = 1]
+LDIR [BC > 1]
+LDDR [BC = 1]
+LDDR [BC > 1]
+CPI
+CPD
+CPIR [BC = 1]
+CPIR [BC > 1]
+CPDR [BC = 1]
+CPDR [BC > 1]
+PASSED: INI
+IND
+INIR
+ONDR
+OUTI
+OUTD
+OTIR
+OTDR

@@ -1141,17 +1141,17 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var port = input.State.Registers[Register.C];
+            var port = input.State.Registers.ReadPair(Register.BC);
 
             var address = input.State.Registers.ReadPair(Register.HL);
 
             var data = input.Ram[address];
 
+            input.State.Registers[Register.B]--;
+
             input.Ports.WriteByte(port, data);
 
             input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) - 1));
-
-            input.State.Registers[Register.B]--;
 
             // Flags
             input.State.Flags.Carry = data > input.State.Registers[Register.A];
@@ -1175,17 +1175,17 @@ public static class ProcessorMiscellaneousInstructions
     {
         unchecked
         {
-            var port = input.State.Registers[Register.C];
+            var port = input.State.Registers.ReadPair(Register.BC);
 
             var address = input.State.Registers.ReadPair(Register.HL);
 
             var data = input.Ram[address];
 
+            input.State.Registers[Register.B]--;
+
             input.Ports.WriteByte(port, data);
 
             input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) - 1));
-
-            input.State.Registers[Register.B]--;
 
             // Flags
             input.State.Flags.Carry = data > input.State.Registers[Register.A];
@@ -1201,7 +1201,7 @@ public static class ProcessorMiscellaneousInstructions
             
             input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) - 1);
 
-            if (input.State.Registers.ReadPair(Register.BC) != 0)
+            if (input.State.Registers[Register.B] != 0)
             {
                 input.State.ProgramCounter -= 2;
 
