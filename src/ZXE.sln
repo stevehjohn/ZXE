@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE73493D-6E10-481E-827A-58A67E1E73F1}"
 	ProjectSection(SolutionItems) = preProject
 		..\LICENSE = ..\LICENSE
+		..\Documentation\Memptr.txt = ..\Documentation\Memptr.txt
 		..\Notes.md = ..\Notes.md
 		..\README.md = ..\README.md
 		..\Documentation\Z80 Family User Manual.pdf = ..\Documentation\Z80 Family User Manual.pdf
