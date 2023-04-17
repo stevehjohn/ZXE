@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Windows.Host.Infrastructure;
@@ -108,6 +109,8 @@ public class Monitor : Game
             var adapter = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
 
             adapter.Load(file);
+
+            Thread.Sleep(250); // Prevent multiple loads, hopefully.
 
             _imageName = file.Split('\\')[^2];
 

@@ -55,8 +55,7 @@ public class Z80FileLoader
             }
             else
             {
-                // TODO: Decompress
-                pageData = data[(offset + 3)..(offset + 3 + pageLength)];
+                pageData = DecompressV2(data[(offset + 3)..(offset + 3 + pageLength)]);
             }
 
             _ram.LoadIntoPage(data[offset + 2] - 3, pageData);
@@ -85,6 +84,45 @@ public class Z80FileLoader
         var dataToLoad = compressed ? Decompress(data[30..]) : data[30..];
 
         _ram.Load(dataToLoad, 0x4000);
+    }
+
+    private byte[] DecompressV2(byte[] data)
+    {
+        var decompressed = new List<byte>();
+
+        var i = 0;
+
+        while (i < data.Length)
+        {
+            if (data[i] == 0xED)
+            {
+                if (data[i + 1] == 0xED)
+                {
+                    var length = data[i + 2];
+
+                    for (var r = 0; r < length; r++)
+                    {
+                        decompressed.Add(data[i + 3]);
+                    }
+
+                    i += 4;
+
+                    continue;
+                }
+
+                decompressed.Add(data[i]);
+
+                i++;
+            }
+            else
+            {
+                decompressed.Add(data[i]);
+
+                i++;
+            }
+        }
+
+        return decompressed.ToArray();
     }
 
     private byte[] Decompress(byte[] data)

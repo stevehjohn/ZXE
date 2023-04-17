@@ -96,18 +96,38 @@ public class VRamAdapter
 
         var data = screenRam[colourAddress];
 
-        var background = ((data & 0b00111000) >> 3) switch
+        Color background;
+
+        if ((data & 0b0100_0000) > 0)
         {
-            0 => Color.Black,
-            1 => Color.Blue,
-            2 => Color.Red,
-            3 => Color.Magenta,
-            4 => Color.Green,
-            5 => Color.Cyan,
-            6 => Color.Yellow,
-            7 => Color.White,
-            _ => Color.Black
-        };
+            background = ((data & 0b00111000) >> 3) switch
+            {
+                0 => Color.Black,
+                1 => Color.DarkBlue,
+                2 => Color.Red,
+                3 => Color.Magenta,
+                4 => Color.FromNonPremultiplied(0, 200, 0, 255),
+                5 => Color.Cyan,
+                6 => Color.Yellow,
+                7 => Color.White,
+                _ => Color.Black
+            };
+        }
+        else
+        {
+            background = ((data & 0b00111000) >> 3) switch
+            {
+                0 => Color.Black,
+                1 => Color.Blue,
+                2 => Color.FromNonPremultiplied(192, 0, 0, 255),
+                3 => Color.DarkMagenta,
+                4 => Color.Green,
+                5 => Color.DarkCyan,
+                6 => Color.FromNonPremultiplied(204, 204, 0, 255),
+                7 => Color.LightGray,
+                _ => Color.Black
+            };
+        }
 
         Color foreground;
 
