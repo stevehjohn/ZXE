@@ -85,7 +85,7 @@ public static class KeyboardMapper
         }
 
         // Account for PC arrow keys (caps + 5, 6, 7 or 8 on the speccy).
-        if (keys == Keys.Up || keys == Keys.Down || keys == Keys.Left || keys == Keys.Right)
+        if (keys == Keys.Up || keys == Keys.Down || keys == Keys.Left || keys == Keys.Right || keys == Keys.Back)
         {
             data = (byte) (data & 0b1111_1110);
         }
@@ -218,6 +218,12 @@ public static class KeyboardMapper
 
         // Numeric 0, 6 - 9.
         if (keys == Keys.D0)
+        {
+            data = (byte) (data & 0b1111_1110);
+        }
+
+        // Windows backspace.
+        if (keys == Keys.Back)
         {
             data = (byte) (data & 0b1111_1110);
         }
