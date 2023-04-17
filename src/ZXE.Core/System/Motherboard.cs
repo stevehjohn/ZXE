@@ -129,7 +129,24 @@ public class Motherboard : IDisposable
             // Special paging.
         }
 
+        if ((data & 0b0001_0000) > 0)
+        {
+            var rom = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum 128\\image-1.rom");
+
+            _ram.Load(rom, 0);
+        }
+        else
+        {
+            var rom = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum 128\\image-0.rom");
+
+            _ram.Load(rom, 0);
+        }
+
         _ram.SetBank(data & 0b0000_0111);
+
+        if ((data & 0b0000_1000) > 0)
+        {
+        }
 
         _ram.SetScreen((data & 0b0000_1000) > 0 ? 2 : 1);
     }

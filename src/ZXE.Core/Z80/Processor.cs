@@ -18,6 +18,10 @@ public partial class Processor
 
     private readonly ITracer? _tracer;
 
+    private long _opcodesExecuted;
+
+    public long OpcodesExecuted => _opcodesExecuted;
+
     // TODO: Remove - not good.
     public Instruction?[] Instructions => _instructions;
 
@@ -106,6 +110,8 @@ public partial class Processor
         }
 
         var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
+
+        _opcodesExecuted++;
 
         if (additionalCycles > -1)
         {
