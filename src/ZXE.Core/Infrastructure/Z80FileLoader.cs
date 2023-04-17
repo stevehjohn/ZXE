@@ -59,9 +59,9 @@ public class Z80FileLoader
                 pageData = data[(offset + 3)..(offset + 3 + pageLength)];
             }
 
-            //_ram.LoadIntoPage(data[offset + 2] - 3, pageData);
+            _ram.LoadIntoPage(data[offset + 2] - 3, pageData);
 
-            offset += pageLength;
+            offset += pageLength + 3;
         }
     }
 
