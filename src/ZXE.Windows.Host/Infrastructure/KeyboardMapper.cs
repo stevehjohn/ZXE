@@ -78,13 +78,13 @@ public static class KeyboardMapper
     {
         var data = (byte) 0b1111_1111;
 
-        // Caps shift
+        // Caps shift.
         if (keys == Keys.LeftShift || keys == Keys.RightShift)
         {
             data = (byte) (data & 0b1111_1110);
         }
 
-        // Account for PC arrow keys (caps + 5, 6, 7 or 8 on the speccy)
+        // Account for PC arrow keys (caps + 5, 6, 7 or 8 on the speccy).
         if (keys == Keys.Up || keys == Keys.Down || keys == Keys.Left || keys == Keys.Right)
         {
             data = (byte) (data & 0b1111_1110);
@@ -177,7 +177,7 @@ public static class KeyboardMapper
     {
         var data = (byte) 0b1111_1111;
 
-        // Numeric 1 - 5
+        // Numeric 1 - 5.
         if (keys == Keys.D1)
         {
             data = (byte) (data & 0b1111_1110);
@@ -203,7 +203,7 @@ public static class KeyboardMapper
             data = (byte) (data & 0b1110_1111);
         }
 
-        // Windows left arrow
+        // Windows left arrow.
         if (keys == Keys.Left)
         {
             data = (byte) (data & 0b1110_1111);
@@ -214,33 +214,53 @@ public static class KeyboardMapper
 
     private static byte ScanForEFFEKeys(Keys keys)
     {
-        // Numeric 0, 6 - 9
+        var data = (byte) 0b1111_1111;
+
+        // Numeric 0, 6 - 9.
         if (keys == Keys.D0)
         {
-            return 0b11111110;
+            data = (byte) (data & 0b1111_1110);
         }
 
         if (keys == Keys.D9)
         {
-            return 0b11111101;
+            data = (byte) (data & 0b1111_1101);
         }
 
         if (keys == Keys.D8)
         {
-            return 0b11111011;
+            data = (byte) (data & 0b1111_1011);
+        }
+
+        // Windows right arrow.
+        if (keys == Keys.Right)
+        {
+            data = (byte) (data & 0b1111_1011);
         }
 
         if (keys == Keys.D7)
         {
-            return 0b11110111;
+            data = (byte) (data & 0b1111_0111);
+        }
+
+        // Windows up arrow.
+        if (keys == Keys.Up)
+        {
+            data = (byte) (data & 0b1111_0111);
         }
 
         if (keys == Keys.D6)
         {
-            return 0b11101111;
+            data = (byte) (data & 0b1110_1111);
         }
 
-        return 0b11111111;
+        // Windows down arrow.
+        if (keys == Keys.Down)
+        {
+            data = (byte) (data & 0b1110_1111);
+        }
+
+        return data;
     }
 
     private static byte ScanForDFFEKeys(Keys keys)
@@ -310,7 +330,7 @@ public static class KeyboardMapper
             return 0b11111110;
         }
 
-        // Symbol shift
+        // Symbol shift.
         if (keys == Keys.LeftAlt)
         {
             return 0b11111101;
