@@ -43,6 +43,8 @@ public class State
 
     public bool InterruptFlipFlop2 { get; set; }
 
+    public bool SkipInterrupt { get; set; }
+
     public byte Q { get; set; }
 
     public State()

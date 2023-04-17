@@ -111,6 +111,11 @@ public partial class Processor
 
         var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
 
+        if (instruction.Mnemonic != "EI")
+        {
+            _state.SkipInterrupt = false;
+        }
+
         _opcodesExecuted++;
 
         if (additionalCycles > -1)
@@ -170,6 +175,11 @@ public partial class Processor
     
     public void HandleInterrupts(Ram ram, Bus bus)
     {
+        if (_state.SkipInterrupt)
+        {
+            return;
+        }
+
         if (bus.NonMaskableInterrupt)
         {
             HandleNonMaskableInterrupt(ram);

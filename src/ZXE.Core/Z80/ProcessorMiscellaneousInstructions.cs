@@ -370,6 +370,8 @@ public static class ProcessorMiscellaneousInstructions
         
         input.State.InterruptFlipFlop2 = true;
 
+        input.State.SkipInterrupt = true;
+
         return 0;
     }
 
