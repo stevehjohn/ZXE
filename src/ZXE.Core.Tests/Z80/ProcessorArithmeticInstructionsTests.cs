@@ -127,13 +127,13 @@ public class ProcessorArithmeticInstructionsTests
         // INC SP
         _ram[0x4000] = 0x33;
 
-        _state.StackPointer = 0x1234;
+        _state.StackPointer = 0xF234;
         
         _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x1235, _state.StackPointer);
+        Assert.Equal(0xF235, _state.StackPointer);
     }
 
     [Fact]
@@ -190,13 +190,13 @@ public class ProcessorArithmeticInstructionsTests
         // DEC SP
         _ram[0x4000] = 0x3B;
 
-        _state.StackPointer = 0x1235;
+        _state.StackPointer = 0xF235;
         
         _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x1234, _state.StackPointer);
+        Assert.Equal(0xF234, _state.StackPointer);
     }
 
     [Fact]

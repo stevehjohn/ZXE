@@ -174,16 +174,16 @@ public class ProcessorLoadInstructionsTests
     [Fact]
     public void LD_SP_nn()
     {
-        // LD SP, 0x1234
+        // LD SP, 0xF234
         _ram[0x4000] = 0x31;
         _ram[0x4001] = 0x34;
-        _ram[0x4002] = 0x12;
+        _ram[0x4002] = 0xF2;
         
         _state.ProgramCounter = 0x4000;
 
         _processor.ProcessInstruction(_ram, _ports, _bus);
 
-        Assert.Equal(0x1234, _state.StackPointer);
+        Assert.Equal(0xF234, _state.StackPointer);
     }
 
     [Fact]

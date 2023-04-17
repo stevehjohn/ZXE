@@ -1,6 +1,4 @@
-﻿using ZXE.Core.Extensions;
-
-namespace ZXE.Core.Z80;
+﻿namespace ZXE.Core.Z80;
 
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
@@ -18,9 +16,9 @@ public static class ProcessorBitOperationInstructions
         // Carry unaffected
         input.State.Flags.AddSubtract = false;
         input.State.Flags.ParityOverflow = result == 0;
-        input.State.Flags.X1 = (data & 0x08) > 0;
+        input.State.Flags.X1 = bit == 0x20 && result != 0;
         input.State.Flags.HalfCarry = true;
-        input.State.Flags.X2 = (data & 0x20) > 0;
+        input.State.Flags.X2 = bit == 0x08 && result != 0;
         input.State.Flags.Zero = result == 0;
         input.State.Flags.Sign = bit == 0x80 && result != 0;
 

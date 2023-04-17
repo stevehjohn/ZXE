@@ -17,7 +17,14 @@ public class State
     public int StackPointer
     {
         get => _stackPointer;
-        set => _stackPointer = value & 0xFFFF;
+        set { 
+            _stackPointer = value & 0xFFFF;
+
+            if (_stackPointer < 0x5B00)
+            {
+                throw new StackOverflowException();
+            }
+        }
     }
 
     public Registers Registers;
