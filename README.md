@@ -44,6 +44,7 @@ Runs tests against this awesome suite:
 
 ## Useful Resources
 
+- http://slady.net/Sinclair-ZX-Spectrum-keyboard/
 - https://gist.github.com/drhelius/8497817
 - https://mdfs.net/Software/Z80/Exerciser/Spectrum/
 - https://github.com/raxoft/z80test

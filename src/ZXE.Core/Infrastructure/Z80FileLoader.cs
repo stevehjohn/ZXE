@@ -22,20 +22,23 @@ public class Z80FileLoader
 
         LoadRegisters(data);
 
-        LoadRam(data);
-    }
+        var ramOffset = 30;
 
-    private void LoadRam(byte[] data)
-    {
         if (_state.ProgramCounter == 0)
         {
-            throw new Exception("V2. Not currently supported.");
+            // v2 or 3. data[30] == 23 for v2, 54 or 55 for v3.
+            ramOffset = 30;
         }
 
+        LoadRam(data, ramOffset);
+    }
+
+    private void LoadRam(byte[] data, int startOffset)
+    {
         var compressed = (data[12] & 0x20) > 0;
 
         // 30 == V1 header length
-        var dataToLoad = compressed ? Decompress(data[30..]) : data[30..];
+        var dataToLoad = compressed ? Decompress(data[startOffset..]) : data[startOffset..];
 
         _ram.Load(dataToLoad, 0x4000);
     }
