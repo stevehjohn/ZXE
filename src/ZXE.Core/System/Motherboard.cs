@@ -144,10 +144,6 @@ public class Motherboard : IDisposable
 
         _ram.SetBank(data & 0b0000_0111);
 
-        if ((data & 0b0000_1000) > 0)
-        {
-        }
-
         _ram.SetScreen((data & 0b0000_1000) > 0 ? 2 : 1);
     }
 

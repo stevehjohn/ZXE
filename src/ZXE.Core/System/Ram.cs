@@ -65,6 +65,11 @@ public class Ram
         Array.Copy(_banks[bank], 0, _ram, 0xC000, Constants.K16);
     }
 
+    public void LoadIntoPage(int pageNumber, byte[] data)
+    {
+        Array.Copy(_banks[pageNumber], 0, data, 0, data.Length);
+    }
+
     public byte this[int address]
     {
         get => _ram[address & 0xFFFF];

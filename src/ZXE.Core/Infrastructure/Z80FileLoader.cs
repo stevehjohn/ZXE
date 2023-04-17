@@ -22,23 +22,65 @@ public class Z80FileLoader
 
         LoadRegisters(data);
 
-        var ramOffset = 30;
-
-        if (_state.ProgramCounter == 0)
+        if (_state.ProgramCounter != 0)
         {
-            // v2 or 3. data[30] == 23 for v2, 54 or 55 for v3.
-            ramOffset = 30;
+            LoadRam(data);
+
+            return;
         }
 
-        LoadRam(data, ramOffset);
+        if (data[30] != 23)
+        {
+            throw new Exception("V3 not yet supported.");
+        }
+
+        LoadV2Parameters(data);
+
+        LoadPages(data, 55);
     }
 
-    private void LoadRam(byte[] data, int startOffset)
+    private void LoadPages(byte[] data, int offset)
+    {
+        // https://worldofspectrum.org/faq/reference/z80format.htm
+
+        var length = data[offset + 1] << 8 | data[offset];
+
+        while (offset < data.Length)
+        {
+            byte[] pageData;
+
+            if (length == 0xFF)
+            {
+                pageData = data[(offset + 3)..(offset + 3 + 0xFFFF)];
+            }
+            else
+            {
+                // TODO: Decompress
+                pageData = data[(offset + 3)..(offset + 3 + length)];
+            }
+
+            _ram.LoadIntoPage(data[offset + 2] - 3, pageData);
+        }
+    }
+
+    private void LoadV2Parameters(byte[] data)
+    {
+        _state.ProgramCounter = data[33] << 8 | data[32];
+
+        if (data[34] is 3 or 4)
+        {
+            _ram.SetBank(data[35] & 0b0000_0111);
+
+            _ram.SetScreen((data[35] & 0b0000_1000) > 0 ? 2 : 1);
+        }
+    }
+
+    private void LoadRam(byte[] data)
     {
         var compressed = (data[12] & 0x20) > 0;
 
         // 30 == V1 header length
-        var dataToLoad = compressed ? Decompress(data[startOffset..]) : data[startOffset..];
+        var dataToLoad = compressed ? Decompress(data[30..]) : data[30..];
 
         _ram.Load(dataToLoad, 0x4000);
     }
