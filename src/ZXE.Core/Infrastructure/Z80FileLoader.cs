@@ -34,9 +34,9 @@ public class Z80FileLoader
             throw new Exception("V3 not yet supported.");
         }
 
-        LoadV2Parameters(data);
-
         LoadPages(data, 55);
+
+        LoadV2Parameters(data);
     }
 
     private void LoadPages(byte[] data, int offset)

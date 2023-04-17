@@ -67,7 +67,7 @@ public class Ram
 
     public void LoadIntoPage(int pageNumber, byte[] data)
     {
-        Array.Copy(_banks[pageNumber], 0, data, 0, data.Length);
+        Array.Copy(data, 0, _banks[pageNumber], 0, data.Length);
     }
 
     public byte this[int address]
