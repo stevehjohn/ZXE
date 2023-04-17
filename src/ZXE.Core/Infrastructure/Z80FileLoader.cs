@@ -43,23 +43,25 @@ public class Z80FileLoader
     {
         // https://worldofspectrum.org/faq/reference/z80format.htm
 
-        var length = data[offset + 1] << 8 | data[offset];
-
         while (offset < data.Length)
         {
+            var pageLength = data[offset + 1] << 8 | data[offset];
+
             byte[] pageData;
 
-            if (length == 0xFF)
+            if (pageLength == 0xFF)
             {
                 pageData = data[(offset + 3)..(offset + 3 + 0xFFFF)];
             }
             else
             {
                 // TODO: Decompress
-                pageData = data[(offset + 3)..(offset + 3 + length)];
+                pageData = data[(offset + 3)..(offset + 3 + pageLength)];
             }
 
-            _ram.LoadIntoPage(data[offset + 2] - 3, pageData);
+            //_ram.LoadIntoPage(data[offset + 2] - 3, pageData);
+
+            offset += pageLength;
         }
     }
 
