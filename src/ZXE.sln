@@ -59,6 +59,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core.FuseTests", "ZXE.C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other Images", "Other Images", "{B7EC1DE2-308E-4C6D-B15F-FE4A011E9D4C}"
 	ProjectSection(SolutionItems) = preProject
+		..\Other Images\memptr-flags-tests.sna = ..\Other Images\memptr-flags-tests.sna
 		..\Other Images\snaptest.sna = ..\Other Images\snaptest.sna
 		..\Other Images\snaptest.v1.z80 = ..\Other Images\snaptest.v1.z80
 		..\Other Images\z80-tests.z80 = ..\Other Images\z80-tests.z80

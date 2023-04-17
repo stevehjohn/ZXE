@@ -125,3 +125,10 @@ None.
 bit n,[r] 1e3636bf
 cpd[r]    133e3d03
 cpi[r]    4a8c416b
+
+### Woody Tests - Flags faiures.
+
+CCF
+SBC 8
+ADC 16
+SBC 16

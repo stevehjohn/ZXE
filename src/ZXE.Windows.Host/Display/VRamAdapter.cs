@@ -94,7 +94,6 @@ public class VRamAdapter
 
         colourAddress += offset;
 
-        // TODO: This will cause array to be copied twice.
         var data = screenRam[colourAddress];
 
         var background = ((data & 0b00111000) >> 3) switch

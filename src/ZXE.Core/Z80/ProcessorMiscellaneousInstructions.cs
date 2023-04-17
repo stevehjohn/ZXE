@@ -801,7 +801,7 @@ public static class ProcessorMiscellaneousInstructions
             input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
             
-            input.State.PutFlagsInFRegister();
+            input.State.PutFlagsInFRegister(true);
 
             return 0;
         }

@@ -60,6 +60,8 @@ Runs tests against this awesome suite:
 
 - https://github.com/ArjunNair/Zero-Emulator/blob/master/Ziggy/Speccy/Z80.cs
 - https://worldofspectrum.org/faq/reference/128kreference.htm
+- https://worldofspectrum.org/forums/discussion/20345/redirect/p1
+- https://worldofspectrum.org/forums/discussion/41704
 - https://clrhome.org/table/
 - http://www.z80.info/z80syntx.htm
 - http://www.z80.info/z80code.htm

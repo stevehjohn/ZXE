@@ -127,6 +127,19 @@ public class Monitor : Game
             _motherboard.Resume();
         }
 
+        if (Keyboard.GetState().IsKeyDown(Keys.F5))
+        {
+            _motherboard.Pause();
+
+            var file = "..\\..\\..\\..\\..\\Other Images\\memptr-flags-tests.sna";
+
+            var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+
+            adapter.Load(file);
+
+            _motherboard.Resume();
+        }
+
         if (Keyboard.GetState().IsKeyDown(Keys.F9))
         {
             _motherboard.Fast = ! _motherboard.Fast;
