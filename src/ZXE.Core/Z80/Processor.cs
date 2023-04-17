@@ -111,7 +111,7 @@ public partial class Processor
 
         var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
 
-        if (instruction.Mnemonic != "EI")
+        if (instruction.Mnemonic != "EI" && ! instruction.Mnemonic.StartsWith("SOPSET"))
         {
             _state.SkipInterrupt = false;
         }
