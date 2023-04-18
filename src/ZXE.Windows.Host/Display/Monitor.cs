@@ -44,7 +44,7 @@ public class Monitor : Game
 
         _motherboard = motherboard;
 
-        _vRamAdapter = new VRamAdapter(_motherboard.Ram, _graphicsDeviceManager);
+        _vRamAdapter = new VRamAdapter(_motherboard, _graphicsDeviceManager);
 
 #if ! DELAY
         _motherboard.Start();

@@ -9,7 +9,7 @@ namespace ZXE.Windows.Host.Display;
 
 public class VRamAdapter
 {
-    private readonly Ram _ram;
+    private readonly Motherboard _motherboard;
 
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
 
@@ -21,9 +21,9 @@ public class VRamAdapter
 
     public Texture2D Display => _display;
 
-    public VRamAdapter(Ram ram, GraphicsDeviceManager graphicsDeviceManager)
+    public VRamAdapter(Motherboard motherboard, GraphicsDeviceManager graphicsDeviceManager)
     {
-        _ram = ram;
+        _motherboard = motherboard;
 
         _graphicsDeviceManager = graphicsDeviceManager;
 
@@ -40,7 +40,12 @@ public class VRamAdapter
 
         _alternate = _stopwatch.ElapsedMilliseconds > 500;
 
-        var screenRam = _ram.ScreenRam;
+        var screenRam = _motherboard.ScreenRam;
+
+        if (screenRam == null)
+        {
+            return;
+        }
 
         for (var y = 0; y < Constants.ScreenHeightPixels; y++)
         {

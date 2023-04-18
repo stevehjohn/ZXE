@@ -27,6 +27,8 @@ public class Motherboard : IDisposable
 
     private readonly ITracer? _tracer;
 
+    public byte[]? ScreenRam { get; private set; }
+
 #if TRACE_OVER_IP
     private readonly Process? _console;
 #endif
@@ -223,5 +225,7 @@ public class Motherboard : IDisposable
         _bus.Data = 0xFF;
 
         _bus.Interrupt = true;
+
+        ScreenRam = _ram.ScreenRam;
     }
 }
