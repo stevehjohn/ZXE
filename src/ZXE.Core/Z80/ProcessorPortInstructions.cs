@@ -1,4 +1,6 @@
 ﻿using ZXE.Core.Extensions;
+// ReSharper disable InconsistentNaming
+// ReSharper disable IdentifierTypo
 
 namespace ZXE.Core.Z80;
 
@@ -184,6 +186,227 @@ public static class ProcessorPortInstructions
 
             // TODO: Correctly account for extra cycles?
             input.State.Registers[Register.B]--;
+
+            if (input.State.Registers[Register.B] != 0)
+            {
+                input.State.ProgramCounter -= 2;
+
+                return 5;
+            }
+
+            return 0;
+        }
+    }
+
+    public static int OUTI(Input input)
+    {
+        unchecked
+        {
+            var port = input.State.Registers[Register.C];
+
+            var address = input.State.Registers.ReadPair(Register.HL);
+
+            var data = input.Ram[address];
+
+            input.Ports.WriteByte(port, data);
+
+            input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) + 1));
+
+            input.State.Registers[Register.B]--;
+
+            // Flags
+            input.State.Flags.Carry = data > input.State.Registers[Register.A];
+            input.State.Flags.AddSubtract = (data & 0x80) > 0;
+            input.State.Flags.ParityOverflow = input.State.Registers[Register.B].IsEvenParity();
+            input.State.Flags.X1 = (input.State.Registers[Register.B] & 0x08) > 0;
+            input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (data & 0x0F);
+            input.State.Flags.X2 = (input.State.Registers[Register.B] & 0x20) > 0;
+            input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
+            input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
+            
+            input.State.PutFlagsInFRegister();
+
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) + 1);
+
+            return 0;
+        }
+    }
+
+    public static int OTIR(Input input)
+    {
+        unchecked
+        {
+            var port = input.State.Registers[Register.C];
+
+            var address = input.State.Registers.ReadPair(Register.HL);
+
+            var data = input.Ram[address];
+
+            input.Ports.WriteByte(port, data);
+
+            input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) + 1));
+
+            input.State.Registers[Register.B]--;
+
+            // Flags
+            // Carry unaffected
+            input.State.Flags.AddSubtract = false;
+            input.State.Flags.ParityOverflow = data.IsEvenParity();
+            input.State.Flags.X1 = (data & 0x08) > 0;
+            // Half carry unknown
+            input.State.Flags.X2 = (data & 0x20) > 0;
+            input.State.Flags.Zero = true;
+            // Sign unknown
+            
+            input.State.PutFlagsInFRegister();
+            
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) + 1);
+
+            if (input.State.Registers[Register.B] != 0)
+            {
+                input.State.ProgramCounter -= 2;
+
+                return 5;
+            }
+
+            return 0;
+        }
+    }
+
+    public static int IND(Input input)
+    {
+        unchecked
+        {
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) - 1);
+
+            input.State.Registers[Register.B]--;
+
+            var port = input.State.Registers.ReadPair(Register.BC);
+
+            var value = input.Ports.ReadByte(port);
+
+            input.Ram[input.State.Registers.ReadPair(Register.HL)] = value;
+
+            input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) - 1));
+
+            // Flags
+            input.State.Flags.Carry = value > input.State.Registers[Register.A];
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+            input.State.Flags.X1 = (value & 0x08) > 0;
+            input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (value & 0x0F);
+            input.State.Flags.X2 = (value & 0x20) > 0;
+            input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
+            input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
+            
+            input.State.PutFlagsInFRegister();
+
+            return 0;
+        }
+    }
+
+    public static int INDR(Input input)
+    {
+        unchecked
+        {
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) - 1);
+
+            input.State.Registers[Register.B]--;
+
+            var port = input.State.Registers.ReadPair(Register.BC);
+
+            var value = input.Ports.ReadByte(port);
+
+            input.Ram[input.State.Registers.ReadPair(Register.HL)] = value;
+
+            input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) - 1));
+
+            // Flags
+            input.State.Flags.Carry = value > input.State.Registers[Register.A];
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+            input.State.Flags.X1 = (value & 0x08) > 0;
+            input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (value & 0x0F);
+            input.State.Flags.X2 = (value & 0x20) > 0;
+            input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
+            input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
+            
+            input.State.PutFlagsInFRegister();
+
+            if (input.State.Registers[Register.B] != 0)
+            {
+                input.State.ProgramCounter -= 2;
+
+                return 5;
+            }
+
+            return 0;
+        }
+    }
+
+    public static int OUTD(Input input)
+    {
+        unchecked
+        {
+            var port = input.State.Registers.ReadPair(Register.BC);
+
+            var address = input.State.Registers.ReadPair(Register.HL);
+
+            var data = input.Ram[address];
+
+            input.State.Registers[Register.B]--;
+
+            input.Ports.WriteByte(port, data);
+
+            input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) - 1));
+
+            // Flags
+            input.State.Flags.Carry = data > input.State.Registers[Register.A];
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+            input.State.Flags.X1 = (data & 0x08) > 0;
+            input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (data & 0x0F);
+            input.State.Flags.X2 = (data & 0x20) > 0;
+            input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
+            input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
+            
+            input.State.PutFlagsInFRegister();
+            
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) - 1);
+
+            return 0;
+        }
+    }
+
+    public static int OTDR(Input input)
+    {
+        unchecked
+        {
+            var port = input.State.Registers.ReadPair(Register.BC);
+
+            var address = input.State.Registers.ReadPair(Register.HL);
+
+            var data = input.Ram[address];
+
+            input.State.Registers[Register.B]--;
+
+            input.Ports.WriteByte(port, data);
+
+            input.State.Registers.WritePair(Register.HL, (ushort) (input.State.Registers.ReadPair(Register.HL) - 1));
+
+            // Flags
+            input.State.Flags.Carry = data > input.State.Registers[Register.A];
+            input.State.Flags.AddSubtract = true;
+            input.State.Flags.ParityOverflow = input.State.Registers.ReadPair(Register.BC) != 0;
+            input.State.Flags.X1 = (data & 0x08) > 0;
+            input.State.Flags.HalfCarry = (input.State.Registers[Register.A] & 0x0F) < (data & 0x0F);
+            input.State.Flags.X2 = (data & 0x20) > 0;
+            input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
+            input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
+            
+            input.State.PutFlagsInFRegister();
+            
+            input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) - 1);
 
             if (input.State.Registers[Register.B] != 0)
             {

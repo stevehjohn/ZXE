@@ -186,17 +186,17 @@ public partial class Processor
 
         instructions[0xEDA2] = new Instruction("INI", 1, ProcessorPortInstructions.INI, 12, null, 0xEDA2);
 
-        instructions[0xEDA3] = new Instruction("OUTI", 1, ProcessorMiscellaneousInstructions.OUTI, 12, null, 0xEDA3);
+        instructions[0xEDA3] = new Instruction("OUTI", 1, ProcessorPortInstructions.OUTI, 12, null, 0xEDA3);
 
-        instructions[0xEDA3] = new Instruction("OUTI", 1, ProcessorMiscellaneousInstructions.OUTI, 12, null, 0xEDA3);
+        instructions[0xEDA3] = new Instruction("OUTI", 1, ProcessorPortInstructions.OUTI, 12, null, 0xEDA3);
 
         instructions[0xEDA8] = new Instruction("LDD", 1, ProcessorMiscellaneousInstructions.LDD, 12, null, 0xEDA8);
 
         instructions[0xEDA9] = new Instruction("CPD", 1, ProcessorMiscellaneousInstructions.CPD, 12, null, 0xEDA9);
 
-        instructions[0xEDAA] = new Instruction("IND", 1, ProcessorMiscellaneousInstructions.IND, 12, null, 0xEDAA);
+        instructions[0xEDAA] = new Instruction("IND", 1, ProcessorPortInstructions.IND, 12, null, 0xEDAA);
 
-        instructions[0xEDAB] = new Instruction("OUTD", 1, ProcessorMiscellaneousInstructions.OUTD, 12, null, 0xEDAB);
+        instructions[0xEDAB] = new Instruction("OUTD", 1, ProcessorPortInstructions.OUTD, 12, null, 0xEDAB);
 
         instructions[0xEDB0] = new Instruction("LDIR", 1, ProcessorMiscellaneousInstructions.LDIR, 12, "LDIR BC DE HL", 0xEDB0);
 
@@ -204,7 +204,7 @@ public partial class Processor
 
         instructions[0xEDB2] = new Instruction("INIR", 1, ProcessorPortInstructions.INIR, 12, null, 0xEDB2);
 
-        instructions[0xEDB3] = new Instruction("OTIR", 1, ProcessorMiscellaneousInstructions.OTIR, 12, "OTIR B", 0xEDB3);
+        instructions[0xEDB3] = new Instruction("OTIR", 1, ProcessorPortInstructions.OTIR, 12, "OTIR B", 0xEDB3);
 
         instructions[0xEDA8] = new Instruction("LDD", 1, ProcessorMiscellaneousInstructions.LDD, 12, null, 0xEDA8);
 
@@ -212,8 +212,8 @@ public partial class Processor
 
         instructions[0xEDB9] = new Instruction("CPDR", 1, ProcessorMiscellaneousInstructions.CPDR, 12, null, 0xEDB9);
 
-        instructions[0xEDBA] = new Instruction("INDR", 1, ProcessorMiscellaneousInstructions.INDR, 12, null, 0xEDBA);
+        instructions[0xEDBA] = new Instruction("INDR", 1, ProcessorPortInstructions.INDR, 12, null, 0xEDBA);
 
-        instructions[0xEDBB] = new Instruction("OTDR", 1, ProcessorMiscellaneousInstructions.OTDR, 12, null, 0xEDBB);
+        instructions[0xEDBB] = new Instruction("OTDR", 1, ProcessorPortInstructions.OTDR, 12, null, 0xEDBB);
     }
 }
