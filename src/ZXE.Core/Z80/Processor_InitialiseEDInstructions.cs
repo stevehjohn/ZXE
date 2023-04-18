@@ -7,37 +7,37 @@ public partial class Processor
 {
     private static void InitialiseEDInstructions(Dictionary<int, Instruction> instructions)
     {
-        instructions[0xED00] = new Instruction("IN_0 B, (n)", 2, i => ProcessorMiscellaneousInstructions.IN_b_R_addr_n(i, Register.B), 8, null, 0x0ED00);
+        instructions[0xED00] = new Instruction("IN_0 B, (n)", 2, i => ProcessorPortInstructions.IN_b_R_addr_n(i, Register.B), 8, null, 0x0ED00);
 
         instructions[0xED01] = new Instruction("OUT_0 (n), B", 2, i => ProcessorMiscellaneousInstructions.OUT_b_addr_n_R(i, Register.B), 8, null, 0xED01);
 
         instructions[0xED04] = new Instruction("TST B", 1, i => ProcessorMiscellaneousInstructions.TST_R(i, Register.B), 6, null, 0xED04);
 
-        instructions[0xED08] = new Instruction("IN_0 C, (n)", 2, i => ProcessorMiscellaneousInstructions.IN_b_R_addr_n(i, Register.C), 8, null, 0x0ED08);
+        instructions[0xED08] = new Instruction("IN_0 C, (n)", 2, i => ProcessorPortInstructions.IN_b_R_addr_n(i, Register.C), 8, null, 0x0ED08);
 
         instructions[0xED09] = new Instruction("OUT_0 (n), C", 2, i => ProcessorMiscellaneousInstructions.OUT_b_addr_n_R(i, Register.C), 8, null, 0xED09);
 
         instructions[0xED0C] = new Instruction("TST C", 1, i => ProcessorMiscellaneousInstructions.TST_R(i, Register.C), 6, null, 0xED0C);
         
-        instructions[0xED10] = new Instruction("IN_0 D, (n)", 2, i => ProcessorMiscellaneousInstructions.IN_b_R_addr_n(i, Register.D), 8, null, 0x0ED10);
+        instructions[0xED10] = new Instruction("IN_0 D, (n)", 2, i => ProcessorPortInstructions.IN_b_R_addr_n(i, Register.D), 8, null, 0x0ED10);
 
         instructions[0xED11] = new Instruction("OUT_0 (n), D", 2, i => ProcessorMiscellaneousInstructions.OUT_b_addr_n_R(i, Register.D), 8, null, 0xED11);
 
         instructions[0xED14] = new Instruction("TST D", 1, i => ProcessorMiscellaneousInstructions.TST_R(i, Register.B), 6, null, 0xED14);
 
-        instructions[0xED18] = new Instruction("IN_0 E, (n)", 2, i => ProcessorMiscellaneousInstructions.IN_b_R_addr_n(i, Register.E), 8, null, 0x0ED18);
+        instructions[0xED18] = new Instruction("IN_0 E, (n)", 2, i => ProcessorPortInstructions.IN_b_R_addr_n(i, Register.E), 8, null, 0x0ED18);
 
         instructions[0xED19] = new Instruction("OUT_0 (n), E", 2, i => ProcessorMiscellaneousInstructions.OUT_b_addr_n_R(i, Register.E), 8, null, 0xED19);
 
         instructions[0xED1C] = new Instruction("TST E", 1, i => ProcessorMiscellaneousInstructions.TST_R(i, Register.E), 6, null, 0xED1C);
 
-        instructions[0xED20] = new Instruction("IN_0 H, (n)", 2, i => ProcessorMiscellaneousInstructions.IN_b_R_addr_n(i, Register.H), 8, null, 0x0ED20);
+        instructions[0xED20] = new Instruction("IN_0 H, (n)", 2, i => ProcessorPortInstructions.IN_b_R_addr_n(i, Register.H), 8, null, 0x0ED20);
 
         instructions[0xED21] = new Instruction("OUT_0 (n), H", 2, i => ProcessorMiscellaneousInstructions.OUT_b_addr_n_R(i, Register.H), 8, null, 0xED21);
 
         instructions[0xED24] = new Instruction("TST H", 1, i => ProcessorMiscellaneousInstructions.TST_R(i, Register.H), 6, null, 0xED24);
 
-        instructions[0xED28] = new Instruction("IN_0 L, (n)", 2, i => ProcessorMiscellaneousInstructions.IN_b_R_addr_n(i, Register.L), 8, null, 0x0ED28);
+        instructions[0xED28] = new Instruction("IN_0 L, (n)", 2, i => ProcessorPortInstructions.IN_b_R_addr_n(i, Register.L), 8, null, 0x0ED28);
 
         instructions[0xED29] = new Instruction("OUT_0 (n), L", 2, i => ProcessorMiscellaneousInstructions.OUT_b_addr_n_R(i, Register.L), 8, null, 0xED29);
 
@@ -45,13 +45,13 @@ public partial class Processor
 
         instructions[0xED34] = new Instruction("TST (HL)", 1, i => ProcessorMiscellaneousInstructions.TST_addr_R(i, Register.HL), 6, null, 0xED34);
 
-        instructions[0xED38] = new Instruction("IN_0 A, (n)", 2, i => ProcessorMiscellaneousInstructions.IN_b_R_addr_n(i, Register.A), 8, null, 0x0ED38);
+        instructions[0xED38] = new Instruction("IN_0 A, (n)", 2, i => ProcessorPortInstructions.IN_b_R_addr_n(i, Register.A), 8, null, 0x0ED38);
 
         instructions[0xED39] = new Instruction("OUT_0 (n), A", 2, i => ProcessorMiscellaneousInstructions.OUT_b_addr_n_R(i, Register.A), 8, null, 0xED39);
 
         instructions[0xED3C] = new Instruction("TST A", 1, i => ProcessorMiscellaneousInstructions.TST_R(i, Register.A), 6, null, 0xED3C);
 
-        instructions[0xED40] = new Instruction("IN B, (C)", 1, i => ProcessorMiscellaneousInstructions.IN_R_C(i, Register.B), 8, null, 0xED40);
+        instructions[0xED40] = new Instruction("IN B, (C)", 1, i => ProcessorPortInstructions.IN_R_C(i, Register.B), 8, null, 0xED40);
 
         instructions[0xED41] = new Instruction("OUT (BC), B", 1, i => ProcessorMiscellaneousInstructions.OUT_addr_RR_R(i, Register.BC, Register.B), 8, null, 0xED41);
 
@@ -67,7 +67,7 @@ public partial class Processor
 
         instructions[0xED47] = new Instruction("LD I, A", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.I, Register.A), 5, null, 0xED47);
 
-        instructions[0xED48] = new Instruction("IN C, (C)", 1, i => ProcessorMiscellaneousInstructions.IN_R_C(i, Register.C), 8, null, 0xED48);
+        instructions[0xED48] = new Instruction("IN C, (C)", 1, i => ProcessorPortInstructions.IN_R_C(i, Register.C), 8, null, 0xED48);
 
         instructions[0xED49] = new Instruction("OUT (BC), B", 1, i => ProcessorMiscellaneousInstructions.OUT_addr_RR_R(i, Register.BC, Register.B), 8, null, 0xED49);
 
@@ -83,7 +83,7 @@ public partial class Processor
 
         instructions[0xED4F] = new Instruction("LD R, A", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.R, Register.A), 5, null, 0xED4F);
         
-        instructions[0xED50] = new Instruction("IN D, (C)", 1, i => ProcessorMiscellaneousInstructions.IN_R_C(i, Register.D), 8, null, 0xED50);
+        instructions[0xED50] = new Instruction("IN D, (C)", 1, i => ProcessorPortInstructions.IN_R_C(i, Register.D), 8, null, 0xED50);
 
         instructions[0xED51] = new Instruction("OUT (BC), D", 1, i => ProcessorMiscellaneousInstructions.OUT_addr_RR_R(i, Register.BC, Register.D), 8, null, 0xED51);
 
@@ -99,7 +99,7 @@ public partial class Processor
 
         instructions[0xED57] = new Instruction("LD A, I", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.A, Register.I), 5, null, 0xED57);
 
-        instructions[0xED58] = new Instruction("IN E, (C)", 1, i => ProcessorMiscellaneousInstructions.IN_R_C(i, Register.E), 8, null, 0xED58);
+        instructions[0xED58] = new Instruction("IN E, (C)", 1, i => ProcessorPortInstructions.IN_R_C(i, Register.E), 8, null, 0xED58);
 
         instructions[0xED59] = new Instruction("OUT (BC), E", 1, i => ProcessorMiscellaneousInstructions.OUT_addr_RR_R(i, Register.BC, Register.E), 8, null, 0xED59);
 
@@ -115,7 +115,7 @@ public partial class Processor
 
         instructions[0xED5F] = new Instruction("LD A, R", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.A, Register.R), 5, null, 0xED5F);
 
-        instructions[0xED60] = new Instruction("IN H, (C)", 1, i => ProcessorMiscellaneousInstructions.IN_R_C(i, Register.H), 8, null, 0xED60);
+        instructions[0xED60] = new Instruction("IN H, (C)", 1, i => ProcessorPortInstructions.IN_R_C(i, Register.H), 8, null, 0xED60);
 
         instructions[0xED61] = new Instruction("OUT (BC), H", 1, i => ProcessorMiscellaneousInstructions.OUT_addr_RR_R(i, Register.BC, Register.H), 8, null, 0xED61);
 
@@ -131,7 +131,7 @@ public partial class Processor
 
         instructions[0xED67] = new Instruction("RRD", 1, ProcessorMiscellaneousInstructions.RRD, 18, null, 0xED67);
 
-        instructions[0xED68] = new Instruction("IN L, (C)", 1, i => ProcessorMiscellaneousInstructions.IN_R_C(i, Register.L), 8, null, 0xED68);
+        instructions[0xED68] = new Instruction("IN L, (C)", 1, i => ProcessorPortInstructions.IN_R_C(i, Register.L), 8, null, 0xED68);
 
         instructions[0xED69] = new Instruction("OUT (BC), L", 1, i => ProcessorMiscellaneousInstructions.OUT_addr_RR_R(i, Register.BC, Register.L), 8, null, 0xED69);
 
@@ -148,7 +148,7 @@ public partial class Processor
         instructions[0xED6F] = new Instruction("RLD", 1, ProcessorMiscellaneousInstructions.RLD, 18, null, 0xED6F);
 
         // TODO: Is this correct?
-        instructions[0xED70] = new Instruction("IN (BC)", 1, i => ProcessorMiscellaneousInstructions.IN_addr_RR(i, Register.BC), 8, null, 0xED70);
+        instructions[0xED70] = new Instruction("IN (BC)", 1, i => ProcessorPortInstructions.IN_addr_RR(i, Register.BC), 8, null, 0xED70);
 
         instructions[0xED71] = new Instruction("OUT (BC), 0", 1, i => ProcessorMiscellaneousInstructions.OUT_addr_R_n(i, Register.BC, 0), 8, null, 0xED71);
 
@@ -164,7 +164,7 @@ public partial class Processor
 
         instructions[0xED77] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4);
 
-        instructions[0xED78] = new Instruction("IN A, (C)", 1, i => ProcessorMiscellaneousInstructions.IN_R_C(i, Register.A), 8, null, 0xED78);
+        instructions[0xED78] = new Instruction("IN A, (C)", 1, i => ProcessorPortInstructions.IN_R_C(i, Register.A), 8, null, 0xED78);
 
         instructions[0xED79] = new Instruction("OUT (BC), A", 1, i => ProcessorMiscellaneousInstructions.OUT_addr_RR_R(i, Register.BC, Register.A), 8, null, 0xED79);
 

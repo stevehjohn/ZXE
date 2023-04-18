@@ -444,7 +444,7 @@ public partial class Processor
 
         instructions[0xDDDA] = new Instruction("JP C, nn", 3, ProcessorBranchInstructions.JP_C_nn, 10);
 
-        instructions[0xDDDB] = new Instruction("IN A, (n)", 2, i => ProcessorMiscellaneousInstructions.IN_R_p(i, Register.A), 11);
+        instructions[0xDDDB] = new Instruction("IN A, (n)", 2, i => ProcessorPortInstructions.IN_R_p(i, Register.A), 11);
 
         instructions[0xDDDC] = new Instruction("CALL C, nn", 3, ProcessorBranchInstructions.CALL_C_nn, 10);
 
