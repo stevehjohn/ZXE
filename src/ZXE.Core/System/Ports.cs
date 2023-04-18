@@ -17,7 +17,7 @@ public class Ports
 
     public byte ReadByte(ushort port)
     {
-        if ((port & 0xFE) == 0xFE)
+        if ((port & 0x01) == 0x00)
         {
             var value = (byte) 0xFF;
 
