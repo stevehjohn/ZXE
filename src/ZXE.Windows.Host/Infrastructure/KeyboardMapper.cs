@@ -16,7 +16,7 @@ public static class KeyboardMapper
         var portData = new List<(ushort Port, byte data)>();
 
         // Just assume up to 2 keys for now.
-        var keys = keyboardState.Take(2).ToArray();
+        var keys = keyboardState.Take(3).ToArray();
 
         foreach (var port in Ports)
         {
@@ -29,7 +29,12 @@ public static class KeyboardMapper
 
             var data = GetPortData(port, keys[0]);
 
-            if (keys.Length > 1)
+            if (keys.Length == 2)
+            {
+                data &= GetPortData(port, keys[1]);
+            }
+
+            if (keys.Length == 3)
             {
                 data &= GetPortData(port, keys[1]);
             }
@@ -115,62 +120,66 @@ public static class KeyboardMapper
 
     private static byte ScanForFDFEKeys(Keys keys)
     {
+        var data = (byte) 0b1111_1111;
+
         if (keys == Keys.A)
         {
-            return 0b11111110;
+            data = (byte) (data & 0b1111_1110);
         }
 
         if (keys == Keys.S)
         {
-            return 0b11111101;
+            data = (byte) (data & 0b1111_1101);
         }
 
         if (keys == Keys.D)
         {
-            return 0b11111011;
+            data = (byte) (data & 0b1111_1011);
         }
 
         if (keys == Keys.F)
         {
-            return 0b11110111;
+            data = (byte) (data & 0b1111_0111);
         }
 
         if (keys == Keys.G)
         {
-            return 0b11101111;
+            data = (byte) (data & 0b1110_1111);
         }
 
-        return 0b11111111;
+        return data;
     }
 
     private static byte ScanForFBFEKeys(Keys keys)
     {
+        var data = (byte) 0b1111_1111;
+
         if (keys == Keys.Q)
         {
-            return 0b11111110;
+            data = (byte) (data & 0b1111_1110);
         }
 
         if (keys == Keys.W)
         {
-            return 0b11111101;
+            data = (byte) (data & 0b1111_1101);
         }
 
         if (keys == Keys.E)
         {
-            return 0b11111011;
+            data = (byte) (data & 0b1111_1011);
         }
 
         if (keys == Keys.R)
         {
-            return 0b11110111;
+            data = (byte) (data & 0b1111_0111);
         }
 
         if (keys == Keys.T)
         {
-            return 0b11101111;
+            data = (byte) (data & 0b1110_1111);
         }
 
-        return 0b11111111;
+        return data;
     }
 
     private static byte ScanForF7FEKeys(Keys keys)
@@ -271,32 +280,34 @@ public static class KeyboardMapper
 
     private static byte ScanForDFFEKeys(Keys keys)
     {
+        var data = (byte) 0b1111_1111;
+
         if (keys == Keys.P)
         {
-            return 0b11111110;
+            data = (byte) (data & 0b1111_1110);
         }
 
         if (keys == Keys.O)
         {
-            return 0b11111101;
+            data = (byte) (data & 0b1111_1101);
         }
 
         if (keys == Keys.I)
         {
-            return 0b11111011;
+            data = (byte) (data & 0b1111_1011);
         }
 
         if (keys == Keys.U)
         {
-            return 0b11110111;
+            data = (byte) (data & 0b1111_0111);
         }
 
         if (keys == Keys.Y)
         {
-            return 0b11101111;
+            data = (byte) (data & 0b1110_1111);
         }
 
-        return 0b11111111;
+        return data;
     }
 
     private static byte ScanForBFFEKeys(Keys keys)
