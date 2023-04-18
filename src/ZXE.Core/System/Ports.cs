@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ZXE.Core.System;
+﻿namespace ZXE.Core.System;
 
 public class Ports
 {
