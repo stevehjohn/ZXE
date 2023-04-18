@@ -8,7 +8,6 @@ public static class ProcessorPortInstructions
 {
     public static int IN_addr_RR(Input input, Register source)
     {
-        //var value = input.Ports.ReadByte(input.Ram[input.State.Registers.ReadPair(source)]);
         var value = input.Ports.ReadByte(input.State.Registers.ReadPair(source));
         
         // Flags
@@ -84,10 +83,9 @@ public static class ProcessorPortInstructions
 
     public static int OUT_addr_n_R(Input input, Register register)
     {
-        // TODO: Hmm. Might have to get into buses and stuff for this one... bugger.
+        input.Ports.WriteByte((ushort) (input.Data[1] & (input.State.Registers[Register.A] << 8)), input.State.Registers[Register.A]);
 
         // Flags unaffected
-        input.Ports.WriteByte((ushort) (input.Data[1] & (input.State.Registers[Register.A] << 8)), input.State.Registers[Register.A]);
 
         input.State.MemPtr = (ushort) (((input.Data[1] + 1) & 0xFF) | (input.State.Registers[register] << 8));
 
@@ -96,17 +94,18 @@ public static class ProcessorPortInstructions
 
     public static int OUT_addr_RR_R(Input input, Register destination, Register source)
     {
-        // Flags unaffected
         input.Ports.WriteByte(input.State.Registers.ReadPair(destination), input.State.Registers[source]);
+
+        // Flags unaffected
 
         input.State.MemPtr = (ushort) (((input.Ram[input.State.Registers.ReadPair(destination)] + 1) & 0xFF) | (input.State.Registers[source] << 8));
 
         return 0;
     }
 
-    public static int OUT_addr_R_n(Input input, Register register, byte data)
+    public static int OUT_addr_RR_n(Input input, Register register, byte data)
     {
-        // TODO: Hmm. Might have to get into buses and stuff for this one... bugger.
+        input.Ports.WriteByte(input.State.Registers.ReadPair(register), data);
 
         // Flags unaffected
 

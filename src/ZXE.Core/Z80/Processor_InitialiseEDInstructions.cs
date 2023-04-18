@@ -150,7 +150,7 @@ public partial class Processor
         // TODO: Is this correct?
         instructions[0xED70] = new Instruction("IN (BC)", 1, i => ProcessorPortInstructions.IN_addr_RR(i, Register.BC), 8, null, 0xED70);
 
-        instructions[0xED71] = new Instruction("OUT (BC), 0", 1, i => ProcessorPortInstructions.OUT_addr_R_n(i, Register.BC, 0), 8, null, 0xED71);
+        instructions[0xED71] = new Instruction("OUT (BC), 0", 1, i => ProcessorPortInstructions.OUT_addr_RR_n(i, Register.BC, 0), 8, null, 0xED71);
 
         instructions[0xED72] = new Instruction("SBC HL, SP", 1, i => ProcessorArithmeticInstructions.SBC_RR_SP(i, Register.HL), 11, null, 0xED72);
 
