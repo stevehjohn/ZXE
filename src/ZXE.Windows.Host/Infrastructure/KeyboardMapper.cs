@@ -15,9 +15,6 @@ public static class KeyboardMapper
     {
         var portData = new List<(ushort Port, byte data)>();
 
-        // Just assume up to 3 keys for now.
-        var keys = keyboardState.Take(3).ToArray();
-
         foreach (var port in Ports)
         {
             if (keys.Length == 0)
@@ -29,7 +26,7 @@ public static class KeyboardMapper
 
             var data = (byte) 0xFF;
 
-            foreach (var key in keys)
+            foreach (var key in keyboardState)
             {
                 data &= GetPortData(port, key);
             }
