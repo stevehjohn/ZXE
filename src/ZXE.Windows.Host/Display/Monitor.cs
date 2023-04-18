@@ -102,7 +102,7 @@ public class Monitor : Game
         {
             _motherboard.Pause();
 
-            var file = "..\\..\\..\\..\\..\\Game Images\\Robocop\\image-0.z80";
+            var file = "..\\..\\..\\..\\..\\Game Images\\Batman The Movie\\image-0.z80";
 
             //var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 

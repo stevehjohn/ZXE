@@ -29,12 +29,15 @@ public class Z80FileLoader
             return;
         }
 
-        if (data[30] != 23)
+        if (data[30] is not (23 or 54 or 55))
         {
-            throw new Exception("V3 not yet supported.");
+            // TODO: Replace with proper exception.
+            throw new Exception("Dodgy file.");
         }
 
-        LoadPages(data, 55);
+        var ramStart = 32 + data[30];
+
+        LoadPages(data, ramStart);
 
         LoadV2Parameters(data);
     }

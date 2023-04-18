@@ -155,6 +155,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wizard's Lair", "Wizard's L
 		..\Game Images\Wizard's Lair\image-0.z80 = ..\Game Images\Wizard's Lair\image-0.z80
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Batman The Movie", "Batman The Movie", "{C3A8AE76-D075-445D-A457-4588EC084091}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Batman The Movie\image-0.z80 = ..\Game Images\Batman The Movie\image-0.z80
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -267,6 +272,7 @@ Global
 		{417E6891-E55D-4FDF-938F-48272C63DF85} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{8CC52AD5-AC2E-4F2C-8CFF-8E31B30AE44F} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{4F7F17CB-5DDA-4AC8-935C-6FED229EABCB} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{C3A8AE76-D075-445D-A457-4588EC084091} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}
