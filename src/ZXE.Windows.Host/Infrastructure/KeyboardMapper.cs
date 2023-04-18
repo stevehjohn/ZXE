@@ -15,7 +15,7 @@ public static class KeyboardMapper
     {
         var portData = new List<(ushort Port, byte data)>();
 
-        // Just assume up to 2 keys for now.
+        // Just assume up to 3 keys for now.
         var keys = keyboardState.Take(3).ToArray();
 
         foreach (var port in Ports)
