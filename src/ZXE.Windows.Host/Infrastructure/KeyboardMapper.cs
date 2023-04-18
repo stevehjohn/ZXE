@@ -348,28 +348,28 @@ public static class KeyboardMapper
 
         if (keys == Keys.Space)
         {
-            return 0b11111110;
+            data = (byte) (data & 0b1111_1110);
         }
 
         // Symbol shift.
         if (keys == Keys.LeftAlt)
         {
-            return 0b11111101;
+            data = (byte) (data & 0b1111_1101);
         }
 
         if (keys == Keys.M)
         {
-            return 0b11111011;
+            data = (byte) (data & 0b1111_1011);
         }
 
         if (keys == Keys.N)
         {
-            return 0b11110111;
+            data = (byte) (data & 0b1111_0111);
         }
 
         if (keys == Keys.B)
         {
-            return 0b11101111;
+            data = (byte) (data & 0b1110_1111);
         }
 
         return data;
