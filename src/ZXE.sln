@@ -170,6 +170,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Robocop 3", "Robocop 3", "{
 		..\Game Images\Robocop 3\image-0.z80 = ..\Game Images\Robocop 3\image-0.z80
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cybernoid 2", "Cybernoid 2", "{F140F3E5-481D-491F-98B9-A6FFDB363F8D}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Cybernoid 2\image-0.z80 = ..\Game Images\Cybernoid 2\image-0.z80
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -285,6 +290,7 @@ Global
 		{C3A8AE76-D075-445D-A457-4588EC084091} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{3B73890A-C9EC-4E0D-A2B8-E1E29126535D} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{C5992A7B-A019-4847-9BB8-8D43B2A16D47} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{F140F3E5-481D-491F-98B9-A6FFDB363F8D} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}
