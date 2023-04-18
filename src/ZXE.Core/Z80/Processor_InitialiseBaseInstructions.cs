@@ -505,7 +505,7 @@ public partial class Processor
 
         instructions[0xF8] = new Instruction("RET S", 1, ProcessorBranchInstructions.RET_S, 5);
 
-        instructions[0xF9] = new Instruction("LD SP, HL", 1, ProcessorLoadInstructions.LD_RR_RR, 6);
+        instructions[0xF9] = new Instruction("LD SP, HL", 1, i => ProcessorLoadInstructions.LD_SP_RR(i, Register.HL), 6);
 
         instructions[0xFA] = new Instruction("JP S, nn", 3, ProcessorBranchInstructions.JP_S_nn, 10);
 

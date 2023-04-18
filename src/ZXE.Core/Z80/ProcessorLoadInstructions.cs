@@ -135,7 +135,7 @@ public static class ProcessorLoadInstructions
 
         input.State.Registers[destination] = value;
 
-        if (source == Register.I || source == Register.R)
+        if (destination == Register.A && (source == Register.I || source == Register.R))
         {
             // Flags
             // Carry unaffected
