@@ -27,16 +27,11 @@ public static class KeyboardMapper
                 continue;
             }
 
-            var data = GetPortData(port, keys[0]);
+            var data = (byte) 0xFF;
 
-            if (keys.Length == 2)
+            foreach (var key in keys)
             {
-                data &= GetPortData(port, keys[1]);
-            }
-
-            if (keys.Length == 3)
-            {
-                data &= GetPortData(port, keys[2]);
+                data &= GetPortData(port, key);
             }
 
             portData.Add((port, data));
