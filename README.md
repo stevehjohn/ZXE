@@ -2,9 +2,9 @@
 
 A ZX Spectrum emulator. Mostly about just seeing if I can.
 
-Runs BASIC, and I've tested it with the first Dizzy, Treasure Island Dizzy and Fantasy World Dizzy. No sound yet though.
+128/48 BASIC both seem to work.
 
-https://www.outsidecontextproblem.com/zxe-tid-works.html
+A bunch of games also, see https://www.outsidecontextproblem.com/zxe-more-progress.html.
 
 ## Features
 
