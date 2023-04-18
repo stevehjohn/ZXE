@@ -36,7 +36,7 @@ public static class KeyboardMapper
 
             if (keys.Length == 3)
             {
-                data &= GetPortData(port, keys[1]);
+                data &= GetPortData(port, keys[2]);
             }
 
             portData.Add((port, data));
