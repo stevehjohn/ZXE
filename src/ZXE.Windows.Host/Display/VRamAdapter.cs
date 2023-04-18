@@ -103,7 +103,7 @@ public class VRamAdapter
             background = ((data & 0b00111000) >> 3) switch
             {
                 0 => Color.Black,
-                1 => Color.DarkBlue,
+                1 => Color.Blue,
                 2 => Color.Red,
                 3 => Color.Magenta,
                 4 => Color.FromNonPremultiplied(0, 200, 0, 255),
@@ -118,7 +118,7 @@ public class VRamAdapter
             background = ((data & 0b00111000) >> 3) switch
             {
                 0 => Color.Black,
-                1 => Color.Blue,
+                1 => Color.DarkBlue,
                 2 => Color.FromNonPremultiplied(192, 0, 0, 255),
                 3 => Color.DarkMagenta,
                 4 => Color.Green,
@@ -136,7 +136,7 @@ public class VRamAdapter
             foreground = (data & 0b00000111) switch
             {
                 0 => Color.Black,
-                1 => Color.DarkBlue,
+                1 => Color.Blue,
                 2 => Color.Red,
                 3 => Color.Magenta,
                 4 => Color.FromNonPremultiplied(0, 200, 0, 255),
@@ -151,7 +151,7 @@ public class VRamAdapter
             foreground = (data & 0b00000111) switch
             {
                 0 => Color.Black,
-                1 => Color.Blue,
+                1 => Color.DarkBlue,
                 2 => Color.FromNonPremultiplied(192, 0, 0, 255),
                 3 => Color.DarkMagenta,
                 4 => Color.Green,
