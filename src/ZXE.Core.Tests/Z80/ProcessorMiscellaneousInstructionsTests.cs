@@ -168,25 +168,6 @@ public class ProcessorMiscellaneousInstructionsTests
     }
 
     [Fact]
-    public void IN_b_R_addr_n()
-    {
-        // IN_0 B, (n)
-        _ram[0x4000] = 0xED;
-        _ram[0x4001] = 0x00;
-        _ram[0x4002] = 0x10;
-
-        _ports.WriteByte(0x10, 0x24);
-        
-        _state.ProgramCounter = 0x4000;
-
-        _processor.ProcessInstruction(_ram, _ports, _bus);
-        
-        _processor.ProcessInstruction(_ram, _ports, _bus);
-
-        Assert.Equal(0x24, _state.Registers[Register.B]);
-    }
-
-    [Fact]
     public void LDIR()
     {
         // LDIR

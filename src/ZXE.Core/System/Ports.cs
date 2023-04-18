@@ -1,28 +1,41 @@
-﻿namespace ZXE.Core.System;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ZXE.Core.System;
 
 public class Ports
 {
-    private readonly byte?[] _ports;
+    private readonly byte[] _ports;
 
     public Action<byte, byte>? PagedEvent { set; private get; }
 
     public Ports()
     {
-        _ports = new byte?[0x010000];
+        _ports = new byte[0x010000];
 
         ResetKeyboardPorts();
     }
 
     public byte ReadByte(ushort port)
     {
-        if (_ports[port] == null)
+        if ((port & 0xFE) == 0xFE)
         {
-            return 0;
+            var value = (byte) 0xFF;
+
+            var high = (port & 0xFF00) >> 8;
+
+            if ((high & 0b0000_0001) == 0) value &= _ports[0b1111_1110_1111_1110];
+            if ((high & 0b0000_0010) == 0) value &= _ports[0b1111_1101_1111_1110];
+            if ((high & 0b0000_0100) == 0) value &= _ports[0b1111_1011_1111_1110];
+            if ((high & 0b0000_1000) == 0) value &= _ports[0b1111_0111_1111_1110];
+            if ((high & 0b0001_0000) == 0) value &= _ports[0b1110_1111_1111_1110];
+            if ((high & 0b0010_0000) == 0) value &= _ports[0b1101_1111_1111_1110];
+            if ((high & 0b0100_0000) == 0) value &= _ports[0b1011_1111_1111_1110];
+            if ((high & 0b1000_0000) == 0) value &= _ports[0b0111_1111_1111_1110];
+
+            return value;
         }
 
-        var value = _ports[port]!.Value;
-
-        return value;
+        return _ports[port];
     }
 
     private bool _pagingDisabled;
@@ -33,9 +46,9 @@ public class Ports
 
         if (port == 0x7FFD && PagedEvent != null && ! _pagingDisabled)
         {
-            if ((data & 0b00010000) > 0)
+            if ((data & 0b00100000) > 0)
             {
-                //_pagingDisabled = true;
+                _pagingDisabled = true;
             }
 
             PagedEvent(0x7F, data);
