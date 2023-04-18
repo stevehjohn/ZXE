@@ -184,7 +184,7 @@ public partial class Processor
 
         instructions[0xEDA1] = new Instruction("CPI", 1, ProcessorMiscellaneousInstructions.CPI, 12, null, 0xEDA1);
 
-        instructions[0xEDA2] = new Instruction("INI", 1, ProcessorMiscellaneousInstructions.INI, 12, null, 0xEDA2);
+        instructions[0xEDA2] = new Instruction("INI", 1, ProcessorPortInstructions.INI, 12, null, 0xEDA2);
 
         instructions[0xEDA3] = new Instruction("OUTI", 1, ProcessorMiscellaneousInstructions.OUTI, 12, null, 0xEDA3);
 
@@ -202,7 +202,7 @@ public partial class Processor
 
         instructions[0xEDB1] = new Instruction("CPIR", 1, ProcessorMiscellaneousInstructions.CPIR, 12, "CPIR BC HL", 0xEDB1);
 
-        instructions[0xEDB2] = new Instruction("INIR", 1, ProcessorMiscellaneousInstructions.INIR, 12, null, 0xEDB2);
+        instructions[0xEDB2] = new Instruction("INIR", 1, ProcessorPortInstructions.INIR, 12, null, 0xEDB2);
 
         instructions[0xEDB3] = new Instruction("OTIR", 1, ProcessorMiscellaneousInstructions.OTIR, 12, "OTIR B", 0xEDB3);
 
