@@ -180,6 +180,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dan Dare 3", "Dan Dare 3", 
 		..\Game Images\Dan Dare 3\image-0.z80 = ..\Game Images\Dan Dare 3\image-0.z80
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "The Great Escape", "The Great Escape", "{567F27E3-3444-4A4F-9A4F-E8E421F3E5D4}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\The Great Escape\image-0.z80 = ..\Game Images\The Great Escape\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Indiana Jones and the Temple of Doom", "Indiana Jones and the Temple of Doom", "{AC05D225-0BD8-4C40-A71E-CD12B584F0A3}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Indiana Jones and the Temple of Doom\image-0.z80 = ..\Game Images\Indiana Jones and the Temple of Doom\image-0.z80
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -297,6 +307,8 @@ Global
 		{C5992A7B-A019-4847-9BB8-8D43B2A16D47} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{F140F3E5-481D-491F-98B9-A6FFDB363F8D} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{E2BB46A2-F094-4686-8F54-0793F9D0EA80} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{567F27E3-3444-4A4F-9A4F-E8E421F3E5D4} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{AC05D225-0BD8-4C40-A71E-CD12B584F0A3} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}
