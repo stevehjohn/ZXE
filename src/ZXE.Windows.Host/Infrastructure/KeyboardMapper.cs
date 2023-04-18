@@ -312,36 +312,40 @@ public static class KeyboardMapper
 
     private static byte ScanForBFFEKeys(Keys keys)
     {
+        var data = (byte) 0b1111_1111;
+
         if (keys == Keys.Enter)
         {
-            return 0b11111110;
+            data = (byte) (data & 0b1111_1110);
         }
 
         if (keys == Keys.L)
         {
-            return 0b11111101;
+            data = (byte) (data & 0b1111_1101);
         }
 
         if (keys == Keys.K)
         {
-            return 0b11111011;
+            data = (byte) (data & 0b1111_1011);
         }
 
         if (keys == Keys.J)
         {
-            return 0b11110111;
+            data = (byte) (data & 0b1111_0111);
         }
 
         if (keys == Keys.H)
         {
-            return 0b11101111;
+            data = (byte) (data & 0b1110_1111);
         }
 
-        return 0b11111111;
+        return data;
     }
 
     private static byte ScanFor7FFEKeys(Keys keys)
     {
+        var data = (byte) 0b1111_1111;
+
         if (keys == Keys.Space)
         {
             return 0b11111110;
@@ -368,6 +372,6 @@ public static class KeyboardMapper
             return 0b11101111;
         }
 
-        return 0b11111111;
+        return data;
     }
 }
