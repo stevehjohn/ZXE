@@ -17,7 +17,7 @@ public static class KeyboardMapper
 
         foreach (var port in Ports)
         {
-            if (keys.Length == 0)
+            if (keyboardState.Length == 0)
             {
                 portData.Add((port, 0b11111111));
 
