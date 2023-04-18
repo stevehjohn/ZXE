@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 // ReSharper disable InconsistentNaming
 // ReSharper disable IdentifierTypo
