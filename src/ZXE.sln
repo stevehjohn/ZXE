@@ -130,9 +130,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Batman", "Batman", "{6358DF
 		..\Game Images\Batman\image-0.z80 = ..\Game Images\Batman\image-0.z80
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Barbarian", "Barbarian", "{0174D6EB-3CAB-45D2-8587-37F2B91CDC0B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Barbarian 2", "Barbarian 2", "{0174D6EB-3CAB-45D2-8587-37F2B91CDC0B}"
 	ProjectSection(SolutionItems) = preProject
-		..\Game Images\Barbarian\image-0.z80 = ..\Game Images\Barbarian\image-0.z80
+		..\Game Images\Barbarian 2\image-0.z80 = ..\Game Images\Barbarian 2\image-0.z80
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Robocop", "Robocop", "{31F4F688-EE97-4621-BBBA-20A8FCC89240}"

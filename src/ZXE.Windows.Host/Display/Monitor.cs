@@ -8,9 +8,12 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Windows.Host.Infrastructure;
+using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
+using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace ZXE.Windows.Host.Display;
 
@@ -102,18 +105,32 @@ public class Monitor : Game
         {
             _motherboard.Pause();
 
-            var file = "..\\..\\..\\..\\..\\Game Images\\Robocop 2\\image-0.z80";
+            var dialog = new OpenFileDialog
+                         {
+                             DefaultExt = "z80"
+                         };
+
+            var result = dialog.ShowDialog();
+
+            if (result != DialogResult.OK)
+            {
+                _motherboard.Resume();
+
+                return;
+            }
+
+            //var file = "..\\..\\..\\..\\..\\Game Images\\Robocop 2\\image-0.z80";
             //var file = "..\\..\\..\\..\\..\\Game Images\\Robocop 2\\image-0.z80";
 
             //var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
             var adapter = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
 
-            adapter.Load(file);
+            adapter.Load(dialog.FileName);
 
             Thread.Sleep(250); // Prevent multiple loads, hopefully.
 
-            _imageName = file.Split('\\')[^2];
+            _imageName = dialog.FileName.Split('\\')[^2];
 
             _motherboard.Resume();
         }
