@@ -427,7 +427,7 @@ public partial class Processor
 
         instructions[0xD2] = new Instruction("JP NC, nn", 3, ProcessorBranchInstructions.JP_NC_nn, 10);
 
-        instructions[0xD3] = new Instruction("OUT (n), A", 2, i => ProcessorMiscellaneousInstructions.OUT_addr_n_R(i, Register.A), 11);
+        instructions[0xD3] = new Instruction("OUT (n), A", 2, i => ProcessorPortInstructions.OUT_addr_n_R(i, Register.A), 11);
 
         instructions[0xD4] = new Instruction("CALL NC, nn", 3, ProcessorBranchInstructions.CALL_NC_nn, 10);
 
