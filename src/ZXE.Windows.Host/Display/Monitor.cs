@@ -198,6 +198,16 @@ public class Monitor : Game
             _motherboard.Resume();
         }
 
+        if (Keyboard.GetState().IsKeyDown(Keys.F1))
+        {
+            _motherboard.Pause();
+        }
+
+        if (Keyboard.GetState().IsKeyDown(Keys.F2))
+        {
+            _motherboard.Resume();
+        }
+
         base.Update(gameTime);
     }
 
