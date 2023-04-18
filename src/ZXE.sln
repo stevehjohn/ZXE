@@ -160,6 +160,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Batman The Movie", "Batman 
 		..\Game Images\Batman The Movie\image-0.z80 = ..\Game Images\Batman The Movie\image-0.z80
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Robocop 2", "Robocop 2", "{3B73890A-C9EC-4E0D-A2B8-E1E29126535D}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Robocop 2\image-0.z80 = ..\Game Images\Robocop 2\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Robocop 3", "Robocop 3", "{C5992A7B-A019-4847-9BB8-8D43B2A16D47}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Robocop 3\image-0.z80 = ..\Game Images\Robocop 3\image-0.z80
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -273,6 +283,8 @@ Global
 		{8CC52AD5-AC2E-4F2C-8CFF-8E31B30AE44F} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{4F7F17CB-5DDA-4AC8-935C-6FED229EABCB} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 		{C3A8AE76-D075-445D-A457-4588EC084091} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{3B73890A-C9EC-4E0D-A2B8-E1E29126535D} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{C5992A7B-A019-4847-9BB8-8D43B2A16D47} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}
