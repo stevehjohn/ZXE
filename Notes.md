@@ -11,6 +11,7 @@ This document just contains notes for me to refer to during implementation.
 - Tricky one: Render screen when 14336 TStates have passed since 50Hz refresh.
 - Setting Q and Memptr.
 - Update README to better reflect the additional projects.
+- Make changing emulated machine easier.
 
 ## Assembly Language
 
