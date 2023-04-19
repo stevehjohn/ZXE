@@ -8,7 +8,7 @@ public class Ports
 
     public Ports()
     {
-        _ports = new byte[0x010000];
+        _ports = new byte[0x01_0000];
 
         ResetKeyboardPorts();
     }
