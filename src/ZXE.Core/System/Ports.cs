@@ -10,22 +10,14 @@ public class Ports
     {
         _ports = new byte[0x010000];
 
-        // NOTE: This is to pass 'jsmoo' tests. Revert if breaks other things.
-        //for (var i = 0; i < 0x1_0000; i++)
-        //{
-        //    _ports[i] = 0xFF;
-        //}
-
         ResetKeyboardPorts();
     }
 
     public byte ReadByte(ushort port)
     {
-        if ((port & 0x01) == 0x00)
+        if ((port & 0xFE) == 0xFE)
         {
-            // NOTE: This is to pass 'jsmoo' tests. Revert if breaks other things.
-            //var value = _ports[port];
-            var value = (byte) 0xFF;
+            var value = (byte)0xFF;
 
             var high = (port & 0xFF00) >> 8;
 
