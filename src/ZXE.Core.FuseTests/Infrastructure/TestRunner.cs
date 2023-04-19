@@ -6,7 +6,6 @@ using ZXE.Common.DebugHelpers;
 using ZXE.Common.Extensions;
 using ZXE.Core.FuseTests.Exceptions;
 using ZXE.Core.FuseTests.Models;
-using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Core.Z80;
 
@@ -238,7 +237,7 @@ public static class TestRunner
 
             if (startLine.HasValue)
             {
-                return new TestExpectedResult(results[startLine!.Value..line]);
+                return new TestExpectedResult(results[startLine.Value..line]);
             }
 
             line++;

@@ -39,6 +39,7 @@ public class TestRunner
         foreach (var file in files)
         {
             // Skip a bunch of tests
+            // ReSharper disable once StringCompareToIsCultureSpecific
             if (Path.GetFileName(file).CompareTo("ed a2 ") < 0)
             {
                 continue;

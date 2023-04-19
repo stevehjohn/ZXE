@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace ZXE.Core.Z80;
+﻿namespace ZXE.Core.Z80;
 
 public class State
 {

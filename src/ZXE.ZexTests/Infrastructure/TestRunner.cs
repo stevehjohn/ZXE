@@ -1,6 +1,5 @@
 ﻿using ZXE.Common.ConsoleHelpers;
 using ZXE.Common.DebugHelpers;
-using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Core.Z80;
 

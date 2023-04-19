@@ -1,7 +1,6 @@
 ﻿using JetBrains.Annotations;
 using System.Diagnostics.CodeAnalysis;
 using ZXE.Common.DebugHelpers;
-using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Core.Tests.Console.Infrastructure;
 using ZXE.Core.Z80;

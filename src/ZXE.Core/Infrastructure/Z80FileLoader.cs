@@ -89,7 +89,7 @@ public class Z80FileLoader
         _ram.Load(dataToLoad, 0x4000);
     }
 
-    private byte[] DecompressV2(byte[] data)
+    private static byte[] DecompressV2(byte[] data)
     {
         var decompressed = new List<byte>();
 
@@ -128,7 +128,7 @@ public class Z80FileLoader
         return decompressed.ToArray();
     }
 
-    private byte[] Decompress(byte[] data)
+    private static byte[] Decompress(byte[] data)
     {
         var decompressed = new List<byte>();
 
