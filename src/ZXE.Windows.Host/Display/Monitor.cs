@@ -139,7 +139,7 @@ public class Monitor : Game
         {
             _motherboard.Pause();
 
-            var file = "..\\..\\..\\..\\..\\Other Images\\zexdoc-spectrum.com";
+            var file = "..\\..\\..\\..\\..\\Other Images\\zexall-spectrum.com";
 
             _imageName = file.Split('\\')[^2];
 
