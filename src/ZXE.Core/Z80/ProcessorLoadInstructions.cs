@@ -7,6 +7,8 @@ public static class ProcessorLoadInstructions
         input.State.Registers.LoadFromRam(register, input.Data[1..3]);
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -18,6 +20,8 @@ public static class ProcessorLoadInstructions
             input.Ram[input.State.Registers.ReadPair(target)] = input.State.Registers[source];
 
             // Flags unaffected
+            
+            input.State.ResetQ();
 
             input.State.MemPtr = (ushort) (((input.State.Registers.ReadPair(target) + 1) & 0xFF) | (input.State.Registers[source] << 8));
         }
@@ -30,6 +34,8 @@ public static class ProcessorLoadInstructions
         input.State.Registers[register] = input.Data[1];
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -41,6 +47,8 @@ public static class ProcessorLoadInstructions
             input.Ram[(input.Data[2] << 8) | input.Data[1]] = input.State.Registers[register];
 
             // Flags unaffected
+            
+            input.State.ResetQ();
 
             input.State.MemPtr = (ushort) ((((input.Data[2] << 8) | input.Data[1] + 1) & 0xFF) | (input.State.Registers[register] << 8));
         }
@@ -55,6 +63,8 @@ public static class ProcessorLoadInstructions
             input.State.Registers[register] = input.Ram[(input.Data[2] << 8) | input.Data[1]];
 
             // Flags unaffected
+            
+            input.State.ResetQ();
 
             input.State.MemPtr = (ushort) (input.Ram[(input.Data[2] << 8) | input.Data[1]] + 1);
         }
@@ -69,6 +79,8 @@ public static class ProcessorLoadInstructions
             input.State.Registers[target] = input.Ram[input.State.Registers.ReadPair(source)];
 
             // Flags unaffected
+            
+            input.State.ResetQ();
 
             input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(source) + 1);
         }
@@ -88,6 +100,8 @@ public static class ProcessorLoadInstructions
             input.Ram[address + 1] = (byte) ((data & 0xFF00) >> 8);
 
             // Flags unaffected
+            
+            input.State.ResetQ();
 
             input.State.MemPtr = (ushort) ((input.Data[2] << 8 | input.Data[1]) + 1);
         }
@@ -104,6 +118,8 @@ public static class ProcessorLoadInstructions
             input.State.Registers.WritePair(register, (ushort) (input.Ram[address + 1] << 8 | input.Ram[address]));
 
             // Flags unaffected
+            
+            input.State.ResetQ();
 
             input.State.MemPtr = (ushort) ((input.Data[2] << 8 | input.Data[1]) + 1);
         }
@@ -116,6 +132,8 @@ public static class ProcessorLoadInstructions
         input.State.StackPointer = input.Data[2] << 8 | input.Data[1];
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -125,6 +143,8 @@ public static class ProcessorLoadInstructions
         input.Ram[input.State.Registers.ReadPair(register)] = input.Data[1];
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -158,6 +178,8 @@ public static class ProcessorLoadInstructions
         input.State.StackPointer = input.State.Registers.ReadPair(Register.HL);
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -169,6 +191,8 @@ public static class ProcessorLoadInstructions
         input.State.Registers.WritePair(register, (ushort) ((input.Data[1] << 8) | (value & 0x00FF)));
         
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -180,6 +204,8 @@ public static class ProcessorLoadInstructions
         input.State.Registers.WritePair(register, (ushort) (input.Data[1] | (value & 0xFF00)));
         
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -193,6 +219,8 @@ public static class ProcessorLoadInstructions
         input.Ram[address] = input.Data[2];
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         input.State.MemPtr = (ushort) address;
 
@@ -206,6 +234,8 @@ public static class ProcessorLoadInstructions
         input.State.Registers[destination] = (byte) ((value & 0xFF00) >> 8);
         
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -217,6 +247,8 @@ public static class ProcessorLoadInstructions
         input.State.Registers[destination] = (byte) (value & 0x00FF);
         
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -230,6 +262,8 @@ public static class ProcessorLoadInstructions
         input.State.Registers[destination] = input.Ram[address];
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         input.State.MemPtr = (ushort) address;
 
@@ -246,6 +280,8 @@ public static class ProcessorLoadInstructions
 
         // Flags unaffected
         
+        input.State.ResetQ();
+
         input.State.MemPtr = (ushort) address;
 
         return 0;
@@ -260,6 +296,8 @@ public static class ProcessorLoadInstructions
         input.State.Registers.WritePair(destination, value);
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -275,6 +313,8 @@ public static class ProcessorLoadInstructions
         input.State.Registers.WritePair(destination, value);
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -290,6 +330,8 @@ public static class ProcessorLoadInstructions
         input.State.Registers.WritePair(destination, value);
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -303,6 +345,8 @@ public static class ProcessorLoadInstructions
         input.State.Registers.WritePair(destination, value);
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -318,6 +362,8 @@ public static class ProcessorLoadInstructions
         input.State.Registers.WritePair(destination, value);
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -333,6 +379,8 @@ public static class ProcessorLoadInstructions
         input.State.Registers.WritePair(destination, value);
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -342,6 +390,8 @@ public static class ProcessorLoadInstructions
         input.State.StackPointer = input.State.Registers.ReadPair(register);
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -358,6 +408,8 @@ public static class ProcessorLoadInstructions
             input.Ram[address + 1] = (byte) ((data & 0xFF00) >> 8);
 
             // Flags unaffected
+        
+            input.State.ResetQ();
         }
 
         return 0;
@@ -374,6 +426,8 @@ public static class ProcessorLoadInstructions
             input.State.StackPointer = (input.State.StackPointer & 0x00FF) | (input.Ram[address + 1] << 8);
 
             // Flags unaffected
+        
+            input.State.ResetQ();
         }
 
         return 0;

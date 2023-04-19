@@ -10,6 +10,8 @@ public static class ProcessorArithmeticInstructions
         }
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -106,6 +108,8 @@ public static class ProcessorArithmeticInstructions
 
         // Flags unaffected
 
+        input.State.ResetQ();
+
         return 0;
     }
 
@@ -114,6 +118,8 @@ public static class ProcessorArithmeticInstructions
         input.State.StackPointer++;
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -203,6 +209,8 @@ public static class ProcessorArithmeticInstructions
         input.State.StackPointer--;
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }

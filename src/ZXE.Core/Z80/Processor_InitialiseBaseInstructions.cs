@@ -4,7 +4,7 @@ public partial class Processor
 {
     private void InitialiseBaseInstructions(Dictionary<int, Instruction> instructions)
     {
-        instructions[0x00] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4);
+        instructions[0x00] = new Instruction("NOP", 1, i => ProcessorMiscellaneousInstructions.NOP(i), 4);
 
         instructions[0x01] = new Instruction("LD BC, nn", 3, i => ProcessorLoadInstructions.LD_RR_nn(i, Register.BC), 10);
 

@@ -6,7 +6,7 @@ public partial class Processor
 {
     private void InitialiseDDInstructions(Dictionary<int, Instruction> instructions)
     {
-        instructions[0xDD00] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4, null, 0xDD00);
+        instructions[0xDD00] = new Instruction("NOP", 1, i => ProcessorMiscellaneousInstructions.NOP(i), 4, null, 0xDD00);
 
         instructions[0xDD01] = new Instruction("LD BC, nn", 3, i => ProcessorLoadInstructions.LD_RR_nn(i, Register.BC), 10, null, 0xDD01);
 
@@ -448,7 +448,7 @@ public partial class Processor
 
         instructions[0xDDDC] = new Instruction("CALL C, nn", 3, ProcessorBranchInstructions.CALL_C_nn, 10);
 
-        instructions[0xDDDD] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4);
+        instructions[0xDDDD] = new Instruction("NOP", 1, i => ProcessorMiscellaneousInstructions.NOP(i), 4);
 
         instructions[0xDDDE] = new Instruction("SBC A, n", 2, i => ProcessorArithmeticInstructions.SBC_R_n(i, Register.A), 7);
 
@@ -480,7 +480,7 @@ public partial class Processor
 
         instructions[0xDDEC] = new Instruction("CALL PE, nn", 3, ProcessorBranchInstructions.CALL_PE_nn, 10);
 
-        instructions[0xDDED] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4);
+        instructions[0xDDED] = new Instruction("NOP", 1, i => ProcessorMiscellaneousInstructions.NOP(i), 4);
 
         instructions[0xDDEE] = new Instruction("XOR A, n", 2, i => ProcessorBitwiseLogicInstructions.XOR_R_n(i, Register.A), 7);
 
@@ -512,7 +512,7 @@ public partial class Processor
 
         instructions[0xDDFC] = new Instruction("CALL S, nn", 3, ProcessorBranchInstructions.CALL_S_nn, 10);
 
-        instructions[0xDDFD] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4);
+        instructions[0xDDFD] = new Instruction("NOP", 1, i => ProcessorMiscellaneousInstructions.NOP(i), 4);
 
         instructions[0xDDFE] = new Instruction("CP A, n", 2, i => ProcessorMiscellaneousInstructions.CP_R_n(i, Register.A), 7);
 

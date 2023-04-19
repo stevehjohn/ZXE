@@ -6,7 +6,7 @@ public partial class Processor
 {
     private void InitialiseFDInstructions(Dictionary<int, Instruction> instructions)
     {
-        instructions[0xFD00] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4, null, 0xFD00);
+        instructions[0xFD00] = new Instruction("NOP", 1, ProcessorMiscellaneousInstructions.NOP, 4, null, 0xFD00);
         
         instructions[0xFD01] = new Instruction("LD BC, nn", 3, i => ProcessorLoadInstructions.LD_RR_nn(i, Register.BC), 10);
 
@@ -398,7 +398,7 @@ public partial class Processor
 
         instructions[0xFDC3] = new Instruction("JP nn", 3, ProcessorBranchInstructions.JP_nn, 10);
 
-        instructions[0xFDC4] = new Instruction("CALL NZ, nn", 3, ProcessorBranchInstructions.CALL_NZ_nn, 10, null);
+        instructions[0xFDC4] = new Instruction("CALL NZ, nn", 3, ProcessorBranchInstructions.CALL_NZ_nn, 10);
 
         instructions[0xFDC5] = new Instruction("PUSH BC", 1, i => ProcessorMiscellaneousInstructions.PUSH_RR(i, Register.BC), 11);
 
@@ -454,7 +454,7 @@ public partial class Processor
 
         instructions[0xFFE0] = new Instruction("RET PO", 1, ProcessorBranchInstructions.RET_PO, 5);
         
-        instructions[0xFDDD] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4);
+        instructions[0xFDDD] = new Instruction("NOP", 1, ProcessorMiscellaneousInstructions.NOP, 4);
 
         instructions[0xFDDE] = new Instruction("SBC A, n", 2, i => ProcessorArithmeticInstructions.SBC_R_n(i, Register.A), 7);
 
@@ -516,7 +516,7 @@ public partial class Processor
 
         instructions[0xFDFC] = new Instruction("CALL S, nn", 3, ProcessorBranchInstructions.CALL_S_nn, 10);
 
-        instructions[0xFDFD] = new Instruction("NOP", 1, _ => ProcessorMiscellaneousInstructions.NOP(), 4);
+        instructions[0xFDFD] = new Instruction("NOP", 1, ProcessorMiscellaneousInstructions.NOP, 4);
         
         instructions[0xFDFE] = new Instruction("CP A, n", 2, i => ProcessorMiscellaneousInstructions.CP_R_n(i, Register.A), 7);
 

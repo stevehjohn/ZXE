@@ -55,6 +55,8 @@ public static class ProcessorBitOperationInstructions
         input.State.Registers[register] = (byte) (input.State.Registers[register] & mask);
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -66,6 +68,8 @@ public static class ProcessorBitOperationInstructions
         input.Ram[input.State.Registers.ReadPair(register)] = (byte) (input.Ram[input.State.Registers.ReadPair(register)] & mask);
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -75,6 +79,8 @@ public static class ProcessorBitOperationInstructions
         input.State.Registers[register] |= bit;
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -84,6 +90,8 @@ public static class ProcessorBitOperationInstructions
         input.Ram[input.State.Registers.ReadPair(register)] |= bit;
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -130,6 +138,8 @@ public static class ProcessorBitOperationInstructions
         input.State.Registers[destination] = result;
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         input.State.MemPtr = address;
 
@@ -149,6 +159,8 @@ public static class ProcessorBitOperationInstructions
         input.Ram[address] = result;
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -160,6 +172,8 @@ public static class ProcessorBitOperationInstructions
         input.Ram[address] |= bit;
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -174,6 +188,8 @@ public static class ProcessorBitOperationInstructions
 
         // Flags unaffected
         
+        input.State.ResetQ();
+
         input.State.MemPtr = address;
 
         return 0;

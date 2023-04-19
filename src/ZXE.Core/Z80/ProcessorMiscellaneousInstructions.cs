@@ -7,9 +7,11 @@ namespace ZXE.Core.Z80;
 
 public static class ProcessorMiscellaneousInstructions
 {
-    public static int NOP()
+    public static int NOP(Input input)
     {
         // Flags unaffected
+                
+        input.State.ResetQ();
 
         return 0;
     }
@@ -29,6 +31,8 @@ public static class ProcessorMiscellaneousInstructions
         {
             input.State.Flags = Flags.FromByte(input.State.Registers[Register.F]);
         }
+
+        input.State.ResetQ();
 
         return 0;
     }
@@ -170,6 +174,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Halted = true;
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -239,6 +245,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Registers.WritePair(register, data);
 
         input.State.Flags = Flags.FromByte(input.State.Registers[Register.F]);
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -278,6 +286,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.ProgramCounter = pageZeroAddress;
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         input.State.MemPtr = (ushort) input.State.ProgramCounter;
 
@@ -305,6 +315,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Registers.WritePair(Register.HL_, hl);
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -322,6 +334,8 @@ public static class ProcessorMiscellaneousInstructions
         input.Ram[input.State.StackPointer + 1] = (byte) ((value & 0xFF00) >> 8);
 
         // Flags unaffected
+        
+        input.State.ResetQ();
 
         input.State.MemPtr = input.State.Registers.ReadPair(register);
 
@@ -336,8 +350,11 @@ public static class ProcessorMiscellaneousInstructions
 
         input.State.Registers.WritePair(right, swap);
         
-        // Flags unaffected
         input.State.Flags = Flags.FromByte(input.State.Registers[Register.F]);
+
+        // Flags unaffected
+        
+        input.State.ResetQ();
 
         return 0;
     }
@@ -347,6 +364,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.InterruptFlipFlop1 = false;
         
         input.State.InterruptFlipFlop2 = false;
+                
+        input.State.ResetQ();
 
         return 0;
     }
@@ -358,6 +377,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.InterruptFlipFlop2 = true;
 
         input.State.SkipInterrupt = true;
+                
+        input.State.ResetQ();
 
         return 0;
     }
@@ -469,6 +490,8 @@ public static class ProcessorMiscellaneousInstructions
         input.State.InterruptMode = mode;
 
         // Flags unaffected
+                
+        input.State.ResetQ();
 
         return 0;
     }

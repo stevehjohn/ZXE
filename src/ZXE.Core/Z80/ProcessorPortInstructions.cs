@@ -77,6 +77,10 @@ public static class ProcessorPortInstructions
         input.State.MemPtr = (ushort) ((input.State.Registers[register] << 8 | input.Data[1]) + 1);
 
         input.State.Registers[register] = value;
+                
+        // Flags unaffected
+
+        input.State.ResetQ();
 
         return 0;
     }
@@ -86,6 +90,8 @@ public static class ProcessorPortInstructions
         input.Ports.WriteByte((ushort) (input.Data[1] & (input.State.Registers[Register.A] << 8)), input.State.Registers[Register.A]);
 
         // Flags unaffected
+                
+        input.State.ResetQ();
 
         input.State.MemPtr = (ushort) (((input.Data[1] + 1) & 0xFF) | (input.State.Registers[register] << 8));
 
@@ -97,6 +103,8 @@ public static class ProcessorPortInstructions
         input.Ports.WriteByte(input.State.Registers.ReadPair(destination), input.State.Registers[source]);
 
         // Flags unaffected
+                
+        input.State.ResetQ();
 
         input.State.MemPtr = (ushort) (((input.Ram[input.State.Registers.ReadPair(destination)] + 1) & 0xFF) | (input.State.Registers[source] << 8));
 
@@ -108,6 +116,8 @@ public static class ProcessorPortInstructions
         input.Ports.WriteByte(input.State.Registers.ReadPair(register), data);
 
         // Flags unaffected
+                
+        input.State.ResetQ();
 
         input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.BC) + 1);
 
@@ -119,6 +129,8 @@ public static class ProcessorPortInstructions
         input.Ports.WriteByte(input.Data[1], input.State.Registers[register]);
 
         // Flags unaffected
+                
+        input.State.ResetQ();
 
         input.State.MemPtr = (ushort) (((input.Data[1] + 1) & 0xFF) | (input.State.Registers[register] << 8));
 
