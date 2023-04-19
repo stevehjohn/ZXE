@@ -16,6 +16,12 @@ So far, apart from a WIP emulator, I have...
 
 ## Solution Structure
 
+### ZXE.Windows.Host
+
+This will run the Spectrum emulator on Windows. For now, you'll have to edit `Program.cs` to change the version (48/128) being emulated.
+
+Press F10 to load a Z80 file.
+
 ### ZXE.Core
 
 This is the emulator. I have tried to keep all the Z80 specific code in the Z80 folder so it can be used in contexts other than only a ZX Spectrum emulator.
