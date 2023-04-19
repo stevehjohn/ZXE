@@ -17,7 +17,7 @@ public class Ports
     {
         if ((port & 0xFE) == 0xFE)
         {
-            var value = (byte)0xFF;
+            var value = (byte) 0xFF;
 
             var high = (port & 0xFF00) >> 8;
 
