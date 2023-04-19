@@ -85,9 +85,7 @@ Number failing: 31
 
 ```
 76: HALT
-db_1: IN A, (n)
 db_2: IN A, (n)
-db_3: IN A, (n)
 db: IN A, (n)
 ed40: IN B, (C)
 ed48: IN C, (C)
@@ -108,7 +106,6 @@ eda3_08: OUTI
 edaa: IND
 edaa_01: IND
 edaa_02: IND
-edaa_03: IND
 edab: OUTD
 edab_01: OUTD
 edb2: INIR
