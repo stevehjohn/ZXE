@@ -62,7 +62,7 @@ Number failing: 20
 
 ```
 37 0000: SCF
-3F 0001: CCFt
+3F 0001: CCF
 DD 37 0009: SCF
 DD 3F 0001: CCF
 ED A1 0004: CPI
