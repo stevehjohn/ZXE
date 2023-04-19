@@ -1,7 +1,4 @@
-﻿using System.Net;
-using ZXE.Core.Extensions;
-
-namespace ZXE.Core.Z80;
+﻿namespace ZXE.Core.Z80;
 
 public static class ProcessorArithmeticInstructions
 {
@@ -406,7 +403,7 @@ public static class ProcessorArithmeticInstructions
             input.State.Flags.Zero = result == 0;
             input.State.Flags.Sign = (sbyte) result < 0;
 
-            input.State.PutFlagsInFRegister(true);
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;

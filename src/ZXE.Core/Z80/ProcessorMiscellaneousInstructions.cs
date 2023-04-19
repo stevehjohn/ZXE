@@ -90,7 +90,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = input.State.Registers[Register.A] == 0;
         input.State.Flags.Sign = (input.State.Registers[Register.A] & 0x80) > 0;
 
-        input.State.PutFlagsInFRegister(true);
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -113,7 +113,7 @@ public static class ProcessorMiscellaneousInstructions
             // Zero unaffected
             // Sign unaffected
 
-            input.State.PutFlagsInFRegister(true);
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -160,7 +160,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.PutFlagsInFRegister(true);
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -535,7 +535,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.PutFlagsInFRegister(true);
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -564,7 +564,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.PutFlagsInFRegister(true);
+        input.State.PutFlagsInFRegister();
         
         // TODO: Correctly account for extra cycles?
         
@@ -605,7 +605,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = difference == 0;
         input.State.Flags.Sign = (byte) difference > 0x7F;
 
-        input.State.PutFlagsInFRegister(true);
+        input.State.PutFlagsInFRegister();
 
         input.State.MemPtr++;
 
@@ -633,7 +633,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = difference == 0;
         input.State.Flags.Sign = (byte) difference > 0x7F;
 
-        input.State.PutFlagsInFRegister(true);
+        input.State.PutFlagsInFRegister();
         
         // TODO: Correctly account for extra cycles?
 
@@ -680,7 +680,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.PutFlagsInFRegister(true);
+        input.State.PutFlagsInFRegister();
 
         return 0;
     }
@@ -709,7 +709,7 @@ public static class ProcessorMiscellaneousInstructions
         // Zero unaffected
         // Sign unaffected
 
-        input.State.PutFlagsInFRegister(true);
+        input.State.PutFlagsInFRegister();
         
         // TODO: Correctly account for extra cycles?
         
@@ -750,7 +750,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = difference == 0;
         input.State.Flags.Sign = (byte) difference > 0x7F;
 
-        input.State.PutFlagsInFRegister(true);
+        input.State.PutFlagsInFRegister();
 
         input.State.MemPtr--;
 
@@ -779,7 +779,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = difference == 0;
         input.State.Flags.Sign = (byte) difference > 0x7F;
 
-        input.State.PutFlagsInFRegister(true);
+        input.State.PutFlagsInFRegister();
 
         if (input.State.Registers.ReadPair(Register.BC) == 1 || difference == 0)
         {
@@ -828,7 +828,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = input.State.Registers[Register.A] == 0;
         input.State.Flags.Sign = (sbyte) input.State.Registers[Register.A] < 0;
             
-        input.State.PutFlagsInFRegister(true);
+        input.State.PutFlagsInFRegister();
 
         input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.HL) + 1);
 
@@ -863,7 +863,7 @@ public static class ProcessorMiscellaneousInstructions
         input.State.Flags.Zero = input.State.Registers[Register.A] == 0;
         input.State.Flags.Sign = (sbyte) input.State.Registers[Register.A] < 0;
             
-        input.State.PutFlagsInFRegister(true);
+        input.State.PutFlagsInFRegister();
 
         input.State.MemPtr = (ushort) (input.State.Registers.ReadPair(Register.HL) + 1);
 

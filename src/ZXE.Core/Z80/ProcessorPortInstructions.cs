@@ -151,7 +151,7 @@ public static class ProcessorPortInstructions
             input.State.Flags.Zero = input.State.Registers[Register.B] == 0;
             input.State.Flags.Sign = (sbyte) input.State.Registers[Register.B] < 0;
             
-            input.State.PutFlagsInFRegister(true);
+            input.State.PutFlagsInFRegister();
 
             return 0;
         }

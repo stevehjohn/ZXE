@@ -28,7 +28,7 @@ public static class ProcessorBitwiseRotationInstructions
             // Zero unaffected
             // Sign unaffected
 
-            input.State.PutFlagsInFRegister(true);
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -59,7 +59,7 @@ public static class ProcessorBitwiseRotationInstructions
             // Zero unaffected
             // Sign unaffected
 
-            input.State.PutFlagsInFRegister(true);
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -87,7 +87,7 @@ public static class ProcessorBitwiseRotationInstructions
             // Zero unaffected
             // Sign unaffected
 
-            input.State.PutFlagsInFRegister(true);
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
@@ -115,7 +115,7 @@ public static class ProcessorBitwiseRotationInstructions
             // Zero unaffected
             // Sign unaffected
 
-            input.State.PutFlagsInFRegister(true);
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;

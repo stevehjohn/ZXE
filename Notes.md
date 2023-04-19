@@ -4,6 +4,11 @@ This document just contains notes for me to refer to during implementation.
 
 ## TODOs
 
+- Instructions that modify F (except pop af) copy F to Q. Instructions that don't modify F set Q to 0.
+  Then, the flags of ccf and scf are computed as explained here: https://github.com/redcode/Z80/blob/master/sources/Z80.c#L1220
+  Done for:
+
+
 - https://worldofspectrum.org/faq/reference/128kreference.htm#Plus3
 - Tricky one: Render screen when 14336 TStates have passed since 50Hz refresh.
 - Setting Q and Memptr.

@@ -147,7 +147,7 @@ public static class ProcessorLoadInstructions
             input.State.Flags.Zero = value == 0;
             input.State.Flags.Sign = (sbyte) value < 0;
 
-            input.State.PutFlagsInFRegister(true);
+            input.State.PutFlagsInFRegister();
         }
 
         return 0;
