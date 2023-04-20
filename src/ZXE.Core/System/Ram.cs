@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Infrastructure;
+﻿using System.Net;
+using ZXE.Core.Infrastructure;
 
 namespace ZXE.Core.System;
 
@@ -52,8 +53,8 @@ public class Ram
 
     public byte this[int address]
     {
-        get => _layout[address & 0b1100_0000_0000_0000 >> 14][address & 0x0011_1111_1111_1111];
-        set => _layout[address & 0b1100_0000_0000_0000 >> 14][address & 0x0011_1111_1111_1111] = value;
+        get => _layout[(address & 0b1100_0000_0000_0000) >> 14][address & 0b0011_1111_1111_1111];
+        set => _layout[(address & 0b1100_0000_0000_0000) >> 14][address & 0b0011_1111_1111_1111] = value;
     }
 
     public byte[] ReadBlock(Range range)
@@ -73,8 +74,9 @@ public class Ram
         return data;
     }
 
-    public void SetBank(int a, int b = 0)
+    public void SetBank(int startAddress, int bankNumber)
     {
+        _layout[(startAddress & 0b1100_0000_0000_0000) >> 14] = _banks[bankNumber];
     }
 
     public void Load(byte[] data, int destination)

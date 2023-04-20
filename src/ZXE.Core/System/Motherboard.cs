@@ -143,34 +143,34 @@ public class Motherboard : IDisposable
             switch (data & 0b0110 >> 1)
             {
                 case 0:
-                    _ram.SetBank(3);
-                    _ram.SetBank(2, 0x8000);
-                    _ram.SetBank(1, 0x4000);
-                    _ram.SetBank(0, 0x0000);
+                    _ram.SetBank(0xC000, 3);
+                    _ram.SetBank(0x8000, 2);
+                    _ram.SetBank(0x4000, 1);
+                    _ram.SetBank(0x0000, 0);
 
                     break;
 
                 case 1:
-                    _ram.SetBank(7);
-                    _ram.SetBank(6, 0x8000);
-                    _ram.SetBank(5, 0x4000);
-                    _ram.SetBank(4, 0x0000);
+                    _ram.SetBank(0xC000, 7);
+                    _ram.SetBank(0x8000, 6);
+                    _ram.SetBank(0x4000, 5);
+                    _ram.SetBank(0x0000, 4);
 
                     break;
 
                 case 2:
-                    _ram.SetBank(3);
-                    _ram.SetBank(6, 0x8000);
-                    _ram.SetBank(5, 0x4000);
-                    _ram.SetBank(4, 0x0000);
+                    _ram.SetBank(0xC000, 3);
+                    _ram.SetBank(0x8000, 6);
+                    _ram.SetBank(0x4000, 5);
+                    _ram.SetBank(0x0000, 4);
                     
                     break;
 
                 case 3:
-                    _ram.SetBank(3);
-                    _ram.SetBank(6, 0x8000);
-                    _ram.SetBank(7, 0x4000);
-                    _ram.SetBank(4, 0x0000);
+                    _ram.SetBank(0xC000, 3);
+                    _ram.SetBank(0x8000, 6);
+                    _ram.SetBank(0x4000, 7);
+                    _ram.SetBank(0x0000, 4);
 
                     break;
             }
@@ -213,7 +213,7 @@ public class Motherboard : IDisposable
             _ram.Load(rom, 0);
         }
 
-        _ram.SetBank(data & 0b0000_0111);
+        _ram.SetBank(0xC000, data & 0b0000_0111);
 
         _ram.Screen = (data & 0b0000_1000) > 0 ? 2 : 1;
     }

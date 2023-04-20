@@ -73,7 +73,7 @@ public class Z80FileLoader
 
         if (data[34] is 3 or 4)
         {
-            _ram.SetBank(data[35] & 0b0000_0111);
+            _ram.SetBank(0xC000, data[35] & 0b0000_0111);
 
             _ram.Screen = (data[35] & 0b0000_1000) > 0 ? 2 : 1;
         }
