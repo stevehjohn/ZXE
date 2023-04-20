@@ -81,6 +81,10 @@ public class Ram
 
     public void Load(byte[] data, int destination)
     {
+        for (var i = 0; i < data.Length; i++)
+        {
+            this[destination + i] = data[i];
+        }
     }
 
     public void LoadIntoPage(int page, byte[] data)
