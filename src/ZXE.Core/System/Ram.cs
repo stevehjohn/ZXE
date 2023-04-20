@@ -44,8 +44,8 @@ public class Ram
         // Note: Bank 9 (i.e. [8]) is a special case to contain the ROM
         // Default 5, 2, 0
 
-        _layout[0] = _banks[8]; // 0x0000 - 0x0FFF
-        _layout[1] = _banks[5]; // 0x4000 - 0x3FFF
+        _layout[0] = _banks[8]; // 0x0000 - 0x3FFF
+        _layout[1] = _banks[5]; // 0x4000 - 0x7FFF
         _layout[2] = _banks[2]; // 0x8000 - 0xBFFF
         _layout[3] = _banks[0]; // 0xC000 - 0xFFFF
     }
