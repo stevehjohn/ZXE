@@ -80,4 +80,9 @@ public class Ram
     public void Load(byte[] data, int destination)
     {
     }
+
+    public void LoadIntoPage(int page, byte[] data)
+    {
+        Array.Copy(data, 0, _banks[page], 0, data.Length);
+    }
 }
