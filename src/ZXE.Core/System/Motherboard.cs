@@ -199,15 +199,12 @@ public class Motherboard : IDisposable
             romNumber += (data & 0b0000_0100) > 0 ? 2 : 0;
         }
 
-        Debugger.Log(0, "INFO", $"{romNumber}");
-
         if (! _romCache.ContainsKey(romNumber))
         {
             _romCache.Add(romNumber, File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\{folder}\\image-{romNumber}.rom"));
         }
 
         _ram.Load(_romCache[romNumber], 0);
-
     }
 
     public void Start()
