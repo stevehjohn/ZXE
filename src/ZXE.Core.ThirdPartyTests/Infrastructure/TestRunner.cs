@@ -64,10 +64,6 @@ public class TestRunner
 
                 var skipRemainder = false;
 
-                if (test.Name.Contains("157"))
-                {
-                }
-
                 var result = RunTest(test);
 
                 switch (result.Result)

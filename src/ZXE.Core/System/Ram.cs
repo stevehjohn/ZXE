@@ -63,7 +63,7 @@ public class Ram
         {
             address &= 0xFFFF;
 
-            if (address < 0x4000)
+            if (address < 0x4000 && ProtectRom)
             {
                 return;
             }
