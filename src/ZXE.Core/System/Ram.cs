@@ -1,5 +1,4 @@
-﻿using System.Net;
-using ZXE.Core.Infrastructure;
+﻿using ZXE.Core.Infrastructure;
 
 namespace ZXE.Core.System;
 
