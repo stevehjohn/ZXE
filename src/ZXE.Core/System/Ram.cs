@@ -15,10 +15,10 @@ public class Ram
 
     public bool ProtectRom { get; set; }
 
-    public int Screen 
+    public int Screen
     {
         get => _screen;
-        set 
+        set
         {
             if (value is < 1 or > 2)
             {
@@ -52,8 +52,24 @@ public class Ram
 
     public byte this[int address]
     {
-        get => _layout[(address & 0b1100_0000_0000_0000) >> 14][address & 0b0011_1111_1111_1111];
-        set => _layout[(address & 0b1100_0000_0000_0000) >> 14][address & 0b0011_1111_1111_1111] = value;
+        get
+        {
+            address &= 0xFFFF;
+
+            return _layout[(address & 0b1100_0000_0000_0000) >> 14][address & 0b0011_1111_1111_1111];
+        }
+
+        set
+        {
+            address &= 0xFFFF;
+
+            if (address < 0x4000)
+            {
+                return;
+            }
+
+            _layout[(address & 0b1100_0000_0000_0000) >> 14][address & 0b0011_1111_1111_1111] = value;
+        }
     }
 
     public byte[] ReadBlock(Range range)
