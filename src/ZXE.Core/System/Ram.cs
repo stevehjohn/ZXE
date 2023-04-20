@@ -86,6 +86,11 @@ public class Ram
         }
     }
 
+    public void LoadRom(byte[] data)
+    {
+        Array.Copy(data, 0, _layout[0], 0, data.Length);
+    }
+
     public void LoadIntoPage(int page, byte[] data)
     {
         Array.Copy(data, 0, _banks[page], 0, data.Length);
