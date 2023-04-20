@@ -99,7 +99,7 @@ public class SnaFileAdapter
 
     private void WriteRam(FileStream file)
     {
-        file.Write(_ram[0x4000..]);
+        file.Write(_ram.ReadBlock(0x4000..));
     }
 
     private void LoadRam(byte[] data)

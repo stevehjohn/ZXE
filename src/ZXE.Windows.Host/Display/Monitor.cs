@@ -19,6 +19,7 @@ namespace ZXE.Windows.Host.Display;
 
 public class Monitor : Game
 {
+    // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
 
     private readonly Motherboard _motherboard;
