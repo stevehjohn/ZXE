@@ -15,7 +15,7 @@ public class Ports
 
     public byte ReadByte(ushort port)
     {
-        var value = (byte) 0x00;
+        var value = _ports[port];
 
         if ((port & 0xFE) == 0xFE)
         {
@@ -36,6 +36,7 @@ public class Ports
         return value;
     }
 
+    // TODO: This should really be on the motherboard.
     private bool _pagingDisabled;
 
     public void WriteByte(ushort port, byte data)

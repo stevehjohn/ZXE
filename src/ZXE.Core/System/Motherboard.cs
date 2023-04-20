@@ -30,6 +30,8 @@ public class Motherboard : IDisposable
 
     private readonly Model _model;
 
+    private readonly Dictionary<int, byte[]> _romCache = new();
+
 #if TRACE_OVER_IP
     private readonly Process? _console;
 #endif
@@ -168,6 +170,13 @@ public class Motherboard : IDisposable
             }
         }
 
+        if (port == 0x7F)
+        {
+            _ram.SetBank(0xC000, data & 0b0000_0111);
+
+            _ram.Screen = (data & 0b0000_1000) > 0 ? 2 : 1;
+        }
+
         var folder = _model switch 
         {
             Model.Spectrum128 => "ZX Spectrum 128",
@@ -186,37 +195,24 @@ public class Motherboard : IDisposable
 
         if (port == 0x1F)
         {
+            romNumber = (_ports.ReadByte(0x7FFD) & 0b0001_0000) > 0 ? 1 : 0;
             romNumber += (data & 0b0000_0100) > 0 ? 2 : 0;
         }
 
         Debugger.Log(0, "INFO", $"{romNumber}");
 
-        if ((data & 0b0001_0000) > 0)
+        if (! _romCache.ContainsKey(romNumber))
         {
-            var rom = File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\{folder}\\image-{romNumber}.rom");
-
-            _ram.Load(rom, 0);
-        }
-        else
-        {
-            var rom = File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\{folder}\\image-{romNumber}.rom");
-
-            _ram.Load(rom, 0);
+            _romCache.Add(romNumber, File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\{folder}\\image-{romNumber}.rom"));
         }
 
-        _ram.SetBank(0xC000, data & 0b0000_0111);
+        _ram.Load(_romCache[romNumber], 0);
 
-        _ram.Screen = (data & 0b0000_1000) > 0 ? 2 : 1;
     }
 
     public void Start()
     {
         _timer.Start();
-    }
-
-    public void Stop()
-    {
-        _timer.Stop();
     }
 
     public void Pause()
