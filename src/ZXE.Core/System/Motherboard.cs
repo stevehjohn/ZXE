@@ -1,4 +1,4 @@
-﻿//#define TRACE_OVER_IP
+﻿#define TRACE_OVER_IP
 
 #if TRACE_OVER_IP
 using System.Diagnostics;
@@ -36,7 +36,7 @@ public class Motherboard : IDisposable
 #endif
 
 #if TRACE_OVER_IP
-    private bool _tracing;
+    private bool _tracing = true;
 #endif
 
     public Ram Ram => _ram;
