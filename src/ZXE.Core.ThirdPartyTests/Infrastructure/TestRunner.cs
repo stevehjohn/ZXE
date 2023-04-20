@@ -1,4 +1,4 @@
-﻿//#define UNATTENDED
+﻿#define UNATTENDED
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -40,10 +40,10 @@ public class TestRunner
         {
             // Skip a bunch of tests
             // ReSharper disable once StringCompareToIsCultureSpecific
-            if (Path.GetFileName(file).CompareTo("ed a2 ") < 0)
-            {
-                continue;
-            }
+            //if (Path.GetFileName(file).CompareTo("ed a2 ") < 0)
+            //{
+            //    continue;
+            //}
 
             // End early
             //if (Path.GetFileName(file).CompareTo("fd df") > 0)
