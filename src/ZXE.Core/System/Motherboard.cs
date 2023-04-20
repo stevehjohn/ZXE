@@ -6,6 +6,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 #endif
+using System.Diagnostics;
+using System.Net.Security;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System.Interfaces;
@@ -26,6 +28,8 @@ public class Motherboard : IDisposable
     private readonly ITimer _timer;
 
     private readonly ITracer? _tracer;
+
+    private readonly Model _model;
 
 #if TRACE_OVER_IP
     private readonly Process? _console;
@@ -113,6 +117,13 @@ public class Motherboard : IDisposable
 
                 break;
 
+            case Model.SpectrumPlus2A:
+                data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum +2A\\image-0.rom");
+
+                _ram.Load(data, 0);
+
+                break;
+
             case Model.SpectrumPlus3:
                 data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum +3\\image-0.rom");
 
@@ -120,6 +131,8 @@ public class Motherboard : IDisposable
 
                 break;
         }
+
+        _model = model;
     }
 
     private void PagedEvent(byte port, byte data)
@@ -127,17 +140,75 @@ public class Motherboard : IDisposable
         if (port == 0x1F && (data & 0x01) > 0)
         {
             // Special paging.
+            switch (data & 0b0110 >> 1)
+            {
+                case 0:
+                    _ram.SetBank(3);
+                    _ram.SetBank(2, 0x8000);
+                    _ram.SetBank(1, 0x4000);
+                    _ram.SetBank(0, 0x0000);
+
+                    break;
+
+                case 1:
+                    _ram.SetBank(7);
+                    _ram.SetBank(6, 0x8000);
+                    _ram.SetBank(5, 0x4000);
+                    _ram.SetBank(4, 0x0000);
+
+                    break;
+
+                case 2:
+                    _ram.SetBank(3);
+                    _ram.SetBank(6, 0x8000);
+                    _ram.SetBank(5, 0x4000);
+                    _ram.SetBank(4, 0x0000);
+                    
+                    break;
+
+                case 3:
+                    _ram.SetBank(3);
+                    _ram.SetBank(6, 0x8000);
+                    _ram.SetBank(7, 0x4000);
+                    _ram.SetBank(4, 0x0000);
+
+                    break;
+            }
         }
+
+        var folder = _model switch 
+        {
+            Model.Spectrum128 => "ZX Spectrum 128",
+            Model.SpectrumPlus2 => "ZX Spectrum +2",
+            Model.SpectrumPlus2A => "ZX Spectrum +2A",
+            Model.SpectrumPlus3 => "ZX Spectrum +3",
+            // TODO: Proper exception?
+            _ => throw new Exception("Invalid model")
+        };
+
+        var romNumber = 0;
+
+        if (port == 0x7F)
+        {
+            romNumber = (data & 0b0001_0000) > 0 ? 1 : 0;
+        }
+
+        if (port == 0x1F)
+        {
+            romNumber += (data & 0b0000_0100) > 0 ? 2 : 0;
+        }
+
+        Debugger.Log(0, "INFO", $"{romNumber}");
 
         if ((data & 0b0001_0000) > 0)
         {
-            var rom = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum 128\\image-1.rom");
+            var rom = File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\{folder}\\image-{romNumber}.rom");
 
             _ram.Load(rom, 0);
         }
         else
         {
-            var rom = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum 128\\image-0.rom");
+            var rom = File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\{folder}\\image-{romNumber}.rom");
 
             _ram.Load(rom, 0);
         }

@@ -58,7 +58,7 @@ public class Ram
         _screen = screen;
     }
 
-    public void SetBank(int bank)
+    public void SetBank(int bank, int baseAddress = 0xC000)
     {
         _bank = bank;
 
