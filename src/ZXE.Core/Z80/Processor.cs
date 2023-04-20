@@ -74,7 +74,7 @@ public partial class Processor
 
         if (_state.OpcodePrefix > 0xFF)
         {
-            data = ram.GetData(_state.ProgramCounter, 2);
+            data = ram.ReadBlock(_state.ProgramCounter, 2);
 
             instruction = _instructions[(_state.OpcodePrefix << 8) | data[1]];
 
@@ -94,7 +94,7 @@ public partial class Processor
                 throw new OpcodeNotImplementedException($"Opcode not implemented: {opcode:X6}.");
             }
 
-            data = ram.GetData(_state.ProgramCounter, instruction.Length);
+            data = ram.ReadBlock(_state.ProgramCounter, instruction.Length);
         }
 
         if (_tracer != null)

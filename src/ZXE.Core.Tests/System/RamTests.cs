@@ -5,17 +5,18 @@ namespace ZXE.Core.Tests.System;
 
 public class RamTests
 {
+    private readonly Ram _ram = new();
+
     [Fact]
-    public void Loads_data_correctly()
+    public void Copies_data_across_layout_boundaries()
     {
-        var ram = new Ram();
+        _ram[0x0FFE] = 0x01;
+        _ram[0x0FFF] = 0x02;
+        _ram[0x1000] = 0x03;
+        _ram[0x1001] = 0x04;
 
-        ram.Load(new byte[] { 0x10, 0x11, 0x12, 0x13, 0x14 }, 0x20);
+        var read = _ram.ReadBlock(0x0FFE..0x1001);
 
-        Assert.Equal(0x10, ram[0x20]);
-        Assert.Equal(0x11, ram[0x21]);
-        Assert.Equal(0x12, ram[0x22]);
-        Assert.Equal(0x13, ram[0x23]);
-        Assert.Equal(0x14, ram[0x24]);
+        Assert.Equal(4, read.Length);
     }
 }

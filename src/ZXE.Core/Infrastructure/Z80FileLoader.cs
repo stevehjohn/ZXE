@@ -61,7 +61,8 @@ public class Z80FileLoader
                 pageData = DecompressV2(data[(offset + 3)..(offset + 3 + pageLength)]);
             }
 
-            _ram.LoadIntoPage(data[offset + 2] - 3, pageData);
+            // TODO: FIX!
+            //_ram.LoadIntoPage(data[offset + 2] - 3, pageData);
 
             offset += pageLength + 3;
         }
@@ -75,7 +76,7 @@ public class Z80FileLoader
         {
             _ram.SetBank(data[35] & 0b0000_0111);
 
-            _ram.SetScreen((data[35] & 0b0000_1000) > 0 ? 2 : 1);
+            _ram.Screen = (data[35] & 0b0000_1000) > 0 ? 2 : 1;
         }
     }
 

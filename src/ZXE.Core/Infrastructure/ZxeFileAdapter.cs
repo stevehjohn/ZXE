@@ -65,7 +65,7 @@ public class ZxeFileAdapter
         var data = new ZxeFile
                    {
                        State = _state,
-                       Ram = _ram[0x4000..],
+                       Ram = _ram.ReadBlock(0x4000..),
                        Registers = _state.Registers.GetRawRegisters(),
                        RomTitle = romTitle
                    };
