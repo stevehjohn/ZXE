@@ -15,9 +15,11 @@ public class Ports
 
     public byte ReadByte(ushort port)
     {
+        var value = (byte) 0x00;
+
         if ((port & 0xFE) == 0xFE)
         {
-            var value = (byte) 0xFF;
+            value = 0xFF;
 
             var high = (port & 0xFF00) >> 8;
 
@@ -29,11 +31,9 @@ public class Ports
             if ((high & 0b0010_0000) == 0) value &= _ports[0b1101_1111_1111_1110];
             if ((high & 0b0100_0000) == 0) value &= _ports[0b1011_1111_1111_1110];
             if ((high & 0b1000_0000) == 0) value &= _ports[0b0111_1111_1111_1110];
-
-            return value;
         }
 
-        return _ports[port];
+        return value;
     }
 
     private bool _pagingDisabled;

@@ -7,7 +7,6 @@ using System.Net.Sockets;
 using System.Text;
 #endif
 using System.Diagnostics;
-using System.Net.Security;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System.Interfaces;
@@ -117,13 +116,6 @@ public class Motherboard : IDisposable
 
                 break;
 
-            case Model.SpectrumPlus2A:
-                data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum +2A\\image-0.rom");
-
-                _ram.Load(data, 0);
-
-                break;
-
             case Model.SpectrumPlus3:
                 data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum +3\\image-0.rom");
 
@@ -180,7 +172,6 @@ public class Motherboard : IDisposable
         {
             Model.Spectrum128 => "ZX Spectrum 128",
             Model.SpectrumPlus2 => "ZX Spectrum +2",
-            Model.SpectrumPlus2A => "ZX Spectrum +2A",
             Model.SpectrumPlus3 => "ZX Spectrum +3",
             // TODO: Proper exception?
             _ => throw new Exception("Invalid model")
