@@ -85,9 +85,9 @@ public class FileTracer : IDisposable, ITracer
 
         builder.Append($"IY: {state.Registers.ReadPair(Register.IY):X4} ");
 
-        builder.Append($"I: {state.Registers.ReadPair(Register.IY):X2} ");
+        builder.Append($"I: {state.Registers[Register.I]:X2} ");
 
-        builder.Append($"R: {state.Registers.ReadPair(Register.IY):X2} ");
+        builder.Append($"R: {state.Registers[Register.R]:X2} ");
 
         builder.Append($"AF': {state.Registers.ReadPair(Register.AF_):X4} ");
 
