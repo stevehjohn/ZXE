@@ -22,6 +22,10 @@ public class FileTracer : IDisposable, ITracer
 
     public void TraceBefore(Instruction instruction, byte[] data, State state, Ram ram)
     {
+    }
+
+    public void TraceAfter(Instruction instruction, byte[] data, State state, Ram ram)
+    {
         var builder = new StringBuilder();
 
         builder.Append($"{instruction.Mnemonic,-15}");
@@ -94,10 +98,6 @@ public class FileTracer : IDisposable, ITracer
         builder.Append(Environment.NewLine);
 
         _file.Write(Encoding.UTF8.GetBytes(builder.ToString()));
-    }
-
-    public void TraceAfter(Instruction instruction, byte[] data, State state, Ram ram)
-    {
     }
 
     public List<string> GetTrace()
