@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using ZXE.Core.Infrastructure;
+﻿using ZXE.Core.Infrastructure;
 
 namespace ZXE.Core.System;
 
@@ -45,7 +44,7 @@ public class Ports
             if ((high & 0b1000_0000) == 0) value &= _ports[0b0111_1111_1111_1110] ?? 0xFF;
         }
 
-        // Disk drive.
+        // Disk drive (+2A/3 only).
         //if ((port & 0x2FFD) > 0)
         //{
         //    value = 0xFF;
