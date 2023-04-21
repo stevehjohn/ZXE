@@ -30,6 +30,8 @@ public class Motherboard : IDisposable
 
     private readonly Model _model;
 
+    private byte _lastPageWrite;
+
     private readonly Dictionary<int, byte[]> _romCache = new();
 
 #if TRACE_OVER_IP
@@ -174,6 +176,8 @@ public class Motherboard : IDisposable
         {
             _ram.SetBank(0xC000, data & 0b0000_0111);
 
+            _lastPageWrite = data;
+
             _ram.Screen = (data & 0b0000_1000) > 0 ? 2 : 1;
         }
 
@@ -195,7 +199,7 @@ public class Motherboard : IDisposable
 
         if (port == 0x1F)
         {
-            romNumber = (_ram[0x5B5C] & 0b0001_0000) > 0 ? 1 : 0;
+            romNumber = (_lastPageWrite & 0b0001_0000) > 0 ? 1 : 0;
             romNumber += (data & 0b0000_0100) > 0 ? 2 : 0;
         }
 
