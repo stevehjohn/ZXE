@@ -152,12 +152,10 @@ FD DB 00D7: IN A, (n)
 
 ### Fuse Tests Failing - not considering undocumented flags.
 
-Number failing: 31
+Number failing: 25
 
 ```
 76: HALT
-db_2: IN A, (n)
-db: IN A, (n)
 ed40: IN B, (C)
 ed48: IN C, (C)
 ed50: IN D, (C)
@@ -174,7 +172,6 @@ eda3_02: OUTI
 eda3_04: OUTI
 eda3_06: OUTI
 eda3_08: OUTI
-edaa: IND
 edaa_01: IND
 edaa_02: IND
 edab: OUTD
