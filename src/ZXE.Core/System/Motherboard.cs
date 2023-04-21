@@ -102,28 +102,28 @@ public class Motherboard : IDisposable
             case Model.Spectrum48K:
                 data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum 48K\\image-0.rom");
 
-                _ram.LoadRom(data);
+                _ram.LoadRom(data, 0);
 
                 break;
 
             case Model.Spectrum128:
                 data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum 128\\image-0.rom");
 
-                _ram.LoadRom(data);
+                _ram.LoadRom(data, 0);
 
                 break;
 
             case Model.SpectrumPlus2:
                 data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum +2\\image-0.rom");
 
-                _ram.LoadRom(data);
+                _ram.LoadRom(data, 0);
 
                 break;
 
             case Model.SpectrumPlus3:
                 data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum +3\\image-0.rom");
 
-                _ram.LoadRom(data);
+                _ram.LoadRom(data, 0);
 
                 break;
         }
@@ -208,7 +208,7 @@ public class Motherboard : IDisposable
             _romCache.Add(romNumber, File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\{folder}\\image-{romNumber}.rom"));
         }
 
-        _ram.LoadRom(_romCache[romNumber]);
+        _ram.LoadRom(_romCache[romNumber], 0);
     }
 
     public void Start()

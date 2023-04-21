@@ -9,11 +9,19 @@ public class Ram
 
     private readonly byte[][] _layout;
 
+    private readonly byte[] _bankNumbers;
+
     private int _screen = 1;
+
+    private int _rom;
 
     public byte[] ScreenRam => _screen == 1 ? _banks[5] : _banks[7];
 
     public bool ProtectRom { get; set; }
+
+    public byte[] BankNumbers => _bankNumbers;
+
+    public int Rom => _rom;
 
     public int Screen
     {
@@ -36,6 +44,8 @@ public class Ram
 
         _layout = new byte[4][];
 
+        _bankNumbers = new byte[4];
+
         for (var b = 0; b < 9; b++)
         {
             _banks[b] = new byte[Constants.K16];
@@ -48,6 +58,11 @@ public class Ram
         _layout[1] = _banks[5]; // 0x4000 - 0x7FFF
         _layout[2] = _banks[2]; // 0x8000 - 0xBFFF
         _layout[3] = _banks[0]; // 0xC000 - 0xFFFF
+
+        _bankNumbers[0] = 8;
+        _bankNumbers[1] = 5;
+        _bankNumbers[2] = 2;
+        _bankNumbers[3] = 0;
     }
 
     public byte this[int address]
@@ -92,6 +107,8 @@ public class Ram
     public void SetBank(int startAddress, int bankNumber)
     {
         _layout[(startAddress & 0b1100_0000_0000_0000) >> 14] = _banks[bankNumber];
+
+        _bankNumbers[(startAddress & 0b1100_0000_0000_0000) >> 14] = (byte) bankNumber;
     }
 
     public void Load(byte[] data, int destination)
@@ -102,9 +119,11 @@ public class Ram
         }
     }
 
-    public void LoadRom(byte[] data)
+    public void LoadRom(byte[] data, int number)
     {
         Array.Copy(data, 0, _layout[0], 0, data.Length);
+
+        _rom = number;
     }
 
     public void LoadIntoPage(int page, byte[] data)

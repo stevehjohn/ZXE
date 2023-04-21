@@ -38,6 +38,10 @@ public class FileTracer : IDisposable, ITracer
             }
         }
 
+        builder.Append($"BANKS: {ram.BankNumbers[0]}{ram.BankNumbers[1]}{ram.BankNumbers[2]}{ram.BankNumbers[3]} ");
+
+        builder.Append($"SCR: {ram.Screen} ");
+
         builder.Append($"PC: {state.ProgramCounter:X4} ");
 
         builder.Append($"SP: {state.StackPointer:X4} ");
