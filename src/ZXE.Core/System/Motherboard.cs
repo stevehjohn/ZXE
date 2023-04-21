@@ -58,7 +58,7 @@ public class Motherboard : IDisposable
                    ProtectRom = true
                };
 
-        _ports = new Ports
+        _ports = new Ports(model)
                  {
                      PagedEvent = PagedEvent
                  };

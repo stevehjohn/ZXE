@@ -1,4 +1,7 @@
-﻿namespace ZXE.Core.System;
+﻿using System.Diagnostics;
+using ZXE.Core.Infrastructure;
+
+namespace ZXE.Core.System;
 
 public class Ports
 {
@@ -6,12 +9,17 @@ public class Ports
 
     public Action<byte, byte>? PagedEvent { set; private get; }
 
-    public Ports()
+    private readonly Model _model;
+
+    public Ports(Model model = Model.Spectrum48K)
     {
         _ports = new byte?[0x0001_0000];
 
+        // Kempston. Required for Manic Miner.
         _ports[0x001f] = 0;
         _ports[0x011f] = 0;
+
+        _model = model;
 
         ResetKeyboardPorts();
     }
@@ -20,6 +28,7 @@ public class Ports
     {
         var value = _ports[port] ?? 0xFF;
 
+        // Keyboard.
         if ((port & 0xFE) == 0xFE)
         {
             value = 0xFF;
@@ -36,6 +45,12 @@ public class Ports
             if ((high & 0b1000_0000) == 0) value &= _ports[0b0111_1111_1111_1110] ?? 0xFF;
         }
 
+        // Disk drive.
+        //if ((port & 0x2FFD) > 0)
+        //{
+        //    value = 0xFF;
+        //}
+
         return value;
     }
 
@@ -46,19 +61,45 @@ public class Ports
     {
         _ports[port] = data;
 
-        if (port == 0x7FFD && PagedEvent != null && ! _pagingDisabled)
+        if (PagedEvent == null || _model == Model.Spectrum48K || _pagingDisabled)
         {
-            if ((data & 0b00100000) > 0)
-            {
-                _pagingDisabled = true;
-            }
-
-            PagedEvent(0x7F, data);
+            return;
         }
 
-        if (port == 0x1FFD && PagedEvent != null)
+        if ((port & 0x01) != 0)
         {
-            PagedEvent(0x1F, data);
+            var paging = (port & 0b1000_0000_0000_0010) == 0;
+
+            if (_model == Model.SpectrumPlus3)
+            {
+                paging &= (port & 0b0100_0000_0000_0000) > 0;
+            }
+
+            if (paging)
+            {
+                if ((data & 0b00100000) > 0)
+                {
+                    _pagingDisabled = true;
+
+                    return;
+                }
+
+                PagedEvent(0x7F, data);
+            }
+
+            if (_model != Model.SpectrumPlus3)
+            {
+                return;
+            }
+            
+            paging = (port & 0b1110_0000_0000_0010) == 0;
+
+            paging &= (port & 0b0001_0000_0000_0000) > 0;
+
+            if (paging)
+            {
+                PagedEvent(0x1F, data);
+            }
         }
     }
 
