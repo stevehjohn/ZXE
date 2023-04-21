@@ -44,6 +44,25 @@ public class FileTracer : IDisposable, ITracer
 
         builder.Append($"ROM: {ram.Rom} ");
 
+        builder.Append("INT: ");
+
+        switch (state.InterruptType)
+        {
+            case InterruptType.Maskable:
+                builder.Append("MSK ");
+
+                break;
+
+            case InterruptType.NonMaskable:
+                builder.Append("NMI ");
+
+                break;
+            default:
+                builder.Append("--- ");
+
+                break;
+        }
+
         builder.Append($"PC: {state.ProgramCounter:X4} ");
 
         builder.Append($"SP: {state.StackPointer:X4} ");

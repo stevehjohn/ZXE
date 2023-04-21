@@ -218,6 +218,8 @@ public partial class Processor
         _state.InterruptFlipFlop1 = false;
 
         _state.ProgramCounter = 0x0066;
+
+        _state.InterruptType = InterruptType.NonMaskable;
     }
 
     private void HandleMaskableInterrupt(Ram ram, Bus bus)
@@ -246,6 +248,8 @@ public partial class Processor
                         _state.ProgramCounter = address;
 
                         _state.ResetQ();
+
+                        _state.InterruptType = InterruptType.Maskable;
                     }
                     else if (instruction.Mnemonic.StartsWith("CALL"))
                     {
@@ -260,6 +264,8 @@ public partial class Processor
                         _state.MemPtr = (ushort) _state.ProgramCounter;
 
                         _state.ResetQ();
+
+                        _state.InterruptType = InterruptType.Maskable;
                     }
 
                     break;
@@ -268,6 +274,8 @@ public partial class Processor
                     PushProgramCounter(ram);
 
                     _state.ProgramCounter = 0x0038;
+
+                    _state.InterruptType = InterruptType.Maskable;
 
                     break;
 
@@ -281,6 +289,8 @@ public partial class Processor
                         bus.Data = null;
 
                         _state.ProgramCounter = ram[address] | (ram[address + 1] << 8);
+
+                        _state.InterruptType = InterruptType.Maskable;
                     }
 
                     break;

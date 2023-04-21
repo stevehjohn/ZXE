@@ -37,6 +37,8 @@ public class State
 
     public bool SkipInterrupt { get; set; }
 
+    public InterruptType InterruptType { get; set; }
+
     public byte Q { get; set; }
 
     public State()

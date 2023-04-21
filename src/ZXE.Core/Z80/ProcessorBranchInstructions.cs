@@ -134,6 +134,8 @@ public static class ProcessorBranchInstructions
 
         input.State.ResetQ();
 
+        input.State.InterruptType = InterruptType.None;
+
         return -1;
     }
 
@@ -154,6 +156,8 @@ public static class ProcessorBranchInstructions
         // Flags unaffected
 
         input.State.ResetQ();
+
+        input.State.InterruptType = InterruptType.None;
 
         return -1;
     }
