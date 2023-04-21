@@ -10,7 +10,7 @@ public static class Program
     [STAThread]
     public static void Main()
     {
-        var motherboard = new Motherboard(Model.SpectrumPlus2, null); //, new FormattingTracer());
+        var motherboard = new Motherboard(Model.Spectrum128, null); //, new FormattingTracer());
         //var motherboard = new Motherboard(Model.SpectrumPlus3, new FormattingTracer());
 
         motherboard.Reset();
