@@ -109,10 +109,6 @@ public partial class Processor
             ProcessorExtension.InterceptInstruction(_state, ram);
         }
 
-        if (_state.ProgramCounter == 0x5B1C)
-        {
-        }
-
         var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
 
         _opcodesExecuted++;
