@@ -48,6 +48,8 @@ public class FileTracer : IDisposable, ITracer
 
         builder.Append($"ROM: {ram.Rom} ");
 
+        builder.Append($"IM: {(int) state.InterruptMode} ");
+
         builder.Append("INT: ");
 
         switch (state.InterruptType)
