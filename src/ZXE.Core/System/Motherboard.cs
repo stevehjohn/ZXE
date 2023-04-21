@@ -170,6 +170,8 @@ public class Motherboard : IDisposable
 
                     break;
             }
+
+            return;
         }
 
         if (port == 0x7F)
