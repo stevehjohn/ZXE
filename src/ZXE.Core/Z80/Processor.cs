@@ -111,11 +111,6 @@ public partial class Processor
 
         var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
 
-        if (instruction.Mnemonic != "EI" && ! instruction.Mnemonic.StartsWith("SOPSET"))
-        {
-            _state.SkipInterrupt = false;
-        }
-
         _opcodesExecuted++;
 
         if (additionalCycles > -1)
@@ -126,6 +121,11 @@ public partial class Processor
         if (! instruction.Mnemonic.StartsWith("SOPSET") && _state.OpcodePrefix == 0)
         {
             HandleInterrupts(ram, bus);
+        }
+
+        if (instruction.Mnemonic != "EI" && ! instruction.Mnemonic.StartsWith("SOPSET"))
+        {
+            _state.SkipInterrupt = false;
         }
 
         if (_tracer != null)
