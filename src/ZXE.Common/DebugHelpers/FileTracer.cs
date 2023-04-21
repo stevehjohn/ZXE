@@ -100,6 +100,8 @@ public class FileTracer : IDisposable, ITracer
         builder.Append(Environment.NewLine);
 
         _file.Write(Encoding.UTF8.GetBytes(builder.ToString()));
+
+        _file.Flush();
     }
 
     public List<string> GetTrace()
