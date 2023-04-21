@@ -28,7 +28,7 @@ public class FileTracer : IDisposable, ITracer
 
         for (var i = 0; i < 7; i++)
         {
-            if (data.Length < i - 1)
+            if (i < data.Length)
             {
                 builder.Append($"{data[i]:X2} ");
             }
@@ -41,6 +41,30 @@ public class FileTracer : IDisposable, ITracer
         builder.Append($"PC: {state.ProgramCounter:X4} ");
 
         builder.Append($"SP: {state.StackPointer:X4} ");
+
+        builder.Append($"AF: {state.Registers.ReadPair(Register.AF):X4} ");
+
+        builder.Append($"BC: {state.Registers.ReadPair(Register.BC):X4} ");
+
+        builder.Append($"DE: {state.Registers.ReadPair(Register.DE):X4} ");
+
+        builder.Append($"HL: {state.Registers.ReadPair(Register.HL):X4} ");
+
+        builder.Append($"IX: {state.Registers.ReadPair(Register.IX):X4} ");
+
+        builder.Append($"IY: {state.Registers.ReadPair(Register.IY):X4} ");
+
+        builder.Append($"I: {state.Registers.ReadPair(Register.IY):X2} ");
+
+        builder.Append($"R: {state.Registers.ReadPair(Register.IY):X2} ");
+
+        builder.Append($"AF': {state.Registers.ReadPair(Register.AF_):X4} ");
+
+        builder.Append($"BC': {state.Registers.ReadPair(Register.BC_):X4} ");
+
+        builder.Append($"DE': {state.Registers.ReadPair(Register.DE_):X4} ");
+
+        builder.Append($"HL': {state.Registers.ReadPair(Register.HL_):X4} ");
 
         builder.Append(Environment.NewLine);
 
