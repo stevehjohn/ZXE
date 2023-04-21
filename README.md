@@ -63,6 +63,10 @@ Runs tests against this awesome suite:
 - https://github.com/anotherlin/z80emu/blob/master/zextest.c
 - https://www.angelfire.com/ga/jamiemylandshome/download.html
 
+## Gaming related
+
+- https://www.the-tipshop.co.uk/
+
 ## Miscellaneous References
 
 - https://github.com/ArjunNair/Zero-Emulator/blob/master/Ziggy/Speccy/Z80.cs
