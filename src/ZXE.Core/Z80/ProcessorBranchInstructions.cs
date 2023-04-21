@@ -289,6 +289,8 @@ public static class ProcessorBranchInstructions
 
         input.State.MemPtr = (ushort) input.State.ProgramCounter;
 
+        input.State.InterruptType = InterruptType.None;
+
         return 0;
     }
 
