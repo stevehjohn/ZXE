@@ -208,7 +208,7 @@ public class Motherboard : IDisposable
             _romCache.Add(romNumber, File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\{folder}\\image-{romNumber}.rom"));
         }
 
-        _ram.LoadRom(_romCache[romNumber], 0);
+        _ram.LoadRom(_romCache[romNumber], romNumber);
     }
 
     public void Start()
