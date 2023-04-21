@@ -42,6 +42,8 @@ public class FileTracer : IDisposable, ITracer
 
         builder.Append($"SCR: {ram.Screen} ");
 
+        builder.Append($"ROM: {ram.Rom} ");
+
         builder.Append($"PC: {state.ProgramCounter:X4} ");
 
         builder.Append($"SP: {state.StackPointer:X4} ");
