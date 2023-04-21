@@ -195,7 +195,7 @@ public class Motherboard : IDisposable
 
         if (port == 0x1F)
         {
-            romNumber = (_ports.ReadByte(0x7FFD) & 0b0001_0000) > 0 ? 1 : 0;
+            romNumber = (_ram[0x5B5C] & 0b0001_0000) > 0 ? 1 : 0;
             romNumber += (data & 0b0000_0100) > 0 ? 2 : 0;
         }
 
