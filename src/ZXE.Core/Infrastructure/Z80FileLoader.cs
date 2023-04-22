@@ -80,7 +80,7 @@ public class Z80FileLoader
             var romNumber = (data[35] & 0b0001_0000) >> 4;
 
             // TODO: Load appropriate machine.
-            var rom = File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum 128\\image-{romNumber}.rom");
+            var rom = File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum +2\\image-{romNumber}.rom");
 
             _ram.LoadRom(rom, romNumber);
         }
