@@ -47,6 +47,8 @@ public class Motherboard : IDisposable
 
     public Processor Processor => _processor;
 
+    public Model Model => _model;
+
     public bool Fast
     {
         get => _timer.Fast;

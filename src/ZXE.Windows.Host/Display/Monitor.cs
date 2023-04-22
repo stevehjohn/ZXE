@@ -125,7 +125,7 @@ public class Monitor : Game
 
             //var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
-            var adapter = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
+            var adapter = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram, _motherboard.Model);
 
             adapter.Load(dialog.FileName);
 
@@ -155,7 +155,7 @@ public class Monitor : Game
 
             var file = "..\\..\\..\\..\\..\\Other Images\\memtest+3.z80";
 
-            var adapter = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
+            var adapter = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram, _motherboard.Model);
 
             adapter.Load(file);
 

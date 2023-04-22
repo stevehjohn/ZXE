@@ -9,7 +9,7 @@ public class Z80FileLoader
 
     private readonly Ram _ram;
 
-    public Z80FileLoader(State state, Ram ram)
+    public Z80FileLoader(State state, Ram ram, Model model)
     {
         _state = state;
 
