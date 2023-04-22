@@ -22,9 +22,32 @@ public class FileTracer : IDisposable, ITracer
 
     public void TraceBefore(Instruction instruction, byte[] data, State state, Ram ram)
     {
+        Trace(instruction, data, state, ram, true);
     }
 
     public void TraceAfter(Instruction instruction, byte[] data, State state, Ram ram)
+    {
+        Trace(instruction, data, state, ram, false);
+    }
+
+    public List<string> GetTrace()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ClearTrace()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Dispose()
+    {
+        _file.Close();
+
+        _file.Dispose();
+    }
+
+    private void Trace(Instruction instruction, byte[] data, State state, Ram ram, bool showMnemonic)
     {
         var builder = new StringBuilder();
 
@@ -101,23 +124,6 @@ public class FileTracer : IDisposable, ITracer
 
         _file.Write(Encoding.UTF8.GetBytes(builder.ToString()));
 
-        _file.Flush();
-    }
-
-    public List<string> GetTrace()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void ClearTrace()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Dispose()
-    {
-        _file.Close();
-
-        _file.Dispose();
+        _file.Flush();    
     }
 }
