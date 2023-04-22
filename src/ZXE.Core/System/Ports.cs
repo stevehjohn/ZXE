@@ -1,4 +1,5 @@
-﻿using ZXE.Core.Infrastructure;
+﻿using System.Diagnostics;
+using ZXE.Core.Infrastructure;
 
 namespace ZXE.Core.System;
 
@@ -17,7 +18,11 @@ public class Ports
         // Kempston. Required for Manic Miner.
         _ports[0x001f] = 0;
         _ports[0x011f] = 0;
-
+        // 4F1F
+        // 5F1F
+        // 471F
+        // 571F
+        // 671F
         _model = model;
 
         ResetKeyboardPorts();
@@ -27,8 +32,14 @@ public class Ports
     {
         var value = _ports[port] ?? 0xFF;
 
+        // Kempston.
+        if ((port & 0xFF) is 0x1F or 0xDF)
+        {
+            value = 0x00;
+        }
+
         // Keyboard.
-        if ((port & 0xFE) == 0xFE)
+        if ((port & 0xFF) == 0xFE)
         {
             value = 0xFF;
 
