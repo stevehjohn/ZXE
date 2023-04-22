@@ -29,7 +29,9 @@ public class Motherboard : IDisposable
 
     private readonly Model _model;
 
-    private byte _lastPageWrite;
+    private byte _last7FFD;
+
+    private byte _last1FFD;
 
     private readonly Dictionary<int, byte[]> _romCache = new();
 
@@ -179,8 +181,6 @@ public class Motherboard : IDisposable
         {
             _ram.SetBank(0xC000, data & 0b0000_0111);
 
-            _lastPageWrite = data;
-
             _ram.Screen = (data & 0b0000_1000) > 0 ? 2 : 1;
         }
 
@@ -197,12 +197,17 @@ public class Motherboard : IDisposable
 
         if (port == 0x7F)
         {
+            _last7FFD = data;
+
             romNumber = (data & 0b0001_0000) > 0 ? 1 : 0;
+            romNumber += (_last1FFD & 0b0000_0100) > 0 ? 2 : 0;
         }
 
         if (port == 0x1F)
         {
-            romNumber = (_lastPageWrite & 0b0001_0000) > 0 ? 1 : 0;
+            _last1FFD = data;
+
+            romNumber = (_last7FFD & 0b0001_0000) > 0 ? 1 : 0;
             romNumber += (data & 0b0000_0100) > 0 ? 2 : 0;
         }
 
