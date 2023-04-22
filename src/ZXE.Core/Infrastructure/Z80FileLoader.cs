@@ -9,6 +9,8 @@ public class Z80FileLoader
 
     private readonly Ram _ram;
 
+    private readonly Model _model;
+
     public Z80FileLoader(State state, Ram ram, Model model)
     {
         _state = state;
@@ -71,7 +73,7 @@ public class Z80FileLoader
     {
         _state.ProgramCounter = data[33] << 8 | data[32];
 
-        if (data[34] is 3 or 4)
+        if (data[34] is 3 or 4 or 7 or 12)
         {
             _ram.SetBank(0xC000, data[35] & 0b0000_0111);
 
@@ -79,8 +81,22 @@ public class Z80FileLoader
 
             var romNumber = (data[35] & 0b0001_0000) >> 4;
 
+            if (data[34] == 7 && data[30] == 55)
+            {
+                // +3 Use 0x1ffd for ROM number.
+            }
+
+            var folder = _model switch 
+            {
+                Model.Spectrum128 => "ZX Spectrum 128",
+                Model.SpectrumPlus2 => "ZX Spectrum +2",
+                Model.SpectrumPlus3 => "ZX Spectrum +3",
+                // TODO: Proper exception?
+                _ => throw new Exception("Invalid model")
+            };
+
             // TODO: Load appropriate machine.
-            var rom = File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum +2\\image-{romNumber}.rom");
+            var rom = File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\{folder}\\image-{romNumber}.rom");
 
             _ram.LoadRom(rom, romNumber);
         }
