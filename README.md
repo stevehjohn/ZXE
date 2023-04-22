@@ -74,44 +74,14 @@ Runs tests against this awesome suite:
 
 ## Useful Resources
 
-- http://slady.net/Sinclair-ZX-Spectrum-keyboard/
-- https://gist.github.com/drhelius/8497817
-- https://mdfs.net/Software/Z80/Exerciser/Spectrum/
-- https://github.com/raxoft/z80test
+- https://clrhome.org/table/
 - https://floooh.github.io/
-- https://floooh.github.io/2021/12/17/cycle-stepped-z80.html#testing
-- https://floooh.github.io/2021/12/06/z80-instruction-timing.html
-- https://clrhome.org/asm/
-- https://ps4star.github.io/z80studio/
-- https://github.com/redcode/Z80/wiki/Z80-Test-Suite
-- https://github.com/anotherlin/z80emu/blob/master/zextest.c
-- https://www.angelfire.com/ga/jamiemylandshome/download.html
+- http://www.breakintoprogram.co.uk/hardware/computers/zx-spectrum/memory-map
+- https://worldofspectrum.org/faq/reference/128kreference.htm
+- https://github.com/floooh/chips-test/tree/master/tests/fuse
+- https://dotneteer.github.io/zx-spectrum/2018/01/26/zxspectrum-part-4.html
 
-## Gaming related
+## Game pokes
 
 - https://www.the-tipshop.co.uk/
 
-## Miscellaneous References
-
-- https://github.com/ArjunNair/Zero-Emulator/blob/master/Ziggy/Speccy/Z80.cs
-- https://worldofspectrum.org/faq/reference/128kreference.htm
-- https://worldofspectrum.org/forums/discussion/20345/redirect/p1
-- https://worldofspectrum.org/forums/discussion/41704
-- https://clrhome.org/table/
-- http://www.z80.info/z80syntx.htm
-- http://www.z80.info/z80code.htm
-- http://www.z80.info/z80oplist.txt
-- http://www.z80.info/decoding.htm
-- http://www.z80.info/z80sflag.htm
-- http://www.breakintoprogram.co.uk/hardware/computers/zx-spectrum/memory-map
-- https://landley.net/history/mirror/cpm/z80.html
-- https://worldofspectrum.org/faq/reference/z80reference.htm
-- https://github.com/reclaimed/prettybasic/tree/master/doc
-- https://www.tablix.org/~avian/spectrum/rom/zx82.htm
-- http://www.breakintoprogram.co.uk/hardware/computers/zx-spectrum/keyboard
-- https://skoolkid.github.io/rom/maps/all.html
-- https://luckyredfish.com/interrupts-on-the-zx-spectrum/
-- https://worldofspectrum.org/
-- https://github.com/floooh/chips-test/tree/master/tests/fuse
-- http://rk.nvg.ntnu.no/sinclair/faq/tech_z80.html
-- https://dotneteer.github.io/zx-spectrum/2018/01/26/zxspectrum-part-4.html
