@@ -51,7 +51,14 @@ public class FileTracer : IDisposable, ITracer
     {
         var builder = new StringBuilder();
 
-        builder.Append($"{instruction.Mnemonic,-15}");
+        if (showMnemonic)
+        {
+            builder.Append($"{instruction.Mnemonic,-15}");
+        }
+        else
+        {
+            builder.Append("               ");
+        }
 
         for (var i = 0; i < 7; i++)
         {
