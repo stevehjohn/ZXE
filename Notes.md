@@ -224,7 +224,9 @@ LD HL, (nn) [ED]
 LD DE, (nn)
 LD BC, (nn)
 LD IX, (nn)
+
 PASSED: LD IY, (nn)
+
 LD SP, (nn)
 LD (nn), HL
 LD (nn), HL [ED]
@@ -261,7 +263,9 @@ CPIR [BC = 1]
 CPIR [BC > 1]
 CPDR [BC = 1]
 CPDR [BC > 1]
+
 PASSED: INI
+
 IND
 INIR
 ONDR
