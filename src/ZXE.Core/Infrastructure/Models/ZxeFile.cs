@@ -12,7 +12,7 @@ public class ZxeFile
 
     public Dictionary<string, ushort> Registers { get; set; } = new();
 
-    public byte[] Rom { get; set; }
+    public byte[]? Rom { get; set; }
 
     public string? RomTitle { get; set; }
 }
