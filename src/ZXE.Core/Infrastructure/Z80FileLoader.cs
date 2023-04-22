@@ -84,6 +84,7 @@ public class Z80FileLoader
             if (data[34] == 7 && data[30] == 55)
             {
                 // +3 Use 0x1ffd for ROM number.
+                romNumber += (data[86] & 0b0000_0100) > 0 ? 2 : 0;
             }
 
             var folder = _model switch 
