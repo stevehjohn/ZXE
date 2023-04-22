@@ -6,6 +6,21 @@ A ZX Spectrum emulator. Mostly about just seeing if I can.
 
 A bunch of games also, see https://www.outsidecontextproblem.com/zxe-more-progress.html.
 
+## Current tested games list
+
+Some games require 128 emulation, some 48. Will update list to indicate this when I can.
+
+- Batman: The Movie
+- Cybernoid
+- Cybernoid 2
+- Dan Dare 3
+- Dizzy
+- Exolon
+- Fantasy World Dizzy
+- Manic Miner
+- Robocop
+- Treasure Island Dizzy
+
 ## Features
 
 So far, apart from a WIP emulator, I have...
