@@ -203,7 +203,6 @@ None.
 bit n,[r]          bb37bfd1
 cpd[r]             133e3d03
 cpi[r]             4a8c416b
-daa,cpl,scf,ccf    431bb7a6
 
 ### Woody Tests - Flags faiures.
 

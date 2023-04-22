@@ -107,7 +107,7 @@ public class VRamAdapter
                 2 => Color.Red,
                 3 => Color.Magenta,
                 4 => Color.FromNonPremultiplied(0, 200, 0, 255),
-                5 => Color.DarkCyan,
+                5 => Color.Cyan,
                 6 => Color.Yellow,
                 7 => Color.White,
                 _ => Color.Black
@@ -122,7 +122,7 @@ public class VRamAdapter
                 2 => Color.FromNonPremultiplied(192, 0, 0, 255),
                 3 => Color.DarkMagenta,
                 4 => Color.Green,
-                5 => Color.Cyan,
+                5 => Color.DarkCyan,
                 6 => Color.FromNonPremultiplied(204, 204, 0, 255),
                 7 => Color.LightGray,
                 _ => Color.Black
@@ -140,7 +140,7 @@ public class VRamAdapter
                 2 => Color.Red,
                 3 => Color.Magenta,
                 4 => Color.FromNonPremultiplied(0, 200, 0, 255),
-                5 => Color.DarkCyan,
+                5 => Color.Cyan,
                 6 => Color.Yellow,
                 7 => Color.White,
                 _ => Color.Black
@@ -155,7 +155,7 @@ public class VRamAdapter
                 2 => Color.FromNonPremultiplied(192, 0, 0, 255),
                 3 => Color.DarkMagenta,
                 4 => Color.Green,
-                5 => Color.Cyan,
+                5 => Color.DarkCyan,
                 6 => Color.FromNonPremultiplied(204, 204, 0, 255),
                 7 => Color.LightGray,
                 _ => Color.Black
