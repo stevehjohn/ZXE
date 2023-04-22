@@ -301,7 +301,8 @@ public class TestRunner
                    && state.Registers[Register.C] == test.Final.C
                    && state.Registers[Register.D] == test.Final.D
                    && state.Registers[Register.E] == test.Final.E
-                   && state.Registers[Register.F] == test.Final.F
+                   // && state.Registers[Register.F] == test.Final.F
+                   && CheckFlags(state.Flags, Flags.FromByte(test.Final.F))
                    && state.Registers[Register.H] == test.Final.H
                    && state.Registers[Register.I] == test.Final.I
                    && state.Registers[Register.R] == test.Final.R
