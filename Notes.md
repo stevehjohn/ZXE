@@ -12,6 +12,7 @@ This document just contains notes for me to refer to during implementation.
 - Setting Q and Memptr.
 - Update README to better reflect the additional projects.
 - Make changing emulated machine easier.
+- For running tests, ports should not emulate keyboard.
 
 ## Assembly Language
 
@@ -46,7 +47,17 @@ Load zex[all|doc]-spectrum.com into 0x8000 and run `RANDOMIZE USR 32768`.
 Number failing: 8
 
 ```
-ED A2 0000: INI
+DB 0066: IN A, (n)
+DD DB 0010: IN A, (n)
+ED 40 00E7: IN B, (C)
+ED 48 00B7: IN C, (C)
+ED 50 000D: IN D, (C)
+ED 58 003E: IN E, (C)
+ED 60 000C: IN H, (C)
+ED 68 0002: IN L, (C)
+ED 70 0013: IN (BC)
+ED 78 0001: IN A, (C)
+ED A2 0157: INI
 ED A3 0000: OUTI
 ED AA 0000: IND
 ED AB 0000: OUTD
@@ -54,6 +65,7 @@ ED B2 0000: INIR
 ED B3 0000: OTIR
 ED BA 0000: INDR
 ED BB 0002: OTDR
+FD DB 00D7: IN A, (n)
 ```
 
 ### Third Party Tests Failing - including undocumented flags.
