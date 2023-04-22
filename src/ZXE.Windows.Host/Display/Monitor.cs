@@ -153,11 +153,15 @@ public class Monitor : Game
         {
             _motherboard.Pause();
 
-            var file = "..\\..\\..\\..\\..\\Other Images\\memtest+3.z80";
+            var file = "..\\..\\..\\..\\..\\Other Images\\diag-rom.com";
 
-            var adapter = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram, _motherboard.Model);
+            var data = File.ReadAllBytes(file);
 
-            adapter.Load(file);
+            _motherboard.Ram.LoadRom(data, 0);
+
+            _motherboard.Processor.State.ProgramCounter = 0x0000;
+
+            _motherboard.Reset();
 
             _motherboard.Resume();
         }
