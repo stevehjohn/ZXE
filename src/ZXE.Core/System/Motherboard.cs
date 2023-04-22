@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 #endif
+using System.Diagnostics;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System.Interfaces;
@@ -203,7 +204,7 @@ public class Motherboard : IDisposable
             _last1FFD = data;
         }
 
-        var romNumber = (_last7FFD & 0b0001_0000) >> 4 | (_last1FFD >> 1);
+        var romNumber = (_last7FFD & 0b0001_0000) >> 4 | (_last1FFD & 0b0000_0100) >> 1;
 
         if (! _romCache.ContainsKey(romNumber))
         {
