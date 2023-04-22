@@ -153,9 +153,9 @@ public class Monitor : Game
         {
             _motherboard.Pause();
 
-            var file = "..\\..\\..\\..\\..\\Other Images\\memptr-flags-tests.sna";
+            var file = "..\\..\\..\\..\\..\\Other Images\\memtest+3.z80";
 
-            var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+            var adapter = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram);
 
             adapter.Load(file);
 
