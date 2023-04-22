@@ -56,9 +56,9 @@ public class Ports
         }
 
         // Disk drive (+2A/3 only).
-        //if ((port & 0x2FFD) > 0)
+        //if (port == 0x2FFD)
         //{
-        //    value = 0xFF;
+        //    value = 0b10000000;
         //}
 
         return value;
