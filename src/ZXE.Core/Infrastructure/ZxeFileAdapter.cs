@@ -51,10 +51,6 @@ public class ZxeFileAdapter
 
         _state.StackPointer = model.State.StackPointer;
 
-        _state.Registers.PutRawRegisters(model.Registers!);
-
-        _ram.Load(model.Ram!, 0x4000);
-
         return model.RomTitle;
     }
 
@@ -65,10 +61,35 @@ public class ZxeFileAdapter
         var data = new ZxeFile
                    {
                        State = _state,
-                       Ram = _ram.ReadBlock(0x4000..),
-                       Registers = _state.Registers.GetRawRegisters(),
                        RomTitle = romTitle
                    };
+
+        data.Registers.Add("AF", _state.Registers.ReadPair(Register.AF));
+        data.Registers.Add("BC", _state.Registers.ReadPair(Register.BC));
+        data.Registers.Add("DE", _state.Registers.ReadPair(Register.DE));
+        data.Registers.Add("HL", _state.Registers.ReadPair(Register.HL));
+
+        data.Registers.Add("AF'", _state.Registers.ReadPair(Register.AF_));
+        data.Registers.Add("BC'", _state.Registers.ReadPair(Register.BC_));
+        data.Registers.Add("DE'", _state.Registers.ReadPair(Register.DE_));
+        data.Registers.Add("HL'", _state.Registers.ReadPair(Register.HL_));
+
+        data.Registers.Add("IX'", _state.Registers.ReadPair(Register.IX));
+        data.Registers.Add("IY'", _state.Registers.ReadPair(Register.IY));
+
+        data.Registers.Add("IR'", (ushort) ((_state.Registers[Register.I] << 8) & _state.Registers[Register.R]));
+
+        for (var i = 0; i < 8; i++)
+        {
+            data.RamBanks.Add(i, _ram.ReadBank(i));
+        }
+
+        for (var i = 0; i < 4; i++)
+        {
+            data.PageConfiguration.Add(i, _ram.BankNumbers[i]);
+        }
+
+        data.Rom = _ram.ReadBank(8);
 
         var json = JsonSerializer.Serialize(data, new JsonSerializerOptions
                                                   {

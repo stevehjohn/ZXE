@@ -6,9 +6,13 @@ public class ZxeFile
 {
     public State? State { get; set; }
 
-    public byte[]? Ram { get; set; }
+    public Dictionary<int, int> PageConfiguration { get; set; } = new();
 
-    public byte[]? Registers { get; set; }
+    public Dictionary<int, byte[]> RamBanks { get; set; } = new();
+
+    public Dictionary<string, ushort> Registers { get; set; } = new();
+
+    public byte[] Rom { get; set; }
 
     public string? RomTitle { get; set; }
 }

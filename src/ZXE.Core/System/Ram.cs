@@ -130,4 +130,13 @@ public class Ram
     {
         Array.Copy(data, 0, _banks[page], 0, data.Length);
     }
+
+    public byte[] ReadBank(int bank)
+    {
+        var result = new byte[Constants.K16];
+
+        Array.Copy(_banks[bank], 0, result, 0, Constants.K16);
+
+        return result;
+    }
 }
