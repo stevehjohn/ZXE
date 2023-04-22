@@ -76,6 +76,13 @@ public class Z80FileLoader
             _ram.SetBank(0xC000, data[35] & 0b0000_0111);
 
             _ram.Screen = (data[35] & 0b0000_1000) > 0 ? 2 : 1;
+
+            var romNumber = (data[35] & 0b0001_0000) >> 4;
+
+            // TODO: Load appropriate machine.
+            var rom = File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum 128\\image-{romNumber}.rom");
+
+            _ram.LoadRom(rom, romNumber);
         }
     }
 
