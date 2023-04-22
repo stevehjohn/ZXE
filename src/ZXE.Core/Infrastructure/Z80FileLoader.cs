@@ -98,7 +98,6 @@ public class Z80FileLoader
                 _ => throw new Exception("Invalid model")
             };
 
-            // TODO: Load appropriate machine.
             var rom = File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\{folder}\\image-{romNumber}.rom");
 
             _ram.LoadRom(rom, romNumber);
