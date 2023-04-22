@@ -16,6 +16,8 @@ public class Z80FileLoader
         _state = state;
 
         _ram = ram;
+
+        _model = model;
     }
 
     public void Load(string fileName)
