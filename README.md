@@ -81,6 +81,10 @@ Runs tests against this awesome suite:
 - https://github.com/floooh/chips-test/tree/master/tests/fuse
 - https://dotneteer.github.io/zx-spectrum/2018/01/26/zxspectrum-part-4.html
 
+## Games
+
+- https://www.planetemu.net/roms/sinclair-zx-spectrum-z80
+
 ## Game pokes
 
 - https://www.the-tipshop.co.uk/
