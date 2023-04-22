@@ -10,6 +10,7 @@ A bunch of games also, see https://www.outsidecontextproblem.com/zxe-more-progre
 
 Some games require 128 emulation, some 48. Will update list to indicate this when I can.
 
+- Barbarian 2
 - Batman: The Movie
 - Cybernoid
 - Cybernoid 2
@@ -17,9 +18,17 @@ Some games require 128 emulation, some 48. Will update list to indicate this whe
 - Dizzy
 - Exolon
 - Fantasy World Dizzy
+- Great Escape, The
+- Head Over Heels
+- Indiana Jones and the Temple of Doom 
+- Jet Pac
 - Manic Miner
+- Myth: History in the Making
 - Robocop
+- Robocop 2
+- Teenage Mutant Hero Turtles
 - Treasure Island Dizzy
+- Wizard's Lair
 
 ## Features
 
