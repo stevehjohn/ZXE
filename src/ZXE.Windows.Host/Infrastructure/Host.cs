@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
@@ -137,7 +138,52 @@ public class Host : Game
                 _motherboard.Fast = true;
 
                 break;
+
+            case MenuResult.SaveState:
+                SaveState();
+
+                break;
+
+            case MenuResult.LoadState:
+                LoadState();
+
+                break;
         }
+
+        _motherboard.Resume();
+    }
+
+    private void LoadState()
+    {
+        _motherboard.Pause();
+
+        _motherboard.Reset();
+
+        var adapter = new ZxeFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+
+        var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ZXE Snapshots");
+
+        var directoryInfo = new DirectoryInfo(path);
+
+        var file = directoryInfo.EnumerateFiles("*").MaxBy(f => f.CreationTimeUtc);
+
+        if (file != null)
+        {
+            _imageName = adapter.Load(file.FullName);
+        }
+
+        _motherboard.Resume();
+    }
+
+    private void SaveState()
+    {
+        _motherboard.Pause();
+
+        var adapter = new ZxeFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+
+        var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ZXE Snapshots", $"{_imageName} {DateTime.Now:yyyy-MM-dd HH-mm}.zxe.json");
+
+        adapter.Save(path, _imageName);
 
         _motherboard.Resume();
     }
