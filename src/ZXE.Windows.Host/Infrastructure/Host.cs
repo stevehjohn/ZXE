@@ -4,15 +4,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
-using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Windows.Host.Display;
-using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace ZXE.Windows.Host.Infrastructure;

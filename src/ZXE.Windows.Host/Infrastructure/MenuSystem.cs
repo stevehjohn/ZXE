@@ -18,6 +18,10 @@ public class MenuSystem
 
     private readonly Dictionary<char, int> _characterMap = new();
 
+    private int _colorOffset;
+
+    private int _colorFrame;
+
     public Texture2D Menu { get; private set; }
 
     public MenuSystem(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager)
@@ -38,6 +42,27 @@ public class MenuSystem
     public void Update()
     {
         DrawMenu();
+
+        UpdateTextAnimation();
+    }
+
+    private void UpdateTextAnimation()
+    {
+        _colorFrame++;
+
+        if (_colorFrame < 5)
+        {
+            return;
+        }
+
+        _colorFrame = 0;
+
+        _colorOffset--;
+
+        if (_colorOffset < 0)
+        {
+            _colorOffset = 7;
+        }
     }
 
     private void DrawMenu()
@@ -91,23 +116,32 @@ public class MenuSystem
     {
         var co = _characterMap[character];
 
-        var textColor = Color.White;
+        var color = Color.White;
+
+        var offset = _colorOffset;
 
         for (var iy = 0; iy < 8; iy++)
         {
+            var decrement = ColorDecrement * offset;
+
+            var textColor = Color.FromNonPremultiplied(color.R - decrement, color.G - decrement, color.B - decrement, color.A);
+
+            offset++;
+
+            if (offset > 7)
+            {
+                offset = 0;
+            }
+
             for (var ix = 0; ix < 8; ix++)
             {
-                var color = _characterSet[iy * 128 + ix + co];
-
-                if (color.A == 0)
+                if (_characterSet[iy * 128 + ix + co].A == 0)
                 {
                     continue;
                 }
 
                 data[(3 + y) * 2048 + (x + 4) * 8 + ix + iy * 256] = textColor;
             }
-
-            textColor = Color.FromNonPremultiplied(textColor.R - ColorDecrement, textColor.G - ColorDecrement, textColor.B - ColorDecrement, textColor.A);
         }
     }
 
