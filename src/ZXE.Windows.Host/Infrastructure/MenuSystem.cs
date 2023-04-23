@@ -73,12 +73,7 @@ public class MenuSystem
 
         DrawWindow(data);
 
-        DrawString(data, " !\"#$%&'()*+,-./", 1, 1);
-        DrawString(data, "0123456789:;<]>?", 1, 2);
-        DrawString(data, "@ABCDEFGHIJKLMNO", 1, 3);
-        DrawString(data, "PQRSTUVWXYZ[\\]^_", 1, 4);
-        DrawString(data, "£abcdefghijklmno", 1, 5);
-        DrawString(data, "pqrstuvwxyz{|}~©", 1, 6);
+        DrawString(data, "ZXE - Menu", 7, 1);
 
         var screen = new Texture2D(_graphicsDeviceManager.GraphicsDevice, Constants.ScreenWidthPixels, Constants.ScreenHeightPixels);
 
