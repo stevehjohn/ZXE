@@ -2,6 +2,7 @@
 using ZXE.Core.Infrastructure.Models;
 using ZXE.Core.System;
 using ZXE.Core.Z80;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ZXE.Core.Infrastructure;
 
@@ -65,9 +66,19 @@ public class ZxeFileAdapter
         _state.Registers[Register.I] = (byte) ((model.Registers["IR"] & 0xFF00) >> 8);
         _state.Registers[Register.R] = (byte) (model.Registers["IR"] & 0x00FF);
 
-        // TODO: RAM Banks
+        for (var i = 0; i < 8; i++)
+        {
+            _ram.LoadIntoPage(i, model.RamBanks[i]);
+        }
         
-        // TODO: ROM
+        for (var i = 0; i < 4; i++)
+        {
+            _ram.BankNumbers[i] = (byte) model.PageConfiguration[i];
+        }
+
+        _ram.LoadRom(model.Rom!, 0);
+
+        // TODO: ROM number
 
         return model.RomTitle;
     }
