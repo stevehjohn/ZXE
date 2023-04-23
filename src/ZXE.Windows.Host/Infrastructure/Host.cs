@@ -8,6 +8,7 @@ using ZXE.Core.System;
 using ZXE.Windows.Host.Display;
 using ZXE.Windows.Host.Infrastructure.Menu;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
+using Model = ZXE.Core.Infrastructure.Model;
 
 namespace ZXE.Windows.Host.Infrastructure;
 
@@ -16,9 +17,9 @@ public class Host : Game
     // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
 
-    private readonly Motherboard _motherboard;
+    private VRamAdapter _vRamAdapter;
 
-    private readonly VRamAdapter _vRamAdapter;
+    private Motherboard _motherboard;
 
     private SpriteBatch _spriteBatch;
 
@@ -30,7 +31,7 @@ public class Host : Game
 
     private MenuSystem _menuSystem;
 
-    public Host(Motherboard motherboard)
+    public Host()
     {
         _graphicsDeviceManager = new GraphicsDeviceManager(this)
         {
@@ -42,15 +43,18 @@ public class Host : Game
 
         IsMouseVisible = true;
 
-        _motherboard = motherboard;
+        SetMotherboard(Model.SpectrumPlus3);
+    }
+
+    private void SetMotherboard(Model model)
+    {
+        _motherboard = new Motherboard(model);
 
         _vRamAdapter = new VRamAdapter(_motherboard.Ram, _graphicsDeviceManager);
 
 #if ! DELAY
         _motherboard.Start();
 #endif
-
-        Content.RootDirectory = "_Content";
     }
 
     protected override void Initialize()
@@ -104,9 +108,17 @@ public class Host : Game
         base.Update(gameTime);
     }
 
-    private void MenuFinished(object arguments)
+    private void MenuFinished(MenuResult result, object arguments)
     {
         _menuSystem = null;
+
+        switch (result)
+        {
+            case MenuResult.Restart:
+                SetMotherboard((Model) arguments);
+
+                return;
+        }
 
         _motherboard.Resume();
     }

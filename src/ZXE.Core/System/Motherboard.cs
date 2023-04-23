@@ -58,7 +58,7 @@ public class Motherboard : IDisposable
         set => _timer.Fast = value;
     }
 
-    public Motherboard(Model model, ITracer? tracer)
+    public Motherboard(Model model, ITracer? tracer = null)
     {
         _ram = new Ram
                {
@@ -133,6 +133,8 @@ public class Motherboard : IDisposable
         }
 
         _model = model;
+
+        Reset();
     }
 
     private void PagedEvent(byte port, byte data)

@@ -22,7 +22,7 @@ public class MenuSystem
 
     private readonly Dictionary<char, int> _characterMap = new();
 
-    private readonly Action<object> _menuFinished;
+    private readonly Action<MenuResult, object> _menuFinished;
 
     private int _colorOffset;
 
@@ -36,7 +36,7 @@ public class MenuSystem
 
     public Texture2D Menu { get; private set; }
 
-    public MenuSystem(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager, Action<object> menuFinished)
+    public MenuSystem(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager, Action<MenuResult, object> menuFinished)
     {
         _background = background;
 
@@ -92,8 +92,9 @@ public class MenuSystem
                 _selectionDelay = SelectionFrameDelay;
 
                 break;
-            case MenuResult.Exit:
-                _menuFinished();
+
+            default:
+                _menuFinished(result.Result, result.Arguments);
 
                 break;
         }
