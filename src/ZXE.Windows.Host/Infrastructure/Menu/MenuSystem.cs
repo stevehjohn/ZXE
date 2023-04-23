@@ -85,7 +85,7 @@ public class MenuSystem
 
         DrawString(data, "[5] Emulation Speed", 1, 11, Color.FromNonPremultiplied(80, 80, 80, 255));
 
-        DrawString(data, "[6] Debugging Options", 1, 13, Color.DarkGray);
+        DrawString(data, "[6] Debugging Options", 1, 13, Color.FromNonPremultiplied(80, 80, 80, 255));
 
         DrawString(data, "[ESC] Close Menu", 4, 16, Color.FromNonPremultiplied(255, 64, 64, 255));
 
