@@ -75,10 +75,10 @@ public class MenuSystem
 
         var cy = 16;
 
+        var textColor = Color.White;
+
         for (var iy = 0; iy < 8; iy++)
         {
-            Color textColor = Color.White;
-
             for (var ix = 0; ix < 8; ix++)
             {
                 var color = _characterSet[(cy + iy) * 128 + cx + ix];
@@ -90,6 +90,8 @@ public class MenuSystem
 
                 data[(3 + y) * 2048 + (x + 4) * 8 + ix + iy * 256] = textColor;
             }
+
+            textColor = Color.FromNonPremultiplied(textColor.R - 20, textColor.G - 20, textColor.B - 20, textColor.A);
         }
     }
 }
