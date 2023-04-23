@@ -1,13 +1,12 @@
 ﻿//#define DELAY
 // Use the above to pause boot to allow for recording.
 
-using System;
-using System.IO;
-using System.Threading;
-using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.IO;
+using System.Windows.Forms;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Windows.Host.Display;
@@ -137,7 +136,8 @@ public class Host : Game
     {
         var dialog = new OpenFileDialog
                      {
-                         DefaultExt = "z80;sna"
+                         Multiselect = false,
+                         Filter = "Z80 (*.z80)|*.z80|Snapshot files(*.sna)|*.sna"
                      };
 
         var result = dialog.ShowDialog();
@@ -155,11 +155,11 @@ public class Host : Game
 
         switch (Path.GetExtension(filename).ToLowerInvariant())
         {
-            case "z80":
+            case ".z80":
                 loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram, _motherboard.Model);
 
                 break;
-            case "sna":
+            case ".sna":
                 loader = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
                 break;
