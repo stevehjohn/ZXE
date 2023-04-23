@@ -194,30 +194,17 @@ public class Motherboard : IDisposable
             _ => throw new Exception("Invalid model")
         };
 
-        var romNumber = 0;
-
         if (port == 0x7F)
         {
-            romNumber = (data & 0b0001_0000) > 0 ? 1 : 0;
+            _last7FFD = data;
         }
 
         if (port == 0x1F)
         {
-            romNumber = (_last7FFD & 0b0001_0000) > 0 ? 1 : 0;
-            romNumber += (data & 0b0000_0100) > 0 ? 2 : 0;
+            _last1FFD = data;
         }
 
-        //if (port == 0x7F)
-        //{
-        //    _last7FFD = data;
-        //}
-
-        //if (port == 0x1F)
-        //{
-        //    _last1FFD = data;
-        //}
-
-        //var romNumber = (_last7FFD & 0b0001_0000) >> 4 | (_last1FFD & 0b0000_0100) >> 1;
+        var romNumber = (_last7FFD & 0b0001_0000) >> 4 | (_last1FFD & 0b0000_0100) >> 1;
 
         if (! _romCache.ContainsKey(romNumber))
         {
