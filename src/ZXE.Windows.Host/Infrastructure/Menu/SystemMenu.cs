@@ -30,6 +30,15 @@ public class SystemMenu : MenuBase
             case 1:
                 return (MenuResult.Restart, null, Model.Spectrum48K);
 
+            case 2:
+                return (MenuResult.Restart, null, Model.Spectrum128);
+
+            case 3:
+                return (MenuResult.Restart, null, Model.SpectrumPlus2);
+
+            case 4:
+                return (MenuResult.Restart, null, Model.SpectrumPlus3);
+
             case 5:
                 return (MenuResult.NewMenu, new MainMenu(), null);
 
