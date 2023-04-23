@@ -21,8 +21,8 @@ public class SystemMenu : MenuBase
         return items;
     }
 
-    public override MenuBase ItemSelected(int id)
+    public override (MenuResult Result, MenuBase NewMenu) ItemSelected(int id)
     {
-        return null;
+        return (MenuResult.NewMenu, new MainMenu());
     }
 }

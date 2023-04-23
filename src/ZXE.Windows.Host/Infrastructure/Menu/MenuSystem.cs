@@ -75,7 +75,12 @@ public class MenuSystem
             return;
         }
 
-        _menu = _menu.ItemSelected(_selectedItem);
+        var result = _menu.ItemSelected(_selectedItem);
+
+        if (result.Result == MenuResult.NewMenu)
+        {
+            _menu = result.NewMenu;
+        }
 
         _selectedItem = -1;
 
