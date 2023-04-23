@@ -77,6 +77,10 @@ public class ZxeFileAdapter
 
         _ram.LoadRom(model.Rom!, model.RomNumber, true);
 
+        _state.Last7ffd = model.Last7Ffd;
+
+        _state.Last1ffd = model.Last1Ffd;
+
         return model.RomTitle;
     }
 
@@ -120,6 +124,10 @@ public class ZxeFileAdapter
         data.Rom = _ram.ReadBank(8);
 
         data.RomNumber = _ram.Rom;
+
+        data.Last7Ffd = _state.Last7ffd;
+
+        data.Last1Ffd = _state.Last1ffd;
 
         var json = JsonSerializer.Serialize(data, new JsonSerializerOptions
                                                   {

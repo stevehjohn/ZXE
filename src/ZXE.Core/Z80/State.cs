@@ -41,6 +41,10 @@ public class State
 
     public byte Q { get; set; }
 
+    public byte Last7ffd { get; set; }
+
+    public byte Last1ffd { get; set; }
+
     public State()
     {
         Registers = new Registers();

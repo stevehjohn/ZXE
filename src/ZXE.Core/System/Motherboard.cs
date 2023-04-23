@@ -6,7 +6,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 #endif
-using System.Diagnostics;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System.Interfaces;
@@ -27,10 +26,6 @@ public class Motherboard : IDisposable
     private readonly ITimer _timer;
 
     private readonly ITracer? _tracer;
-
-    private byte _last7FFD;
-
-    private byte _last1FFD;
 
     private readonly Dictionary<int, byte[]> _romCache = new();
 
@@ -196,15 +191,15 @@ public class Motherboard : IDisposable
 
         if (port == 0x7F)
         {
-            _last7FFD = data;
+            _processor.State.Last7ffd = data;
         }
 
         if (port == 0x1F)
         {
-            _last1FFD = data;
+            _processor.State.Last1ffd = data;
         }
 
-        var romNumber = (_last7FFD & 0b0001_0000) >> 4 | (_last1FFD & 0b0000_0100) >> 1;
+        var romNumber = (_processor.State.Last7ffd & 0b0001_0000) >> 4 | (_processor.State.Last1ffd & 0b0000_0100) >> 1;
 
         if (! _romCache.ContainsKey(romNumber))
         {
