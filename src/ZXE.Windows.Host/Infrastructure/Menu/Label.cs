@@ -5,6 +5,8 @@ namespace ZXE.Windows.Host.Infrastructure.Menu;
 
 public class Label
 {
+    public int Id { get; private set; }
+
     public bool Centered { get; private set; }
 
     public string Text { get; private set; }
@@ -19,8 +21,10 @@ public class Label
 
     public Keys? SelectKey { get; private set; }
 
-    public Label(bool centered, string text, Color color, int x, int y, Keys? selectKey, Color? selectedColor = null)
+    public Label(int id, bool centered, string text, Color color, int x, int y, Keys? selectKey, Color? selectedColor = null)
     {
+        Id = id;
+
         Centered = centered;
 
         Text = text;

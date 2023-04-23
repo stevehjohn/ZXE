@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using ZXE.Common;
 
 namespace ZXE.Windows.Host.Infrastructure.Menu;
@@ -21,6 +22,8 @@ public class MenuSystem
     private int _colorOffset;
 
     private int _colorFrame;
+
+    private int _selectedItem = -1;
 
     private MenuBase _menu;
 
@@ -48,6 +51,23 @@ public class MenuSystem
         DrawMenu();
 
         UpdateTextAnimation();
+
+        CheckSelection();
+    }
+
+    private void CheckSelection()
+    {
+        var keys = Keyboard.GetState();
+
+        foreach (var item in _menu.GetMenu())
+        {
+            if (keys.IsKeyDown(item.SelectKey!.Value))
+            {
+                _selectedItem = item.Id;
+
+                break;
+            }
+        }
     }
 
     private void UpdateTextAnimation()
@@ -83,10 +103,6 @@ public class MenuSystem
         {
             DrawString(data, item.Text, item.X, item.Y, item.Color, item.Centered);
         }
-
-        //DrawString(data, "ZXE - Menu", 7, 0, Color.White);
-
-        //DrawString(data, "[1] Select System", 1, 3, Color.Yellow);
 
         //DrawString(data, "[2] Load Z80/SNA File", 1, 5, Color.FromNonPremultiplied(80, 80, 80, 255));
 
