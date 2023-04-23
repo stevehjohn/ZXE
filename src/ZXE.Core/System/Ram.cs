@@ -13,7 +13,7 @@ public class Ram
 
     private int _screen = 1;
 
-    private int _rom;
+    private int _rom = -1;
 
     public byte[] ScreenRam => _screen == 1 ? _banks[5] : _banks[7];
 
@@ -119,11 +119,14 @@ public class Ram
         }
     }
 
-    public void LoadRom(byte[] data, int number)
+    public void LoadRom(byte[] data, int number, bool force = false)
     {
-        Array.Copy(data, 0, _layout[0], 0, data.Length);
+        if (number != _rom || force)
+        {
+            Array.Copy(data, 0, _layout[0], 0, data.Length);
 
-        _rom = number;
+            _rom = number;
+        }
     }
 
     public void LoadIntoPage(int page, byte[] data)

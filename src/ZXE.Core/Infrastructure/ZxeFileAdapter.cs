@@ -75,7 +75,7 @@ public class ZxeFileAdapter
             _ram.BankNumbers[i] = (byte) model.PageConfiguration[i];
         }
 
-        _ram.LoadRom(model.Rom!, 0);
+        _ram.LoadRom(model.Rom!, _ram.Rom, true);
 
         return (model.RomTitle, model.Model);
     }
