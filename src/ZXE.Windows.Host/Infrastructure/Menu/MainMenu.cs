@@ -19,15 +19,15 @@ public class MainMenu : MenuBase
         return items;
     }
 
-    public override (MenuResult Result, MenuBase NewMenu) ItemSelected(int id)
+    public override (MenuResult Result, MenuBase NewMenu, object Arguments) ItemSelected(int id)
     {
         switch (id)
         {
             case 1:
-                return (MenuResult.NewMenu, new SystemMenu());
+                return (MenuResult.NewMenu, new SystemMenu(), null);
 
             case 2:
-                return (MenuResult.Exit, null);
+                return (MenuResult.Exit, null, null);
 
             default:
                 // TODO: Proper exception?

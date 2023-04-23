@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using ZXE.Core.Infrastructure;
 
 namespace ZXE.Windows.Host.Infrastructure.Menu;
 
@@ -21,8 +23,19 @@ public class SystemMenu : MenuBase
         return items;
     }
 
-    public override (MenuResult Result, MenuBase NewMenu) ItemSelected(int id)
+    public override (MenuResult Result, MenuBase NewMenu, object Arguments) ItemSelected(int id)
     {
-        return (MenuResult.NewMenu, new MainMenu());
+        switch (id)
+        {
+            case 1:
+                return (MenuResult.Restart, null, Model.Spectrum48K);
+
+            case 5:
+                return (MenuResult.NewMenu, new MainMenu(), null);
+
+            default:
+                // TODO: Proper exception?
+                throw new Exception("Invalid item");
+        }
     }
 }

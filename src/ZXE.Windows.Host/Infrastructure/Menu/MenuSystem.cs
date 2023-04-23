@@ -22,7 +22,7 @@ public class MenuSystem
 
     private readonly Dictionary<char, int> _characterMap = new();
 
-    private readonly Action _menuFinished;
+    private readonly Action<object> _menuFinished;
 
     private int _colorOffset;
 
@@ -36,7 +36,7 @@ public class MenuSystem
 
     public Texture2D Menu { get; private set; }
 
-    public MenuSystem(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager, Action menuFinished)
+    public MenuSystem(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager, Action<object> menuFinished)
     {
         _background = background;
 

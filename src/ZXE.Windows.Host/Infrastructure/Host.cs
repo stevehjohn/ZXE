@@ -104,7 +104,7 @@ public class Host : Game
         base.Update(gameTime);
     }
 
-    private void MenuFinished()
+    private void MenuFinished(object arguments)
     {
         _menuSystem = null;
 

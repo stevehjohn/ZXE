@@ -3,5 +3,6 @@
 public enum MenuResult
 {
     Exit,
-    NewMenu
+    NewMenu,
+    Restart
 }
