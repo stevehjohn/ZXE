@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using ZXE.Common;
 
-namespace ZXE.Windows.Host.Infrastructure;
+namespace ZXE.Windows.Host.Infrastructure.Menu;
 
 public class MenuSystem
 {
@@ -73,7 +73,21 @@ public class MenuSystem
 
         DrawWindow(data);
 
-        DrawString(data, "ZXE - Menu", 7, 1);
+        DrawString(data, "ZXE - Menu", 7, 0, Color.White);
+
+        DrawString(data, "[1] Select System", 1, 3, Color.Yellow);
+
+        DrawString(data, "[2] Load Z80/SNA File", 1, 5, Color.FromNonPremultiplied(80, 80, 80, 255));
+
+        DrawString(data, "[3] Save System State", 1, 7, Color.FromNonPremultiplied(80, 80, 80, 255));
+
+        DrawString(data, "[4] Save System State", 1, 9, Color.FromNonPremultiplied(80, 80, 80, 255));
+
+        DrawString(data, "[5] Emulation Speed", 1, 11, Color.FromNonPremultiplied(80, 80, 80, 255));
+
+        DrawString(data, "[6] Debugging Options", 1, 13, Color.DarkGray);
+
+        DrawString(data, "[ESC] Close Menu", 4, 16, Color.FromNonPremultiplied(255, 64, 64, 255));
 
         var screen = new Texture2D(_graphicsDeviceManager.GraphicsDevice, Constants.ScreenWidthPixels, Constants.ScreenHeightPixels);
 
@@ -99,19 +113,17 @@ public class MenuSystem
         }
     }
 
-    private void DrawString(Color[] data, string text, int x, int y)
+    private void DrawString(Color[] data, string text, int x, int y, Color color)
     {
         for (var i = 0; i < text.Length; i++)
         {
-            DrawMenuCharacter(data, text[i], x + i, y);
+            DrawMenuCharacter(data, text[i], x + i, y, color);
         }
     }
 
-    private void DrawMenuCharacter(Color[] data, char character, int x, int y)
+    private void DrawMenuCharacter(Color[] data, char character, int x, int y, Color color)
     {
         var co = _characterMap[character];
-
-        var color = Color.White;
 
         var offset = _colorOffset;
 

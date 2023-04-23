@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ZXE.Core.System;
 using ZXE.Windows.Host.Display;
+using ZXE.Windows.Host.Infrastructure.Menu;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace ZXE.Windows.Host.Infrastructure;
