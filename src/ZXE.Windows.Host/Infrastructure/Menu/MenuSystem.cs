@@ -77,21 +77,28 @@ public class MenuSystem
 
         DrawWindow(data);
 
-        DrawString(data, "ZXE - Menu", 7, 0, Color.White);
+        var items = _menu.GetMenu();
 
-        DrawString(data, "[1] Select System", 1, 3, Color.Yellow);
+        foreach (var item in items)
+        {
+            DrawString(data, item.Text, item.X, item.Y, item.Color, item.Centered);
+        }
 
-        DrawString(data, "[2] Load Z80/SNA File", 1, 5, Color.FromNonPremultiplied(80, 80, 80, 255));
+        //DrawString(data, "ZXE - Menu", 7, 0, Color.White);
 
-        DrawString(data, "[3] Save System State", 1, 7, Color.FromNonPremultiplied(80, 80, 80, 255));
+        //DrawString(data, "[1] Select System", 1, 3, Color.Yellow);
 
-        DrawString(data, "[4] Load System State", 1, 9, Color.FromNonPremultiplied(80, 80, 80, 255));
+        //DrawString(data, "[2] Load Z80/SNA File", 1, 5, Color.FromNonPremultiplied(80, 80, 80, 255));
 
-        DrawString(data, "[5] Emulation Speed", 1, 11, Color.FromNonPremultiplied(80, 80, 80, 255));
+        //DrawString(data, "[3] Save System State", 1, 7, Color.FromNonPremultiplied(80, 80, 80, 255));
 
-        DrawString(data, "[6] Debugging Options", 1, 13, Color.FromNonPremultiplied(80, 80, 80, 255));
+        //DrawString(data, "[4] Load System State", 1, 9, Color.FromNonPremultiplied(80, 80, 80, 255));
 
-        DrawString(data, "[ESC] Close Menu", 4, 16, Color.FromNonPremultiplied(255, 64, 64, 255));
+        //DrawString(data, "[5] Emulation Speed", 1, 11, Color.FromNonPremultiplied(80, 80, 80, 255));
+
+        //DrawString(data, "[6] Debugging Options", 1, 13, Color.FromNonPremultiplied(80, 80, 80, 255));
+
+        //DrawString(data, "[ESC] Close Menu", 4, 16, Color.FromNonPremultiplied(255, 64, 64, 255));
 
         var screen = new Texture2D(_graphicsDeviceManager.GraphicsDevice, Constants.ScreenWidthPixels, Constants.ScreenHeightPixels);
 
@@ -117,15 +124,27 @@ public class MenuSystem
         }
     }
 
-    private void DrawString(Color[] data, string text, int x, int y, Color color)
+    private void DrawString(Color[] data, string text, int x, int y, Color color, bool centered)
     {
+        var xOffset = 0;
+
+        if (centered)
+        {
+            x = 12 - text.Length / 2;
+
+            if (text.Length % 2 == 1)
+            {
+                xOffset = -4;
+            }
+        }
+
         for (var i = 0; i < text.Length; i++)
         {
-            DrawMenuCharacter(data, text[i], x + i, y, color);
+            DrawMenuCharacter(data, text[i], x + i, y, color, xOffset);
         }
     }
 
-    private void DrawMenuCharacter(Color[] data, char character, int x, int y, Color color)
+    private void DrawMenuCharacter(Color[] data, char character, int x, int y, Color color, int xOffset)
     {
         var co = _characterMap[character];
 
@@ -151,7 +170,7 @@ public class MenuSystem
                     continue;
                 }
 
-                data[(3 + y) * 2048 + (x + 4) * 8 + ix + iy * 256] = textColor;
+                data[(3 + y) * 2048 + (x + 4) * 8 + ix + iy * 256 + xOffset] = textColor;
             }
         }
     }
