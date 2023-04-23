@@ -23,6 +23,12 @@ public class StateMenu : MenuBase
     {
         switch (id)
         {
+            case 1:
+                return (MenuResult.SaveState, null, null);
+
+            case 2:
+                return (MenuResult.LoadState, null, null);
+
             default:
                 return (MenuResult.NewMenu, new MainMenu(), null);
         }

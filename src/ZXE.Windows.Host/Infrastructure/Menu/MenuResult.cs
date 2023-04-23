@@ -7,5 +7,7 @@ public enum MenuResult
     Restart,
     LoadZ80SNA,
     SpeedNormal,
-    SpeedFast
+    SpeedFast,
+    SaveState,
+    LoadState
 }
