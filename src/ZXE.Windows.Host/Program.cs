@@ -1,7 +1,6 @@
 ﻿using System;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
-using ZXE.Windows.Host.Display;
 
 namespace ZXE.Windows.Host;
 
@@ -15,7 +14,7 @@ public static class Program
 
         motherboard.Reset();
 
-        using var monitor = new Monitor(motherboard);
+        using var monitor = new Infrastructure.Host(motherboard);
 
         monitor.Run();
     }

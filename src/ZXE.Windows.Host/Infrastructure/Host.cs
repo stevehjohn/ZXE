@@ -11,13 +11,13 @@ using System.Threading;
 using System.Windows.Forms;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
-using ZXE.Windows.Host.Infrastructure;
+using ZXE.Windows.Host.Display;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
-namespace ZXE.Windows.Host.Display;
+namespace ZXE.Windows.Host.Infrastructure;
 
-public class Monitor : Game
+public class Host : Game
 {
     // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
@@ -34,13 +34,13 @@ public class Monitor : Game
     private int _count = 0;
 #endif
 
-    public Monitor(Motherboard motherboard)
+    public Host(Motherboard motherboard)
     {
         _graphicsDeviceManager = new GraphicsDeviceManager(this)
-                                 {
-                                     PreferredBackBufferWidth = 256 * 4,
-                                     PreferredBackBufferHeight = 192 * 4
-                                 };
+        {
+            PreferredBackBufferWidth = 256 * 4,
+            PreferredBackBufferHeight = 192 * 4
+        };
 
         Content.RootDirectory = "_Content";
 
@@ -107,9 +107,9 @@ public class Monitor : Game
             _motherboard.Pause();
 
             var dialog = new OpenFileDialog
-                         {
-                             DefaultExt = "z80"
-                         };
+            {
+                DefaultExt = "z80"
+            };
 
             var result = dialog.ShowDialog();
 
@@ -161,7 +161,7 @@ public class Monitor : Game
 
         if (Keyboard.GetState().IsKeyDown(Keys.F9))
         {
-            _motherboard.Fast = ! _motherboard.Fast;
+            _motherboard.Fast = !_motherboard.Fast;
 
             if (_motherboard.Fast)
             {
