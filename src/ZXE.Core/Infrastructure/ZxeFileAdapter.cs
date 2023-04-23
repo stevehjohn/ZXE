@@ -105,7 +105,7 @@ public class ZxeFileAdapter
         data.Registers.Add("IX", _state.Registers.ReadPair(Register.IX));
         data.Registers.Add("IY", _state.Registers.ReadPair(Register.IY));
 
-        data.Registers.Add("IR'", (ushort) ((_state.Registers[Register.I] << 8) & _state.Registers[Register.R]));
+        data.Registers.Add("IR", (ushort) ((_state.Registers[Register.I] << 8) & _state.Registers[Register.R]));
 
         for (var i = 0; i < 8; i++)
         {
