@@ -47,9 +47,9 @@ public class ZxeFileAdapter
 
         _state.Q = model.State.Q;
 
-        _state.Registers = model.State.Registers;
-
         _state.StackPointer = model.State.StackPointer;
+
+        // TODO: Registers, RAM Banks, ROM
 
         return model.RomTitle;
     }
