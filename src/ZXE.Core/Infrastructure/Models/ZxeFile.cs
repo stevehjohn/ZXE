@@ -19,4 +19,8 @@ public class ZxeFile
     public int RomNumber { get; set; }
 
     public string? RomTitle { get; set; }
+
+    public byte Last7Ffd { get; set; }
+
+    public byte Last1Ffd { get; set; }
 }
