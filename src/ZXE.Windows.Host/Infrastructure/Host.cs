@@ -34,6 +34,8 @@ public class Host : Game
     private int _count = 0;
 #endif
 
+    private MenuSystem _menuSystem;
+
     public Host(Motherboard motherboard)
     {
         _graphicsDeviceManager = new GraphicsDeviceManager(this)
@@ -78,11 +80,6 @@ public class Host : Game
         }
 #endif
 
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-        {
-            Exit();
-        }
-
         var keys = Keyboard.GetState().GetPressedKeys();
 
         var portData = KeyboardMapper.MapKeyState(keys);
@@ -92,130 +89,20 @@ public class Host : Game
             _motherboard.Ports.WriteByte(port.Port, port.data);
         }
 
-        if (Keyboard.GetState().IsKeyDown(Keys.F11))
-        {
-            _motherboard.SetTraceState(true);
-        }
-
-        if (Keyboard.GetState().IsKeyDown(Keys.F12))
-        {
-            _motherboard.SetTraceState(false);
-        }
-
-        if (Keyboard.GetState().IsKeyDown(Keys.F10))
+        if (Keyboard.GetState().IsKeyDown(Keys.F10) && _menuSystem == null)
         {
             _motherboard.Pause();
 
-            var dialog = new OpenFileDialog
-            {
-                DefaultExt = "z80"
-            };
+            _vRamAdapter.RenderDisplay();
+            
+            var screen = _vRamAdapter.Display;
 
-            var result = dialog.ShowDialog();
-
-            if (result != DialogResult.OK)
-            {
-                _motherboard.Resume();
-
-                return;
-            }
-
-            var adapter = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram, _motherboard.Model);
-
-            adapter.Load(dialog.FileName);
-
-            Thread.Sleep(250); // Prevent multiple loads, hopefully.
-
-            _imageName = dialog.FileName.Split('\\')[^2];
-
-            _motherboard.Resume();
+            _menuSystem = new MenuSystem(screen, _graphicsDeviceManager);
         }
 
-        if (Keyboard.GetState().IsKeyDown(Keys.F6))
+        if (_menuSystem != null)
         {
-            _motherboard.Pause();
-
-            var file = "..\\..\\..\\..\\..\\Other Images\\zexall-spectrum.com";
-
-            _imageName = file.Split('\\')[^2];
-
-            _motherboard.Ram.Load(File.ReadAllBytes(file), 0x8000);
-
-            _motherboard.Resume();
-        }
-
-        if (Keyboard.GetState().IsKeyDown(Keys.F5))
-        {
-            _motherboard.Pause();
-
-            var file = "..\\..\\..\\..\\..\\Other Images\\memtest+3.z80";
-
-            var adapter = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram, _motherboard.Model);
-
-            adapter.Load(file);
-
-            _motherboard.Reset();
-
-            _motherboard.Resume();
-        }
-
-        if (Keyboard.GetState().IsKeyDown(Keys.F9))
-        {
-            _motherboard.Fast = !_motherboard.Fast;
-
-            if (_motherboard.Fast)
-            {
-                Window.Title = "ZXE - Fast";
-            }
-            else
-            {
-                Window.Title = "ZXE";
-            }
-        }
-
-        if (Keyboard.GetState().IsKeyDown(Keys.F8))
-        {
-            _motherboard.Pause();
-
-            var adapter = new ZxeFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
-
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ZXE Snapshots", $"{_imageName} {DateTime.Now:yyyy-MM-dd HH-mm}.zxe.json");
-
-            adapter.Save(path, _imageName);
-
-            _motherboard.Resume();
-        }
-
-        if (Keyboard.GetState().IsKeyDown(Keys.F7))
-        {
-            _motherboard.Pause();
-
-            _motherboard.Reset();
-
-            var adapter = new ZxeFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
-
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ZXE Snapshots");
-
-            var directoryInfo = new DirectoryInfo(path);
-
-            var file = directoryInfo.EnumerateFiles("*").MaxBy(f => f.CreationTimeUtc);
-
-            if (file != null)
-            {
-                _imageName = adapter.Load(file.FullName);
-            }
-
-            _motherboard.Resume();
-        }
-
-        if (Keyboard.GetState().IsKeyDown(Keys.F1))
-        {
-            _motherboard.Pause();
-        }
-
-        if (Keyboard.GetState().IsKeyDown(Keys.F2))
-        {
-            _motherboard.Resume();
+            _menuSystem.Update();
         }
 
         base.Update(gameTime);
@@ -225,10 +112,19 @@ public class Host : Game
     {
         GraphicsDevice.Clear(Color.DarkGray);
 
-        // TODO: Call from motherboard at appropriate point.
-        _vRamAdapter.RenderDisplay();
+        Texture2D screen;
 
-        var screen = _vRamAdapter.Display;
+        if (_menuSystem != null)
+        {
+            screen = _menuSystem.Menu;
+        }
+        else
+        {
+            // TODO: Call from motherboard at appropriate point.
+            _vRamAdapter.RenderDisplay();
+            
+            screen = _vRamAdapter.Display;
+        }
 
         _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
 

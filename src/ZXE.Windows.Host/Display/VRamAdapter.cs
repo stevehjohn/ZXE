@@ -33,7 +33,7 @@ public class VRamAdapter
     public void RenderDisplay()
     {
         var texture = new Texture2D(_graphicsDeviceManager.GraphicsDevice, Constants.ScreenWidthPixels, Constants.ScreenHeightPixels);
-
+       
         var data = new Color[Constants.ScreenWidthPixels * Constants.ScreenHeightPixels];
 
         var i = 0;
