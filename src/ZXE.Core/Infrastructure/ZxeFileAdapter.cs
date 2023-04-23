@@ -49,7 +49,25 @@ public class ZxeFileAdapter
 
         _state.StackPointer = model.State.StackPointer;
 
-        // TODO: Registers, RAM Banks, ROM
+        _state.Registers.WritePair(Register.AF, model.Registers["AF"]);
+        _state.Registers.WritePair(Register.BC, model.Registers["BC"]);
+        _state.Registers.WritePair(Register.DE, model.Registers["DE"]);
+        _state.Registers.WritePair(Register.HL, model.Registers["HL"]);
+
+        _state.Registers.WritePair(Register.AF_, model.Registers["AF'"]);
+        _state.Registers.WritePair(Register.BC_, model.Registers["BC'"]);
+        _state.Registers.WritePair(Register.DE_, model.Registers["DE'"]);
+        _state.Registers.WritePair(Register.HL_, model.Registers["HL'"]);
+
+        _state.Registers.WritePair(Register.IX, model.Registers["IX"]);
+        _state.Registers.WritePair(Register.IY, model.Registers["IY"]);
+
+        _state.Registers[Register.I] = (byte) ((model.Registers["IR"] & 0xFF00) >> 8);
+        _state.Registers[Register.R] = (byte) (model.Registers["IR"] & 0x00FF);
+
+        // TODO: RAM Banks
+        
+        // TODO: ROM
 
         return model.RomTitle;
     }
@@ -74,8 +92,8 @@ public class ZxeFileAdapter
         data.Registers.Add("DE'", _state.Registers.ReadPair(Register.DE_));
         data.Registers.Add("HL'", _state.Registers.ReadPair(Register.HL_));
 
-        data.Registers.Add("IX'", _state.Registers.ReadPair(Register.IX));
-        data.Registers.Add("IY'", _state.Registers.ReadPair(Register.IY));
+        data.Registers.Add("IX", _state.Registers.ReadPair(Register.IX));
+        data.Registers.Add("IY", _state.Registers.ReadPair(Register.IY));
 
         data.Registers.Add("IR'", (ushort) ((_state.Registers[Register.I] << 8) & _state.Registers[Register.R]));
 
