@@ -12,7 +12,6 @@ using System.Windows.Forms;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Windows.Host.Infrastructure;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
