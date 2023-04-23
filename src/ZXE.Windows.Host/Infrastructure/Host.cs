@@ -125,7 +125,7 @@ public class Host : Game
                 return;
 
             case MenuResult.LoadZ80SNA:
-                LoadZ80SNA();
+                LoadZ80Sna();
 
                 break;
         }
@@ -133,7 +133,7 @@ public class Host : Game
         _motherboard.Resume();
     }
 
-    private void LoadZ80SNA()
+    private void LoadZ80Sna()
     {
         var dialog = new OpenFileDialog
                      {
