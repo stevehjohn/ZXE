@@ -1,6 +1,5 @@
-﻿using System.Drawing.Design;
-using System.Drawing.Drawing2D;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using ZXE.Common;
 
@@ -12,13 +11,17 @@ public class MenuSystem
 
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
 
+    private Texture2D _characterSet;
+
     public Texture2D Menu { get; private set; }
 
-    public MenuSystem(Texture2D background, GraphicsDeviceManager graphicsDeviceManager)
+    public MenuSystem(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager)
     {
         _background = background;
 
         _graphicsDeviceManager = graphicsDeviceManager;
+
+        _characterSet = contentManager.Load<Texture2D>("character-set");
     }
 
     public void Update()

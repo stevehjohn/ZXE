@@ -55,6 +55,8 @@ public class Host : Game
 #if ! DELAY
         _motherboard.Start();
 #endif
+
+        Content.RootDirectory = "_Content";
     }
 
     protected override void Initialize()
@@ -97,7 +99,7 @@ public class Host : Game
             
             var screen = _vRamAdapter.Display;
 
-            _menuSystem = new MenuSystem(screen, _graphicsDeviceManager);
+            _menuSystem = new MenuSystem(screen, _graphicsDeviceManager, Content);
         }
 
         if (_menuSystem != null)
