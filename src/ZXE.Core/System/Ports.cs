@@ -15,14 +15,6 @@ public class Ports
     {
         _ports = new byte?[0x0001_0000];
 
-        // Kempston. Required for Manic Miner.
-        _ports[0x001f] = 0;
-        _ports[0x011f] = 0;
-        // 4F1F
-        // 5F1F
-        // 471F
-        // 571F
-        // 671F
         _model = model;
 
         ResetKeyboardPorts();
