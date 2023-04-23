@@ -82,8 +82,6 @@ public class Ports
                 if ((data & 0b00100000) > 0)
                 {
                     _pagingDisabled = true;
-
-                    return;
                 }
 
                 PagedEvent(0x7F, data);
