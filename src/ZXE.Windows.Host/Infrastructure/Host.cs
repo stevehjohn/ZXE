@@ -127,6 +127,16 @@ public class Host : Game
                 LoadZ80Sna();
 
                 break;
+
+            case MenuResult.SpeedNormal:
+                _motherboard.Fast = false;
+
+                break;
+
+            case MenuResult.SpeedFast:
+                _motherboard.Fast = true;
+
+                break;
         }
 
         _motherboard.Resume();
