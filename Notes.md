@@ -200,12 +200,15 @@ None.
 
 ### ZexAll failures.
 
+```
 bit n,[r]          bb37bfd1
 cpd[r]             133e3d03
 cpi[r]             4a8c416b
+```
 
 ### Woody Tests - Flags faiures.
 
+```
 CCF
 SBC 8
 ADC 16
@@ -219,9 +222,11 @@ OUTI
 OUTD
 DD CB (00 - FF) ROM
 FD CB (00 - FF) ROM
+```
 
 ### Woody Tests - Memptr results.
 
+```
 LD A, (nn)
 LD (nn), A
 LD A, (BC)
@@ -284,3 +289,4 @@ OUTI
 OUTD
 OTIR
 OTDR
+```
