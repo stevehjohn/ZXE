@@ -1,9 +1,14 @@
 ﻿//#define DELAY
 // Use the above to pause boot to allow for recording.
 
+using System;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Windows.Host.Display;
 using ZXE.Windows.Host.Infrastructure.Menu;
@@ -118,7 +123,54 @@ public class Host : Game
                 SetMotherboard((Model) arguments);
 
                 return;
+
+            case MenuResult.LoadZ80SNA:
+                LoadZ80SNA();
+
+                break;
         }
+
+        _motherboard.Resume();
+    }
+
+    private void LoadZ80SNA()
+    {
+        var dialog = new OpenFileDialog
+                     {
+                         DefaultExt = "z80;sna"
+                     };
+
+        var result = dialog.ShowDialog();
+
+        if (result != DialogResult.OK)
+        {
+            _motherboard.Resume();
+
+            return;
+        }
+
+        var filename = dialog.FileName;
+
+        IImageLoader loader;
+
+        switch (Path.GetExtension(filename).ToLowerInvariant())
+        {
+            case "z80":
+                loader = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram, _motherboard.Model);
+
+                break;
+            case "sna":
+                loader = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+
+                break;
+            default:
+                // TODO: Proper extension
+                throw new Exception("Unsupported file format");
+        }
+
+        loader.Load(dialog.FileName);
+
+        _imageName = dialog.FileName.Split('\\')[^2];
 
         _motherboard.Resume();
     }

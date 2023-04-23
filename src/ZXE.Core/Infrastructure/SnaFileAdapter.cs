@@ -3,7 +3,7 @@ using ZXE.Core.Z80;
 
 namespace ZXE.Core.Infrastructure;
 
-public class SnaFileAdapter
+public class SnaFileAdapter : IImageLoader
 {
     private readonly State _state;
 
