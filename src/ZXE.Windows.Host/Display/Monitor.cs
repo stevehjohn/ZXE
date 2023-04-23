@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Windows.Host.Infrastructure;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
@@ -120,11 +121,6 @@ public class Monitor : Game
                 return;
             }
 
-            //var file = "..\\..\\..\\..\\..\\Game Images\\Robocop 2\\image-0.z80";
-            //var file = "..\\..\\..\\..\\..\\Game Images\\Robocop 2\\image-0.z80";
-
-            //var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
-
             var adapter = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram, _motherboard.Model);
 
             adapter.Load(dialog.FileName);
@@ -153,13 +149,11 @@ public class Monitor : Game
         {
             _motherboard.Pause();
 
-            var file = "..\\..\\..\\..\\..\\Other Images\\diag-rom.com";
+            var file = "..\\..\\..\\..\\..\\Other Images\\memtest+3.z80";
 
-            var data = File.ReadAllBytes(file);
+            var adapter = new Z80FileLoader(_motherboard.Processor.State, _motherboard.Ram, _motherboard.Model);
 
-            _motherboard.Ram.LoadRom(data, 0);
-
-            _motherboard.Processor.State.ProgramCounter = 0x0000;
+            adapter.Load(file);
 
             _motherboard.Reset();
 
