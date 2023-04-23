@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using ZXE.Common;
@@ -13,7 +14,7 @@ public class MenuSystem
 
     private readonly Color[] _characterSet;
 
-    //private Texture2D _characterSet;
+    private readonly Dictionary<char, int> _characterMap = new();
 
     public Texture2D Menu { get; private set; }
 
@@ -28,6 +29,8 @@ public class MenuSystem
         _characterSet = new Color[7168];
 
         characterSet.GetData(_characterSet);
+
+        InitialiseCharacterMap();
     }
 
     public void Update()
@@ -71,9 +74,7 @@ public class MenuSystem
 
     private void DrawMenuCharacter(Color[] data, char character, int x, int y)
     {
-        var cx = 8;
-
-        var cy = 16;
+        var co = _characterMap[character];
 
         var textColor = Color.White;
 
@@ -81,7 +82,7 @@ public class MenuSystem
         {
             for (var ix = 0; ix < 8; ix++)
             {
-                var color = _characterSet[(cy + iy) * 128 + cx + ix];
+                var color = _characterSet[iy * 128 + ix + co];
 
                 if (color.A == 0)
                 {
@@ -93,5 +94,11 @@ public class MenuSystem
 
             textColor = Color.FromNonPremultiplied(textColor.R - 20, textColor.G - 20, textColor.B - 20, textColor.A);
         }
+    }
+
+    private void InitialiseCharacterMap()
+    {
+        _characterMap.Add('@', 2048);
+        _characterMap.Add('A', 2056);
     }
 }
