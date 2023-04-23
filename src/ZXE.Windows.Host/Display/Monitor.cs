@@ -181,9 +181,6 @@ public class Monitor : Game
 
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ZXE Snapshots", $"{_imageName} {DateTime.Now:yyyy-MM-dd HH-mm}.zxe.json");
 
-            // TODO: This is me-specific.
-            path = path.Replace("OneDrive\\", string.Empty);
-
             adapter.Save(path, _imageName);
 
             _motherboard.Resume();
@@ -198,9 +195,6 @@ public class Monitor : Game
             var adapter = new ZxeFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ZXE Snapshots");
-
-            // TODO: This is me-specific.
-            path = path.Replace("OneDrive\\", string.Empty);
 
             var directoryInfo = new DirectoryInfo(path);
 
