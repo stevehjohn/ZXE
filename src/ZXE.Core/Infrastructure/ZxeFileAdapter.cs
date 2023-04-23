@@ -2,7 +2,6 @@
 using ZXE.Core.Infrastructure.Models;
 using ZXE.Core.System;
 using ZXE.Core.Z80;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ZXE.Core.Infrastructure;
 
