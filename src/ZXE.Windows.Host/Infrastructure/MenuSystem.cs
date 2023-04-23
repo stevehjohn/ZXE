@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Drawing.Design;
+using System.Drawing.Drawing2D;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZXE.Common;
 
@@ -45,7 +47,13 @@ public class MenuSystem
         {
             for (var x = 24; x < 232; x++)
             {
-                data[y * Constants.ScreenWidthPixels + x] = Color.Black; //.Multiply(data[i], 0.5f);
+                var i = y * Constants.ScreenWidthPixels + x;
+
+                var color = data[i];
+
+                color = y < 18 || y > 173 || x < 26 || x > 229 ? Color.White : Color.FromNonPremultiplied(color.R / 5, color.G / 5, color.B / 5, color.A);
+
+                data[i] = color;
             }
         }
     }
