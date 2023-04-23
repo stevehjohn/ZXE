@@ -5,4 +5,6 @@ namespace ZXE.Windows.Host.Infrastructure.Menu;
 public abstract class MenuBase
 {
     public abstract List<Label> GetMenu();
+
+    public abstract MenuBase ItemSelected(int id);
 }

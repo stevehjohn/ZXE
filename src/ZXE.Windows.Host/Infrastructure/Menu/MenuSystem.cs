@@ -11,6 +11,8 @@ public class MenuSystem
 {
     private const int ColorDecrement = 20;
 
+    private const int SelectionFrameDelay = 24;
+
     private readonly Texture2D _background;
 
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
@@ -24,6 +26,8 @@ public class MenuSystem
     private int _colorFrame;
 
     private int _selectedItem = -1;
+
+    private int _selectionDelay = SelectionFrameDelay;
 
     private MenuBase _menu;
 
@@ -53,14 +57,47 @@ public class MenuSystem
         UpdateTextAnimation();
 
         CheckSelection();
+
+        ActionSelection();
+    }
+
+    public void ActionSelection()
+    {
+        if (_selectedItem == -1)
+        {
+            return;
+        }
+
+        _selectionDelay--;
+
+        if (_selectionDelay > 0)
+        {
+            return;
+        }
+
+        _menu = _menu.ItemSelected(_selectedItem);
+
+        _selectedItem = -1;
+
+        _selectionDelay = SelectionFrameDelay;
     }
 
     private void CheckSelection()
     {
+        if (_selectedItem > -1)
+        {
+            return;
+        }
+
         var keys = Keyboard.GetState();
 
         foreach (var item in _menu.GetMenu())
         {
+            if (item.Id == 0 || ! item.SelectKey.HasValue)
+            {
+                continue;
+            }
+
             if (keys.IsKeyDown(item.SelectKey!.Value))
             {
                 _selectedItem = item.Id;
@@ -101,7 +138,7 @@ public class MenuSystem
 
         foreach (var item in items)
         {
-            DrawString(data, item.Text, item.X, item.Y, item.Color, item.Centered);
+            DrawString(data, item.Text, item.X, item.Y, _selectedItem == item.Id ? item.SelectedColor!.Value : item.Color, item.Centered);
         }
 
         //DrawString(data, "[2] Load Z80/SNA File", 1, 5, Color.FromNonPremultiplied(80, 80, 80, 255));
