@@ -28,8 +28,6 @@ public class Motherboard : IDisposable
 
     private readonly ITracer? _tracer;
 
-    private readonly Model _model;
-
     private byte _last7FFD;
 
     private byte _last1FFD;
@@ -50,7 +48,7 @@ public class Motherboard : IDisposable
 
     public Processor Processor => _processor;
 
-    public Model Model => _model;
+    public Model Model { get; set; }
 
     public bool Fast
     {
@@ -132,7 +130,7 @@ public class Motherboard : IDisposable
                 break;
         }
 
-        _model = model;
+        Model = model;
 
         Reset();
     }
@@ -187,7 +185,7 @@ public class Motherboard : IDisposable
             _ram.Screen = (data & 0b0000_1000) > 0 ? 2 : 1;
         }
 
-        var folder = _model switch 
+        var folder = Model switch 
         {
             Model.Spectrum128 => "ZX Spectrum 128",
             Model.SpectrumPlus2 => "ZX Spectrum +2",

@@ -169,7 +169,14 @@ public class Host : Game
 
         if (file != null)
         {
-            _imageName = adapter.Load(file.FullName);
+            var result = adapter.Load(file.FullName);
+
+            if (result.ImageName != null)
+            {
+                _imageName = result.ImageName;
+
+                _motherboard.Model = result.Model;
+            }
         }
 
         _motherboard.Resume();
