@@ -83,12 +83,6 @@ public class Z80FileLoader
 
             var romNumber = (data[35] & 0b0001_0000) >> 4;
 
-            if (data[34] == 7 && data[30] == 55 && (data[86] & 0x01) == 0)
-            {
-                // +3 Use 0x1ffd for ROM number.
-                romNumber += (data[86] & 0b0000_0100) > 0 ? 2 : 0;
-            }
-
             var folder = _model switch 
             {
                 Model.Spectrum128 => "ZX Spectrum 128",
@@ -97,6 +91,11 @@ public class Z80FileLoader
                 // TODO: Proper exception?
                 _ => throw new Exception("Invalid model")
             };
+
+            if (_model == Model.SpectrumPlus3 && romNumber == 1)
+            {
+                romNumber = 3;
+            }
 
             var rom = File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\{folder}\\image-{romNumber}.rom");
 
