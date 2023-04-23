@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -21,6 +22,8 @@ public class MenuSystem
 
     private readonly Dictionary<char, int> _characterMap = new();
 
+    private readonly Action _menuFinished;
+
     private int _colorOffset;
 
     private int _colorFrame;
@@ -33,11 +36,13 @@ public class MenuSystem
 
     public Texture2D Menu { get; private set; }
 
-    public MenuSystem(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager)
+    public MenuSystem(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager, Action menuFinished)
     {
         _background = background;
 
         _graphicsDeviceManager = graphicsDeviceManager;
+
+        _menuFinished = menuFinished;
 
         var characterSet = contentManager.Load<Texture2D>("character-set");
 
@@ -77,14 +82,21 @@ public class MenuSystem
 
         var result = _menu.ItemSelected(_selectedItem);
 
-        if (result.Result == MenuResult.NewMenu)
+        switch (result.Result)
         {
-            _menu = result.NewMenu;
+            case MenuResult.NewMenu:
+                _menu = result.NewMenu;
+
+                _selectedItem = -1;
+
+                _selectionDelay = SelectionFrameDelay;
+
+                break;
+            case MenuResult.Exit:
+                _menuFinished();
+
+                break;
         }
-
-        _selectedItem = -1;
-
-        _selectionDelay = SelectionFrameDelay;
     }
 
     private void CheckSelection()

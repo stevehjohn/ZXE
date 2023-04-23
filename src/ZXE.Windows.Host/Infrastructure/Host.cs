@@ -93,7 +93,7 @@ public class Host : Game
             
             var screen = _vRamAdapter.Display;
 
-            _menuSystem = new MenuSystem(screen, _graphicsDeviceManager, Content);
+            _menuSystem = new MenuSystem(screen, _graphicsDeviceManager, Content, MenuFinished);
         }
 
         if (_menuSystem != null)
@@ -102,6 +102,13 @@ public class Host : Game
         }
 
         base.Update(gameTime);
+    }
+
+    private void MenuFinished()
+    {
+        _menuSystem = null;
+
+        _motherboard.Resume();
     }
 
     protected override void Draw(GameTime gameTime)
