@@ -22,6 +22,8 @@ public class MenuSystem
 
     private int _colorFrame;
 
+    private MenuBase _menu;
+
     public Texture2D Menu { get; private set; }
 
     public MenuSystem(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager)
@@ -37,6 +39,8 @@ public class MenuSystem
         characterSet.GetData(_characterSet);
 
         InitialiseCharacterMap();
+
+        _menu = new MainMenu();
     }
 
     public void Update()
@@ -81,7 +85,7 @@ public class MenuSystem
 
         DrawString(data, "[3] Save System State", 1, 7, Color.FromNonPremultiplied(80, 80, 80, 255));
 
-        DrawString(data, "[4] Save System State", 1, 9, Color.FromNonPremultiplied(80, 80, 80, 255));
+        DrawString(data, "[4] Load System State", 1, 9, Color.FromNonPremultiplied(80, 80, 80, 255));
 
         DrawString(data, "[5] Emulation Speed", 1, 11, Color.FromNonPremultiplied(80, 80, 80, 255));
 
