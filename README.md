@@ -10,8 +10,17 @@ A bunch of games also, see https://www.outsidecontextproblem.com/zxe-more-progre
 
 Some games require 128 emulation, some 48. Will update list to indicate this when I can.
 
-- Barbarian 2
+### Tested on 48K
+
+- Manic Miner
+
+### Tested on 128
+
 - Batman: The Movie
+
+### Tested but can't remember which...
+
+- Barbarian 2
 - Cybernoid
 - Cybernoid 2
 - Dan Dare 3
@@ -22,7 +31,6 @@ Some games require 128 emulation, some 48. Will update list to indicate this whe
 - Head Over Heels
 - Indiana Jones and the Temple of Doom 
 - Jet Pac
-- Manic Miner
 - Myth: History in the Making
 - Robocop
 - Robocop 2
