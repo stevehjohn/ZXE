@@ -18,7 +18,7 @@ public class ZxeFileAdapter
         _ram = ram;
     }
 
-    public (string? ImageName, Model Model) Load(string filename)
+    public string? Load(string filename)
     {
         var json = File.ReadAllText(filename);
 
@@ -26,7 +26,7 @@ public class ZxeFileAdapter
 
         if (model == null)
         {
-            return (null, Model.Spectrum48K);
+            return null;
         }
 
         _state.Flags = model.State!.Flags;
@@ -77,7 +77,7 @@ public class ZxeFileAdapter
 
         _ram.LoadRom(model.Rom!, model.RomNumber, true);
 
-        return (model.RomTitle, model.Model);
+        return model.RomTitle;
     }
 
     public void Save(string filename, string romTitle, Model model)

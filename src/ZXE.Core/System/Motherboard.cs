@@ -28,9 +28,9 @@ public class Motherboard : IDisposable
 
     private readonly ITracer? _tracer;
 
-    private byte Last7Ffd { get; set; }
+    private byte _last7FFD;
 
-    private byte Last1Ffd { get; set; }
+    private byte _last1FFD;
 
     private readonly Dictionary<int, byte[]> _romCache = new();
 
@@ -196,15 +196,15 @@ public class Motherboard : IDisposable
 
         if (port == 0x7F)
         {
-            Last7Ffd = data;
+            _last7FFD = data;
         }
 
         if (port == 0x1F)
         {
-            Last1Ffd = data;
+            _last1FFD = data;
         }
 
-        var romNumber = (Last7Ffd & 0b0001_0000) >> 4 | (Last1Ffd & 0b0000_0100) >> 1;
+        var romNumber = (_last7FFD & 0b0001_0000) >> 4 | (_last1FFD & 0b0000_0100) >> 1;
 
         if (! _romCache.ContainsKey(romNumber))
         {
