@@ -77,12 +77,10 @@ public class ZxeFileAdapter
 
         _ram.LoadRom(model.Rom!, 0);
 
-        // TODO: ROM number
-
         return model.RomTitle;
     }
 
-    public void Save(string filename, string romTitle)
+    public void Save(string filename, string romTitle, Model model)
     {
         Directory.CreateDirectory(Path.GetDirectoryName(filename)!);
 
@@ -91,6 +89,8 @@ public class ZxeFileAdapter
                        State = _state,
                        RomTitle = romTitle
                    };
+
+        data.Model = model;
 
         data.Registers.Add("AF", _state.Registers.ReadPair(Register.AF));
         data.Registers.Add("BC", _state.Registers.ReadPair(Register.BC));
@@ -118,6 +118,8 @@ public class ZxeFileAdapter
         }
 
         data.Rom = _ram.ReadBank(8);
+
+        data.RomNumber = _ram.Rom;
 
         var json = JsonSerializer.Serialize(data, new JsonSerializerOptions
                                                   {

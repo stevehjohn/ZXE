@@ -183,7 +183,7 @@ public class Host : Game
 
         var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ZXE Snapshots", $"{_imageName} {DateTime.Now:yyyy-MM-dd HH-mm}.zxe.json");
 
-        adapter.Save(path, _imageName);
+        adapter.Save(path, _imageName, _motherboard.Model);
 
         _motherboard.Resume();
     }
