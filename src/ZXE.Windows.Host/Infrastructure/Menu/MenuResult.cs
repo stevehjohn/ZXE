@@ -4,5 +4,6 @@ public enum MenuResult
 {
     Exit,
     NewMenu,
-    Restart
+    Restart,
+    LoadZ80SNA
 }
