@@ -13,18 +13,21 @@ public class MainMenu : MenuBase
                     {
                         new(0, true, "ZXE - Menu", Color.White, 0, 0, null),
                         new(1, false, "[1] Select System", Color.Yellow, 1, 3, Keys.D1, Color.LightGreen),
-                        new(2, true, "[ESC] Close Menu", Color.FromNonPremultiplied(255, 64, 64, 255), 0, 16, Keys.Escape)
+                        new(2, true, "[ESC] Close Menu", Color.FromNonPremultiplied(255, 64, 64, 255), 0, 16, Keys.Escape, Color.LightGreen)
                     };
 
         return items;
     }
 
-    public override MenuBase ItemSelected(int id)
+    public override (MenuResult Result, MenuBase NewMenu) ItemSelected(int id)
     {
         switch (id)
         {
             case 1:
-                return new SystemMenu();
+                return (MenuResult.NewMenu, new SystemMenu());
+
+            case 2:
+                return (MenuResult.Exit, null);
 
             default:
                 // TODO: Proper exception?

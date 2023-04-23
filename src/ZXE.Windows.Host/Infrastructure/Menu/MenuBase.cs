@@ -6,5 +6,5 @@ public abstract class MenuBase
 {
     public abstract List<Label> GetMenu();
 
-    public abstract MenuBase ItemSelected(int id);
+    public abstract (MenuResult Result, MenuBase NewMenu) ItemSelected(int id);
 }
