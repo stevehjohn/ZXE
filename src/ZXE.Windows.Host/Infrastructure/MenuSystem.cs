@@ -52,6 +52,8 @@ public class MenuSystem
         DrawString(data, "0123456789:;<]>?", 1, 2);
         DrawString(data, "@ABCDEFGHIJKLMNO", 1, 3);
         DrawString(data, "PQRSTUVWXYZ[\\]^_", 1, 4);
+        DrawString(data, "£abcdefghijklmno", 1, 5);
+        DrawString(data, "pqrstuvwxyz{|}~©", 1, 6);
 
         var screen = new Texture2D(_graphicsDeviceManager.GraphicsDevice, Constants.ScreenWidthPixels, Constants.ScreenHeightPixels);
 
@@ -178,5 +180,39 @@ public class MenuSystem
         _characterMap.Add(']', 3176);
         _characterMap.Add('^', 3184);
         _characterMap.Add('_', 3192);
+
+        _characterMap.Add('£', 4096);
+        _characterMap.Add('a', 4104);
+        _characterMap.Add('b', 4112);
+        _characterMap.Add('c', 4120);
+        _characterMap.Add('d', 4128);
+        _characterMap.Add('e', 4136);
+        _characterMap.Add('f', 4144);
+        _characterMap.Add('g', 4152);
+        _characterMap.Add('h', 4160);
+        _characterMap.Add('i', 4168);
+        _characterMap.Add('j', 4176);
+        _characterMap.Add('k', 4184);
+        _characterMap.Add('l', 4192);
+        _characterMap.Add('m', 4200);
+        _characterMap.Add('n', 4208);
+        _characterMap.Add('o', 4216);
+
+        _characterMap.Add('p', 5120);
+        _characterMap.Add('q', 5128);
+        _characterMap.Add('r', 5136);
+        _characterMap.Add('s', 5144);
+        _characterMap.Add('t', 5152);
+        _characterMap.Add('u', 5160);
+        _characterMap.Add('v', 5168);
+        _characterMap.Add('w', 5176);
+        _characterMap.Add('x', 5184);
+        _characterMap.Add('y', 5192);
+        _characterMap.Add('z', 5200);
+        _characterMap.Add('{', 5208);
+        _characterMap.Add('|', 5216);
+        _characterMap.Add('}', 5224);
+        _characterMap.Add('~', 5232);
+        _characterMap.Add('©', 5240);
     }
 }
