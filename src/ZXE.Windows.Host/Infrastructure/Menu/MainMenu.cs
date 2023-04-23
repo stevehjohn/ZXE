@@ -30,6 +30,9 @@ public class MainMenu : MenuBase
             case 2:
                 return (MenuResult.LoadZ80SNA, null, null);
 
+            case 4:
+                return (MenuResult.NewMenu, new SpeedMenu(), null);
+
             default:
                 return (MenuResult.Exit, null, null);
         }

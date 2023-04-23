@@ -5,5 +5,7 @@ public enum MenuResult
     Exit,
     NewMenu,
     Restart,
-    LoadZ80SNA
+    LoadZ80SNA,
+    SpeedNormal,
+    SpeedFast
 }
