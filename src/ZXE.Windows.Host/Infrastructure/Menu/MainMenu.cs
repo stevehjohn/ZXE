@@ -14,7 +14,7 @@ public class MainMenu : MenuBase
                         new(0, true, "ZXE - Menu", Color.White, 0, 0, null),
                         new(1, false, "[1] Select System", Color.Yellow, 1, 3, Keys.D1, Color.LightGreen),
                         new(2, false, "[2] Load Z80/SNA File", Color.Yellow, 1, 5, Keys.D2, Color.LightGreen),
-                        new(4, false, "[4] Emulator Speed", Color.Yellow, 1, 8, Keys.D2, Color.LightGreen),
+                        new(4, false, "[4] Emulator Speed", Color.Yellow, 1, 9, Keys.D2, Color.LightGreen),
                         new(99, true, "[ESC] Close Menu", Color.FromNonPremultiplied(255, 64, 64, 255), 0, 16, Keys.Escape, Color.LightGreen)
                     };
 
