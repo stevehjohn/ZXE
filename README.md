@@ -38,39 +38,13 @@ Some games require 128 emulation, some 48. Will update list to indicate this whe
 - Treasure Island Dizzy
 - Wizard's Lair
 
-## Features
-
-So far, apart from a WIP emulator, I have...
-
-### Colourised Tracing of Machine Code Execution
-
-![Console Tracing](Images/Tracing-1.png)
-
-## Solution Structure
-
-### ZXE.Windows.Host
+## ZXE.Windows.Host
 
 This will run the Spectrum emulator on Windows. For now, you'll have to edit `Program.cs` to change the version (48/128) being emulated.
 
 Press F10 to load a Z80 file.
 
-### ZXE.Core
-
-This is the emulator. I have tried to keep all the Z80 specific code in the Z80 folder so it can be used in contexts other than only a ZX Spectrum emulator.
-
-### ZXE.Core.Tests
-
-Unit tests for the above.
-
-### ZXE.Core.Tests.Console
-
-Run some select tests in the console so the developer has easy access to the test output.
-
-### ZXE.Core.ThirdPartyTests
-
-Runs tests against this awesome suite:
-
-- https://github.com/raddad772/jsmoo/tree/main/misc/tests/GeneratedTests/z80/v1
+Planning to add a menu system or something similar to simplify this.
 
 ## ROMS
 
