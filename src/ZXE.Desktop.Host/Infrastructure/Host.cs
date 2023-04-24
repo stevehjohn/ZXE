@@ -33,7 +33,7 @@ public class Host : Game
     private int _count = 0;
 #endif
 
-    private MenuSystemBase _menuSystem;
+    private MenuSystem _menuSystem;
 
     public Host()
     {
