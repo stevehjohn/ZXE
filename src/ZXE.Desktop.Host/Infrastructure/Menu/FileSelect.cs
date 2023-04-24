@@ -86,13 +86,17 @@ public class FileSelect : CharacterOverlayBase
 
                 GetFiles();
             }
+            else
+            {
+                _menuDone(_files[_selected].FullPath);
+            }
 
             _selectDelay = SelectDelayFramesSlow;
         }
 
         if (keys.IsKeyDown(Keys.Escape))
         {
-            // TODO: Close menu
+            _menuDone(null);
 
             _selectDelay = SelectDelayFramesFast;
         }

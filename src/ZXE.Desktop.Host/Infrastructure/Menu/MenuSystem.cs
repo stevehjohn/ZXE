@@ -35,7 +35,10 @@ public class MenuSystem : CharacterOverlayBase
         {
             _fileSelect.Update();
 
-            Menu = _fileSelect.Menu;
+            if (_fileSelect != null)
+            {
+                Menu = _fileSelect.Menu;
+            }
 
             return;
         }
@@ -94,7 +97,7 @@ public class MenuSystem : CharacterOverlayBase
 
         if (! string.IsNullOrWhiteSpace(path))
         {
-            _menuFinished(MenuResult.LoadZ80Sna, path);
+            //_menuFinished(MenuResult.LoadZ80Sna, path);
         }
     }
 

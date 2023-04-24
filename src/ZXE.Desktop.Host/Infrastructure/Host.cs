@@ -124,7 +124,7 @@ public class Host : Game
                 return;
 
             case MenuResult.LoadZ80Sna:
-                LoadZ80Sna(arguments);
+                LoadZ80Sna((string) arguments);
 
                 break;
 
@@ -208,7 +208,7 @@ public class Host : Game
 
         loader.Load(filename);
         
-        _imageName = filename.Split('/')[^2];
+        _imageName = filename.Split(Path.DirectorySeparatorChar)[^2];
 
         _motherboard.Resume();
     }
