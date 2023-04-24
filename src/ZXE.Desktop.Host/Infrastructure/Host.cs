@@ -7,15 +7,14 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
-using ZXE.Windows.Host.Display;
-using ZXE.Windows.Host.Infrastructure.Menu;
+using ZXE.Desktop.Host.Display;
+using ZXE.Desktop.Host.Infrastructure.Menu;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using Model = ZXE.Core.Infrastructure.Model;
 
-namespace ZXE.Windows.Host.Infrastructure;
+namespace ZXE.Desktop.Host.Infrastructure;
 
 public class Host : Game
 {
@@ -205,8 +204,9 @@ public class Host : Game
 
             return;
         }
-
-        var filename = dialog.FileName;
+        */
+        
+        var filename = "../../../../../Game Images/Batman The Movie/image-0.z80";
 
         IImageLoader loader;
 
@@ -225,12 +225,11 @@ public class Host : Game
                 throw new Exception("Unsupported file format");
         }
 
-        loader.Load(dialog.FileName);
-
-        _imageName = dialog.FileName.Split('\\')[^2];
+        loader.Load(filename);
+        
+        _imageName = filename.Split('/')[^2];
 
         _motherboard.Resume();
-        */
     }
 
     protected override void Draw(GameTime gameTime)

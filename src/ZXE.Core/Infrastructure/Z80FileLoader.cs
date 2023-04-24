@@ -97,7 +97,7 @@ public class Z80FileLoader : IImageLoader
                 romNumber = 3;
             }
 
-            var rom = File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\{folder}\\image-{romNumber}.rom");
+            var rom = File.ReadAllBytes($"../../../../../ROM Images/{folder}/image-{romNumber}.rom");
 
             _ram.LoadRom(rom, romNumber);
         }
