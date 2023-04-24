@@ -77,7 +77,7 @@ public class MenuSystem : CharacterOverlayBase
                 break;
 
             case MenuResult.LoadZ80Sna:
-                _fileSelect = new FileSelect(Background, GraphicsDeviceManager, ContentManager);
+                _fileSelect = new FileSelect(Background, GraphicsDeviceManager, ContentManager, MenuDone);
 
                 break;
 
@@ -85,6 +85,16 @@ public class MenuSystem : CharacterOverlayBase
                 _menuFinished(result.Result, result.Arguments);
 
                 break;
+        }
+    }
+
+    private void MenuDone(string path)
+    {
+        _fileSelect = null;
+
+        if (! string.IsNullOrWhiteSpace(path))
+        {
+            _menuFinished(MenuResult.LoadZ80Sna, path);
         }
     }
 

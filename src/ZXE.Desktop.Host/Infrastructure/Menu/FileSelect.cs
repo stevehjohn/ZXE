@@ -1,10 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.Xna.Framework.Input;
 using ZXE.Common;
 
 namespace ZXE.Desktop.Host.Infrastructure.Menu;
@@ -25,12 +26,16 @@ public class FileSelect : CharacterOverlayBase
 
     private int _selectDelay;
 
-    public FileSelect(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager)
+    private Action<string> _menuDone;
+
+    public FileSelect(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager, Action<string> menuDone)
         : base(background, graphicsDeviceManager, contentManager)
     {
         _path = Directory.GetCurrentDirectory();
 
         GetFiles();
+
+        _menuDone = menuDone;
     }
 
     public void Update()
@@ -140,7 +145,7 @@ public class FileSelect : CharacterOverlayBase
 
         directories.ForEach(d => _files.Add((d, Path.GetFileName(d), true)));
 
-        var files = Directory.EnumerateFiles(_path).OrderBy(d => d).ToList();
+        var files = Directory.EnumerateFiles(_path).Where(f => Path.GetExtension(f).ToLowerInvariant() is ".z80" or ".sna").OrderBy(d => d).ToList();
 
         files.ForEach(f => _files.Add((f, Path.GetFileName(f), false)));
     }

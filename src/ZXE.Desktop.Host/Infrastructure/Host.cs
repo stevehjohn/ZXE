@@ -124,7 +124,7 @@ public class Host : Game
                 return;
 
             case MenuResult.LoadZ80Sna:
-                LoadZ80Sna();
+                LoadZ80Sna(arguments);
 
                 break;
 
@@ -187,27 +187,8 @@ public class Host : Game
         _motherboard.Resume();
     }
     
-    private void LoadZ80Sna()
+    private void LoadZ80Sna(string filename)
     {
-        /*
-        var dialog = new OpenFileDialog
-                     {
-                         Multiselect = false,
-                         Filter = "Z80 (*.z80)|*.z80|Snapshot files(*.sna)|*.sna"
-                     };
-
-        var result = dialog.ShowDialog();
-
-        if (result != DialogResult.OK)
-        {
-            _motherboard.Resume();
-
-            return;
-        }
-        */
-        
-        var filename = "../../../../../Game Images/Batman The Movie/image-0.z80";
-
         IImageLoader loader;
 
         switch (Path.GetExtension(filename).ToLowerInvariant())
