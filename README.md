@@ -45,6 +45,7 @@ Some games require 128 emulation, some 48. Will update list to indicate this whe
 - Myth: History in the Making
 - Robocop
 - Robocop 2
+- Robocop 3
 - Teenage Mutant Hero Turtles
 - Treasure Island Dizzy
 - Wizard's Lair
