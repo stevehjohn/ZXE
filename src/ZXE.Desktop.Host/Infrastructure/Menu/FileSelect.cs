@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ZXE.Common;
+using ZXE.Desktop.Host.Infrastructure.Settings;
 
 namespace ZXE.Desktop.Host.Infrastructure.Menu;
 
@@ -37,7 +38,14 @@ public class FileSelect : CharacterOverlayBase
     public FileSelect(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager, Action<string> menuDone)
         : base(background, graphicsDeviceManager, contentManager)
     {
-        _path = Directory.GetCurrentDirectory();
+        var path = AppSettings.Instance.LastZ80SnaPath;
+
+        if (string.IsNullOrWhiteSpace(path) || ! Path.Exists(path))
+        {
+            path = Directory.GetCurrentDirectory();
+        }
+
+        _path = path;
 
         GetFiles();
 
