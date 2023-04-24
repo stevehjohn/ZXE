@@ -118,7 +118,7 @@ public class Motherboard : IDisposable
                 break;
 
             case Model.SpectrumPlus3:
-                data = File.ReadAllBytes("..\\..\\..\\..\\..\\ROM Images\\ZX Spectrum +3\\image-0.rom");
+                data = File.ReadAllBytes("../../../../../ROM Images/ZX Spectrum +3/image-0.rom");
 
                 _ram.LoadRom(data, 0);
 
@@ -203,7 +203,7 @@ public class Motherboard : IDisposable
 
         if (! _romCache.ContainsKey(romNumber))
         {
-            _romCache.Add(romNumber, File.ReadAllBytes($"..\\..\\..\\..\\..\\ROM Images\\{folder}\\image-{romNumber}.rom"));
+            _romCache.Add(romNumber, File.ReadAllBytes($"../../../../../ROM Images/{folder}/image-{romNumber}.rom"));
         }
 
         _ram.LoadRom(_romCache[romNumber], romNumber);

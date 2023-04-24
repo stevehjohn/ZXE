@@ -187,9 +187,10 @@ public class Host : Game
 
         _motherboard.Resume();
     }
-
+    
     private void LoadZ80Sna()
     {
+        /*
         var dialog = new OpenFileDialog
                      {
                          Multiselect = false,
@@ -229,6 +230,7 @@ public class Host : Game
         _imageName = dialog.FileName.Split('\\')[^2];
 
         _motherboard.Resume();
+        */
     }
 
     protected override void Draw(GameTime gameTime)
