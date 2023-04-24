@@ -16,7 +16,7 @@ public class FileSelect : CharacterOverlayBase
 
     private const int SelectDelayFramesSlow = 10;
 
-    private const int CancelDelayFrames = 24;
+    private const int SelectDelayFramesVerySlow = 24;
 
     private const int FileRows = 12;
 
@@ -29,6 +29,8 @@ public class FileSelect : CharacterOverlayBase
     private int _selectDelay;
 
     private bool _cancelled;
+
+    private bool _fileSelected;
 
     private readonly Action<string> _menuDone;
 
@@ -48,7 +50,7 @@ public class FileSelect : CharacterOverlayBase
 
         UpdateTextAnimation();
 
-        if (! _cancelled)
+        if (! _cancelled && ! _fileSelected)
         {
             CheckKeys();
         }
@@ -58,7 +60,7 @@ public class FileSelect : CharacterOverlayBase
 
             if (_selectDelay == 0)
             {
-                _menuDone(null);
+                _menuDone(_cancelled ? null : _files[_selected].FullPath);
             }
         }
     }
@@ -100,19 +102,21 @@ public class FileSelect : CharacterOverlayBase
 
                 _selected = 0;
 
+                _selectDelay = SelectDelayFramesSlow;
+
                 GetFiles();
             }
             else
             {
-                _menuDone(_files[_selected].FullPath);
-            }
+                _selectDelay = SelectDelayFramesVerySlow;
 
-            _selectDelay = SelectDelayFramesSlow;
+                _fileSelected = true;
+            }
         }
 
         if (keys.IsKeyDown(Keys.Escape))
         {
-            _selectDelay = CancelDelayFrames;
+            _selectDelay = SelectDelayFramesVerySlow;
 
             _cancelled = true;
         }
@@ -183,7 +187,7 @@ public class FileSelect : CharacterOverlayBase
 
         while (i < _files.Count && y < FileRows)
         {
-            DrawString(data, TruncateFileName(_files[i].Display), 0, y + 3, Color.LightGreen, false, i == _selected);
+            DrawString(data, TruncateFileName(_files[i].Display), 0, y + 3, _fileSelected ? Color.Yellow : Color.LightGreen, false, i == _selected);
 
             i++;
 

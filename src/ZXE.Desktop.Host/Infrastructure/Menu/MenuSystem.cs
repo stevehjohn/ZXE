@@ -108,7 +108,7 @@ public class MenuSystem : CharacterOverlayBase
 
         if (! string.IsNullOrWhiteSpace(path))
         {
-            //_menuFinished(MenuResult.LoadZ80Sna, path);
+            _menuFinished(MenuResult.LoadZ80Sna, path);
         }
     }
 
