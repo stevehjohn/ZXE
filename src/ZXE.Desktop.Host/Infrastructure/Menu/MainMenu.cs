@@ -29,7 +29,7 @@ public class MainMenu : MenuBase
                 return (MenuResult.NewMenu, new SystemMenu(), null);
 
             case 2:
-                return (MenuResult.LoadZ80SNA, null, null);
+                return (MenuResult.LoadZ80Sna, null, null);
 
             case 3:
                 return (MenuResult.NewMenu, new StateMenu(), null);

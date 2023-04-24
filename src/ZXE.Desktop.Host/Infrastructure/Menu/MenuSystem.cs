@@ -19,6 +19,8 @@ public class MenuSystem : CharacterOverlayBase
 
     private MenuBase _menu;
 
+    private FileSelect _fileSelect;
+
     public MenuSystem(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager, Action<MenuResult, object> menuFinished)
         : base(background, graphicsDeviceManager, contentManager)
     {
@@ -29,10 +31,12 @@ public class MenuSystem : CharacterOverlayBase
 
     public void Update()
     {
-        //if (_fileSelect != null)
-        //{
-        //    return;
-        //}
+        if (_fileSelect != null)
+        {
+            Menu = _fileSelect.Menu;
+
+            return;
+        }
 
         DrawMenu();
 
@@ -67,6 +71,11 @@ public class MenuSystem : CharacterOverlayBase
                 _selectedItem = -1;
 
                 _selectionDelay = SelectionFrameDelay;
+
+                break;
+
+            case MenuResult.LoadZ80Sna:
+                _fileSelect = new FileSelect(Background, GraphicsDeviceManager, ContentManager);
 
                 break;
 

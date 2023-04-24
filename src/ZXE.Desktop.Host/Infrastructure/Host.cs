@@ -123,7 +123,7 @@ public class Host : Game
 
                 return;
 
-            case MenuResult.LoadZ80SNA:
+            case MenuResult.LoadZ80Sna:
                 LoadZ80Sna();
 
                 break;

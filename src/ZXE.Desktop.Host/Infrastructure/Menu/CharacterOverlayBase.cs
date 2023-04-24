@@ -23,6 +23,8 @@ public class CharacterOverlayBase
     protected readonly Texture2D Background;
 
     protected readonly GraphicsDeviceManager GraphicsDeviceManager;
+
+    protected readonly ContentManager ContentManager;
     
     public Texture2D Menu { get; protected set; }
 
@@ -31,6 +33,8 @@ public class CharacterOverlayBase
         Background = background;
 
         GraphicsDeviceManager = graphicsDeviceManager;
+
+        ContentManager = contentManager;
 
         var characterSet = contentManager.Load<Texture2D>("character-set");
 
