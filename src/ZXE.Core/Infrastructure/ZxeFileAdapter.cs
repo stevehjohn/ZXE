@@ -72,7 +72,7 @@ public class ZxeFileAdapter
         
         for (var i = 0; i < 4; i++)
         {
-            _ram.BankNumbers[i] = (byte) model.PageConfiguration[i];
+            _ram.SetBankBySlotNumber(i, model.PageConfiguration[i]);
         }
 
         _ram.LoadRom(model.Rom!, model.RomNumber, true);

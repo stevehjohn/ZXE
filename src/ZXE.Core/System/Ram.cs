@@ -111,6 +111,13 @@ public class Ram
         _bankNumbers[(startAddress & 0b1100_0000_0000_0000) >> 14] = (byte) bankNumber;
     }
 
+    public void SetBankBySlotNumber(int slotNumber, int bankNumber)
+    {
+        _layout[slotNumber] = _banks[bankNumber];
+
+        _bankNumbers[slotNumber] = (byte) bankNumber;
+    }
+
     public void Load(byte[] data, int destination)
     {
         for (var i = 0; i < data.Length; i++)
