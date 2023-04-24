@@ -8,6 +8,8 @@ A bunch of games also, see https://www.outsidecontextproblem.com/zxe-more-progre
 
 ## ZXE.Desktop.Host
 
+Open `ZXE.Desktop.sln`.
+
 Cross platform host for the emulator. When running, press F10 for the menu.
 
 I did have one issue building on macOS on an M1 processor. Solved by https://stackoverflow.com/a/74317078.
@@ -15,6 +17,8 @@ I did have one issue building on macOS on an M1 processor. Solved by https://sta
 `sudo ln -s /opt/homebrew/Cellar/freeimage/3.18.0/lib/libfreeimage.dylib /usr/local/lib/libfreeimage`
 
 ## ZXE.Windows.Host
+
+Open `ZXE.Windows.sln`.
 
 Windows host for the emulator. When running, press F10 for the menu.
 
