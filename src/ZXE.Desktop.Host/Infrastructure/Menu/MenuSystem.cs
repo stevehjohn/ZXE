@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Threading;
 using ZXE.Common;
 
 namespace ZXE.Desktop.Host.Infrastructure.Menu;
@@ -80,7 +81,11 @@ public class MenuSystem : CharacterOverlayBase
                 break;
 
             case MenuResult.LoadZ80Sna:
-                _fileSelect = new FileSelect(Background, GraphicsDeviceManager, ContentManager, MenuDone);
+                _fileSelect = new FileSelect(Background, GraphicsDeviceManager, ContentManager, FileSelectDone);
+
+                _selectedItem = -1;
+
+                _selectionDelay = SelectionFrameDelay;
 
                 break;
 
@@ -91,13 +96,17 @@ public class MenuSystem : CharacterOverlayBase
         }
     }
 
-    private void MenuDone(string path)
+    private void FileSelectDone(string path)
     {
         _fileSelect = null;
 
         if (! string.IsNullOrWhiteSpace(path))
         {
             //_menuFinished(MenuResult.LoadZ80Sna, path);
+        }
+        else
+        {
+            _selectionDelay = SelectionFrameDelay;
         }
     }
 

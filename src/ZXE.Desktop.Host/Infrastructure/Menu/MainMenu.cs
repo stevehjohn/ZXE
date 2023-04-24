@@ -37,8 +37,11 @@ public class MainMenu : MenuBase
             case 4:
                 return (MenuResult.NewMenu, new SpeedMenu(), null);
 
-            default:
+            case 99:
                 return (MenuResult.Exit, null, null);
+
+            default:
+                return (MenuResult.NoAction, null, null);
         }
     }
 }

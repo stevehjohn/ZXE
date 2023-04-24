@@ -2,6 +2,7 @@
 
 public enum MenuResult
 {
+    NoAction,
     Exit,
     NewMenu,
     Restart,
