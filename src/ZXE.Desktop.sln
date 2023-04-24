@@ -34,8 +34,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum 48K", "ZX Spect
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Utilities", "ZXE.Utilities\ZXE.Utilities.csproj", "{748ABF22-ED8E-44C0-8652-F481CDBE8C03}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Windows.Host", "ZXE.Windows.Host\ZXE.Windows.Host.csproj", "{B524E95E-BB3B-4FBE-A147-F937BFCD16AE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Console.LogViewer", "ZXE.Console.LogViewer\ZXE.Console.LogViewer.csproj", "{821FFE18-6651-4663-913E-FD16EE296257}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum +3", "ZX Spectrum +3", "{D4F1D69F-9FB5-4004-8B9E-DE312B60E432}"

@@ -190,12 +190,12 @@ public class Host : Game
     
     private void LoadZ80Sna()
     {
-        /*
+
         var dialog = new OpenFileDialog
-                     {
-                         Multiselect = false,
-                         Filter = "Z80 (*.z80)|*.z80|Snapshot files(*.sna)|*.sna"
-                     };
+        {
+            Multiselect = false,
+            Filter = "Z80 (*.z80)|*.z80|Snapshot files(*.sna)|*.sna"
+        };
 
         var result = dialog.ShowDialog();
 
@@ -230,7 +230,7 @@ public class Host : Game
         _imageName = dialog.FileName.Split('\\')[^2];
 
         _motherboard.Resume();
-        */
+
     }
 
     protected override void Draw(GameTime gameTime)

@@ -1,0 +1,325 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE73493D-6E10-481E-827A-58A67E1E73F1}"
+	ProjectSection(SolutionItems) = preProject
+		..\LICENSE = ..\LICENSE
+		..\Documentation\Memptr.txt = ..\Documentation\Memptr.txt
+		..\Notes.md = ..\Notes.md
+		..\README.md = ..\README.md
+		..\Documentation\Z80 Family User Manual.pdf = ..\Documentation\Z80 Family User Manual.pdf
+		..\Documentation\Z80 Undocumented.pdf = ..\Documentation\Z80 Undocumented.pdf
+		..\Documentation\Z80 User Manual 2.pdf = ..\Documentation\Z80 User Manual 2.pdf
+		..\Documentation\Z80 User Manual.pdf = ..\Documentation\Z80 User Manual.pdf
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core", "ZXE.Core\ZXE.Core.csproj", "{463ECCDE-1A31-4812-BB07-C0945001694D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core.Tests", "ZXE.Core.Tests\ZXE.Core.Tests.csproj", "{6802C760-59D5-469E-B01F-8FA966669AC1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core.Tests.Console", "ZXE.Core.Tests.Console\ZXE.Core.Tests.Console.csproj", "{E6C16151-095C-4BAA-8498-7B2A4CAF21A1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core.ThirdPartyTests", "ZXE.Core.ThirdPartyTests\ZXE.Core.ThirdPartyTests.csproj", "{EC09A4A6-F367-4B08-B1C2-A67CCD2F9004}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Common", "ZXE.Common\ZXE.Common.csproj", "{92EE2C72-0F6F-4E5B-A404-DBA5F5748120}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rom Images", "Rom Images", "{0EA62AEC-0B7B-4833-91CE-F92066E804AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum 48K", "ZX Spectrum 48K", "{57959EB0-56F2-4C3E-A94F-57E2F9672B66}"
+	ProjectSection(SolutionItems) = preProject
+		..\ROM Images\ZX Spectrum 48K\image-0.rom = ..\ROM Images\ZX Spectrum 48K\image-0.rom
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Utilities", "ZXE.Utilities\ZXE.Utilities.csproj", "{748ABF22-ED8E-44C0-8652-F481CDBE8C03}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Windows.Host", "ZXE.Windows.Host\ZXE.Windows.Host.csproj", "{B524E95E-BB3B-4FBE-A147-F937BFCD16AE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Console.LogViewer", "ZXE.Console.LogViewer\ZXE.Console.LogViewer.csproj", "{821FFE18-6651-4663-913E-FD16EE296257}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum +3", "ZX Spectrum +3", "{D4F1D69F-9FB5-4004-8B9E-DE312B60E432}"
+	ProjectSection(SolutionItems) = preProject
+		..\ROM Images\ZX Spectrum +3\image-0.rom = ..\ROM Images\ZX Spectrum +3\image-0.rom
+		..\ROM Images\ZX Spectrum +3\image-1.rom = ..\ROM Images\ZX Spectrum +3\image-1.rom
+		..\ROM Images\ZX Spectrum +3\image-2.rom = ..\ROM Images\ZX Spectrum +3\image-2.rom
+		..\ROM Images\ZX Spectrum +3\image-3.rom = ..\ROM Images\ZX Spectrum +3\image-3.rom
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game Images", "Game Images", "{40236FC3-1E09-4D60-8380-FD727C9BBF70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Treasure Island Dizzy", "Treasure Island Dizzy", "{B5437754-C6C2-4FBE-A72C-850B777A9FB7}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Treasure Island Dizzy\image-0.sna = ..\Game Images\Treasure Island Dizzy\image-0.sna
+		..\Game Images\Treasure Island Dizzy\image-0.z80 = ..\Game Images\Treasure Island Dizzy\image-0.z80
+		..\Game Images\Treasure Island Dizzy\load-screen.bin = ..\Game Images\Treasure Island Dizzy\load-screen.bin
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.Core.FuseTests", "ZXE.Core.FuseTests\ZXE.Core.FuseTests.csproj", "{BF53FA1E-5D66-4073-97E7-642F85755FDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other Images", "Other Images", "{B7EC1DE2-308E-4C6D-B15F-FE4A011E9D4C}"
+	ProjectSection(SolutionItems) = preProject
+		..\Other Images\memptr-flags-tests.sna = ..\Other Images\memptr-flags-tests.sna
+		..\Other Images\memtest+3.z80 = ..\Other Images\memtest+3.z80
+		..\Other Images\snaptest.sna = ..\Other Images\snaptest.sna
+		..\Other Images\snaptest.v1.z80 = ..\Other Images\snaptest.v1.z80
+		..\Other Images\z80-tests.z80 = ..\Other Images\z80-tests.z80
+		..\Other Images\zexall-spectrum.com = ..\Other Images\zexall-spectrum.com
+		..\Other Images\zexall-spectrum.z80 = ..\Other Images\zexall-spectrum.z80
+		..\Other Images\zexdoc-spectrum.com = ..\Other Images\zexdoc-spectrum.com
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXE.ZexTests", "ZXE.ZexTests\ZXE.ZexTests.csproj", "{4ED315F7-1395-49D8-9C2B-154402393832}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jet Pac", "Jet Pac", "{ECC5A18D-9623-4760-9334-4B2871B302F0}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Jet Pac\image-0.sna = ..\Game Images\Jet Pac\image-0.sna
+		..\Game Images\Jet Pac\image-0.z80 = ..\Game Images\Jet Pac\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manic Miner", "Manic Miner", "{B8945F25-4341-4602-82EF-3DD5FD63DD77}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Manic Miner\image-0.z80 = ..\Game Images\Manic Miner\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Head Over Heels", "Head Over Heels", "{2C8ABA5C-0CF1-4CCB-AB96-72ECF7DCA5C1}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Head Over Heels\image-0.z80 = ..\Game Images\Head Over Heels\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Horace Goes Skiing", "Horace Goes Skiing", "{76162651-1960-482F-9C07-2D34C67088E8}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Horace Goes Skiing\image-0.z80 = ..\Game Images\Horace Goes Skiing\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fantasy World Dizzy", "Fantasy World Dizzy", "{A5E75E76-6140-4BDE-B507-18A72B2C4176}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Fantasy World Dizzy\image-0.sna = ..\Game Images\Fantasy World Dizzy\image-0.sna
+		..\Game Images\Fantasy World Dizzy\image-0.z80 = ..\Game Images\Fantasy World Dizzy\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Myth", "Myth", "{60AC96CF-F447-4D8B-8E87-2469FD963D91}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Myth\image-0.z80 = ..\Game Images\Myth\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dizzy", "Dizzy", "{1D23B8E8-313A-4D5D-9366-9F3B49519664}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Dizzy\image-0.sna = ..\Game Images\Dizzy\image-0.sna
+		..\Game Images\Dizzy\image-0.z80 = ..\Game Images\Dizzy\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum 128", "ZX Spectrum 128", "{88199B3B-864A-4474-81DC-A1C92463C377}"
+	ProjectSection(SolutionItems) = preProject
+		..\ROM Images\ZX Spectrum 128\image-0.rom = ..\ROM Images\ZX Spectrum 128\image-0.rom
+		..\ROM Images\ZX Spectrum 128\image-1.rom = ..\ROM Images\ZX Spectrum 128\image-1.rom
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZX Spectrum +2", "ZX Spectrum +2", "{94D5F65D-6B17-46DD-8659-83893E5D06F5}"
+	ProjectSection(SolutionItems) = preProject
+		..\ROM Images\ZX Spectrum +2\image-0.rom = ..\ROM Images\ZX Spectrum +2\image-0.rom
+		..\ROM Images\ZX Spectrum +2\image-1.rom = ..\ROM Images\ZX Spectrum +2\image-1.rom
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Teenage Mutant Hero Turtles", "Teenage Mutant Hero Turtles", "{260A7DA2-05BA-4638-B23D-0D88CD5D3006}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Teenage Mutant Hero Turtles\image-0.z80 = ..\Game Images\Teenage Mutant Hero Turtles\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Batman", "Batman", "{6358DF9D-5C3A-4FDF-9CAE-3435AB2F5857}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Batman\image-0.z80 = ..\Game Images\Batman\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Barbarian 2", "Barbarian 2", "{0174D6EB-3CAB-45D2-8587-37F2B91CDC0B}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Barbarian 2\image-0.z80 = ..\Game Images\Barbarian 2\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Robocop", "Robocop", "{31F4F688-EE97-4621-BBBA-20A8FCC89240}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Robocop\image-0.z80 = ..\Game Images\Robocop\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cybernoid", "Cybernoid", "{417E6891-E55D-4FDF-938F-48272C63DF85}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Cybernoid\image-0.z80 = ..\Game Images\Cybernoid\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Exolon", "Exolon", "{8CC52AD5-AC2E-4F2C-8CFF-8E31B30AE44F}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Exolon\image-0.z80 = ..\Game Images\Exolon\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wizard's Lair", "Wizard's Lair", "{4F7F17CB-5DDA-4AC8-935C-6FED229EABCB}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Wizard's Lair\image-0.z80 = ..\Game Images\Wizard's Lair\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Batman The Movie", "Batman The Movie", "{C3A8AE76-D075-445D-A457-4588EC084091}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Batman The Movie\image-0.z80 = ..\Game Images\Batman The Movie\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Robocop 2", "Robocop 2", "{3B73890A-C9EC-4E0D-A2B8-E1E29126535D}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Robocop 2\image-0.z80 = ..\Game Images\Robocop 2\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Robocop 3", "Robocop 3", "{C5992A7B-A019-4847-9BB8-8D43B2A16D47}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Robocop 3\image-0.z80 = ..\Game Images\Robocop 3\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cybernoid 2", "Cybernoid 2", "{F140F3E5-481D-491F-98B9-A6FFDB363F8D}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Cybernoid 2\image-0.z80 = ..\Game Images\Cybernoid 2\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dan Dare 3", "Dan Dare 3", "{E2BB46A2-F094-4686-8F54-0793F9D0EA80}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Dan Dare 3\image-0.z80 = ..\Game Images\Dan Dare 3\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "The Great Escape", "The Great Escape", "{567F27E3-3444-4A4F-9A4F-E8E421F3E5D4}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\The Great Escape\image-0.z80 = ..\Game Images\The Great Escape\image-0.z80
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Indiana Jones and the Temple of Doom", "Indiana Jones and the Temple of Doom", "{AC05D225-0BD8-4C40-A71E-CD12B584F0A3}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game Images\Indiana Jones and the Temple of Doom\image-0.z80 = ..\Game Images\Indiana Jones and the Temple of Doom\image-0.z80
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{463ECCDE-1A31-4812-BB07-C0945001694D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{463ECCDE-1A31-4812-BB07-C0945001694D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{463ECCDE-1A31-4812-BB07-C0945001694D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{463ECCDE-1A31-4812-BB07-C0945001694D}.Debug|x86.Build.0 = Debug|Any CPU
+		{463ECCDE-1A31-4812-BB07-C0945001694D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{463ECCDE-1A31-4812-BB07-C0945001694D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{463ECCDE-1A31-4812-BB07-C0945001694D}.Release|x86.ActiveCfg = Release|Any CPU
+		{463ECCDE-1A31-4812-BB07-C0945001694D}.Release|x86.Build.0 = Release|Any CPU
+		{6802C760-59D5-469E-B01F-8FA966669AC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6802C760-59D5-469E-B01F-8FA966669AC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6802C760-59D5-469E-B01F-8FA966669AC1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6802C760-59D5-469E-B01F-8FA966669AC1}.Debug|x86.Build.0 = Debug|Any CPU
+		{6802C760-59D5-469E-B01F-8FA966669AC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6802C760-59D5-469E-B01F-8FA966669AC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6802C760-59D5-469E-B01F-8FA966669AC1}.Release|x86.ActiveCfg = Release|Any CPU
+		{6802C760-59D5-469E-B01F-8FA966669AC1}.Release|x86.Build.0 = Release|Any CPU
+		{E6C16151-095C-4BAA-8498-7B2A4CAF21A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6C16151-095C-4BAA-8498-7B2A4CAF21A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6C16151-095C-4BAA-8498-7B2A4CAF21A1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E6C16151-095C-4BAA-8498-7B2A4CAF21A1}.Debug|x86.Build.0 = Debug|Any CPU
+		{E6C16151-095C-4BAA-8498-7B2A4CAF21A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6C16151-095C-4BAA-8498-7B2A4CAF21A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6C16151-095C-4BAA-8498-7B2A4CAF21A1}.Release|x86.ActiveCfg = Release|Any CPU
+		{E6C16151-095C-4BAA-8498-7B2A4CAF21A1}.Release|x86.Build.0 = Release|Any CPU
+		{EC09A4A6-F367-4B08-B1C2-A67CCD2F9004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC09A4A6-F367-4B08-B1C2-A67CCD2F9004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC09A4A6-F367-4B08-B1C2-A67CCD2F9004}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EC09A4A6-F367-4B08-B1C2-A67CCD2F9004}.Debug|x86.Build.0 = Debug|Any CPU
+		{EC09A4A6-F367-4B08-B1C2-A67CCD2F9004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC09A4A6-F367-4B08-B1C2-A67CCD2F9004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC09A4A6-F367-4B08-B1C2-A67CCD2F9004}.Release|x86.ActiveCfg = Release|Any CPU
+		{EC09A4A6-F367-4B08-B1C2-A67CCD2F9004}.Release|x86.Build.0 = Release|Any CPU
+		{92EE2C72-0F6F-4E5B-A404-DBA5F5748120}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92EE2C72-0F6F-4E5B-A404-DBA5F5748120}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92EE2C72-0F6F-4E5B-A404-DBA5F5748120}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{92EE2C72-0F6F-4E5B-A404-DBA5F5748120}.Debug|x86.Build.0 = Debug|Any CPU
+		{92EE2C72-0F6F-4E5B-A404-DBA5F5748120}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92EE2C72-0F6F-4E5B-A404-DBA5F5748120}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92EE2C72-0F6F-4E5B-A404-DBA5F5748120}.Release|x86.ActiveCfg = Release|Any CPU
+		{92EE2C72-0F6F-4E5B-A404-DBA5F5748120}.Release|x86.Build.0 = Release|Any CPU
+		{748ABF22-ED8E-44C0-8652-F481CDBE8C03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{748ABF22-ED8E-44C0-8652-F481CDBE8C03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{748ABF22-ED8E-44C0-8652-F481CDBE8C03}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{748ABF22-ED8E-44C0-8652-F481CDBE8C03}.Debug|x86.Build.0 = Debug|Any CPU
+		{748ABF22-ED8E-44C0-8652-F481CDBE8C03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{748ABF22-ED8E-44C0-8652-F481CDBE8C03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{748ABF22-ED8E-44C0-8652-F481CDBE8C03}.Release|x86.ActiveCfg = Release|Any CPU
+		{748ABF22-ED8E-44C0-8652-F481CDBE8C03}.Release|x86.Build.0 = Release|Any CPU
+		{B524E95E-BB3B-4FBE-A147-F937BFCD16AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B524E95E-BB3B-4FBE-A147-F937BFCD16AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B524E95E-BB3B-4FBE-A147-F937BFCD16AE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B524E95E-BB3B-4FBE-A147-F937BFCD16AE}.Debug|x86.Build.0 = Debug|Any CPU
+		{B524E95E-BB3B-4FBE-A147-F937BFCD16AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B524E95E-BB3B-4FBE-A147-F937BFCD16AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B524E95E-BB3B-4FBE-A147-F937BFCD16AE}.Release|x86.ActiveCfg = Release|Any CPU
+		{B524E95E-BB3B-4FBE-A147-F937BFCD16AE}.Release|x86.Build.0 = Release|Any CPU
+		{821FFE18-6651-4663-913E-FD16EE296257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{821FFE18-6651-4663-913E-FD16EE296257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821FFE18-6651-4663-913E-FD16EE296257}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{821FFE18-6651-4663-913E-FD16EE296257}.Debug|x86.Build.0 = Debug|Any CPU
+		{821FFE18-6651-4663-913E-FD16EE296257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{821FFE18-6651-4663-913E-FD16EE296257}.Release|Any CPU.Build.0 = Release|Any CPU
+		{821FFE18-6651-4663-913E-FD16EE296257}.Release|x86.ActiveCfg = Release|Any CPU
+		{821FFE18-6651-4663-913E-FD16EE296257}.Release|x86.Build.0 = Release|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Debug|x86.Build.0 = Debug|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Release|x86.ActiveCfg = Release|Any CPU
+		{BF53FA1E-5D66-4073-97E7-642F85755FDA}.Release|x86.Build.0 = Release|Any CPU
+		{4ED315F7-1395-49D8-9C2B-154402393832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ED315F7-1395-49D8-9C2B-154402393832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ED315F7-1395-49D8-9C2B-154402393832}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4ED315F7-1395-49D8-9C2B-154402393832}.Debug|x86.Build.0 = Debug|Any CPU
+		{4ED315F7-1395-49D8-9C2B-154402393832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ED315F7-1395-49D8-9C2B-154402393832}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ED315F7-1395-49D8-9C2B-154402393832}.Release|x86.ActiveCfg = Release|Any CPU
+		{4ED315F7-1395-49D8-9C2B-154402393832}.Release|x86.Build.0 = Release|Any CPU
+		{1F09B9A2-B93A-410C-A905-C5FB7991E874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F09B9A2-B93A-410C-A905-C5FB7991E874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F09B9A2-B93A-410C-A905-C5FB7991E874}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1F09B9A2-B93A-410C-A905-C5FB7991E874}.Debug|x86.Build.0 = Debug|Any CPU
+		{1F09B9A2-B93A-410C-A905-C5FB7991E874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F09B9A2-B93A-410C-A905-C5FB7991E874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F09B9A2-B93A-410C-A905-C5FB7991E874}.Release|x86.ActiveCfg = Release|Any CPU
+		{1F09B9A2-B93A-410C-A905-C5FB7991E874}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{57959EB0-56F2-4C3E-A94F-57E2F9672B66} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
+		{D4F1D69F-9FB5-4004-8B9E-DE312B60E432} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
+		{B5437754-C6C2-4FBE-A72C-850B777A9FB7} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{ECC5A18D-9623-4760-9334-4B2871B302F0} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{B8945F25-4341-4602-82EF-3DD5FD63DD77} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{2C8ABA5C-0CF1-4CCB-AB96-72ECF7DCA5C1} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{76162651-1960-482F-9C07-2D34C67088E8} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{A5E75E76-6140-4BDE-B507-18A72B2C4176} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{60AC96CF-F447-4D8B-8E87-2469FD963D91} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{1D23B8E8-313A-4D5D-9366-9F3B49519664} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{88199B3B-864A-4474-81DC-A1C92463C377} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
+		{94D5F65D-6B17-46DD-8659-83893E5D06F5} = {0EA62AEC-0B7B-4833-91CE-F92066E804AA}
+		{260A7DA2-05BA-4638-B23D-0D88CD5D3006} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{6358DF9D-5C3A-4FDF-9CAE-3435AB2F5857} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{0174D6EB-3CAB-45D2-8587-37F2B91CDC0B} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{31F4F688-EE97-4621-BBBA-20A8FCC89240} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{417E6891-E55D-4FDF-938F-48272C63DF85} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{8CC52AD5-AC2E-4F2C-8CFF-8E31B30AE44F} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{4F7F17CB-5DDA-4AC8-935C-6FED229EABCB} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{C3A8AE76-D075-445D-A457-4588EC084091} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{3B73890A-C9EC-4E0D-A2B8-E1E29126535D} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{C5992A7B-A019-4847-9BB8-8D43B2A16D47} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{F140F3E5-481D-491F-98B9-A6FFDB363F8D} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{E2BB46A2-F094-4686-8F54-0793F9D0EA80} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{567F27E3-3444-4A4F-9A4F-E8E421F3E5D4} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+		{AC05D225-0BD8-4C40-A71E-CD12B584F0A3} = {40236FC3-1E09-4D60-8380-FD727C9BBF70}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {70D63098-8A93-4D38-8243-BF6D0061FE7C}
+	EndGlobalSection
+EndGlobal
