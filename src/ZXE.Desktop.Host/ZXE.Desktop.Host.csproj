@@ -31,7 +31,7 @@
     </ItemGroup>
     <ItemGroup>
       <None Update="app-settings.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
     <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
