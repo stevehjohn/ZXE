@@ -6,9 +6,19 @@ A ZX Spectrum emulator. Mostly about just seeing if I can.
 
 A bunch of games also, see https://www.outsidecontextproblem.com/zxe-more-progress.html.
 
+## ZXE.Desktop.Host
+
+Cross platform host for the emulator. When running, press F10 for the menu.
+
+I did have one issue building on macOS on an M1 processor. Solved by https://stackoverflow.com/a/74317078.
+`brew install freeimage`
+`sudo ln -s /opt/homebrew/Cellar/freeimage/3.18.0/lib/libfreeimage.dylib /usr/local/lib/libfreeimage`
+
 ## ZXE.Windows.Host
 
-This will run the Spectrum emulator on Windows. Press F10 for the menu.
+Windows host for the emulator. When running, press F10 for the menu.
+
+Should retire this in favour of ZXE.Desktop.Host if it proves reliable across platforms.
 
 ## Current tested games list
 
