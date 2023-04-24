@@ -204,8 +204,9 @@ public class Host : Game
 
             return;
         }
-
-        var filename = dialog.FileName;
+        */
+        
+        var filename = "../../../../../Game Images/Batman The Movie/image-0.z80";
 
         IImageLoader loader;
 
@@ -224,12 +225,11 @@ public class Host : Game
                 throw new Exception("Unsupported file format");
         }
 
-        loader.Load(dialog.FileName);
+        loader.Load(filename);
 
-        _imageName = dialog.FileName.Split('\\')[^2];
+        _imageName = filename.Split('\\')[^2];
 
         _motherboard.Resume();
-        */
     }
 
     protected override void Draw(GameTime gameTime)
