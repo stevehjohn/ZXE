@@ -148,12 +148,21 @@ public class FileSelect : CharacterOverlayBase
     private void DrawFileList(Color[] data)
     {
         var i = 0;
-        
-        while (i < _files.Count && i < 15)
+
+        var y = 0;
+
+        if (_selected > 14)
         {
-            DrawString(data, TruncateFileName(_files[i + _offset].Display), 0, i + 3, Color.LightGreen, false, i == _selected);
+            i = _selected - 14;
+        }
+
+        while (i < _files.Count && y < 15)
+        {
+            DrawString(data, TruncateFileName(_files[i + _offset].Display), 0, y + 3, Color.LightGreen, false, i == _selected);
 
             i++;
+
+            y++;
         }
     }
 
