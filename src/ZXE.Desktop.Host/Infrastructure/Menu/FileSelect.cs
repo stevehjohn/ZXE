@@ -4,11 +4,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ZXE.Desktop.Host.Infrastructure.Menu;
 
-public class FileSelect
+public class FileSelect : CharacterOverlayBase
 {
-    public Texture2D Menu { get; private set; }
-
     public FileSelect(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager)
+        : base(background, graphicsDeviceManager, contentManager)
     {
     }
 }
