@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Threading;
 using ZXE.Common;
 
 namespace ZXE.Desktop.Host.Infrastructure.Menu;
@@ -32,25 +31,32 @@ public class MenuSystem : CharacterOverlayBase
 
     public void Update()
     {
+        Texture2D menu = null;
+
         if (_fileSelect != null)
         {
             _fileSelect.Update();
 
             if (_fileSelect != null)
             {
-                Menu = _fileSelect.Menu;
+                menu = _fileSelect.Menu;
             }
-
-            return;
         }
 
-        DrawMenu();
+        if (menu == null)
+        {
+            DrawMenu();
 
-        UpdateTextAnimation();
+            UpdateTextAnimation();
 
-        CheckSelection();
+            CheckSelection();
 
-        ActionSelection();
+            ActionSelection();
+        }
+        else
+        {
+            Menu = menu;
+        }
     }
 
     private void ActionSelection()
@@ -103,10 +109,6 @@ public class MenuSystem : CharacterOverlayBase
         if (! string.IsNullOrWhiteSpace(path))
         {
             //_menuFinished(MenuResult.LoadZ80Sna, path);
-        }
-        else
-        {
-            _selectionDelay = SelectionFrameDelay;
         }
     }
 

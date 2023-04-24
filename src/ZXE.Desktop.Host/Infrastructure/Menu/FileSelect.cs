@@ -16,17 +16,21 @@ public class FileSelect : CharacterOverlayBase
 
     private const int SelectDelayFramesSlow = 10;
 
+    private const int CancelDelayFrames = 24;
+
+    private const int FileRows = 12;
+
     private string _path;
 
     private readonly List<(string FullPath, string Display, bool IsDirectory)> _files = new();
-
-    private int _offset;
 
     private int _selected;
 
     private int _selectDelay;
 
-    private Action<string> _menuDone;
+    private bool _cancelled;
+
+    private readonly Action<string> _menuDone;
 
     public FileSelect(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager, Action<string> menuDone)
         : base(background, graphicsDeviceManager, contentManager)
@@ -44,7 +48,19 @@ public class FileSelect : CharacterOverlayBase
 
         UpdateTextAnimation();
 
-        CheckKeys();
+        if (! _cancelled)
+        {
+            CheckKeys();
+        }
+        else
+        {
+            _selectDelay--;
+
+            if (_selectDelay == 0)
+            {
+                _menuDone(null);
+            }
+        }
     }
 
     private void CheckKeys()
@@ -96,9 +112,9 @@ public class FileSelect : CharacterOverlayBase
 
         if (keys.IsKeyDown(Keys.Escape))
         {
-            _menuDone(null);
+            _selectDelay = CancelDelayFrames;
 
-            _selectDelay = SelectDelayFramesFast;
+            _cancelled = true;
         }
     }
 
@@ -160,14 +176,14 @@ public class FileSelect : CharacterOverlayBase
 
         var y = 0;
 
-        if (_selected > 14)
+        if (_selected >= FileRows)
         {
-            i = _selected - 14;
+            i = _selected - FileRows + 1;
         }
 
-        while (i < _files.Count && y < 15)
+        while (i < _files.Count && y < FileRows)
         {
-            DrawString(data, TruncateFileName(_files[i + _offset].Display), 0, y + 3, Color.LightGreen, false, i == _selected);
+            DrawString(data, TruncateFileName(_files[i].Display), 0, y + 3, Color.LightGreen, false, i == _selected);
 
             i++;
 
@@ -189,13 +205,15 @@ public class FileSelect : CharacterOverlayBase
     {
         DrawString(data, "ZXE - Load Z80/SNA", 0, 0, Color.White, true);
 
+        DrawString(data, "[ESC] Close Menu", 0, 17, _cancelled ? Color.LightGreen : Color.FromNonPremultiplied(255, 64, 64, 255), true);
+
         for (var y = 38; y < 40; y++)
         {
             for (var x = 24; x < 232; x++)
             {
-                var i = y * Constants.ScreenWidthPixels + x;
+                data[y * Constants.ScreenWidthPixels + x] = Color.White;
 
-                data[i] = Color.White;
+                data[(y + 114) * Constants.ScreenWidthPixels + x] = Color.White;
             }
         }
     }
