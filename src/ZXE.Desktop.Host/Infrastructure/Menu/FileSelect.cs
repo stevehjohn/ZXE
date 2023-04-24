@@ -29,6 +29,8 @@ public class FileSelect : CharacterOverlayBase
 
     private int _selectDelay;
 
+    private int _top;
+
     private bool _cancelled;
 
     private bool _fileSelected;
@@ -90,6 +92,11 @@ public class FileSelect : CharacterOverlayBase
 
             _selectDelay = SelectDelayFramesFast;
 
+            if (_selected < _top)
+            {
+                _top--;
+            }
+
             return;
         }
 
@@ -98,6 +105,11 @@ public class FileSelect : CharacterOverlayBase
             _selected++;
 
             _selectDelay = SelectDelayFramesFast;
+
+            if (_selected + _top >= FileRows && _top + FileRows < _files.Count)
+            {
+                _top++;
+            }
 
             return;
         }
@@ -188,14 +200,9 @@ public class FileSelect : CharacterOverlayBase
 
     private void DrawFileList(Color[] data)
     {
-        var i = 0;
+        var i = _top;
 
         var y = 0;
-
-        if (_selected >= FileRows)
-        {
-            i = _selected - FileRows + 1;
-        }
 
         while (i < _files.Count && y < FileRows)
         {
