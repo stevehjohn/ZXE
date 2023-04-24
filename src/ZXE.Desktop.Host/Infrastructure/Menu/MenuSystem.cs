@@ -33,6 +33,8 @@ public class MenuSystem : CharacterOverlayBase
     {
         if (_fileSelect != null)
         {
+            _fileSelect.Update();
+
             Menu = _fileSelect.Menu;
 
             return;

@@ -62,7 +62,7 @@ public class CharacterOverlayBase
         }
     }
 
-    protected void DrawString(Color[] data, string text, int x, int y, Color color, bool centered)
+    protected void DrawString(Color[] data, string text, int x, int y, Color color, bool centered = false, bool invert = false)
     {
         var xOffset = 0;
 
@@ -78,7 +78,7 @@ public class CharacterOverlayBase
 
         for (var i = 0; i < text.Length; i++)
         {
-            DrawMenuCharacter(data, text[i], x + i, y, color, xOffset);
+            DrawMenuCharacter(data, text[i], x + i, y, color, xOffset, invert);
         }
     }
     
@@ -101,11 +101,13 @@ public class CharacterOverlayBase
         }
     }
 
-    private void DrawMenuCharacter(Color[] data, char character, int x, int y, Color color, int xOffset)
+    private void DrawMenuCharacter(Color[] data, char character, int x, int y, Color color, int xOffset, bool invert = false)
     {
         var co = _characterMap[character];
 
         var offset = _colorOffset;
+
+        var a = invert ? 255 : 0;
 
         for (var iy = 0; iy < 8; iy++)
         {
@@ -122,7 +124,7 @@ public class CharacterOverlayBase
 
             for (var ix = 0; ix < 8; ix++)
             {
-                if (_characterSet[iy * 128 + ix + co].A == 0)
+                if (_characterSet[iy * 128 + ix + co].A == a)
                 {
                     continue;
                 }
