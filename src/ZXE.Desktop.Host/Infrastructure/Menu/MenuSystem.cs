@@ -66,7 +66,7 @@ public class MenuSystem
         ActionSelection();
     }
 
-    public void ActionSelection()
+    private void ActionSelection()
     {
         if (_selectedItem == -1)
         {
