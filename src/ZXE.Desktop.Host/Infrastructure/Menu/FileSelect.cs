@@ -136,11 +136,11 @@ public class FileSelect : CharacterOverlayBase
             _files.Add((string.Empty, "..", true));
         }
 
-        var directories = Directory.EnumerateDirectories(_path).ToList();
+        var directories = Directory.EnumerateDirectories(_path).OrderBy(d => d).ToList();
 
         directories.ForEach(d => _files.Add((d, Path.GetFileName(d), true)));
 
-        var files = Directory.EnumerateFiles(_path).ToList();
+        var files = Directory.EnumerateFiles(_path).OrderBy(d => d).ToList();
 
         files.ForEach(f => _files.Add((f, Path.GetFileName(f), false)));
     }
