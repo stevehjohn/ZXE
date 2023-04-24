@@ -13,8 +13,9 @@ Open `ZXE.Desktop.sln`.
 Cross platform host for the emulator. When running, press F10 for the menu.
 
 I did have one issue building on macOS on an M1 processor. Solved by https://stackoverflow.com/a/74317078.
-`brew install freeimage`
-`sudo ln -s /opt/homebrew/Cellar/freeimage/3.18.0/lib/libfreeimage.dylib /usr/local/lib/libfreeimage`
+
+- `brew install freeimage`
+- `sudo ln -s /opt/homebrew/Cellar/freeimage/3.18.0/lib/libfreeimage.dylib /usr/local/lib/libfreeimage`
 
 ## ZXE.Windows.Host
 
