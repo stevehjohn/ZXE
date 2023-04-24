@@ -159,12 +159,6 @@ public class MenuSystem
             DrawString(data, item.Text, item.X, item.Y, _selectedItem == item.Id ? item.SelectedColor!.Value : item.Color, item.Centered);
         }
 
-        //DrawString(data, "[3] Save System State", 1, 7, Color.FromNonPremultiplied(80, 80, 80, 255));
-
-        //DrawString(data, "[4] Load System State", 1, 9, Color.FromNonPremultiplied(80, 80, 80, 255));
-
-        //DrawString(data, "[5] Emulation Speed", 1, 11, Color.FromNonPremultiplied(80, 80, 80, 255));
-
         //DrawString(data, "[6] Debugging Options", 1, 13, Color.FromNonPremultiplied(80, 80, 80, 255));
 
         var screen = new Texture2D(_graphicsDeviceManager.GraphicsDevice, Constants.ScreenWidthPixels, Constants.ScreenHeightPixels);
