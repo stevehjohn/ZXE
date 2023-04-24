@@ -8,7 +8,7 @@ using ZXE.Common;
 
 namespace ZXE.Desktop.Host.Infrastructure.Menu;
 
-public class MenuSystem
+public class MenuSystem : MenuSystemBase
 {
     private const int ColorDecrement = 20;
 
@@ -34,7 +34,9 @@ public class MenuSystem
 
     private MenuBase _menu;
 
-    public Texture2D Menu { get; private set; }
+    private Texture2D _menuTexture;
+
+    public override Texture2D Menu => _menuTexture;
 
     public MenuSystem(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager, Action<MenuResult, object> menuFinished)
     {
@@ -55,7 +57,7 @@ public class MenuSystem
         _menu = new MainMenu();
     }
 
-    public void Update()
+    public override void Update()
     {
         DrawMenu();
 
@@ -165,7 +167,7 @@ public class MenuSystem
 
         screen.SetData(data);
 
-        Menu = screen;
+        _menuTexture = screen;
     }
 
     private static void DrawWindow(Color[] data)
