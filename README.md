@@ -29,17 +29,8 @@ Should retire this in favour of ZXE.Desktop.Host if it proves reliable across pl
 
 Some games require 128 emulation, some 48. Will update list to indicate this when I can.
 
-### Tested on 48K
-
-- Manic Miner
-
-### Tested on 128
-
-- Batman: The Movie
-
-### Tested but can't remember which...
-
 - Barbarian 2
+- Batman: The Movie
 - Cybernoid
 - Cybernoid 2
 - Dan Dare 3
@@ -50,6 +41,7 @@ Some games require 128 emulation, some 48. Will update list to indicate this whe
 - Head Over Heels
 - Indiana Jones and the Temple of Doom 
 - Jet Pac
+- Manic Miner
 - Myth: History in the Making
 - Robocop
 - Robocop 2
