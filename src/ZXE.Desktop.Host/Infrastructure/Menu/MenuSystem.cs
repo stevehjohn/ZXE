@@ -19,8 +19,6 @@ public class MenuSystem : CharacterOverlayBase
 
     private MenuBase _menu;
 
-    public Texture2D Menu { get; private set; }
-
     public MenuSystem(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager, Action<MenuResult, object> menuFinished)
         : base(background, graphicsDeviceManager, contentManager)
     {
@@ -108,7 +106,7 @@ public class MenuSystem : CharacterOverlayBase
     {
         var data = new Color[Constants.ScreenWidthPixels * Constants.ScreenHeightPixels];
 
-        _background.GetData(data);
+        Background.GetData(data);
 
         DrawWindow(data);
 
@@ -121,7 +119,7 @@ public class MenuSystem : CharacterOverlayBase
 
         //DrawString(data, "[6] Debugging Options", 1, 13, Color.FromNonPremultiplied(80, 80, 80, 255));
 
-        var screen = new Texture2D(_graphicsDeviceManager.GraphicsDevice, Constants.ScreenWidthPixels, Constants.ScreenHeightPixels);
+        var screen = new Texture2D(GraphicsDeviceManager.GraphicsDevice, Constants.ScreenWidthPixels, Constants.ScreenHeightPixels);
 
         screen.SetData(data);
 

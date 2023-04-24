@@ -20,15 +20,17 @@ public class CharacterOverlayBase
 
     private int _colorFrame;
 
-    protected readonly Texture2D _background;
+    protected readonly Texture2D Background;
 
-    protected readonly GraphicsDeviceManager _graphicsDeviceManager;
+    protected readonly GraphicsDeviceManager GraphicsDeviceManager;
+    
+    public Texture2D Menu { get; protected set; }
 
     public CharacterOverlayBase(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager)
     {
-        _background = background;
+        Background = background;
 
-        _graphicsDeviceManager = graphicsDeviceManager;
+        GraphicsDeviceManager = graphicsDeviceManager;
 
         var characterSet = contentManager.Load<Texture2D>("character-set");
 
