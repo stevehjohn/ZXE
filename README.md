@@ -6,6 +6,10 @@ A ZX Spectrum emulator. Mostly about just seeing if I can.
 
 A bunch of games also, see https://www.outsidecontextproblem.com/zxe-more-progress.html.
 
+## ZXE.Windows.Host
+
+This will run the Spectrum emulator on Windows. Press F10 for the menu.
+
 ## Current tested games list
 
 Some games require 128 emulation, some 48. Will update list to indicate this when I can.
@@ -37,14 +41,6 @@ Some games require 128 emulation, some 48. Will update list to indicate this whe
 - Teenage Mutant Hero Turtles
 - Treasure Island Dizzy
 - Wizard's Lair
-
-## ZXE.Windows.Host
-
-This will run the Spectrum emulator on Windows. For now, you'll have to edit `Program.cs` to change the version (48/128) being emulated.
-
-Press F10 to load a Z80 file.
-
-Planning to add a menu system or something similar to simplify this.
 
 ## ROMS
 
