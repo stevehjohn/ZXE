@@ -80,6 +80,35 @@ public class CharacterOverlayBase
         {
             DrawMenuCharacter(data, text[i], x + i, y, color, xOffset, invert);
         }
+
+        if (invert)
+        {
+            var offset = _colorOffset;
+
+            for (var iy = 0; iy < 8; iy++)
+            {
+                var decrement = ColorDecrement * offset;
+
+                var lineColor = Color.FromNonPremultiplied(color.R - decrement, color.G - decrement, color.B - decrement, color.A);
+
+                offset++;
+
+                if (offset > 7)
+                {
+                    offset = 0;
+                }
+
+                for (var ix = 2; ix < 8; ix++)
+                {
+                    data[(3 + y) * 2048 + (x + 3) * 8 + ix + iy * 256 + xOffset] = lineColor;
+                }
+
+                for (var ix = (1 + text.Length) * 8; ix < 206; ix++)
+                {
+                    data[(3 + y) * 2048 + (x + 3) * 8 + ix + iy * 256 + xOffset] = lineColor;
+                }
+            }
+        }
     }
     
     protected void UpdateTextAnimation()
