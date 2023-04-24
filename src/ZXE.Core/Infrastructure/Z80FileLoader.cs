@@ -3,7 +3,7 @@ using ZXE.Core.Z80;
 
 namespace ZXE.Core.Infrastructure;
 
-public class Z80FileLoader
+public class Z80FileLoader : IImageLoader
 {
     private readonly State _state;
 

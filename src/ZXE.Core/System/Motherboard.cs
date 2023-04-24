@@ -6,7 +6,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 #endif
-using System.Diagnostics;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.Infrastructure.Interfaces;
 using ZXE.Core.System.Interfaces;
@@ -28,12 +27,6 @@ public class Motherboard : IDisposable
 
     private readonly ITracer? _tracer;
 
-    private readonly Model _model;
-
-    private byte _last7FFD;
-
-    private byte _last1FFD;
-
     private readonly Dictionary<int, byte[]> _romCache = new();
 
 #if TRACE_OVER_IP
@@ -50,7 +43,7 @@ public class Motherboard : IDisposable
 
     public Processor Processor => _processor;
 
-    public Model Model => _model;
+    public Model Model { get; set; }
 
     public bool Fast
     {
@@ -58,7 +51,7 @@ public class Motherboard : IDisposable
         set => _timer.Fast = value;
     }
 
-    public Motherboard(Model model, ITracer? tracer)
+    public Motherboard(Model model, ITracer? tracer = null)
     {
         _ram = new Ram
                {
@@ -132,7 +125,9 @@ public class Motherboard : IDisposable
                 break;
         }
 
-        _model = model;
+        Model = model;
+
+        Reset();
     }
 
     private void PagedEvent(byte port, byte data)
@@ -185,7 +180,7 @@ public class Motherboard : IDisposable
             _ram.Screen = (data & 0b0000_1000) > 0 ? 2 : 1;
         }
 
-        var folder = _model switch 
+        var folder = Model switch 
         {
             Model.Spectrum128 => "ZX Spectrum 128",
             Model.SpectrumPlus2 => "ZX Spectrum +2",
@@ -196,15 +191,15 @@ public class Motherboard : IDisposable
 
         if (port == 0x7F)
         {
-            _last7FFD = data;
+            _processor.State.Last7ffd = data;
         }
 
         if (port == 0x1F)
         {
-            _last1FFD = data;
+            _processor.State.Last1ffd = data;
         }
 
-        var romNumber = (_last7FFD & 0b0001_0000) >> 4 | (_last1FFD & 0b0000_0100) >> 1;
+        var romNumber = (_processor.State.Last7ffd & 0b0001_0000) >> 4 | (_processor.State.Last1ffd & 0b0000_0100) >> 1;
 
         if (! _romCache.ContainsKey(romNumber))
         {

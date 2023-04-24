@@ -13,7 +13,7 @@ public class Ram
 
     private int _screen = 1;
 
-    private int _rom;
+    private int _rom = -1;
 
     public byte[] ScreenRam => _screen == 1 ? _banks[5] : _banks[7];
 
@@ -111,6 +111,13 @@ public class Ram
         _bankNumbers[(startAddress & 0b1100_0000_0000_0000) >> 14] = (byte) bankNumber;
     }
 
+    public void SetBankBySlotNumber(int slotNumber, int bankNumber)
+    {
+        _layout[slotNumber] = _banks[bankNumber];
+
+        _bankNumbers[slotNumber] = (byte) bankNumber;
+    }
+
     public void Load(byte[] data, int destination)
     {
         for (var i = 0; i < data.Length; i++)
@@ -119,11 +126,14 @@ public class Ram
         }
     }
 
-    public void LoadRom(byte[] data, int number)
+    public void LoadRom(byte[] data, int number, bool force = false)
     {
-        Array.Copy(data, 0, _layout[0], 0, data.Length);
+        if (number != _rom || force)
+        {
+            Array.Copy(data, 0, _layout[0], 0, data.Length);
 
-        _rom = number;
+            _rom = number;
+        }
     }
 
     public void LoadIntoPage(int page, byte[] data)
