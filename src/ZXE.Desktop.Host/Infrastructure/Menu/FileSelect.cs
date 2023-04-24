@@ -117,6 +117,10 @@ public class FileSelect : CharacterOverlayBase
             else
             {
                 _selectDelay = SelectDelayFramesVerySlow;
+                
+                AppSettings.Instance.LastZ80SnaPath = Path.GetDirectoryName(_files[_selected].FullPath);
+
+                AppSettings.Instance.Save();
 
                 _fileSelected = true;
             }

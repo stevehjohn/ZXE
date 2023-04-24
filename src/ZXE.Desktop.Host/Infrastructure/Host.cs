@@ -11,6 +11,7 @@ using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Desktop.Host.Display;
 using ZXE.Desktop.Host.Infrastructure.Menu;
+using ZXE.Desktop.Host.Infrastructure.Settings;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using Model = ZXE.Core.Infrastructure.Model;
 
@@ -47,12 +48,16 @@ public class Host : Game
 
         IsMouseVisible = true;
 
-        SetMotherboard(Model.SpectrumPlus3);
+        SetMotherboard(AppSettings.Instance.SystemModel);
     }
 
     private void SetMotherboard(Model model)
     {
         _motherboard = new Motherboard(model);
+
+        AppSettings.Instance.SystemModel = model;
+
+        AppSettings.Instance.Save();
 
         _vRamAdapter = new VRamAdapter(_motherboard.Ram, _graphicsDeviceManager);
 
