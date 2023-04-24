@@ -4,6 +4,7 @@ This document just contains notes for me to refer to during implementation.
 
 ## TODOs
 
+- Loading state files should really instantiate a new motherboard (so correct system is emulated).
 - Instructions that modify F (except pop af) copy F to Q. Instructions that don't modify F set Q to 0.
   Then, the flags of ccf and scf are computed as explained here: https://github.com/redcode/Z80/blob/master/sources/Z80.c#L1220
   More: https://github.com/hoglet67/Z80Decoder/wiki/Undocumented-Flags#scfccf
