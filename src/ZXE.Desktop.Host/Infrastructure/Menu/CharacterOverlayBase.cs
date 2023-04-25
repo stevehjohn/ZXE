@@ -98,14 +98,14 @@ public class CharacterOverlayBase
                     offset = 0;
                 }
 
-                for (var ix = 2; ix < 8; ix++)
+                for (var ix = 26; ix < (x + 4) * 8; ix++)
                 {
-                    data[(3 + y) * 2048 + (x + 3) * 8 + ix + iy * 256 + xOffset] = lineColor;
+                    data[(3 + y) * 2048 + ix + iy * 256 + xOffset] = lineColor;
                 }
 
-                for (var ix = (1 + text.Length) * 8; ix < 206; ix++)
+                for (var ix = (4 + text.Length) * 8; ix < 230; ix++)
                 {
-                    data[(3 + y) * 2048 + (x + 3) * 8 + ix + iy * 256 + xOffset] = lineColor;
+                    data[(3 + y) * 2048 + ix + iy * 256 + xOffset] = lineColor;
                 }
             }
         }

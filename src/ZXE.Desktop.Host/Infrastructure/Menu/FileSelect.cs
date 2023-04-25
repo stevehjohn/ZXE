@@ -111,6 +111,11 @@ public class FileSelect : CharacterOverlayBase
         {
             _selectDelay = SelectDelayFramesFast;
 
+            if (_y + _top + 1 == _files.Count)
+            {
+                return;
+            }
+
             _y++;
 
             if (_y >= FileRows - 1)
@@ -244,7 +249,7 @@ public class FileSelect : CharacterOverlayBase
     {
         DrawString(data, "ZXE - Load Z80/SNA", 0, 0, Color.White, true);
 
-        DrawString(data, "[ESC] Close Menu", 0, 17, _cancelled ? Color.LightGreen : Color.FromNonPremultiplied(255, 64, 64, 255), true);
+        DrawString(data, "[ESC] Close Menu", 0, 17, _cancelled ? Color.LightGreen : Color.FromNonPremultiplied(255, 64, 64, 255), true, _cancelled);
 
         for (var y = 38; y < 40; y++)
         {

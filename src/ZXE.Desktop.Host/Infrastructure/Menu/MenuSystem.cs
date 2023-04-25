@@ -149,7 +149,7 @@ public class MenuSystem : CharacterOverlayBase
 
         foreach (var item in items)
         {
-            DrawString(data, item.Text, item.X, item.Y, _selectedItem == item.Id ? item.SelectedColor!.Value : item.Color, item.Centered);
+            DrawString(data, item.Text, item.X, item.Y, _selectedItem == item.Id ? item.SelectedColor!.Value : item.Color, item.Centered, _selectedItem == item.Id);
         }
 
         //DrawString(data, "[6] Debugging Options", 1, 13, Color.FromNonPremultiplied(80, 80, 80, 255));
