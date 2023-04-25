@@ -122,6 +122,8 @@ public class FileSelect : CharacterOverlayBase
 
                 _selected = 0;
 
+                _top = 0;
+
                 _selectDelay = SelectDelayFramesSlow;
 
                 GetFiles();
