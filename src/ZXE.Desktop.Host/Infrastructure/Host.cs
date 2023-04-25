@@ -19,9 +19,10 @@ namespace ZXE.Desktop.Host.Infrastructure;
 
 public class Host : Game
 {
-    private const int ScaleFactor = 4;
     // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
+
+    private int _scaleFactor = 4;
 
     private VRamAdapter _vRamAdapter;
 
@@ -41,8 +42,8 @@ public class Host : Game
     {
         _graphicsDeviceManager = new GraphicsDeviceManager(this)
         {
-            PreferredBackBufferWidth = 256 * ScaleFactor,
-            PreferredBackBufferHeight = 192 * ScaleFactor
+            PreferredBackBufferWidth = 256 * _scaleFactor,
+            PreferredBackBufferHeight = 192 * _scaleFactor
         };
 
         Content.RootDirectory = "_Content";
@@ -153,9 +154,19 @@ public class Host : Game
                 LoadState();
 
                 break;
+
+            case MenuResult.ChangeScale:
+                ChangeScale((int) arguments);
+
+                break;
         }
 
         _motherboard.Resume();
+    }
+
+    private void ChangeScale(int scale)
+    {
+        _scaleFactor = scale;
     }
 
     private void LoadState()
@@ -239,7 +250,7 @@ public class Host : Game
 
         _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
 
-        _spriteBatch.Draw(screen, new Rectangle(0, 0, 256 * ScaleFactor, 192 * ScaleFactor), new Rectangle(0, 0, 256, 192), Color.White);
+        _spriteBatch.Draw(screen, new Rectangle(0, 0, 256 * _scaleFactor, 192 * _scaleFactor), new Rectangle(0, 0, 256, 192), Color.White);
 
         _spriteBatch.End();
 
