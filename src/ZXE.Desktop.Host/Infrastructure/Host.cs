@@ -19,6 +19,7 @@ namespace ZXE.Desktop.Host.Infrastructure;
 
 public class Host : Game
 {
+    private const int ScaleFactor = 4;
     // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
 
@@ -40,13 +41,13 @@ public class Host : Game
     {
         _graphicsDeviceManager = new GraphicsDeviceManager(this)
         {
-            PreferredBackBufferWidth = 256 * 4,
-            PreferredBackBufferHeight = 192 * 4
+            PreferredBackBufferWidth = 256 * ScaleFactor,
+            PreferredBackBufferHeight = 192 * ScaleFactor
         };
 
         Content.RootDirectory = "_Content";
 
-        IsMouseVisible = true;
+        IsMouseVisible = false;
 
         SetMotherboard(AppSettings.Instance.SystemModel);
     }
@@ -238,7 +239,7 @@ public class Host : Game
 
         _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
 
-        _spriteBatch.Draw(screen, new Rectangle(0, 0, 256 * 4, 192 * 4), new Rectangle(0, 0, 256, 192), Color.White);
+        _spriteBatch.Draw(screen, new Rectangle(0, 0, 256 * ScaleFactor, 192 * ScaleFactor), new Rectangle(0, 0, 256, 192), Color.White);
 
         _spriteBatch.End();
 
