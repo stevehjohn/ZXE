@@ -70,18 +70,22 @@ public class FileSelect : CharacterOverlayBase
         {
             _selectDelay--;
 
-            if (! _folderSelected)
+            if (_selectDelay == 0)
             {
-                if (_selectDelay == 0)
+                if (! _folderSelected)
                 {
                     _menuDone(_cancelled ? null : _files[_top + _y].FullPath);
                 }
-            }
-            else
-            {
-                _folderSelected = false;
+                else
+                {
+                    _folderSelected = false;
+                    
+                    _top = 0;
 
-                GetFiles();
+                    _y = 0;
+
+                    GetFiles();
+                }
             }
         }
     }
@@ -149,10 +153,6 @@ public class FileSelect : CharacterOverlayBase
             if (_files[_top + _y].IsDirectory)
             {
                 _path = _files[_top + _y].FullPath;
-
-                _top = 0;
-
-                _y = 0;
 
                 _selectDelay = SelectDelayFramesSlow;
 
@@ -238,7 +238,7 @@ public class FileSelect : CharacterOverlayBase
 
         while (i < _files.Count && y < FileRows)
         {
-            DrawString(data, TruncateFileName(_files[i].Display), 0, y + 3, _fileSelected ? Color.Yellow : Color.LightGreen, false, i == _top + _y);
+            DrawString(data, TruncateFileName(_files[i].Display), 0, y + 3, _fileSelected || (_folderSelected && _top + i == _top + _y) ? Color.Yellow : Color.LightGreen, false, i == _top + _y);
 
             i++;
 
