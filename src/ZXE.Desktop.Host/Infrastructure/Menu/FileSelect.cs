@@ -25,11 +25,11 @@ public class FileSelect : CharacterOverlayBase
 
     private readonly List<(string FullPath, string Display, bool IsDirectory)> _files = new();
 
-    private int _selected;
-
     private int _selectDelay;
 
     private int _top;
+
+    private int _y;
 
     private bool _cancelled;
 
@@ -70,7 +70,7 @@ public class FileSelect : CharacterOverlayBase
 
             if (_selectDelay == 0)
             {
-                _menuDone(_cancelled ? null : _files[_selected].FullPath);
+                _menuDone(_cancelled ? null : _files[_top + _y].FullPath);
             }
         }
     }
@@ -86,29 +86,43 @@ public class FileSelect : CharacterOverlayBase
 
         var keys = Keyboard.GetState();
 
-        if (keys.IsKeyDown(Keys.Up) && _selected > 0)
+        if (keys.IsKeyDown(Keys.Up))
         {
-            _selected--;
-
             _selectDelay = SelectDelayFramesFast;
 
-            if (_selected < _top)
+            _y--;
+
+            if (_y < 0)
             {
+                _y = 0;
+
                 _top--;
+
+                if (_top < 0)
+                {
+                    _top = 0;
+                }
             }
 
             return;
         }
 
-        if (keys.IsKeyDown(Keys.Down) && _selected < _files.Count - 1)
+        if (keys.IsKeyDown(Keys.Down))
         {
-            _selected++;
-
             _selectDelay = SelectDelayFramesFast;
 
-            if (_selected + _top >= FileRows && _top + FileRows < _files.Count)
+            _y++;
+
+            if (_y >= FileRows - 1)
             {
+                _y = FileRows - 1;
+
                 _top++;
+
+                if (_y + _top >= _files.Count)
+                {
+                    _top--;
+                }
             }
 
             return;
@@ -116,13 +130,13 @@ public class FileSelect : CharacterOverlayBase
 
         if (keys.IsKeyDown(Keys.Enter))
         {
-            if (_files[_selected].IsDirectory)
+            if (_files[_top + _y].IsDirectory)
             {
-                _path = _files[_selected].FullPath;
-
-                _selected = 0;
+                _path = _files[_top + _y].FullPath;
 
                 _top = 0;
+
+                _y = 0;
 
                 _selectDelay = SelectDelayFramesSlow;
 
@@ -132,7 +146,7 @@ public class FileSelect : CharacterOverlayBase
             {
                 _selectDelay = SelectDelayFramesVerySlow;
                 
-                AppSettings.Instance.LastZ80SnaPath = Path.GetDirectoryName(_files[_selected].FullPath);
+                AppSettings.Instance.LastZ80SnaPath = Path.GetDirectoryName(_files[_top + _y].FullPath);
 
                 AppSettings.Instance.Save();
 
@@ -208,7 +222,7 @@ public class FileSelect : CharacterOverlayBase
 
         while (i < _files.Count && y < FileRows)
         {
-            DrawString(data, TruncateFileName(_files[i].Display), 0, y + 3, _fileSelected ? Color.Yellow : Color.LightGreen, false, i == _selected);
+            DrawString(data, TruncateFileName(_files[i].Display), 0, y + 3, _fileSelected ? Color.Yellow : Color.LightGreen, false, i == _top + _y);
 
             i++;
 
