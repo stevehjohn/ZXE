@@ -10,5 +10,6 @@ public enum MenuResult
     SpeedNormal,
     SpeedFast,
     SaveState,
-    LoadState
+    LoadState,
+    ChangeScale
 }
