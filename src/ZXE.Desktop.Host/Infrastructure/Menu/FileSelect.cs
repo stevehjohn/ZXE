@@ -35,6 +35,8 @@ public class FileSelect : CharacterOverlayBase
 
     private bool _fileSelected;
 
+    private bool _folderSelected;
+
     private readonly Action<string> _menuDone;
 
     public FileSelect(Texture2D background, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager, Action<string> menuDone)
@@ -60,7 +62,7 @@ public class FileSelect : CharacterOverlayBase
 
         UpdateTextAnimation();
 
-        if (! _cancelled && ! _fileSelected)
+        if (! _cancelled && ! _fileSelected && ! _folderSelected)
         {
             CheckKeys();
         }
@@ -68,9 +70,18 @@ public class FileSelect : CharacterOverlayBase
         {
             _selectDelay--;
 
-            if (_selectDelay == 0)
+            if (! _folderSelected)
             {
-                _menuDone(_cancelled ? null : _files[_top + _y].FullPath);
+                if (_selectDelay == 0)
+                {
+                    _menuDone(_cancelled ? null : _files[_top + _y].FullPath);
+                }
+            }
+            else
+            {
+                _folderSelected = false;
+
+                GetFiles();
             }
         }
     }
@@ -145,7 +156,7 @@ public class FileSelect : CharacterOverlayBase
 
                 _selectDelay = SelectDelayFramesSlow;
 
-                GetFiles();
+                _folderSelected = true;
             }
             else
             {
