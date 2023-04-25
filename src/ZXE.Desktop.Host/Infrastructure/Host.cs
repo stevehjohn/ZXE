@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Desktop.Host.Display;
@@ -167,6 +168,11 @@ public class Host : Game
     private void ChangeScale(int scale)
     {
         _scaleFactor = scale;
+
+        _graphicsDeviceManager.PreferredBackBufferWidth = 256 * _scaleFactor;
+        _graphicsDeviceManager.PreferredBackBufferHeight = 192 * _scaleFactor;
+
+        _graphicsDeviceManager.ApplyChanges();
     }
 
     private void LoadState()
