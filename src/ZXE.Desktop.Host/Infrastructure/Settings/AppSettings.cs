@@ -17,6 +17,8 @@ public class AppSettings
 
     public Model SystemModel { get; set; }
 
+    public int ScaleFactor { get; set; }
+
     private static AppSettings GetAppSettings()
     {
         var json = File.ReadAllText(SettingsFile);

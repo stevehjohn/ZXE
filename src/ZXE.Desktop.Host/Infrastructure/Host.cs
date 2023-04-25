@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.IO;
 using System.Linq;
-using System.Security.Principal;
 using ZXE.Core.Infrastructure;
 using ZXE.Core.System;
 using ZXE.Desktop.Host.Display;
@@ -23,7 +22,7 @@ public class Host : Game
     // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
     private readonly GraphicsDeviceManager _graphicsDeviceManager;
 
-    private int _scaleFactor = 4;
+    private int _scaleFactor = AppSettings.Instance.ScaleFactor;
 
     private VRamAdapter _vRamAdapter;
 
@@ -173,6 +172,9 @@ public class Host : Game
         _graphicsDeviceManager.PreferredBackBufferHeight = 192 * _scaleFactor;
 
         _graphicsDeviceManager.ApplyChanges();
+
+        AppSettings.Instance.ScaleFactor = _scaleFactor;
+        AppSettings.Instance.Save();
     }
 
     private void LoadState()
