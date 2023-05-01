@@ -32,7 +32,7 @@ public class Timer : ITimer
     {
         Task.Run(TimerWorker, _cancellationToken);
 
-        Task.Run(InterruptWorker, _cancellationToken);
+        //Task.Run(InterruptWorker, _cancellationToken);
     }
 
     public void Stop()
@@ -61,23 +61,40 @@ public class Timer : ITimer
     {
         var stopwatch = new Stopwatch();
 
-        var cycles = 0;
-
         // TODO: Get this working properly.
         while (true)
         {
-            if (!Fast)
-            {
-                stopwatch.Restart();
+            //if (!Fast)
+            //{
+            //    stopwatch.Restart();
 
-                while (stopwatch.ElapsedTicks < cycles * _microsecondsPerCycle)
-                {
-                }
-            }
+            //    while (stopwatch.ElapsedTicks < cycles * _microsecondsPerCycle)
+            //    {
+            //    }
+            //}
+
+            var frameCycles = 0;
+
+            HandleRefreshInterrupt();
 
             if (! _paused)
             {
-                cycles = OnTick();
+                while (frameCycles < 69_888)
+                {
+                    var cycles = OnTick();
+
+                    if (cycles == 0)
+                    {
+                        break;
+                    }
+
+                    frameCycles += cycles;
+                }
+            }
+
+            if (! Fast)
+            {
+                Thread.Sleep(20);
             }
         }
         // ReSharper disable once FunctionNeverReturns
