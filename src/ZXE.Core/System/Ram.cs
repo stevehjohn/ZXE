@@ -11,11 +11,13 @@ public class Ram
 
     private readonly byte[] _bankNumbers;
 
+    private readonly byte[] _frame;
+
     private int _screen = 1;
 
     private int _rom = -1;
 
-    public byte[] ScreenRam => _screen == 1 ? _banks[5] : _banks[7];
+    public byte[] ScreenRam => _frame;
 
     public bool ProtectRom { get; set; }
 
@@ -51,6 +53,8 @@ public class Ram
             _banks[b] = new byte[Constants.K16];
         }
 
+        _frame = new byte[Constants.K16];
+
         // Note: Bank 9 (i.e. [8]) is a special case to contain the ROM
         // Default 5, 2, 0
 
@@ -63,6 +67,11 @@ public class Ram
         _bankNumbers[1] = 5;
         _bankNumbers[2] = 2;
         _bankNumbers[3] = 0;
+    }
+
+    public void FrameReady()
+    {
+        Array.Copy(_screen == 1 ? _banks[5] : _banks[7], 0, _frame, 0, Constants.K16);
     }
 
     public byte this[int address]

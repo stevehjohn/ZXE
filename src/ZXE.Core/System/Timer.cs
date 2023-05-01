@@ -9,6 +9,8 @@ public class Timer : ITimer
 
     public required Action HandleRefreshInterrupt { get; init; }
 
+    public required Action FrameFinished { get; set; }
+
     private readonly CancellationTokenSource _cancellationTokenSource;
 
     private readonly CancellationToken _cancellationToken;
@@ -92,9 +94,11 @@ public class Timer : ITimer
                 }
             }
 
+            FrameFinished();
+
             if (! Fast)
             {
-                Thread.Sleep(20);
+                Thread.Sleep(10);
             }
         }
         // ReSharper disable once FunctionNeverReturns

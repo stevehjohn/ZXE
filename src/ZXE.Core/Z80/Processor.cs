@@ -47,11 +47,17 @@ public partial class Processor
 
     public (int Cycles, string Mnemonic) ProcessInstruction(Ram ram, Ports ports, Bus bus)
     {
+        Instruction? instruction;
+
         if (_state.Halted)
         {
             HandleInterrupts(ram, bus);
 
-            return (_instructions[0x00]!.Action(new Input(Array.Empty<byte>(), _state, ram, ports)), "NOP");
+            instruction = _instructions[0x00];
+
+            instruction!.Action(new Input(Array.Empty<byte>(), _state, ram, ports));
+
+            return (instruction.ClockCycles, instruction.Mnemonic);
         }
 
         var opcode = (int) ram[_state.ProgramCounter];
@@ -67,8 +73,6 @@ public partial class Processor
         {
             throw new OpcodeNotImplementedException($"Opcode not implemented: {opcode:X6}.");
         }
-
-        Instruction? instruction;
 
         byte[]? data;
 

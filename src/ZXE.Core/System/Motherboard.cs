@@ -68,7 +68,8 @@ public class Motherboard : IDisposable
         _timer = new Timer(4_000_000)
                  {
                      OnTick = Tick,
-                     HandleRefreshInterrupt = RefreshInterrupt
+                     HandleRefreshInterrupt = RefreshInterrupt,
+                     FrameFinished = FrameFinished
                  };
 
         if (tracer != null)
@@ -280,5 +281,10 @@ public class Motherboard : IDisposable
         _bus.Data = 0xFF;
 
         _bus.Interrupt = true;
+    }
+
+    private void FrameFinished()
+    {
+        _ram.FrameReady();
     }
 }
