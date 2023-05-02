@@ -15,7 +15,8 @@ public class TimerTests
         using var timer = new Timer(3_500_000)
                           {
                               OnTick = OnTick,
-                              HandleRefreshInterrupt = RefreshInterrupt
+                              HandleRefreshInterrupt = RefreshInterrupt,
+                              FrameFinished = FrameFinished
                           };
 
         timer.Start();
@@ -23,6 +24,11 @@ public class TimerTests
         Thread.Sleep(200);
 
         Assert.True(_callCount > 5);
+    }
+
+    private void FrameFinished()
+    {
+        throw new NotImplementedException();
     }
 
     private int OnTick()

@@ -29,11 +29,15 @@ public partial class Processor
     
     public IProcessorExtension? ProcessorExtension { get; set; }
 
+    private List<string> _log = new List<string>(20_000);
+
     public Processor()
     {
         _state = new State();
 
         _instructions = InitialiseInstructions();
+
+        File.Delete("Zex.log");
     }
 
     public Processor(ITracer tracer)
@@ -43,6 +47,8 @@ public partial class Processor
         _instructions = InitialiseInstructions();
 
         _tracer = tracer;
+
+        File.Delete("Zex.log");
     }
 
     public (int Cycles, string Mnemonic) ProcessInstruction(Ram ram, Ports ports, Bus bus)
@@ -113,6 +119,20 @@ public partial class Processor
             ProcessorExtension.InterceptInstruction(_state, ram);
         }
 
+        _log.Add($"{_state.ProgramCounter:X8} {_state.Registers[Register.F] & 0b1101_0111:X2} {instruction.Opcode:X8} {instruction.Mnemonic}");
+        
+        if (instruction.Mnemonic == "IN A, (C)")
+        {
+            _log.Add($"A: {_state.Registers[Register.A]:X2}  BC: {_state.Registers.ReadPair(Register.BC)}  (BC): {ports.ReadByte(_state.Registers.ReadPair(Register.BC))}");
+        }
+
+        if (_log.Count == 20_000)
+        {
+            File.AppendAllLines("Zex.log", _log);
+
+            _log.Clear();
+        }
+
         var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
 
         _opcodesExecuted++;
@@ -122,12 +142,12 @@ public partial class Processor
             _state.ProgramCounter += instruction.Length;
         }
 
-        if (! instruction.Mnemonic.StartsWith("SOPSET") && _state.OpcodePrefix == 0)
+        if (! instruction.Mnemonic.StartsWith("PREFIX") && _state.OpcodePrefix == 0)
         {
             HandleInterrupts(ram, bus);
         }
 
-        if (instruction.Mnemonic != "EI" && ! instruction.Mnemonic.StartsWith("SOPSET"))
+        if (instruction.Mnemonic != "EI" && ! instruction.Mnemonic.StartsWith("PREFIX"))
         {
             _state.SkipInterrupt = false;
         }
@@ -315,7 +335,7 @@ public partial class Processor
 
     private void UpdateR(Instruction instruction)
     {
-        if (instruction.Mnemonic.StartsWith("SOPSET"))
+        if (instruction.Mnemonic.StartsWith("PREFIX"))
         {
             return;
         }

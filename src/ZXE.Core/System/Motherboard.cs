@@ -212,6 +212,10 @@ public class Motherboard : IDisposable
 
     public void Start()
     {
+        var loader = new Z80FileLoader(_processor.State, _ram, Model);
+
+        loader.Load("../../../../../Game Images/Treasure Island Dizzy/image-0.z80");
+
         _timer.Start();
     }
 

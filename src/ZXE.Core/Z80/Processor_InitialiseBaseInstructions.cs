@@ -411,7 +411,7 @@ public partial class Processor
         instructions[0xCA] = new Instruction("JP Z, nn", 3, ProcessorBranchInstructions.JP_Z_nn, 10);
                 
         // Switch opcode set to CB
-        instructions[0xCB] = new Instruction("SOPSET 0xCB", 1, _ => SetOpcodePrefix(0xCB), 4);
+        instructions[0xCB] = new Instruction("PREFIX 0xCB", 1, _ => SetOpcodePrefix(0xCB), 4);
 
         instructions[0xCC] = new Instruction("CALL Z, nn", 3, ProcessorBranchInstructions.CALL_Z_nn, 10);
 
@@ -448,7 +448,7 @@ public partial class Processor
         instructions[0xDC] = new Instruction("CALL C, nn", 3, ProcessorBranchInstructions.CALL_C_nn, 10);
 
         // Switch opcode set to DD
-        instructions[0xDD] = new Instruction("SOPSET 0xDD", 1, _ => SetOpcodePrefix(0xDD), 4);
+        instructions[0xDD] = new Instruction("PREFIX 0xDD", 1, _ => SetOpcodePrefix(0xDD), 4);
 
         instructions[0xDE] = new Instruction("SBC A, n", 2, i => ProcessorArithmeticInstructions.SBC_R_n(i, Register.A), 7);
 
@@ -481,7 +481,7 @@ public partial class Processor
         instructions[0xEC] = new Instruction("CALL PE, nn", 3, ProcessorBranchInstructions.CALL_PE_nn, 10);
         
         // Switch opcode set to ED
-        instructions[0xED] = new Instruction("SOPSET 0xED", 1, _ => SetOpcodePrefix(0xED), 4);
+        instructions[0xED] = new Instruction("PREFIX 0xED", 1, _ => SetOpcodePrefix(0xED), 4);
 
         instructions[0xEE] = new Instruction("XOR A, n", 2, i => ProcessorBitwiseLogicInstructions.XOR_R_n(i, Register.A), 7);
 
@@ -514,7 +514,7 @@ public partial class Processor
         instructions[0xFC] = new Instruction("CALL S, nn", 3, ProcessorBranchInstructions.CALL_S_nn, 10);
         
         // Switch opcode set to FD
-        instructions[0xFD] = new Instruction("SOPSET 0xFD", 1, _ => SetOpcodePrefix(0xFD), 4);
+        instructions[0xFD] = new Instruction("PREFIX 0xFD", 1, _ => SetOpcodePrefix(0xFD), 4);
 
         instructions[0xFE] = new Instruction("CP A, n", 2, i => ProcessorMiscellaneousInstructions.CP_R_n(i, Register.A), 7);
 
