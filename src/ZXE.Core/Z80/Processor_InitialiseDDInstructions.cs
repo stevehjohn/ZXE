@@ -114,7 +114,7 @@ public partial class Processor
 
         instructions[0xDD35] = new Instruction("DEC (IX + d)", 2, i => ProcessorArithmeticInstructions.DEC_addr_RR_plus_d(i, Register.IX), 19);
 
-        instructions[0xDD36] = new Instruction("LD (IX + d), n", 3, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_n(i, Register.IX), 19);
+        instructions[0xDD36] = new Instruction("LD (IX + d), n", 3, i => ProcessorLoadInstructions.LD_addr_RR_plus_d_n(i, Register.IX), 15);
 
         instructions[0xDD37] = new Instruction("SCF", 1, ProcessorMiscellaneousInstructions.SCF, 4, null, 0xDD37);
 
