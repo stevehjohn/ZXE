@@ -22,6 +22,8 @@ public partial class Processor
 
     public long OpcodesExecuted => _opcodesExecuted;
 
+    private long _tstates;
+
     // TODO: Remove - not good.
     public Instruction?[] Instructions => _instructions;
 
@@ -50,6 +52,8 @@ public partial class Processor
 
         File.Delete("Zex.log");
     }
+
+    private int _carry;
 
     public (int Cycles, string Mnemonic) ProcessInstruction(Ram ram, Ports ports, Bus bus)
     {
@@ -118,12 +122,35 @@ public partial class Processor
         {
             ProcessorExtension.InterceptInstruction(_state, ram);
         }
-
-        _log.Add($"{_state.ProgramCounter:X8} {_state.Registers[Register.F] & 0b1101_0111:X2} {instruction.Opcode:X8} {instruction.Mnemonic}");
         
-        if (instruction.Mnemonic == "IN A, (C)")
+        //if (instruction.Mnemonic == "IN A, (C)")
+        //{
+        //    _log.Add($"A: {_state.Registers[Register.A]:X2}  BC: {_state.Registers.ReadPair(Register.BC)}  (BC): {ports.ReadByte(_state.Registers.ReadPair(Register.BC))}");
+        //}
+
+        var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
+
+        _opcodesExecuted++;
+        
+        if (additionalCycles > -1)
         {
-            _log.Add($"A: {_state.Registers[Register.A]:X2}  BC: {_state.Registers.ReadPair(Register.BC)}  (BC): {ports.ReadByte(_state.Registers.ReadPair(Register.BC))}");
+            _state.ProgramCounter += instruction.Length;
+        }
+ 
+        if (instruction.Mnemonic.StartsWith("PREFIX"))
+        {
+            _log.Add($"OE: {OpcodesExecuted:X8}  TS: {0:X2}  PC: {_state.ProgramCounter + (_state.OpcodePrefix > 0xFF ? 2 : 0):X8}  AF: {_state.Registers[Register.A]:X2}{_state.Registers[Register.F] & 0b1101_0111:X2}  BC: {_state.Registers.ReadPair(Register.BC):X4}  DE: {_state.Registers.ReadPair(Register.DE):X4}  HL: {_state.Registers.ReadPair(Register.HL):X4}  OP: {instruction.Opcode:X8}  {instruction.Mnemonic}");
+        }
+        else
+        {
+            _log.Add($"OE: {OpcodesExecuted:X8}  TS: {instruction.ClockCycles + _carry + (additionalCycles > 0 ? additionalCycles : 0):X2}  PC: {_state.ProgramCounter:X8}  AF: {_state.Registers[Register.A]:X2}{_state.Registers[Register.F] & 0b1101_0111:X2}  BC: {_state.Registers.ReadPair(Register.BC):X4}  DE: {_state.Registers.ReadPair(Register.DE):X4}  HL: {_state.Registers.ReadPair(Register.HL):X4}  OP: {instruction.Opcode:X8}  {instruction.Mnemonic}");
+
+            _carry = 0;
+        }
+
+        if (instruction.Mnemonic.StartsWith("PREFIX"))
+        {
+            _carry += instruction.ClockCycles;
         }
 
         if (_log.Count == 20_000)
@@ -131,15 +158,6 @@ public partial class Processor
             File.AppendAllLines("Zex.log", _log);
 
             _log.Clear();
-        }
-
-        var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
-
-        _opcodesExecuted++;
-
-        if (additionalCycles > -1)
-        {
-            _state.ProgramCounter += instruction.Length;
         }
 
         if (! instruction.Mnemonic.StartsWith("PREFIX") && _state.OpcodePrefix == 0)
@@ -156,6 +174,8 @@ public partial class Processor
         {
             _tracer.TraceAfter(instruction, data, _state, ram);
         }
+
+        _tstates += instruction.ClockCycles + (additionalCycles > -1 ? additionalCycles : 0);
 
         return (instruction.ClockCycles + (additionalCycles > -1 ? additionalCycles : 0), instruction.Mnemonic);
     }
@@ -306,6 +326,8 @@ public partial class Processor
                 case InterruptMode.Mode2:
                     if (bus.Data != null)
                     {
+                        _log.Add("INT");
+
                         PushProgramCounter(ram);
 
                         address = (_state.Registers[Register.I] << 8) + bus.Data.Value;

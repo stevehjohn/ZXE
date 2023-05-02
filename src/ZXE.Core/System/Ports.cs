@@ -17,7 +17,7 @@ public class Ports
 
         _model = model;
 
-        ResetKeyboardPorts();
+        //ResetKeyboardPorts();
     }
 
     public byte ReadByte(ushort port)

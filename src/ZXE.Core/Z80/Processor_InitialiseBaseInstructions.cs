@@ -24,7 +24,7 @@ public partial class Processor
 
         instructions[0x09] = new Instruction("ADD HL, BC", 1, i => ProcessorArithmeticInstructions.ADD_RR_RR(i, Register.HL, Register.BC), 11);
 
-        instructions[0x0A] = new Instruction("LD A, (BC)'", 1, i => ProcessorLoadInstructions.LD_R_addr_RR(i, Register.A, Register.BC), 7);
+        instructions[0x0A] = new Instruction("LD A, (BC)", 1, i => ProcessorLoadInstructions.LD_R_addr_RR(i, Register.A, Register.BC), 7);
 
         instructions[0x0B] = new Instruction("DEC BC", 1, i => ProcessorArithmeticInstructions.DEC_RR(i, Register.BC), 6);
 
