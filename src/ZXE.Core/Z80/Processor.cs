@@ -69,7 +69,7 @@ public partial class Processor
 
             _opcodesExecuted++;
 
-            _log.Add($"OE: {OpcodesExecuted:X8}  TS: {0:X2}  PC: {_state.ProgramCounter + (_state.OpcodePrefix > 0xFF ? 2 : 0):X8}  AF: {_state.Registers[Register.A]:X2}{_state.Registers[Register.F] & 0b1101_0111:X2}  BC: {_state.Registers.ReadPair(Register.BC):X4}  DE: {_state.Registers.ReadPair(Register.DE):X4}  HL: {_state.Registers.ReadPair(Register.HL):X4}  OP: {instruction.Opcode:X8}  {instruction.Mnemonic}");
+            _log.Add($"OE: {OpcodesExecuted:X8}  TS: {instruction.ClockCycles:X2}  PC: {_state.ProgramCounter - 1 + (_state.OpcodePrefix > 0xFF ? 2 : 0):X8}  SP: {_state.StackPointer}  AF: {_state.Registers[Register.A]:X2}{_state.Registers[Register.F] & 0b1101_0111:X2}  BC: {_state.Registers.ReadPair(Register.BC):X4}  DE: {_state.Registers.ReadPair(Register.DE):X4}  HL: {_state.Registers.ReadPair(Register.HL):X4}  OP: {instruction.Opcode:X8}  {instruction.Mnemonic}");
 
             return (instruction.ClockCycles, instruction.Mnemonic);
         }
@@ -132,6 +132,10 @@ public partial class Processor
         //    _log.Add($"A: {_state.Registers[Register.A]:X2}  BC: {_state.Registers.ReadPair(Register.BC)}  (BC): {ports.ReadByte(_state.Registers.ReadPair(Register.BC))}");
         //}
 
+        if (_opcodesExecuted == 0x00041E5F)
+        {
+        }
+
         var additionalCycles = instruction.Action(new Input(data, _state, ram, ports));
 
         _opcodesExecuted++;
@@ -143,11 +147,11 @@ public partial class Processor
  
         if (instruction.Mnemonic.StartsWith("PREFIX"))
         {
-            _log.Add($"OE: {OpcodesExecuted:X8}  TS: {0:X2}  PC: {_state.ProgramCounter + (_state.OpcodePrefix > 0xFF ? 2 : 0):X8}  AF: {_state.Registers[Register.A]:X2}{_state.Registers[Register.F] & 0b1101_0111:X2}  BC: {_state.Registers.ReadPair(Register.BC):X4}  DE: {_state.Registers.ReadPair(Register.DE):X4}  HL: {_state.Registers.ReadPair(Register.HL):X4}  OP: {instruction.Opcode:X8}  {instruction.Mnemonic}");
+            _log.Add($"OE: {OpcodesExecuted:X8}  TS: {0:X2}  PC: {_state.ProgramCounter + (_state.OpcodePrefix > 0xFF ? 2 : 0):X8}  SP: {_state.StackPointer}  AF: {_state.Registers[Register.A]:X2}{_state.Registers[Register.F] & 0b1101_0111:X2}  BC: {_state.Registers.ReadPair(Register.BC):X4}  DE: {_state.Registers.ReadPair(Register.DE):X4}  HL: {_state.Registers.ReadPair(Register.HL):X4}  OP: {instruction.Opcode:X8}  {instruction.Mnemonic}");
         }
         else
         {
-            _log.Add($"OE: {OpcodesExecuted:X8}  TS: {instruction.ClockCycles + _carry + (additionalCycles > 0 ? additionalCycles : 0):X2}  PC: {_state.ProgramCounter:X8}  AF: {_state.Registers[Register.A]:X2}{_state.Registers[Register.F] & 0b1101_0111:X2}  BC: {_state.Registers.ReadPair(Register.BC):X4}  DE: {_state.Registers.ReadPair(Register.DE):X4}  HL: {_state.Registers.ReadPair(Register.HL):X4}  OP: {instruction.Opcode:X8}  {instruction.Mnemonic}");
+            _log.Add($"OE: {OpcodesExecuted:X8}  TS: {instruction.ClockCycles + _carry + (additionalCycles > 0 ? additionalCycles : 0):X2}  PC: {_state.ProgramCounter:X8}  SP: {_state.StackPointer}  AF: {_state.Registers[Register.A]:X2}{_state.Registers[Register.F] & 0b1101_0111:X2}  BC: {_state.Registers.ReadPair(Register.BC):X4}  DE: {_state.Registers.ReadPair(Register.DE):X4}  HL: {_state.Registers.ReadPair(Register.HL):X4}  OP: {instruction.Opcode:X8}  {instruction.Mnemonic}");
 
             _carry = 0;
         }
