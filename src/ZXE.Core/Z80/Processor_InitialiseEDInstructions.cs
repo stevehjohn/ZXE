@@ -111,7 +111,7 @@ public partial class Processor
 
         instructions[0xED5D] = new Instruction("RETN", 1, ProcessorBranchInstructions.RETN, 10, null, 0xED5D);
 
-        instructions[0xED5E] = new Instruction("IM 2", 1, i => ProcessorMiscellaneousInstructions.IM_m(i, InterruptMode.Mode2), 5, null, 0xED5E);
+        instructions[0xED5E] = new Instruction("IM 2", 1, i => ProcessorMiscellaneousInstructions.IM_m(i, InterruptMode.Mode2), 4, null, 0xED5E);
 
         instructions[0xED5F] = new Instruction("LD A, R", 1, i => ProcessorLoadInstructions.LD_R_R(i, Register.A, Register.R), 5, null, 0xED5F);
 
