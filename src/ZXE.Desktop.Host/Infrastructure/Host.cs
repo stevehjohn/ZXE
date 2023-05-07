@@ -64,6 +64,10 @@ public class Host : Game
         _vRamAdapter = new VRamAdapter(_motherboard.Ram, _graphicsDeviceManager);
 
 #if ! DELAY
+        var loader = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+
+        loader.Load("../../../../../Other Images/test.sna");
+
         _motherboard.Start();
 #endif
     }
@@ -109,6 +113,17 @@ public class Host : Game
             var screen = _vRamAdapter.Display;
 
             _menuSystem = new MenuSystem(screen, _graphicsDeviceManager, Content, MenuFinished);
+        }
+
+        if (Keyboard.GetState().IsKeyDown(Keys.F8) && _menuSystem == null)
+        {
+            _motherboard.Pause();
+
+            var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+
+            adapter.Save("test.sna");
+
+            _motherboard.Resume();
         }
 
         if (_menuSystem != null)

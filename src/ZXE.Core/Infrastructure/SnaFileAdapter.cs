@@ -27,7 +27,7 @@ public class SnaFileAdapter : IImageLoader
 
     public void Save(string filename)
     {
-        Directory.CreateDirectory(Path.GetDirectoryName(filename)!);
+        //Directory.CreateDirectory(Path.GetDirectoryName(filename)!);
 
         using var file = File.Create(filename);
 
@@ -99,7 +99,7 @@ public class SnaFileAdapter : IImageLoader
 
     private void WriteRam(FileStream file)
     {
-        file.Write(_ram.ReadBlock(0x4000..));
+        file.Write(_ram.ReadBlock(0x4000..0x10000));
     }
 
     private void LoadRam(byte[] data)
