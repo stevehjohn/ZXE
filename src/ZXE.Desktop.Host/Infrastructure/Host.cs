@@ -64,9 +64,9 @@ public class Host : Game
         _vRamAdapter = new VRamAdapter(_motherboard.Ram, _graphicsDeviceManager);
 
 #if ! DELAY
-        var loader = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+        var loader = new ZxeFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
 
-        loader.Load("../../../../../Other Images/test.sna");
+        loader.Load("C:\\Users\\steve\\OneDrive\\Documents\\ZXE Snapshots\\Other Images 2023-05-08 20-26.zxe.json");
 
         _motherboard.Start();
 #endif
@@ -119,9 +119,11 @@ public class Host : Game
         {
             _motherboard.Pause();
 
-            var adapter = new SnaFileAdapter(_motherboard.Processor.State, _motherboard.Ram);
+            var data = File.ReadAllBytes("../../../../../Other Images/zexdoc-spectrum.com");
 
-            adapter.Save("test.sna");
+            _motherboard.Ram.Load(data, 0x8000);
+
+            _motherboard.Processor.State.ProgramCounter = 0x8000;
 
             _motherboard.Resume();
         }

@@ -29,8 +29,6 @@ public class ZxeFileAdapter
             return null;
         }
 
-        _state.Flags = model.State!.Flags;
-
         _state.Halted = model.State.Halted;
 
         _state.InterruptFlipFlop1 = model.State.InterruptFlipFlop1;
@@ -53,6 +51,8 @@ public class ZxeFileAdapter
         _state.Registers.WritePair(Register.BC, model.Registers["BC"]);
         _state.Registers.WritePair(Register.DE, model.Registers["DE"]);
         _state.Registers.WritePair(Register.HL, model.Registers["HL"]);
+
+        _state.Flags = Flags.FromByte(_state.Registers[Register.F]);
 
         _state.Registers.WritePair(Register.AF_, model.Registers["AF'"]);
         _state.Registers.WritePair(Register.BC_, model.Registers["BC'"]);

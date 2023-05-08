@@ -75,8 +75,6 @@ public class Timer : ITimer
 
             var frameCycles = 0;
 
-            HandleRefreshInterrupt();
-
             if (! _paused)
             {
                 while (frameCycles < 69_888)

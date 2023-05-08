@@ -24,9 +24,9 @@ public class Ports
     {
         var value = _ports[port] ?? 0xFF;
 
-        if (port == 0xBFFE)
+        if (port == 0xF7FE)
         {
-            return 0xFE;
+            return 0b1011_1101;
         }
 
         // Kempston.
