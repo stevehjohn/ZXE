@@ -21,7 +21,7 @@ public class FormattingTracer : ITracer
 
     public void TraceAfter(Instruction instruction, byte[] data, State state, Ram ram)
     {
-        if (instruction.Mnemonic.StartsWith("SOPSET", StringComparison.InvariantCultureIgnoreCase))
+        if (instruction.Mnemonic.StartsWith("PREFIX", StringComparison.InvariantCultureIgnoreCase))
         {
             _trace.Add(string.Empty);
 
@@ -143,7 +143,7 @@ public class FormattingTracer : ITracer
 
         var parts = GetMnemonicParts(mnemonic);
 
-        if (parts[0] == "SOPSET")
+        if (parts[0] == "PREFIX")
         {
             return string.Empty;
         }

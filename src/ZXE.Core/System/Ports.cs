@@ -17,12 +17,17 @@ public class Ports
 
         _model = model;
 
-        ResetKeyboardPorts();
+        //ResetKeyboardPorts();
     }
 
     public byte ReadByte(ushort port)
     {
         var value = _ports[port] ?? 0xFF;
+
+        if (port == 0xBFFE)
+        {
+            return 0xFE;
+        }
 
         // Kempston.
         if ((port & 0xFF) is 0x1F or 0xDF)

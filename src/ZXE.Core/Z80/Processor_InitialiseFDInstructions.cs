@@ -412,7 +412,7 @@ public partial class Processor
 
         instructions[0xFDCA] = new Instruction("JP Z, nn", 3, ProcessorBranchInstructions.JP_Z_nn, 10);
         
-        instructions[0xFDCB] = new Instruction("SOPSET 0xFDCB", 1, _ => SetOpcodePrefix(0xFDCB), 4);
+        instructions[0xFDCB] = new Instruction("PREFIX 0xFDCB", 1, _ => SetOpcodePrefix(0xFDCB), 4);
 
         instructions[0xFDCC] = new Instruction("CALL Z, nn", 3, ProcessorBranchInstructions.CALL_Z_nn, 10);
 

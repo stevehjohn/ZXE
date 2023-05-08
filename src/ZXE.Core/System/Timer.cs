@@ -81,6 +81,11 @@ public class Timer : ITimer
             {
                 while (frameCycles < 69_888)
                 {
+                    if (frameCycles >= 24 && frameCycles < 56)
+                    {
+                        HandleRefreshInterrupt();
+                    }
+
                     var cycles = OnTick();
 
                     if (cycles == 0)

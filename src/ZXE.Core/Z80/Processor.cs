@@ -22,6 +22,8 @@ public partial class Processor
 
     public long OpcodesExecuted => _opcodesExecuted;
 
+    private long _tstates;
+
     // TODO: Remove - not good.
     public Instruction?[] Instructions => _instructions;
 
@@ -29,11 +31,15 @@ public partial class Processor
     
     public IProcessorExtension? ProcessorExtension { get; set; }
 
+    private List<string> _log = new(21_000);
+
     public Processor()
     {
         _state = new State();
 
         _instructions = InitialiseInstructions();
+
+        File.Delete("Zex.log");
     }
 
     public Processor(ITracer tracer)
@@ -43,15 +49,29 @@ public partial class Processor
         _instructions = InitialiseInstructions();
 
         _tracer = tracer;
+
+        File.Delete("Zex.log");
     }
+
+    private int _carry;
 
     public (int Cycles, string Mnemonic) ProcessInstruction(Ram ram, Ports ports, Bus bus)
     {
+        Instruction? instruction;
+
         if (_state.Halted)
         {
             HandleInterrupts(ram, bus);
 
-            return (_instructions[0x00]!.Action(new Input(Array.Empty<byte>(), _state, ram, ports)), "NOP");
+            instruction = _instructions[0x00];
+
+            instruction!.Action(new Input(Array.Empty<byte>(), _state, ram, ports));
+
+            _opcodesExecuted++;
+
+            _log.Add($"PC: {_state.ProgramCounter - 1 + (_state.OpcodePrefix > 0xFF ? 2 : 0):X8}  SP: {_state.StackPointer}  AF: {_state.Registers[Register.A]:X2}{_state.Registers[Register.F] & 0b1101_0111:X2}  BC: {_state.Registers.ReadPair(Register.BC):X4}  DE: {_state.Registers.ReadPair(Register.DE):X4}  HL: {_state.Registers.ReadPair(Register.HL):X4}  OP: {instruction.Opcode:X8}  {instruction.Mnemonic}");
+
+            return (instruction.ClockCycles, instruction.Mnemonic);
         }
 
         var opcode = (int) ram[_state.ProgramCounter];
@@ -67,8 +87,6 @@ public partial class Processor
         {
             throw new OpcodeNotImplementedException($"Opcode not implemented: {opcode:X6}.");
         }
-
-        Instruction? instruction;
 
         byte[]? data;
 
@@ -117,13 +135,36 @@ public partial class Processor
         {
             _state.ProgramCounter += instruction.Length;
         }
+ 
+        if (instruction.Mnemonic.StartsWith("PREFIX"))
+        {
+            _log.Add($"PC: {_state.ProgramCounter + (_state.OpcodePrefix > 0xFF ? 2 : 0):X8}  SP: {_state.StackPointer}  AF: {_state.Registers[Register.A]:X2}{_state.Registers[Register.F] & 0b1101_0111:X2}  BC: {_state.Registers.ReadPair(Register.BC):X4}  DE: {_state.Registers.ReadPair(Register.DE):X4}  HL: {_state.Registers.ReadPair(Register.HL):X4}  OP: {instruction.Opcode:X8}  {instruction.Mnemonic}");
+        }
+        else
+        {
+            _log.Add($"PC: {_state.ProgramCounter:X8}  SP: {_state.StackPointer}  AF: {_state.Registers[Register.A]:X2}{_state.Registers[Register.F] & 0b1101_0111:X2}  BC: {_state.Registers.ReadPair(Register.BC):X4}  DE: {_state.Registers.ReadPair(Register.DE):X4}  HL: {_state.Registers.ReadPair(Register.HL):X4}  OP: {instruction.Opcode:X8}  {instruction.Mnemonic}");
 
-        if (! instruction.Mnemonic.StartsWith("SOPSET") && _state.OpcodePrefix == 0)
+            _carry = 0;
+        }
+
+        if (instruction.Mnemonic.StartsWith("PREFIX"))
+        {
+            _carry += instruction.ClockCycles;
+        }
+
+        if (_log.Count >= 20_000)
+        {
+            File.AppendAllLines("Zex.log", _log);
+
+            _log.Clear();
+        }
+
+        if (! instruction.Mnemonic.StartsWith("PREFIX") && _state.OpcodePrefix == 0)
         {
             HandleInterrupts(ram, bus);
         }
 
-        if (instruction.Mnemonic != "EI" && ! instruction.Mnemonic.StartsWith("SOPSET"))
+        if (instruction.Mnemonic != "EI" && ! instruction.Mnemonic.StartsWith("PREFIX"))
         {
             _state.SkipInterrupt = false;
         }
@@ -132,6 +173,8 @@ public partial class Processor
         {
             _tracer.TraceAfter(instruction, data, _state, ram);
         }
+
+        _tstates += instruction.ClockCycles + (additionalCycles > -1 ? additionalCycles : 0);
 
         return (instruction.ClockCycles + (additionalCycles > -1 ? additionalCycles : 0), instruction.Mnemonic);
     }
@@ -228,6 +271,8 @@ public partial class Processor
 
         if (_state.InterruptFlipFlop1)
         {
+            _log.Add("INT");
+
             _state.InterruptFlipFlop1 = _state.InterruptFlipFlop2 = false;
 
             int address;
@@ -311,7 +356,7 @@ public partial class Processor
 
     private void UpdateR(Instruction instruction)
     {
-        if (instruction.Mnemonic.StartsWith("SOPSET"))
+        if (instruction.Mnemonic.StartsWith("PREFIX"))
         {
             return;
         }

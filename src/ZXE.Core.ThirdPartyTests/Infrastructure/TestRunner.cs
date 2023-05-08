@@ -274,7 +274,7 @@ public class TestRunner
 
                 var result = processor.ProcessInstruction(ram, ports, bus);
 
-                if (firstMnemonic == null && ! result.Mnemonic.StartsWith("SOPSET"))
+                if (firstMnemonic == null && ! result.Mnemonic.StartsWith("PREFIX"))
                 {
                     firstMnemonic = result.Mnemonic;
                 }
