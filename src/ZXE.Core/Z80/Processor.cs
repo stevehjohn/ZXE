@@ -138,7 +138,7 @@ public partial class Processor
  
         if (instruction.Mnemonic.StartsWith("PREFIX"))
         {
-            _log.Add($"PC: {_state.ProgramCounter + (_state.OpcodePrefix > 0xFF ? 2 : 0):X8}  SP: {_state.StackPointer:X4}  AF: {_state.Registers[Register.A]:X2}{_state.Registers[Register.F]:X2}  F: {_state.Registers[Register.F] & 0b1101_0111:X2}  BC: {_state.Registers.ReadPair(Register.BC):X4}  DE: {_state.Registers.ReadPair(Register.DE):X4}  HL: {_state.Registers.ReadPair(Register.HL):X4}  OP: {instruction.Opcode:X8}  {instruction.Mnemonic}");
+            _log.Add($"PC: {_state.ProgramCounter + (_state.OpcodePrefix > 0xFF ? 4 : 0):X8}  SP: {_state.StackPointer:X4}  AF: {_state.Registers[Register.A]:X2}{_state.Registers[Register.F]:X2}  F: {_state.Registers[Register.F] & 0b1101_0111:X2}  BC: {_state.Registers.ReadPair(Register.BC):X4}  DE: {_state.Registers.ReadPair(Register.DE):X4}  HL: {_state.Registers.ReadPair(Register.HL):X4}  OP: {instruction.Opcode:X8}  {instruction.Mnemonic}");
         }
         else
         {
